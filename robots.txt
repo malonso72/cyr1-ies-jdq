@@ -1,0 +1,8 @@
+# robots.txt — CyR 1º ESO · IES Jiménez de Quesada
+# Permite a los buscadores indexar todo el contenido público.
+
+User-agent: *
+Allow: /
+
+# Mapa del sitio para facilitar la indexación
+Sitemap: https://cyr1-ies-jdq.malonso72.workers.dev/sitemap.xml
