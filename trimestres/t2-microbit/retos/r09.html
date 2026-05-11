@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1A8A6B">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Reto 09 · Micro:bit</title>
+<meta name="description" content="Reto 09 Micro:bit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(26,138,107,.12);border:1px solid rgba(26,138,107,.35)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Reto 09</div>
+  <h1>Cronómetro</h1>
+  <div class="duracion">Micro:bit · Computación física</div>
+</section>
+<div class="hub-main">
+  <div class="section-title">🧩 Descripción</div>
+  <p>Crea un cronómetro simple. El botón A lo inicia y cuenta los segundos, el botón B lo para y muestra el tiempo transcurrido. A+B lo reinicia a cero.</p>
+  <div class="section-title">🎯 Conceptos</div>
+  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Variables de tiempo</span><span class='badge'>Bucles con pausas</span><span class='badge'>Control de flujo</span><span class='badge'>Eventos de botones</span></p>
+  <div class="section-title">🧠 Pseudocódigo</div>
+  <div class="codebox">Al iniciar
+Establecer tiempo = 0
+Establecer corriendo = falso
+Para siempre
+Si corriendo = verdadero entonces
+Cambiar tiempo por +1
+Mostrar número tiempo
+Pausa 1000 ms
+Al presionar botón A
+Establecer corriendo = verdadero
+Al presionar botón B
+Establecer corriendo = falso
+Al presionar botón A+B
+Establecer tiempo = 0
+Establecer corriendo = falso
+Borrar pantalla</div>
+  <div class="section-title">💡 Ayuda</div>
+  <p>Una variable booleana controla si el cronómetro está corriendo. Mientras sea verdadero, suma 1 cada segundo (1000 ms). Los botones cambian el estado.</p>
+  <div class="section-title">🚀 Reto extra</div>
+  <p>¿Puedes hacer una cuenta atrás? Empieza en 10 y baja hasta 0, luego muestra &quot;FIN&quot;.</p>
+  <div class="section-title">✅ Autoevaluación</div>
+  <ul><li>El botón A inicia el cronómetro</li><li>El botón B lo para</li><li>A+B lo reinicia a cero</li><li>Cuenta correctamente los segundos</li><li>Consejo: Los cronómetros usan el concepto de &quot;estado&quot;. ¡Fundamental en programación!</li></ul>
+  <div class="section-title">🔗 Programar</div>
+  <div class="bg">
+    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
+    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+  </div>
+  <div class="section-title">Navegación</div>
+  <div class="bg"><a href="r08.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 08</span></a><a href="r10.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 10</span></a></div>
+</div>
+</div>
+
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  CyR 1º ESO · Curso 2025-26 · Manuel Alonso Herrera
+  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+  <br><span class="version">v1.0.0</span>
+</p>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>
