@@ -2,29 +2,45 @@
 
 Lista de lo que queda por completar. Se actualiza con cada sprint.
 
-## Bloqueante para v1.1.0 (Fase E del brief)
+## ✅ v1.1.0 — Integración "scratch integrado" (mayo 2026)
 
-### T3 Ciberseguridad — integración de material existente
+Esta integración (paquete `cyr1-ies-jdq-scratch-integrado.zip`) ha cerrado la
+mayor parte de la Fase E del brief y ha publicado material completo para
+los tres trimestres.
 
-- [ ] **Presentación pizarra v3**: copiar a `trimestres/t3-ciberseguridad/presentacion.html`
-  SIN modificar su CSS interno (preserva su estética dark independiente).
-  Manuel debe indicar la ruta local del archivo.
-- [ ] **Cuadernillo v6 del alumno**: convertir a `trimestres/t3-ciberseguridad/cuadernillo.html`.
-  Si está en DOCX, conversión cuidadosa preservando estructura por sesiones.
-  Si está en HTML, ajustar rutas y CSS al nuevo entorno.
-- [ ] **Sesiones (16-17 sesiones tipo "Opción D")**: contar el número exacto
-  de archivos de sesión existentes en el material original ANTES de generar.
-  Crear `sesiones/sNN.html` para cada una, manteniendo el formato Opción D.
-- [ ] **Moodle**: crear `trimestres/t3-ciberseguridad/moodle.html` con la tabla
-  de templates de entrega + la rúbrica de 4 criterios.
-- [ ] **Solucionario**: copiar a `_soluciones/cuadernillo_solucionario_v6.html`
-  (privado, NO se despliega).
-- [ ] Quitar el `<span class="pending-badge">Pendiente Fase E</span>` de las
-  4 tarjetas del hub T3 cuando su material esté integrado.
+### T1 · Scratch — publicado
+- [x] **Presentación inicial** del bloque (`trimestres/t1-scratch/presentacion.html`).
+- [x] **20 sesiones** (s01–s20) en `trimestres/t1-scratch/sesiones/`.
+- [x] **12 juegos** (pong, naves, arkanoid, laberinto, space-invaders, etc.)
+  en `trimestres/t1-scratch/juegos/`.
+- [x] **Proyectos finales** (ideas, checklist, índice) en `trimestres/t1-scratch/proyectos/`.
+- [x] **Cuadernillo Scratch parte 1** (PDF, optimizado a 6 MB).
+- [x] **Guías de los 11 juegos** (PDFs) en `materiales/guias-juegos/`.
+- [x] Badge "Próximamente" eliminado de la tarjeta T1 del index raíz.
 
-> **Nota:** la tarjeta T3 del `index.html` (raíz del sitio) NO tiene badge
-> "Próximamente" porque su hub es navegable y completo en cuanto a estructura.
-> Las tarjetas T1 y T2 sí tienen el badge porque su material es genérico.
+### T2 · micro:bit — publicado
+- [x] **Presentación inicial** del bloque (`trimestres/t2-microbit/presentacion.html`).
+- [x] **30 retos** (r00–r29) en `trimestres/t2-microbit/retos/`.
+- [x] **Cuadernillo de retos** (PDF) en `materiales/retos-microbit.pdf`.
+- [x] Badge "Próximamente" eliminado de la tarjeta T2 del index raíz.
+
+### T3 · Ciberseguridad — Fase E completada
+- [x] **Presentación pizarra** integrada (`presentacion.html`).
+- [x] **Cuadernillo del alumno** (v7) integrado: HTML + PDF imprimible en
+  `materiales/cuadernillo-ciberseguridad-1eso-v7.pdf`.
+- [x] **19 sesiones** (s01–s19) integradas — el conteo final son 19, no 16-17
+  como decía la versión inicial del brief.
+- [x] **Moodle**: `trimestres/t3-ciberseguridad/moodle.html` con templates y rúbrica.
+- [x] Badges "Pendiente Fase E" eliminados de las 4 tarjetas del hub T3.
+- [ ] **Solucionario** del cuadernillo v7: copiar a
+  `_soluciones/cuadernillo_solucionario_v7.html` (privado, NO se despliega).
+
+### Infraestructura del sitio tras la integración
+- [x] **`sitemap.xml`** regenerado con las 100 URLs publicadas.
+- [x] **Navegación transversal** ampliada en `teoria.html`/`actividades.html`
+  de T1 y T2 para incluir Sesiones, Juegos, Proyectos y Retos.
+- [x] **Auditoría de enlaces internos**: 0 enlaces rotos sobre 1.178.
+- [x] **Auditoría de imágenes huérfanas**: 0 huérfanas.
 
 ## Pendientes de Manuel (no bloqueantes)
 
