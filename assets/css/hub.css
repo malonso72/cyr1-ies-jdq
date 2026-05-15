@@ -3,10 +3,10 @@
    Tarjetas, banner con fachada, secciones, buscador
    ═══════════════════════════════════════════════════════════════ */
 
-html,body{min-height:100vh;background:radial-gradient(circle at top,#F7FDFA 0,#EEF9F2 40%,#DFF2E6 100%);overflow-x:hidden}
+html,body{min-height:100vh;background:radial-gradient(circle at top,#F9FBFE 0,#F4F6F9 40%,#EEF2F7 100%);overflow-x:hidden}
 
 /* ── Banner de cabecera con fachada ── */
-.hd-hero{position:relative;max-width:1240px;margin:14px auto 0;background:linear-gradient(rgba(10,60,40,.42),rgba(10,60,40,.62)),url('img/fachadaiesjdq.jpg') center/cover no-repeat;color:#fff;padding:42px 24px 38px;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 6px 20px rgba(26,138,107,.18);min-height:220px;border-radius:8px}
+.hd-hero{position:relative;max-width:1240px;margin:14px auto 0;background:linear-gradient(rgba(15,30,55,.42),rgba(15,30,55,.62)),url('../../img/fachadaiesjdq.jpg') center/cover no-repeat;color:#fff;padding:42px 24px 38px;display:flex;align-items:center;justify-content:center;gap:24px;box-shadow:0 6px 20px rgba(27,79,138,.18);min-height:220px;border-radius:8px}
 .hd-hero-logo{flex-shrink:0;width:92px;height:92px;background:#fff;border-radius:16px;padding:7px;box-shadow:0 8px 22px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
 .hd-hero-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 .hd-hero-text{text-align:center;min-width:0;text-shadow:0 2px 10px rgba(0,0,0,.6)}
@@ -31,15 +31,15 @@ html,body{min-height:100vh;background:radial-gradient(circle at top,#F7FDFA 0,#E
 .bg.bg-large{grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:16px}
 
 /* ── Tarjeta base ── */
-.bc{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0,#FBFCFE 100%);border:1px solid var(--bd);border-radius:14px;padding:14px 14px 12px;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;text-align:left;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit;box-shadow:0 3px 12px rgba(20,90,60,.04)}
+.bc{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0,#FBFCFE 100%);border:1px solid var(--bd);border-radius:14px;padding:14px 14px 12px;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;text-align:left;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit;box-shadow:0 3px 12px rgba(27,79,138,.04)}
 .bc::before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--principal2),var(--principal))}
-.bc:hover{border-color:rgba(26,138,107,.35);box-shadow:0 12px 28px rgba(26,138,107,.12);transform:translateY(-4px)}
+.bc:hover{border-color:rgba(27,79,138,.35);box-shadow:0 12px 28px rgba(27,79,138,.12);transform:translateY(-4px)}
 .bc.tipo-tool::before{background:linear-gradient(90deg,#7BCB92,#1A6B3A)}
 .bc.tipo-proyecto::before{background:linear-gradient(90deg,#F08A7C,#C0321E)}
 .bc.tipo-pdf::before{background:linear-gradient(90deg,#7FB3E6,#2E7BC4)}
 
 /* ── Iconos de tarjeta ── */
-.bi{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:1.3rem;line-height:1;margin-bottom:4px;background:linear-gradient(135deg,var(--principal-bg),var(--principal-cl));box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 3px 8px rgba(26,138,107,.08)}
+.bi{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:1.3rem;line-height:1;margin-bottom:4px;background:linear-gradient(135deg,var(--principal-bg),var(--principal-cl));box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 3px 8px rgba(27,79,138,.08)}
 .bc.tipo-tool .bi{background:linear-gradient(135deg,#EEF9F1,#DCF2E3);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 6px 14px rgba(26,107,58,.10)}
 .bc.tipo-proyecto .bi{background:linear-gradient(135deg,#FFF0EE,#FFE0DB);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 6px 14px rgba(192,50,30,.10)}
 .bc.tipo-pdf .bi{background:linear-gradient(135deg,#F2F7FD,#E5EEF9);box-shadow:inset 0 1px 0 rgba(255,255,255,.75),0 6px 14px rgba(46,123,196,.10)}
@@ -61,10 +61,10 @@ html,body{min-height:100vh;background:radial-gradient(circle at top,#F7FDFA 0,#E
 .pending-badge{position:absolute;top:8px;right:8px;font-family:var(--cond);font-size:.66rem;font-weight:700;letter-spacing:.04em;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,#E2E6EC,#C9CFD8);color:#3A4250;border:1.5px solid #B5BCC6;text-transform:uppercase;line-height:1.2;box-shadow:0 2px 6px rgba(60,70,90,.15)}
 
 /* ── Buscador global ── */
-.searchbar{max-width:640px;margin:32px auto 14px;padding:10px 18px;background:#fff;border:1px solid var(--bd);border-radius:24px;box-shadow:0 6px 18px rgba(26,138,107,.06);display:flex;align-items:center}
+.searchbar{max-width:640px;margin:32px auto 14px;padding:10px 18px;background:#fff;border:1px solid var(--bd);border-radius:24px;box-shadow:0 6px 18px rgba(27,79,138,.06);display:flex;align-items:center}
 .searchbar input{flex:1;border:0;outline:0;background:transparent;font-family:var(--sans);font-size:.95rem;color:var(--tx);padding:4px 6px}
 .searchbar input::placeholder{color:#8C97A8}
-.searchbar:focus-within{border-color:var(--principal2);box-shadow:0 6px 18px rgba(46,176,136,.20)}
+.searchbar:focus-within{border-color:var(--principal2);box-shadow:0 6px 18px rgba(46,123,196,.20)}
 
 /* ── Aviso ── */
 .aviso{max-width:720px;margin:36px auto 18px;padding:18px 24px;background:#F9FAFC;border-left:4px solid var(--principal);border-radius:4px;font-size:.88rem;line-height:1.6;color:var(--tx)}
@@ -109,6 +109,16 @@ details.criterios .criterios-body{padding:14px 18px;border:1px solid var(--bd);b
 
 /* ── Scroll fix anchors ── */
 [id]{scroll-margin-top:110px}
+
+/* ── Bloque "Empieza aquí" (guía de uso para el alumno) ── */
+.empieza-aqui{max-width:1100px;margin:0 auto 28px;padding:18px 22px 16px;background:linear-gradient(135deg,var(--principal-bg) 0%,#F4F8FD 100%);border-left:4px solid var(--principal);border-radius:8px;box-shadow:0 3px 12px rgba(27,79,138,.05)}
+.empieza-aqui h2{font-family:var(--cond);font-size:1.15rem;font-weight:700;color:var(--principal);margin-bottom:10px;letter-spacing:.01em;display:flex;align-items:center;gap:8px}
+.empieza-aqui ol{margin:0;padding-left:24px;list-style:decimal}
+.empieza-aqui ol li{font-size:.92rem;line-height:1.55;color:var(--tx);padding:3px 0 3px 4px}
+.empieza-aqui ol li::marker{color:var(--principal);font-weight:700}
+.empieza-aqui ol li strong{color:var(--principal);font-weight:600}
+.empieza-aqui .empieza-nota{margin-top:12px;padding-top:10px;border-top:1px dashed rgba(27,79,138,.25);font-size:.84rem;color:var(--t2);line-height:1.5}
+.empieza-aqui .empieza-nota strong{color:var(--principal);font-weight:600}
 
 @media print{
   html,body{background:#fff!important}

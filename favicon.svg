@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="8" fill="#1A8A6B"/>
+  <rect width="64" height="64" rx="8" fill="#1B4F8A"/>
   <text x="32" y="30" text-anchor="middle" font-family="'Barlow Condensed','Helvetica',sans-serif" font-weight="700" font-size="22" fill="#fff">CyR</text>
-  <text x="32" y="52" text-anchor="middle" font-family="'Barlow Condensed','Helvetica',sans-serif" font-weight="700" font-size="22" fill="#D7F2E7">1º</text>
+  <text x="32" y="52" text-anchor="middle" font-family="'Barlow Condensed','Helvetica',sans-serif" font-weight="700" font-size="22" fill="#DDE9F7">1º</text>
 </svg>
