@@ -24,7 +24,7 @@ los tres trimestres.
 - [x] **Cuadernillo de retos** (PDF) en `materiales/retos-microbit.pdf`.
 - [x] Badge "Próximamente" eliminado de la tarjeta T2 del index raíz.
 
-### T3 · Ciberseguridad — Fase E completada
+### T3 · Ciberseguridad — Fase E completada (versión inicial)
 - [x] **Presentación pizarra** integrada (`presentacion.html`).
 - [x] **Cuadernillo del alumno** (v7) integrado: HTML + PDF imprimible en
   `materiales/cuadernillo-ciberseguridad-1eso-v7.pdf`.
@@ -32,8 +32,6 @@ los tres trimestres.
   como decía la versión inicial del brief.
 - [x] **Moodle**: `trimestres/t3-ciberseguridad/moodle.html` con templates y rúbrica.
 - [x] Badges "Pendiente Fase E" eliminados de las 4 tarjetas del hub T3.
-- [ ] **Solucionario** del cuadernillo v7: copiar a
-  `_soluciones/cuadernillo_solucionario_v7.html` (privado, NO se despliega).
 
 ### Infraestructura del sitio tras la integración
 - [x] **`sitemap.xml`** regenerado con las 100 URLs publicadas.
@@ -41,6 +39,37 @@ los tres trimestres.
   de T1 y T2 para incluir Sesiones, Juegos, Proyectos y Retos.
 - [x] **Auditoría de enlaces internos**: 0 enlaces rotos sobre 1.178.
 - [x] **Auditoría de imágenes huérfanas**: 0 huérfanas.
+
+## ✅ v2.0.0 — Rework T3 "Bitácora de investigación" (mayo 2026)
+
+Reescritura completa del trimestre de Ciberseguridad a partir del
+nuevo cuadernillo (`Cuadernillo_Ciberseguridad_1ESOB_FINAL.pdf`, 62 pp.).
+
+### Cambios estructurales
+- [x] **Borrado** del T3 anterior: 19 sesiones (s01–s19), `presentacion.html`,
+  `cuadernillo.html` (v6/v7), `moodle.html` y PDF v7. Backup en
+  `outputs/t3-backup-pre-rework/`.
+- [x] **18 sesiones nuevas** (s01–s18) en formato "Bitácora de investigación":
+  cada una con Misión · Herramientas · Pasos · Para pensar.
+- [x] **Cuadernillo web nuevo** (`cuadernillo.html`): presentación, normas, índice y descarga.
+- [x] **PDF nuevo** en `materiales/cuadernillo-ciberseguridad-1eso.pdf` (62 pp., 2,7 MB).
+- [x] **Hub T3 reescrito**: trabajo en parejas, "saber/hacer/evaluar" actualizado a
+  vocabulario de investigación (OSINT, deepfakes, ingeniería social…).
+- [x] **`sesiones/index.html`** rehecho con las 18 sesiones, indicador de
+  materiales auxiliares y enlace al PDF.
+- [x] Acceso a Moodle ahora es **enlace externo** directo a la plataforma
+  de la Junta (ya no hay página `moodle.html` local).
+- [x] **`sitemap.xml`** regenerado con 97 URLs.
+- [x] **Auditoría de enlaces**: 0 rotos sobre 1.172.
+
+### Pendientes del nuevo T3
+- [ ] **Solucionario** del nuevo cuadernillo (si Manuel lo elabora aparte):
+  guardar en `_soluciones/cuadernillo_solucionario_bitacora.html` (privado).
+- [ ] Revisar los **materiales auxiliares** referenciados en las sesiones
+  S09, S10, S13, S16 y S17: por ahora solo aparece el aviso "incluye material
+  auxiliar" en cada sesión. Si se quiere mostrar el contenido extra en la
+  página web (capturas, casos), habría que crear secciones específicas o
+  páginas adicionales.
 
 ## Pendientes de Manuel (no bloqueantes)
 
