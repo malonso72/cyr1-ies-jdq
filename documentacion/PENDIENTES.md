@@ -40,6 +40,50 @@ los tres trimestres.
 - [x] **Auditoría de enlaces internos**: 0 enlaces rotos sobre 1.178.
 - [x] **Auditoría de imágenes huérfanas**: 0 huérfanas.
 
+## ✅ v2.1.0 — T3 actualizado al cuadernillo v7 (mayo 2026)
+
+Actualización del bloque de Ciberseguridad a la versión 7 del cuadernillo
+(`Cuadernillo_Ciberseguridad_1ESOB_v7.pdf`, **88 páginas**, 1,0 MB).
+Se conserva la estructura Bitácora de investigación pero con dinámicas
+nuevas en casi todas las sesiones.
+
+### Cambios v7 vs v6
+- [x] **PDF reemplazado**: 88 pp. (antes 62 pp.), 1,0 MB.
+- [x] **Misiones, herramientas, pasos y "Para pensar"** re-extraídos sesión a
+  sesión desde el PDF (parser `parse_ciber_v7.py`).
+- [x] **Títulos de sesión actualizados** en `sesiones/index.html` y
+  `cuadernillo.html`:
+  - S02 → "Contraseñas: torneo de la clase".
+  - S03 → "Caza al phisher: URL mortal + modo SOC".
+  - S04 → "Lo que internet sabe de ti + ranking OSINT".
+  - S07 → "Redes sociales: perfil de riesgo" (nuevo cálculo BAJO/MEDIO/ALTO).
+  - S09 → "Ingeniería social + Escape Room PIENSA" con diploma.
+  - S11 → "Wifis públicas: el café trampa" + aventura de Ana.
+  - S12 → "Identidad digital y Derecho al Olvido".
+  - S13 → Caso Lucía + **informe policial**.
+  - S14 → Deepfakes — **torneo Real/Fake** con puntuación y vidas.
+  - S15 → Ciber Cluedo CCN + **caso fragmentado** + pista falsa.
+  - S16 → Gaming: **4 estafas** + tienda falsa + streamer.
+  - S17 → Caso Marta Ruiz — **línea temporal del fraude**.
+  - S18 → Examen del analista + Informe final manuscrito (sin "Para pensar":
+    se sustituye por las 4 partes del informe).
+- [x] **Nuevos materiales auxiliares** añadidos (badge "📎 Material auxiliar"):
+  S07, S11, S12, S14, S15, S18.
+- [x] **Hub T3** actualizado: nuevas habilidades en "Hacer/Evaluar"
+  (analista SOC, niveles de riesgo, informe policial, diplomas), tarjeta de PDF
+  ahora dice "88 páginas A4".
+- [x] **`cuadernillo.html`**: sección de descarga reescrita con resumen de
+  novedades v7.
+- [x] **`sitemap.xml`** regenerado (97 URLs).
+- [x] **Auditoría de enlaces**: 0 rotos sobre 1.191.
+
+### Pendientes derivados de v7
+- [ ] **Escape Room PIENSA (S9)**: si se aloja en Moodle y da diploma
+  descargable, recordar enlazar desde S09 cuando esté publicado.
+- [ ] Posible expansión web de los materiales auxiliares ahora añadidos
+  (S11 café trampa, S12 Derecho al Olvido, S14 casos del torneo, S15 caso
+  fragmentado, S18 examen del analista).
+
 ## ✅ v2.0.0 — Rework T3 "Bitácora de investigación" (mayo 2026)
 
 Reescritura completa del trimestre de Ciberseguridad a partir del
