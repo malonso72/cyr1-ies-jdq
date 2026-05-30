@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel del Delegado de Protección de Datos · Sesión 12 · v1</title>
+<style>
+  :root {
+    --azul-tribunal: #0E2A3C;
+    --azul-tribunal-2: #1B3F58;
+    --oro: #C9A227;
+    --oro-claro: #E8C547;
+    --crema: #F4ECD8;
+    --crema-papel: #FAF3E0;
+    --tinta: #1A1A1A;
+    --tinta-suave: #3D3D3D;
+    --rojo-sello: #8B1A1A;
+    --verde-aceptado: #2D6A4F;
+    --gris-borde: #B8AC8C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--azul-tribunal);
+    background-image:
+      radial-gradient(ellipse at top, rgba(201,162,39,0.08), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 3px);
+    color: var(--tinta);
+    min-height: 100vh;
+    padding: 24px 16px;
+    line-height: 1.55;
+  }
+  .lienzo {
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--crema-papel);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(184,172,140,0.08), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(184,172,140,0.06), transparent 40%);
+    border: 1px solid var(--gris-borde);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,162,39,0.2) inset;
+    padding: 36px 44px;
+    position: relative;
+  }
+  .lienzo::before {
+    content: ""; position: absolute; top: 14px; left: 14px; right: 14px; bottom: 14px;
+    border: 1px solid var(--gris-borde); pointer-events: none; opacity: 0.5;
+  }
+
+  /* ENCABEZADO TIPO TRIBUNAL */
+  .encabezado {
+    text-align: center; padding-bottom: 18px;
+    border-bottom: 3px double var(--azul-tribunal);
+    margin-bottom: 22px;
+  }
+  .encabezado .escudo { font-size: 38px; margin-bottom: 6px; }
+  .encabezado h1 {
+    font-family: 'Georgia', serif;
+    font-size: 24px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--azul-tribunal); font-weight: normal;
+  }
+  .encabezado .subtitulo {
+    font-style: italic; font-size: 13px; color: var(--tinta-suave); margin-top: 6px;
+    letter-spacing: 1px;
+  }
+  .encabezado .ref {
+    font-family: 'Courier New', monospace; font-size: 11px;
+    color: var(--tinta-suave); margin-top: 10px; letter-spacing: 2px;
+  }
+
+  /* PANTALLAS */
+  .pantalla { display: none; }
+  .pantalla.activa { display: block; animation: aparecer 0.4s ease; }
+  @keyframes aparecer { from {opacity:0;} to {opacity:1;} }
+
+  /* TEXTO LEGAL */
+  h2 {
+    font-family: 'Georgia', serif;
+    color: var(--azul-tribunal); font-size: 19px;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 14px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--gris-borde);
+    font-weight: normal;
+  }
+  h3 {
+    font-family: 'Georgia', serif; color: var(--azul-tribunal);
+    font-size: 15px; letter-spacing: 1px; text-transform: uppercase;
+    margin: 14px 0 8px 0; font-weight: bold;
+  }
+  p { margin-bottom: 10px; }
+  .destacar { color: var(--rojo-sello); font-weight: bold; }
+  .legal { font-style: italic; color: var(--tinta-suave); font-size: 13px; }
+
+  /* ACREDITACIÓN INICIAL */
+  .campos-acreditacion {
+    background: rgba(201,162,39,0.06);
+    border: 1px solid var(--gris-borde);
+    padding: 18px 22px; margin: 18px 0;
+  }
+  .campo {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .campo label {
+    min-width: 220px; font-variant: small-caps; letter-spacing: 1px;
+    color: var(--azul-tribunal); font-size: 14px;
+  }
+  .campo input {
+    flex: 1; padding: 8px 10px; border: none;
+    border-bottom: 1px solid var(--tinta-suave);
+    background: transparent; font-family: 'Georgia', serif;
+    font-size: 15px; color: var(--tinta);
+  }
+  .campo input:focus { outline: none; border-bottom-color: var(--oro); }
+
+  /* BOTONES */
+  .btn {
+    font-family: 'Georgia', serif;
+    background: var(--azul-tribunal); color: var(--crema);
+    border: 1px solid var(--azul-tribunal);
+    padding: 12px 26px; font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    margin-top: 12px;
+  }
+  .btn:hover { background: var(--oro); color: var(--azul-tribunal); border-color: var(--oro); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-oro {
+    background: var(--oro); color: var(--azul-tribunal); border-color: var(--oro);
+  }
+  .btn-oro:hover { background: var(--azul-tribunal); color: var(--oro); border-color: var(--oro); }
+
+  /* BARRA DE LECTURA (BRIEFING) */
+  .barra-lectura {
+    position: sticky; top: 8px; z-index: 10;
+    background: rgba(14,42,60,0.95); color: var(--crema);
+    border: 1px solid var(--oro);
+    padding: 10px 16px; margin-bottom: 18px;
+    font-size: 12px; letter-spacing: 1px;
+  }
+  .barra-lectura .estado { display: flex; justify-content: space-between; }
+  .barra-lectura .ok { color: var(--oro-claro); font-weight: bold; }
+  .barra-lectura .progreso-visual {
+    height: 4px; background: rgba(255,255,255,0.1); margin-top: 6px;
+  }
+  .barra-lectura .fill {
+    height: 100%; background: var(--oro); width: 0%; transition: width 0.3s;
+  }
+
+  /* FUNDAMENTOS */
+  .fundamento {
+    background: var(--crema);
+    border-left: 4px solid var(--oro);
+    padding: 14px 18px; margin-bottom: 12px;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.06);
+  }
+  .fundamento .titulo {
+    font-variant: small-caps; letter-spacing: 2px;
+    color: var(--azul-tribunal); font-weight: bold;
+    font-size: 14px; margin-bottom: 6px;
+  }
+  .fundamento .articulo {
+    font-family: 'Courier New', monospace;
+    font-size: 10px; color: var(--tinta-suave);
+    letter-spacing: 1px;
+  }
+  .fundamento.si .titulo::before { content: "✓ "; color: var(--verde-aceptado); }
+  .fundamento.no .titulo::before { content: "✗ "; color: var(--rojo-sello); }
+  .fundamento p { font-size: 14px; margin: 6px 0 0; }
+
+  /* EXPEDIENTE */
+  .expediente {
+    background: var(--crema);
+    border: 1px solid var(--gris-borde);
+    padding: 20px 24px; margin-top: 14px;
+    box-shadow: 2px 2px 0 rgba(14,42,60,0.1);
+    position: relative;
+  }
+  .expediente .num-expediente {
+    position: absolute; top: -12px; left: 20px;
+    background: var(--azul-tribunal); color: var(--oro);
+    padding: 3px 14px; font-size: 11px;
+    letter-spacing: 3px; font-weight: bold;
+  }
+  .expediente .meta {
+    font-family: 'Courier New', monospace;
+    font-size: 11px; color: var(--tinta-suave);
+    border-bottom: 1px dashed var(--gris-borde);
+    padding-bottom: 8px; margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .expediente .ficha-fila {
+    display: flex; gap: 12px; margin-bottom: 6px;
+    align-items: baseline;
+  }
+  .expediente .ficha-etiq {
+    min-width: 140px; font-variant: small-caps;
+    letter-spacing: 1.5px; color: var(--azul-tribunal);
+    font-size: 12px; font-weight: bold;
+  }
+  .expediente .ficha-val { font-size: 14px; }
+  .expediente .hechos {
+    background: rgba(255,255,255,0.5);
+    border-left: 3px solid var(--azul-tribunal);
+    padding: 10px 14px; margin: 12px 0;
+    font-size: 14px; line-height: 1.6;
+  }
+  .expediente .solicita {
+    font-style: italic; padding: 8px 0;
+    color: var(--azul-tribunal); font-size: 14px;
+  }
+
+  /* RESOLUCIÓN: FUNDAMENTO + DECISIÓN */
+  .resolucion {
+    background: rgba(14,42,60,0.04);
+    border: 1px dashed var(--azul-tribunal);
+    padding: 14px 18px; margin-top: 14px;
+  }
+  .resolucion .titulo-paso {
+    font-variant: small-caps; letter-spacing: 2px;
+    color: var(--azul-tribunal); font-weight: bold;
+    font-size: 13px; margin-bottom: 8px;
+  }
+  .resolucion select {
+    width: 100%; padding: 10px 12px;
+    font-family: 'Georgia', serif; font-size: 14px;
+    border: 1px solid var(--gris-borde);
+    background: var(--crema); color: var(--tinta);
+  }
+  .resolucion select:focus { outline: none; border-color: var(--oro); }
+  .botones-decision {
+    display: flex; gap: 12px; margin-top: 14px;
+  }
+  .btn-decision {
+    flex: 1; padding: 14px;
+    font-family: 'Georgia', serif; font-size: 15px;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    border: 2px solid;
+  }
+  .btn-aceptar {
+    background: var(--crema); color: var(--verde-aceptado);
+    border-color: var(--verde-aceptado);
+  }
+  .btn-aceptar:hover { background: var(--verde-aceptado); color: var(--crema); }
+  .btn-aceptar:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-denegar {
+    background: var(--crema); color: var(--rojo-sello);
+    border-color: var(--rojo-sello);
+  }
+  .btn-denegar:hover { background: var(--rojo-sello); color: var(--crema); }
+  .btn-denegar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* FEEDBACK / DICTAMEN */
+  .dictamen {
+    margin-top: 16px; padding: 18px 22px;
+    border: 2px solid;
+    display: none; position: relative;
+  }
+  .dictamen.activo { display: block; animation: aparecer 0.4s; }
+  .dictamen.correcto { background: rgba(45,106,79,0.08); border-color: var(--verde-aceptado); }
+  .dictamen.incorrecto { background: rgba(139,26,26,0.06); border-color: var(--rojo-sello); }
+  .dictamen .titulo-dictamen {
+    font-variant: small-caps; letter-spacing: 3px;
+    font-weight: bold; font-size: 15px; margin-bottom: 8px;
+  }
+  .dictamen.correcto .titulo-dictamen { color: var(--verde-aceptado); }
+  .dictamen.incorrecto .titulo-dictamen { color: var(--rojo-sello); }
+  .dictamen .fundamento-aplicable {
+    font-style: italic; margin: 8px 0; padding: 8px 12px;
+    background: rgba(0,0,0,0.04); font-size: 13px;
+  }
+  .dictamen .acciones { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-reint, .btn-sig {
+    padding: 10px 18px; font-family: 'Georgia', serif;
+    border: 1px solid; cursor: pointer; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .btn-reint { background: var(--crema); color: var(--azul-tribunal); border-color: var(--azul-tribunal); }
+  .btn-reint:hover { background: var(--azul-tribunal); color: var(--crema); }
+  .btn-sig { background: var(--azul-tribunal); color: var(--crema); border-color: var(--azul-tribunal); }
+  .btn-sig:hover { background: var(--oro); border-color: var(--oro); color: var(--azul-tribunal); }
+
+  /* PROGRESO EN EXPEDIENTES */
+  .progreso-cab {
+    display: flex; justify-content: space-between;
+    font-family: 'Courier New', monospace; font-size: 11px;
+    color: var(--tinta-suave); letter-spacing: 2px;
+    margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+  .progreso-cab span { font-weight: bold; }
+
+  /* SELLO DE RESOLUCIÓN */
+  .sello-final {
+    position: absolute; right: -20px; top: 16px;
+    width: 110px; height: 110px; border: 3px solid var(--rojo-sello);
+    border-radius: 50%; color: var(--rojo-sello);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; font-size: 10px; font-weight: bold;
+    letter-spacing: 2px; line-height: 1.3;
+    transform: rotate(-12deg); opacity: 0.85;
+    background: rgba(255,255,255,0.7);
+  }
+
+  /* DIPLOMA */
+  .diploma-preview {
+    background: var(--crema-papel);
+    border: 8px double var(--oro);
+    padding: 32px;
+    margin: 18px 0;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+  .diploma-preview .titulo-d {
+    font-family: 'Georgia', serif;
+    font-size: 22px; letter-spacing: 5px;
+    color: var(--azul-tribunal); text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .diploma-preview .sub-d {
+    font-style: italic; color: var(--tinta-suave);
+    font-size: 14px; margin-bottom: 22px;
+  }
+  .diploma-preview .nombres-d {
+    font-family: 'Georgia', serif; font-size: 20px;
+    color: var(--azul-tribunal); font-weight: bold;
+    margin: 14px 0; letter-spacing: 1px;
+  }
+  .diploma-preview .resumen-d {
+    background: rgba(14,42,60,0.05);
+    border: 1px solid var(--gris-borde);
+    padding: 14px; margin: 14px 0;
+    font-size: 14px; text-align: left;
+  }
+  .diploma-preview .resumen-d div {
+    display: flex; justify-content: space-between;
+    padding: 4px 0; border-bottom: 1px dashed var(--gris-borde);
+  }
+  .diploma-preview .resumen-d div:last-child { border-bottom: none; font-weight: bold; }
+
+  .acciones-finales {
+    display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
+  }
+  .acciones-finales .btn { margin-top: 0; }
+
+  /* AVISOS */
+  .aviso-importante {
+    background: rgba(201,162,39,0.12);
+    border-left: 5px solid var(--oro);
+    padding: 12px 16px; margin: 14px 0;
+    font-size: 13px; line-height: 1.5;
+  }
+  .aviso-importante b { color: var(--azul-tribunal); }
+
+  footer-legal {
+    display: block; text-align: center;
+    margin-top: 22px; padding-top: 14px;
+    border-top: 1px solid var(--gris-borde);
+    font-size: 11px; color: var(--tinta-suave);
+    font-family: 'Courier New', monospace; letter-spacing: 1.5px;
+  }
+
+  @media (max-width: 600px) {
+    .lienzo { padding: 22px 18px; }
+    .lienzo::before { display: none; }
+    .botones-decision { flex-direction: column; }
+    .ficha-fila { flex-direction: column; gap: 2px; }
+    .expediente .ficha-etiq { min-width: 0; }
+    .campo { flex-direction: column; align-items: flex-start; }
+    .campo label { min-width: 0; }
+    .campo input { width: 100%; }
+    .sello-final { right: 10px; top: 10px; width: 80px; height: 80px; font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lienzo">
+  <div class="encabezado">
+    <div class="escudo">⚖️</div>
+    <h1>Despacho del Delegado de Protección de Datos</h1>
+    <div class="subtitulo">Reglamento General de Protección de Datos · UE 2016/679</div>
+    <div class="ref">EXPEDIENTES · 1ºESO B · IES JIMÉNEZ DE QUESADA</div>
+  </div>
+
+  <!-- PANTALLA 0 — ACREDITACIÓN -->
+  <div class="pantalla activa" id="pantalla-acreditacion">
+    <h2>I. Acreditación profesional</h2>
+    <p>Por la presente, se les acredita formalmente como <b>Delegados de Protección de Datos</b> (DPO) en prácticas para la resolución de los 8 expedientes que se les remiten a continuación.</p>
+    <p>Su función será examinar cada solicitud de <em>Derecho al Olvido</em> presentada por un ciudadano y emitir resolución motivada conforme al RGPD y a la Ley Orgánica 3/2018 de Protección de Datos Personales y Garantía de los Derechos Digitales.</p>
+
+    <div class="campos-acreditacion">
+      <div class="campo">
+        <label>Letrado/a Investigador/a 1</label>
+        <input type="text" id="nombre1" placeholder="Nombre y apellidos">
+      </div>
+      <div class="campo">
+        <label>Letrado/a Investigador/a 2</label>
+        <input type="text" id="nombre2" placeholder="Nombre y apellidos">
+      </div>
+    </div>
+
+    <div class="aviso-importante">
+      <b>Antes de resolver expedientes</b> deberán leer la <b>Hoja de Fundamentos Jurídicos</b> que les remite el despacho. Sin esa lectura no podrán dictar resoluciones.
+    </div>
+
+    <button class="btn btn-oro" onclick="iniciarBriefing()">▸ Recibir hoja de fundamentos</button>
+  </div>
+
+  <!-- PANTALLA 1 — BRIEFING JURÍDICO -->
+  <div class="pantalla" id="pantalla-briefing">
+
+    <div class="barra-lectura">
+      <div class="estado">
+        <span>📖 LECTURA: <span id="estado-scroll" class="pendiente">en curso…</span></span>
+        <span>⏱ TIEMPO MÍNIMO: <span id="estado-tiempo" class="pendiente">90 s</span></span>
+      </div>
+      <div class="progreso-visual"><div class="fill" id="fill-tiempo"></div></div>
+    </div>
+
+    <h2>II. Fundamentos jurídicos aplicables</h2>
+    <p class="legal">El Derecho al Olvido (art. 17 RGPD y art. 93–94 LOPDGDD) faculta a cualquier ciudadano para solicitar la retirada de información personal en buscadores cuando concurran determinadas circunstancias. No es un derecho absoluto: convive con el derecho a la libertad de información y con el interés público.</p>
+
+    <div id="contenido-briefing">
+
+      <h3>A. Casos en los que la solicitud SÍ procede</h3>
+
+      <div class="fundamento si">
+        <div class="titulo">Fundamento 1 — Información antigua y perjudicial</div>
+        <div class="articulo">Art. 17.1 a) y c) RGPD · Art. 93 LOPDGDD</div>
+        <p>Información publicada hace años, <span class="destacar">sin interés público actual</span>, que causa un perjuicio actual al solicitante. Ejemplo prototípico: un comentario inadecuado de juventud que sigue apareciendo en Google al buscar el nombre.</p>
+      </div>
+
+      <div class="fundamento si">
+        <div class="titulo">Fundamento 2 — Imágenes publicadas por terceros sin consentimiento</div>
+        <div class="articulo">Art. 17.1 d) RGPD · L.O. 1/1982 protección del honor</div>
+        <p>Fotografías subidas por otra persona sin permiso del afectado, especialmente si comprometen su imagen o intimidad. <span class="destacar">El consentimiento del titular es necesario.</span></p>
+      </div>
+
+      <h3>B. Casos en los que la solicitud NO procede</h3>
+
+      <div class="fundamento no">
+        <div class="titulo">Fundamento 3 — Información veraz de interés público actual</div>
+        <div class="articulo">Art. 17.3 a) RGPD · Doctrina TC sobre libertad de información</div>
+        <p>Datos veraces sobre <span class="destacar">personas con cargo público en el ejercicio de sus funciones</span>, sentencias firmes recientes que mantengan interés social, o información que sirva a la transparencia. <span class="legal">Prevalece el derecho a la información sobre la protección de datos.</span></p>
+      </div>
+
+      <div class="fundamento no">
+        <div class="titulo">Fundamento 4 — Datos públicos por ley</div>
+        <div class="articulo">Ley 15/2014 Registro Mercantil · BOE</div>
+        <p>Información publicada en registros oficiales <span class="destacar">accesibles por mandato legal</span> (Registro Mercantil, BOE, boletines oficiales, sentencias) tiene reglas especiales. <span class="legal">No se puede borrar de Google si la fuente original es de publicidad obligatoria.</span></p>
+      </div>
+
+      <div class="aviso-importante">
+        <b>Atención especial — Información FALSA:</b> el Derecho al Olvido <span class="destacar">no es la vía adecuada</span> para combatir información falsa. La vía correcta es el <em>derecho de rectificación</em> (art. 16 RGPD) o, en su caso, la denuncia por difamación.
+      </div>
+
+      <div id="marca-fin-briefing" style="text-align:center;font-style:italic;color:var(--verde-aceptado);padding:10px;border-top:1px dashed var(--gris-borde);margin-top:10px;">
+        — Fin de la hoja de fundamentos —
+      </div>
+    </div>
+
+    <button class="btn btn-oro" id="btn-pasar-expedientes" onclick="iniciarExpedientes()" disabled>
+      🔒 Esperando lectura completa…
+    </button>
+  </div>
+
+  <!-- PANTALLA 2 — EXPEDIENTES -->
+  <div class="pantalla" id="pantalla-expedientes">
+    <div class="progreso-cab">
+      <span>EXPEDIENTE <span id="num-exp">1</span> / 8</span>
+      <span>RESOLUCIONES CORRECTAS: <span id="aciertos-disp">0</span></span>
+    </div>
+
+    <div id="contenedor-expediente"></div>
+    <div class="dictamen" id="dictamen"></div>
+  </div>
+
+  <!-- PANTALLA 3 — RESOLUCIÓN FINAL Y DIPLOMA -->
+  <div class="pantalla" id="pantalla-final">
+    <h2>III. Resolución del Despacho</h2>
+    <p>Concluida la resolución de los 8 expedientes asignados, se les hace entrega del <b>nombramiento oficial</b> como Delegados de Protección de Datos.</p>
+
+    <div class="diploma-preview" id="diploma-preview">
+      <div class="titulo-d">Nombramiento</div>
+      <div class="sub-d">Delegado/a de Protección de Datos · Promoción 2026</div>
+      <div style="font-size:36px;color:var(--oro);">⚖️</div>
+      <p style="margin: 10px 0; font-style: italic;">El Despacho de Protección de Datos del IES Jiménez de Quesada acredita a</p>
+      <div class="nombres-d" id="nombres-finales"></div>
+      <p>como Delegados de Protección de Datos en prácticas, por haber resuelto correctamente los expedientes que se les encomendaron conforme a los fundamentos del RGPD y de la LOPDGDD.</p>
+
+      <div class="resumen-d">
+        <div><span>Fecha de resolución:</span> <span id="fecha-final"></span></div>
+        <div><span>Expedientes resueltos:</span> <span>8 / 8</span></div>
+        <div><span>Resoluciones correctas:</span> <span id="correctas-finales"></span> / 8</div>
+        <div><span>Fundamentos jurídicos aplicados:</span> <span id="fundamentos-finales"></span></div>
+        <div><span>CALIFICACIÓN FINAL:</span> <span id="calificacion-final"></span></div>
+      </div>
+
+      <p class="legal" style="margin-top: 12px;">"La protección de datos no es un trámite: es el último muro entre la persona y el sistema."</p>
+    </div>
+
+    <div class="acciones-finales">
+      <button class="btn btn-oro" onclick="descargarDiploma()">📥 Descargar nombramiento (PNG)</button>
+      <button class="btn" onclick="window.print()">🖨 Imprimir</button>
+    </div>
+
+    <div class="aviso-importante" style="margin-top: 18px;">
+      <b>Entrega en Moodle:</b> subid el PNG del nombramiento a la tarea de la Sesión 12. Una sola entrega por pareja, ambos nombres deben figurar en el diploma.
+    </div>
+  </div>
+
+  <footer-legal>
+    IES JIMÉNEZ DE QUESADA · SANTA FE (GRANADA) · CIBERSEGURIDAD · SESIÓN 12 · v1
+  </footer-legal>
+</div>
+
+<script>
+// ============ ESTADO ============
+let nombre1 = '', nombre2 = '';
+let expedienteActual = 0;
+let aciertos = 0;
+let fundamentosAplicados = new Set();
+let scrollOk = false, tiempoOk = false;
+const TIEMPO_MIN = 90;
+
+// ============ EXPEDIENTES ============
+// Cada expediente: tomado literalmente del Material S12 del cuadernillo.
+// fundamento_correcto: el número (1-4) que justifica la resolución correcta.
+// decision_correcta: "ACEPTAR" o "DENEGAR".
+const EXPEDIENTES = [
+  {
+    n: 1,
+    solicitante: "Pablo Martínez Romero",
+    edad: "27 años",
+    profesion: "En búsqueda de empleo",
+    hechos: "Hace 8 años, cuando el solicitante tenía 19, publicó en un foro abierto de cine un comentario muy violento e insultante sobre una película. Hoy, al buscar su nombre en Google, ese comentario sigue apareciendo en los primeros resultados.",
+    solicita: "Que Google deje de mostrar ese resultado al buscar su nombre.",
+    decision: "ACEPTAR",
+    fundamento: 1,
+    explicacion: "El comentario es <b>antiguo</b> (8 años), <b>no tiene ningún interés público actual</b> (era una opinión en un foro de cine sin relevancia social), y le está <b>causando perjuicio real</b> en su búsqueda de empleo. Es el caso paradigmático del Fundamento 1."
+  },
+  {
+    n: 2,
+    solicitante: "Lucía Fernández Sánchez",
+    edad: "34 años",
+    profesion: "Maestra de Primaria",
+    hechos: "En 2019 fue acusada de un robo y la noticia se publicó en prensa local. En 2020 fue ABSUELTA en juicio. Sin embargo, al buscar su nombre en Google sigue apareciendo la noticia inicial de cuando fue acusada, no la sentencia absolutoria posterior.",
+    solicita: "Retirada del resultado que muestra la acusación inicial.",
+    decision: "ACEPTAR",
+    fundamento: 1,
+    explicacion: "La información ha perdido relevancia: la solicitante fue <b>absuelta</b>, por lo que la noticia original es <b>parcial e inexacta</b> en el contexto actual. Se considera información antigua sin interés público actual cuyo mantenimiento causa perjuicio. Caso del Fundamento 1, agravado por la inexactitud sobrevenida."
+  },
+  {
+    n: 3,
+    solicitante: "Manuel Ortiz García",
+    edad: "52 años",
+    profesion: "CEO de empresa cotizada",
+    hechos: "Una web económica publica que el solicitante percibió 480.000 € de remuneración el año pasado. El dato es VERAZ y procede del Registro Mercantil, que por ley es público y accesible a cualquier ciudadano.",
+    solicita: "Que el dato deje de aparecer asociado a su nombre.",
+    decision: "DENEGAR",
+    fundamento: 4,
+    explicacion: "El Registro Mercantil es de <b>publicidad obligatoria por ley</b> (Ley 15/2014). Los datos económicos de directivos de empresas cotizadas son accesibles legalmente. Caso del Fundamento 4: información publicada por mandato legal. Concurre además interés público (transparencia económica)."
+  },
+  {
+    n: 4,
+    solicitante: "Sara Jiménez López",
+    edad: "31 años",
+    profesion: "Diseñadora gráfica",
+    hechos: "Una foto suya en bikini en la playa, tomada hace 12 años cuando tenía 19 años, fue subida por una amiga a un blog público sin su consentimiento. La foto sigue apareciendo en Google Imágenes al buscar su nombre.",
+    solicita: "Retirada de la foto de los resultados de búsqueda.",
+    decision: "ACEPTAR",
+    fundamento: 2,
+    explicacion: "La fotografía fue publicada por una <b>tercera persona sin consentimiento</b> de la afectada y compromete su imagen personal. La L.O. 1/1982 protege el derecho a la propia imagen. Caso paradigmático del Fundamento 2."
+  },
+  {
+    n: 5,
+    solicitante: "Carlos Vidal Moreno",
+    edad: "41 años",
+    profesion: "Empresario",
+    hechos: "En 2020 fue CONDENADO por sentencia firme por un delito de estafa con perjuicio a 14 víctimas. La noticia sigue saliendo en Google al buscar su nombre. La sentencia es reciente y el caso tuvo repercusión por el número de afectados.",
+    solicita: "Que Google deje de indexar la noticia de su condena.",
+    decision: "DENEGAR",
+    fundamento: 3,
+    explicacion: "Se trata de una <b>sentencia firme reciente</b> (2020) con <b>interés social vigente</b>: hay víctimas reconocidas judicialmente y la información sirve a la prevención de futuras estafas. Caso del Fundamento 3: prevalece el derecho a la información."
+  },
+  {
+    n: 6,
+    solicitante: "María Castillo Vega",
+    edad: "38 años",
+    profesion: "Actriz",
+    hechos: "Una web de espectáculos publica como noticia que la solicitante padece una enfermedad grave. El dato es ROTUNDAMENTE FALSO: la solicitante goza de perfecta salud y aporta certificado médico.",
+    solicita: "Eliminación de la noticia de los resultados de búsqueda mediante Derecho al Olvido.",
+    decision: "DENEGAR",
+    fundamento: 0, // caso especial: información falsa
+    explicacion: "<b>La vía elegida es incorrecta.</b> El Derecho al Olvido no se aplica a información falsa. La solicitante debe ejercer el <b>derecho de rectificación</b> (art. 16 RGPD) o presentar denuncia por intromisión ilegítima al honor (L.O. 1/1982). Aviso destacado en la hoja de fundamentos.",
+    fundamentoMostrado: "Aviso especial — Información FALSA"
+  },
+  {
+    n: 7,
+    solicitante: "Roberto Aguilar Núñez",
+    edad: "29 años",
+    profesion: "Recién licenciado, buscando empleo",
+    hechos: "Hace 5 años, durante una marcha estudiantil pacífica en su época universitaria, una foto de prensa local recogió su imagen en un grupo de manifestantes. La marcha era legal, sin altercados. La foto sigue accesible al buscar su nombre y al solicitante le preocupa el efecto que pueda tener en procesos de selección.",
+    solicita: "Que Google deje de mostrar la foto al buscar su nombre.",
+    decision: "ACEPTAR",
+    fundamento: 1,
+    explicacion: "La participación en una manifestación legal y pacífica no tiene <b>interés público actual</b> 5 años después, no fue noticia destacada, y el solicitante no es figura pública. La información antigua le perjudica en su empleabilidad. Caso del Fundamento 1."
+  },
+  {
+    n: 8,
+    solicitante: "Antonio Ruiz Cabrera",
+    edad: "68 años",
+    profesion: "Ex-alcalde, JUBILADO desde 2023",
+    hechos: "Durante su mandato como alcalde (2015–2023) mantuvo una cuenta personal de Twitter donde comentaba decisiones municipales y la vida política local. Ahora, jubilado, pide a Google que deje de indexar esos tuits porque \"forman parte del pasado\".",
+    solicita: "Desindexación de sus tuits sobre actividad municipal.",
+    decision: "DENEGAR",
+    fundamento: 3,
+    explicacion: "Aunque el solicitante esté ahora jubilado, los tuits versan sobre el <b>ejercicio de un cargo público</b> (alcalde) y sus decisiones administrativas. Esa información mantiene interés público para la rendición de cuentas histórica. Caso del Fundamento 3: información veraz sobre cargo público en el ejercicio de sus funciones."
+  }
+];
+
+// Mapa de fundamentos para el selector
+const FUNDAMENTOS = {
+  "1": "Fundamento 1 — Información antigua, sin interés público actual, perjudicial",
+  "2": "Fundamento 2 — Imágenes de terceros sin consentimiento",
+  "3": "Fundamento 3 — Información veraz de interés público (cargo público / sentencia firme reciente)",
+  "4": "Fundamento 4 — Datos públicos por ley (Registro Mercantil, BOE)",
+  "F": "Aviso especial — Información FALSA (vía incorrecta: corresponde rectificación)"
+};
+
+// ============ NAVEGACIÓN ============
+function cambiarPantalla(id) {
+  document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+  document.getElementById(id).classList.add('activa');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function iniciarBriefing() {
+  nombre1 = document.getElementById('nombre1').value.trim();
+  nombre2 = document.getElementById('nombre2').value.trim();
+  if (!nombre1 || !nombre2) {
+    alert('Para emitir el nombramiento al final se necesitan los dos nombres.');
+    return;
+  }
+  cambiarPantalla('pantalla-briefing');
+  iniciarBloqueoBriefing();
+}
+
+function iniciarBloqueoBriefing() {
+  scrollOk = false; tiempoOk = false;
+  const btn = document.getElementById('btn-pasar-expedientes');
+  btn.disabled = true;
+  btn.textContent = '🔒 Esperando lectura completa…';
+
+  let segundos = 0;
+  const timer = setInterval(() => {
+    segundos++;
+    const restante = Math.max(0, TIEMPO_MIN - segundos);
+    document.getElementById('fill-tiempo').style.width = Math.min(100, (segundos / TIEMPO_MIN) * 100) + '%';
+    if (restante > 0) {
+      document.getElementById('estado-tiempo').textContent = restante + ' s';
+    } else {
+      document.getElementById('estado-tiempo').textContent = '✓ COMPLETADO';
+      document.getElementById('estado-tiempo').className = 'ok';
+      tiempoOk = true;
+      desbloquearBriefing();
+      clearInterval(timer);
+    }
+  }, 1000);
+
+  const marca = document.getElementById('marca-fin-briefing');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !scrollOk) {
+        scrollOk = true;
+        document.getElementById('estado-scroll').textContent = '✓ COMPLETADA';
+        document.getElementById('estado-scroll').className = 'ok';
+        desbloquearBriefing();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  observer.observe(marca);
+}
+
+function desbloquearBriefing() {
+  if (scrollOk && tiempoOk) {
+    const btn = document.getElementById('btn-pasar-expedientes');
+    btn.disabled = false;
+    btn.textContent = '▸ Comenzar resolución de expedientes';
+  }
+}
+
+function iniciarExpedientes() {
+  expedienteActual = 0;
+  aciertos = 0;
+  fundamentosAplicados.clear();
+  document.getElementById('aciertos-disp').textContent = '0';
+  cambiarPantalla('pantalla-expedientes');
+  mostrarExpediente(0);
+}
+
+function mostrarExpediente(idx) {
+  if (idx >= EXPEDIENTES.length) {
+    mostrarFinal();
+    return;
+  }
+  expedienteActual = idx;
+  document.getElementById('num-exp').textContent = idx + 1;
+  document.getElementById('dictamen').classList.remove('activo');
+
+  const e = EXPEDIENTES[idx];
+  const cont = document.getElementById('contenedor-expediente');
+  cont.innerHTML = `
+    <div class="expediente">
+      <div class="num-expediente">EXP. Nº ${e.n}</div>
+      <div class="meta">REF: DPO/2026/${String(e.n).padStart(4,'0')} · FECHA REGISTRO: ${new Date().getFullYear()}-05-${String(10+e.n).padStart(2,'0')}</div>
+
+      <div class="ficha-fila"><span class="ficha-etiq">Solicitante</span><span class="ficha-val">${e.solicitante}</span></div>
+      <div class="ficha-fila"><span class="ficha-etiq">Edad</span><span class="ficha-val">${e.edad}</span></div>
+      <div class="ficha-fila"><span class="ficha-etiq">Profesión</span><span class="ficha-val">${e.profesion}</span></div>
+
+      <h3 style="margin-top: 14px;">Hechos alegados</h3>
+      <div class="hechos">${e.hechos}</div>
+
+      <h3>Petición</h3>
+      <div class="solicita">"${e.solicita}"</div>
+
+      <div class="resolucion">
+        <div class="titulo-paso">Resolución que procede dictar</div>
+        <p style="font-size:13px;margin-bottom:10px;color:var(--tinta-suave);">Antes de pulsar el botón de decisión, seleccionen el <b>fundamento jurídico</b> que la motiva. Sin selección, los botones permanecen bloqueados.</p>
+
+        <select id="selector-fundamento" onchange="habilitarBotones()">
+          <option value="">— Seleccione fundamento aplicable —</option>
+          <option value="1">${FUNDAMENTOS["1"]}</option>
+          <option value="2">${FUNDAMENTOS["2"]}</option>
+          <option value="3">${FUNDAMENTOS["3"]}</option>
+          <option value="4">${FUNDAMENTOS["4"]}</option>
+          <option value="F">${FUNDAMENTOS["F"]}</option>
+        </select>
+
+        <div class="botones-decision">
+          <button class="btn-decision btn-aceptar" id="btn-aceptar" disabled onclick="resolver('ACEPTAR')">
+            ✓ Aceptar solicitud
+          </button>
+          <button class="btn-decision btn-denegar" id="btn-denegar" disabled onclick="resolver('DENEGAR')">
+            ✗ Denegar solicitud
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function habilitarBotones() {
+  const sel = document.getElementById('selector-fundamento').value;
+  document.getElementById('btn-aceptar').disabled = !sel;
+  document.getElementById('btn-denegar').disabled = !sel;
+}
+
+function resolver(decision) {
+  const e = EXPEDIENTES[expedienteActual];
+  const fundSeleccionado = document.getElementById('selector-fundamento').value;
+
+  // Bloquear controles
+  document.getElementById('selector-fundamento').disabled = true;
+  document.getElementById('btn-aceptar').disabled = true;
+  document.getElementById('btn-denegar').disabled = true;
+
+  // Comparación: para ser totalmente correcto debe coincidir DECISIÓN y FUNDAMENTO
+  const fundEsperado = (e.fundamento === 0) ? "F" : String(e.fundamento);
+  const decisionCorrecta = (decision === e.decision);
+  const fundamentoCorrecto = (fundSeleccionado === fundEsperado);
+  const todoCorrecto = decisionCorrecta && fundamentoCorrecto;
+
+  const dictamen = document.getElementById('dictamen');
+  dictamen.className = 'dictamen activo ' + (todoCorrecto ? 'correcto' : 'incorrecto');
+
+  let titulo, cuerpo, acciones;
+
+  if (todoCorrecto) {
+    aciertos++;
+    fundamentosAplicados.add(fundEsperado);
+    document.getElementById('aciertos-disp').textContent = aciertos;
+    titulo = `RESOLUCIÓN CORRECTA — ${e.decision === "ACEPTAR" ? "Se estima" : "Se desestima"} la solicitud`;
+    cuerpo = `<p>${e.explicacion}</p>`;
+    acciones = `<button class="btn-sig" onclick="mostrarExpediente(${expedienteActual + 1})">▸ Siguiente expediente</button>`;
+  } else {
+    titulo = `RESOLUCIÓN INCORRECTA`;
+    let detalle = '';
+    if (!decisionCorrecta && !fundamentoCorrecto) {
+      detalle = `<p>Ni la decisión ni el fundamento son los que corresponden a este expediente.</p>`;
+    } else if (!decisionCorrecta) {
+      detalle = `<p>El fundamento jurídico seleccionado es correcto, pero la decisión que procedía era <b>${e.decision}</b>, no ${decision}.</p>`;
+    } else {
+      detalle = `<p>La decisión es correcta, pero el fundamento jurídico que mejor la motiva es <b>${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</b>.</p>`;
+    }
+    cuerpo = detalle + `<div class="fundamento-aplicable"><b>Resolución correcta:</b> ${e.decision} · <b>Fundamento:</b> ${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</div><p>${e.explicacion}</p>`;
+    acciones = `
+      <button class="btn-reint" onclick="reintentarExpediente()">↻ Volver a resolver</button>
+      <button class="btn-sig" onclick="mostrarExpediente(${expedienteActual + 1})">↪ Avanzar sin acierto</button>
+    `;
+  }
+
+  dictamen.innerHTML = `
+    <div class="titulo-dictamen">${titulo}</div>
+    ${cuerpo}
+    <div class="acciones">${acciones}</div>
+  `;
+
+  dictamen.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function reintentarExpediente() {
+  mostrarExpediente(expedienteActual);
+}
+
+// ============ FINAL ============
+function mostrarFinal() {
+  cambiarPantalla('pantalla-final');
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  document.getElementById('nombres-finales').textContent = `${nombre1}  ·  ${nombre2}`;
+  document.getElementById('fecha-final').textContent = fecha;
+  document.getElementById('correctas-finales').textContent = aciertos;
+  document.getElementById('fundamentos-finales').textContent = fundamentosAplicados.size + ' de 5';
+
+  let calif;
+  if (aciertos === 8) calif = "SOBRESALIENTE — APTO con honores";
+  else if (aciertos >= 6) calif = "NOTABLE — APTO";
+  else if (aciertos >= 4) calif = "SUFICIENTE — APTO en prácticas";
+  else calif = "REQUIERE REVISIÓN";
+  document.getElementById('calificacion-final').textContent = calif;
+}
+
+// ============ DESCARGA DIPLOMA PNG ============
+function descargarDiploma() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1100; canvas.height = 800;
+  const ctx = canvas.getContext('2d');
+
+  // Fondo crema con vignette
+  ctx.fillStyle = '#FAF3E0';
+  ctx.fillRect(0, 0, 1100, 800);
+  const grad = ctx.createRadialGradient(550, 400, 100, 550, 400, 600);
+  grad.addColorStop(0, 'rgba(201,162,39,0.04)');
+  grad.addColorStop(1, 'rgba(14,42,60,0.10)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1100, 800);
+
+  // Bordes dobles dorados
+  ctx.strokeStyle = '#C9A227'; ctx.lineWidth = 6;
+  ctx.strokeRect(30, 30, 1040, 740);
+  ctx.lineWidth = 2;
+  ctx.strokeRect(48, 48, 1004, 704);
+
+  // Cabecera
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#0E2A3C';
+  ctx.font = '38px Georgia';
+  ctx.fillText('⚖', 550, 130);
+
+  ctx.font = 'bold 30px Georgia';
+  ctx.fillText('NOMBRAMIENTO OFICIAL', 550, 180);
+
+  ctx.font = 'italic 18px Georgia';
+  ctx.fillStyle = '#3D3D3D';
+  ctx.fillText('Delegado/a de Protección de Datos · Promoción 2026', 550, 210);
+
+  // Línea separadora
+  ctx.strokeStyle = '#C9A227'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(300, 240); ctx.lineTo(800, 240); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(300, 246); ctx.lineTo(800, 246); ctx.stroke();
+
+  // Cuerpo del nombramiento
+  ctx.fillStyle = '#1A1A1A';
+  ctx.font = 'italic 16px Georgia';
+  ctx.fillText('El Despacho de Protección de Datos del IES Jiménez de Quesada acredita a', 550, 290);
+
+  ctx.font = 'bold 24px Georgia';
+  ctx.fillStyle = '#0E2A3C';
+  ctx.fillText(`${nombre1}  ·  ${nombre2}`, 550, 335);
+
+  ctx.font = '15px Georgia';
+  ctx.fillStyle = '#1A1A1A';
+  ctx.fillText('como Delegados de Protección de Datos en prácticas, por haber resuelto', 550, 375);
+  ctx.fillText('los expedientes de Derecho al Olvido encomendados conforme al RGPD.', 550, 395);
+
+  // Caja de stats
+  ctx.fillStyle = 'rgba(14,42,60,0.06)';
+  ctx.fillRect(180, 430, 740, 200);
+  ctx.strokeStyle = '#B8AC8C'; ctx.lineWidth = 1;
+  ctx.strokeRect(180, 430, 740, 200);
+
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  const hora = `${String(ahora.getHours()).padStart(2,'0')}:${String(ahora.getMinutes()).padStart(2,'0')}`;
+
+  let calif;
+  if (aciertos === 8) calif = "SOBRESALIENTE";
+  else if (aciertos >= 6) calif = "NOTABLE";
+  else if (aciertos >= 4) calif = "SUFICIENTE";
+  else calif = "REVISIÓN";
+
+  ctx.font = '13px Georgia';
+  ctx.fillStyle = '#3D3D3D';
+  ctx.textAlign = 'left';
+  const lineas = [
+    ['FECHA DE RESOLUCIÓN', `${fecha} · ${hora}`],
+    ['EXPEDIENTES RESUELTOS', '8 de 8'],
+    ['RESOLUCIONES CORRECTAS', `${aciertos} de 8`],
+    ['FUNDAMENTOS APLICADOS', `${fundamentosAplicados.size} de 5`],
+    ['CALIFICACIÓN FINAL', calif],
+  ];
+  let y = 460;
+  lineas.forEach(([etiq, val]) => {
+    ctx.fillStyle = '#0E2A3C'; ctx.font = 'bold 13px Georgia';
+    ctx.fillText(etiq, 220, y);
+    ctx.fillStyle = '#1A1A1A'; ctx.font = '15px Georgia';
+    ctx.textAlign = 'right';
+    ctx.fillText(val, 880, y);
+    ctx.textAlign = 'left';
+    y += 32;
+  });
+
+  // Sello rojo
+  ctx.save();
+  ctx.translate(950, 670);
+  ctx.rotate(-0.18);
+  ctx.strokeStyle = '#8B1A1A'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.arc(0, 0, 60, 0, Math.PI*2); ctx.stroke();
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(0, 0, 53, 0, Math.PI*2); ctx.stroke();
+  ctx.fillStyle = '#8B1A1A';
+  ctx.font = 'bold 11px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText('IES JIMÉNEZ', 0, -10);
+  ctx.fillText('DE QUESADA', 0, 4);
+  ctx.font = '8px Georgia';
+  ctx.fillText('DPO · 2026', 0, 22);
+  ctx.restore();
+
+  // Pie
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#3D3D3D';
+  ctx.font = 'italic 13px Georgia';
+  ctx.fillText('"La protección de datos no es un trámite: es el último muro entre la persona y el sistema."', 550, 685);
+
+  ctx.fillStyle = '#0E2A3C';
+  ctx.font = '11px "Courier New"';
+  ctx.fillText('IES JIMÉNEZ DE QUESADA · SANTA FE (GRANADA)', 550, 725);
+  ctx.fillText('CIBERSEGURIDAD · 1ºESO B · SESIÓN 12 · DERECHO AL OLVIDO · v1', 550, 745);
+
+  // Descargar
+  const safe = (s) => (s || 'Anonimo').replace(/[^a-zA-Z0-9_-]/g, '');
+  const filename = `Nombramiento_DPO_S12_${safe(nombre1)}_${safe(nombre2)}_${fecha.replace(/\//g,'-')}.png`;
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+</script>
+
+</body>
+</html>

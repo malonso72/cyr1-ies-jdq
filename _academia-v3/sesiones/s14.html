@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5B3D9B">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>S14 · Real o Fake · Academia Cyber-IES</title>
+<meta name="description" content="Sesión 14 · Torneo Real/Fake de deepfakes · Academia Cyber-IES · CyR 1º ESO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/academia.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">Academia Cyber-IES · Sesión 14</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>🎓</span><span class="nc-lbl">Academia</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎬</span><span class="nc-lbl">S14 · Real / Fake</span></span>
+</nav>
+
+<main id="main-content">
+<section class="acad-hero">
+  <div class="acad-num">SESIÓN 14 · 40-50 MIN</div>
+  <h1>IA, deepfakes y voces falsas</h1>
+  <p class="acad-sub">Una IA puede crear un vídeo o una voz tan convincente que tu abuela jura que eres tú. Hoy aprendes a detectarlo a tiempo.</p>
+</section>
+
+<div class="acad-progreso">
+  <div class="paso activo" data-bloque="mision"><div class="num">1</div><span>Misión</span></div>
+  <div class="paso" data-bloque="teoria"><div class="num">2</div><span>Teoría</span></div>
+  <div class="paso" data-bloque="entrenamiento"><div class="num">3</div><span>Entrenar</span></div>
+  <div class="paso" data-bloque="juego"><div class="num">4</div><span>Torneo</span></div>
+  <div class="paso" data-bloque="informe"><div class="num">5</div><span>Informe</span></div>
+  <div class="paso" data-bloque="diploma"><div class="num">6</div><span>Insignia</span></div>
+</div>
+
+<div class="acad-insignias-fila">
+  <div class="mi-insignia" data-mi="cadete" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Cadete</div><div class="et">tras teoría</div></div>
+  <div class="mi-insignia" data-mi="analista" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Analista</div><div class="et">tras entrenar</div></div>
+  <div class="mi-insignia" data-mi="investigador" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Forense</div><div class="et">tras torneo</div></div>
+  <div class="mi-insignia" data-mi="detective" data-ganada="false"><div class="emoji">🏆</div><div class="nom">Cazador</div><div class="et">final</div></div>
+</div>
+
+<div class="acad-main">
+
+<section class="bloque acad-mision" data-bloque="mision" data-activo="true">
+  <div class="titulo-bloque">▸ Bloque 1 · Misión</div>
+  <h2>🎬 Una nueva amenaza: deepfakes</h2>
+  <div class="narrativa">
+    Hace 5 años hacían falta semanas y equipos profesionales para crear un vídeo falso medio creíble.
+    Hoy <strong>una app gratuita</strong> en el móvil puede clonar la voz de cualquiera con 30 segundos
+    de audio y crear un vídeo que engaña a tu abuela. Tu misión: aprender las <strong>6 señales</strong>
+    que delatan a un deepfake y ganar el <strong>Torneo ¿Real o Fake?</strong> con 10 casos.
+  </div>
+  <div class="objetivo">
+    <strong>Qué vas a hacer hoy</strong>
+    <p>Estudiar 4 conceptos sobre IA generativa. Entrenar con 6 frases V/F sobre deepfakes. Pasar al
+    <strong>Torneo Real/Fake</strong>: 10 casos donde decides si es real o falso, con vidas y bonus por
+    identificar la señal que lo delata.</p>
+  </div>
+  <div class="acad-identidad">
+    <div class="pareja">
+      <div><label for="nombre1">Investigador/a 1</label><input type="text" id="nombre1" data-acad="nombre1" placeholder="Tu nombre y apellido"></div>
+      <div><label for="nombre2">Investigador/a 2</label><input type="text" id="nombre2" data-acad="nombre2" placeholder="Nombre de tu pareja (opcional)"></div>
+    </div>
+  </div>
+  <div class="resumen">
+    <span class="chip">⏱️ 40-50 min</span>
+    <span class="chip">📚 4 conceptos</span>
+    <span class="chip">🎬 10 casos del torneo</span>
+    <span class="chip">🏆 4 insignias</span>
+  </div>
+  <div class="barra-acciones"><span></span>
+    <button class="btn-acad" onclick="Academia.irABloque('teoria')">Empezar la misión ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-teoria" data-bloque="teoria">
+  <div class="titulo-bloque">▸ Bloque 2 · Teoría interactiva</div>
+  <h2>📖 4 cosas que debes saber sobre los deepfakes</h2>
+  <p class="intro">Lo que era ciencia ficción hace 3 años hoy se hace con una app gratis.</p>
+  <div class="tarjetas-teoria" id="tarjetas-teoria"></div>
+  <div class="nav-tarjetas">
+    <button class="btn-acad secundario" id="btn-anterior" onclick="navTarjeta(-1)" disabled>◂ Anterior</button>
+    <div class="puntos-tarjetas" id="puntos-tarjetas"></div>
+    <button class="btn-acad" id="btn-siguiente" onclick="navTarjeta(1)" disabled>Siguiente ▸</button>
+  </div>
+  <div class="barra-acciones" id="barra-fin-teoria" style="display:none">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('mision')">◂ Misión</button>
+    <button class="btn-acad" onclick="Academia.irABloque('entrenamiento')">A entrenar ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-entrenamiento" data-bloque="entrenamiento">
+  <div class="titulo-bloque">▸ Bloque 3 · Entrenamiento</div>
+  <h2>🏋️ 6 frases sobre deepfakes</h2>
+  <div class="pista"><strong>¿Verdadero o falso?</strong> Algunas afirmaciones suenan creíbles pero son mitos.</div>
+  <div class="entrenamiento-marcador">
+    <div><span>Aciertos</span><b id="vf-aciertos">0</b></div>
+    <div><span>Fallos</span><b id="vf-fallos">0</b></div>
+    <div><span>Restantes</span><b id="vf-restantes">6</b></div>
+  </div>
+  <div id="zona-frases-vf"></div>
+  <div class="barra-acciones">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('teoria')">◂ Teoría</button>
+    <button class="btn-acad" id="btn-al-reto" onclick="Academia.irABloque('juego')" disabled>Al torneo ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-juego" data-bloque="juego">
+  <div class="titulo-bloque">▸ Bloque 4 · Torneo Real/Fake</div>
+  <h2>🧪 10 casos forenses</h2>
+  <p class="intro">Tienes 3 vidas. En cada caso decide REAL o FAKE y, opcionalmente, marca la señal que lo delata para ganar bonus. Al final, analiza el caso del falso nieto y descarga el Diploma del Cazador.</p>
+
+  <div class="reto-externo">
+    <div class="barra-reto">
+      <div class="izq">🎬 Torneo ¿Real o Fake? · Sesión 14</div>
+      <a href="../retos/s14-reto-realfake.html" target="_blank" rel="noopener">Abrir en pestaña nueva ↗</a>
+    </div>
+    <iframe class="iframe-reto" src="../retos/s14-reto-realfake.html" title="Torneo Real/Fake" loading="lazy"></iframe>
+  </div>
+
+  <div class="confirma-reto">
+    <div class="txt">
+      <span class="et">✓ Cuando termines el torneo y descargues el Diploma del Cazador</span>
+      Marca aquí para desbloquear el informe final.
+    </div>
+    <button class="btn-acad verde" id="btn-reto-hecho" onclick="marcarRetoHecho()">✓ He terminado el torneo</button>
+  </div>
+
+  <div class="barra-acciones" id="barra-fin-juego" style="display:none">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('entrenamiento')">◂ Entrenamiento</button>
+    <button class="btn-acad" onclick="Academia.irABloque('informe')">Al informe ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-informe" data-bloque="informe">
+  <div class="titulo-bloque">▸ Bloque 5 · Informe del investigador</div>
+  <h2>📝 Cierra tu investigación</h2>
+  <p class="intro-informe">Mínimo 8 palabras por respuesta.</p>
+  <div class="informe-pregunta">
+    <label for="inf-q1">1. De las 6 señales que delatan un deepfake (ojos, bordes, sincronización labios-voz, iluminación, voz monótona, contexto sospechoso) ¿cuál te parece la MÁS útil para detectarlos a ojo? ¿Por qué?</label>
+    <p class="ayuda">Piensa cuál te ayudaría más en una situación real.</p>
+    <textarea id="inf-q1" data-q="q1" placeholder="Escribe tu respuesta..."></textarea>
+    <div class="contador-palabras" id="cnt-q1">0 palabras</div>
+  </div>
+  <div class="informe-pregunta">
+    <label for="inf-q2">2. Tu abuelo recibe una llamada con voz "rara" pidiéndole dinero urgente para un familiar. ¿Qué le aconsejas hacer ANTES de pagar nada?</label>
+    <p class="ayuda">La regla de oro contra deepfakes de voz tiene que ver con verificar por otro canal.</p>
+    <textarea id="inf-q2" data-q="q2" placeholder="Escribe tu respuesta..."></textarea>
+    <div class="contador-palabras" id="cnt-q2">0 palabras</div>
+  </div>
+  <div class="informe-pregunta">
+    <label for="inf-q3">3. ¿Subirías a TikTok un vídeo de 60 segundos hablando a cámara? Después de esta sesión, ¿cambia algo en tu forma de pensarlo?</label>
+    <p class="ayuda">Reflexiona: 60 segundos de tu voz pueden bastar para clonarla.</p>
+    <textarea id="inf-q3" data-q="q3" placeholder="Escribe tu respuesta..."></textarea>
+    <div class="contador-palabras" id="cnt-q3">0 palabras</div>
+  </div>
+  <div class="feedback" id="fb-informe"></div>
+  <div class="barra-acciones">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('juego')">◂ Volver al torneo</button>
+    <button class="btn-acad verde" onclick="finalizarInforme()">Recoger insignia ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-diploma" data-bloque="diploma">
+  <div class="titulo-bloque">▸ Bloque 6 · Insignia</div>
+  <h2>🏆 Has completado la Sesión 14</h2>
+  <div class="diploma-preview">
+    <div class="titulo-dp">Academia Cyber-IES</div>
+    <div class="sub-dp">Sesión 14 · Real / Fake · Promoción 2026</div>
+    <div class="icono-dp">🎬</div>
+    <p class="body-dp" style="font-style:italic">Se acredita a</p>
+    <div class="nombres-dp">
+      <span data-acad="nombre1">Investigador/a 1</span><br>
+      <span style="font-style:italic;font-size:1rem;color:#666;font-family:Georgia,serif">y</span><br>
+      <span data-acad="nombre2">Investigador/a 2</span>
+    </div>
+    <p class="body-dp">por haber dominado las 6 señales que delatan un deepfake, completado el Torneo Real/Fake y comprendido por qué la regla de oro contra voces clonadas es VERIFICAR POR OTRO CANAL.</p>
+    <div class="insignia">Cazador de Deepfakes</div>
+    <div class="resumen-dp">
+      <div><span>Teoría:</span> <span id="res-teoria">— microquiz</span></div>
+      <div><span>Entrenamiento:</span> <span id="res-entrenamiento">— V/F</span></div>
+      <div><span>Tiempo total:</span> <span id="res-tiempo">—</span></div>
+    </div>
+    <div class="codigo-final" id="cod-final">CÓDIGO: ————</div>
+    <p style="font-style:italic;font-size:.8rem;color:#666;margin-top:14px">"Si te promete dinero fácil o te mete prisa, mira por qué tiene tanta prisa."</p>
+  </div>
+  <div class="barra-acciones centro">
+    <button class="btn-acad oro" onclick="descargarInsignia()">📥 Descargar insignia (PNG)</button>
+    <button class="btn-acad secundario" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  <div style="background:var(--acad-violeta-cl);border-radius:10px;padding:18px 22px;margin-top:18px;text-align:left">
+    <h3 style="font-family:var(--cond);color:var(--acad-violeta);margin-bottom:8px">🎯 Próximo paso</h3>
+    <p style="font-size:.95rem;color:var(--texto)">La Sesión 15 te lleva a la Mesa del Detective: caso de phishing al Sr. Hernández del IES.</p>
+    <div class="barra-acciones" style="margin-top:12px">
+      <a class="btn-acad secundario" href="../index.html">🎓 Academia</a>
+      <a class="btn-acad" href="s15.html">Sesión 15 · Ciber Cluedo ▸</a>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+<footer style="text-align:center;padding:30px 14px 50px;color:var(--t2);font-size:.85rem">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  Academia Cyber-IES · Curso 2026-27 · Manuel Alonso Herrera
+</footer>
+<script src="../../assets/js/common.js"></script>
+<script src="../assets/js/academia.js"></script>
+<script src="s14.js"></script>
+</body>
+</html>

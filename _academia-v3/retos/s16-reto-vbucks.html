@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Epic Games Store Spain - V-Bucks Promo 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f0f0; color: #222; }
+
+  /* "Barra de navegador" simulada */
+  .browser-bar {
+    background: #333; padding: 8px 14px; display: flex; align-items: center; gap: 10px;
+  }
+  .browser-bar .botones { display: flex; gap: 6px; }
+  .browser-bar .botones span {
+    width: 12px; height: 12px; border-radius: 50%; display: inline-block;
+  }
+  .browser-bar .botones .r { background: #ff5f56; }
+  .browser-bar .botones .y { background: #ffbd2e; }
+  .browser-bar .botones .g { background: #27c93f; }
+  .url-bar {
+    flex: 1; background: #444; color: #fff; padding: 6px 14px; border-radius: 14px;
+    font-family: monospace; font-size: 13px;
+  }
+  .url-bar .protocolo { color: #ff8888; }
+
+  /* Tienda */
+  .header-store {
+    background: linear-gradient(135deg, #2a2a72, #009ffd);
+    color: #fff; padding: 18px 24px; text-align: center;
+  }
+  .header-store h1 {
+    font-size: 26px; letter-spacing: 1px;
+  }
+  .header-store .epic-fake {
+    font-size: 12px; color: #ffd700; margin-top: 4px; font-style: italic;
+  }
+
+  /* Contador falso */
+  .contador {
+    background: #c0392b; color: #fff; padding: 14px; text-align: center;
+    font-size: 18px; font-weight: bold;
+  }
+  .contador .tiempo { font-size: 24px; color: #ffeb3b; letter-spacing: 2px; }
+
+  /* Packs */
+  .packs {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    padding: 24px; background: #fff;
+  }
+  @media (max-width: 800px) { .packs { grid-template-columns: 1fr 1fr; } }
+  .pack {
+    border: 2px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;
+    background: linear-gradient(180deg, #fff, #f5f5f5);
+    transition: transform 0.2s;
+  }
+  .pack:hover { transform: translateY(-3px); border-color: #009ffd; }
+  .pack .cantidad { font-size: 22px; color: #2a2a72; font-weight: bold; }
+  .pack .precio-old { color: #999; text-decoration: line-through; font-size: 13px; margin-top: 4px; }
+  .pack .precio-new { color: #c0392b; font-size: 26px; font-weight: bold; margin: 6px 0; }
+  .pack .descuento { background: #c0392b; color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 4px; display: inline-block; }
+  .pack .oferta { background: #ffd700; color: #2a2a72; font-size: 12px; padding: 4px 10px; font-weight: bold; margin-bottom: 8px; display: inline-block; border-radius: 4px; }
+  .btn-comprar {
+    background: linear-gradient(135deg, #ff6b00, #c0392b); color: #fff;
+    border: none; padding: 12px 18px; border-radius: 6px; font-weight: bold;
+    cursor: pointer; width: 100%; margin-top: 10px; font-size: 14px;
+  }
+
+  /* Sello falso */
+  .sello {
+    background: #fff; padding: 14px; margin: 20px 24px; border-radius: 8px;
+    border: 2px dashed #27c93f; display: flex; align-items: center; gap: 14px;
+  }
+  .sello .escudo { font-size: 38px; }
+  .sello .texto strong { color: #27c93f; }
+
+  /* Métodos pago */
+  .metodos {
+    background: #fafafa; padding: 16px 24px; border-top: 1px solid #ddd;
+  }
+  .metodos h3 { color: #2a2a72; margin-bottom: 8px; }
+  .metodos ul { list-style: none; }
+  .metodos li { padding: 4px 0; }
+  .metodos li::before { content: "✓ "; color: #27c93f; }
+  .metodos .raro { color: #c0392b; font-weight: bold; }
+
+  /* Footer */
+  .footer-store {
+    background: #1a1a40; color: #aaa; padding: 18px 24px; font-size: 13px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .footer-store .btn-soporte {
+    background: #ffd700; color: #1a1a40; border: none; padding: 8px 14px;
+    border-radius: 4px; font-weight: bold; cursor: pointer;
+  }
+
+  /* Modal de "compra" */
+  .modal-bg {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); z-index: 100; padding: 30px; overflow-y: auto;
+  }
+  .modal-bg.activa { display: flex; align-items: flex-start; justify-content: center; }
+  .modal {
+    background: #fff; border-radius: 10px; padding: 28px;
+    max-width: 520px; width: 100%;
+  }
+  .modal h2 { color: #2a2a72; margin-bottom: 14px; }
+  .modal .campo { margin-bottom: 14px; }
+  .modal label { display: block; font-weight: bold; margin-bottom: 4px; color: #333; }
+  .modal input {
+    width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 4px;
+    font-size: 15px; font-family: inherit;
+  }
+  .modal .nota-roja { color: #c0392b; font-size: 12px; margin-top: 4px; font-style: italic; }
+  .modal .btn-enviar {
+    background: linear-gradient(135deg, #ff6b00, #c0392b); color: #fff;
+    border: none; padding: 14px; border-radius: 6px; font-weight: bold;
+    cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px;
+  }
+
+  /* Modal "Has caído" */
+  .modal-caido {
+    background: #1a3a5c; color: #fff; max-width: 720px;
+  }
+  .modal-caido h2 { color: #ff5f56; font-size: 28px; text-align: center; }
+  .modal-caido .subtitulo {
+    text-align: center; font-size: 16px; color: #FFD700;
+    margin: 8px 0 20px 0; font-style: italic;
+  }
+  .modal-caido .trampa {
+    background: rgba(255,255,255,0.05); border-left: 4px solid #FFD700;
+    padding: 12px 16px; margin-bottom: 10px; border-radius: 4px;
+  }
+  .modal-caido .trampa b { color: #FFD700; }
+  .modal-caido .acciones { text-align: center; margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .modal-caido button {
+    background: #FFD700; color: #1a3a5c; border: none; padding: 12px 22px;
+    border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px;
+  }
+  .modal-caido button.secundario { background: #6FB5E8; }
+</style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGADOR FALSA -->
+<div class="browser-bar">
+  <div class="botones"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+  <div class="url-bar">
+    <span class="protocolo">http://</span>vbucks-epic-store-spain.com.es-promo.online/oferta-mayo-2026
+  </div>
+</div>
+
+<!-- HEADER de la tienda -->
+<div class="header-store">
+  <h1>🎮 EPIC GAMES STORE — V-BUCKS PROMO 2026 🎮</h1>
+  <div class="epic-fake">Tienda OFICIAL de V-Bucks · Promoción exclusiva mayo 2026 · Compatible PC/PS5/Xbox/Switch/Movil</div>
+</div>
+
+<!-- CONTADOR FALSO -->
+<div class="contador">
+  ⏱ ESTA OFERTA CADUCA EN <span class="tiempo" id="contador">04:12:33</span>
+</div>
+
+<!-- PACKS -->
+<div class="packs">
+  <div class="pack">
+    <div class="cantidad">1.000 V-Bucks</div>
+    <div class="precio-old">9,99 €</div>
+    <div class="precio-new">1,99 €</div>
+    <div class="descuento">-80%</div>
+    <button class="btn-comprar" onclick="abrirCompra('1.000 V-Bucks', '1,99€')">COMPRAR YA</button>
+  </div>
+  <div class="pack">
+    <div class="cantidad">5.000 V-Bucks</div>
+    <div class="precio-old">39,99 €</div>
+    <div class="precio-new">4,99 €</div>
+    <div class="descuento">-87%</div>
+    <button class="btn-comprar" onclick="abrirCompra('5.000 V-Bucks', '4,99€')">COMPRAR YA</button>
+  </div>
+  <div class="pack">
+    <div class="cantidad">13.500 V-Bucks</div>
+    <div class="precio-old">99,99 €</div>
+    <div class="precio-new">9,99 €</div>
+    <div class="descuento">-90%</div>
+    <button class="btn-comprar" onclick="abrirCompra('13.500 V-Bucks', '9,99€')">COMPRAR YA</button>
+  </div>
+  <div class="pack">
+    <div class="oferta">⭐ OFERTA ESPECIAL</div>
+    <div class="cantidad">50.000 V-Bucks</div>
+    <div class="precio-old">—</div>
+    <div class="precio-new">19,99 €</div>
+    <div class="descuento">SOLO HOY</div>
+    <button class="btn-comprar" onclick="abrirCompra('50.000 V-Bucks', '19,99€')">COMPRAR YA</button>
+  </div>
+</div>
+
+<!-- SELLO FALSO -->
+<div class="sello">
+  <div class="escudo">🛡️</div>
+  <div class="texto">
+    <strong>100% SEGURO</strong> · Verificado por Symantec 2026 · Tienda autorizada por Epic Games España · Pagos cifrados SSL
+  </div>
+</div>
+
+<!-- MÉTODOS DE PAGO -->
+<div class="metodos">
+  <h3>💳 Métodos de pago aceptados:</h3>
+  <ul>
+    <li>Tarjeta de crédito/débito (Visa, Mastercard)</li>
+    <li>PayPal</li>
+    <li class="raro">Transferencia con código (enviar a cuenta IBAN y mandar el código a cobro@vbucks-epic.com)</li>
+  </ul>
+</div>
+
+<!-- FOOTER con botón soporte -->
+<div class="footer-store">
+  <div>© 2026 Epic Games Store Spain · vbucks-epic-store-spain.com.es-promo.online</div>
+  <button class="btn-soporte" onclick="abrirSoporte()">💬 Soporte 24h</button>
+</div>
+
+<!-- MODAL DE COMPRA / SOPORTE -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modalContenido"></div>
+</div>
+
+<script>
+// Contador que avanza (para parecer urgente)
+let segundos = 4 * 3600 + 12 * 60 + 33;
+setInterval(() => {
+  segundos--;
+  if (segundos < 0) segundos = 4 * 3600;
+  const h = String(Math.floor(segundos / 3600)).padStart(2, '0');
+  const m = String(Math.floor((segundos % 3600) / 60)).padStart(2, '0');
+  const s = String(segundos % 60).padStart(2, '0');
+  document.getElementById('contador').textContent = `${h}:${m}:${s}`;
+}, 1000);
+
+const TRAMPAS = [
+  { titulo: "URL del navegador", explicacion: "<code>vbucks-epic-store-spain.com.es-promo.online</code> NO es Epic Games. El dominio real es <code>epicgames.com</code>. El truco es meter \"epic\" dentro del nombre para confundir, y la URL acaba en <code>.online</code>, no en <code>.com</code>." },
+  { titulo: "Precios imposibles", explicacion: "1.000 V-Bucks reales = 9,99€. Aquí los venden a 1,99€. 50.000 V-Bucks ni siquiera existen como pack oficial. Si el precio es demasiado bueno para ser cierto, es estafa." },
+  { titulo: "Protocolo HTTP (no HTTPS)", explicacion: "La URL empieza por <code>http://</code> (sin candado). Una tienda real de pagos JAMÁS usa http. Mirad el color rojo en la barra: ese es el aviso de \"no seguro\"." },
+  { titulo: "Contador de urgencia falso", explicacion: "Las cuentas atrás \"caduca en 4:12:33\" están pensadas para que pinches sin pensar. Si recargáis la página, el contador vuelve a empezar: es un script que nunca llega a 0." },
+  { titulo: "Sello \"verificado por Symantec\"", explicacion: "Cualquiera puede poner un escudo verde en HTML. Los certificados de seguridad reales se ven en el candado del navegador, no en una imagen dentro de la web. Symantec ni siquiera certifica tiendas online así." },
+  { titulo: "Método de pago raro", explicacion: "\"Transferencia con código a cobro@vbucks-epic.com\" es la trampa clásica: las transferencias no se pueden recuperar como una tarjeta. Una tienda legítima NUNCA pide enviar dinero por transferencia + código por email." },
+  { titulo: "Formulario que pide contraseña Epic", explicacion: "Ni el botón \"comprar\" ni el botón \"soporte\" tendrían que pedir vuestra contraseña de Epic Games. Una tienda legítima cobraría con tarjeta sin saber jamás vuestra contraseña del juego. Esto es phishing puro." },
+  { titulo: "Epic NO vende V-Bucks en webs externas", explicacion: "Epic Games solo vende V-Bucks dentro del propio juego Fortnite o en su web oficial epicgames.com. Cualquier web externa que diga \"tienda oficial V-Bucks\" es FALSA. Sin excepciones." }
+];
+
+function abrirCompra(pack, precio) {
+  document.getElementById('modalContenido').innerHTML = `
+    <h2>🛒 Comprar: ${pack} por ${precio}</h2>
+    <p style="color:#666;margin-bottom:14px;">Rellena tus datos para recibir los V-Bucks en tu cuenta en menos de 2 minutos.</p>
+    <div class="campo">
+      <label>Usuario de Epic Games</label>
+      <input type="text" placeholder="Tu nombre de usuario...">
+    </div>
+    <div class="campo">
+      <label>Contraseña de Epic Games</label>
+      <input type="password" placeholder="Tu contraseña...">
+      <div class="nota-roja">Necesitamos tu contraseña para enviarte los V-Bucks directamente a tu cuenta.</div>
+    </div>
+    <div class="campo">
+      <label>Plataforma</label>
+      <input type="text" placeholder="PC / PS5 / Xbox / Switch / Móvil">
+    </div>
+    <button class="btn-enviar" onclick="mostrarHasCaido('compra')">✅ COMPLETAR COMPRA</button>
+  `;
+  document.getElementById('modalBg').classList.add('activa');
+}
+
+function abrirSoporte() {
+  document.getElementById('modalContenido').innerHTML = `
+    <h2>💬 Contacta con Soporte 24h</h2>
+    <p style="color:#666;margin-bottom:14px;">Verifica tu cuenta para que un agente pueda atenderte.</p>
+    <div class="campo">
+      <label>Email registrado en Epic Games</label>
+      <input type="email" placeholder="tu@email.com">
+    </div>
+    <div class="campo">
+      <label>Contraseña de Epic Games</label>
+      <input type="password" placeholder="Tu contraseña...">
+      <div class="nota-roja">Verificación obligatoria para confirmar tu identidad.</div>
+    </div>
+    <button class="btn-enviar" onclick="mostrarHasCaido('soporte')">📩 ENVIAR MENSAJE A SOPORTE</button>
+  `;
+  document.getElementById('modalBg').classList.add('activa');
+}
+
+function mostrarHasCaido(via) {
+  const trampasHtml = TRAMPAS.map((t, i) => `
+    <div class="trampa"><b>${i+1}. ${t.titulo}</b><br>${t.explicacion}</div>
+  `).join('');
+
+  document.getElementById('modalContenido').className = 'modal modal-caido';
+  document.getElementById('modalContenido').innerHTML = `
+    <h2>⚠️ HAS CAÍDO EN UNA SIMULACIÓN ⚠️</h2>
+    <div class="subtitulo">Acabáis de dar vuestro usuario y contraseña de Epic Games a unos desconocidos. En la vida real, vuestra cuenta de Fortnite, skins y dinero ya no serían vuestros.</div>
+    <p style="text-align:center;margin-bottom:14px;color:#FFD700;font-weight:bold;">Estas son las 8 señales que tendríais que haber detectado:</p>
+    ${trampasHtml}
+    <p style="text-align:center;margin-top:18px;font-size:15px;">
+      🎯 <b>Vuestra misión ahora:</b> volved a la tienda y anotad en la bitácora (Sesión 16) cuántas de estas 8 señales habíais detectado VOSOTROS antes de \"caer\". Cada señal vale 1 punto.
+    </p>
+    <div class="acciones">
+      <button onclick="cerrarModalYReset()">🔙 Volver y examinar la tienda</button>
+      <button class="secundario" onclick="window.print()">🖨 Imprimir / guardar</button>
+    </div>
+  `;
+}
+
+function cerrarModalYReset() {
+  document.getElementById('modalContenido').className = 'modal';
+  document.getElementById('modalBg').classList.remove('activa');
+}
+</script>
+
+</body>
+</html>
