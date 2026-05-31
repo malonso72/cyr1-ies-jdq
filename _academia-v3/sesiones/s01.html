@@ -1312,9 +1312,16 @@ function finalizarInforme() {
   const q2 = document.getElementById('inf-q2').value.trim();
   const q3 = document.getElementById('inf-q3').value.trim();
 
-  if (contarPalabras(q1) < 8 || contarPalabras(q2) < 8 || contarPalabras(q3) < 8) {
+  const v1 = Academia.respuestaInformeValida(q1);
+  const v2 = Academia.respuestaInformeValida(q2);
+  const v3 = Academia.respuestaInformeValida(q3);
+  if (!v1.ok || !v2.ok || !v3.ok) {
+    let detalle = '';
+    if (!v1.ok) detalle += '<br>· Pregunta 1: ' + v1.motivo + '.';
+    if (!v2.ok) detalle += '<br>· Pregunta 2: ' + v2.motivo + '.';
+    if (!v3.ok) detalle += '<br>· Pregunta 3: ' + v3.motivo + '.';
     Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
-      `<span class="et">❌ Informe incompleto</span>Cada respuesta debe tener al menos 8 palabras. Vuelve a leer las preguntas con calma.`);
+      `<span class="et">❌ Informe incompleto</span>Necesitas responder de verdad, no con letras sueltas.` + detalle);
     return;
   }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/</loc>
     <lastmod>2026-05-21</lastmod>
@@ -457,128 +458,116 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/cuadernillo.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s01.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s02.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s03.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s04.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s05.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s06.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s07.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s08.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s09.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s10.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s11.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s12.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s13.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s14.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s15.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s16.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s17.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s18.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>S03 · Caza al phisher · T3 Ciberseguridad</title>
+<meta name="description" content="Sesión 3: Caza al phisher · Ciberseguridad · CyR 1º ESO.">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">T3 · Ciberseguridad · Sesión 03</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación de la sesión">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T3</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../cuadernillo.html"><span>📒</span><span class="nc-lbl">Cuadernillo</span></a>
+  <span class="nc-sep">·</span>
+  <a href="index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+</nav>
+<div class="unidad-layout">
+<aside class="sb-side">
+  <h3>Sesión 03</h3>
+  <a href="#mision">🎯 Misión</a>
+  <a href="#herramientas">🧰 Herramientas</a>
+  <a href="#pasos">✅ Pasos</a>
+  <a href="#para-pensar">💭 Para pensar</a>
+  <a href="../materiales/cuadernillo-ciberseguridad-1eso.pdf">📄 PDF completo</a>
+</aside>
+<main class="ct" id="main-content">
+<h1 class="unidad-titulo">S03 · Caza al phisher</h1>
+<p class="unidad-subt">Guía de aula. El registro detallado (tablas, capturas, reflexión individual) se hace en el cuadernillo.</p>
+
+<section class="apartado" id="mision">
+  <h2>🎯 Misión de hoy</h2>
+  <p>Convertiros en analistas SOC (Security Operations Center). Vais a analizar URLs como hacen los profesionales: rapidez (test &quot;URL mortal&quot; de 15 segundos), profundidad (análisis con VirusTotal/WHOIS) y emisión de veredicto tipo LEGÍTIMO / SOSPECHOSO / MALICIOSO.</p>
+</section>
+
+<section class="apartado" id="herramientas">
+  <h2>🧰 Herramientas</h2>
+  <ul class="herramientas-list">
+    <li>VirusTotal — analiza una URL con 70+ antivirus a la vez — <a href="https://www.virustotal.com" target="_blank" rel="noopener">https://www.virustotal.com</a></li>
+    <li>WHOIS Lookup — saber quién registró un dominio y cuándo — <a href="https://who.is" target="_blank" rel="noopener">https://who.is</a></li>
+    <li>Google Phishing Quiz — test oficial de Google (en español) — <a href="https://phishingquiz.withgoogle.com/?hl=es" target="_blank" rel="noopener">https://phishingquiz.withgoogle.com/?hl=es</a></li>
+  </ul>
+</section>
+
+<section class="apartado" id="pasos">
+  <h2>✅ Pasos de la investigación</h2>
+  <ol>
+    <li>PARTE 1 — URL MORTAL (rápido): el profesor proyectará 5 URLs durante SOLO 15 segundos cada una. Vosotros apuntáis: ¿real o falsa? ¿qué pista os hizo decidir?</li>
+    <li>PARTE 2 — MODO SOC (profundo): abrid VirusTotal y WHOIS en pestañas distintas. Tenéis 4 URLs para analizar.</li>
+    <li>Para cada URL: copiadla en VirusTotal (mirad cuántos antivirus la marcan) y en WHOIS (mirad cuándo se registró el dominio).</li>
+    <li>Emitid VEREDICTO como un analista real: LEGÍTIMO / SOSPECHOSO / MALICIOSO. Justificadlo.</li>
+    <li>PARTE 3 — Cuando terminéis, haced el Phishing Quiz de Google y anotad vuestra puntuación.</li>
+  </ol>
+  <div class="callout callout-info"><span class="icon">📒</span><div>Las tablas de bitácora y los datos descubiertos se registran únicamente en el cuadernillo.</div></div>
+</section>
+
+<section class="apartado" id="para-pensar">
+  <h2>💭 Para pensar</h2>
+  <ul>
+    <li>En las 15 segundos del &quot;URL mortal&quot;, ¿qué tipo de pista os ha funcionado mejor: el dominio raro, las palabras como &quot;security&quot; o &quot;verify&quot;, la extensión (.tk, .xyz)? ¿Por qué?</li>
+    <li>De las 4 URLs del Modo SOC, ¿cuál es la más fácil de detectar como falsa y por qué?</li>
+    <li>¿Qué pista os parece más fiable para saber si una URL es de fiar: lo que dice VirusTotal o lo que dice WHOIS? ¿Y si las dos discrepan?</li>
+    <li>Si un amigo os dice &quot;me ha llegado un correo raro&quot;, ¿qué tres cosas le diríais que mire ANTES de pinchar?</li>
+  </ul>
+  <p class="unidad-subt">Reflexión individual de cada investigador/a.</p>
+</section>
+
+
+
+<p class="unidad-nav-foot">
+  <a href="s02.html">← Anterior</a> · <a href="index.html">Índice de sesiones</a> · <a href="s04.html">Siguiente →</a>
+</p>
+
+</main>
+</div>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

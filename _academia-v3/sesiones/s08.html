@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5B3D9B">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>S8 · Escape Room CCN-CERT · Academia Cyber-IES</title>
+<meta name="description" content="Sesión 8 · Escape Room CCN-CERT · Academia Cyber-IES · CyR 1º ESO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/academia.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">Academia Cyber-IES · Sesión 8</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>🎓</span><span class="nc-lbl">Academia</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🔐</span><span class="nc-lbl">S8 · Escape CCN</span></span>
+</nav>
+<main id="main-content">
+<section class="acad-hero">
+  <div class="acad-num">SESIÓN 8 · 40-50 MIN</div>
+  <h1>Escape Room CCN-CERT</h1>
+  <p class="acad-sub">Es el escape room oficial del Centro Criptológico Nacional. Hoy lo resuelves tú.</p>
+</section>
+<div class="acad-progreso">
+  <div class="paso activo" data-bloque="mision"><div class="num">1</div><span>Misión</span></div>
+  <div class="paso" data-bloque="teoria"><div class="num">2</div><span>Teoría</span></div>
+  <div class="paso" data-bloque="entrenamiento"><div class="num">3</div><span>Entrenar</span></div>
+  <div class="paso" data-bloque="juego"><div class="num">4</div><span>Escape CCN</span></div>
+  <div class="paso" data-bloque="informe"><div class="num">5</div><span>Informe</span></div>
+  <div class="paso" data-bloque="diploma"><div class="num">6</div><span>Insignia</span></div>
+</div>
+<div class="acad-insignias-fila">
+  <div class="mi-insignia" data-mi="cadete" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Cadete</div><div class="et">tras teoría</div></div>
+  <div class="mi-insignia" data-mi="analista" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Aprendiz</div><div class="et">tras entrenar</div></div>
+  <div class="mi-insignia" data-mi="investigador" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Operador</div><div class="et">tras reto</div></div>
+  <div class="mi-insignia" data-mi="detective" data-ganada="false"><div class="emoji">🏆</div><div class="nom">CCN</div><div class="et">final</div></div>
+</div>
+<div class="acad-main">
+
+<section class="bloque acad-mision" data-bloque="mision" data-activo="true">
+  <div class="titulo-bloque">▸ Bloque 1 · Misión</div>
+  <h2>🔐 Misión: salir del escape room del CCN</h2>
+  <div class="narrativa" style="background:#FFF8E1;border-left:4px solid var(--acad-oro);padding:12px 14px;border-radius:0 6px 6px 0"><strong>🛡️ Esto es real:</strong> el <strong>CCN-CERT</strong> es el equipo que protege la ciberseguridad de las administraciones públicas de España. El mismo que defiende ministerios y embajadas. Han hecho un escape room para que aprendas con sus retos. Hoy lo juegas tú.</div>
+  <div class="narrativa">El Escape Room "Ángeles del CCN" mezcla 5 retos de ciberseguridad: contraseñas, phishing, malware, redes WiFi y privacidad. Tarda unos 25-30 minutos. Al terminar te dan un diploma oficial.</div>
+  <div class="objetivo"><strong>Qué vas a hacer hoy</strong><p>Repasar los 4 conceptos clave del CCN (CCN-CERT, ciberataque, ciberresiliencia, INCIBE). Entrenar con 6 V/F. Resolver el escape room oficial del CCN-CERT. Subir tu diploma a la entrega.</p></div>
+  <div class="acad-identidad">
+    <div class="pareja">
+      <div><label for="nombre1">Investigador/a 1</label><input type="text" id="nombre1" data-acad="nombre1" placeholder="Tu nombre y apellido"></div>
+      <div><label for="nombre2">Investigador/a 2</label><input type="text" id="nombre2" data-acad="nombre2" placeholder="Nombre de tu pareja (opcional)"></div>
+    </div>
+  </div>
+  <div class="resumen">
+    <span class="chip">⏱️ 40-50 min</span>
+    <span class="chip">📚 4 conceptos</span>
+    <span class="chip">🔐 Escape · 25-30 min</span>
+    <span class="chip">🏆 4 insignias</span>
+  </div>
+  <div class="barra-acciones"><span></span><button class="btn-acad" onclick="Academia.irABloque('teoria')">Activar misión CCN ▸</button></div>
+</section>
+
+<section class="bloque acad-teoria" data-bloque="teoria">
+  <div class="titulo-bloque">▸ Bloque 2 · Teoría interactiva</div>
+  <h2>📖 4 cosas sobre el CCN y los profesionales que protegen España</h2>
+  <p class="intro">Antes de entrar al escape, conoce a quien te entrena.</p>
+  <div class="tarjetas-teoria" id="tarjetas-teoria"></div>
+  <div class="nav-tarjetas">
+    <button class="btn-acad secundario" id="btn-anterior" onclick="navTarjeta(-1)" disabled>◂ Anterior</button>
+    <div class="puntos-tarjetas" id="puntos-tarjetas"></div>
+    <button class="btn-acad" id="btn-siguiente" onclick="navTarjeta(1)" disabled>Siguiente ▸</button>
+  </div>
+  <div class="barra-acciones" id="barra-fin-teoria" style="display:none">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('mision')">◂ Misión</button>
+    <button class="btn-acad" onclick="Academia.irABloque('entrenamiento')">A entrenar ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-entrenamiento" data-bloque="entrenamiento">
+  <div class="titulo-bloque">▸ Bloque 3 · Entrenamiento</div>
+  <h2>🏋️ 6 frases V/F</h2>
+  <div class="pista"><strong>¿Verdadero o falso?</strong> Antes del reto, calienta motores.</div>
+  <div class="entrenamiento-marcador">
+    <div><span>Aciertos</span><b id="vf-aciertos">0</b></div>
+    <div><span>Fallos</span><b id="vf-fallos">0</b></div>
+    <div><span>Restantes</span><b id="vf-restantes">6</b></div>
+  </div>
+  <div id="zona-frases-vf"></div>
+  <div class="barra-acciones">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('teoria')">◂ Teoría</button>
+    <button class="btn-acad" id="btn-al-reto" onclick="Academia.irABloque('juego')" disabled>Al reto ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-juego" data-bloque="juego">
+  <div class="titulo-bloque">▸ Bloque 4 · Escape CCN</div>
+  <h2>🔐 Resuelve el Escape Room</h2>
+  <p class="intro">Abre el escape room del CCN-CERT en pestaña nueva y resuelve los 5 retos. Tarda unos 25-30 minutos.</p>
+  <div class="reto-externo"><div class="barra-reto"><div class="izq">🛠️ Herramientas externas</div></div><div style="padding:18px;background:#FFF8E1"><p>Es un escape room oficial del <strong>Centro Criptológico Nacional</strong> (CCN-CERT). Es el organismo que protege la ciberseguridad de las administraciones del Estado español. Tu reto: salir.</p><div style="margin:14px 0"><a href="https://www.ccn-cert.cni.es/comunicacion-eventos/eventos/escape-room.html" target="_blank" rel="noopener" class="btn-acad oro" style="margin:6px">🔐 Abrir Escape Room CCN ↗</a></div><div style="background:#FFF;border:1px solid var(--bd);border-radius:6px;padding:14px;margin-top:10px"><strong>📋 Pasos:</strong><ol style="margin-left:20px;line-height:1.7"><li>Pulsa el botón para abrir el escape room oficial del CCN.</li><li>Si pide nombre/email, usa un email tuyo válido para recibir el diploma.</li><li>Resuelve los 5 retos (contraseñas, phishing, malware, WiFi, privacidad). Tarda 25-30 min.</li><li>Al terminar, descarga el diploma que te envía el CCN.</li><li>Vuelve aquí y rellena el informe.</li></ol></div></div></div><div class="confirma-reto"><div class="txt"><span class="et">✓ Cuando termines</span>Marca aquí para desbloquear el informe.</div><button class="btn-acad verde" id="btn-reto-hecho" onclick="marcarRetoHecho()">✓ He terminado</button></div>
+  <div class="barra-acciones" id="barra-fin-juego" style="display:none">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('entrenamiento')">◂ Entrenamiento</button>
+    <button class="btn-acad" onclick="Academia.irABloque('informe')">Al informe ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-informe" data-bloque="informe">
+  <div class="titulo-bloque">▸ Bloque 5 · Informe</div>
+  <h2>📝 Cierra tu trabajo</h2>
+  <p class="intro-informe">Mínimo 8 palabras por respuesta. Se guarda en este navegador.</p>
+  <div class="informe-pregunta"><label for="inf-q1">1. ¿Cuál de los 5 retos del escape room te ha gustado MÁS? ¿Por qué?</label><p class="ayuda">Identifica el reto y qué te enseñó.</p><textarea id="inf-q1" data-q="q1" placeholder="Escribe tu respuesta..."></textarea><div class="contador-palabras" id="cnt-q1">0 palabras</div></div>
+  <div class="informe-pregunta"><label for="inf-q2">2. ¿Qué reto del escape room te ha costado MÁS? ¿Cómo lo resolviste al final?</label><p class="ayuda">Describe la dificultad y cómo la superaste.</p><textarea id="inf-q2" data-q="q2" placeholder="Escribe tu respuesta..."></textarea><div class="contador-palabras" id="cnt-q2">0 palabras</div></div>
+  <div class="informe-pregunta"><label for="inf-q3">3. Conociendo ahora el CCN-CERT y sus retos, ¿qué crees que diferencia a un buen ciberanalista de uno mediocre?</label><p class="ayuda">Una idea concreta: paciencia, observación, no actuar sin pensar, etc.</p><textarea id="inf-q3" data-q="q3" placeholder="Escribe tu respuesta..."></textarea><div class="contador-palabras" id="cnt-q3">0 palabras</div></div>
+  <div class="feedback" id="fb-informe"></div>
+  <div class="barra-acciones">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('juego')">◂ Volver al reto</button>
+    <button class="btn-acad verde" onclick="finalizarInforme()">Recoger insignia ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-diploma" data-bloque="diploma">
+  <div class="titulo-bloque">▸ Bloque 6 · Insignia</div>
+  <h2>🏆 Has completado la Sesión 8</h2>
+  <div class="diploma-preview">
+    <div class="titulo-dp">Academia Cyber-IES</div>
+    <div class="sub-dp">Sesión 8 · Escape Room CCN-CERT · Promoción 2026</div>
+    <div class="icono-dp">🔐</div>
+    <p class="body-dp" style="font-style:italic">Se acredita a</p>
+    <div class="nombres-dp">
+      <span data-acad="nombre1">Investigador/a 1</span><br>
+      <span style="font-style:italic;font-size:1rem;color:#666;font-family:Georgia,serif">y</span><br>
+      <span data-acad="nombre2">Investigador/a 2</span>
+    </div>
+    <p class="body-dp">por haber completado el Escape Room oficial del CCN-CERT y comprendido cómo trabajan los equipos profesionales que protegen las administraciones públicas de España.</p>
+    <div class="insignia">{INS_FINAL}</div>
+    <div class="resumen-dp">
+      <div><span>Teoría:</span> <span id="res-teoria">— microquiz</span></div>
+      <div><span>Entrenamiento:</span> <span id="res-entrenamiento">— V/F</span></div>
+      <div><span>Tiempo total:</span> <span id="res-tiempo">—</span></div>
+    </div>
+    <div class="codigo-final" id="cod-final">CÓDIGO: ————</div>
+    <p style="font-style:italic;font-size:.8rem;color:#666;margin-top:14px">"{FRASE_DIPLOMA}"</p>
+  </div>
+  <div class="barra-acciones centro">
+    <button class="btn-acad oro" onclick="descargarInsignia()">📥 Descargar insignia (PNG)</button>
+    <button class="btn-acad secundario" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  <div style="background:var(--acad-violeta-cl);border-radius:10px;padding:18px 22px;margin-top:18px;text-align:left">
+    <h3 style="font-family:var(--cond);color:var(--acad-violeta);margin-bottom:8px">🎯 Próximo paso</h3>
+    <p style="font-size:.95rem;color:var(--texto)">La Sesión 9 te lleva al Escape Room PIENSA (ingeniería social) que ya está en el sitio.</p>
+    <div class="barra-acciones" style="margin-top:12px">
+      <a class="btn-acad secundario" href="../index.html">🎓 Academia</a>
+      <a class="btn-acad" href="s09.html">Sesión 9 · Ingeniería social ▸</a>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+<footer style="text-align:center;padding:30px 14px 50px;color:var(--t2);font-size:.85rem">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  Academia Cyber-IES · Curso 2026-27 · Manuel Alonso Herrera
+</footer>
+<script src="../../assets/js/common.js"></script>
+<script src="../assets/js/academia.js"></script>
+<script src="s08.js"></script>
+</body>
+</html>

@@ -1,0 +1,2202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5B3D9B">
+
+<title>S1 · Las palabras del oficio · Academia Cyber-IES</title>
+<meta name="description" content="Sesión 1 · 6 conceptos básicos de ciberseguridad + caza al impostor · Academia Cyber-IES · CyR 1º ESO · IES Jiménez de Quesada.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+
+<style id="cyr-common-css">
+/* ═══════════════════════════════════════════════════════════════
+   CyR 1º ESO · IES Jiménez de Quesada · CSS común
+   Curso 2025-26 · Paleta verde-cian
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ── Paleta principal (azul institucional, unificado con Bachillerato) ── */
+  --principal:#1B4F8A;
+  --principal2:#2E7BC4;
+  --principal-cl:#DDE9F7;
+  --principal-bg:#EEF4FB;
+
+  /* ── Acento (verde-cian, para contrastes puntuales si hicieran falta) ── */
+  --acento:#1A8A6B;
+  --acento2:#2EB088;
+  --acento-cl:#D7F2E7;
+  --acento-bg:#E7F7EF;
+
+  /* ── Auxiliares (idénticos al modelo TECI) ── */
+  --bg:#F4F6F9;
+  --hub-bg:#F4F6F9;
+  --w:#FFF;
+  --tx:#23272F;
+  --texto:#1A2430;
+  --t2:#555D6B;
+  --texto2:#455565;
+  --bd:#D8DDE5;
+  --borde:#CDD7E3;
+  --verde:#1A6B3A;
+  --verde-cl:#E4F4EB;
+  --rojo:#C0321E;
+  --rojo-cl:#FCEAE7;
+  --gris:#F5F6F8;
+
+  /* ── Tipografía ── */
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Barlow',sans-serif;
+  --cond:'Barlow Condensed',sans-serif;
+
+  /* ── Métricas comunes ── */
+  --nw:260px;
+  --hh:52px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{font-family:var(--sans),system-ui,sans-serif;color:var(--tx)}
+a{color:var(--principal);text-decoration:none}
+a:hover{color:var(--principal2)}
+
+/* ── Accesibilidad ── */
+*:focus-visible{outline:2px solid var(--principal);outline-offset:2px;border-radius:3px}
+.skip-link{position:absolute;top:-100px;left:8px;z-index:9999;padding:8px 14px;background:var(--principal);color:#fff;font-weight:600;border-radius:6px;text-decoration:none;font-size:.85rem;transition:top .15s}
+.skip-link:focus{top:8px;outline:2px solid #FCE8D2;outline-offset:2px}
+
+/* ── Cabecera global del curso ── */
+.curso-hd{background:linear-gradient(135deg,var(--principal),var(--principal2));color:#fff;padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 10px rgba(27,79,138,.15);font-family:var(--sans);position:sticky;top:0;z-index:1000;height:var(--hh)}
+.curso-hd .curso-lg{font-family:var(--cond);font-size:1.15rem;font-weight:700;cursor:pointer;color:#fff;text-decoration:none}
+.curso-hd .curso-lg:hover{opacity:.85}
+.curso-hd .curso-sb{font-size:.72rem;opacity:.8;margin-left:10px;color:#fff}
+.curso-hd .curso-home-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.24);color:#fff;font-size:.72rem;padding:5px 11px;border-radius:8px;cursor:pointer;margin-left:auto;transition:background .15s;text-decoration:none}
+.curso-hd .curso-home-btn:hover{background:rgba(255,255,255,.16)}
+
+/* ── Nav transversal (chips entre páginas hermanas) ── */
+.curso-navcross{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 16px;background:#F4F6F9;border-bottom:1px solid #D8DDE5;font-family:var(--sans);font-size:.78rem;position:sticky;top:var(--hh);z-index:450}
+.curso-navcross a,.curso-navcross span.nc-current{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:16px;text-decoration:none;border:1px solid transparent;transition:all .18s}
+.curso-navcross a{color:#23272F;background:#fff;border-color:#D8DDE5}
+.curso-navcross a:hover{background:var(--principal-bg);border-color:var(--principal);color:var(--principal)}
+.curso-navcross span.nc-current{background:linear-gradient(135deg,var(--principal),var(--principal2));color:#fff;border-color:var(--principal);font-weight:600;cursor:default}
+.curso-navcross .nc-sep{color:#8C97A8;align-self:center;user-select:none}
+@media(max-width:640px){.curso-navcross{gap:4px;padding:8px 10px}.curso-navcross a span.nc-lbl,.curso-navcross span.nc-current span.nc-lbl{display:none}.curso-navcross .nc-sep{display:none}}
+
+/* ── Mini-test interactivo ── */
+.test-section{margin:20px 0 28px;padding:20px 24px;background:linear-gradient(180deg,#E4F4EB,#F2FAF5);border-left:5px solid var(--verde);border-radius:5px}
+.test-section h2{font-family:var(--cond);font-size:16pt;color:var(--verde);margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.test-section .test-sub{font-size:9pt;color:var(--texto2);margin-bottom:14px}
+.test-q{background:#fff;border:1px solid var(--borde);border-radius:5px;padding:12px 14px;margin-bottom:10px}
+.test-qtext{font-weight:600;color:var(--texto);margin-bottom:8px;font-size:10pt}
+.test-opts{display:flex;flex-direction:column;gap:4px}
+.test-opt{display:block;width:100%;text-align:left;padding:8px 12px;background:#fff;border:1px solid var(--borde);border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:9.5pt;color:var(--texto);transition:all .15s;line-height:1.4}
+.test-opt:hover:not(:disabled){background:var(--principal-bg);border-color:var(--principal2)}
+.test-opt:disabled{cursor:default;opacity:.95}
+.test-opt.correct{background:#E4F4EB;border-color:var(--verde);color:var(--verde);font-weight:600}
+.test-opt.wrong{background:#FCEAE7;border-color:var(--rojo);color:var(--rojo)}
+.test-fb{display:none;margin-top:10px;padding:10px 12px;background:var(--principal-bg);border-left:3px solid var(--principal);font-size:9pt;color:var(--texto2);border-radius:0 4px 4px 0;line-height:1.5}
+.test-q.answered .test-fb{display:block}
+
+/* ── Soluciones colapsables (en actividades.html) ── */
+.sol-btn{font-family:var(--cond);font-size:.95rem;font-weight:600;background:#fff;color:var(--principal);border:1.5px solid var(--principal);padding:6px 14px;border-radius:6px;cursor:pointer;margin:8px 0;transition:all .15s}
+.sol-btn:hover{background:var(--principal-bg)}
+.sol-btn.open{background:var(--principal);color:#fff}
+.sol-btn::before{content:'▶ ';display:inline-block;transition:transform .15s}
+.sol-btn.open::before{transform:rotate(90deg)}
+.sol-content{display:none;background:var(--principal-bg);border-left:3px solid var(--principal);padding:12px 16px;border-radius:0 4px 4px 0;margin:6px 0 14px;font-size:9.8pt;line-height:1.55}
+.sol-content.show{display:block}
+
+/* ── Print: oculta navegación, expande soluciones ── */
+@media print{
+  .curso-hd,.curso-navcross,.sol-btn,.test-opt{display:none!important}
+  .sol-content,.test-fb{display:block!important}
+  .apartado,.seccion,.test-q{break-inside:avoid}
+  html,body{background:#fff!important;color:#000!important}
+  a{color:#000!important;text-decoration:none}
+}
+
+</style>
+<style id="cyr-academia-css">
+/* ═══════════════════════════════════════════════════════════════
+   Academia Cyber-IES · CyR 1º ESO · IES Jiménez de Quesada
+   CSS específico de las sesiones HTML autónomas de 30-40 min
+   ─ Se carga JUNTO con common.css del sitio principal
+   ─ Cada sesión tiene la misma estructura de 6 bloques
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  --acad-violeta:#5B3D9B;
+  --acad-violeta-2:#7A57BD;
+  --acad-violeta-cl:#EFE9F7;
+  --acad-oro:#C9A227;
+  --acad-oro-cl:#FAF1CC;
+  --acad-rojo:#A02B2B;
+  --acad-verde:#2D6A4F;
+  --acad-verde-cl:#D6EBDF;
+  --acad-azul-mar:#0E2A3C;
+}
+
+/* ── Hero de la sesión ─────────────────────────────────────────── */
+.acad-hero{
+  background:linear-gradient(135deg,var(--acad-azul-mar),var(--acad-violeta));
+  color:#fff;padding:28px 22px;text-align:center;
+  border-radius:0 0 20px 20px;margin-bottom:18px;
+}
+.acad-hero .acad-num{
+  display:inline-block;background:var(--acad-oro);color:var(--acad-azul-mar);
+  font-family:var(--cond);font-weight:700;letter-spacing:2px;
+  padding:4px 14px;border-radius:14px;font-size:.85rem;margin-bottom:10px;
+}
+.acad-hero h1{
+  font-family:var(--cond);font-size:2rem;margin:0 0 8px;
+  letter-spacing:1px;text-transform:uppercase;
+}
+.acad-hero .acad-sub{font-size:.95rem;opacity:.85;font-style:italic;max-width:680px;margin:0 auto}
+
+/* ── Barra de progreso superior (6 pasos) ─────────────────────── */
+.acad-progreso{
+  display:flex;gap:6px;max-width:780px;margin:0 auto 24px;padding:0 14px;
+  font-family:var(--cond);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;
+}
+.acad-progreso .paso{
+  flex:1;text-align:center;padding:8px 6px;background:#fff;
+  border:1px solid var(--bd);border-radius:8px;color:var(--t2);
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  transition:all .2s;
+}
+.acad-progreso .paso .num{
+  display:inline-block;width:22px;height:22px;line-height:22px;border-radius:50%;
+  background:var(--bd);color:#fff;font-size:.75rem;font-weight:700;
+}
+.acad-progreso .paso.activo{background:var(--acad-violeta);color:#fff;border-color:var(--acad-violeta)}
+.acad-progreso .paso.activo .num{background:var(--acad-oro);color:var(--acad-azul-mar)}
+.acad-progreso .paso.completado{background:var(--acad-verde-cl);color:var(--acad-verde);border-color:var(--acad-verde)}
+.acad-progreso .paso.completado .num{background:var(--acad-verde);color:#fff}
+.acad-progreso .paso.completado .num::before{content:"✓"}
+.acad-progreso .paso.completado .num{font-size:0}
+
+@media(max-width:640px){
+  .acad-progreso{flex-wrap:wrap}
+  .acad-progreso .paso{flex:1 1 30%;font-size:.62rem}
+}
+
+/* ── Contenedor de bloques (solo uno visible) ─────────────────── */
+.acad-main{max-width:880px;margin:0 auto;padding:0 14px 60px}
+.bloque{display:none;animation:fade .35s ease}
+.bloque[data-activo="true"]{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Identidad: pedir nombres una vez por sesión ──────────────── */
+.acad-identidad{
+  background:var(--acad-violeta-cl);border:2px dashed var(--acad-violeta);
+  padding:16px 18px;border-radius:10px;margin-bottom:18px;
+}
+.acad-identidad label{display:block;font-family:var(--cond);font-size:.85rem;color:var(--acad-violeta);margin-bottom:4px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.acad-identidad input{width:100%;padding:9px 12px;border:1px solid var(--bd);border-radius:6px;font-family:var(--sans);font-size:1rem;background:#fff}
+.acad-identidad .pareja{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.acad-identidad .pareja{grid-template-columns:1fr}}
+
+/* ── Bloque 1: MISIÓN ─────────────────────────────────────────── */
+.acad-mision{
+  background:linear-gradient(180deg,#FFF9E8,#FFF);
+  border:2px solid var(--acad-oro);border-radius:14px;padding:24px 26px;
+  position:relative;overflow:hidden;
+}
+.acad-mision::before{
+  content:"";position:absolute;top:-20px;right:-20px;width:120px;height:120px;
+  background:radial-gradient(circle,var(--acad-oro-cl),transparent 70%);
+}
+.acad-mision .titulo-bloque{
+  font-family:var(--cond);text-transform:uppercase;color:var(--acad-azul-mar);
+  letter-spacing:2px;font-size:.9rem;margin-bottom:6px;
+}
+.acad-mision h2{font-family:var(--cond);font-size:1.7rem;color:var(--acad-azul-mar);margin:0 0 12px}
+.acad-mision .narrativa{
+  font-size:1.05rem;line-height:1.65;color:var(--texto);margin-bottom:14px;
+  border-left:4px solid var(--acad-oro);padding:8px 0 8px 14px;background:#FFFEF5;
+}
+.acad-mision .objetivo{
+  background:#fff;border:1px solid var(--bd);border-radius:8px;padding:14px 16px;
+  margin:12px 0;
+}
+.acad-mision .objetivo strong{color:var(--acad-violeta);font-family:var(--cond);letter-spacing:1px;font-size:.85rem;text-transform:uppercase;display:block;margin-bottom:4px}
+.acad-mision .resumen{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.acad-mision .resumen .chip{
+  background:var(--acad-violeta-cl);color:var(--acad-violeta);
+  padding:6px 12px;border-radius:14px;font-size:.85rem;font-family:var(--cond);
+}
+
+/* ── Bloque 2: TEORÍA INTERACTIVA (tarjetas) ──────────────────── */
+.acad-teoria .titulo-bloque{font-family:var(--cond);text-transform:uppercase;color:var(--acad-violeta);letter-spacing:2px;font-size:.85rem;margin-bottom:4px}
+.acad-teoria h2{font-family:var(--cond);font-size:1.6rem;color:var(--acad-azul-mar);margin:0 0 12px}
+.acad-teoria .intro{margin-bottom:18px;color:var(--texto2);font-size:.95rem}
+
+.tarjetas-teoria{position:relative;min-height:380px}
+.tarjeta-teoria{
+  display:none;background:#fff;border:1px solid var(--bd);border-radius:14px;
+  padding:22px 24px;box-shadow:0 4px 18px rgba(91,61,155,.08);
+}
+.tarjeta-teoria[data-activa="true"]{display:block;animation:fade .3s}
+
+/* Cabecera del concepto (siempre visible) */
+.tarjeta-teoria .concepto-num{
+  display:inline-block;background:var(--acad-violeta);color:#fff;font-family:var(--cond);
+  padding:3px 10px;border-radius:10px;font-size:.75rem;letter-spacing:1px;margin-bottom:8px;
+}
+.tarjeta-teoria .concepto-fase{
+  display:inline-block;background:var(--acad-oro);color:var(--acad-azul-mar);font-family:var(--cond);
+  padding:3px 10px;border-radius:10px;font-size:.7rem;letter-spacing:1px;margin-bottom:8px;margin-left:6px;
+}
+.tarjeta-teoria h3{font-family:var(--cond);font-size:1.5rem;color:var(--acad-azul-mar);margin-bottom:10px}
+
+/* Sub-pantallas dentro de una tarjeta */
+.tarjeta-teoria .subtarjeta{display:none}
+.tarjeta-teoria .subtarjeta[data-activa="true"]{display:block;animation:fade .25s}
+
+.tarjeta-teoria .que-es{font-size:1.02rem;line-height:1.6;color:var(--texto);margin-bottom:14px}
+.tarjeta-teoria .ej{padding:12px 14px;border-radius:8px;font-size:.92rem;line-height:1.5;margin-bottom:10px}
+.tarjeta-teoria .ej.bueno{background:var(--acad-verde-cl);border-left:4px solid var(--acad-verde);color:#19432F}
+.tarjeta-teoria .ej.peligroso{background:#FCEAE7;border-left:4px solid var(--acad-rojo);color:#5A1B1B}
+.tarjeta-teoria .ej .et{font-family:var(--cond);font-size:.72rem;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:3px;font-weight:700}
+
+.tarjeta-teoria .reconocer-titulo{font-family:var(--cond);color:var(--acad-violeta);font-size:1rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.tarjeta-teoria .senales{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.tarjeta-teoria .senal{
+  background:var(--acad-violeta-cl);border-left:3px solid var(--acad-violeta);
+  padding:10px 12px;border-radius:0 6px 6px 0;font-size:.94rem;
+}
+.tarjeta-teoria .senal b{color:var(--acad-violeta);display:block;font-family:var(--cond);font-size:.78rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px}
+
+/* Ranking ordenable con botones ▲▼ */
+.lista-ranking{
+  background:#fff;border:1px solid var(--bd);border-radius:10px;padding:8px;margin:14px 0;
+}
+.item-ranking{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;margin:5px 0;
+  background:#F4F6F9;border:1px solid var(--bd);border-radius:8px;transition:.2s;
+}
+.item-ranking .pos{
+  background:var(--acad-violeta);color:#fff;font-family:var(--cond);font-weight:700;
+  width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;flex-shrink:0;
+}
+.item-ranking .pwd-rank{
+  flex:1;font-family:var(--mono);font-size:.92rem;color:var(--texto);word-break:break-all;
+}
+.item-ranking .botones-mover{display:flex;flex-direction:column;gap:3px}
+.item-ranking .botones-mover button{
+  background:#fff;border:1px solid var(--bd);width:30px;height:22px;border-radius:5px;
+  cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;padding:0;
+  transition:.15s;
+}
+.item-ranking .botones-mover button:hover:not(:disabled){background:var(--acad-violeta-cl);border-color:var(--acad-violeta)}
+.item-ranking .botones-mover button:disabled{opacity:.3;cursor:not-allowed}
+.item-ranking.correcto-orden{background:var(--acad-verde-cl);border-color:var(--acad-verde)}
+.item-ranking.incorrecto-orden{background:#FCEAE7;border-color:var(--acad-rojo)}
+
+.resultado-ranking{
+  background:var(--acad-violeta-cl);border-left:4px solid var(--acad-violeta);
+  border-radius:0 6px 6px 0;padding:12px 16px;margin-top:12px;display:none;
+}
+.resultado-ranking[data-activo="true"]{display:block}
+.resultado-ranking .item-explica{
+  background:#fff;padding:8px 12px;border-radius:5px;margin:6px 0;font-size:.88rem;border-left:3px solid var(--bd);
+}
+.resultado-ranking .item-explica.bien{border-color:var(--acad-verde)}
+.resultado-ranking .item-explica.mal{border-color:var(--acad-rojo)}
+.resultado-ranking .item-explica b{color:var(--acad-azul-mar);font-family:var(--cond)}
+
+/* Reto externo en iframe */
+.reto-externo{
+  background:#fff;border:2px solid var(--acad-violeta);border-radius:14px;overflow:hidden;
+  margin:14px 0;box-shadow:0 6px 24px rgba(91,61,155,.18);
+}
+.reto-externo .barra-reto{
+  background:linear-gradient(135deg,var(--acad-azul-mar),var(--acad-violeta));
+  color:#fff;padding:10px 16px;display:flex;align-items:center;gap:12px;justify-content:space-between;
+  font-family:var(--cond);letter-spacing:1px;font-size:.85rem;
+}
+.reto-externo .barra-reto .izq{display:flex;align-items:center;gap:10px}
+.reto-externo .barra-reto a{
+  color:#fff;text-decoration:underline;font-size:.78rem;opacity:.9;
+}
+.reto-externo .iframe-reto{
+  width:100%;height:760px;border:none;display:block;background:#0E2A3C;
+}
+@media(max-width:560px){.reto-externo .iframe-reto{height:620px}}
+
+.confirma-reto{
+  background:var(--acad-violeta-cl);border:2px dashed var(--acad-violeta);border-radius:10px;
+  padding:14px 18px;margin:14px 0;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.confirma-reto .et{font-family:var(--cond);color:var(--acad-violeta);letter-spacing:1px;text-transform:uppercase;font-size:.8rem;font-weight:700;display:block;margin-bottom:2px}
+.confirma-reto .txt{flex:1;min-width:200px;font-size:.92rem;color:var(--texto)}
+.confirma-reto button{flex-shrink:0}
+
+/* Nivel de riesgo (semáforo grande) */
+.nivel-riesgo{
+  border-radius:12px;padding:18px 22px;margin:14px 0;display:flex;align-items:center;gap:18px;
+  border:2px solid;
+}
+.nivel-riesgo .nivel-emoji{font-size:2.6rem;line-height:1;flex-shrink:0}
+.nivel-riesgo .nivel-texto{flex:1}
+.nivel-riesgo .nivel-badge{
+  display:inline-block;font-family:var(--cond);font-size:.85rem;letter-spacing:2px;
+  text-transform:uppercase;padding:4px 12px;border-radius:14px;font-weight:700;margin-bottom:6px;
+}
+.nivel-riesgo h4{font-family:var(--cond);font-size:1.2rem;margin:4px 0 6px}
+.nivel-riesgo p{font-size:.92rem;line-height:1.5;color:var(--texto)}
+
+.nivel-riesgo.verde{background:linear-gradient(180deg,var(--acad-verde-cl),#FFF);border-color:var(--acad-verde)}
+.nivel-riesgo.verde .nivel-badge{background:var(--acad-verde);color:#fff}
+.nivel-riesgo.verde h4{color:var(--acad-verde)}
+
+.nivel-riesgo.amarillo{background:linear-gradient(180deg,#FFF8E1,#FFF);border-color:#D29922}
+.nivel-riesgo.amarillo .nivel-badge{background:#D29922;color:#fff}
+.nivel-riesgo.amarillo h4{color:#A77A14}
+
+.nivel-riesgo.naranja{background:linear-gradient(180deg,#FFE8D6,#FFF);border-color:#C97B1E}
+.nivel-riesgo.naranja .nivel-badge{background:#C97B1E;color:#fff}
+.nivel-riesgo.naranja h4{color:#8B5612}
+
+.nivel-riesgo.rojo{background:linear-gradient(180deg,#FCEAE7,#FFF);border-color:var(--acad-rojo)}
+.nivel-riesgo.rojo .nivel-badge{background:var(--acad-rojo);color:#fff}
+.nivel-riesgo.rojo h4{color:var(--acad-rojo)}
+
+/* Badges de vulnerabilidad */
+.badges-vuln{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.badge-vuln{
+  background:#FCEAE7;color:var(--acad-rojo);padding:4px 10px;border-radius:12px;
+  font-size:.78rem;font-family:var(--cond);letter-spacing:.5px;text-transform:uppercase;
+  border:1px solid var(--acad-rojo);font-weight:600;
+}
+.badge-vuln.ok{background:var(--acad-verde-cl);color:var(--acad-verde);border-color:var(--acad-verde)}
+
+/* Mini-laboratorio interactivo (ej. contraseñas) */
+.mini-lab-teoria{
+  background:linear-gradient(180deg,#EAF6F1,#FFF);
+  border:2px solid var(--acento);border-radius:10px;padding:16px 18px;margin-top:12px;
+}
+.mini-lab-teoria .titulo-ml{
+  font-family:var(--cond);color:var(--acento);font-size:.95rem;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;font-weight:700;
+}
+.mini-lab-teoria .descr-ml{font-size:.92rem;color:var(--texto);margin-bottom:10px;line-height:1.45}
+.mini-lab-teoria .input-pwd{
+  display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;
+}
+.mini-lab-teoria .input-pwd input{
+  flex:1;min-width:200px;padding:11px 14px;border:1px solid var(--bd);border-radius:6px;
+  font-family:var(--mono);font-size:1rem;background:#fff;
+}
+.mini-lab-teoria .input-pwd input:focus{border-color:var(--acento);outline:none;box-shadow:0 0 0 3px rgba(26,138,107,.15)}
+.mini-lab-teoria .ver-pwd{
+  background:#fff;border:1px solid var(--bd);padding:0 12px;border-radius:6px;cursor:pointer;
+  font-size:1.1rem;
+}
+.mini-lab-teoria .btn-comprobar-pwd{
+  background:linear-gradient(135deg,var(--acento),var(--acento2));color:#fff;border:none;
+  padding:11px 18px;border-radius:6px;font-family:var(--cond);font-size:.9rem;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;font-weight:700;
+}
+.mini-lab-teoria .resultado-pwd{
+  background:#fff;border:1px solid var(--bd);border-radius:8px;padding:14px 16px;margin-top:10px;
+  display:none;
+}
+.mini-lab-teoria .resultado-pwd[data-activo="true"]{display:block;animation:fade .3s}
+.mini-lab-teoria .barra-fuerza{
+  height:12px;border-radius:6px;background:#EEE;overflow:hidden;margin:8px 0 12px;
+}
+.mini-lab-teoria .barra-fuerza .relleno{
+  height:100%;transition:.4s;border-radius:6px;
+}
+.mini-lab-teoria .barra-fuerza .relleno[data-nivel="0"]{background:#999;width:5%}
+.mini-lab-teoria .barra-fuerza .relleno[data-nivel="1"]{background:var(--acad-rojo);width:20%}
+.mini-lab-teoria .barra-fuerza .relleno[data-nivel="2"]{background:#D29922;width:40%}
+.mini-lab-teoria .barra-fuerza .relleno[data-nivel="3"]{background:#7DA84E;width:65%}
+.mini-lab-teoria .barra-fuerza .relleno[data-nivel="4"]{background:var(--acad-verde);width:85%}
+.mini-lab-teoria .barra-fuerza .relleno[data-nivel="5"]{background:var(--acad-verde);width:100%}
+.mini-lab-teoria .check-pwd{
+  display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.92rem;color:var(--texto);
+}
+.mini-lab-teoria .check-pwd .icon{
+  width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:700;flex-shrink:0;
+}
+.mini-lab-teoria .check-pwd.pasa .icon{background:var(--acad-verde);color:#fff}
+.mini-lab-teoria .check-pwd.falla .icon{background:var(--acad-rojo);color:#fff}
+.mini-lab-teoria .check-pwd.pasa .icon::after{content:"✓"}
+.mini-lab-teoria .check-pwd.falla .icon::after{content:"✗"}
+.mini-lab-teoria .tiempo-pwd{
+  background:var(--acad-violeta-cl);border-left:4px solid var(--acad-violeta);
+  padding:10px 14px;border-radius:0 6px 6px 0;margin-top:10px;font-size:.95rem;
+}
+.mini-lab-teoria .tiempo-pwd b{color:var(--acad-violeta);font-family:var(--cond);font-size:1.1rem}
+
+/* Mini-reto dentro de la teoría (inline) */
+.mini-reto-teoria{
+  background:linear-gradient(180deg,#FFF8E1,#FFF);
+  border:2px dashed var(--acad-oro);border-radius:10px;padding:14px 16px;margin-top:12px;
+}
+.mini-reto-teoria .titulo-mr{
+  font-family:var(--cond);color:var(--acad-azul-mar);font-size:.95rem;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;font-weight:700;
+}
+.mini-reto-teoria .opciones-mr{display:flex;flex-direction:column;gap:8px}
+.mini-reto-teoria .opcion-mr{
+  background:#fff;border:1px solid var(--bd);border-radius:6px;padding:10px 12px;
+  cursor:pointer;font-family:var(--mono);font-size:.85rem;color:var(--texto);transition:.15s;
+  text-align:left;line-height:1.4;
+}
+.mini-reto-teoria .opcion-mr:hover:not(:disabled){background:var(--acad-violeta-cl);border-color:var(--acad-violeta)}
+.mini-reto-teoria .opcion-mr.correcta{background:var(--acad-verde-cl);color:var(--acad-verde);border-color:var(--acad-verde);font-weight:600}
+.mini-reto-teoria .opcion-mr.incorrecta{background:#FCEAE7;color:var(--acad-rojo);border-color:var(--acad-rojo)}
+.mini-reto-teoria .feedback-mr{
+  margin-top:10px;padding:10px 14px;border-radius:6px;font-size:.88rem;display:none;
+}
+.mini-reto-teoria .feedback-mr[data-activo="true"]{display:block}
+.mini-reto-teoria .feedback-mr.bien{background:var(--acad-verde-cl);color:#19432F;border-left:3px solid var(--acad-verde)}
+.mini-reto-teoria .feedback-mr.mal{background:#FCEAE7;color:#5A1B1B;border-left:3px solid var(--acad-rojo)}
+
+/* Navegación interna entre sub-pantallas */
+.nav-sub{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:8px;border-top:1px dashed var(--bd);padding-top:14px}
+.nav-sub .ind{display:flex;gap:6px;flex:1;justify-content:center}
+.nav-sub .ind span{width:10px;height:10px;border-radius:50%;background:var(--bd);transition:.2s}
+.nav-sub .ind span.activa{background:var(--acad-violeta);transform:scale(1.4)}
+.nav-sub .ind span.completada{background:var(--acad-verde)}
+
+/* Navegación entre tarjetas (concepto a concepto) */
+.nav-tarjetas{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px}
+.nav-tarjetas .puntos-tarjetas{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;flex:1}
+.nav-tarjetas .punto{width:11px;height:11px;border-radius:50%;background:var(--bd);cursor:pointer;transition:.2s}
+.nav-tarjetas .punto.activo{background:var(--acad-violeta);transform:scale(1.4)}
+.nav-tarjetas .pu
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+  <span class="curso-sb">Academia Cyber-IES · Sesión 1</span>
+</header>
+
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="#"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="#"><span>🎓</span><span class="nc-lbl">Academia</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🗂️</span><span class="nc-lbl">S1 · Glosario</span></span>
+</nav>
+
+<main id="main-content">
+
+<section class="acad-hero">
+  <div class="acad-num">SESIÓN 1 · 30-40 MIN</div>
+  <h1>Las palabras del oficio</h1>
+  <p class="acad-sub">6 conceptos esenciales de ciberseguridad. Después: una trampa con 3 impostores camuflados.</p>
+</section>
+
+<!-- BARRA DE PROGRESO -->
+<div class="acad-progreso" aria-label="Progreso de la sesión">
+  <div class="paso activo" data-bloque="mision"><div class="num">1</div><span>Misión</span></div>
+  <div class="paso" data-bloque="teoria"><div class="num">2</div><span>Teoría</span></div>
+  <div class="paso" data-bloque="entrenamiento"><div class="num">3</div><span>Entrenar</span></div>
+  <div class="paso" data-bloque="juego"><div class="num">4</div><span>Reto</span></div>
+  <div class="paso" data-bloque="informe"><div class="num">5</div><span>Informe</span></div>
+  <div class="paso" data-bloque="diploma"><div class="num">6</div><span>Insignia</span></div>
+</div>
+
+<!-- FILA DE MINI-INSIGNIAS -->
+<div class="acad-insignias-fila" id="fila-insignias" aria-label="Insignias progresivas">
+  <div class="mi-insignia" data-mi="cadete" data-ganada="false">
+    <div class="emoji">🎖️</div>
+    <div class="nom">Cadete</div>
+    <div class="et">tras teoría</div>
+  </div>
+  <div class="mi-insignia" data-mi="analista" data-ganada="false">
+    <div class="emoji">🎖️</div>
+    <div class="nom">Analista</div>
+    <div class="et">tras entrenar</div>
+  </div>
+  <div class="mi-insignia" data-mi="investigador" data-ganada="false">
+    <div class="emoji">🎖️</div>
+    <div class="nom">Investigador</div>
+    <div class="et">tras reto</div>
+  </div>
+  <div class="mi-insignia" data-mi="detective" data-ganada="false">
+    <div class="emoji">🏆</div>
+    <div class="nom">Detective</div>
+    <div class="et">final</div>
+  </div>
+</div>
+
+<div class="acad-main">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOQUE 1 · MISIÓN
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bloque acad-mision" data-bloque="mision" data-activo="true">
+  <div class="titulo-bloque">▸ Bloque 1 · Misión</div>
+  <h2>🎯 La Agencia Cyber-IES te necesita</h2>
+
+  <div class="narrativa">
+    Necesitamos un <strong>glosario oficial</strong> de ciberseguridad para el aula. Tu equipo va a
+    aprender <strong>6 conceptos clave</strong> y después se enfrentará a una lista de palabras donde
+    <strong>3 son INVENTADAS</strong> pero suenan creíbles. Si te dejas engañar, el aula aprenderá basura.
+    <strong>Tu misión doble:</strong> dominar los 6 conceptos y desenmascarar a los 3 impostores.
+  </div>
+
+  <div class="objetivo">
+    <strong>Qué vas a hacer hoy</strong>
+    <p>Vas a estudiar <strong>6 conceptos</strong> en mini-pantallas (qué es, cómo lo reconoces y un microquiz). Después
+    entrenas con 6 emparejamientos y 6 frases "verdadero o falso". Llega el reto: 6 situaciones reales
+    donde tienes que elegir el término que las describe + 9 palabras donde detectas a los 3 impostores.</p>
+  </div>
+
+  <div class="acad-identidad">
+    <div class="pareja">
+      <div>
+        <label for="nombre1">Investigador/a 1</label>
+        <input type="text" id="nombre1" data-acad="nombre1" placeholder="Tu nombre y apellido">
+      </div>
+      <div>
+        <label for="nombre2">Investigador/a 2</label>
+        <input type="text" id="nombre2" data-acad="nombre2" placeholder="Nombre de tu pareja (opcional)">
+      </div>
+    </div>
+    <p style="font-size:.8rem;color:var(--t2);margin-top:8px">
+      💡 Tus nombres se guardan solo en este navegador y se reutilizarán en las demás sesiones de la Academia.
+    </p>
+  </div>
+
+  <div class="resumen">
+    <span class="chip">⏱️ 30-40 min</span>
+    <span class="chip">📚 6 conceptos</span>
+    <span class="chip">🏋️ 12 ejercicios</span>
+    <span class="chip">🎮 15 retos</span>
+    <span class="chip">🏆 4 insignias</span>
+  </div>
+
+  <div class="barra-acciones">
+    <span></span>
+    <button class="btn-acad" onclick="Academia.irABloque('teoria')">Empezar la misión ▸</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOQUE 2 · TEORÍA (6 CONCEPTOS × 3 SUB-PANTALLAS)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bloque acad-teoria" data-bloque="teoria">
+  <div class="titulo-bloque">▸ Bloque 2 · Teoría interactiva</div>
+  <h2>📖 6 conceptos esenciales</h2>
+  <p class="intro">Cada concepto tiene <strong>3 pantallas</strong>: qué es, cómo lo reconoces y un microquiz obligatorio para avanzar al siguiente.</p>
+
+  <div class="tarjetas-teoria" id="tarjetas-teoria"></div>
+
+  <div class="nav-tarjetas">
+    <button class="btn-acad secundario" id="btn-anterior" onclick="navTarjeta(-1)" disabled>◂ Anterior</button>
+    <div class="puntos-tarjetas" id="puntos-tarjetas"></div>
+    <button class="btn-acad" id="btn-siguiente" onclick="navTarjeta(1)" disabled>Siguiente ▸</button>
+  </div>
+
+  <div class="barra-acciones" id="barra-fin-teoria" style="display:none">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('mision')">◂ Volver a la misión</button>
+    <button class="btn-acad" onclick="Academia.irABloque('entrenamiento')">A entrenar ▸</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOQUE 3 · ENTRENAMIENTO (2 NIVELES)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bloque acad-entrenamiento" data-bloque="entrenamiento">
+  <div class="titulo-bloque">▸ Bloque 3 · Entrenamiento guiado</div>
+  <h2>🏋️ Dos niveles de práctica</h2>
+
+  <!-- NIVEL 1: EMPAREJAR -->
+  <div id="zona-nivel1">
+    <div class="pista"><strong>Nivel 1 · Empareja término con definición</strong> — pincha un término de la izquierda y luego su definición en la derecha. Si fallas, vuelven a quedar libres.</div>
+
+    <div class="entrenamiento-marcador">
+      <div><span>Aciertos</span><b id="ent-aciertos">0</b></div>
+      <div><span>Fallos</span><b id="ent-fallos">0</b></div>
+      <div><span>Restantes</span><b id="ent-restantes">6</b></div>
+    </div>
+
+    <div id="zona-entrenamiento" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0">
+      <div>
+        <h3 style="font-family:var(--cond);color:var(--acad-violeta);margin-bottom:8px">Términos</h3>
+        <div id="col-terminos"></div>
+      </div>
+      <div>
+        <h3 style="font-family:var(--cond);color:var(--acad-violeta);margin-bottom:8px">Definiciones</h3>
+        <div id="col-definiciones"></div>
+      </div>
+    </div>
+
+    <div class="feedback" id="fb-entrenamiento"></div>
+
+    <div class="barra-acciones">
+      <button class="btn-acad secundario" onclick="Academia.irABloque('teoria')">◂ Volver a teoría</button>
+      <button class="btn-acad" id="btn-a-nivel2" onclick="mostrarNivel2()" disabled>Al nivel 2 ▸</button>
+    </div>
+  </div>
+
+  <!-- NIVEL 2: VERDADERO / FALSO -->
+  <div id="zona-nivel2" style="display:none">
+    <div class="pista"><strong>Nivel 2 · ¿Verdadero o Falso?</strong> — lee cada frase y decide si lo que dice es correcto o falso. Tras responder verás la explicación.</div>
+
+    <div class="entrenamiento-marcador">
+      <div><span>Aciertos</span><b id="vf-aciertos">0</b></div>
+      <div><span>Fallos</span><b id="vf-fallos">0</b></div>
+      <div><span>Restantes</span><b id="vf-restantes">6</b></div>
+    </div>
+
+    <div id="zona-frases-vf"></div>
+
+    <div class="barra-acciones">
+      <button class="btn-acad secundario" onclick="volverANivel1()">◂ Nivel 1</button>
+      <button class="btn-acad" id="btn-al-reto" onclick="Academia.irABloque('juego')" disabled>Al reto principal ▸</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOQUE 4 · RETO (2 PARTES)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bloque acad-juego" data-bloque="juego">
+  <div class="titulo-bloque">▸ Bloque 4 · Reto principal</div>
+  <h2>🎮 Aplica lo aprendido</h2>
+
+  <!-- PARTE A: SITUACIONES (COMPRENSIÓN) -->
+  <div id="zona-parteA">
+    <div class="pista"><strong>Parte A · ¿Qué está pasando?</strong> — Lee cada situación real y elige el término que mejor la describe. Tras responder, ves la explicación.</div>
+
+    <div class="hud">
+      <div class="bloque-hud"><span>Situación</span><b id="hud-sit"><span id="sit-actual">1</span> / 8</b></div>
+      <div class="bloque-hud"><span>Aciertos</span><b id="hud-sit-aciertos">0</b></div>
+    </div>
+
+    <div id="zona-situaciones"></div>
+
+    <div class="barra-acciones">
+      <button class="btn-acad secundario" onclick="volverAlEntrenamiento()">◂ Volver al entrenamiento</button>
+      <button class="btn-acad" id="btn-a-parteB" onclick="mostrarParteB()" disabled>A la Parte B ▸</button>
+    </div>
+  </div>
+
+  <!-- PARTE B: REAL/INVENTADO -->
+  <div id="zona-parteB" style="display:none">
+    <div class="pista"><strong>Parte B · Caza al impostor</strong> — Aquí tienes 9 términos. 6 son reales (los que estudiaste) y 3 son INVENTADOS pero suenan creíbles. Marca cada uno antes de emitir veredicto.</div>
+
+    <div class="hud">
+      <div class="bloque-hud"><span>Clasificados</span><b id="hud-clasificados">0 / 9</b></div>
+      <div class="bloque-hud"><span>REAL</span><b id="hud-reales">0</b></div>
+      <div class="bloque-hud"><span>INVENTADO</span><b id="hud-falsos">0</b></div>
+    </div>
+
+    <div class="grid-elementos" id="grid-juego"></div>
+
+    <div class="barra-acciones centro">
+      <button class="btn-acad oro" id="btn-veredicto" onclick="emitirVeredicto()" disabled>🔓 EMITIR VEREDICTO</button>
+    </div>
+
+    <div class="resultado-juego" id="resultado-juego" style="display:none"></div>
+
+    <div class="barra-acciones" id="barra-fin-juego" style="display:none">
+      <button class="btn-acad secundario" onclick="reiniciarParteB()">🔄 Volver a intentarlo</button>
+      <button class="btn-acad" onclick="Academia.irABloque('informe')">Al informe ▸</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOQUE 5 · INFORME
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bloque acad-informe" data-bloque="informe">
+  <div class="titulo-bloque">▸ Bloque 5 · Informe del investigador</div>
+  <h2>📝 Cierra tu investigación</h2>
+  <p class="intro-informe">Tu glosario oficial está listo. Antes de recibir la insignia, responde a estas tres preguntas. Las respuestas se <strong>guardan en este navegador</strong> y formarán parte de tu bitácora final del bloque.</p>
+
+  <div class="informe-pregunta">
+    <label for="inf-q1">1. ¿Cuál de los 3 términos falsos te costó MÁS detectar? ¿Por qué te sonaba creíble?</label>
+    <p class="ayuda">Ejemplo: "Ultra2FA porque suena a una versión mejorada del 2FA real".</p>
+    <textarea id="inf-q1" data-q="q1" placeholder="Escribe tu respuesta (mínimo 2 líneas)..."></textarea>
+    <div class="contador-palabras" id="cnt-q1">0 palabras</div>
+  </div>
+
+  <div class="informe-pregunta">
+    <label for="inf-q2">2. De los 6 conceptos reales, ¿cuál crees que es el más útil para tu vida personal? Explica por qué.</label>
+    <p class="ayuda">Piensa en cuál te va a servir mañana mismo: contraseñas, 2FA, phishing…</p>
+    <textarea id="inf-q2" data-q="q2" placeholder="Escribe tu respuesta..."></textarea>
+    <div class="contador-palabras" id="cnt-q2">0 palabras</div>
+  </div>
+
+  <div class="informe-pregunta">
+    <label for="inf-q3">3. Después de hoy, ¿qué vas a CAMBIAR (algo concreto) en cómo usas internet?</label>
+    <p class="ayuda">No vale "tendré más cuidado". Sé concreto: "voy a activar la verificación en dos pasos en mi Instagram".</p>
+    <textarea id="inf-q3" data-q="q3" placeholder="Escribe tu compromiso concreto..."></textarea>
+    <div class="contador-palabras" id="cnt-q3">0 palabras</div>
+  </div>
+
+  <div class="feedback" id="fb-informe"></div>
+
+  <div class="barra-acciones">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('juego')">◂ Volver al reto</button>
+    <button class="btn-acad verde" onclick="finalizarInforme()">Recoger insignia ▸</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BLOQUE 6 · DIPLOMA / INSIGNIA
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="bloque acad-diploma" data-bloque="diploma">
+  <div class="titulo-bloque">▸ Bloque 6 · Insignia</div>
+  <h2>🏆 Has completado la Sesión 1</h2>
+
+  <div class="diploma-preview" id="diploma-preview">
+    <div class="titulo-dp">Academia Cyber-IES</div>
+    <div class="sub-dp">Sesión 1 · Las palabras del oficio · Promoción 2026</div>
+    <div class="icono-dp">🗂️</div>
+    <p class="body-dp" style="font-style:italic">Se acredita a</p>
+    <div class="nombres-dp">
+      <span data-acad="nombre1">Investigador/a 1</span><br>
+      <span style="font-style:italic;font-size:1rem;color:#666;font-family:Georgia,serif">y</span><br>
+      <span data-acad="nombre2">Investigador/a 2</span>
+    </div>
+    <p class="body-dp">por dominar los 6 conceptos básicos de ciberseguridad, aplicarlos a situaciones reales y desenmascarar a los 3 impostores camuflados en el glosario.</p>
+    <div class="insignia" id="insignia-texto">Detective del Glosario</div>
+    <div class="resumen-dp">
+      <div><span>Teoría:</span> <span id="res-teoria">— microquiz</span></div>
+      <div><span>Entrenamiento:</span> <span id="res-entrenamiento">— ejercicios</span></div>
+      <div><span>Reto:</span> <span id="res-reto">— / 15</span></div>
+      <div><span>Tiempo total:</span> <span id="res-tiempo">—</span></div>
+      <div><span>Calificación:</span> <span id="res-calif">—</span></div>
+    </div>
+    <div class="codigo-final" id="cod-final">CÓDIGO: ————</div>
+    <p style="font-style:italic;font-size:.8rem;color:#666;margin-top:14px">"Quien sabe nombrar lo que pasa sabe enfrentarse a ello."</p>
+  </div>
+
+  <div class="barra-acciones centro">
+    <button class="btn-acad oro" onclick="descargarInsignia()">📥 Descargar insignia (PNG)</button>
+    <button class="btn-acad secundario" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+
+  <div style="background:var(--acad-violeta-cl);border-radius:10px;padding:18px 22px;margin-top:18px;text-align:left">
+    <h3 style="font-family:var(--cond);color:var(--acad-violeta);margin-bottom:8px">🎯 Próximo paso</h3>
+    <p style="font-size:.95rem;color:var(--texto)">Guarda el PNG. Cuando termines las 18 sesiones, tu profesor pedirá las 18 insignias para evaluar el bloque.</p>
+    <p style="font-size:.9rem;color:var(--texto2);margin-top:8px;font-style:italic">
+      💾 <strong>El compromiso que has escrito en el informe se guarda en este navegador.</strong> En la Sesión 2 lo recuperaremos para recordarte lo que prometiste hacer.
+    </p>
+    <div class="barra-acciones" style="margin-top:12px">
+      <a class="btn-acad secundario" href="#">🎓 Volver a la Academia</a>
+      <a class="btn-acad" href="#">Sesión 2 · Contraseñas ▸</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- .acad-main -->
+
+</main>
+
+<footer style="text-align:center;padding:30px 14px 50px;color:var(--t2);font-size:.85rem">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  Academia Cyber-IES · Curso 2026-27 · Manuel Alonso Herrera
+</footer>
+
+
+
+<script>
+// ════════════════════════════════════════════════════════════════
+// SESIÓN 1 · Las palabras del oficio (v2 — 6 conceptos)
+// ════════════════════════════════════════════════════════════════
+
+const SESION_ID = 's01';
+const tInicio = Date.now();
+
+// ── BLOQUE 2: 6 CONCEPTOS × 3 SUB-PANTALLAS ─────────────────────
+const CONCEPTOS = [
+  {
+    nombre: "Phishing",
+    queEs: "Engaño por correo, mensaje o web que se hace pasar por una empresa real (tu banco, Instagram, Correos…) para robarte la contraseña o datos personales.",
+    ejemplo: { tipo:'peligroso', texto:"📧 'BBVA — Bloqueo de cuenta en 24h. Pincha aquí y verifica tu identidad.' Si pinchas y metes tu usuario, los estafadores ya lo tienen." },
+    senales: [
+      "Te meten prisa con AMENAZAS ('bloqueo en 24h', 'última oportunidad').",
+      "El remitente no es el oficial: 'bbva-seguridad@gmail.com' en vez de '@bbva.es'.",
+      "Te piden meter contraseña o datos pinchando un enlace del propio mensaje."
+    ],
+    miniReto: {
+      titulo: "Pruébalo: ¿cuál de estos 3 emails es phishing?",
+      opciones: [
+        { html: "📧 De: <b>amazon@amazon.es</b><br>Asunto: Tu pedido ha sido enviado<br>Tu paquete llegará el viernes 5 de junio. Puedes consultar el seguimiento en tu cuenta.", correcta: false, explica: "Legítimo. Remitente oficial @amazon.es, sin urgencia, sin pedir contraseña ni datos. Solo informa." },
+        { html: "📧 De: <b>seguridad-bbva@gmail.com</b><br>Asunto: 🚨 ALERTA — Tu cuenta será BLOQUEADA en 1 hora<br>Pincha AQUÍ y verifica tu contraseña AHORA.", correcta: true, explica: "Phishing. Tres alertas a la vez: remitente con @gmail.com (no @bbva.es), urgencia + amenaza, pide pinchar y meter contraseña por enlace." },
+        { html: "📧 De: <b>no-reply@instagram.com</b><br>Asunto: Nuevo inicio de sesión detectado<br>Has iniciado sesión desde un dispositivo nuevo en Barcelona. Si has sido tú, ignora este aviso. Si no, revisa tu actividad.", correcta: false, explica: "Legítimo. Es un aviso informativo (no pide datos, no mete prisa, viene de @instagram.com). Las apps reales sí mandan este tipo de avisos por seguridad." }
+      ]
+    },
+    quiz: {
+      p: "¿Qué señal es MÁS sospechosa en un email del banco?",
+      opciones: [
+        "Que tenga el logo del banco",
+        "Que el remitente NO sea el oficial y pidan datos por enlace",
+        "Que esté escrito en español",
+        "Que sea reciente"
+      ],
+      correcta: 1,
+      explica: "Un banco REAL nunca te pedirá meter usuario y contraseña por un enlace de email. Combinado con un remitente raro, es la señal definitiva."
+    }
+  },
+  {
+    nombre: "Malware",
+    queEs: "Nombre general para los programas dañinos: virus, troyanos, ransomware, spyware. Todo lo que se cuela en tu dispositivo para fastidiar, robar o secuestrar.",
+    ejemplo: { tipo:'peligroso', texto:"📱 Bajas un 'crack' de Fortnite desde una web rara. El .apk instala además un programa que graba todas tus pulsaciones." },
+    senales: [
+      "El archivo viene de FUERA de las tiendas oficiales (Play Store, App Store).",
+      "Es ejecutable (.exe, .apk, .bat, .scr) o un ZIP con un ejecutable dentro.",
+      "Promete algo gratis muy bueno: skins, V-Bucks, antivirus pro, películas en estreno."
+    ],
+    quiz: {
+      p: "Una app de linterna te pide acceso a contactos y micrófono. ¿Qué piensas?",
+      opciones: [
+        "Es normal, todas piden eso",
+        "Es sospechoso, una linterna NO necesita eso",
+        "Hay que dárselo si quieres usarla",
+        "Solo es preocupante si pide ubicación"
+      ],
+      correcta: 1,
+      explica: "Una linterna no necesita ni contactos ni micrófono. Si los pide, probablemente recopila datos para vender o sea malware disfrazado."
+    }
+  },
+  {
+    nombre: "Contraseña segura",
+    queEs: "Contraseña LARGA (15+ caracteres), ÚNICA para cada cuenta y que no contenga datos tuyos (nombre, fecha, mascota, equipo o ídolo).",
+    ejemplo: { tipo:'bueno', texto:"✅ 'caballo-grapa-luna-puente-83' → 28 caracteres, fácil de recordar, romperla por fuerza bruta tardaría miles de años." },
+    senales: [
+      "Tiene 15+ caracteres. La longitud importa MÁS que los símbolos raros.",
+      "No incluye tus datos personales (nombre, fecha de nacimiento, mascota, equipo).",
+      "Es DIFERENTE en cada cuenta. Si una se filtra, las demás no caen."
+    ],
+    miniLab: { tipo: 'password' },
+    quiz: {
+      p: "¿Cuál de estas contraseñas es MÁS segura?",
+      opciones: [
+        "Lucia2012!",
+        "P@ss123",
+        "caballo-mesa-luna-puente-83",
+        "qwerty12"
+      ],
+      correcta: 2,
+      explica: "La 3ª: aunque solo use palabras corrientes, su LONGITUD (27 caracteres) la hace prácticamente imposible de romper. Y no contiene datos personales."
+    }
+  },
+  {
+    nombre: "Verificación en dos pasos (2FA)",
+    queEs: "Pedir DOS pruebas en vez de una para iniciar sesión: tu contraseña + un código que llega al móvil. Aunque te roben la contraseña, sin tu móvil no entran.",
+    ejemplo: { tipo:'bueno', texto:"✅ Activas 2FA en tu Instagram. Cuando alguien intenta entrar desde otro móvil, te llega un código por SMS sin el cual no puede acceder." },
+    senales: [
+      "Lo activas en 'Seguridad' o 'Cuenta' de cada app importante (Instagram, Gmail, banco…).",
+      "El segundo paso suele ser un SMS con código, una app (Google Authenticator) o una huella.",
+      "Es la mejor defensa cuando una contraseña tuya se filtra en otra web."
+    ],
+    quiz: {
+      p: "Tu amigo presume de que usa la misma contraseña en todo. ¿Qué le aconsejas?",
+      opciones: [
+        "Que apunte todas en un papel pegado al ordenador",
+        "Que active 2FA en sus apps importantes (y use contraseñas distintas)",
+        "Que no se preocupe si la recuerda bien",
+        "Que use una sola muy larga para todo"
+      ],
+      correcta: 1,
+      explica: "El 2FA actúa como segundo candado. Y usar contraseñas distintas evita que una filtración tumbe todas sus cuentas."
+    }
+  },
+  {
+    nombre: "HTTPS",
+    queEs: "Versión segura de HTTP, el lenguaje en el que tu navegador habla con las webs. La 's' significa 'seguro': la información va CIFRADA y nadie en medio puede leerla.",
+    ejemplo: { tipo:'bueno', texto:"✅ Entras a tu banco y la URL empieza por 'https://' con un candado al lado. Tus datos viajan cifrados, nadie en la red puede leerlos." },
+    senales: [
+      "Mira la barra de direcciones: debe poner 'https://' (no solo 'http://').",
+      "Aparece un candado al lado de la URL. Si no hay candado, los datos viajan sin cifrar.",
+      "Si el navegador avisa 'no seguro' en rojo, NO metas contraseñas ni tarjeta."
+    ],
+    miniReto: {
+      titulo: "Pruébalo: ¿en cuál de estas 3 URLs metes la tarjeta tranquilamente?",
+      opciones: [
+        { html: "🔒 <b>https://www.netflix.com/login</b><br><span style='color:var(--acad-verde);font-size:.8rem'>El navegador muestra candado verde</span>", correcta: true, explica: "Segura. HTTPS + candado + dominio real de Netflix (netflix.com). Las tres cosas coinciden." },
+        { html: "🔓 <b>http://shop-deals-2026.online/checkout</b><br><span style='color:var(--acad-rojo);font-size:.8rem'>El navegador muestra 'No seguro' en rojo</span>", correcta: false, explica: "INSEGURA. Empieza por 'http://' (sin la s). Tu tarjeta viajaría sin cifrar y cualquiera en la misma red wifi podría leerla. Además el dominio '.online' es típico de tiendas fraudulentas." },
+        { html: "🔒 <b>https://paypal-security-update.tk/verify</b><br><span style='color:var(--acad-oro);font-size:.8rem'>Tiene candado pero el dominio es raro</span>", correcta: false, explica: "TRUCO. El candado solo significa que la comunicación está cifrada, NO que la web sea de PayPal. El dominio 'paypal-security-update.tk' no es de PayPal (sería paypal.com). HTTPS ≠ web legítima." }
+      ]
+    },
+    quiz: {
+      p: "Vas a comprar en una web y la URL pone 'http://' sin candado. ¿Qué haces?",
+      opciones: [
+        "Compro igual, será más rápido",
+        "Pongo igual la tarjeta, total cifra todo",
+        "NO meto datos: esa web no es segura",
+        "Cambio de navegador"
+      ],
+      correcta: 2,
+      explica: "Sin HTTPS, tu contraseña y tarjeta viajan EN CLARO. Cualquiera en la misma red wifi (por ejemplo en un café) podría leerlas. Nunca compres en sitios http://."
+    }
+  },
+  {
+    nombre: "Fake news",
+    queEs: "Noticia falsa diseñada para parecer verdadera. A veces es propaganda, a veces es para vender clics, a veces para manipular elecciones.",
+    ejemplo: { tipo:'peligroso', texto:"⚠️ Vídeo en TikTok: 'El gobierno va a meter chips en las vacunas'. Miles de personas lo comparten sin comprobarlo." },
+    senales: [
+      "El titular es escandaloso, te despierta indignación o miedo.",
+      "Solo lo publican fuentes desconocidas: ningún medio serio lo recoge.",
+      "Cuando buscas el dato exacto en Google, no aparece o aparece contradicho."
+    ],
+    quiz: {
+      p: "Antes de compartir por WhatsApp un vídeo escandaloso, ¿qué es lo MÁS importante?",
+      opciones: [
+        "Que te lo haya mandado un amigo de confianza",
+        "Que tenga muchas visualizaciones",
+        "Verificar la noticia en un medio serio (El País, RTVE, BBC…)",
+        "Que el titular sea muy llamativo"
+      ],
+      correcta: 2,
+      explica: "Aunque te lo mande tu mejor amigo, si no aparece en medios serios, no lo compartas. Las fake news viajan rápido porque la gente confía sin comprobar."
+    }
+  }
+];
+
+// ── 3 IMPOSTORES CREÍBLES ───────────────────────────────────────
+const FALSOS = [
+  { nombre: "SecureLogin", explica: "Suena a producto comercial, pero NO es un término genérico de ciberseguridad. Existen apps llamadas así (productos comerciales), pero como concepto general no aparece ni en INCIBE ni en glosarios oficiales. Lo que sí existe: '2FA', 'gestor de contraseñas'." },
+  { nombre: "Ultra2FA", explica: "El 2FA es 2FA: no hay 'ultra'. Algunos productos comerciales podrían llamarse así, pero NO es un término de ciberseguridad estándar. Si alguien te lo nombra como concepto general, sospecha." },
+  { nombre: "HyperCookie", explica: "Suena a un tipo especial de cookie. Lo que sí existe son 'supercookies' o 'evercookies' (cookies muy difíciles de borrar), pero 'HyperCookie' es invención: no aparece en ninguna fuente oficial." }
+];
+
+// ── ESTADO DE TEORÍA ────────────────────────────────────────────
+let tarjetaActual = 0;
+let subActual = 0;     // 0=qué es, 1=cómo reconocer, 2=microquiz
+const microquizContestados = new Set();   // tarjetas con microquiz hecho (acierto o fallo)
+const microquizAciertos = new Set();      // tarjetas con microquiz acertado
+
+function renderTarjetas() {
+  const cont = document.getElementById('tarjetas-teoria');
+  cont.innerHTML = CONCEPTOS.map((c, i) => `
+    <article class="tarjeta-teoria" data-idx="${i}" data-activa="${i === 0 ? 'true' : 'false'}">
+      <div>
+        <span class="concepto-num">CONCEPTO ${i + 1} / 6</span>
+        <span class="concepto-fase" id="fase-${i}">PANTALLA 1 / 3</span>
+      </div>
+      <h3>${c.nombre}</h3>
+
+      <!-- SUB-PANTALLA 1: QUÉ ES -->
+      <div class="subtarjeta" data-sub="0" data-activa="true">
+        <p class="que-es">${c.queEs}</p>
+        <div class="ej ${c.ejemplo.tipo}">
+          <span class="et">${c.ejemplo.tipo === 'bueno' ? '✅ Ejemplo de uso correcto' : '⚠️ Ejemplo peligroso'}</span>
+          ${c.ejemplo.texto}
+        </div>
+      </div>
+
+      <!-- SUB-PANTALLA 2: CÓMO LO RECONOCES -->
+      <div class="subtarjeta" data-sub="1">
+        <div class="reconocer-titulo">🔍 Cómo lo reconoces</div>
+        <div class="senales">
+          ${c.senales.map((s, j) => `<div class="senal"><b>Señal ${j+1}</b>${s}</div>`).join('')}
+        </div>
+        ${c.miniReto ? `
+        <div class="mini-reto-teoria" data-tarjeta="${i}">
+          <div class="titulo-mr">🎯 ${c.miniReto.titulo}</div>
+          <div class="opciones-mr">
+            ${c.miniReto.opciones.map((op, j) => `
+              <button class="opcion-mr" onclick="responderMiniReto(${i}, ${j})">${op.html}</button>
+            `).join('')}
+          </div>
+          <div class="feedback-mr" id="fb-mr-${i}"></div>
+        </div>
+        ` : ''}
+        ${c.miniLab && c.miniLab.tipo === 'password' ? `
+        <div class="mini-lab-teoria" data-tarjeta="${i}">
+          <div class="titulo-ml">🔧 Laboratorio: Diseña tu contraseña</div>
+          <p class="descr-ml">Crea aquí una contraseña que cumpla los 3 criterios de arriba. El laboratorio te dirá qué falla y cuánto tardarían en romperla.</p>
+          <div class="input-pwd">
+            <input type="text" id="lab-pwd-input" placeholder="Escribe aquí tu contraseña...">
+            <button class="ver-pwd" onclick="alternarVisibilidadPwd()" id="btn-ver-pwd" title="Mostrar/ocultar">👁</button>
+            <button class="btn-comprobar-pwd" onclick="comprobarMiContrasena()">Comprobar</button>
+          </div>
+          <div class="resultado-pwd" id="lab-pwd-resultado"></div>
+        </div>
+        ` : ''}
+      </div>
+
+      <!-- SUB-PANTALLA 3: MICROQUIZ OBLIGATORIO -->
+      <div class="subtarjeta" data-sub="2">
+        <div class="microquiz" data-tarjeta="${i}">
+          <div class="pregunta-mq">🧠 Comprobación rápida — ${c.quiz.p}</div>
+          <div class="opciones-mq" id="opcionesMq-${i}">
+            ${c.quiz.opciones.map((op, j) => `
+              <button onclick="responderMicroquiz(${i}, ${j})">${String.fromCharCode(65 + j)}. ${op}</button>
+            `).join('')}
+          </div>
+          <div class="feedback-mq" id="fb-mq-${i}"></div>
+        </div>
+      </div>
+
+      <!-- NAVEGACIÓN SUB-PANTALLAS -->
+      <div class="nav-sub">
+        <button class="btn-acad secundario" onclick="navSub(${i}, -1)" id="btn-sub-prev-${i}" disabled>◂ Atrás</button>
+        <div class="ind">
+          <span class="activa" data-sub="0"></span>
+          <span data-sub="1"></span>
+          <span data-sub="2"></span>
+        </div>
+        <button class="btn-acad" onclick="navSub(${i}, 1)" id="btn-sub-next-${i}">Continuar ▸</button>
+      </div>
+    </article>
+  `).join('');
+
+  // Puntos de navegación entre conceptos
+  const puntos = document.getElementById('puntos-tarjetas');
+  puntos.innerHTML = CONCEPTOS.map((_, i) => `<div class="punto ${i === 0 ? 'activo' : ''}" data-idx="${i}" onclick="irATarjeta(${i})"></div>`).join('');
+}
+
+function navSub(tarjetaIdx, delta) {
+  const tarjeta = document.querySelector(`.tarjeta-teoria[data-idx="${tarjetaIdx}"]`);
+  const subs = tarjeta.querySelectorAll('.subtarjeta');
+  let actual = -1;
+  subs.forEach((s, i) => { if (s.dataset.activa === 'true') actual = i; });
+  const nuevo = actual + delta;
+
+  if (nuevo < 0) return;
+  if (nuevo > 2) {
+    // Pasar al siguiente concepto si el microquiz está hecho
+    if (microquizContestados.has(tarjetaIdx)) {
+      navTarjeta(1);
+    }
+    return;
+  }
+
+  subs.forEach(s => s.dataset.activa = 'false');
+  subs[nuevo].dataset.activa = 'true';
+  subActual = nuevo;
+
+  // Actualizar indicadores
+  const inds = tarjeta.querySelectorAll('.nav-sub .ind span');
+  inds.forEach((ind, i) => {
+    ind.classList.remove('activa', 'completada');
+    if (i === nuevo) ind.classList.add('activa');
+    else if (i < nuevo) ind.classList.add('completada');
+  });
+
+  // Actualizar etiqueta de fase
+  document.getElementById(`fase-${tarjetaIdx}`).textContent = `PANTALLA ${nuevo + 1} / 3`;
+
+  // Botones
+  document.getElementById(`btn-sub-prev-${tarjetaIdx}`).disabled = nuevo === 0;
+  const btnNext = document.getElementById(`btn-sub-next-${tarjetaIdx}`);
+  if (nuevo === 2) {
+    // En el microquiz: solo deja avanzar si está contestado
+    btnNext.textContent = microquizContestados.has(tarjetaIdx) ? 'Siguiente concepto ▸' : '🔒 Responde el microquiz';
+    btnNext.disabled = !microquizContestados.has(tarjetaIdx);
+  } else {
+    btnNext.textContent = 'Continuar ▸';
+    btnNext.disabled = false;
+  }
+}
+
+function navTarjeta(delta) {
+  irATarjeta(tarjetaActual + delta);
+}
+
+function irATarjeta(idx) {
+  if (idx < 0 || idx >= CONCEPTOS.length) return;
+  // Solo permite saltar a una tarjeta ya vista o la siguiente a la última completada
+  document.querySelectorAll('.tarjeta-teoria').forEach(t => t.dataset.activa = 'false');
+  document.querySelector(`.tarjeta-teoria[data-idx="${idx}"]`).dataset.activa = 'true';
+  tarjetaActual = idx;
+
+  // Reiniciar a sub 0 si nunca había entrado, mantener si ya
+  const tarjeta = document.querySelector(`.tarjeta-teoria[data-idx="${idx}"]`);
+  const subs = tarjeta.querySelectorAll('.subtarjeta');
+  subs.forEach((s, i) => s.dataset.activa = (i === 0 ? 'true' : 'false'));
+  const inds = tarjeta.querySelectorAll('.nav-sub .ind span');
+  inds.forEach((ind, i) => { ind.classList.remove('activa', 'completada'); if (i === 0) ind.classList.add('activa'); });
+  document.getElementById(`fase-${idx}`).textContent = 'PANTALLA 1 / 3';
+  document.getElementById(`btn-sub-prev-${idx}`).disabled = true;
+  document.getElementById(`btn-sub-next-${idx}`).textContent = 'Continuar ▸';
+  document.getElementById(`btn-sub-next-${idx}`).disabled = false;
+
+  // Actualizar puntos
+  document.querySelectorAll('.puntos-tarjetas .punto').forEach((p, i) => {
+    p.classList.remove('activo', 'visto');
+    if (i === idx) p.classList.add('activo');
+    else if (microquizContestados.has(i)) p.classList.add('visto');
+  });
+
+  // Botones entre tarjetas
+  document.getElementById('btn-anterior').disabled = idx === 0;
+  document.getElementById('btn-siguiente').disabled = !microquizContestados.has(idx);
+
+  // Fin de la teoría: mostrar barra si está en la última y contestada
+  if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) {
+    document.getElementById('barra-fin-teoria').style.display = 'flex';
+    otorgarInsignia('cadete');
+  }
+
+  document.querySelector('.tarjetas-teoria').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function responderMicroquiz(idxTarjeta, idxOp) {
+  if (microquizContestados.has(idxTarjeta)) return;
+  const c = CONCEPTOS[idxTarjeta].quiz;
+  microquizContestados.add(idxTarjeta);
+  if (idxOp === c.correcta) microquizAciertos.add(idxTarjeta);
+
+  const botones = document.querySelectorAll(`#opcionesMq-${idxTarjeta} button`);
+  botones.forEach((b, i) => {
+    b.disabled = true;
+    if (i === c.correcta) b.classList.add('correcta');
+    else if (i === idxOp) b.classList.add('incorrecta');
+  });
+  const fb = document.getElementById(`fb-mq-${idxTarjeta}`);
+  fb.innerHTML = (idxOp === c.correcta ? '✅ Correcto. ' : '❌ Respuesta correcta: ' + String.fromCharCode(65 + c.correcta) + '. ') + c.explica;
+  fb.dataset.activo = 'true';
+
+  // Desbloquear botón "siguiente concepto"
+  const btnNext = document.getElementById(`btn-sub-next-${idxTarjeta}`);
+  btnNext.textContent = idxTarjeta === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
+  btnNext.disabled = false;
+  document.getElementById('btn-siguiente').disabled = false;
+
+  // Actualizar punto del concepto
+  document.querySelectorAll('.puntos-tarjetas .punto').forEach((p, i) => {
+    if (i === idxTarjeta) p.classList.add('visto');
+  });
+
+  // ¿Última? → cadete
+  if (idxTarjeta === CONCEPTOS.length - 1) {
+    document.getElementById('barra-fin-teoria').style.display = 'flex';
+    otorgarInsignia('cadete');
+  }
+}
+
+// ── LABORATORIO DE CONTRASEÑAS ─────────────────────────────────
+function alternarVisibilidadPwd() {
+  const input = document.getElementById('lab-pwd-input');
+  if (!input) return;
+  input.type = input.type === 'password' ? 'text' : 'password';
+}
+
+const PWD_COMUNES = [
+  '123456', '1234567', '12345678', '123456789', '1234567890',
+  'password', 'contraseña', 'qwerty', 'qwerty123', 'abc123',
+  '111111', '000000', 'iloveyou', 'admin', 'letmein',
+  'welcome', 'football', 'monkey', 'dragon', 'sunshine',
+  'princess', 'master', 'shadow', 'hola', 'fortnite'
+];
+
+function comprobarMiContrasena() {
+  const input = document.getElementById('lab-pwd-input');
+  if (!input) return;
+  const pwd = input.value;
+  if (pwd.length === 0) return;
+  const cont = document.getElementById('lab-pwd-resultado');
+
+  // ─ Check 1: longitud ─
+  const longitud = pwd.length;
+  const checkLong = longitud >= 15;
+
+  // ─ Check 2: no contiene datos personales ─
+  const n1 = (Academia.getNombre1() || '').toLowerCase();
+  const n2 = (Academia.getNombre2() || '').toLowerCase();
+  const pwdLow = pwd.toLowerCase();
+  let nombreEnPwd = false;
+  if (n1.length >= 3) {
+    const tokens = n1.split(/\s+/).filter(t => t.length >= 3);
+    if (tokens.some(t => pwdLow.includes(t))) nombreEnPwd = true;
+  }
+  if (n2.length >= 3) {
+    const tokens = n2.split(/\s+/).filter(t => t.length >= 3);
+    if (tokens.some(t => pwdLow.includes(t))) nombreEnPwd = true;
+  }
+  // También buscar años recientes (datos de nacimiento)
+  const tieneAñoSospechoso = /20[01][0-9]/.test(pwd);
+  const checkPersonal = !nombreEnPwd && !tieneAñoSospechoso;
+
+  // ─ Check 3: no es una contraseña común ─
+  const checkComun = !PWD_COMUNES.some(c => pwdLow === c || pwdLow.includes(c));
+
+  // ─ Estimación de tiempo de craqueo ─
+  let alfabeto = 0;
+  if (/[a-z]/.test(pwd)) alfabeto += 26;
+  if (/[A-Z]/.test(pwd)) alfabeto += 26;
+  if (/[0-9]/.test(pwd)) alfabeto += 10;
+  if (/[^a-zA-Z0-9]/.test(pwd)) alfabeto += 32;
+  if (alfabeto === 0) alfabeto = 26;
+  // Combinaciones = alfabeto^longitud / 2 (en media tarda la mitad)
+  // Asumimos 10^11 intentos/seg (cracking moderno)
+  const combinaciones = Math.pow(alfabeto, longitud) / 2;
+  const segundos = combinaciones / 1e11;
+  let tiempoTexto, claseTiempo;
+  if (!checkComun) {
+    tiempoTexto = 'INSTANTÁNEO (es una contraseña conocida)';
+    claseTiempo = 0;
+  } else if (segundos < 1) {
+    tiempoTexto = 'Menos de 1 segundo';
+    claseTiempo = 1;
+  } else if (segundos < 60) {
+    tiempoTexto = `${Math.round(segundos)} segundos`;
+    claseTiempo = 1;
+  } else if (segundos < 3600) {
+    tiempoTexto = `${Math.round(segundos / 60)} minutos`;
+    claseTiempo = 2;
+  } else if (segundos < 86400) {
+    tiempoTexto = `${Math.round(segundos / 3600)} horas`;
+    claseTiempo = 2;
+  } else if (segundos < 86400 * 30) {
+    tiempoTexto = `${Math.round(segundos / 86400)} días`;
+    claseTiempo = 3;
+  } else if (segundos < 86400 * 365) {
+    tiempoTexto = `${Math.round(segundos / 86400 / 30)} meses`;
+    claseTiempo = 3;
+  } else if (segundos < 86400 * 365 * 100) {
+    tiempoTexto = `${Math.round(segundos / 86400 / 365)} años`;
+    claseTiempo = 4;
+  } else if (segundos < 86400 * 365 * 1e6) {
+    tiempoTexto = 'miles de años';
+    claseTiempo = 5;
+  } else {
+    tiempoTexto = 'más tiempo del que existe el universo';
+    claseTiempo = 5;
+  }
+
+  // ─ Nivel global (0-5) ─
+  const checksOk = [checkLong, checkPersonal, checkComun].filter(Boolean).length;
+  let nivel;
+  if (!checkComun) nivel = 1;
+  else if (checksOk === 3 && claseTiempo >= 4) nivel = 5;
+  else if (checksOk === 3) nivel = 4;
+  else if (checksOk === 2) nivel = 3;
+  else if (checksOk === 1) nivel = 2;
+  else nivel = 1;
+
+  // ─ Mensaje global ─
+  const todosPasan = checkLong && checkPersonal && checkComun;
+  const titulo = todosPasan
+    ? '✅ ¡Buena contraseña! Tu cuenta estaría a salvo.'
+    : '⚠️ Esta contraseña tiene fallos. Mira abajo qué falla.';
+
+  cont.innerHTML = `
+    <h4 style="font-family:var(--cond);color:var(--acad-azul-mar);margin-bottom:8px">${titulo}</h4>
+    <div class="barra-fuerza"><div class="relleno" data-nivel="${nivel}"></div></div>
+    <div class="check-pwd ${checkLong ? 'pasa' : 'falla'}"><span class="icon"></span> Longitud: <b>${longitud} caracteres</b> ${checkLong ? '(perfecto: 15+)' : '(necesitas al menos 15)'}</div>
+    <div class="check-pwd ${checkPersonal ? 'pasa' : 'falla'}"><span class="icon"></span> No contiene datos personales ${!checkPersonal ? (nombreEnPwd ? '(¡contiene tu nombre!)' : '(contiene un año tipo 2010-2019)') : ''}</div>
+    <div class="check-pwd ${checkComun ? 'pasa' : 'falla'}"><span class="icon"></span> No es una contraseña común ${!checkComun ? '(está en las listas de contraseñas más usadas)' : ''}</div>
+    <div class="tiempo-pwd">⏱ Un atacante tardaría: <b>${tiempoTexto}</b></div>
+    ${todosPasan
+      ? '<p style="font-size:.85rem;color:var(--t2);margin-top:10px;font-style:italic">💡 Truco: para recordarla, piensa en 3-4 palabras corrientes unidas con guiones. Por ejemplo: <b>caballo-mesa-luna-puente-83</b></p>'
+      : '<p style="font-size:.85rem;color:var(--t2);margin-top:10px">Vuelve a intentarlo. Recuerda los 3 criterios de las señales de arriba.</p>'
+    }
+  `;
+  cont.dataset.activo = 'true';
+  Academia.setSesion(SESION_ID, { laboratorio_pwd: { longitud, checksOk, claseTiempo } });
+}
+
+const miniRetoContestados = new Set();
+function responderMiniReto(idxTarjeta, idxOp) {
+  if (miniRetoContestados.has(idxTarjeta)) return;
+  miniRetoContestados.add(idxTarjeta);
+  const c = CONCEPTOS[idxTarjeta];
+  if (!c.miniReto) return;
+  const op = c.miniReto.opciones[idxOp];
+
+  const botones = document.querySelectorAll(`.mini-reto-teoria[data-tarjeta="${idxTarjeta}"] .opcion-mr`);
+  botones.forEach((b, i) => {
+    b.disabled = true;
+    if (c.miniReto.opciones[i].correcta) b.classList.add('correcta');
+    else if (i === idxOp) b.classList.add('incorrecta');
+  });
+  const fb = document.getElementById(`fb-mr-${idxTarjeta}`);
+  fb.className = 'feedback-mr ' + (op.correcta ? 'bien' : 'mal');
+  fb.innerHTML = (op.correcta ? '✅ ' : '❌ ') + op.explica;
+  fb.dataset.activo = 'true';
+}
+
+// ── BLOQUE 3 NIVEL 1: EMPAREJAR (6 PARES) ───────────────────────
+const PARES = [
+  { t: "Phishing", d: "Engaño que se hace pasar por una empresa real para robarte datos." },
+  { t: "Malware", d: "Nombre general para los programas dañinos (virus, troyanos…)." },
+  { t: "Contraseña fuerte", d: "Contraseña larga, única y sin datos personales tuyos." },
+  { t: "2FA", d: "Pedir contraseña + código del móvil para entrar en una cuenta." },
+  { t: "HTTPS", d: "Versión segura del protocolo web: candado y 's' en la URL." },
+  { t: "Fake news", d: "Noticia falsa diseñada para parecer verdadera." }
+];
+let entSeleccionado = null;
+let entAciertos = 0, entFallos = 0;
+const entResueltos = new Set();
+
+function renderEntrenamiento() {
+  const terminos = PARES.map((p, i) => ({ ...p, idx: i })).sort(() => Math.random() - 0.5);
+  const defs = PARES.map((p, i) => ({ ...p, idx: i })).sort(() => Math.random() - 0.5);
+
+  document.getElementById('col-terminos').innerHTML = terminos.map(p =>
+    `<button class="item-ent" data-tipo="termino" data-idx="${p.idx}" onclick="elegirEnt(this)" style="width:100%;text-align:left;margin-bottom:6px;padding:11px 14px;font-family:var(--cond);font-size:.95rem;background:#fff;border:1px solid var(--bd);border-radius:6px;cursor:pointer;letter-spacing:.5px;color:var(--acad-azul-mar);font-weight:600;transition:.15s">${p.t}</button>`
+  ).join('');
+
+  document.getElementById('col-definiciones').innerHTML = defs.map(p =>
+    `<button class="item-ent" data-tipo="def" data-idx="${p.idx}" onclick="elegirEnt(this)" style="width:100%;text-align:left;margin-bottom:6px;padding:11px 14px;font-family:var(--sans);font-size:.88rem;background:#fff;border:1px solid var(--bd);border-radius:6px;cursor:pointer;color:var(--texto);line-height:1.4;transition:.15s">${p.d}</button>`
+  ).join('');
+
+  document.getElementById('ent-aciertos').textContent = '0';
+  document.getElementById('ent-fallos').textContent = '0';
+  document.getElementById('ent-restantes').textContent = PARES.length;
+  document.getElementById('btn-a-nivel2').disabled = true;
+}
+
+function elegirEnt(btn) {
+  if (btn.classList.contains('resuelto')) return;
+  const tipo = btn.dataset.tipo;
+  const idx = parseInt(btn.dataset.idx);
+
+  if (entSeleccionado && entSeleccionado.btn === btn) {
+    resetEstilo(btn);
+    entSeleccionado = null;
+    return;
+  }
+
+  if (!entSeleccionado) {
+    marcarSeleccionado(btn);
+    entSeleccionado = { tipo, idx, btn };
+    return;
+  }
+
+  if (entSeleccionado.tipo === tipo) {
+    resetEstilo(entSeleccionado.btn);
+    marcarSeleccionado(btn);
+    entSeleccionado = { tipo, idx, btn };
+    return;
+  }
+
+  if (entSeleccionado.idx === idx) {
+    entAciertos++;
+    entResueltos.add(idx);
+    [entSeleccionado.btn, btn].forEach(b => {
+      b.style.background = 'var(--acad-verde-cl)';
+      b.style.color = 'var(--acad-verde)';
+      b.style.borderColor = 'var(--acad-verde)';
+      b.classList.add('resuelto');
+      b.style.cursor = 'default';
+    });
+    Academia.mostrarFeedback(document.getElementById('fb-entrenamiento'), 'bien',
+      `<span class="et">✅ Bien</span>Has emparejado "<strong>${PARES[idx].t}</strong>" con su definición.`);
+  } else {
+    entFallos++;
+    [entSeleccionado.btn, btn].forEach(b => {
+      b.style.background = '#FCEAE7';
+      b.style.color = 'var(--acad-rojo)';
+      b.style.borderColor = 'var(--acad-rojo)';
+    });
+    const otros = entSeleccionado.btn;
+    const aqui = btn;
+    setTimeout(() => {
+      [otros, aqui].forEach(b => { if (!b.classList.contains('resuelto')) resetEstilo(b); });
+    }, 1100);
+    Academia.mostrarFeedback(document.getElementById('fb-entrenamiento'), 'mal',
+      `<span class="et">❌ No es ese par</span>Lee la definición con calma y vuelve a probar.`);
+  }
+
+  entSeleccionado = null;
+  document.getElementById('ent-aciertos').textContent = entAciertos;
+  document.getElementById('ent-fallos').textContent = entFallos;
+  document.getElementById('ent-restantes').textContent = PARES.length - entAciertos;
+
+  if (entAciertos === PARES.length) {
+    Academia.mostrarFeedback(document.getElementById('fb-entrenamiento'), 'bien',
+      `<span class="et">🎉 Nivel 1 completado</span>${PARES.length} pares con ${entFallos} fallos. Vamos al nivel 2.`);
+    document.getElementById('btn-a-nivel2').disabled = false;
+  }
+}
+
+function resetEstilo(btn) {
+  btn.style.background = '';
+  btn.style.color = '';
+  btn.style.borderColor = '';
+}
+function marcarSeleccionado(btn) {
+  btn.style.background = 'var(--acad-violeta)';
+  btn.style.color = '#fff';
+  btn.style.borderColor = 'var(--acad-violeta)';
+}
+
+// ── BLOQUE 3 NIVEL 2: VERDADERO / FALSO ─────────────────────────
+const FRASES_VF = [
+  { texto: "HTTPS sirve para guardar cookies en el navegador.", correcta: false,
+    explica: "Falso. HTTPS cifra la comunicación entre tu navegador y la web. Las cookies son otra cosa: pequeños archivos que las webs guardan en tu navegador." },
+  { texto: "El 2FA consiste en pedir DOS contraseñas distintas en la misma pantalla.", correcta: false,
+    explica: "Falso. El 2FA pide tu contraseña + un código (SMS, app, huella). No son dos contraseñas: son DOS pruebas DISTINTAS." },
+  { texto: "Un antivirus protege al 100 % contra cualquier ataque.", correcta: false,
+    explica: "Falso. Un antivirus es UN candado más, no la solución total. Si pinchas un enlace y das tu contraseña tú mismo, el antivirus no puede pararlo." },
+  { texto: "El phishing solo llega por email; nunca por SMS o llamada.", correcta: false,
+    explica: "Falso. Por SMS se llama smishing; por llamada, vishing. Mismo engaño, distinto canal." },
+  { texto: "Una contraseña LARGA es más fuerte que una corta con muchos símbolos raros.", correcta: true,
+    explica: "Verdadero. La longitud importa más que los símbolos. 'caballo-grapa-luna-puente-83' es más fuerte que 'P@ss1!'" },
+  { texto: "Las fake news solo se propagan por redes sociales, nunca por WhatsApp.", correcta: false,
+    explica: "Falso. WhatsApp es uno de los canales MÁS usados para fake news: se reenvían en grupos familiares y entre amigos a toda velocidad." }
+];
+let vfActuales = [];
+let vfAciertos = 0, vfFallos = 0;
+const vfContestadas = new Set();
+
+function mostrarNivel2() {
+  document.getElementById('zona-nivel1').style.display = 'none';
+  document.getElementById('zona-nivel2').style.display = 'block';
+  if (vfActuales.length === 0) renderNivel2();
+}
+
+function volverANivel1() {
+  document.getElementById('zona-nivel2').style.display = 'none';
+  document.getElementById('zona-nivel1').style.display = 'block';
+}
+
+function renderNivel2() {
+  vfActuales = [...FRASES_VF].sort(() => Math.random() - 0.5);
+  const cont = document.getElementById('zona-frases-vf');
+  cont.innerHTML = vfActuales.map((f, i) => `
+    <div class="frase-vf" data-idx="${i}">
+      <div class="texto-frase">${i + 1}. ${f.texto}</div>
+      <div class="vf-botones">
+        <button onclick="responderVF(${i}, true)">✓ Verdadero</button>
+        <button onclick="responderVF(${i}, false)">✗ Falso</button>
+      </div>
+      <div class="explica-vf" id="exp-vf-${i}"></div>
+    </div>
+  `).join('');
+}
+
+function responderVF(idx, valor) {
+  if (vfContestadas.has(idx)) return;
+  vfContestadas.add(idx);
+  const f = vfActuales[idx];
+  const acertado = (valor === f.correcta);
+  if (acertado) vfAciertos++; else vfFallos++;
+
+  const cont = document.querySelector(`.frase-vf[data-idx="${idx}"]`);
+  const botones = cont.querySelectorAll('.vf-botones button');
+  botones.forEach((b, i) => {
+    b.disabled = true;
+    const esCorrectaBtn = (i === 0 && f.correcta) || (i === 1 && !f.correcta);
+    if (esCorrectaBtn) b.classList.add('correcta');
+    else if ((i === 0 && valor) || (i === 1 && !valor)) b.classList.add('incorrecta');
+  });
+  const exp = document.getElementById(`exp-vf-${idx}`);
+  exp.innerHTML = (acertado ? '✅ ' : '❌ ') + f.explica;
+  exp.dataset.activo = 'true';
+
+  document.getElementById('vf-aciertos').textContent = vfAciertos;
+  document.getElementById('vf-fallos').textContent = vfFallos;
+  document.getElementById('vf-restantes').textContent = FRASES_VF.length - vfContestadas.size;
+
+  if (vfContestadas.size === FRASES_VF.length) {
+    document.getElementById('btn-al-reto').disabled = false;
+    otorgarInsignia('analista');
+  }
+}
+
+// ── BLOQUE 4 PARTE A: SITUACIONES (COMPRENSIÓN) ─────────────────
+const SITUACIONES = [
+  {
+    texto: "Te llega un email de 'Spotify' diciendo que tu cuenta se cerrará en 1 hora si no pinchas en el enlace y verificas tu contraseña.",
+    opciones: ["Phishing", "Malware", "Fake news", "Suplantación"],
+    correcta: 0,
+    explica: "Phishing. Te meten prisa + te piden meter contraseña por enlace. Spotify nunca te pediría eso así."
+  },
+  {
+    texto: "Tu padre instala una app que viene de fuera de Play Store y le pide acceso a contactos y SMS.",
+    opciones: ["Cookie", "Posible malware", "2FA", "HTTPS roto"],
+    correcta: 1,
+    explica: "Posible malware. Apps fuera de tiendas oficiales + permisos excesivos son la receta clásica."
+  },
+  {
+    texto: "Estás creando tu Instagram y como contraseña pones 'maria2012' (tu nombre + año de nacimiento).",
+    opciones: ["Es segura por la longitud", "Es insegura: contiene tus datos personales", "Es segura porque tiene número", "Da igual, en Instagram no importa"],
+    correcta: 1,
+    explica: "Insegura. Cualquiera que te conozca un poco la adivinaría. Para una contraseña segura: 15+ caracteres y NUNCA datos personales tuyos."
+  },
+  {
+    texto: "En Snapchat activas que al iniciar sesión te llegue un código por SMS al móvil además de la contraseña.",
+    opciones: ["Phishing", "2FA (verificación en dos pasos)", "Malware", "Cookie"],
+    correcta: 1,
+    explica: "2FA. Dos pruebas en vez de una. Aunque te roben la contraseña, sin el SMS no entran."
+  },
+  {
+    texto: "Vas a comprar unas zapatillas online. La URL pone 'http://shop-deals.com' sin candado, y el navegador avisa 'no seguro'.",
+    opciones: ["Compra rápido antes de que se acabe la oferta", "Esa web NO tiene HTTPS: no metas tarjeta", "Cambia de navegador", "Pon datos falsos para probar"],
+    correcta: 1,
+    explica: "Sin HTTPS, tu tarjeta viaja sin cifrar. Cualquiera en la misma red wifi (por ejemplo en un café) podría leerla. NUNCA pagues en webs http://."
+  },
+  {
+    texto: "Tu primo te manda un vídeo de TikTok donde alguien afirma 'el gobierno va a apagar el WiFi para siempre el viernes'. Lo dice una cuenta anónima.",
+    opciones: ["Compártelo rápido para avisar a todos", "Fake news: verifica en un medio serio antes de compartir", "Es real, es de TikTok", "Reenvía solo a la familia"],
+    correcta: 1,
+    explica: "Fake news clásica: titular escandaloso + fuente anónima + ningún medio serio lo dice. Si no aparece en El País, RTVE o BBC, no lo compartas."
+  },
+  {
+    texto: "🤔 SITUACIÓN AMBIGUA · Un amigo (su número correcto en tu agenda) te manda un WhatsApp: 'Mira qué guay este test que dice a qué famoso te pareces 😎' + enlace. No habíais hablado del tema.",
+    opciones: [
+      "Es seguro: el número es de mi amigo",
+      "Sospechoso: su cuenta podría estar hackeada o suplantada. Pregúntale por OTRO canal antes de pinchar",
+      "Pincho rápido, total es solo un test",
+      "Le respondo pidiendo más datos"
+    ],
+    correcta: 1,
+    explica: "AMBIGUA. El número correcto NO garantiza nada: pueden haberle hackeado WhatsApp, o un atacante puede haber clonado su perfil. Cualquier enlace inesperado (aunque venga de un contacto) debe verificarse por OTRO canal — una llamada normal, por ejemplo. Esto es suplantación de identidad."
+  },
+  {
+    texto: "🤔 SITUACIÓN AMBIGUA · Recibes un email muy bien escrito del IES sobre una excursión. La URL del formulario pone 'https://' con candado. Remitente: 'extraescolares@ies-jdq-info.com'.",
+    opciones: [
+      "Es legítimo porque tiene HTTPS y candado",
+      "HTTPS por sí solo NO garantiza legitimidad: el dominio 'ies-jdq-info.com' NO es el del IES. Sospecha",
+      "Es seguro porque está bien escrito",
+      "Lo abro y lo relleno, son del IES"
+    ],
+    correcta: 1,
+    explica: "AMBIGUA. Esta es la trampa más sofisticada: el HTTPS solo significa que la comunicación está cifrada, no que la web sea legítima. Cualquiera puede comprar un certificado HTTPS para un dominio falso. El dominio real del centro sería algo como 'iesjimenezdequesada.es' o el oficial del centro. Aprende: HTTPS ≠ web de confianza. Mira siempre el dominio."
+  }
+];
+let sitActual = 0;
+let sitAciertos = 0;
+const sitContestadas = new Set();
+
+function renderSituaciones() {
+  const cont = document.getElementById('zona-situaciones');
+  cont.innerHTML = SITUACIONES.map((s, i) => `
+    <div class="situacion" data-idx="${i}" style="${i === 0 ? '' : 'display:none'}">
+      <span class="num-situacion">SITUACIÓN ${i + 1} / ${SITUACIONES.length}</span>
+      <div class="texto-situacion">${s.texto}</div>
+      <div class="opciones-sit" id="opc-sit-${i}">
+        ${s.opciones.map((op, j) => `<button onclick="responderSituacion(${i}, ${j})">${String.fromCharCode(65 + j)}. ${op}</button>`).join('')}
+      </div>
+      <div class="explica-sit" id="exp-sit-${i}"></div>
+      ${i < SITUACIONES.length - 1
+        ? `<div class="barra-acciones centro" style="margin-top:10px" id="nav-sit-${i}" data-mostrar="false"><button class="btn-acad" onclick="siguienteSituacion(${i})">Siguiente situación ▸</button></div>`
+        : `<div class="barra-acciones centro" style="margin-top:10px" id="nav-sit-${i}" data-mostrar="false"><button class="btn-acad oro" onclick="terminarSituaciones()">Continuar a Parte B ▸</button></div>`}
+    </div>
+  `).join('');
+}
+
+function responderSituacion(idx, idxOp) {
+  if (sitContestadas.has(idx)) return;
+  sitContestadas.add(idx);
+  const s = SITUACIONES[idx];
+  const acertado = (idxOp === s.correcta);
+  if (acertado) sitAciertos++;
+
+  const botones = document.querySelectorAll(`#opc-sit-${idx} button`);
+  botones.forEach((b, i) => {
+    b.disabled = true;
+    if (i === s.correcta) b.classList.add('correcta');
+    else if (i === idxOp) b.classList.add('incorrecta');
+  });
+  const exp = document.getElementById(`exp-sit-${idx}`);
+  exp.innerHTML = (acertado ? '✅ Correcto. ' : '❌ Respuesta correcta: ' + String.fromCharCode(65 + s.correcta) + '. ') + s.explica;
+  exp.dataset.activo = 'true';
+  document.getElementById(`nav-sit-${idx}`).dataset.mostrar = 'true';
+  document.getElementById(`nav-sit-${idx}`).style.display = 'flex';
+  document.getElementById('hud-sit-aciertos').textContent = sitAciertos;
+}
+
+function siguienteSituacion(idx) {
+  document.querySelector(`.situacion[data-idx="${idx}"]`).style.display = 'none';
+  document.querySelector(`.situacion[data-idx="${idx + 1}"]`).style.display = 'block';
+  document.getElementById('sit-actual').textContent = idx + 2;
+  document.querySelector(`.situacion[data-idx="${idx + 1}"]`).scrollIntoView({ behavior: 'smooth' });
+}
+
+function terminarSituaciones() {
+  document.getElementById('btn-a-parteB').disabled = false;
+  document.getElementById('btn-a-parteB').scrollIntoView({ behavior: 'smooth' });
+}
+
+function mostrarParteB() {
+  document.getElementById('zona-parteA').style.display = 'none';
+  document.getElementById('zona-parteB').style.display = 'block';
+  renderParteB();
+}
+
+function volverAlEntrenamiento() {
+  Academia.irABloque('entrenamiento');
+}
+
+// BLOQUE 4 PARTE B: REAL / INVENTADO
+const TODOS_TERMINOS = [
+  { nombre: "Phishing", real: true, explica: CONCEPTOS[0].queEs },
+  { nombre: "Malware", real: true, explica: CONCEPTOS[1].queEs },
+  { nombre: "Contraseña segura", real: true, explica: CONCEPTOS[2].queEs },
+  { nombre: "2FA", real: true, explica: CONCEPTOS[3].queEs },
+  { nombre: "HTTPS", real: true, explica: CONCEPTOS[4].queEs },
+  { nombre: "Fake news", real: true, explica: CONCEPTOS[5].queEs },
+  ...FALSOS.map(f => ({ nombre: f.nombre, real: false, explica: f.explica }))
+];
+
+let clasificaciones = {};
+let parteBTerminado = false;
+
+function renderParteB() {
+  const barajados = [...TODOS_TERMINOS].sort(() => Math.random() - 0.5);
+  const grid = document.getElementById('grid-juego');
+  grid.innerHTML = barajados.map(t => `
+    <div class="elemento" data-nombre="${t.nombre}">
+      <div class="nombre">${t.nombre}</div>
+      <div class="veredicto-mini" id="vm-${t.nombre.replace(/\s/g,'_')}"></div>
+      <div class="botonera-elemento">
+        <button class="real" onclick="clasificar('${t.nombre}','real')">REAL</button>
+        <button class="falso" onclick="clasificar('${t.nombre}','falso')">INVENTADO</button>
+      </div>
+    </div>
+  `).join('');
+  clasificaciones = {};
+  parteBTerminado = false;
+  actualizarHud();
+  document.getElementById('btn-veredicto').disabled = true;
+  document.getElementById('resultado-juego').style.display = 'none';
+  document.getElementById('barra-fin-juego').style.display = 'none';
+}
+
+function clasificar(nombre, tipo) {
+  if (parteBTerminado) return;
+  clasificaciones[nombre] = tipo;
+  const el = document.querySelector(`.elemento[data-nombre="${nombre}"]`);
+  el.classList.remove('elegido-real', 'elegido-falso');
+  el.classList.add(tipo === 'real' ? 'elegido-real' : 'elegido-falso');
+  const vm = document.getElementById(`vm-${nombre.replace(/\s/g,'_')}`);
+  if (vm) vm.textContent = tipo === 'real' ? '✓ REAL' : '✗ INVENTADO';
+  actualizarHud();
+}
+
+function actualizarHud() {
+  const clasif = Object.keys(clasificaciones).length;
+  const reales = Object.values(clasificaciones).filter(v => v === 'real').length;
+  const falsos = Object.values(clasificaciones).filter(v => v === 'falso').length;
+  document.getElementById('hud-clasificados').textContent = `${clasif} / ${TODOS_TERMINOS.length}`;
+  document.getElementById('hud-reales').textContent = reales;
+  document.getElementById('hud-falsos').textContent = falsos;
+  document.getElementById('btn-veredicto').disabled = clasif < TODOS_TERMINOS.length;
+}
+
+function emitirVeredicto() {
+  parteBTerminado = true;
+  let aciertos = 0;
+  const items = [];
+
+  TODOS_TERMINOS.forEach(t => {
+    const elegido = clasificaciones[t.nombre];
+    const acertado = (t.real && elegido === 'real') || (!t.real && elegido === 'falso');
+    if (acertado) aciertos++;
+
+    const el = document.querySelector(`.elemento[data-nombre="${t.nombre}"]`);
+    el.classList.remove('elegido-real', 'elegido-falso');
+    el.classList.add(acertado ? 'correcto' : 'incorrecto');
+    const vm = el.querySelector('.veredicto-mini');
+    vm.textContent = t.real
+      ? (acertado ? '✓ ERA REAL' : '✗ ERA REAL')
+      : (acertado ? '✓ ERA INVENTADO' : '✗ ERA INVENTADO');
+
+    items.push({
+      acertado, t,
+      html: `<div class="item-correcciones ${acertado ? 'acierto' : 'fallo'}">
+        <strong>${t.nombre}</strong> ${acertado ? '✓' : '✗'} — era <strong>${t.real ? 'REAL' : 'INVENTADO'}</strong>.
+        <br><span style="font-size:.85rem">${t.explica}</span>
+      </div>`
+    });
+  });
+
+  const totalParteB = TODOS_TERMINOS.length;
+  const scoreTotal = sitAciertos + aciertos;
+  const totalGeneral = SITUACIONES.length + totalParteB;
+
+  let insignia = "Aprendiz del Glosario";
+  if (scoreTotal === totalGeneral) insignia = "Maestro del Glosario";
+  else if (scoreTotal >= totalGeneral - 2) insignia = "Detective del Glosario";
+  else if (scoreTotal >= Math.floor(totalGeneral * 0.6)) insignia = "Investigador del Glosario";
+
+  const res = document.getElementById('resultado-juego');
+  res.innerHTML = `
+    <div class="puntuacion-final">${aciertos} / ${totalParteB}</div>
+    <p style="text-align:center;margin-bottom:8px">Parte A (situaciones): ${sitAciertos} / ${SITUACIONES.length}</p>
+    <p style="text-align:center;margin-bottom:14px;font-family:var(--cond);font-size:1.1rem;color:var(--acad-violeta)">Insignia provisional: <strong>${insignia}</strong></p>
+    <h3 style="font-family:var(--cond);margin-bottom:10px">📊 Correcciones de la Parte B</h3>
+    ${items.map(it => it.html).join('')}
+  `;
+  res.style.display = 'block';
+  document.getElementById('barra-fin-juego').style.display = 'flex';
+
+  Academia.setSesion(SESION_ID, {
+    sitAciertos, sitTotal: SITUACIONES.length,
+    parteB_aciertos: aciertos, parteB_total: totalParteB,
+    scoreTotal, totalGeneral, insignia,
+    entAciertos, entFallos, vfAciertos, vfFallos,
+    microquizAciertos: microquizAciertos.size,
+    microquizTotal: CONCEPTOS.length,
+    tiempoMin: Math.round((Date.now() - tInicio) / 60000)
+  });
+  otorgarInsignia('investigador');
+  res.scrollIntoView({ behavior: 'smooth' });
+}
+
+function reiniciarParteB() { renderParteB(); }
+
+// MINI-INSIGNIAS PROGRESIVAS
+const insigniasGanadas = new Set();
+function otorgarInsignia(nombre) {
+  if (insigniasGanadas.has(nombre)) return;
+  insigniasGanadas.add(nombre);
+  const el = document.querySelector(`.mi-insignia[data-mi="${nombre}"]`);
+  if (el) el.dataset.ganada = 'true';
+
+  const nombres = { cadete: 'Cadete', analista: 'Analista', investigador: 'Investigador', detective: 'Detective' };
+  const emojis = { cadete: '🎖️', analista: '🎖️', investigador: '🎖️', detective: '🏆' };
+  mostrarToast('Has ganado la insignia', `${emojis[nombre]} ${nombres[nombre]}`);
+  Academia.setSesion(SESION_ID, { ['insignia_' + nombre]: true });
+}
+
+function mostrarToast(titulo, nombre) {
+  const t = document.createElement('div');
+  t.className = 'toast-insignia';
+  t.innerHTML = `<div class="emoji">🏅</div><div><div class="titulo">${titulo}</div><div class="nombre">${nombre}</div></div>`;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4200);
+}
+
+// BLOQUE 5: INFORME
+function contarPalabras(texto) {
+  return (texto.trim().match(/\S+/g) || []).length;
+}
+
+function finalizarInforme() {
+  const q1 = document.getElementById('inf-q1').value.trim();
+  const q2 = document.getElementById('inf-q2').value.trim();
+  const q3 = document.getElementById('inf-q3').value.trim();
+
+  if (contarPalabras(q1) < 8 || contarPalabras(q2) < 8 || contarPalabras(q3) < 8) {
+    Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
+      `<span class="et">❌ Informe incompleto</span>Cada respuesta debe tener al menos 8 palabras. Vuelve a leer las preguntas con calma.`);
+    return;
+  }
+
+  const datos = Academia.getSesion(SESION_ID);
+  const scoreReto = (datos.sitAciertos || 0) + (datos.parteB_aciertos || 0);
+  const totalReto = (datos.sitTotal || 0) + (datos.parteB_total || 0);
+  Academia.marcarCompletada(SESION_ID, scoreReto, totalReto);
+  Academia.setSesion(SESION_ID, { q1, q2, q3, informeCompletado: true });
+
+  document.getElementById('res-teoria').textContent = `${datos.microquizAciertos || 0} / ${datos.microquizTotal || 6} microquiz`;
+  document.getElementById('res-entrenamiento').textContent = `${(datos.entAciertos || 0)} pares · ${(datos.vfAciertos || 0)} V/F`;
+  document.getElementById('res-reto').textContent = `${scoreReto} / ${totalReto}`;
+  document.getElementById('res-tiempo').textContent = `${datos.tiempoMin || 0} min`;
+  const porcentaje = totalReto > 0 ? Math.round((scoreReto / totalReto) * 100) : 0;
+  const calif = porcentaje >= 90 ? '🏆 Excelente' : porcentaje >= 75 ? '⭐ Notable' : porcentaje >= 50 ? '👍 Suficiente' : '📚 A repasar';
+  document.getElementById('res-calif').textContent = calif;
+  document.getElementById('insignia-texto').textContent = datos.insignia || 'Aprendiz del Glosario';
+  const cod = Academia.codigoFinalizacion(SESION_ID, scoreReto);
+  document.getElementById('cod-final').textContent = `CÓDIGO: ${cod}`;
+  Academia.setSesion(SESION_ID, { codigo: cod, calificacion: calif });
+  Academia.rellenarIdentidad();
+
+  otorgarInsignia('detective');
+  Academia.irABloque('diploma');
+}
+
+function descargarInsignia() {
+  const datos = Academia.getSesion(SESION_ID);
+  const n1 = Academia.getNombre1() || 'Investigador/a 1';
+  const n2 = Academia.getNombre2() || 'Investigador/a 2';
+  const scoreReto = (datos.sitAciertos || 0) + (datos.parteB_aciertos || 0);
+  const totalReto = (datos.sitTotal || 0) + (datos.parteB_total || 0);
+
+  Academia.descargarDiploma({
+    titulo: 'Detective del Glosario',
+    subtitulo: 'Sesión 1 · Las palabras del oficio · Promoción 2026',
+    icono: '🗂️',
+    insignia: datos.insignia || 'Aprendiz del Glosario',
+    nombres: [n1, n2],
+    sesionNum: 'S1',
+    score: scoreReto,
+    total: totalReto,
+    codigo: datos.codigo,
+    frase: 'Quien sabe nombrar lo que pasa sabe enfrentarse a ello'
+  }, `S01-glosario-${n1.replace(/\s/g, '_')}.png`);
+}
+
+// INICIALIZACIÓN
+window.addEventListener('DOMContentLoaded', () => {
+  renderTarjetas();
+  renderEntrenamiento();
+  renderSituaciones();
+
+  const datos = Academia.getSesion(SESION_ID);
+  ['q1', 'q2', 'q3'].forEach(q => {
+    if (datos[q]) {
+      const ta = document.getElementById(`inf-${q}`);
+      if (ta) {
+        ta.value = datos[q];
+        document.getElementById(`cnt-${q}`).textContent = `${contarPalabras(datos[q])} palabras`;
+      }
+    }
+  });
+
+  document.querySelectorAll('.informe-pregunta textarea').forEach(ta => {
+    ta.addEventListener('input', () => {
+      const palabras = contarPalabras(ta.value);
+      document.getElementById(`cnt-${ta.dataset.q}`).textContent = `${palabras} palabras`;
+      Academia.setSesion(SESION_ID, { [ta.dataset.q]: ta.value });
+    });
+  });
+});
+</script>
+<script id="cyr-common-js">
+/* ═══════════════════════════════════════════════════════════════
+   CyR 1º ESO · IES Jiménez de Quesada · JS común
+   ─────────────────────────────────────────────────────────────
+   Funcionalidades: mini-test, soluciones colapsables, MathJax,
+   scroll suave a anclas con offset por sticky header.
+   ═══════════════════════════════════════════════════════════════ */
+
+(function(){
+  'use strict';
+
+  // 1. Mini-test interactivo (botones de respuesta única)
+  function initMiniTest(){
+    document.querySelectorAll('.test-q').forEach(function(q){
+      var correct = q.dataset.answer;
+      q.querySelectorAll('.test-opt').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(q.classList.contains('answered')) return;
+          q.classList.add('answered');
+          q.querySelectorAll('.test-opt').forEach(function(b){
+            if(b.dataset.opt === correct) b.classList.add('correct');
+            else if(b === btn) b.classList.add('wrong');
+            b.disabled = true;
+          });
+        });
+      });
+    });
+  }
+
+  // 2. Soluciones colapsables
+  function initSolutionsCollapse(){
+    document.addEventListener('click', function(e){
+      if(e.target.classList && e.target.classList.contains('sol-btn')){
+        e.target.classList.toggle('open');
+        if(e.target.nextElementSibling){
+          e.target.nextElementSibling.classList.toggle('show');
+        }
+      }
+    });
+  }
+
+  // 3. MathJax (si está disponible)
+  function initMathJax(){
+    if(typeof MathJax !== 'undefined' && MathJax.typeset){
+      MathJax.typeset();
+    }
+  }
+
+  // 4. Activar el apartado actual en la sidebar al hacer scroll
+  function initSidebarActive(){
+    var sidebar = document.querySelector('.sb-side');
+    if(!sidebar) return;
+    var links = sidebar.querySelectorAll('a[href^="#"]');
+    if(!links.length) return;
+    var sections = [];
+    links.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var s = document.getElementById(id);
+      if(s) sections.push({link:a, section:s});
+    });
+    function update(){
+      var y = window.scrollY + 130;
+      var current = null;
+      sections.forEach(function(p){
+        if(p.section.offsetTop <= y) current = p.link;
+      });
+      links.forEach(function(a){a.classList.remove('activo');});
+      if(current) current.classList.add('activo');
+    }
+    window.addEventListener('scroll', update, {passive:true});
+    update();
+  }
+
+  // Inicialización
+  function init(){
+    initMiniTest();
+    initSolutionsCollapse();
+    initMathJax();
+    initSidebarActive();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+<script id="cyr-academia-js">
+/* ═══════════════════════════════════════════════════════════════
+   Academia Cyber-IES · CyR 1º ESO · IES Jiménez de Quesada
+   Utilidades comunes para todas las sesiones HTML
+   ─ Identidad persistente (nombres del alumno)
+   ─ Guardado por sesión en localStorage
+   ─ Navegación entre los 6 bloques de la plantilla
+   ─ Generación de diploma PNG con canvas
+   ═══════════════════════════════════════════════════════════════ */
+
+const Academia = {
+  // ── IDENTIDAD ─────────────────────────────────────────────────
+  getNombre1() { return localStorage.getItem('academia:nombre1') || ''; },
+  getNombre2() { return localStorage.getItem('academia:nombre2') || ''; },
+  setNombres(n1, n2) {
+    if (n1) localStorage.setItem('academia:nombre1', n1.trim());
+    if (n2) localStorage.setItem('academia:nombre2', n2.trim());
+  },
+  rellenarIdentidad() {
+    document.querySelectorAll('[data-acad="nombre1"]').forEach(el => {
+      if (el.tagName === 'INPUT') el.value = Academia.getNombre1();
+      else el.textContent = Academia.getNombre1() || 'Investigador/a 1';
+    });
+    document.querySelectorAll('[data-acad="nombre2"]').forEach(el => {
+      if (el.tagName === 'INPUT') el.value = Academia.getNombre2();
+      else el.textContent = Academia.getNombre2() || 'Investigador/a 2';
+    });
+  },
+
+  // ── ESTADO POR SESIÓN ────────────────────────────────────────
+  getSesion(id) {
+    try { return JSON.parse(localStorage.getItem(`academia:s:${id}`) || '{}'); }
+    catch (e) { return {}; }
+  },
+  setSesion(id, parcial) {
+    const actual = Academia.getSesion(id);
+    const nuevo = { ...actual, ...parcial, ts: Date.now() };
+    localStorage.setItem(`academia:s:${id}`, JSON.stringify(nuevo));
+    return nuevo;
+  },
+  marcarCompletada(id, score, total) {
+    const all = JSON.parse(localStorage.getItem('academia:completadas') || '{}');
+    all[id] = { ts: Date.now(), score, total };
+    localStorage.setItem('academia:completadas', JSON.stringify(all));
+    Academia.setSesion(id, { completada: true, score, total });
+  },
+  getCompletadas() {
+    return JSON.parse(localStorage.getItem('academia:completadas') || '{}');
+  },
+
+  // ── NAVEGACIÓN ENTRE BLOQUES ─────────────────────────────────
+  bloques: ['mision', 'teoria', 'entrenamiento', 'juego', 'informe', 'diploma'],
+
+  irABloque(id) {
+    document.querySelectorAll('.bloque').forEach(b => b.dataset.activo = 'false');
+    const destino = document.querySelector(`.bloque[data-bloque="${id}"]`);
+    if (destino) destino.dataset.activo = 'true';
+    Academia.actualizarProgreso(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
+
+  actualizarProgreso(idActual) {
+    const idx = Academia.bloques.indexOf(idActual);
+    document.querySelectorAll('.acad-progreso .paso').forEach((paso, i) => {
+      paso.classList.remove('activo', 'completado');
+      if (i < idx) paso.classList.add('completado');
+      else if (i === idx) paso.classList.add('activo');
+    });
+  },
+
+  // ── DIPLOMA PNG (Canvas) ─────────────────────────────────────
+  generarDiplomaPNG(opts) {
+    // opts: { titulo, subtitulo, icono, insignia, nombres, sesionNum, score, total, codigo, frase }
+    const canvas = document.createElement('canvas');
+    const ratio = 2; // doble resolución para verse nítido
+    const W = 1100, H = 800;
+    canvas.width = W * ratio;
+    canvas.height = H * ratio;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(ratio, ratio);
+
+    // Fondo crema
+    ctx.fillStyle = '#FBF5E7';
+    ctx.fillRect(0, 0, W, H);
+
+    // Marco doble dorado
+    ctx.strokeStyle = '#C9A227';
+    ctx.lineWidth = 14;
+    ctx.strokeRect(30, 30, W - 60, H - 60);
+    ctx.lineWidth = 2;
+    ctx.strokeRect(50, 50, W - 100, H - 100);
+
+    // Esquinas decorativas
+    const drawCorner = (x, y, sx, sy) => {
+      ctx.strokeStyle = '#0E2A3C';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(x, y + sy * 50);
+      ctx.lineTo(x, y);
+      ctx.lineTo(x + sx * 50, y);
+      ctx.stroke();
+    };
+    drawCorner(70, 70, 1, 1);
+    drawCorner(W - 70, 70, -1, 1);
+    drawCorner(70, H - 70, 1, -1);
+    drawCorner(W - 70, H - 70, -1, -1);
+
+    // Encabezado: ACADEMIA
+    ctx.fillStyle = '#0E2A3C';
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 18px Georgia';
+    ctx.fillText('· ACADEMIA CYBER-IES ·', W / 2, 110);
+    ctx.font = 'italic 14px Georgia';
+    ctx.fillStyle = '#666';
+    ctx.fillText('IES Jiménez de Quesada · Santa Fe (Granada)', W / 2, 132);
+
+    // Título grande
+    ctx.fillStyle = '#0E2A3C';
+    ctx.font = 'bold 42px Georgia';
+    ctx.fillText(opts.titulo || 'Insignia obtenida', W / 2, 195);
+
+    // Subtítulo en cursiva
+    ctx.font = 'italic 18px Georgia';
+    ctx.fillStyle = '#555';
+    ctx.fillText(opts.subtitulo || '', W / 2, 225);
+
+    // Icono grande
+    ctx.font = '78px serif';
+    ctx.fillText(opts.icono || '🛡️', W / 2, 320);
+
+    // "Se acredita a..."
+    ctx.font = 'italic 18px Georgia';
+    ctx.fillStyle = '#444';
+    ctx.fillText('Se acredita a', W / 2, 365);
+
+    // Nombres en grande
+    ctx.fillStyle = '#0E2A3C';
+    ctx.font = 'bold 32px Georgia';
+    const n1 = opts.nombres?.[0] || 'Investigador/a 1';
+    const n2 = opts.nombres?.[1] || 'Investigador/a 2';
+    ctx.fillText(n1, W / 2, 410);
+    ctx.font = 'italic 18px Georgia';
+    ctx.fillStyle = '#666';
+    ctx.fillText('y', W / 2, 432);
+    ctx.fillStyle = '#0E2A3C';
+    ctx.font = 'bold 32px Georgia';
+    ctx.fillText(n2, W / 2, 462);
+
+    // Insignia (chip dorado)
+    if (opts.insignia) {
+      const insX = W / 2, insY = 520;
+      ctx.fillStyle = '#C9A227';
+      const ancho = Math.min(560, ctx.measureText(opts.insignia).width + 60);
+      ctx.beginPath();
+      ctx.roundRect(insX - ancho / 2, insY - 22, ancho, 44, 22);
+      ctx.fill();
+      ctx.fillStyle = '#0E2A3C';
+      ctx.font = 'bold 18px Georgia';
+      ctx.fillText('INSIGNIA · ' + opts.insignia.toUpperCase(), insX, insY + 6);
+    }
+
+    // Caja de resumen
+    const boxY = 570;
+    ctx.fillStyle = '#FFF';
+    ctx.strokeStyle = '#C9BFA0';
+    ctx.lineWidth = 1;
+    ctx.fillRect(150, boxY, W - 300, 110);
+    ctx.strokeRect(150, boxY, W - 300, 110);
+    ctx.fillStyle = '#333';
+    ctx.font = '15px Georgia';
+    ctx.textAlign = 'left';
+    const fecha = new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' });
+    const left = 175, right = W - 175;
+    let y = boxY + 28;
+    if (opts.sesionNum) {
+      ctx.fillText(`Sesión: ${opts.sesionNum}`, left, y);
+    }
+    ctx.textAlign = 'right';
+    ctx.fillText(`Fecha: ${fecha}`, right, y);
+    y += 28;
+    ctx.textAlign = 'left';
+    if (opts.score !== undefined && opts.total !== undefined) {
+      ctx.fillText(`Puntuación: ${opts.score} / ${opts.total}`, left, y);
+    }
+    ctx.textAlign = 'right';
+    if (opts.codigo) {
+      ctx.font = 'bold 16px monospace';
+      ctx.fillStyle = '#C9A227';
+      ctx.fillText(opts.codigo, right, y);
+    }
+    y += 28;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#666';
+    ctx.font = 'italic 13px Georgia';
+    if (opts.frase) {
+      ctx.fillText('"' + opts.frase + '"', W / 2, y);
+    }
+
+    // Firma sello
+    ctx.fillStyle = '#0E2A3C';
+    ctx.textAlign = 'center';
+    ctx.font = '11px Georgia';
+    ctx.fillText('Manuel Alonso Herrera · Computación y Robótica 1º ESO B', W / 2, H - 70);
+
+    return canvas.toDataURL('image/png');
+  },
+
+  descargarDiploma(opts, nombreArchivo) {
+    const png = Academia.generarDiplomaPNG(opts);
+    const a = document.createElement('a');
+    a.href = png;
+    a.download = nombreArchivo || `diploma-${Date.now()}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  },
+
+  // ── HELPERS DE UI ────────────────────────────────────────────
+  mostrarFeedback(el, tipo, html) {
+    el.className = `feedback ${tipo}`;
+    el.innerHTML = html;
+    el.dataset.activo = 'true';
+  },
+  ocultarFeedback(el) {
+    el.dataset.activo = 'false';
+  },
+
+  // Código único de finalización (4 letras + 4 dígitos basado en hash)
+  codigoFinalizacion(sesion, score) {
+    const datos = `${Academia.getNombre1()}|${Academia.getNombre2()}|${sesion}|${score}|${new Date().toDateString()}`;
+    let hash = 0;
+    for (let i = 0; i < datos.length; i++) {
+      hash = ((hash << 5) - hash) + datos.charCodeAt(i);
+      hash |= 0;
+    }
+    const letras = 'BCDFGHJKLMNPQRSTVWXYZ';
+    let h = Math.abs(hash);
+    let cod = '';
+    for (let i = 0; i < 4; i++) { cod += letras[h % letras.length]; h = Math.floor(h / letras.length); }
+    cod += '-';
+    h = Math.abs(hash);
+    cod += String(h % 10000).padStart(4, '0');
+    return cod;
+  }
+};
+
+// Auto-rellenar identidad al cargar cualquier sesión
+document.addEventListener('DOMContentLoaded', () => {
+  Academia.rellenarIdentidad();
+  // Sincronizar inputs de nombre con localStorage
+  document.querySelectorAll('input[data-acad="nombre1"]').forEach(inp => {
+    inp.addEventListener('input', e => Academia.setNombres(e.target.value, null));
+  });
+  document.querySelectorAll('input[data-acad="nombre2"]').forEach(inp => {
+    inp.addEventListener('input', e => Academia.setNombres(null, e.target.value));
+  });
+});
+
+</script>
+</body>
+</html>

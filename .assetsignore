@@ -19,6 +19,12 @@ documentacion/
 # Material privado de soluciones (no para el público)
 _soluciones/
 
+# Fuente editable de la Academia (se publica ya en /trimestres/t3-ciberseguridad/)
+_academia-v3/
+
+# Versión v2 (cuadernillo) archivada tras la migración a la Academia
+trimestres/t3-ciberseguridad/_legacy-v2/
+
 # Configuración interna de Cloudflare/wrangler
 wrangler.toml
 .wrangler/
