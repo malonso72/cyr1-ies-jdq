@@ -143,7 +143,17 @@ Creada como alternativa a S12 (tema legal árido) sin tocar la S12 original:
 - Enlazada en el hub con tarjeta "↔ S12 · ALTERNATIVA". En sitemap (97 URLs). Auditoría t3: 240 enlaces, 0 rotos. JS verificado con node --check.
 - URL: /trimestres/t3-ciberseguridad/sesiones/s12-alt.html
 - Refinado tras auditoría (94/100): título con gancho "¿Qué harías tú?" (insignia sigue siendo Escudo Digital); teoría reducida de 4 a 3 conceptos; añadida línea de seguridad emocional. El reto es de decisiones con consecuencias + reintento.
-- **Modo ocupación (grupo difícil, sin explicación en clase): anti-tuntún en TODA la sesión.** El microquiz de teoría y el V/F del entrenamiento ahora **exigen acertar para avanzar** (fallar no cuenta, hay que reintentar) — antes solo el reto frenaba el tuntún. Volumen subido para acercarse a ~25-30 min: V/F 6→10, reto 6→8 decisiones. NOTA: este patrón "exigir acierto en microquiz/V/F" de momento solo está en s12-alt; el resto de sesiones (sNN.js) mantienen el microquiz/V/F clásico (se puede replicar si funciona).
+- **Modo ocupación (grupo difícil, sin explicación en clase): anti-tuntún en TODA la sesión.** El microquiz de teoría y el V/F del entrenamiento ahora **exigen acertar para avanzar** (fallar no cuenta, hay que reintentar) — antes solo el reto frenaba el tuntún. Volumen subido para acercarse a ~25-30 min: V/F 6→10, reto 6→8 decisiones. **RACHA PERFECTA EN TODO EL BLOQUE (s02-s18 + s09/s11/s12-alt):** el microquiz de teoría (insignia cadete) y el V/F de entrenamiento (insignia analista) ahora exigen acertar TODAS las preguntas seguidas; un fallo reinicia el bloque (`reiniciarTeoria` → primer concepto; `reiniciarVF` → primera frase). Aplicado vía reemplazo de `responderMicroquiz`/`responderVF` (las 3 variantes del motor) en los 17 sNN.js × 2 ubicaciones (34 archivos), verificado con node --check. S01 (glosario, inline) NO incluida: es a medida, pendiente si se quiere. El aviso "a racha" en pantalla SOLO está puesto en s12-alt; en el resto el alumno lo ve al primer fallo (se puede añadir el banner upfront a todas si interesa).
+
+**Insignia = racha perfecta (escape-room) en s12-alt:** cada bloque de preguntas exige acertar TODAS seguidas; un fallo reinicia el bloque entero. Teoría (3 microquiz) → vuelve al 1er concepto (`reiniciarTeoria`); Entrenamiento (10 V/F) → vuelve a la 1ª frase (`reiniciarVF`); Historia/reto (8 decisiones) → vuelve al principio (`reiniciarHistoria`). Avisos "a racha" en pantalla. ⚠️ Vigilar dureza: la racha de 10 V/F es muy exigente (con explicación al fallar, acaban aprendiéndolas y completando); si frustra demasiado, reducir el nº de V/F o el largo de la racha.
+
+## Ajuste de dificultad — pendiente (curso que viene)
+
+Manuel cree que aún es demasiado fácil llegar al diploma: con la racha perfecta + feedback que revela la respuesta, los alumnos memorizan y la encadenan a la 2ª-3ª vuelta. Decisión: NO tocar de momento. Vías para subir dificultad cuando se retome (recomendado combinar las dos primeras):
+1. **No revelar la respuesta al fallar** (solo "has fallado, vuelves a empezar") → obliga a saberlo, no a memorizar el feedback.
+2. **Banco grande + preguntas al azar** (p. ej. 10 de 25) → cada intento preguntas distintas; memorizar deja de servir. Requiere escribir más preguntas por sesión.
+3. Cronómetro por pregunta (estilo SOC de S3).
+4. Examen final más duro para el diploma (test largo del tirón, no solo el informe).
 
 ## Pendiente / decisiones con Manuel
 

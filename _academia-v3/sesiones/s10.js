@@ -232,6 +232,24 @@ let tarjetaActual = 0;
 const microquizContestados = new Set();
 const microquizAciertos = new Set();
 
+function reiniciarTeoria() {
+  microquizContestados.clear();
+  microquizAciertos.clear();
+  var bf = document.getElementById('barra-fin-teoria'); if (bf) bf.style.display = 'none';
+  tarjetaActual = 0;
+  renderTarjetas();
+  irATarjeta(0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function reiniciarVF() {
+  vfContestadas.clear();
+  vfAciertos = 0;
+  var a = document.getElementById('vf-aciertos'); if (a) a.textContent = '0';
+  var r = document.getElementById('vf-restantes'); if (r) r.textContent = FRASES_VF.length;
+  renderVF();
+  var z = document.getElementById('zona-frases-vf'); if (z) z.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function renderTarjetas() {
   const cont = document.getElementById('tarjetas-teoria');
   cont.innerHTML = CONCEPTOS.map(function(c, i) {
@@ -306,18 +324,30 @@ function irATarjeta(idx) {
 function responderMicroquiz(idx, idxOp) {
   if (microquizContestados.has(idx)) return;
   const c = CONCEPTOS[idx].quiz;
-  microquizContestados.add(idx);
-  if (idxOp === c.correcta) microquizAciertos.add(idx);
-  document.querySelectorAll('#opcionesMq-' + idx + ' button').forEach(function(b, i) { b.disabled = true; if (i === c.correcta) b.classList.add('correcta'); else if (i === idxOp) b.classList.add('incorrecta'); });
   const fb = document.getElementById('fb-mq-' + idx);
-  fb.innerHTML = (idxOp === c.correcta ? '✅ ' : '❌ Correcta: ' + String.fromCharCode(65 + c.correcta) + '. ') + c.explica;
+  const botones = document.querySelectorAll('#opcionesMq-' + idx + ' button');
+  if (idxOp !== c.correcta) {
+    botones.forEach(function(b){ b.disabled = true; });
+    botones[idxOp].classList.add('incorrecta');
+    fb.innerHTML = '❌ Has fallado. Para la insignia hay que acertar los ' + CONCEPTOS.length + ' microquiz SEGUIDOS: vuelves al primer concepto.';
+    fb.dataset.activo = 'true';
+    setTimeout(reiniciarTeoria, 1700);
+    return;
+  }
+  microquizContestados.add(idx);
+  microquizAciertos.add(idx);
+  botones.forEach(function(b, i) { b.disabled = true; if (i === c.correcta) b.classList.add('correcta'); });
+  fb.innerHTML = '✅ ' + c.explica;
   fb.dataset.activo = 'true';
   const btnN = document.getElementById('btn-sub-next-' + idx);
   btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
   btnN.disabled = false;
   document.getElementById('btn-siguiente').disabled = false;
   document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
-  if (idx === CONCEPTOS.length - 1) { document.getElementById('barra-fin-teoria').style.display = 'flex'; otorgarInsignia('cadete'); }
+  if (idx === CONCEPTOS.length - 1) {
+    document.getElementById('barra-fin-teoria').style.display = 'flex';
+    otorgarInsignia('cadete');
+  }
 }
 
 // V/F
@@ -338,24 +368,35 @@ function renderVF() {
 }
 function responderVF(idx, valor) {
   if (vfContestadas.has(idx)) return;
-  vfContestadas.add(idx);
-  const f = vfActuales[idx]; const acertado = (valor === f.correcta);
-  if (acertado) vfAciertos++; else vfFallos++;
+  const f = vfActuales[idx];
+  const acertado = (valor === f.correcta);
   const cont = document.querySelector('.frase-vf[data-idx="' + idx + '"]');
   const botones = cont.querySelectorAll('.vf-botones button');
+  const exp = document.getElementById('exp-vf-' + idx);
+  if (!acertado) {
+    vfFallos++;
+    document.getElementById('vf-fallos').textContent = vfFallos;
+    botones.forEach(function(b){ b.disabled = true; });
+    exp.innerHTML = '❌ Fallaste. ' + f.explica + ' <b>Hay que acertar las ' + FRASES_VF.length + ' SEGUIDAS: vuelves a la primera.</b>';
+    exp.dataset.activo = 'true';
+    setTimeout(reiniciarVF, 1900);
+    return;
+  }
+  vfContestadas.add(idx);
+  vfAciertos++;
   botones.forEach(function(b, i) {
     b.disabled = true;
     const esCorrectaBtn = (i === 0 && f.correcta) || (i === 1 && !f.correcta);
     if (esCorrectaBtn) b.classList.add('correcta');
-    else if ((i === 0 && valor) || (i === 1 && !valor)) b.classList.add('incorrecta');
   });
-  const exp = document.getElementById('exp-vf-' + idx);
-  exp.innerHTML = (acertado ? '✅ ' : '❌ ') + f.explica;
+  exp.innerHTML = '✅ ' + f.explica;
   exp.dataset.activo = 'true';
   document.getElementById('vf-aciertos').textContent = vfAciertos;
-  document.getElementById('vf-fallos').textContent = vfFallos;
   document.getElementById('vf-restantes').textContent = FRASES_VF.length - vfContestadas.size;
-  if (vfContestadas.size === FRASES_VF.length) { document.getElementById('btn-al-reto').disabled = false; otorgarInsignia('analista'); }
+  if (vfContestadas.size === FRASES_VF.length) {
+    document.getElementById('btn-al-reto').disabled = false;
+    otorgarInsignia('analista');
+  }
 }
 
 // Marcar reto como hecho (lanzado por el código específico del reto)

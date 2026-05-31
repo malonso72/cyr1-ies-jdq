@@ -56,6 +56,7 @@
       <p style="margin-top:10px;font-size:14px;color:#9fb3d8;">Marcos y el resto son <b>personajes ficticios</b>. La historia sirve para aprender a protegerte y a ayudar, nunca para señalar a nadie real.</p>
       <div class="campo"><label>Investigador/a 1</label><input type="text" id="nombre1" placeholder="Tu nombre"></div>
       <div class="campo"><label>Investigador/a 2 (opcional)</label><input type="text" id="nombre2" placeholder="Tu pareja"></div>
+      <p style="font-size:13px;color:#ffd166;margin-top:6px;">⚠️ Hay que acertar las decisiones SEGUIDAS. Si fallas una, vuelves al principio de la historia.</p>
       <button class="btn" onclick="empezar()">▶ Empezar la historia</button>
     </div>
   </div>
@@ -268,9 +269,15 @@ function responder(elegida) {
   } else {
     fb.className = 'feedback activo mal';
     fb.innerHTML = '<b class="ko">✗ Esa no es la mejor forma de actuar.</b> ' + e.mal +
-      '<br><button class="btn" onclick="mostrar(' + escenaActual + ')">↻ Volver a intentar este momento</button>';
+      '<br><b>Para el diploma hay que acertar las ' + ESCENAS.length + ' decisiones SEGUIDAS. Vuelves al principio.</b>' +
+      '<br><button class="btn" onclick="reiniciarHistoria()">↺ Volver a empezar la historia</button>';
   }
   fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function reiniciarHistoria() {
+  aciertos = 0;
+  mostrar(0);
 }
 
 function mostrarFinal() {

@@ -106,6 +106,24 @@ let tarjetaActual = 0;
 const microquizContestados = new Set();
 const microquizAciertos = new Set();
 
+function reiniciarTeoria() {
+  microquizContestados.clear();
+  microquizAciertos.clear();
+  var bf = document.getElementById('barra-fin-teoria'); if (bf) bf.style.display = 'none';
+  tarjetaActual = 0;
+  renderTarjetas();
+  irATarjeta(0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function reiniciarVF() {
+  vfContestadas.clear();
+  vfAciertos = 0;
+  var a = document.getElementById('vf-aciertos'); if (a) a.textContent = '0';
+  var r = document.getElementById('vf-restantes'); if (r) r.textContent = FRASES_VF.length;
+  renderVF();
+  var z = document.getElementById('zona-frases-vf'); if (z) z.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function renderTarjetas() {
   const cont = document.getElementById('tarjetas-teoria');
   cont.innerHTML = CONCEPTOS.map(function(c, i) {
@@ -200,11 +218,12 @@ function responderMicroquiz(idx, idxOp) {
   const fb = document.getElementById('fb-mq-' + idx);
   const botones = document.querySelectorAll('#opcionesMq-' + idx + ' button');
   if (idxOp !== c.correcta) {
-    // Fallo: marca solo esa opción y deja reintentar (NO avanza)
+    // Fallo: se pierde la racha de la insignia — vuelta al primer concepto
+    botones.forEach(function(b){ b.disabled = true; });
     botones[idxOp].classList.add('incorrecta');
-    botones[idxOp].disabled = true;
-    fb.innerHTML = '❌ Esa no es. Lee otra vez con calma y prueba con otra opción.';
+    fb.innerHTML = '❌ Has fallado. Para la insignia hay que acertar los ' + CONCEPTOS.length + ' microquiz SEGUIDOS: vuelves al primer concepto.';
     fb.dataset.activo = 'true';
+    setTimeout(reiniciarTeoria, 1700);
     return;
   }
   // Acierto
@@ -253,11 +272,13 @@ function responderVF(idx, valor) {
   const botones = cont.querySelectorAll('.vf-botones button');
   const exp = document.getElementById('exp-vf-' + idx);
   if (!acertado) {
-    // Fallo: muestra el porqué y deja reintentar (no cuenta hasta acertar)
+    // Fallo: se pierde la racha — vuelta a la primera frase
     vfFallos++;
     document.getElementById('vf-fallos').textContent = vfFallos;
-    exp.innerHTML = '❌ Aún no. ' + f.explica + ' <b>Vuelve a intentarlo.</b>';
+    botones.forEach(function(b){ b.disabled = true; });
+    exp.innerHTML = '❌ Fallaste. ' + f.explica + ' <b>Hay que acertar las ' + FRASES_VF.length + ' SEGUIDAS: vuelves a la primera.</b>';
     exp.dataset.activo = 'true';
+    setTimeout(reiniciarVF, 1900);
     return;
   }
   // Acierto: bloquea y cuenta
