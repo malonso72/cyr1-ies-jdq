@@ -142,6 +142,7 @@ Creada como alternativa a S12 (tema legal árido) sin tocar la S12 original:
 - Candado de finalización aplicado (botón bloqueado hasta completar el reto).
 - Enlazada en el hub con tarjeta "↔ S12 · ALTERNATIVA". En sitemap (97 URLs). Auditoría t3: 240 enlaces, 0 rotos. JS verificado con node --check.
 - URL: /trimestres/t3-ciberseguridad/sesiones/s12-alt.html
+- Refinado tras auditoría (94/100): título con gancho "¿Qué harías tú?" (insignia sigue siendo Escudo Digital); teoría reducida de 4 a 3 conceptos (fusión "qué es" + "cómo se reconoce") para dar más peso a la historia; añadida línea de seguridad emocional ("si algo te recuerda a algo real, habla conmigo al terminar"). El reto es de decisiones con consecuencias + reintento (no es un cuestionario disfrazado).
 
 ## Pendiente / decisiones con Manuel
 

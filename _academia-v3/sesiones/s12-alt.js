@@ -4,45 +4,24 @@ const tInicio = Date.now();
 
 const CONCEPTOS = [
   {
-    nombre: "¿Qué es el ciberacoso?",
-    queEs: "Es usar el móvil o internet para hacer daño a alguien de forma REPETIDA: insultar, reírse, excluir, difundir rumores o fotos, amenazar… Lo que lo hace tan duro es que no para al salir del instituto: te sigue a casa, al móvil, a todas horas. No es 'una broma': a la persona que lo sufre le hace daño de verdad.",
-    ejemplo: { tipo: 'peligroso', texto: "⚠️ En el grupo de clase varios empiezan a llamar 'pringado' a un compañero por una foto, otros lo reenvían y se ríen. No es gracioso: es ciberacoso." },
+    nombre: "Qué es el ciberacoso (y cómo se reconoce)",
+    queEs: "Es usar el móvil o internet para hacer daño a alguien de forma REPETIDA: insultar, reírse, EXCLUIR a propósito, difundir rumores o fotos sin permiso, crear cuentas falsas para humillar (suplantación) o amenazar. Lo más duro es que no para al salir del instituto: te sigue al móvil, a todas horas. No es 'una broma': hace daño de verdad.",
+    ejemplo: { tipo: 'peligroso', texto: "\u26a0\ufe0f En el grupo de clase varios empiezan a llamar 'pringado' a un compañero por una foto, otros la reenvían y se ríen. Y alguien crea una cuenta falsa con su nombre. Todo eso es ciberacoso." },
     senales: [
-      "Es repetido en el tiempo, no un comentario aislado.",
-      "Busca hacer daño, humillar o dejar fuera a alguien.",
-      "Ocurre por chats, redes, juegos online… y no da tregua."
-    ],
-    quiz: {
-      p: "¿Qué diferencia al ciberacoso de una discusión normal?",
-      opciones: [
-        "Que ocurre una sola vez",
-        "Que es repetido y busca hacer daño o humillar a alguien",
-        "Que solo pasa entre adultos",
-        "Que siempre es en persona, no por el móvil"
-      ],
-      correcta: 1,
-      explica: "El ciberacoso es repetido y busca dañar. Por eso no es 'una broma': hace daño real y hay que pararlo."
-    }
-  },
-  {
-    nombre: "Cómo lo reconoces (sus formas)",
-    queEs: "El ciberacoso tiene muchas caras: insultos y burlas en chats, EXCLUIR a alguien a propósito (sacarlo de grupos), difundir rumores o fotos sin permiso, crear cuentas falsas para humillar (suplantación), o amenazar. Reconocerlo es el primer paso para frenarlo, lo sufras tú o lo veas en otra persona.",
-    ejemplo: { tipo: 'peligroso', texto: "⚠️ Alguien crea una cuenta falsa con la foto de un compañero para escribir tonterías 'en su nombre'. Eso es suplantación, una forma de ciberacoso." },
-    senales: [
-      "Insultos, motes o burlas repetidas en chats o redes.",
-      "Dejar fuera a propósito o difundir rumores/fotos sin permiso.",
-      "Cuentas falsas que suplantan a alguien para humillarlo."
+      "Es REPETIDO en el tiempo y busca hacer daño o humillar.",
+      "Toma muchas formas: insultos, exclusión, rumores, fotos sin permiso, cuentas falsas.",
+      "Ocurre por chats, redes o juegos online… y no da tregua ni en casa."
     ],
     quiz: {
       p: "¿Cuál de estas situaciones es ciberacoso?",
       opciones: [
         "Discrepar con un amigo una vez y luego arreglarlo",
         "Crear una cuenta falsa con la foto de un compañero para reírse de él",
-        "No contestar un mensaje porque estabas dormido",
-        "Que te ganen en un videojuego online"
+        "Que te ganen en un videojuego online",
+        "No contestar un mensaje porque estabas dormido"
       ],
       correcta: 1,
-      explica: "Suplantar a alguien con una cuenta falsa para humillarlo es ciberacoso. Reconocerlo es el primer paso para actuar."
+      explica: "El ciberacoso es repetido y busca dañar o humillar (aquí, suplantar a alguien con una cuenta falsa). No es una 'broma'."
     }
   },
   {
