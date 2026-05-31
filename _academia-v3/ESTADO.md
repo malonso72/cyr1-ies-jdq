@@ -147,7 +147,17 @@ Creada como alternativa a S12 (tema legal árido) sin tocar la S12 original:
 
 **Insignia = racha perfecta (escape-room) en s12-alt:** cada bloque de preguntas exige acertar TODAS seguidas; un fallo reinicia el bloque entero. Teoría (3 microquiz) → vuelve al 1er concepto (`reiniciarTeoria`); Entrenamiento (10 V/F) → vuelve a la 1ª frase (`reiniciarVF`); Historia/reto (8 decisiones) → vuelve al principio (`reiniciarHistoria`). Avisos "a racha" en pantalla. ⚠️ Vigilar dureza: la racha de 10 V/F es muy exigente (con explicación al fallar, acaban aprendiéndolas y completando); si frustra demasiado, reducir el nº de V/F o el largo de la racha.
 
-## Modelo "2ª oportunidad + nota" — PILOTO en S12-alt (hecho)
+## INTERCAMBIO S12 ↔ S12-alt (hecho)
+
+A petición de Manuel, el **Ciberacoso pasa a ser la S12 principal** y el **Tribunal Digital queda como alternativa**:
+- `sesiones/s12.html`+`s12.js` = Ciberacoso "¿Qué harías tú?" (SESION_ID `s12`, modelo 2ª oportunidad+nota), reto `retos/s12-reto-ciberacoso.html`.
+- `sesiones/s12-alt.html`+`s12-alt.js` = Tribunal Digital (SESION_ID `s12alt`, modelo racha), reto `retos/s12alt-reto-dpo.html`.
+- Retos renombrados (tokens reto↔envoltorio actualizados); retos viejos (`s12alt-reto-ciberacoso.html`, `s12-reto-dpo.html`) BORRADOS. Nota: el prefijo del nombre de archivo de los retos quedó "cruzado" (cosmético, invisible al alumno).
+- Hub: tarjeta principal S12 = Ciberacoso; tarjeta "↔ S12 · ALTERNATIVA" = Tribunal. S11 "próximo paso" → "¿Qué harías tú?".
+- Sin cambios de URL de sesión (s12.html / s12-alt.html), así que el enlace de Moodle a s12.html ahora abre el Ciberacoso. Verificado: 240 enlaces 0 rotos, scripts node --check OK.
+- (Referencias a los nombres viejos solo quedan en `adaptar_reto_s12.py` —script legacy— y en notas previas de este ESTADO.)
+
+## Modelo "2ª oportunidad + nota" — PILOTO en S12 (antes S12-alt)
 
 Sustituye en S12-alt al modelo "1 fallo = reinicio". Por cada pregunta (teoría, V/F y cada decisión del reto):
 - Acierto a la 1ª → sigue, sin penalizar.

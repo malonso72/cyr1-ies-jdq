@@ -825,8 +825,8 @@ function reiniciarTribunal() {
 // ============ FINAL ============
 function mostrarFinal() {
   cambiarPantalla('pantalla-final');
-  try{ localStorage.setItem('academia:reto:s12:done','1'); }catch(e){}
-  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s12','*'); }catch(e){}
+  try{ localStorage.setItem('academia:reto:s12alt:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s12alt','*'); }catch(e){}
   const ahora = new Date();
   const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
   document.getElementById('nombres-finales').textContent = `${nombre1}  ·  ${nombre2}`;

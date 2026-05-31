@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Escudo Digital · Ciberacoso · Sesión 12-alt</title>
+<title>Escudo Digital · Ciberacoso · Sesión 12</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: #14213d; color: #e8eefc; line-height: 1.55; padding: 18px; }
@@ -47,7 +47,7 @@
 <body>
 <div class="wrap">
   <h1>🛡️ Escudo Digital</h1>
-  <p class="subtitulo">Ciberacoso: qué hacer si te pasa (o si lo ves) · Sesión 12-alt</p>
+  <p class="subtitulo">Ciberacoso: qué hacer si te pasa (o si lo ves) · Sesión 12</p>
 
   <!-- INICIO -->
   <div class="pantalla activa" id="p-inicio">
@@ -290,8 +290,8 @@ function reiniciarHistoria() {
 
 function mostrarFinal() {
   cambiar('p-final');
-  try { localStorage.setItem('academia:reto:s12alt:done', '1'); localStorage.setItem('academia:reto:s12alt:seg', String(segReto)); } catch (e) {}
-  try { if (window.parent && window.parent !== window) window.parent.postMessage('academia:reto-completado:s12alt:' + segReto, '*'); } catch (e) {}
+  try { localStorage.setItem('academia:reto:s12:done', '1'); localStorage.setItem('academia:reto:s12:seg', String(segReto)); } catch (e) {}
+  try { if (window.parent && window.parent !== window) window.parent.postMessage('academia:reto-completado:s12:' + segReto, '*'); } catch (e) {}
 }
 
 function descargarDiploma() {

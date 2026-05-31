@@ -1,119 +1,113 @@
-/* S12-alt · Ciberacoso: qué hacer si te pasa · Academia Cyber-IES */
+/* S12 · Tribunal Digital · Academia Cyber-IES */
 const SESION_ID = 's12alt';
 const tInicio = Date.now();
 
 const CONCEPTOS = [
   {
-    nombre: "Qué es el ciberacoso (y cómo se reconoce)",
-    queEs: "Es usar el móvil o internet para hacer daño a alguien de forma REPETIDA: insultar, reírse, EXCLUIR a propósito, difundir rumores o fotos sin permiso, crear cuentas falsas para humillar (suplantación) o amenazar. Lo más duro es que no para al salir del instituto: te sigue al móvil, a todas horas. No es 'una broma': hace daño de verdad.",
-    ejemplo: { tipo: 'peligroso', texto: "\u26a0\ufe0f En el grupo de clase varios empiezan a llamar 'pringado' a un compañero por una foto, otros la reenvían y se ríen. Y alguien crea una cuenta falsa con su nombre. Todo eso es ciberacoso." },
+    nombre: "¿Qué es el Derecho al Olvido?",
+    queEs: "Es tu poder para pedir a Google (u otros buscadores) que YA NO MUESTRE ciertas cosas sobre ti cuando alguien busca tu nombre. La información NO desaparece de internet del todo: sigue donde se publicó, pero Google deja de enseñártela en los resultados.",
+    ejemplo: { tipo: 'bueno', texto: "✅ Buscas tu nombre en Google y aparece un vídeo ridículo tuyo de cuando tenías 9 años. Pides Derecho al Olvido. Google evalúa tu caso y, si procede, deja de mostrar ese vídeo al buscar tu nombre." },
     senales: [
-      "Es REPETIDO en el tiempo y busca hacer daño o humillar.",
-      "Toma muchas formas: insultos, exclusión, rumores, fotos sin permiso, cuentas falsas.",
-      "Ocurre por chats, redes o juegos online… y no da tregua ni en casa."
+      "Es un derecho que existe en toda la Unión Europea desde 2014.",
+      "Lo pides rellenando un formulario en Google: ellos deciden caso a caso.",
+      "Si Google te dice NO, puedes recurrir a la AEPD (la agencia que protege tus datos)."
     ],
     quiz: {
-      p: "¿Cuál de estas situaciones es ciberacoso?",
+      p: "¿Qué hace exactamente el Derecho al Olvido?",
       opciones: [
-        "Discrepar con un amigo una vez y luego arreglarlo",
-        "Crear una cuenta falsa con la foto de un compañero para reírse de él",
-        "Que te ganen en un videojuego online",
-        "No contestar un mensaje porque estabas dormido"
+        "Borra la información de internet por completo",
+        "Hace que Google deje de mostrar esa información al buscar tu nombre",
+        "Te paga una indemnización automática",
+        "Sustituye los datos por otros"
       ],
       correcta: 1,
-      explica: "El ciberacoso es repetido y busca dañar o humillar (aquí, suplantar a alguien con una cuenta falsa). No es una 'broma'."
+      explica: "Solo el buscador deja de mostrar el resultado al buscar TU nombre. La información sigue existiendo donde se publicó. Pero deja de encontrarte."
     }
   },
   {
-    nombre: "Qué hacer: PARA · GUARDA · BLOQUEA · CUENTA",
-    queEs: "Si te pasa a ti, este es el plan: 1) PARA: no respondas al que acosa (responder es lo que busca). 2) GUARDA: haz capturas con fecha y nombre de usuario (son la prueba). 3) BLOQUEA y REPORTA a la persona/cuenta en la app. 4) CUENTA: habla con un adulto de confianza. Pedir ayuda NO es chivarse: es lo valiente.",
-    ejemplo: { tipo: 'bueno', texto: "✅ Te llegan mensajes crueles de un desconocido. No respondes, haces capturas, bloqueas el número y se lo cuentas a tu tutora. Eso es actuar bien." },
+    nombre: "✅ Cuándo SÍ se borra",
+    queEs: "Cuando la información es ANTIGUA, te perjudica HOY y ya no le importa a nadie más. Especialmente si la subió otra persona sin tu permiso. La regla mental es: si han pasado años, no hay interés público actual y solo te hace daño a ti → suele borrarse.",
+    ejemplo: { tipo: 'bueno', texto: "✅ Hace 8 años, tú con 9 años saliste haciendo el tonto en un vídeo que subió un compañero a YouTube. Hoy buscas trabajo de monitor de campamento y el vídeo te perjudica. SE BORRA." },
     senales: [
-      "PARA: no contestes ni te vengues; eso suele alargar el acoso.",
-      "GUARDA pruebas antes de borrar nada.",
-      "BLOQUEA, REPORTA a la app y CUÉNTASELO a un adulto de confianza."
+      "Han pasado años desde que se publicó.",
+      "Ya no hay interés periodístico actual.",
+      "Te perjudica en tu vida actual (estudios, relaciones, trabajo)."
     ],
     quiz: {
-      p: "Recibes mensajes de acoso de un número desconocido. ¿Cuál es el primer paso?",
-      opciones: [
-        "Responder enfadado/a para que vea que no te callas",
-        "No responder, guardar capturas, bloquear y contárselo a un adulto",
-        "Reenviarlo a tus amigos para que opinen",
-        "Borrarlo todo y no decir nada"
-      ],
-      correcta: 1,
-      explica: "PARA · GUARDA · BLOQUEA · CUENTA. Responder da fuerza al acosador; borrar elimina las pruebas que necesitas."
+      p: "Hace 8 años, Pablo (con 19 años) puso un comentario violento en un foro. Hoy busca trabajo. ¿Se borra?",
+      opciones: ["SÍ se borra: información antigua sin interés actual", "NO se borra: la puso él voluntariamente", "Solo si pide perdón a la víctima"],
+      correcta: 0,
+      explica: "SÍ. Hace 8 años + comentario menor + le perjudica hoy. Caso clásico de borrado."
     }
   },
   {
-    nombre: "El testigo que ayuda (tú puedes parar esto)",
-    queEs: "La mayoría de las veces hay testigos: gente que LO VE. Si los testigos se ríen o reenvían, el acoso crece. Si los testigos no reenvían, apoyan a la víctima y avisan a un adulto, el acoso suele PARAR. No hace falta ser un héroe: basta con no seguir la corriente y tender una mano.",
-    ejemplo: { tipo: 'bueno', texto: "✅ Ves que se meten con un compañero en el grupo. No reenvías, le escribes en privado '¿estás bien?' y avisas a un profe. Has hecho de Escudo." },
+    nombre: "❌ Cuándo NO se borra",
+    queEs: "Cuando la información es VERAZ, ACTUAL e interesa a la comunidad. Sobre todo si la persona tiene cargo público (alcalde, ministro, famoso) y la información es sobre lo que hace en su cargo. Aquí pesa más el derecho de la gente a saber que el deseo personal de borrar.",
+    ejemplo: { tipo: 'peligroso', texto: "⚠️ Un alcalde EN ACTIVO pide borrar tweets suyos hablando de su programa político. NO SE BORRA: hay interés público en saber qué dijo y qué hace alguien que nos representa." },
     senales: [
-      "No te rías ni reenvíes: eso alimenta el acoso.",
-      "Apoya a quien lo sufre (aunque sea en privado).",
-      "Avisa a un adulto: un testigo que actúa puede pararlo."
+      "La persona tiene proyección pública (alcalde, famoso, CEO).",
+      "La información es sobre lo que hace EN PÚBLICO (no su vida privada).",
+      "Existe interés legítimo de la gente en conocerla."
     ],
     quiz: {
-      p: "Ves que en el grupo se ríen y reenvían burlas de un compañero. ¿Qué es lo mejor?",
+      p: "Manuel es CEO de una empresa grande. Una web publica que ganó 480.000€ el año pasado (dato VERAZ del Registro Mercantil, que es público). Pide borrar el dato. ¿Se borra?",
+      opciones: ["SÍ se borra: es su vida privada", "NO se borra: dato veraz, de fuente pública y con interés social", "Solo si la empresa quiebra"],
+      correcta: 1,
+      explica: "NO se borra. El Registro Mercantil es PÚBLICO por ley, el dato es VERDAD y un CEO tiene proyección pública. La gente tiene derecho a saberlo."
+    }
+  },
+  {
+    nombre: "⚠️ Casos especiales: lo falso no se 'olvida'",
+    queEs: "El Derecho al Olvido es para información VERAZ que ya no merece estar. Si la información es FALSA (un bulo, una mentira), no se va por Derecho al Olvido: se va por otro camino: denuncia por difamación, rectificación, o directamente borrarlo de la web original.",
+    ejemplo: { tipo: 'peligroso', texto: "⚠️ Una web publica una mentira sobre ti: 'María copió en el examen' cuando NO copiaste. Esto NO es Derecho al Olvido (porque la información es FALSA). Es DIFAMACIÓN: se denuncia y se exige rectificación." },
+    senales: [
+      "Si lo que dicen sobre ti es VERDAD pero ya no debería estar → Derecho al Olvido.",
+      "Si lo que dicen sobre ti es MENTIRA → es difamación, otro camino legal.",
+      "Las sentencias firmes recientes también NO se borran: protegen a futuras víctimas."
+    ],
+    quiz: {
+      p: "Una web publica una mentira sobre ti: dice que te suspendieron por copiar, cuando no es verdad. ¿Es Derecho al Olvido?",
       opciones: [
-        "Reenviarlo también, total ya lo hacen todos",
-        "No reenviar, apoyar al compañero y avisar a un adulto",
-        "Reírte para no quedar mal con el grupo",
-        "Mirar sin hacer nada"
+        "Sí, basta con pedir a Google que lo borre",
+        "No: lo falso no se olvida, se rectifica o denuncia (difamación)",
+        "Solo si tienes pruebas escritas"
       ],
       correcta: 1,
-      explica: "El testigo que NO reenvía, apoya y avisa es clave: ahí es donde más casos de ciberacoso se frenan."
+      explica: "Lo falso NO se va por Derecho al Olvido. Para mentiras hay otra ruta: pedir rectificación, denunciar por difamación, o exigir a la web que lo borre del origen."
     }
   }
 ];
 
+// Mini-casos del juez (6 frases V/F · ¿SE BORRA o NO SE BORRA?)
 const FRASES_VF = [
-  { texto: "El ciberacoso es repetido y busca hacer daño; por eso no es 'solo una broma'.",
+  { texto: "Pedro pide borrar un vídeo suyo bailando de hace 10 años (cuando tenía 7) que subió su prima sin permiso. Hoy le da vergüenza.",
     correcta: true,
-    explica: "Verdadero. Es repetido y busca humillar o dañar. Llamarlo 'broma' quita importancia a algo que hace daño real." },
-  { texto: "Si te acosan por mensajes, lo mejor es responder con otro insulto para que vean que no te callas.",
+    explica: "SE BORRA. Antiguo + lo subió otra persona sin su permiso + sin interés público actual. Caso clásico." },
+  { texto: "Una alcaldesa EN ACTIVO pide borrar tweets suyos donde hablaba de su programa político como candidata.",
     correcta: false,
-    explica: "Falso. Responder es lo que busca el acosador y suele alargarlo. El primer paso es PARAR: no responder." },
-  { texto: "Antes de bloquear o borrar, conviene hacer capturas de los mensajes como prueba.",
-    correcta: true,
-    explica: "Verdadero. GUARDA las pruebas (capturas con fecha y usuario) antes de borrar: hacen falta para denunciar y pedir ayuda." },
-  { texto: "Contarle a un adulto que están acosando a alguien es 'de chivatos'.",
+    explica: "NO SE BORRA. Hay interés público actual: la gente tiene derecho a saber qué dijo alguien que la representa." },
+  { texto: "Una web publica una MENTIRA sobre ti: dice que te suspendieron por copiar (cosa que no es cierta). Pides Derecho al Olvido.",
     correcta: false,
-    explica: "Falso. Pedir ayuda ante un acoso NO es chivarse: es protegerte (o proteger a otra persona) y es lo valiente." },
-  { texto: "Crear una cuenta falsa con la foto de un compañero para humillarlo es una forma de ciberacoso.",
+    explica: "NO SE BORRA por Derecho al Olvido. Lo FALSO no se 'olvida': se denuncia por difamación o se pide rectificación a la web. Otro camino." },
+  { texto: "Una foto tuya de la playa con 5 años, que subió una tía sin pedir permiso a tus padres, sigue saliendo en Google Imágenes. Pides borrarla.",
     correcta: true,
-    explica: "Verdadero. Es suplantación de identidad, una forma de ciberacoso. Se reporta a la plataforma y se avisa a un adulto." },
-  { texto: "Si soy testigo, reírme y reenviar las burlas no afecta a la víctima.",
+    explica: "SE BORRA. Antigua + sin permiso + dato personal sin interés público. Caso típico." },
+  { texto: "Carlos fue CONDENADO por estafa hace 6 meses (sentencia firme reciente). Pide borrar la noticia.",
     correcta: false,
-    explica: "Falso. Reírse y reenviar hace MÁS daño y anima al acosador. El testigo que apoya y avisa es quien ayuda a parar el acoso." },
-  { texto: "Bloquear a quien te acosa es 'de cobardes'.",
+    explica: "NO SE BORRA. Es reciente, hay interés social (proteger a futuros clientes y avisar a la comunidad). Habría que esperar bastante tiempo." },
+  { texto: "El sueldo de un CEO de una empresa importante aparece en el Registro Mercantil (que es público por ley). Él pide borrarlo de Google.",
     correcta: false,
-    explica: "Falso. Bloquear es una herramienta válida y recomendable: te quita de encima al acosador y no es ninguna cobardía." },
-  { texto: "La mayoría del ciberacoso ocurre entre personas que se conocen (clase, instituto), no entre desconocidos.",
-    correcta: true,
-    explica: "Verdadero. Casi siempre el acoso viene de gente del entorno. Por eso cuesta tanto contarlo… y por eso es tan importante hacerlo." },
-  { texto: "Reenviar una captura humillante 'solo a un amigo' también es participar en el acoso.",
-    correcta: true,
-    explica: "Verdadero. Cada reenvío amplía el daño. No difundir ya es ayudar." },
-  { texto: "Si alguien sube una foto tuya sin permiso para burlarse, puedes pedir que la borren y reportarla a la app.",
-    correcta: true,
-    explica: "Verdadero. Tienes derecho a tu imagen: puedes exigir que la quiten, reportarla y avisar a un adulto." }
+    explica: "NO SE BORRA. El Registro Mercantil es PÚBLICO por ley. La gente tiene derecho a consultarlo." }
 ];
 
-// ── TEORÍA ───────────────────────────────────────────────────────
+// ── TEORÍA (versión compacta) ───────────────────────────────────
 let tarjetaActual = 0;
 const microquizContestados = new Set();
 const microquizAciertos = new Set();
-let segTeoria = 0, segVF = 0, segReto = 0;
-let mqFalladas = new Set(), vfFalladas = new Set(), retoCompletado = false;
-function finTeoria(){ if (segTeoria === 0) otorgarInsignia('cadete'); }
-function finVF(){ if (segVF === 0) otorgarInsignia('analista'); }
 
 function reiniciarTeoria() {
   microquizContestados.clear();
   microquizAciertos.clear();
-  segTeoria = 0; mqFalladas.clear();
   var bf = document.getElementById('barra-fin-teoria'); if (bf) bf.style.display = 'none';
   tarjetaActual = 0;
   renderTarjetas();
@@ -123,7 +117,6 @@ function reiniciarTeoria() {
 function reiniciarVF() {
   vfContestadas.clear();
   vfAciertos = 0;
-  segVF = 0; vfFalladas.clear();
   var a = document.getElementById('vf-aciertos'); if (a) a.textContent = '0';
   var r = document.getElementById('vf-restantes'); if (r) r.textContent = FRASES_VF.length;
   renderVF();
@@ -214,7 +207,7 @@ function irATarjeta(idx) {
   document.getElementById('btn-siguiente').disabled = !microquizContestados.has(idx);
   if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) {
     document.getElementById('barra-fin-teoria').style.display = 'flex';
-    finTeoria();
+    otorgarInsignia('cadete');
   }
 }
 
@@ -223,29 +216,28 @@ function responderMicroquiz(idx, idxOp) {
   const c = CONCEPTOS[idx].quiz;
   const fb = document.getElementById('fb-mq-' + idx);
   const botones = document.querySelectorAll('#opcionesMq-' + idx + ' button');
-  if (idxOp === c.correcta) {
-    microquizContestados.add(idx);
-    microquizAciertos.add(idx);
-    botones.forEach(function(b, i) { b.disabled = true; if (i === c.correcta) b.classList.add('correcta'); });
-    fb.innerHTML = '✅ ' + c.explica;
+  if (idxOp !== c.correcta) {
+    botones.forEach(function(b){ b.disabled = true; });
+    botones[idxOp].classList.add('incorrecta');
+    fb.innerHTML = '❌ Has fallado. Para la insignia hay que acertar los ' + CONCEPTOS.length + ' microquiz SEGUIDOS: vuelves al primer concepto.';
     fb.dataset.activo = 'true';
-    const btnN = document.getElementById('btn-sub-next-' + idx);
-    btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
-    btnN.disabled = false;
-    document.getElementById('btn-siguiente').disabled = false;
-    document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
-    if (idx === CONCEPTOS.length - 1) {
-      document.getElementById('barra-fin-teoria').style.display = 'flex';
-      finTeoria();
-    }
+    setTimeout(reiniciarTeoria, 1700);
     return;
   }
-  // Teoría estricta: cualquier fallo vuelve al primer concepto (sin segunda oportunidad)
-  botones.forEach(function(b){ b.disabled = true; });
-  botones[idxOp].classList.add('incorrecta');
-  fb.innerHTML = '❌ Fallaste. ' + c.explica + ' <b>En la teoría, un fallo y vuelves al PRIMER concepto.</b>';
+  microquizContestados.add(idx);
+  microquizAciertos.add(idx);
+  botones.forEach(function(b, i) { b.disabled = true; if (i === c.correcta) b.classList.add('correcta'); });
+  fb.innerHTML = '✅ ' + c.explica;
   fb.dataset.activo = 'true';
-  setTimeout(reiniciarTeoria, 1900);
+  const btnN = document.getElementById('btn-sub-next-' + idx);
+  btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
+  btnN.disabled = false;
+  document.getElementById('btn-siguiente').disabled = false;
+  document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
+  if (idx === CONCEPTOS.length - 1) {
+    document.getElementById('barra-fin-teoria').style.display = 'flex';
+    otorgarInsignia('cadete');
+  }
 }
 
 // ── ENTRENAMIENTO V/F ───────────────────────────────────────────
@@ -260,13 +252,12 @@ function renderVF() {
     return '<div class="frase-vf" data-idx="' + i + '">' +
       '<div class="texto-frase">' + (i + 1) + '. ' + f.texto + '</div>' +
       '<div class="vf-botones">' +
-        '<button onclick="responderVF(' + i + ',true)">✓ Verdadero</button>' +
-        '<button onclick="responderVF(' + i + ',false)">✗ Falso</button>' +
+        '<button onclick="responderVF(' + i + ',true)">✓ SÍ procede / Verdadero</button>' +
+        '<button onclick="responderVF(' + i + ',false)">✗ NO procede / Falso</button>' +
       '</div>' +
       '<div class="explica-vf" id="exp-vf-' + i + '"></div>' +
     '</div>';
   }).join('');
-  document.getElementById('vf-restantes').textContent = FRASES_VF.length;
 }
 
 function responderVF(idx, valor) {
@@ -276,52 +267,52 @@ function responderVF(idx, valor) {
   const cont = document.querySelector('.frase-vf[data-idx="' + idx + '"]');
   const botones = cont.querySelectorAll('.vf-botones button');
   const exp = document.getElementById('exp-vf-' + idx);
-  if (acertado) {
-    vfContestadas.add(idx);
-    vfAciertos++;
-    botones.forEach(function(b, i) {
-      b.disabled = true;
-      const esCorrectaBtn = (i === 0 && f.correcta) || (i === 1 && !f.correcta);
-      if (esCorrectaBtn) b.classList.add('correcta');
-    });
-    exp.innerHTML = '✅ ' + f.explica;
+  if (!acertado) {
+    vfFallos++;
+    document.getElementById('vf-fallos').textContent = vfFallos;
+    botones.forEach(function(b){ b.disabled = true; });
+    exp.innerHTML = '❌ Fallaste. ' + f.explica + ' <b>Hay que acertar las ' + FRASES_VF.length + ' SEGUIDAS: vuelves a la primera.</b>';
     exp.dataset.activo = 'true';
-    document.getElementById('vf-aciertos').textContent = vfAciertos;
-    document.getElementById('vf-restantes').textContent = FRASES_VF.length - vfContestadas.size;
-    if (vfContestadas.size === FRASES_VF.length) {
-      document.getElementById('btn-al-reto').disabled = false;
-      finVF();
-    }
+    setTimeout(reiniciarVF, 1900);
     return;
   }
-  // En V/F (solo 2 opciones) no hay segunda oportunidad: cualquier fallo vuelve a la primera frase
-  vfFallos++;
-  document.getElementById('vf-fallos').textContent = vfFallos;
-  botones.forEach(function(b){ b.disabled = true; });
-  exp.innerHTML = '❌ Fallaste. ' + f.explica + ' <b>En el entrenamiento, un fallo y vuelves a la PRIMERA frase.</b>';
+  vfContestadas.add(idx);
+  vfAciertos++;
+  botones.forEach(function(b, i) {
+    b.disabled = true;
+    const esCorrectaBtn = (i === 0 && f.correcta) || (i === 1 && !f.correcta);
+    if (esCorrectaBtn) b.classList.add('correcta');
+  });
+  exp.innerHTML = '✅ ' + f.explica;
   exp.dataset.activo = 'true';
-  setTimeout(reiniciarVF, 1900);
+  document.getElementById('vf-aciertos').textContent = vfAciertos;
+  document.getElementById('vf-restantes').textContent = FRASES_VF.length - vfContestadas.size;
+  if (vfContestadas.size === FRASES_VF.length) {
+    document.getElementById('btn-al-reto').disabled = false;
+    otorgarInsignia('analista');
+  }
 }
 
-// ── RETO (iframe) ───────────────────────────────────────────────
+// ── RETO (iframe) — marcar como hecho ───────────────────────────
 function marcarRetoHecho() {
   const btn = document.getElementById('btn-reto-hecho');
   btn.disabled = true;
   btn.textContent = '✓ Reto completado';
   document.getElementById('barra-fin-juego').style.display = 'flex';
+  otorgarInsignia('investigador');
   Academia.setSesion(SESION_ID, { retoHecho: true });
 }
 
 // ── INSIGNIAS ───────────────────────────────────────────────────
 const insigniasGanadas = new Set();
-const INSIGNIA_NOMBRES = { cadete: 'Aliado/a', analista: 'Defensor/a', investigador: 'Escudo en acción', detective: 'Escudo Digital' };
-const INSIGNIA_EMOJIS = { cadete: '🎖️', analista: '🎖️', investigador: '🎖️', detective: '🏆' };
 function otorgarInsignia(nombre) {
   if (insigniasGanadas.has(nombre)) return;
   insigniasGanadas.add(nombre);
   const el = document.querySelector('.mi-insignia[data-mi="' + nombre + '"]');
   if (el) el.dataset.ganada = 'true';
-  mostrarToast('Has ganado', INSIGNIA_EMOJIS[nombre] + ' ' + INSIGNIA_NOMBRES[nombre]);
+  const nombres = { cadete: 'Ayudante', analista: 'Juez Junior', investigador: 'Juez Digital', detective: 'Guardián de la Privacidad' };
+  const emojis = { cadete: '🎖️', analista: '🎖️', investigador: '🎖️', detective: '🏆' };
+  mostrarToast('Has ganado', emojis[nombre] + ' ' + nombres[nombre]);
   Academia.setSesion(SESION_ID, { ['insignia_' + nombre]: true });
 }
 function mostrarToast(t, n) {
@@ -334,6 +325,9 @@ function mostrarToast(t, n) {
 
 // ── INFORME ─────────────────────────────────────────────────────
 function contarPalabras(t) { return (t.trim().match(/\S+/g) || []).length; }
+
+function _norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function _tieneMin(texto, lista, min){var t=_norm(texto);var n=0;for(var i=0;i<lista.length;i++){if(t.indexOf(_norm(lista[i]))>=0)n++;}return n>=min;}
 
 function finalizarInforme() {
   const q1 = document.getElementById('inf-q1').value.trim();
@@ -351,21 +345,26 @@ function finalizarInforme() {
       '<span class="et">❌ Informe incompleto</span>Necesitas responder de verdad, no con letras sueltas.' + detalle);
     return;
   }
-  var totalSeg = segTeoria + segVF + segReto;
-  var nota = Math.max(5, 10 - totalSeg);
-  window._notaFinal = nota; window._segTotal = totalSeg;
-  Academia.marcarCompletada(SESION_ID, nota, 10);
-  Academia.setSesion(SESION_ID, { q1: q1, q2: q2, q3: q3, informeCompletado: true, nota: nota, segundas: totalSeg, tiempoMin: Math.round((Date.now() - tInicio) / 60000) });
-  document.getElementById('res-teoria').textContent = (segTeoria === 0 ? 'Teoría: perfecta 🎖️' : 'Teoría: con ayuda (-' + segTeoria + ')');
-  document.getElementById('res-entrenamiento').textContent = (segVF === 0 ? 'Entrenamiento: perfecto 🎖️' : 'Entrenamiento: con ayuda (-' + segVF + ')');
+  // Validación por palabras clave (evita respuestas fuera de tema)
+  var _kwFail = [];
+  if (!_tieneMin(q2, ['hablar','pedir','borrar','denunciar','plataforma','google','permiso','quitar','reportar'], 2)) _kwFail.push('Pregunta 2: nombra pasos concretos (hablar con tu amigo, pedirle que lo borre, reportar a la plataforma/Google, denunciar…).');
+  if (!_tieneMin(q3, ['interes publico','cargo','alcalde','ciudadano','privacidad','informacion','representa','publico'], 1)) _kwFail.push('Pregunta 3: usa la idea de "interés público" o el cargo público (alcalde) frente a un ciudadano normal.');
+  if (_kwFail.length) {
+    Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
+      '<span class="et">✍️ Casi: concreta un poco más</span>Tu respuesta vale en longitud, pero falta nombrar las ideas clave.<br>· ' + _kwFail.join('<br>· '));
+    return;
+  }
+  const datos = Academia.getSesion(SESION_ID);
+  Academia.marcarCompletada(SESION_ID, microquizAciertos.size + vfAciertos, CONCEPTOS.length + FRASES_VF.length);
+  Academia.setSesion(SESION_ID, { q1: q1, q2: q2, q3: q3, informeCompletado: true, tiempoMin: Math.round((Date.now() - tInicio) / 60000) });
+  document.getElementById('res-teoria').textContent = microquizAciertos.size + ' / ' + CONCEPTOS.length + ' microquiz';
+  document.getElementById('res-entrenamiento').textContent = vfAciertos + ' / ' + FRASES_VF.length + ' V/F';
   document.getElementById('res-tiempo').textContent = (Math.round((Date.now() - tInicio) / 60000)) + ' min';
-  const cod = Academia.codigoFinalizacion(SESION_ID, nota);
-  document.getElementById('cod-final').textContent = 'CALIFICACIÓN: ' + nota + ' / 10  ·  ' + cod;
-  Academia.setSesion(SESION_ID, { codigo: cod });
-  var insEl = document.querySelector('.diploma-preview .insignia');
-  if (insEl) insEl.textContent = (totalSeg === 0 ? 'Escudo Digital 🏆 (¡partida perfecta!)' : 'Diploma de participación · sin insignia (' + totalSeg + ' fallo' + (totalSeg===1?'':'s') + ')');
+  const cod = Academia.codigoFinalizacion(SESION_ID, microquizAciertos.size + vfAciertos);
+  document.getElementById('cod-final').textContent = 'CÓDIGO: ' + cod;
+  Academia.setSesion(SESION_ID, { codigo: cod, insignia: 'Guardián de la Privacidad' });
   Academia.rellenarIdentidad();
-  if (totalSeg === 0) otorgarInsignia('detective');
+  otorgarInsignia('detective');
   Academia.irABloque('diploma');
 }
 
@@ -373,20 +372,18 @@ function descargarInsignia() {
   const n1 = Academia.getNombre1() || 'Investigador/a 1';
   const n2 = Academia.getNombre2() || 'Investigador/a 2';
   const datos = Academia.getSesion(SESION_ID);
-  var nota = (datos.nota != null) ? datos.nota : 10;
-  var perfecto = (datos.segundas === 0);
   Academia.descargarDiploma({
-    titulo: 'Escudo Digital',
-    subtitulo: 'Sesión 12 (alt) · Ciberacoso · Promoción 2026',
-    icono: '🛡️',
-    insignia: perfecto ? 'Escudo Digital' : undefined,
+    titulo: 'Guardián de la Privacidad',
+    subtitulo: 'Sesión 12 · Tribunal Digital · Promoción 2026',
+    icono: '⚖️',
+    insignia: 'Guardián de la Privacidad',
     nombres: [n1, n2],
     sesionNum: 'S12',
-    score: nota,
-    total: 10,
+    score: microquizAciertos.size + vfAciertos,
+    total: CONCEPTOS.length + FRASES_VF.length,
     codigo: datos.codigo,
-    frase: perfecto ? '¡Partida perfecta! Pedir ayuda no es chivarse: es lo valiente' : 'Misión completada. Nota: ' + nota + '/10'
-  }, 'S12alt-escudo-' + n1.replace(/\s/g, '_') + '.png');
+    frase: 'Lo que se borra en Google no desaparece de internet — pero deja de encontrarte'
+  }, 'S12-tribunal-' + n1.replace(/\s/g, '_') + '.png');
 }
 
 // ── INIT ────────────────────────────────────────────────────────
@@ -395,13 +392,11 @@ function initSesion() {
     var b=document.getElementById('btn-reto-hecho');
     if(!b) return;
     var key='academia:reto:'+SESION_ID+':done';
-    var keySeg='academia:reto:'+SESION_ID+':seg';
     function unlock(){ if(b.dataset.locked==='1'){ b.disabled=false; b.dataset.locked='0'; b.textContent=b.dataset.label||'✓ He terminado'; } }
-    function lsCheck(){ try{ if(localStorage.getItem(key)==='1'){ var s=parseInt(localStorage.getItem(keySeg),10); if(!isNaN(s)){ segReto=s; if(s===0) otorgarInsignia('investigador'); } retoCompletado=true; unlock(); } }catch(e){} }
-    lsCheck();
-    window.addEventListener('message', function(ev){ if(ev&&typeof ev.data==='string'&&ev.data.indexOf('academia:reto-completado')===0){ var parts=ev.data.split(':'); var n=parseInt(parts[3],10); if(!isNaN(n)) segReto=n; retoCompletado=true; if(segReto===0) otorgarInsignia('investigador'); unlock(); } });
-    window.addEventListener('focus', lsCheck);
-    setInterval(lsCheck, 1500);
+    try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){}
+    window.addEventListener('message', function(ev){ if(ev&&typeof ev.data==='string'&&ev.data.indexOf('academia:reto-completado')===0) unlock(); });
+    window.addEventListener('focus', function(){ try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){} });
+    setInterval(function(){ try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){} }, 1500);
   })();
   renderTarjetas();
   renderVF();
@@ -419,5 +414,11 @@ function initSesion() {
     });
   });
 }
-if (document.readyState !== 'loading') initSesion();
-else document.addEventListener('DOMContentLoaded', initSesion);
+
+// Arranque robusto: si DOM ya está listo, ejecutar; si no, esperar a DOMContentLoaded
+if (document.readyState !== 'loading') {
+  initSesion();
+} else {
+  document.addEventListener('DOMContentLoaded', initSesion);
+}
+
