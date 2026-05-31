@@ -142,7 +142,8 @@ Creada como alternativa a S12 (tema legal árido) sin tocar la S12 original:
 - Candado de finalización aplicado (botón bloqueado hasta completar el reto).
 - Enlazada en el hub con tarjeta "↔ S12 · ALTERNATIVA". En sitemap (97 URLs). Auditoría t3: 240 enlaces, 0 rotos. JS verificado con node --check.
 - URL: /trimestres/t3-ciberseguridad/sesiones/s12-alt.html
-- Refinado tras auditoría (94/100): título con gancho "¿Qué harías tú?" (insignia sigue siendo Escudo Digital); teoría reducida de 4 a 3 conceptos (fusión "qué es" + "cómo se reconoce") para dar más peso a la historia; añadida línea de seguridad emocional ("si algo te recuerda a algo real, habla conmigo al terminar"). El reto es de decisiones con consecuencias + reintento (no es un cuestionario disfrazado).
+- Refinado tras auditoría (94/100): título con gancho "¿Qué harías tú?" (insignia sigue siendo Escudo Digital); teoría reducida de 4 a 3 conceptos; añadida línea de seguridad emocional. El reto es de decisiones con consecuencias + reintento.
+- **Modo ocupación (grupo difícil, sin explicación en clase): anti-tuntún en TODA la sesión.** El microquiz de teoría y el V/F del entrenamiento ahora **exigen acertar para avanzar** (fallar no cuenta, hay que reintentar) — antes solo el reto frenaba el tuntún. Volumen subido para acercarse a ~25-30 min: V/F 6→10, reto 6→8 decisiones. NOTA: este patrón "exigir acierto en microquiz/V/F" de momento solo está en s12-alt; el resto de sesiones (sNN.js) mantienen el microquiz/V/F clásico (se puede replicar si funciona).
 
 ## Pendiente / decisiones con Manuel
 

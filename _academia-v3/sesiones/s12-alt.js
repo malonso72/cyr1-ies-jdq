@@ -86,7 +86,19 @@ const FRASES_VF = [
     explica: "Verdadero. Es suplantación de identidad, una forma de ciberacoso. Se reporta a la plataforma y se avisa a un adulto." },
   { texto: "Si soy testigo, reírme y reenviar las burlas no afecta a la víctima.",
     correcta: false,
-    explica: "Falso. Reírse y reenviar hace MÁS daño y anima al acosador. El testigo que apoya y avisa es quien ayuda a parar el acoso." }
+    explica: "Falso. Reírse y reenviar hace MÁS daño y anima al acosador. El testigo que apoya y avisa es quien ayuda a parar el acoso." },
+  { texto: "Bloquear a quien te acosa es 'de cobardes'.",
+    correcta: false,
+    explica: "Falso. Bloquear es una herramienta válida y recomendable: te quita de encima al acosador y no es ninguna cobardía." },
+  { texto: "La mayoría del ciberacoso ocurre entre personas que se conocen (clase, instituto), no entre desconocidos.",
+    correcta: true,
+    explica: "Verdadero. Casi siempre el acoso viene de gente del entorno. Por eso cuesta tanto contarlo… y por eso es tan importante hacerlo." },
+  { texto: "Reenviar una captura humillante 'solo a un amigo' también es participar en el acoso.",
+    correcta: true,
+    explica: "Verdadero. Cada reenvío amplía el daño. No difundir ya es ayudar." },
+  { texto: "Si alguien sube una foto tuya sin permiso para burlarse, puedes pedir que la borren y reportarla a la app.",
+    correcta: true,
+    explica: "Verdadero. Tienes derecho a tu imagen: puedes exigir que la quiten, reportarla y avisar a un adulto." }
 ];
 
 // ── TEORÍA ───────────────────────────────────────────────────────
@@ -185,15 +197,21 @@ function irATarjeta(idx) {
 function responderMicroquiz(idx, idxOp) {
   if (microquizContestados.has(idx)) return;
   const c = CONCEPTOS[idx].quiz;
-  microquizContestados.add(idx);
-  if (idxOp === c.correcta) microquizAciertos.add(idx);
-  document.querySelectorAll('#opcionesMq-' + idx + ' button').forEach(function(b, i) {
-    b.disabled = true;
-    if (i === c.correcta) b.classList.add('correcta');
-    else if (i === idxOp) b.classList.add('incorrecta');
-  });
   const fb = document.getElementById('fb-mq-' + idx);
-  fb.innerHTML = (idxOp === c.correcta ? '✅ ' : '❌ Correcta: ' + String.fromCharCode(65 + c.correcta) + '. ') + c.explica;
+  const botones = document.querySelectorAll('#opcionesMq-' + idx + ' button');
+  if (idxOp !== c.correcta) {
+    // Fallo: marca solo esa opción y deja reintentar (NO avanza)
+    botones[idxOp].classList.add('incorrecta');
+    botones[idxOp].disabled = true;
+    fb.innerHTML = '❌ Esa no es. Lee otra vez con calma y prueba con otra opción.';
+    fb.dataset.activo = 'true';
+    return;
+  }
+  // Acierto
+  microquizContestados.add(idx);
+  microquizAciertos.add(idx);
+  botones.forEach(function(b, i) { b.disabled = true; if (i === c.correcta) b.classList.add('correcta'); });
+  fb.innerHTML = '✅ ' + c.explica;
   fb.dataset.activo = 'true';
   const btnN = document.getElementById('btn-sub-next-' + idx);
   btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
@@ -224,27 +242,35 @@ function renderVF() {
       '<div class="explica-vf" id="exp-vf-' + i + '"></div>' +
     '</div>';
   }).join('');
+  document.getElementById('vf-restantes').textContent = FRASES_VF.length;
 }
 
 function responderVF(idx, valor) {
   if (vfContestadas.has(idx)) return;
-  vfContestadas.add(idx);
   const f = vfActuales[idx];
   const acertado = (valor === f.correcta);
-  if (acertado) vfAciertos++; else vfFallos++;
   const cont = document.querySelector('.frase-vf[data-idx="' + idx + '"]');
   const botones = cont.querySelectorAll('.vf-botones button');
+  const exp = document.getElementById('exp-vf-' + idx);
+  if (!acertado) {
+    // Fallo: muestra el porqué y deja reintentar (no cuenta hasta acertar)
+    vfFallos++;
+    document.getElementById('vf-fallos').textContent = vfFallos;
+    exp.innerHTML = '❌ Aún no. ' + f.explica + ' <b>Vuelve a intentarlo.</b>';
+    exp.dataset.activo = 'true';
+    return;
+  }
+  // Acierto: bloquea y cuenta
+  vfContestadas.add(idx);
+  vfAciertos++;
   botones.forEach(function(b, i) {
     b.disabled = true;
     const esCorrectaBtn = (i === 0 && f.correcta) || (i === 1 && !f.correcta);
     if (esCorrectaBtn) b.classList.add('correcta');
-    else if ((i === 0 && valor) || (i === 1 && !valor)) b.classList.add('incorrecta');
   });
-  const exp = document.getElementById('exp-vf-' + idx);
-  exp.innerHTML = (acertado ? '✅ ' : '❌ ') + f.explica;
+  exp.innerHTML = '✅ ' + f.explica;
   exp.dataset.activo = 'true';
   document.getElementById('vf-aciertos').textContent = vfAciertos;
-  document.getElementById('vf-fallos').textContent = vfFallos;
   document.getElementById('vf-restantes').textContent = FRASES_VF.length - vfContestadas.size;
   if (vfContestadas.size === FRASES_VF.length) {
     document.getElementById('btn-al-reto').disabled = false;
