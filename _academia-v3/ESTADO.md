@@ -86,8 +86,8 @@ Se bajó el registro del reto `retos/s12-reto-dpo.html` a 1º ESO **sin tocar la
 - Citas legales (art. 17 RGPD, LOPDGDD, etc.) conservadas pero marcadas como "Para saber más" en letra pequeña.
 
 ### Pendiente de decisión (NO tocado, requiere criterio):
-- **Contradicción S18**: el envoltorio tiene informe digital; el reto dice "Parte B en PAPEL, no la sustituye nada". Decidir un único modelo.
-- **Modelo Moodle**: subir **enlace web** a cada sesión, no el HTML suelto (las sesiones dependen de CSS/JS comunes y del reto; un .html aislado falla).
+- ✅ **Contradicción S18 RESUELTA**: unificado a 100% digital. El reto `s18-reto-examen.html` ya no menciona papel/cuadernillo; dirige al Informe Final del bloque (Bloque 5 del envoltorio), que se escribe y guarda en la propia página.
+- ✅ **Modelo Moodle DECIDIDO**: enlazar la URL de cada sesión (recurso "URL", ventana nueva), no subir el HTML suelto. Lista lista para pegar en `_academia-v3/ENLACES-MOODLE.md`.
 - **Doble diploma / doble entrada de nombres** en sesiones con iframe (reto + insignia del envoltorio): unificar o aclarar cuál se entrega.
 - **S11 demasiado larga**: el reto repite la teoría del envoltorio (Fase 0). Considerar recortar una de las dos.
 
