@@ -147,6 +147,17 @@ Creada como alternativa a S12 (tema legal árido) sin tocar la S12 original:
 
 **Insignia = racha perfecta (escape-room) en s12-alt:** cada bloque de preguntas exige acertar TODAS seguidas; un fallo reinicia el bloque entero. Teoría (3 microquiz) → vuelve al 1er concepto (`reiniciarTeoria`); Entrenamiento (10 V/F) → vuelve a la 1ª frase (`reiniciarVF`); Historia/reto (8 decisiones) → vuelve al principio (`reiniciarHistoria`). Avisos "a racha" en pantalla. ⚠️ Vigilar dureza: la racha de 10 V/F es muy exigente (con explicación al fallar, acaban aprendiéndolas y completando); si frustra demasiado, reducir el nº de V/F o el largo de la racha.
 
+## Modelo "2ª oportunidad + nota" — PILOTO en S12-alt (hecho)
+
+Sustituye en S12-alt al modelo "1 fallo = reinicio". Por cada pregunta (teoría, V/F y cada decisión del reto):
+- Acierto a la 1ª → sigue, sin penalizar.
+- 1er fallo → **2ª oportunidad** (no expulsa), pero suma 1 a "segundas usadas" → baja nota y quita la insignia perfecta de ese bloque.
+- 2º fallo en la misma pregunta → **reinicia el bloque** (teoría/V/F/historia desde el principio; resetea las segundas de ese bloque).
+- **Insignia por bloque** (cadete/analista/investigador) solo si ese bloque se completa con 0 segundas. Insignia final (detective/Escudo Digital) solo si toda la sesión es perfecta.
+- **Nota = max(5, 10 − segundas_totales)**. Se muestra en el diploma ("Calificación: X/10") y en el PNG (Puntuación: X/10). Diploma siempre (completar = aprobado, suelo 5).
+- Implementación: `mqFalladas`/`vfFalladas` (Set por bloque), `segTeoria`/`segVF`/`segReto`; el reto envía `segReto` por postMessage (`academia:reto-completado:s12alt:N`) y por localStorage (`academia:reto:s12alt:seg`). Verificado con node --check.
+- Decisiones de Manuel: insignia POR BLOQUE, nota NUMÉRICA 1-10, piloto SOLO en S12-alt. Si funciona en clase → replicar a las 17 sesiones (mismo motor `responderMicroquiz`/`responderVF` + retos).
+
 ## Ajuste de dificultad — pendiente (curso que viene)
 
 Manuel cree que aún es demasiado fácil llegar al diploma: con la racha perfecta + feedback que revela la respuesta, los alumnos memorizan y la encadenan a la 2ª-3ª vuelta. Decisión: NO tocar de momento. Vías para subir dificultad cuando se retome (recomendado combinar las dos primeras):

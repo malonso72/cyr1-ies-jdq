@@ -105,10 +105,15 @@ const FRASES_VF = [
 let tarjetaActual = 0;
 const microquizContestados = new Set();
 const microquizAciertos = new Set();
+let segTeoria = 0, segVF = 0, segReto = 0;
+let mqFalladas = new Set(), vfFalladas = new Set(), retoCompletado = false;
+function finTeoria(){ if (segTeoria === 0) otorgarInsignia('cadete'); }
+function finVF(){ if (segVF === 0) otorgarInsignia('analista'); }
 
 function reiniciarTeoria() {
   microquizContestados.clear();
   microquizAciertos.clear();
+  segTeoria = 0; mqFalladas.clear();
   var bf = document.getElementById('barra-fin-teoria'); if (bf) bf.style.display = 'none';
   tarjetaActual = 0;
   renderTarjetas();
@@ -118,6 +123,7 @@ function reiniciarTeoria() {
 function reiniciarVF() {
   vfContestadas.clear();
   vfAciertos = 0;
+  segVF = 0; vfFalladas.clear();
   var a = document.getElementById('vf-aciertos'); if (a) a.textContent = '0';
   var r = document.getElementById('vf-restantes'); if (r) r.textContent = FRASES_VF.length;
   renderVF();
@@ -208,7 +214,7 @@ function irATarjeta(idx) {
   document.getElementById('btn-siguiente').disabled = !microquizContestados.has(idx);
   if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) {
     document.getElementById('barra-fin-teoria').style.display = 'flex';
-    otorgarInsignia('cadete');
+    finTeoria();
   }
 }
 
@@ -217,30 +223,37 @@ function responderMicroquiz(idx, idxOp) {
   const c = CONCEPTOS[idx].quiz;
   const fb = document.getElementById('fb-mq-' + idx);
   const botones = document.querySelectorAll('#opcionesMq-' + idx + ' button');
-  if (idxOp !== c.correcta) {
-    // Fallo: se pierde la racha de la insignia — vuelta al primer concepto
-    botones.forEach(function(b){ b.disabled = true; });
-    botones[idxOp].classList.add('incorrecta');
-    fb.innerHTML = '❌ Has fallado. Para la insignia hay que acertar los ' + CONCEPTOS.length + ' microquiz SEGUIDOS: vuelves al primer concepto.';
+  if (idxOp === c.correcta) {
+    microquizContestados.add(idx);
+    microquizAciertos.add(idx);
+    botones.forEach(function(b, i) { b.disabled = true; if (i === c.correcta) b.classList.add('correcta'); });
+    fb.innerHTML = '✅ ' + c.explica;
     fb.dataset.activo = 'true';
-    setTimeout(reiniciarTeoria, 1700);
+    const btnN = document.getElementById('btn-sub-next-' + idx);
+    btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
+    btnN.disabled = false;
+    document.getElementById('btn-siguiente').disabled = false;
+    document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
+    if (idx === CONCEPTOS.length - 1) {
+      document.getElementById('barra-fin-teoria').style.display = 'flex';
+      finTeoria();
+    }
     return;
   }
-  // Acierto
-  microquizContestados.add(idx);
-  microquizAciertos.add(idx);
-  botones.forEach(function(b, i) { b.disabled = true; if (i === c.correcta) b.classList.add('correcta'); });
-  fb.innerHTML = '✅ ' + c.explica;
-  fb.dataset.activo = 'true';
-  const btnN = document.getElementById('btn-sub-next-' + idx);
-  btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
-  btnN.disabled = false;
-  document.getElementById('btn-siguiente').disabled = false;
-  document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
-  if (idx === CONCEPTOS.length - 1) {
-    document.getElementById('barra-fin-teoria').style.display = 'flex';
-    otorgarInsignia('cadete');
+  if (!mqFalladas.has(idx)) {
+    mqFalladas.add(idx);
+    segTeoria++;
+    botones[idxOp].classList.add('incorrecta');
+    botones[idxOp].disabled = true;
+    fb.innerHTML = '❌ No es esa. Te queda <b>una segunda oportunidad</b> en esta pregunta (baja la nota y pierdes la insignia perfecta). Si vuelves a fallar, reinicias la teoría.';
+    fb.dataset.activo = 'true';
+    return;
   }
+  botones.forEach(function(b){ b.disabled = true; });
+  botones[idxOp].classList.add('incorrecta');
+  fb.innerHTML = '❌ Dos fallos en esta pregunta: vuelves al primer concepto.';
+  fb.dataset.activo = 'true';
+  setTimeout(reiniciarTeoria, 1700);
 }
 
 // ── ENTRENAMIENTO V/F ───────────────────────────────────────────
@@ -271,32 +284,38 @@ function responderVF(idx, valor) {
   const cont = document.querySelector('.frase-vf[data-idx="' + idx + '"]');
   const botones = cont.querySelectorAll('.vf-botones button');
   const exp = document.getElementById('exp-vf-' + idx);
-  if (!acertado) {
-    // Fallo: se pierde la racha — vuelta a la primera frase
-    vfFallos++;
-    document.getElementById('vf-fallos').textContent = vfFallos;
-    botones.forEach(function(b){ b.disabled = true; });
-    exp.innerHTML = '❌ Fallaste. ' + f.explica + ' <b>Hay que acertar las ' + FRASES_VF.length + ' SEGUIDAS: vuelves a la primera.</b>';
+  if (acertado) {
+    vfContestadas.add(idx);
+    vfAciertos++;
+    botones.forEach(function(b, i) {
+      b.disabled = true;
+      const esCorrectaBtn = (i === 0 && f.correcta) || (i === 1 && !f.correcta);
+      if (esCorrectaBtn) b.classList.add('correcta');
+    });
+    exp.innerHTML = '✅ ' + f.explica;
     exp.dataset.activo = 'true';
-    setTimeout(reiniciarVF, 1900);
+    document.getElementById('vf-aciertos').textContent = vfAciertos;
+    document.getElementById('vf-restantes').textContent = FRASES_VF.length - vfContestadas.size;
+    if (vfContestadas.size === FRASES_VF.length) {
+      document.getElementById('btn-al-reto').disabled = false;
+      finVF();
+    }
     return;
   }
-  // Acierto: bloquea y cuenta
-  vfContestadas.add(idx);
-  vfAciertos++;
-  botones.forEach(function(b, i) {
-    b.disabled = true;
-    const esCorrectaBtn = (i === 0 && f.correcta) || (i === 1 && !f.correcta);
-    if (esCorrectaBtn) b.classList.add('correcta');
-  });
-  exp.innerHTML = '✅ ' + f.explica;
-  exp.dataset.activo = 'true';
-  document.getElementById('vf-aciertos').textContent = vfAciertos;
-  document.getElementById('vf-restantes').textContent = FRASES_VF.length - vfContestadas.size;
-  if (vfContestadas.size === FRASES_VF.length) {
-    document.getElementById('btn-al-reto').disabled = false;
-    otorgarInsignia('analista');
+  if (!vfFalladas.has(idx)) {
+    vfFalladas.add(idx);
+    segVF++; vfFallos++;
+    document.getElementById('vf-fallos').textContent = vfFallos;
+    exp.innerHTML = '❌ No. ' + f.explica + ' <b>Te queda una segunda oportunidad en esta frase (baja la nota).</b>';
+    exp.dataset.activo = 'true';
+    return;
   }
+  vfFallos++;
+  document.getElementById('vf-fallos').textContent = vfFallos;
+  botones.forEach(function(b){ b.disabled = true; });
+  exp.innerHTML = '❌ Dos fallos en esta frase: vuelves a la primera.';
+  exp.dataset.activo = 'true';
+  setTimeout(reiniciarVF, 1700);
 }
 
 // ── RETO (iframe) ───────────────────────────────────────────────
@@ -305,7 +324,6 @@ function marcarRetoHecho() {
   btn.disabled = true;
   btn.textContent = '✓ Reto completado';
   document.getElementById('barra-fin-juego').style.display = 'flex';
-  otorgarInsignia('investigador');
   Academia.setSesion(SESION_ID, { retoHecho: true });
 }
 
@@ -348,16 +366,21 @@ function finalizarInforme() {
       '<span class="et">❌ Informe incompleto</span>Necesitas responder de verdad, no con letras sueltas.' + detalle);
     return;
   }
-  Academia.marcarCompletada(SESION_ID, microquizAciertos.size + vfAciertos, CONCEPTOS.length + FRASES_VF.length);
-  Academia.setSesion(SESION_ID, { q1: q1, q2: q2, q3: q3, informeCompletado: true, tiempoMin: Math.round((Date.now() - tInicio) / 60000) });
-  document.getElementById('res-teoria').textContent = microquizAciertos.size + ' / ' + CONCEPTOS.length + ' microquiz';
-  document.getElementById('res-entrenamiento').textContent = vfAciertos + ' / ' + FRASES_VF.length + ' V/F';
+  var totalSeg = segTeoria + segVF + segReto;
+  var nota = Math.max(5, 10 - totalSeg);
+  window._notaFinal = nota; window._segTotal = totalSeg;
+  Academia.marcarCompletada(SESION_ID, nota, 10);
+  Academia.setSesion(SESION_ID, { q1: q1, q2: q2, q3: q3, informeCompletado: true, nota: nota, segundas: totalSeg, tiempoMin: Math.round((Date.now() - tInicio) / 60000) });
+  document.getElementById('res-teoria').textContent = (segTeoria === 0 ? 'Teoría: perfecta 🎖️' : 'Teoría: con ayuda (-' + segTeoria + ')');
+  document.getElementById('res-entrenamiento').textContent = (segVF === 0 ? 'Entrenamiento: perfecto 🎖️' : 'Entrenamiento: con ayuda (-' + segVF + ')');
   document.getElementById('res-tiempo').textContent = (Math.round((Date.now() - tInicio) / 60000)) + ' min';
-  const cod = Academia.codigoFinalizacion(SESION_ID, microquizAciertos.size + vfAciertos);
-  document.getElementById('cod-final').textContent = 'CÓDIGO: ' + cod;
-  Academia.setSesion(SESION_ID, { codigo: cod, insignia: 'Escudo Digital' });
+  const cod = Academia.codigoFinalizacion(SESION_ID, nota);
+  document.getElementById('cod-final').textContent = 'CALIFICACIÓN: ' + nota + ' / 10  ·  ' + cod;
+  Academia.setSesion(SESION_ID, { codigo: cod });
+  var insEl = document.querySelector('.diploma-preview .insignia');
+  if (insEl) insEl.textContent = (totalSeg === 0 ? 'Escudo Digital 🏆 (¡partida perfecta!)' : 'Diploma de participación · sin insignia (' + totalSeg + ' fallo' + (totalSeg===1?'':'s') + ')');
   Academia.rellenarIdentidad();
-  otorgarInsignia('detective');
+  if (totalSeg === 0) otorgarInsignia('detective');
   Academia.irABloque('diploma');
 }
 
@@ -365,17 +388,19 @@ function descargarInsignia() {
   const n1 = Academia.getNombre1() || 'Investigador/a 1';
   const n2 = Academia.getNombre2() || 'Investigador/a 2';
   const datos = Academia.getSesion(SESION_ID);
+  var nota = (datos.nota != null) ? datos.nota : 10;
+  var perfecto = (datos.segundas === 0);
   Academia.descargarDiploma({
     titulo: 'Escudo Digital',
     subtitulo: 'Sesión 12 (alt) · Ciberacoso · Promoción 2026',
     icono: '🛡️',
-    insignia: 'Escudo Digital',
+    insignia: perfecto ? 'Escudo Digital' : undefined,
     nombres: [n1, n2],
     sesionNum: 'S12',
-    score: microquizAciertos.size + vfAciertos,
-    total: CONCEPTOS.length + FRASES_VF.length,
+    score: nota,
+    total: 10,
     codigo: datos.codigo,
-    frase: 'Pedir ayuda no es chivarse: es lo valiente'
+    frase: perfecto ? '¡Partida perfecta! Pedir ayuda no es chivarse: es lo valiente' : 'Misión completada. Nota: ' + nota + '/10'
   }, 'S12alt-escudo-' + n1.replace(/\s/g, '_') + '.png');
 }
 
@@ -385,11 +410,13 @@ function initSesion() {
     var b=document.getElementById('btn-reto-hecho');
     if(!b) return;
     var key='academia:reto:'+SESION_ID+':done';
+    var keySeg='academia:reto:'+SESION_ID+':seg';
     function unlock(){ if(b.dataset.locked==='1'){ b.disabled=false; b.dataset.locked='0'; b.textContent=b.dataset.label||'✓ He terminado'; } }
-    try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){}
-    window.addEventListener('message', function(ev){ if(ev&&typeof ev.data==='string'&&ev.data.indexOf('academia:reto-completado')===0) unlock(); });
-    window.addEventListener('focus', function(){ try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){} });
-    setInterval(function(){ try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){} }, 1500);
+    function lsCheck(){ try{ if(localStorage.getItem(key)==='1'){ var s=parseInt(localStorage.getItem(keySeg),10); if(!isNaN(s)){ segReto=s; if(s===0) otorgarInsignia('investigador'); } retoCompletado=true; unlock(); } }catch(e){} }
+    lsCheck();
+    window.addEventListener('message', function(ev){ if(ev&&typeof ev.data==='string'&&ev.data.indexOf('academia:reto-completado')===0){ var parts=ev.data.split(':'); var n=parseInt(parts[3],10); if(!isNaN(n)) segReto=n; retoCompletado=true; if(segReto===0) otorgarInsignia('investigador'); unlock(); } });
+    window.addEventListener('focus', lsCheck);
+    setInterval(lsCheck, 1500);
   })();
   renderTarjetas();
   renderVF();

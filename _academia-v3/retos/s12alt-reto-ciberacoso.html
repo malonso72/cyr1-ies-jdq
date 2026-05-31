@@ -56,7 +56,7 @@
       <p style="margin-top:10px;font-size:14px;color:#9fb3d8;">Marcos y el resto son <b>personajes ficticios</b>. La historia sirve para aprender a protegerte y a ayudar, nunca para señalar a nadie real.</p>
       <div class="campo"><label>Investigador/a 1</label><input type="text" id="nombre1" placeholder="Tu nombre"></div>
       <div class="campo"><label>Investigador/a 2 (opcional)</label><input type="text" id="nombre2" placeholder="Tu pareja"></div>
-      <p style="font-size:13px;color:#ffd166;margin-top:6px;">⚠️ Hay que acertar las decisiones SEGUIDAS. Si fallas una, vuelves al principio de la historia.</p>
+      <p style="font-size:13px;color:#ffd166;margin-top:6px;">⚠️ Tienes 2 oportunidades por decisión (la 2ª baja la nota). Dos fallos seguidos y vuelves al principio. Todo a la primera = insignia.</p>
       <button class="btn" onclick="empezar()">▶ Empezar la historia</button>
     </div>
   </div>
@@ -98,7 +98,8 @@
 </div>
 
 <script>
-let nombre1 = '', nombre2 = '', escenaActual = 0, aciertos = 0;
+let nombre1 = '', nombre2 = '', escenaActual = 0, aciertos = 0, segReto = 0;
+var escenaFallada = {};
 
 // Cada escena: situación + pregunta + opciones (una correcta) + explicación
 const ESCENAS = [
@@ -251,39 +252,46 @@ function mostrar(idx) {
 
 function responder(elegida) {
   const e = ESCENAS[escenaActual];
-  const botones = document.querySelectorAll('#opciones .opcion');
-  botones.forEach(b => b.disabled = true);
-  const acerto = (elegida === e.correcta);
-  botones.forEach((b, i) => {
-    if (i === e.correcta) b.classList.add('correcta');
-    else if (i === elegida) b.classList.add('incorrecta');
-  });
   const fb = document.getElementById('feedback');
-  if (acerto) {
+  const botones = document.querySelectorAll('#opciones .opcion');
+  if (elegida === e.correcta) {
+    botones.forEach((b, i) => { b.disabled = true; if (i === e.correcta) b.classList.add('correcta'); });
     aciertos++;
     document.getElementById('aciertos').textContent = aciertos;
     fb.className = 'feedback activo bien';
     fb.innerHTML = '<b class="ok">✓ Buena decisión.</b> ' + e.bien +
       '<br><button class="btn" onclick="mostrar(' + (escenaActual + 1) + ')">' +
       (escenaActual + 1 < ESCENAS.length ? '▸ Siguiente momento' : '▸ Ver tu plan final') + '</button>';
-  } else {
-    fb.className = 'feedback activo mal';
-    fb.innerHTML = '<b class="ko">✗ Esa no es la mejor forma de actuar.</b> ' + e.mal +
-      '<br><b>Para el diploma hay que acertar las ' + ESCENAS.length + ' decisiones SEGUIDAS. Vuelves al principio.</b>' +
-      '<br><button class="btn" onclick="reiniciarHistoria()">↺ Volver a empezar la historia</button>';
+    fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
   }
+  if (!escenaFallada[escenaActual]) {
+    escenaFallada[escenaActual] = true;
+    segReto++;
+    botones[elegida].classList.add('incorrecta');
+    botones[elegida].disabled = true;
+    fb.className = 'feedback activo mal';
+    fb.innerHTML = '<b class="ko">✗ Esa no es la mejor forma.</b> ' + e.mal +
+      '<br><b>Te queda una segunda oportunidad en esta decisión (baja la nota). Si fallas otra vez, vuelves al principio.</b>';
+    fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    return;
+  }
+  botones.forEach(b => b.disabled = true);
+  fb.className = 'feedback activo mal';
+  fb.innerHTML = '<b class="ko">✗ Dos fallos en esta decisión.</b> La historia vuelve a empezar.' +
+    '<br><button class="btn" onclick="reiniciarHistoria()">↺ Volver a empezar</button>';
   fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function reiniciarHistoria() {
-  aciertos = 0;
+  aciertos = 0; segReto = 0; escenaFallada = {};
   mostrar(0);
 }
 
 function mostrarFinal() {
   cambiar('p-final');
-  try { localStorage.setItem('academia:reto:s12alt:done', '1'); } catch (e) {}
-  try { if (window.parent && window.parent !== window) window.parent.postMessage('academia:reto-completado:s12alt', '*'); } catch (e) {}
+  try { localStorage.setItem('academia:reto:s12alt:done', '1'); localStorage.setItem('academia:reto:s12alt:seg', String(segReto)); } catch (e) {}
+  try { if (window.parent && window.parent !== window) window.parent.postMessage('academia:reto-completado:s12alt:' + segReto, '*'); } catch (e) {}
 }
 
 function descargarDiploma() {
