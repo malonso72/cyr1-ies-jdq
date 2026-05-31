@@ -169,6 +169,15 @@ Sustituye en S12-alt al modelo "1 fallo = reinicio". Por cada pregunta (teoría,
 - AJUSTE FINAL (a petición de Manuel): teoría (microquiz) y entrenamiento (V/F) son ESTRICTOS — cualquier fallo reinicia ese bloque desde el principio, sin segunda oportunidad. Solo la HISTORIA (reto) mantiene las 2 oportunidades, así que la nota la marca el reto (segReto). teoría/VF al completarse siempre son limpios → dan insignia y no penalizan nota.
 - Decisiones de Manuel: insignia POR BLOQUE, nota NUMÉRICA 1-10, piloto SOLO en S12-alt. Si funciona en clase → replicar a las 17 sesiones (mismo motor `responderMicroquiz`/`responderVF` + retos).
 
+## Revisión de criterios en todas las sesiones (verificado)
+
+Comprobado el estado del "modelo S12" en las 17 sesiones:
+- **Teoría (microquiz) estricta** + **V/F estricto** (un fallo → reinicio del bloque): YA presente en s02–s18 (rollout previo). Núcleo anti-tuntún uniforme.
+- **Candado de finalización**: presente en todas las sesiones con reto en iframe (s09, s11, s12–s18).
+- **Nota 1-10 + 2ª oportunidad + insignia de mérito**: EXCLUSIVO de S12 (Ciberacoso), porque vive en su reto a medida. Los retos de las otras 16 son juegos distintos con su propia lógica de fallo; no se clona sin reescribir cada uno.
+- Decisión de Manuel: **dejarlo así** (núcleo común ya aplicado; nota+mérito como rasgo propio de S12). Si en el futuro se quiere el modelo completo en otra sesión, hay que reescribir su reto.
+- `ENLACES-MOODLE.md` actualizado: S12 = Ciberacoso; S12 (alt) = Tribunal Digital.
+
 ## Ajuste de dificultad — pendiente (curso que viene)
 
 Manuel cree que aún es demasiado fácil llegar al diploma: con la racha perfecta + feedback que revela la respuesta, los alumnos memorizan y la encadenan a la 2ª-3ª vuelta. Decisión: NO tocar de momento. Vías para subir dificultad cuando se retome (recomendado combinar las dos primeras):

@@ -26,7 +26,8 @@
 | S9 | Escape PIENSA | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s09.html |
 | S10 | WhatsApp bajo sospecha | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s10.html |
 | S11 | Wifi café trampa | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s11.html |
-| S12 | Tribunal Digital | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s12.html |
+| S12 | Ciberacoso · ¿Qué harías tú? | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s12.html |
+| S12 (alt) | Tribunal Digital (Derecho al Olvido) | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s12-alt.html |
 | S13 | Caso Lucía OSINT | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s13.html |
 | S14 | Real / Fake (deepfakes) | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s14.html |
 | S15 | Mesa del Detective | https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s15.html |
