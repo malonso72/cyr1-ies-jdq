@@ -91,6 +91,29 @@ Se bajó el registro del reto `retos/s12-reto-dpo.html` a 1º ESO **sin tocar la
 - **Doble diploma / doble entrada de nombres** en sesiones con iframe (reto + insignia del envoltorio): unificar o aclarar cuál se entrega.
 - **S11 demasiado larga**: el reto repite la teoría del envoltorio (Fase 0). Considerar recortar una de las dos.
 
+## Progreso global + "una sola aventura" (4ª tanda, 31/05/2026)
+
+Construido lo aditivo y sin riesgo (clase va por S12; S13-S17 NO tocadas):
+
+- **Nueva página `progreso.html` + `progreso.js`** ("Tu carrera en la Academia"): lee `academia:completadas` y muestra las 18 insignias (ganadas/bloqueadas), un **escalafón de 7 rangos** (Recluta → Cadete → Analista → Investigador → Especialista → Detective → **Agente Cyber-IES**), badge de **dificultad N1-N5** por sesión, barra de progreso, **carné PNG** (canvas), botón reiniciar, y aviso de que el progreso es por navegador.
+- **Portada**: hero que vende la aventura ("conviértete en Agente Cyber-IES") + **banner destacado** enlazando a `progreso.html`.
+- **S18 → "Ceremonia Final del Analista"**: reencuadrado el envoltorio (hero, título, nav, tarjeta del hub) + bloque de **graduación** con enlace a la carrera. El reto y S13-S17 intactos.
+- Migrado a `trimestres/t3-ciberseguridad/` con rutas ajustadas, añadido a `sitemap.xml` (96 URLs, XML válido), auditoría 227 enlaces · 0 rotos.
+
+Pendiente opcional (NO hecho, por riesgo/tiempo): insignia ORO por informe excelente; badges de dificultad también en las tarjetas del hub; diferenciar S15/S17 (descartado a mitad de curso).
+
+## Ajustes urgentes S12 y S13 (5ª tanda, para usar esta semana)
+
+- **S12 reto**: "Letrado/a Investigador/a" → "Juez/a digital" (ya no queda "Letrado" en el reto).
+- **S13 reto**: subtítulo corregido "Sesión 9 · 1º ESO B" → "Sesión 13 · 1º ESO". (Las menciones a "1º ESO B" dentro de la historia de Lucía —el cartel de su insti— se mantienen: son contenido del caso, no la etiqueta de la sesión.)
+- **S13 página principal**: añadido aviso ético antes del reto ("Lucía es ficticia; no investigues a personas reales").
+- **Informes S12 y S13**: validación por **palabras clave** además del recuento. La P2 y P3 de cada una exigen mencionar ideas del tema (probado: "f f f f" y texto fuera de tema se bloquean; respuesta real pasa). Mensaje de ayuda que indica qué falta nombrar.
+
+NO hecho a propósito:
+- "4 mini-decisiones tras la hoja de reglas" del reto S12: el **envoltorio ya tiene 6 mini-casos V/F** (entrenamiento) antes del tribunal; sería redundante.
+- Las citas legales dentro de las *explicaciones* de cada caso S12 se mantienen como justificación tras el veredicto (el briefing ya las pasó a "Para saber más").
+- Comprobar que el reto de Lucía no deja emitir veredicto sin abrir las 6 publicaciones: es lógica del reto y **conviene que lo pruebes tú** haciendo el flujo completo (abrir 6 → 6 preguntas → veredicto → diploma → "He terminado" → informe → insignia).
+
 ## Pendiente / decisiones con Manuel
 
 - **Validar en el navegador** S9 y S11 (escape PIENSA y aventura de Ana en iframe + descarga de insignia).

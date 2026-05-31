@@ -301,6 +301,9 @@ function mostrarToast(t, n) {
 // ── INFORME ─────────────────────────────────────────────────────
 function contarPalabras(t) { return (t.trim().match(/\S+/g) || []).length; }
 
+function _norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function _tieneMin(texto, lista, min){var t=_norm(texto);var n=0;for(var i=0;i<lista.length;i++){if(t.indexOf(_norm(lista[i]))>=0)n++;}return n>=min;}
+
 function finalizarInforme() {
   const q1 = document.getElementById('inf-q1').value.trim();
   const q2 = document.getElementById('inf-q2').value.trim();
@@ -315,6 +318,15 @@ function finalizarInforme() {
     if (!v3.ok) detalle += '<br>· Pregunta 3: ' + v3.motivo + '.';
     Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
       '<span class="et">❌ Informe incompleto</span>Necesitas responder de verdad, no con letras sueltas.' + detalle);
+    return;
+  }
+  // Validación por palabras clave (evita respuestas fuera de tema)
+  var _kwFail = [];
+  if (!_tieneMin(q2, ['ubicacion','instituto','amigos','horario','familia','mascota','rutina','colegio','barrio','casa','novio'], 1)) _kwFail.push('Pregunta 2: di qué DATOS se sacan (ubicación, instituto, horarios, familia, mascota, rutina…).');
+  if (!_tieneMin(q3, ['privada','ubicacion','seguidores','horario','instituto','casa','publicar','fotos','etiqueta','permiso'], 2)) _kwFail.push('Pregunta 3: da consejos concretos (cuenta privada, no dar ubicación ni instituto, revisar seguidores, no publicar horarios…).');
+  if (_kwFail.length) {
+    Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
+      '<span class="et">✍️ Casi: concreta un poco más</span>Tu respuesta vale en longitud, pero falta nombrar las ideas clave.<br>· ' + _kwFail.join('<br>· '));
     return;
   }
   const datos = Academia.getSesion(SESION_ID);

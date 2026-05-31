@@ -296,6 +296,9 @@ function mostrarToast(t, n) {
 // ── INFORME ─────────────────────────────────────────────────────
 function contarPalabras(t) { return (t.trim().match(/\S+/g) || []).length; }
 
+function _norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function _tieneMin(texto, lista, min){var t=_norm(texto);var n=0;for(var i=0;i<lista.length;i++){if(t.indexOf(_norm(lista[i]))>=0)n++;}return n>=min;}
+
 function finalizarInforme() {
   const q1 = document.getElementById('inf-q1').value.trim();
   const q2 = document.getElementById('inf-q2').value.trim();
@@ -310,6 +313,15 @@ function finalizarInforme() {
     if (!v3.ok) detalle += '<br>· Pregunta 3: ' + v3.motivo + '.';
     Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
       '<span class="et">❌ Informe incompleto</span>Necesitas responder de verdad, no con letras sueltas.' + detalle);
+    return;
+  }
+  // Validación por palabras clave (evita respuestas fuera de tema)
+  var _kwFail = [];
+  if (!_tieneMin(q2, ['hablar','pedir','borrar','denunciar','plataforma','google','permiso','quitar','reportar'], 2)) _kwFail.push('Pregunta 2: nombra pasos concretos (hablar con tu amigo, pedirle que lo borre, reportar a la plataforma/Google, denunciar…).');
+  if (!_tieneMin(q3, ['interes publico','cargo','alcalde','ciudadano','privacidad','informacion','representa','publico'], 1)) _kwFail.push('Pregunta 3: usa la idea de "interés público" o el cargo público (alcalde) frente a un ciudadano normal.');
+  if (_kwFail.length) {
+    Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
+      '<span class="et">✍️ Casi: concreta un poco más</span>Tu respuesta vale en longitud, pero falta nombrar las ideas clave.<br>· ' + _kwFail.join('<br>· '));
     return;
   }
   const datos = Academia.getSesion(SESION_ID);
