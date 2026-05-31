@@ -243,7 +243,7 @@
     <!-- PANTALLA 0: INICIO -->
     <div class="pantalla activa" id="p-inicio">
       <h2>Inicialización del examen</h2>
-      <p>Este es el <b>examen del analista</b>: 12 preguntas que cubren todo el bloque, de la S1 a la S17. Cada pregunta tiene una respuesta correcta. Tras responder, el sistema te explica por qué.</p>
+      <p>Este es el <b>examen del analista</b>: 12 preguntas que cubren todo el bloque, de la S1 a la S17. Cada pregunta tiene una respuesta correcta. Tras responder, el sistema te explica por qué. <b>Ojo: si fallas una, el examen vuelve a empezar desde la primera</b> — ve con calma y piensa cada respuesta.</p>
       <p class="dim">Es un repaso para consolidar todo lo aprendido. Después del examen, completarás el Informe Final del bloque en la propia sesión (Bloque 5), de forma digital.</p>
 
       <div class="acreditar">
@@ -466,11 +466,17 @@ function responder(elegida) {
   fb.innerHTML = `
     <div class="tit">${acerto ? '✓ Correcto' : '✗ Incorrecto — la respuesta era ' + letras[correcta]}</div>
     <p style="margin:0;">${q.explica}</p>
-    <button class="btn-sig" onclick="mostrarPregunta(${pregActual + 1})">
-      ${pregActual + 1 < PREGUNTAS.length ? '▸ Siguiente pregunta' : '▸ Ver resultado'}
-    </button>
+    ${acerto
+      ? `<button class="btn-sig" onclick="mostrarPregunta(${pregActual + 1})">${pregActual + 1 < PREGUNTAS.length ? '▸ Siguiente pregunta' : '▸ Ver resultado'}</button>`
+      : `<button class="btn-sig" onclick="reiniciarExamen()">↺ Has fallado: el examen vuelve a empezar</button>`}
   `;
   fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function reiniciarExamen() {
+  aciertos = 0;
+  pregActual = 0;
+  mostrarPregunta(0);
 }
 
 function irADiploma() {
@@ -493,6 +499,8 @@ function irADiploma() {
 }
 
 function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s18:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s18','*'); }catch(e){}
   const canvas = document.createElement('canvas');
   canvas.width = 1100; canvas.height = 800;
   const ctx = canvas.getContext('2d');

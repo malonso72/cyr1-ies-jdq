@@ -585,6 +585,8 @@ function verificarCodigo() {
 
 // ====== DIPLOMA DESCARGABLE (PNG) ======
 function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s09:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s09','*'); }catch(e){}
   const canvas = document.createElement('canvas');
   canvas.width = 1000;
   canvas.height = 700;

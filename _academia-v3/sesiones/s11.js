@@ -378,6 +378,16 @@ function descargarInsignia() {
 
 // ── INIT ────────────────────────────────────────────────────────
 function initSesion() {
+  (function(){
+    var b=document.getElementById('btn-reto-hecho');
+    if(!b) return;
+    var key='academia:reto:'+SESION_ID+':done';
+    function unlock(){ if(b.dataset.locked==='1'){ b.disabled=false; b.dataset.locked='0'; b.textContent=b.dataset.label||'✓ He terminado'; } }
+    try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){}
+    window.addEventListener('message', function(ev){ if(ev&&typeof ev.data==='string'&&ev.data.indexOf('academia:reto-completado')===0) unlock(); });
+    window.addEventListener('focus', function(){ try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){} });
+    setInterval(function(){ try{ if(localStorage.getItem(key)==='1') unlock(); }catch(e){} }, 1500);
+  })();
   renderTarjetas();
   renderVF();
   const datos = Academia.getSesion(SESION_ID);

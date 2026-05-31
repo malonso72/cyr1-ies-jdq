@@ -288,6 +288,8 @@ function abrirSoporte() {
 }
 
 function mostrarHasCaido(via) {
+  try{ localStorage.setItem('academia:reto:s16:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s16','*'); }catch(e){}
   const trampasHtml = TRAMPAS.map((t, i) => `
     <div class="trampa"><b>${i+1}. ${t.titulo}</b><br>${t.explicacion}</div>
   `).join('');

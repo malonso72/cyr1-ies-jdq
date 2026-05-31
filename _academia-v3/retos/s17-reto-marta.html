@@ -760,10 +760,7 @@ function emitirDictamen() {
     acciones = `<button class="btn-sig-d" onclick="finalizar()">▸ Ir al informe e diploma</button>`;
   } else {
     titulo = '✗ RECONSTRUCCIÓN PARCIAL — Revisar antes de entregar';
-    acciones = `
-      <button class="btn-reint-d" onclick="reintentar()">↻ Volver a revisar evidencias</button>
-      <button class="btn-sig-d" onclick="finalizar()">↪ Avanzar al informe con esta puntuación</button>
-    `;
+    acciones = `<button class="btn-reint-d" onclick="reintentar()">↻ Aún no es perfecto: vuelve a revisar (hay que clavar las 6 evidencias)</button>`;
   }
 
   dictamen.innerHTML = `
@@ -879,6 +876,8 @@ function finalizar() {
 
 // ============ DESCARGA PNG ============
 function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s17:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s17','*'); }catch(e){}
   const canvas = document.createElement('canvas');
   canvas.width = 1100; canvas.height = 800;
   const ctx = canvas.getContext('2d');

@@ -716,10 +716,7 @@ function emitirDictamen() {
     acciones = `<button class="btn-sig-d" onclick="finalizar()">▸ Emitir diploma del detective</button>`;
   } else {
     titulo = '✗ DICTAMEN INCOMPLETO — Reconstrucción a revisar';
-    acciones = `
-      <button class="btn-reint-d" onclick="reintentar()">↻ Revisar y volver a intentar</button>
-      <button class="btn-sig-d" onclick="finalizar()">↪ Continuar al diploma con esta puntuación</button>
-    `;
+    acciones = `<button class="btn-reint-d" onclick="reintentar()">↻ Aún no está perfecto: vuelve a revisar el caso (hay que clavarlo todo)</button>`;
   }
 
   // Notas explicativas por evidencia (siempre, para aprender)
@@ -774,6 +771,8 @@ function finalizar() {
 
 // ============ DESCARGA PNG ============
 function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s15:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s15','*'); }catch(e){}
   const canvas = document.createElement('canvas');
   canvas.width = 1100; canvas.height = 800;
   const ctx = canvas.getContext('2d');

@@ -1036,6 +1036,8 @@ function cambiarPantalla(id) {
 
 // ====== DIPLOMA PNG ======
 function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s11:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s11','*'); }catch(e){}
   const canvas = document.createElement('canvas');
   canvas.width = 1000; canvas.height = 700;
   const ctx = canvas.getContext('2d');

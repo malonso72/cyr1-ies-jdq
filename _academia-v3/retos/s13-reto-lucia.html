@@ -316,6 +316,8 @@ document.getElementById('btnVeredicto').onclick = () => {
     alert(`Antes de emitir veredicto debéis examinar las 6 publicaciones. Llevad ${examinadas} de 6.`);
     return;
   }
+  try{ localStorage.setItem('academia:reto:s13:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s13','*'); }catch(e){}
 
   let aciertos = 0, total = 6;
   const items = [];

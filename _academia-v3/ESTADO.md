@@ -114,6 +114,25 @@ NO hecho a propósito:
 - Las citas legales dentro de las *explicaciones* de cada caso S12 se mantienen como justificación tras el veredicto (el briefing ya las pasó a "Para saber más").
 - Comprobar que el reto de Lucía no deja emitir veredicto sin abrir las 6 publicaciones: es lógica del reto y **conviene que lo pruebes tú** haciendo el flujo completo (abrir 6 → 6 preguntas → veredicto → diploma → "He terminado" → informe → insignia).
 
+## Anti-"tuntún": candado de reto + reinicio al fallar (6ª tanda)
+
+**Candado de finalización** (el botón "He terminado" arranca bloqueado y solo se desbloquea cuando el reto avisa de que se ha completado; funciona vía postMessage + marca en localStorage, también si abren el reto en pestaña nueva):
+- Aplicado en **S12** y **S13**. Patrón reutilizable (clave `academia:reto:sNN:done`, botón con `data-locked`/`data-label`).
+
+**Reinicio al fallar** (decisión de Manuel: estilo escape):
+- **S12 Tribunal**: ✅ implementado. Fallo (decisión o regla) → muestra explicación + **reinicia desde el Caso 1** (`reiniciarTribunal()`). Eliminado "Avanzar sin acierto". Exige 8/8 seguidos — vigilar dureza en aula; alternativa fácil: dar 3 vidas.
+- **S9 Escape PIENSA**: ya reinicia al fallar por diseño.
+- **S14 Real/Fake**: ya tiene 3 vidas + reinicio del torneo al quedarse sin vidas.
+- **S16 V-Bucks**: si "compra"/da credenciales → cae en la estafa + vuelve a examinar.
+- **S11 Wifi**: modelo "reintenta cada decisión", no deja avanzar sin acertar. NO se aplicó reinicio total (desproporcionado para reto de 4 fases).
+- **S18 Examen**: ✅ reinicio al fallar (un fallo → vuelve a la pregunta 1; `reiniciarExamen()`). Aviso en la intro. Exige 12/12 seguidas.
+- **S15 Detective** y **S17 Marta**: ✅ eliminado el atajo "continuar/avanzar con esta puntuación"; **solo se llega al diploma con todo perfecto** (equivalente a reinicio para una tarea de ordenar). `reintentar()` deja revisar.
+- **S11 Wifi**: NO convertido a reinicio total (4 fases + ya cursada por la clase). Su modelo ya impide avanzar sin acertar. Pendiente opcional si se quiere reinicio por fase.
+
+Estado anti-tuntún de los 9 retos: S9 reinicia (diseño) · S12 reinicia · S18 reinicia · S14 3 vidas · S15/S17 exigen perfecto · S16 "caes en la estafa" · S13 deducción de texto (no es opción múltiple) · S11 exige acertar para avanzar. Todos verificados con `node --check`.
+
+**Candado aplicado a las 9 sesiones con reto** (S9, S11, S12-S18): botón bloqueado hasta que el reto señala finalización. Señal inyectada en la función de cierre de cada reto (`descargarDiploma` en 8 de ellos; `mostrarHasCaido` en S16). Verificado: los 9 `sNN.js` y los scripts de los 9 retos pasan `node --check`.
+
 ## Pendiente / decisiones con Manuel
 
 - **Validar en el navegador** S9 y S11 (escape PIENSA y aventura de Ana en iframe + descarga de insignia).

@@ -798,10 +798,8 @@ function resolver(decision) {
       detalle = `<p>La decisión es correcta, pero la regla del juez que mejor lo explica es <b>${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</b>.</p>`;
     }
     cuerpo = detalle + `<div class="fundamento-aplicable"><b>Decisión correcta:</b> ${e.decision === "ACEPTAR" ? "SE BORRA" : "NO SE BORRA"} · <b>Regla:</b> ${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</div><p>${e.explicacion}</p>`;
-    acciones = `
-      <button class="btn-reint" onclick="reintentarExpediente()">↻ Volver a resolver</button>
-      <button class="btn-sig" onclick="mostrarExpediente(${expedienteActual + 1})">↪ Avanzar sin acierto</button>
-    `;
+    cuerpo += `<p style="margin-top:10px;font-weight:bold;color:#C0392B;">⚖️ Una sentencia injusta invalida el juicio. El tribunal vuelve a empezar desde el Caso 1: lee bien las pruebas y no respondas a la ligera.</p>`;
+    acciones = `<button class="btn-reint" onclick="reiniciarTribunal()">↺ Volver a empezar el tribunal (Caso 1)</button>`;
   }
 
   dictamen.innerHTML = `
@@ -817,9 +815,18 @@ function reintentarExpediente() {
   mostrarExpediente(expedienteActual);
 }
 
+function reiniciarTribunal() {
+  aciertos = 0;
+  fundamentosAplicados = new Set();
+  var disp = document.getElementById('aciertos-disp'); if (disp) disp.textContent = '0';
+  mostrarExpediente(0);
+}
+
 // ============ FINAL ============
 function mostrarFinal() {
   cambiarPantalla('pantalla-final');
+  try{ localStorage.setItem('academia:reto:s12:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s12','*'); }catch(e){}
   const ahora = new Date();
   const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
   document.getElementById('nombres-finales').textContent = `${nombre1}  ·  ${nombre2}`;
