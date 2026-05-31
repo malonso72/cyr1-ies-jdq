@@ -76,9 +76,16 @@ Aplicados en **ambas** ubicaciones (`_academia-v3/` fuente y `trimestres/t3-cibe
 - **`<meta viewport>` añadido a los 9 retos** (`s09`-`s18`): no lo tenían, así que dentro del iframe no eran responsive en móvil.
 - **Avisos de privacidad para menores** en S4 (no escribir contraseñas reales; email con permiso/de prueba) y S8 (email del escape CCN: consultar al profesor).
 
-### Pendiente de decisión (NO tocado, requiere criterio):
+### Reto interno S12 ✅ simplificado (3ª tanda)
 
-- **Reto interno S12** (`retos/s12-reto-dpo.html`): sigue usando lenguaje jurídico (RGPD, LOPDGDD, art. 17, "expediente" ~30 veces, "procede/no procede"). El envoltorio ya es apto para 1º ESO pero el reto no. No se reescribe a ciegas porque "procede"/"expediente" pueden ser claves de la lógica del juego: hay que editarlo con cuidado.
+Se bajó el registro del reto `retos/s12-reto-dpo.html` a 1º ESO **sin tocar la lógica** (verificado: 13 anclajes de lógica, identificadores JS, claves `FUNDAMENTOS` "1"-"4"/"F" y valores `ACEPTAR`/`DENEGAR` intactos):
+- "Fundamento jurídico" → "Regla del juez"; "Fundamento N" → "Regla N".
+- "Expediente" visible → "Caso"; "Resolución que procede dictar" → "Tu decisión como juez".
+- Botones "Aceptar/Denegar solicitud" → "SE BORRA / NO SE BORRA" (el value interno sigue siendo ACEPTAR/DENEGAR).
+- "RESOLUCIÓN" → "SENTENCIA" en los títulos de feedback.
+- Citas legales (art. 17 RGPD, LOPDGDD, etc.) conservadas pero marcadas como "Para saber más" en letra pequeña.
+
+### Pendiente de decisión (NO tocado, requiere criterio):
 - **Contradicción S18**: el envoltorio tiene informe digital; el reto dice "Parte B en PAPEL, no la sustituye nada". Decidir un único modelo.
 - **Modelo Moodle**: subir **enlace web** a cada sesión, no el HTML suelto (las sesiones dependen de CSS/JS comunes y del reto; un .html aislado falla).
 - **Doble diploma / doble entrada de nombres** en sesiones con iframe (reto + insignia del envoltorio): unificar o aclarar cuál se entrega.

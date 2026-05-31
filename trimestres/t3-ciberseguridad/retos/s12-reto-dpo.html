@@ -419,36 +419,36 @@
       <div class="progreso-visual"><div class="fill" id="fill-tiempo"></div></div>
     </div>
 
-    <h2>II. Fundamentos jurídicos aplicables</h2>
-    <p class="legal">El Derecho al Olvido (art. 17 RGPD y art. 93–94 LOPDGDD) faculta a cualquier ciudadano para solicitar la retirada de información personal en buscadores cuando concurran determinadas circunstancias. No es un derecho absoluto: convive con el derecho a la libertad de información y con el interés público.</p>
+    <h2>II. Las reglas del juez</h2>
+    <p class="legal">El Derecho al Olvido permite a cualquier persona pedir que Google deje de mostrar información suya cuando se cumplen ciertas condiciones. No es absoluto: convive con el derecho de todos a estar informados y con el interés público. <span style="font-size:.82em;color:#888">(Para saber más: art. 17 RGPD y art. 93–94 LOPDGDD)</span></p>
 
     <div id="contenido-briefing">
 
       <h3>A. Cuándo SÍ se borra</h3>
 
       <div class="fundamento si">
-        <div class="titulo">Fundamento 1 — Información antigua y perjudicial</div>
-        <div class="articulo">Art. 17.1 a) y c) RGPD · Art. 93 LOPDGDD</div>
+        <div class="titulo">Regla 1 — Información antigua y perjudicial</div>
+        <div class="articulo">Para saber más · Art. 17.1 a) y c) RGPD · Art. 93 LOPDGDD</div>
         <p>Información publicada hace años, <span class="destacar">sin interés público actual</span>, que causa un perjuicio actual al solicitante. Ejemplo prototípico: un comentario inadecuado de juventud que sigue apareciendo en Google al buscar el nombre.</p>
       </div>
 
       <div class="fundamento si">
-        <div class="titulo">Fundamento 2 — Imágenes publicadas por terceros sin consentimiento</div>
-        <div class="articulo">Art. 17.1 d) RGPD · L.O. 1/1982 protección del honor</div>
+        <div class="titulo">Regla 2 — Imágenes publicadas por terceros sin consentimiento</div>
+        <div class="articulo">Para saber más · Art. 17.1 d) RGPD · L.O. 1/1982 protección del honor</div>
         <p>Fotografías subidas por otra persona sin permiso del afectado, especialmente si comprometen su imagen o intimidad. <span class="destacar">El consentimiento del titular es necesario.</span></p>
       </div>
 
       <h3>B. Cuándo NO se borra</h3>
 
       <div class="fundamento no">
-        <div class="titulo">Fundamento 3 — Información veraz de interés público actual</div>
-        <div class="articulo">Art. 17.3 a) RGPD · Doctrina TC sobre libertad de información</div>
+        <div class="titulo">Regla 3 — Información veraz de interés público actual</div>
+        <div class="articulo">Para saber más · Art. 17.3 a) RGPD · Doctrina TC sobre libertad de información</div>
         <p>Datos veraces sobre <span class="destacar">personas con cargo público en el ejercicio de sus funciones</span>, sentencias firmes recientes que mantengan interés social, o información que sirva a la transparencia. <span class="legal">Prevalece el derecho a la información sobre la protección de datos.</span></p>
       </div>
 
       <div class="fundamento no">
-        <div class="titulo">Fundamento 4 — Datos públicos por ley</div>
-        <div class="articulo">Ley 15/2014 Registro Mercantil · BOE</div>
+        <div class="titulo">Regla 4 — Datos públicos por ley</div>
+        <div class="articulo">Para saber más · Ley 15/2014 Registro Mercantil · BOE</div>
         <p>Información publicada en registros oficiales <span class="destacar">accesibles por mandato legal</span> (Registro Mercantil, BOE, boletines oficiales, sentencias) tiene reglas especiales. <span class="legal">No se puede borrar de Google si la fuente original es de publicidad obligatoria.</span></p>
       </div>
 
@@ -469,7 +469,7 @@
   <!-- PANTALLA 2 — EXPEDIENTES -->
   <div class="pantalla" id="pantalla-expedientes">
     <div class="progreso-cab">
-      <span>EXPEDIENTE <span id="num-exp">1</span> / 8</span>
+      <span>CASO <span id="num-exp">1</span> / 8</span>
       <span>RESOLUCIONES CORRECTAS: <span id="aciertos-disp">0</span></span>
     </div>
 
@@ -539,7 +539,7 @@ const EXPEDIENTES = [
     solicita: "Que Google deje de mostrar ese resultado al buscar su nombre.",
     decision: "ACEPTAR",
     fundamento: 1,
-    explicacion: "El comentario es <b>antiguo</b> (8 años), <b>no tiene ningún interés público actual</b> (era una opinión en un foro de cine sin relevancia social), y le está <b>causando perjuicio real</b> en su búsqueda de empleo. Es el caso paradigmático del Fundamento 1."
+    explicacion: "El comentario es <b>antiguo</b> (8 años), <b>no tiene ningún interés público actual</b> (era una opinión en un foro de cine sin relevancia social), y le está <b>causando perjuicio real</b> en su búsqueda de empleo. Es el caso paradigmático del Regla 1."
   },
   {
     n: 2,
@@ -550,7 +550,7 @@ const EXPEDIENTES = [
     solicita: "Retirada del resultado que muestra la acusación inicial.",
     decision: "ACEPTAR",
     fundamento: 1,
-    explicacion: "La información ha perdido relevancia: la solicitante fue <b>absuelta</b>, por lo que la noticia original es <b>parcial e inexacta</b> en el contexto actual. Se considera información antigua sin interés público actual cuyo mantenimiento causa perjuicio. Caso del Fundamento 1, agravado por la inexactitud sobrevenida."
+    explicacion: "La información ha perdido relevancia: la solicitante fue <b>absuelta</b>, por lo que la noticia original es <b>parcial e inexacta</b> en el contexto actual. Se considera información antigua sin interés público actual cuyo mantenimiento causa perjuicio. Caso del Regla 1, agravado por la inexactitud sobrevenida."
   },
   {
     n: 3,
@@ -561,7 +561,7 @@ const EXPEDIENTES = [
     solicita: "Que el dato deje de aparecer asociado a su nombre.",
     decision: "DENEGAR",
     fundamento: 4,
-    explicacion: "El Registro Mercantil es de <b>publicidad obligatoria por ley</b> (Ley 15/2014). Los datos económicos de directivos de empresas cotizadas son accesibles legalmente. Caso del Fundamento 4: información publicada por mandato legal. Concurre además interés público (transparencia económica)."
+    explicacion: "El Registro Mercantil es de <b>publicidad obligatoria por ley</b> (Ley 15/2014). Los datos económicos de directivos de empresas cotizadas son accesibles legalmente. Caso del Regla 4: información publicada por mandato legal. Concurre además interés público (transparencia económica)."
   },
   {
     n: 4,
@@ -572,7 +572,7 @@ const EXPEDIENTES = [
     solicita: "Retirada de la foto de los resultados de búsqueda.",
     decision: "ACEPTAR",
     fundamento: 2,
-    explicacion: "La fotografía fue publicada por una <b>tercera persona sin consentimiento</b> de la afectada y compromete su imagen personal. La L.O. 1/1982 protege el derecho a la propia imagen. Caso paradigmático del Fundamento 2."
+    explicacion: "La fotografía fue publicada por una <b>tercera persona sin consentimiento</b> de la afectada y compromete su imagen personal. La L.O. 1/1982 protege el derecho a la propia imagen. Caso paradigmático del Regla 2."
   },
   {
     n: 5,
@@ -583,7 +583,7 @@ const EXPEDIENTES = [
     solicita: "Que Google deje de indexar la noticia de su condena.",
     decision: "DENEGAR",
     fundamento: 3,
-    explicacion: "Se trata de una <b>sentencia firme reciente</b> (2020) con <b>interés social vigente</b>: hay víctimas reconocidas judicialmente y la información sirve a la prevención de futuras estafas. Caso del Fundamento 3: prevalece el derecho a la información."
+    explicacion: "Se trata de una <b>sentencia firme reciente</b> (2020) con <b>interés social vigente</b>: hay víctimas reconocidas judicialmente y la información sirve a la prevención de futuras estafas. Caso del Regla 3: prevalece el derecho a la información."
   },
   {
     n: 6,
@@ -606,7 +606,7 @@ const EXPEDIENTES = [
     solicita: "Que Google deje de mostrar la foto al buscar su nombre.",
     decision: "ACEPTAR",
     fundamento: 1,
-    explicacion: "La participación en una manifestación legal y pacífica no tiene <b>interés público actual</b> 5 años después, no fue noticia destacada, y el solicitante no es figura pública. La información antigua le perjudica en su empleabilidad. Caso del Fundamento 1."
+    explicacion: "La participación en una manifestación legal y pacífica no tiene <b>interés público actual</b> 5 años después, no fue noticia destacada, y el solicitante no es figura pública. La información antigua le perjudica en su empleabilidad. Caso del Regla 1."
   },
   {
     n: 8,
@@ -617,16 +617,16 @@ const EXPEDIENTES = [
     solicita: "Desindexación de sus tuits sobre actividad municipal.",
     decision: "DENEGAR",
     fundamento: 3,
-    explicacion: "Aunque el solicitante esté ahora jubilado, los tuits versan sobre el <b>ejercicio de un cargo público</b> (alcalde) y sus decisiones administrativas. Esa información mantiene interés público para la rendición de cuentas histórica. Caso del Fundamento 3: información veraz sobre cargo público en el ejercicio de sus funciones."
+    explicacion: "Aunque el solicitante esté ahora jubilado, los tuits versan sobre el <b>ejercicio de un cargo público</b> (alcalde) y sus decisiones administrativas. Esa información mantiene interés público para la rendición de cuentas histórica. Caso del Regla 3: información veraz sobre cargo público en el ejercicio de sus funciones."
   }
 ];
 
 // Mapa de fundamentos para el selector
 const FUNDAMENTOS = {
-  "1": "Fundamento 1 — Información antigua, sin interés público actual, perjudicial",
-  "2": "Fundamento 2 — Imágenes de terceros sin consentimiento",
-  "3": "Fundamento 3 — Información veraz de interés público (cargo público / sentencia firme reciente)",
-  "4": "Fundamento 4 — Datos públicos por ley (Registro Mercantil, BOE)",
+  "1": "Regla 1 — Información antigua, sin interés público actual, perjudicial",
+  "2": "Regla 2 — Imágenes de terceros sin consentimiento",
+  "3": "Regla 3 — Información veraz de interés público (cargo público / sentencia firme reciente)",
+  "4": "Regla 4 — Datos públicos por ley (Registro Mercantil, BOE)",
   "F": "Aviso especial — Información FALSA (vía incorrecta: corresponde rectificación)"
 };
 
@@ -715,7 +715,7 @@ function mostrarExpediente(idx) {
   const cont = document.getElementById('contenedor-expediente');
   cont.innerHTML = `
     <div class="expediente">
-      <div class="num-expediente">EXP. Nº ${e.n}</div>
+      <div class="num-expediente">CASO Nº ${e.n}</div>
       <div class="meta">CASO Nº: ${String(e.n).padStart(4,'0')} · FECHA REGISTRO: ${new Date().getFullYear()}-05-${String(10+e.n).padStart(2,'0')}</div>
 
       <div class="ficha-fila"><span class="ficha-etiq">Solicitante</span><span class="ficha-val">${e.solicitante}</span></div>
@@ -729,11 +729,11 @@ function mostrarExpediente(idx) {
       <div class="solicita">"${e.solicita}"</div>
 
       <div class="resolucion">
-        <div class="titulo-paso">Resolución que procede dictar</div>
-        <p style="font-size:13px;margin-bottom:10px;color:var(--tinta-suave);">Antes de pulsar el botón de decisión, seleccionen el <b>fundamento jurídico</b> que la motiva. Sin selección, los botones permanecen bloqueados.</p>
+        <div class="titulo-paso">Tu decisión como juez</div>
+        <p style="font-size:13px;margin-bottom:10px;color:var(--tinta-suave);">Antes de pulsar el botón de decisión, elige la <b>regla del juez</b> que lo explica. Sin elegir una regla, los botones siguen bloqueados.</p>
 
         <select id="selector-fundamento" onchange="habilitarBotones()">
-          <option value="">— Seleccione fundamento aplicable —</option>
+          <option value="">— Elige la regla que se aplica —</option>
           <option value="1">${FUNDAMENTOS["1"]}</option>
           <option value="2">${FUNDAMENTOS["2"]}</option>
           <option value="3">${FUNDAMENTOS["3"]}</option>
@@ -743,10 +743,10 @@ function mostrarExpediente(idx) {
 
         <div class="botones-decision">
           <button class="btn-decision btn-aceptar" id="btn-aceptar" disabled onclick="resolver('ACEPTAR')">
-            ✓ Aceptar solicitud
+            ✓ SE BORRA (acepto)
           </button>
           <button class="btn-decision btn-denegar" id="btn-denegar" disabled onclick="resolver('DENEGAR')">
-            ✗ Denegar solicitud
+            ✗ NO SE BORRA (deniego)
           </button>
         </div>
       </div>
@@ -784,20 +784,20 @@ function resolver(decision) {
     aciertos++;
     fundamentosAplicados.add(fundEsperado);
     document.getElementById('aciertos-disp').textContent = aciertos;
-    titulo = `RESOLUCIÓN CORRECTA — ${e.decision === "ACEPTAR" ? "Se estima" : "Se desestima"} la solicitud`;
+    titulo = `SENTENCIA CORRECTA — ${e.decision === "ACEPTAR" ? "SE BORRA" : "NO SE BORRA"}`;
     cuerpo = `<p>${e.explicacion}</p>`;
-    acciones = `<button class="btn-sig" onclick="mostrarExpediente(${expedienteActual + 1})">▸ Siguiente expediente</button>`;
+    acciones = `<button class="btn-sig" onclick="mostrarExpediente(${expedienteActual + 1})">▸ Siguiente caso</button>`;
   } else {
-    titulo = `RESOLUCIÓN INCORRECTA`;
+    titulo = `SENTENCIA INCORRECTA`;
     let detalle = '';
     if (!decisionCorrecta && !fundamentoCorrecto) {
       detalle = `<p>Ni la decisión ni el fundamento son los que corresponden a este expediente.</p>`;
     } else if (!decisionCorrecta) {
-      detalle = `<p>El fundamento jurídico seleccionado es correcto, pero la decisión que procedía era <b>${e.decision}</b>, no ${decision}.</p>`;
+      detalle = `<p>La regla del juez elegida es correcta, pero la decisión correcta era <b>${e.decision === "ACEPTAR" ? "SE BORRA" : "NO SE BORRA"}</b>, no ${decision === "ACEPTAR" ? "SE BORRA" : "NO SE BORRA"}.</p>`;
     } else {
-      detalle = `<p>La decisión es correcta, pero el fundamento jurídico que mejor la motiva es <b>${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</b>.</p>`;
+      detalle = `<p>La decisión es correcta, pero la regla del juez que mejor lo explica es <b>${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</b>.</p>`;
     }
-    cuerpo = detalle + `<div class="fundamento-aplicable"><b>Resolución correcta:</b> ${e.decision} · <b>Fundamento:</b> ${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</div><p>${e.explicacion}</p>`;
+    cuerpo = detalle + `<div class="fundamento-aplicable"><b>Decisión correcta:</b> ${e.decision === "ACEPTAR" ? "SE BORRA" : "NO SE BORRA"} · <b>Regla:</b> ${e.fundamentoMostrado || FUNDAMENTOS[fundEsperado]}</div><p>${e.explicacion}</p>`;
     acciones = `
       <button class="btn-reint" onclick="reintentarExpediente()">↻ Volver a resolver</button>
       <button class="btn-sig" onclick="mostrarExpediente(${expedienteActual + 1})">↪ Avanzar sin acierto</button>
