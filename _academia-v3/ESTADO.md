@@ -67,6 +67,23 @@ Más detalles: `_academia-v3/PLANTILLA.md`
 - Tarjeta T3 del índice raíz actualizada ("Academia Cyber-IES: 18 sesiones interactivas").
 - **Auditoría de enlaces**: 221 enlaces internos del T3 verificados, 0 rotos.
 
+## Auditoría y arreglos (31/05/2026, 2ª tanda)
+
+Aplicados en **ambas** ubicaciones (`_academia-v3/` fuente y `trimestres/t3-ciberseguridad/` publicado):
+
+- **Placeholders sin sustituir** `{INS_FINAL}` y `{FRASE_DIPLOMA}` en la vista previa del diploma de S4, S5, S6, S7, S8 y S10 → reemplazados por la insignia y frase reales de cada sesión (bug del generador; el PNG descargado ya usaba los valores correctos, solo fallaba la previsualización en pantalla).
+- **Portada**: "30-40 minutos" → "40-50 minutos"; tarjeta S1 "12 conceptos" → "6 conceptos".
+- **`<meta viewport>` añadido a los 9 retos** (`s09`-`s18`): no lo tenían, así que dentro del iframe no eran responsive en móvil.
+- **Avisos de privacidad para menores** en S4 (no escribir contraseñas reales; email con permiso/de prueba) y S8 (email del escape CCN: consultar al profesor).
+
+### Pendiente de decisión (NO tocado, requiere criterio):
+
+- **Reto interno S12** (`retos/s12-reto-dpo.html`): sigue usando lenguaje jurídico (RGPD, LOPDGDD, art. 17, "expediente" ~30 veces, "procede/no procede"). El envoltorio ya es apto para 1º ESO pero el reto no. No se reescribe a ciegas porque "procede"/"expediente" pueden ser claves de la lógica del juego: hay que editarlo con cuidado.
+- **Contradicción S18**: el envoltorio tiene informe digital; el reto dice "Parte B en PAPEL, no la sustituye nada". Decidir un único modelo.
+- **Modelo Moodle**: subir **enlace web** a cada sesión, no el HTML suelto (las sesiones dependen de CSS/JS comunes y del reto; un .html aislado falla).
+- **Doble diploma / doble entrada de nombres** en sesiones con iframe (reto + insignia del envoltorio): unificar o aclarar cuál se entrega.
+- **S11 demasiado larga**: el reto repite la teoría del envoltorio (Fase 0). Considerar recortar una de las dos.
+
 ## Pendiente / decisiones con Manuel
 
 - **Validar en el navegador** S9 y S11 (escape PIENSA y aventura de Ana en iframe + descarga de insignia).
