@@ -133,6 +133,16 @@ Estado anti-tuntún de los 9 retos: S9 reinicia (diseño) · S12 reinicia · S18
 
 **Candado aplicado a las 9 sesiones con reto** (S9, S11, S12-S18): botón bloqueado hasta que el reto señala finalización. Señal inyectada en la función de cierre de cada reto (`descargarDiploma` en 8 de ellos; `mostrarHasCaido` en S16). Verificado: los 9 `sNN.js` y los scripts de los 9 retos pasan `node --check`.
 
+## Sesión ALTERNATIVA a S12 — Ciberacoso (plan B)
+
+Creada como alternativa a S12 (tema legal árido) sin tocar la S12 original:
+- `sesiones/s12-alt.html` + `s12-alt.js` (SESION_ID `s12alt`, no colisiona con s12) + `retos/s12alt-reto-ciberacoso.html`.
+- Tema: **ciberacoso, qué hacer si te pasa o si lo ves**. Personajes ficticios. Enfoque en actuar (no culpabiliza a la víctima) + papel del testigo. Plan **PARA · GUARDA · BLOQUEA · CUENTA**. Insignia "Escudo Digital".
+- Reto: "La historia de Marcos", 6 decisiones; al fallar se reintenta ese momento (avanza solo con la decisión correcta). Líneas de ayuda reales: **017** (INCIBE) y **116 111** (Fundación ANAR).
+- Candado de finalización aplicado (botón bloqueado hasta completar el reto).
+- Enlazada en el hub con tarjeta "↔ S12 · ALTERNATIVA". En sitemap (97 URLs). Auditoría t3: 240 enlaces, 0 rotos. JS verificado con node --check.
+- URL: /trimestres/t3-ciberseguridad/sesiones/s12-alt.html
+
 ## Pendiente / decisiones con Manuel
 
 - **Validar en el navegador** S9 y S11 (escape PIENSA y aventura de Ana en iframe + descarga de insignia).
