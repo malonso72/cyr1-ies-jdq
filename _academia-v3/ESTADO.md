@@ -156,6 +156,7 @@ Sustituye en S12-alt al modelo "1 fallo = reinicio". Por cada pregunta (teoría,
 - **Insignia por bloque** (cadete/analista/investigador) solo si ese bloque se completa con 0 segundas. Insignia final (detective/Escudo Digital) solo si toda la sesión es perfecta.
 - **Nota = max(5, 10 − segundas_totales)**. Se muestra en el diploma ("Calificación: X/10") y en el PNG (Puntuación: X/10). Diploma siempre (completar = aprobado, suelo 5).
 - Implementación: `mqFalladas`/`vfFalladas` (Set por bloque), `segTeoria`/`segVF`/`segReto`; el reto envía `segReto` por postMessage (`academia:reto-completado:s12alt:N`) y por localStorage (`academia:reto:s12alt:seg`). Verificado con node --check.
+- AJUSTE FINAL (a petición de Manuel): teoría (microquiz) y entrenamiento (V/F) son ESTRICTOS — cualquier fallo reinicia ese bloque desde el principio, sin segunda oportunidad. Solo la HISTORIA (reto) mantiene las 2 oportunidades, así que la nota la marca el reto (segReto). teoría/VF al completarse siempre son limpios → dan insignia y no penalizan nota.
 - Decisiones de Manuel: insignia POR BLOQUE, nota NUMÉRICA 1-10, piloto SOLO en S12-alt. Si funciona en clase → replicar a las 17 sesiones (mismo motor `responderMicroquiz`/`responderVF` + retos).
 
 ## Ajuste de dificultad — pendiente (curso que viene)

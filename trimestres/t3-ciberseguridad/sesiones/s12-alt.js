@@ -240,20 +240,12 @@ function responderMicroquiz(idx, idxOp) {
     }
     return;
   }
-  if (!mqFalladas.has(idx)) {
-    mqFalladas.add(idx);
-    segTeoria++;
-    botones[idxOp].classList.add('incorrecta');
-    botones[idxOp].disabled = true;
-    fb.innerHTML = '❌ No es esa. Te queda <b>una segunda oportunidad</b> en esta pregunta (baja la nota y pierdes la insignia perfecta). Si vuelves a fallar, reinicias la teoría.';
-    fb.dataset.activo = 'true';
-    return;
-  }
+  // Teoría estricta: cualquier fallo vuelve al primer concepto (sin segunda oportunidad)
   botones.forEach(function(b){ b.disabled = true; });
   botones[idxOp].classList.add('incorrecta');
-  fb.innerHTML = '❌ Dos fallos en esta pregunta: vuelves al primer concepto.';
+  fb.innerHTML = '❌ Fallaste. ' + c.explica + ' <b>En la teoría, un fallo y vuelves al PRIMER concepto.</b>';
   fb.dataset.activo = 'true';
-  setTimeout(reiniciarTeoria, 1700);
+  setTimeout(reiniciarTeoria, 1900);
 }
 
 // ── ENTRENAMIENTO V/F ───────────────────────────────────────────
@@ -302,20 +294,13 @@ function responderVF(idx, valor) {
     }
     return;
   }
-  if (!vfFalladas.has(idx)) {
-    vfFalladas.add(idx);
-    segVF++; vfFallos++;
-    document.getElementById('vf-fallos').textContent = vfFallos;
-    exp.innerHTML = '❌ No. ' + f.explica + ' <b>Te queda una segunda oportunidad en esta frase (baja la nota).</b>';
-    exp.dataset.activo = 'true';
-    return;
-  }
+  // En V/F (solo 2 opciones) no hay segunda oportunidad: cualquier fallo vuelve a la primera frase
   vfFallos++;
   document.getElementById('vf-fallos').textContent = vfFallos;
   botones.forEach(function(b){ b.disabled = true; });
-  exp.innerHTML = '❌ Dos fallos en esta frase: vuelves a la primera.';
+  exp.innerHTML = '❌ Fallaste. ' + f.explica + ' <b>En el entrenamiento, un fallo y vuelves a la PRIMERA frase.</b>';
   exp.dataset.activo = 'true';
-  setTimeout(reiniciarVF, 1700);
+  setTimeout(reiniciarVF, 1900);
 }
 
 // ── RETO (iframe) ───────────────────────────────────────────────
