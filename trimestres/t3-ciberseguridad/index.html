@@ -184,6 +184,29 @@
 
 </div>
 
+<!-- ░░ CONTROL DE SESIONES ACTIVAS ░░ Cambia SOLO la línea de abajo cada día de clase. -->
+<style>
+.grid-elementos a.elemento.bloqueada{opacity:.5;filter:grayscale(1);pointer-events:none;cursor:default}
+</style>
+<script>
+/* SESIONES_ACTIVAS: qué tarjetas se pueden abrir desde el índice.
+   - Una sesión:  ['s12.html']
+   - Con su alternativa: ['s12.html','s12-alt.html']
+   - TODAS abiertas: deja la lista vacía  []                         */
+const SESIONES_ACTIVAS = ['s12.html','s12-alt.html'];
+(function(){
+  if (!SESIONES_ACTIVAS.length) return;
+  document.querySelectorAll('.grid-elementos a.elemento').forEach(function(a){
+    var file = (a.getAttribute('href')||'').split('/').pop();
+    if (SESIONES_ACTIVAS.indexOf(file) !== -1) return;
+    a.classList.add('bloqueada');
+    a.setAttribute('aria-disabled','true');
+    a.removeAttribute('href');
+    var badge = a.querySelector('div');
+    if (badge){ badge.textContent='🔒 BLOQUEADA'; badge.style.background='#9aa0a6'; badge.style.color='#fff'; }
+  });
+})();
+</script>
 </main>
 
 <footer style="text-align:center;padding:30px 14px 50px;color:var(--t2);font-size:.85rem">
