@@ -336,26 +336,22 @@ function mostrarToast(t, n) {
 function contarPalabras(t) { return (t.trim().match(/\S+/g) || []).length; }
 
 function finalizarInforme() {
-  const q1 = document.getElementById('inf-q1').value.trim();
-  const q2 = document.getElementById('inf-q2').value.trim();
-  const q3 = document.getElementById('inf-q3').value.trim();
-  const v1 = Academia.respuestaInformeValida(q1);
-  const v2 = Academia.respuestaInformeValida(q2);
-  const v3 = Academia.respuestaInformeValida(q3);
-  if (!v1.ok || !v2.ok || !v3.ok) {
+  const MIN_PAL = 20;
+  const qs = ['q1','q2','q3','q4','q5'].map(function(q){ return document.getElementById('inf-' + q).value.trim(); });
+  const vs = qs.map(function(t){ return Academia.respuestaInformeValida(t, MIN_PAL); });
+  if (vs.some(function(v){ return !v.ok; })) {
     let detalle = '';
-    if (!v1.ok) detalle += '<br>· Pregunta 1: ' + v1.motivo + '.';
-    if (!v2.ok) detalle += '<br>· Pregunta 2: ' + v2.motivo + '.';
-    if (!v3.ok) detalle += '<br>· Pregunta 3: ' + v3.motivo + '.';
+    vs.forEach(function(v, i){ if (!v.ok) detalle += '<br>· Pregunta ' + (i+1) + ': ' + v.motivo + '.'; });
     Academia.mostrarFeedback(document.getElementById('fb-informe'), 'mal',
-      '<span class="et">❌ Informe incompleto</span>Necesitas responder de verdad, no con letras sueltas.' + detalle);
+      '<span class="et">❌ Informe incompleto</span>Necesitas responder de verdad (mínimo ' + MIN_PAL + ' palabras por pregunta), no con letras sueltas.' + detalle);
     return;
   }
+  const q1 = qs[0], q2 = qs[1], q3 = qs[2], q4 = qs[3], q5 = qs[4];
   var totalSeg = segTeoria + segVF + segReto;
   var nota = Math.max(5, 10 - totalSeg);
   window._notaFinal = nota; window._segTotal = totalSeg;
   Academia.marcarCompletada(SESION_ID, nota, 10);
-  Academia.setSesion(SESION_ID, { q1: q1, q2: q2, q3: q3, informeCompletado: true, nota: nota, segundas: totalSeg, tiempoMin: Math.round((Date.now() - tInicio) / 60000) });
+  Academia.setSesion(SESION_ID, { q1: q1, q2: q2, q3: q3, q4: q4, q5: q5, informeCompletado: true, nota: nota, segundas: totalSeg, tiempoMin: Math.round((Date.now() - tInicio) / 60000) });
   document.getElementById('res-teoria').textContent = (segTeoria === 0 ? 'Teoría: perfecta 🎖️' : 'Teoría: con ayuda (-' + segTeoria + ')');
   document.getElementById('res-entrenamiento').textContent = (segVF === 0 ? 'Entrenamiento: perfecto 🎖️' : 'Entrenamiento: con ayuda (-' + segVF + ')');
   document.getElementById('res-tiempo').textContent = (Math.round((Date.now() - tInicio) / 60000)) + ' min';
@@ -406,7 +402,7 @@ function initSesion() {
   renderTarjetas();
   renderVF();
   const datos = Academia.getSesion(SESION_ID);
-  ['q1','q2','q3'].forEach(function(q) {
+  ['q1','q2','q3','q4','q5'].forEach(function(q) {
     if (datos[q]) {
       const ta = document.getElementById('inf-' + q);
       if (ta) { ta.value = datos[q]; document.getElementById('cnt-' + q).textContent = contarPalabras(datos[q]) + ' palabras'; }
