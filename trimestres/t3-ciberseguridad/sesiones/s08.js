@@ -192,7 +192,6 @@ function renderTarjetas() {
       '</div>' +
     '</article>';
   }).join('');
-  document.getElementById('puntos-tarjetas').innerHTML = CONCEPTOS.map(function(_, i) { return '<div class="punto ' + (i === 0 ? 'activo' : '') + '" onclick="irATarjeta(' + i + ')"></div>'; }).join('');
 }
 function navSub(idx, delta) {
   const t = document.querySelector('.tarjeta-teoria[data-idx="' + idx + '"]');
@@ -200,7 +199,7 @@ function navSub(idx, delta) {
   let actual = -1; subs.forEach(function(s, i) { if (s.dataset.activa === 'true') actual = i; });
   const nuevo = actual + delta;
   if (nuevo < 0) return;
-  if (nuevo > 2) { if (microquizContestados.has(idx)) navTarjeta(1); return; }
+  if (nuevo > 2) { if (microquizContestados.has(idx)) { if (idx === CONCEPTOS.length - 1) Academia.irABloque('entrenamiento'); else navTarjeta(1); } return; }
   subs.forEach(function(s) { s.dataset.activa = 'false'; });
   subs[nuevo].dataset.activa = 'true';
   const inds = t.querySelectorAll('.nav-sub .ind span');
@@ -208,7 +207,7 @@ function navSub(idx, delta) {
   document.getElementById('fase-' + idx).textContent = 'PANTALLA ' + (nuevo + 1) + ' / 3';
   document.getElementById('btn-sub-prev-' + idx).disabled = nuevo === 0;
   const btnN = document.getElementById('btn-sub-next-' + idx);
-  if (nuevo === 2) { btnN.textContent = microquizContestados.has(idx) ? 'Siguiente concepto ▸' : '🔒 Responde el microquiz'; btnN.disabled = !microquizContestados.has(idx); }
+  if (nuevo === 2) { btnN.textContent = !microquizContestados.has(idx) ? '🔒 Responde el microquiz' : (idx === CONCEPTOS.length - 1 ? 'A entrenar ▸' : 'Siguiente concepto ▸'); btnN.disabled = !microquizContestados.has(idx); }
   else { btnN.textContent = 'Continuar ▸'; btnN.disabled = false; }
 }
 function navTarjeta(delta) { irATarjeta(tarjetaActual + delta); }
@@ -225,9 +224,7 @@ function irATarjeta(idx) {
   document.getElementById('btn-sub-next-' + idx).textContent = 'Continuar ▸';
   document.getElementById('btn-sub-next-' + idx).disabled = false;
   document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { p.classList.remove('activo','visto'); if (i === idx) p.classList.add('activo'); else if (microquizContestados.has(i)) p.classList.add('visto'); });
-  document.getElementById('btn-anterior').disabled = idx === 0;
-  document.getElementById('btn-siguiente').disabled = !microquizContestados.has(idx);
-  if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) { document.getElementById('barra-fin-teoria').style.display = 'flex'; otorgarInsignia('cadete'); }
+  if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) { otorgarInsignia('cadete'); }
 }
 function responderMicroquiz(idx, idxOp) {
   if (microquizContestados.has(idx)) return;
@@ -248,12 +245,10 @@ function responderMicroquiz(idx, idxOp) {
   fb.innerHTML = '✅ ' + c.explica;
   fb.dataset.activo = 'true';
   const btnN = document.getElementById('btn-sub-next-' + idx);
-  btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
+  btnN.textContent = idx === CONCEPTOS.length - 1 ? 'A entrenar ▸' : 'Siguiente concepto ▸';
   btnN.disabled = false;
-  document.getElementById('btn-siguiente').disabled = false;
   document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
   if (idx === CONCEPTOS.length - 1) {
-    document.getElementById('barra-fin-teoria').style.display = 'flex';
     otorgarInsignia('cadete');
   }
 }

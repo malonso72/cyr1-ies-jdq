@@ -169,6 +169,18 @@ Sustituye en S12-alt al modelo "1 fallo = reinicio". Por cada pregunta (teoría,
 - AJUSTE FINAL (a petición de Manuel): teoría (microquiz) y entrenamiento (V/F) son ESTRICTOS — cualquier fallo reinicia ese bloque desde el principio, sin segunda oportunidad. Solo la HISTORIA (reto) mantiene las 2 oportunidades, así que la nota la marca el reto (segReto). teoría/VF al completarse siempre son limpios → dan insignia y no penalizan nota.
 - Decisiones de Manuel: insignia POR BLOQUE, nota NUMÉRICA 1-10, piloto SOLO en S12-alt. Si funciona en clase → replicar a las 17 sesiones (mismo motor `responderMicroquiz`/`responderVF` + retos).
 
+## Navegación de teoría unificada en TODAS las sesiones (verificado)
+
+Arreglo del motor de teoría (microquiz por pantallas) aplicado a las 18 sesiones + s12-alt, en fuente y desplegada:
+- **Sin puntos clicables** (`puntos-tarjetas`): ya no se pueden saltar las preguntas.
+- **Sin navegación externa redundante** (botones `btn-anterior`/`btn-siguiente` eliminados).
+- **Botón único "Continuar/Siguiente concepto"** que en el último concepto pasa a **"A entrenar ▸"** y avanza de verdad (se acabó el "se queda pillado").
+- **barra-fin-teoria** ya no se muestra (evita botón duplicado); la insignia de teoría (cadete) se sigue concediendo.
+- Casos especiales tratados aparte: **s01** (JS inline + variante `tarjetaIdx`/`idxTarjeta`) y **s02** (variante `tarjetaIdx`); s03-s08/s10 tenían el flex en línea (limpiado).
+- Verificado: `node --check` en los 18 .js + inline de s01, auditoría (0 dead-ends, 0 dots, 0 refs vivas a botones externos, 0 NUL), insignia intacta, fuente↔desplegada idénticas.
+
+NOTA: el **informe ampliado** (5 preguntas · 20 palabras) solo está en S12 y S13 (pendiente de pilotar antes de replicar la dosis al resto).
+
 ## Revisión de criterios en todas las sesiones (verificado)
 
 Comprobado el estado del "modelo S12" en las 17 sesiones:

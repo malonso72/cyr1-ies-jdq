@@ -252,10 +252,6 @@ function renderTarjetas() {
     '</article>';
   }).join('');
 
-  const puntos = document.getElementById('puntos-tarjetas');
-  puntos.innerHTML = CONCEPTOS.map(function(_, i) {
-    return '<div class="punto ' + (i === 0 ? 'activo' : '') + '" data-idx="' + i + '" onclick="irATarjeta(' + i + ')"></div>';
-  }).join('');
 }
 
 function renderMiniReto(i, mr) {
@@ -278,7 +274,7 @@ function navSub(tarjetaIdx, delta) {
   const nuevo = actual + delta;
   if (nuevo < 0) return;
   if (nuevo > 2) {
-    if (microquizContestados.has(tarjetaIdx)) navTarjeta(1);
+    if (microquizContestados.has(tarjetaIdx)) { if (tarjetaIdx === CONCEPTOS.length - 1) Academia.irABloque('entrenamiento'); else navTarjeta(1); }
     return;
   }
   subs.forEach(function(s) { s.dataset.activa = 'false'; });
@@ -293,7 +289,7 @@ function navSub(tarjetaIdx, delta) {
   document.getElementById('btn-sub-prev-' + tarjetaIdx).disabled = nuevo === 0;
   const btnNext = document.getElementById('btn-sub-next-' + tarjetaIdx);
   if (nuevo === 2) {
-    btnNext.textContent = microquizContestados.has(tarjetaIdx) ? 'Siguiente concepto ▸' : '🔒 Responde el microquiz';
+    btnNext.textContent = !microquizContestados.has(tarjetaIdx) ? '🔒 Responde el microquiz' : (tarjetaIdx === CONCEPTOS.length - 1 ? 'A entrenar ▸' : 'Siguiente concepto ▸');
     btnNext.disabled = !microquizContestados.has(tarjetaIdx);
   } else {
     btnNext.textContent = 'Continuar ▸';
@@ -322,10 +318,7 @@ function irATarjeta(idx) {
     if (i === idx) p.classList.add('activo');
     else if (microquizContestados.has(i)) p.classList.add('visto');
   });
-  document.getElementById('btn-anterior').disabled = idx === 0;
-  document.getElementById('btn-siguiente').disabled = !microquizContestados.has(idx);
   if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) {
-    document.getElementById('barra-fin-teoria').style.display = 'flex';
     otorgarInsignia('cadete');
   }
   document.querySelector('.tarjetas-teoria').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -350,12 +343,10 @@ function responderMicroquiz(idx, idxOp) {
   fb.innerHTML = '✅ ' + c.explica;
   fb.dataset.activo = 'true';
   const btnN = document.getElementById('btn-sub-next-' + idx);
-  btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
+  btnN.textContent = idx === CONCEPTOS.length - 1 ? 'A entrenar ▸' : 'Siguiente concepto ▸';
   btnN.disabled = false;
-  document.getElementById('btn-siguiente').disabled = false;
   document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
   if (idx === CONCEPTOS.length - 1) {
-    document.getElementById('barra-fin-teoria').style.display = 'flex';
     otorgarInsignia('cadete');
   }
 }

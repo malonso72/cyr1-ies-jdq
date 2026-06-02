@@ -134,11 +134,6 @@
 
   <div class="tarjetas-teoria" id="tarjetas-teoria"></div>
 
-  <div class="nav-tarjetas">
-    <button class="btn-acad secundario" id="btn-anterior" onclick="navTarjeta(-1)" disabled>◂ Anterior</button>
-    <div class="puntos-tarjetas" id="puntos-tarjetas"></div>
-    <button class="btn-acad" id="btn-siguiente" onclick="navTarjeta(1)" disabled>Siguiente ▸</button>
-  </div>
 
   <div class="barra-acciones" id="barra-fin-teoria" style="display:none">
     <button class="btn-acad secundario" onclick="Academia.irABloque('mision')">◂ Volver a la misión</button>
@@ -591,8 +586,6 @@ function renderTarjetas() {
   `).join('');
 
   // Puntos de navegación entre conceptos
-  const puntos = document.getElementById('puntos-tarjetas');
-  puntos.innerHTML = CONCEPTOS.map((_, i) => `<div class="punto ${i === 0 ? 'activo' : ''}" data-idx="${i}" onclick="irATarjeta(${i})"></div>`).join('');
 }
 
 function navSub(tarjetaIdx, delta) {
@@ -606,7 +599,8 @@ function navSub(tarjetaIdx, delta) {
   if (nuevo > 2) {
     // Pasar al siguiente concepto si el microquiz está hecho
     if (microquizContestados.has(tarjetaIdx)) {
-      navTarjeta(1);
+      if (tarjetaIdx === CONCEPTOS.length - 1) Academia.irABloque('entrenamiento');
+      else navTarjeta(1);
     }
     return;
   }
@@ -631,7 +625,7 @@ function navSub(tarjetaIdx, delta) {
   const btnNext = document.getElementById(`btn-sub-next-${tarjetaIdx}`);
   if (nuevo === 2) {
     // En el microquiz: solo deja avanzar si está contestado
-    btnNext.textContent = microquizContestados.has(tarjetaIdx) ? 'Siguiente concepto ▸' : '🔒 Responde el microquiz';
+    btnNext.textContent = !microquizContestados.has(tarjetaIdx) ? '🔒 Responde el microquiz' : (tarjetaIdx === CONCEPTOS.length - 1 ? 'A entrenar ▸' : 'Siguiente concepto ▸');
     btnNext.disabled = !microquizContestados.has(tarjetaIdx);
   } else {
     btnNext.textContent = 'Continuar ▸';
@@ -669,12 +663,9 @@ function irATarjeta(idx) {
   });
 
   // Botones entre tarjetas
-  document.getElementById('btn-anterior').disabled = idx === 0;
-  document.getElementById('btn-siguiente').disabled = !microquizContestados.has(idx);
 
   // Fin de la teoría: mostrar barra si está en la última y contestada
   if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) {
-    document.getElementById('barra-fin-teoria').style.display = 'flex';
     otorgarInsignia('cadete');
   }
 
@@ -699,9 +690,8 @@ function responderMicroquiz(idxTarjeta, idxOp) {
 
   // Desbloquear botón "siguiente concepto"
   const btnNext = document.getElementById(`btn-sub-next-${idxTarjeta}`);
-  btnNext.textContent = idxTarjeta === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
+  btnNext.textContent = idxTarjeta === CONCEPTOS.length - 1 ? 'A entrenar ▸' : 'Siguiente concepto ▸';
   btnNext.disabled = false;
-  document.getElementById('btn-siguiente').disabled = false;
 
   // Actualizar punto del concepto
   document.querySelectorAll('.puntos-tarjetas .punto').forEach((p, i) => {
@@ -710,7 +700,6 @@ function responderMicroquiz(idxTarjeta, idxOp) {
 
   // ¿Última? → cadete
   if (idxTarjeta === CONCEPTOS.length - 1) {
-    document.getElementById('barra-fin-teoria').style.display = 'flex';
     otorgarInsignia('cadete');
   }
 }
