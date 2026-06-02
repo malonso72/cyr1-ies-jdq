@@ -210,8 +210,6 @@ function irATarjeta(idx) {
     p.classList.remove('activo','visto');
     if (i === idx) p.classList.add('activo'); else if (microquizContestados.has(i)) p.classList.add('visto');
   });
-  document.getElementById('btn-anterior').disabled = idx === 0;
-  document.getElementById('btn-siguiente').disabled = !microquizContestados.has(idx);
   if (idx === CONCEPTOS.length - 1 && microquizContestados.has(idx)) {
     document.getElementById('barra-fin-teoria').style.display = 'flex';
     finTeoria();
@@ -232,7 +230,6 @@ function responderMicroquiz(idx, idxOp) {
     const btnN = document.getElementById('btn-sub-next-' + idx);
     btnN.textContent = idx === CONCEPTOS.length - 1 ? '✓ Microquiz hecho' : 'Siguiente concepto ▸';
     btnN.disabled = false;
-    document.getElementById('btn-siguiente').disabled = false;
     document.querySelectorAll('.puntos-tarjetas .punto').forEach(function(p, i) { if (i === idx) p.classList.add('visto'); });
     if (idx === CONCEPTOS.length - 1) {
       document.getElementById('barra-fin-teoria').style.display = 'flex';
