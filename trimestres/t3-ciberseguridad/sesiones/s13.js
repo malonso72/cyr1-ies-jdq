@@ -164,9 +164,6 @@ function renderTarjetas() {
       '</div>' +
     '</article>';
   }).join('');
-  document.getElementById('puntos-tarjetas').innerHTML = CONCEPTOS.map(function(_, i) {
-    return '<div class="punto ' + (i === 0 ? 'activo' : '') + '" onclick="irATarjeta(' + i + ')"></div>';
-  }).join('');
 }
 
 function navSub(idx, delta) {
