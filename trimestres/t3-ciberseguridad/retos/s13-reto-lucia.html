@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso Lucía — Detective OSINT</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #0f1729 0%, #1A3A5C 100%);
+    color: #fff; min-height: 100vh; padding: 20px;
+  }
+  .contenedor { max-width: 1200px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 24px; }
+  h1 { color: #FFD700; font-size: 28px; }
+  .subtitulo { color: #B8C5D6; font-style: italic; font-size: 15px; margin-top: 6px; }
+  .layout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  /* Perfil */
+  .perfil-box {
+    background: rgba(255,255,255,0.05); border: 2px solid #FFD700;
+    border-radius: 10px; padding: 18px;
+  }
+  .perfil-cabecera {
+    display: flex; gap: 16px; align-items: center;
+    padding-bottom: 14px; border-bottom: 1px solid rgba(255,215,0,0.3);
+    margin-bottom: 14px;
+  }
+  .avatar {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: linear-gradient(135deg, #FF6B9D, #C9407F);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+  }
+  .perfil-info h2 { color: #FFD700; font-size: 22px; }
+  .perfil-info .nick { color: #B8C5D6; font-size: 13px; }
+  .perfil-info .bio { color: #fff; font-size: 14px; margin-top: 6px; }
+  .stats { display: flex; gap: 18px; color: #B8C5D6; font-size: 13px; margin-top: 8px; }
+  .stats b { color: #fff; }
+  .cuenta-publica {
+    background: #C9407F; color: #fff; padding: 3px 10px;
+    border-radius: 4px; font-size: 11px; font-weight: bold;
+    display: inline-block; margin-top: 6px;
+  }
+
+  /* Posts */
+  .posts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 14px; }
+  .post-thumb {
+    aspect-ratio: 1; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,215,0,0.2); border-radius: 4px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 32px; transition: all 0.2s;
+    position: relative;
+  }
+  .post-thumb:hover { background: rgba(255,215,0,0.15); border-color: #FFD700; transform: scale(1.03); }
+  .post-thumb .num {
+    position: absolute; top: 4px; left: 6px;
+    background: #FFD700; color: #1A3A5C; width: 22px; height: 22px;
+    border-radius: 50%; font-size: 12px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .post-thumb.examinada::after {
+    content: "✓"; position: absolute; bottom: 4px; right: 6px;
+    color: #27AE60; font-size: 18px; font-weight: bold;
+  }
+
+  /* Modal de post */
+  .modal-bg {
+    display: none; position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%; background: rgba(0,0,0,0.85);
+    z-index: 100; padding: 30px; overflow-y: auto;
+  }
+  .modal-bg.activa { display: flex; align-items: flex-start; justify-content: center; }
+  .modal {
+    background: #1A3A5C; border: 2px solid #FFD700; border-radius: 10px;
+    padding: 24px; max-width: 600px; width: 100%;
+  }
+  .modal h3 { color: #FFD700; margin-bottom: 12px; }
+  .modal .foto-desc {
+    background: rgba(255,215,0,0.1); border-left: 4px solid #FFD700;
+    padding: 12px; margin: 12px 0; font-style: italic; color: #FFE08A;
+  }
+  .modal .post-texto {
+    background: rgba(255,255,255,0.05); padding: 14px; border-radius: 6px;
+    margin: 12px 0; line-height: 1.5;
+  }
+  .modal .meta { color: #6FB5E8; font-size: 13px; }
+  .modal .timestamp { color: #B8C5D6; font-size: 12px; margin-top: 8px; }
+  .cerrar-btn {
+    background: #FFD700; color: #1A3A5C; border: none; padding: 10px 24px;
+    border-radius: 6px; font-weight: bold; cursor: pointer;
+    font-size: 14px; margin-top: 14px;
+  }
+
+  /* Panel de pistas + formulario */
+  .panel {
+    background: rgba(255,255,255,0.05); border: 2px solid #FFD700;
+    border-radius: 10px; padding: 18px;
+  }
+  .panel h3 { color: #FFD700; margin-bottom: 14px; font-size: 18px; }
+  .pregunta { margin-bottom: 14px; }
+  .pregunta label {
+    display: block; color: #FFE08A; font-weight: bold;
+    margin-bottom: 4px; font-size: 14px;
+  }
+  .pregunta input {
+    width: 100%; padding: 8px 10px; border: 1px solid rgba(255,215,0,0.4);
+    background: rgba(0,0,0,0.4); color: #fff; border-radius: 4px;
+    font-size: 14px; font-family: inherit;
+  }
+  .pregunta input:focus { outline: none; border-color: #FFD700; }
+  .pregunta .pista-fuente {
+    font-size: 12px; color: #B8C5D6; margin-top: 4px;
+  }
+  .pregunta .pista-fuente select {
+    background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,215,0,0.3);
+    padding: 4px 6px; border-radius: 3px; font-size: 12px;
+  }
+
+  .btn-veredicto {
+    width: 100%; padding: 14px; background: linear-gradient(135deg, #C99B1F, #FFD700);
+    color: #1A3A5C; border: none; border-radius: 6px; font-size: 16px;
+    font-weight: bold; cursor: pointer; margin-top: 10px;
+  }
+  .btn-veredicto:disabled { background: #555; color: #888; cursor: not-allowed; }
+
+  /* Resultado */
+  .resultado {
+    display: none; background: rgba(0,0,0,0.5); border: 2px solid #27AE60;
+    border-radius: 10px; padding: 20px; margin-top: 18px;
+  }
+  .resultado.activa { display: block; }
+  .resultado h3 { color: #27AE60; margin-bottom: 10px; }
+  .resultado .item { margin-bottom: 8px; padding: 6px 10px; border-radius: 4px; font-size: 14px; }
+  .resultado .item.bien { background: rgba(39,174,96,0.2); border-left: 3px solid #27AE60; }
+  .resultado .item.mal  { background: rgba(192,57,43,0.2); border-left: 3px solid #C0392B; }
+  .resultado .puntuacion {
+    text-align: center; font-size: 28px; color: #FFD700;
+    font-weight: bold; margin: 12px 0;
+  }
+
+  .aviso {
+    background: rgba(230,126,34,0.2); border: 1px solid #E67E22;
+    border-radius: 6px; padding: 10px 14px; margin-bottom: 14px;
+    font-size: 13px; color: #FFCC99;
+  }
+
+  footer { text-align: center; margin-top: 20px; color: #6B7B8E; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header>
+    <h1>🔍 Caso Lucía — Detective OSINT</h1>
+    <p class="subtitulo">Sesión 13 · 1º ESO · Computación y Robótica</p>
+  </header>
+
+  <div class="aviso">
+    ⚠️ <b>Lucía García Pérez es un personaje FICTICIO</b> creado para esta práctica. Investigad solo perfiles públicos puestos como ejercicio. NUNCA hagáis OSINT con compañeros o conocidos sin permiso.
+  </div>
+
+  <div class="layout">
+
+    <!-- COLUMNA IZQUIERDA: el perfil simulado -->
+    <div class="perfil-box">
+      <div class="perfil-cabecera">
+        <div class="avatar">👧</div>
+        <div class="perfil-info">
+          <h2>Lucía García Pérez</h2>
+          <div class="nick">@luci_g_perez</div>
+          <div class="bio">"14 años · futura artista 🎨 · gracias por seguirme ❤"</div>
+          <div class="cuenta-publica">CUENTA PÚBLICA</div>
+          <div class="stats">
+            <span><b>198</b> publicaciones</span>
+            <span><b>432</b> seguidores</span>
+            <span><b>510</b> seguidos</span>
+          </div>
+        </div>
+      </div>
+      <p style="color:#B8C5D6;font-size:13px;margin-bottom:8px;">📌 Pulsad cada publicación para examinarla en detalle. El símbolo ✓ marca las ya vistas.</p>
+      <div class="posts" id="posts"></div>
+    </div>
+
+    <!-- COLUMNA DERECHA: formulario de investigación -->
+    <div class="panel">
+      <h3>📓 Mi investigación</h3>
+      <p style="color:#B8C5D6;font-size:13px;margin-bottom:14px;">Rellenad las 6 preguntas tras examinar TODAS las publicaciones. Indicad de qué publicación sacáis cada dato.</p>
+
+      <form id="formulario">
+        <div class="pregunta">
+          <label>1. ¿En qué CIUDAD vive Lucía?</label>
+          <input type="text" id="p1" placeholder="Escribid la ciudad...">
+          <div class="pista-fuente">Pista de: <select id="f1"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+        </div>
+        <div class="pregunta">
+          <label>2. ¿A qué INSTITUTO va?</label>
+          <input type="text" id="p2" placeholder="Nombre del instituto...">
+          <div class="pista-fuente">Pista de: <select id="f2"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+        </div>
+        <div class="pregunta">
+          <label>3. ¿En qué momento de la semana está SOLA en casa?</label>
+          <input type="text" id="p3" placeholder="Día/s y horas...">
+          <div class="pista-fuente">Pista de: <select id="f3"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+        </div>
+        <div class="pregunta">
+          <label>4. ¿Cómo se llama su NOVIO?</label>
+          <input type="text" id="p4" placeholder="Nombre...">
+          <div class="pista-fuente">Pista de: <select id="f4"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+        </div>
+        <div class="pregunta">
+          <label>5. ¿Cómo se llama su MASCOTA?</label>
+          <input type="text" id="p5" placeholder="Nombre...">
+          <div class="pista-fuente">Pista de: <select id="f5"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+        </div>
+        <div class="pregunta">
+          <label>6. ¿Dónde queda los MIÉRCOLES después de clase?</label>
+          <input type="text" id="p6" placeholder="Sitio concreto...">
+          <div class="pista-fuente">Pista de: <select id="f6"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+        </div>
+
+        <button type="button" class="btn-veredicto" id="btnVeredicto">🔓 EMITIR VEREDICTO</button>
+      </form>
+
+      <div class="resultado" id="resultado"></div>
+    </div>
+  </div>
+
+  <footer>IES Jiménez de Quesada · Santa Fe (Granada) · Manuel Alonso Herrera</footer>
+</div>
+
+<!-- Modal del post -->
+<div class="modal-bg" id="modalBg" onclick="cerrarModal(event)">
+  <div class="modal" id="modalContenido" onclick="event.stopPropagation()"></div>
+</div>
+
+<script>
+const publicaciones = [
+  { n: 1, icono: "🏫", tiempo: "hace 3 semanas",
+    foto: "Lucía sonriendo en la entrada de un edificio con un cartel que pone: \"IES Federico García Lorca · 1º ESO B\".",
+    texto: "¡Empezamos curso! 🎒 Nueva tutora, nuevos compis. Tocan 9 meses de aguantar Mates con Don Pedro 😩😩",
+    hashtags: "#vueltaalcole #IESLorca #1ESOB",
+    ubicacion: "📍 Granada, España" },
+  { n: 2, icono: "💑", tiempo: "hace 2 semanas",
+    foto: "Selfie de Lucía con un chico en el parque. Él lleva sudadera roja del Granada CF.",
+    texto: "Mi Diego 💜 Un mes ya juntos. Te quiero tonto. Ven mañana a clase de natación que te toca a las 6 ❤",
+    hashtags: "#mivida #1mes #diego",
+    ubicacion: "📍 Parque García Lorca, Granada" },
+  { n: 3, icono: "🐶", tiempo: "hace 10 días",
+    foto: "Lucía con su perro pequeño marrón en el sofá del salón. Detrás se ve un mueble con foto familiar y un calendario.",
+    texto: "Mi Toby cuidándome mientras mis padres están en Madrid hasta el viernes 🐶 Me dejan SOLA con mi hermana mayor. Vamos a pedir pizza todas las noches jajaja",
+    hashtags: "#toby #soloencasa #yolo",
+    ubicacion: "" },
+  { n: 4, icono: "🛍", tiempo: "hace 1 semana",
+    foto: "Story compartida. Lucía bailando en el centro comercial Nevada. Detrás se ve la tienda Primark y un reloj: 18:42.",
+    texto: "Todos los miércoles después de clase un ratito en Nevada con las amigas 💖 hasta las 8 que viene mi madre a recogerme",
+    hashtags: "#nevadashopping #miercolesdechicas",
+    ubicacion: "📍 Nevada Shopping" },
+  { n: 5, icono: "📚", tiempo: "hace 4 días",
+    foto: "Selfie en clase. Pizarra borrada al fondo. Reloj de pared: 11:00.",
+    texto: "Recreo!! Por fin. Y mañana es viernes 🙌 quien me invita a un cola-cao en la cafetería de Doña Marta?",
+    hashtags: "#recreo #vidadeestudiante",
+    ubicacion: "" },
+  { n: 6, icono: "🎂", tiempo: "hace 2 días",
+    foto: "Lucía en pijama tumbada en la cama con auriculares. Cartel detrás \"Lucía 14\" en letras de madera, regalo de cumple.",
+    texto: "Domingo de manta y peli con Toby 🐶 Cumplí 14 hace nada y aún tengo el cartel ahí (es de mi prima, vino desde Almería para mi cumple 🥰)",
+    hashtags: "#domingotranqui #14años",
+    ubicacion: "" }
+];
+
+// Respuestas (aceptan variantes razonables)
+const respuestasCorrectas = {
+  p1: { acepta: ["granada"], fuente: "P1", explicacion: "Publicación 1: \"📍 Granada, España\" + #vueltaalcole en IES Lorca." },
+  p2: { acepta: ["lorca", "federico garcía lorca", "ies federico garcía lorca", "ies lorca", "ies federico garcia lorca"], fuente: "P1", explicacion: "Publicación 1: el cartel del edificio dice \"IES Federico García Lorca · 1º ESO B\"." },
+  p3: { acepta: ["lunes a viernes", "entre semana", "esta semana", "hasta viernes", "hasta el viernes", "lunes martes miércoles jueves", "fin de semana padres madrid"], fuente: "P3", explicacion: "Publicación 3: \"mis padres están en Madrid hasta el viernes\" — está sola toda la semana con su hermana." },
+  p4: { acepta: ["diego"], fuente: "P2", explicacion: "Publicación 2: \"Mi Diego 💜\" + #diego." },
+  p5: { acepta: ["toby"], fuente: "P3", explicacion: "Publicación 3: \"Mi Toby cuidándome\" (su perro)." },
+  p6: { acepta: ["nevada", "centro comercial nevada", "nevada shopping", "nevada granada"], fuente: "P4", explicacion: "Publicación 4: \"Todos los miércoles… en Nevada con las amigas\" + ubicación geolocalizada." }
+};
+
+// Construir thumbnails
+const cont = document.getElementById('posts');
+publicaciones.forEach(p => {
+  const div = document.createElement('div');
+  div.className = 'post-thumb';
+  div.dataset.n = p.n;
+  div.innerHTML = `<div class="num">${p.n}</div>${p.icono}`;
+  div.onclick = () => abrirPost(p.n);
+  cont.appendChild(div);
+});
+
+function abrirPost(n) {
+  const p = publicaciones[n - 1];
+  const m = document.getElementById('modalContenido');
+  m.innerHTML = `
+    <h3>📷 Publicación ${p.n} · ${p.tiempo}</h3>
+    <div class="foto-desc">${p.foto}</div>
+    <div class="post-texto">${p.texto}</div>
+    <div class="meta">${p.hashtags}</div>
+    <div class="timestamp">${p.ubicacion}</div>
+    <button class="cerrar-btn" onclick="cerrarModal()">Cerrar</button>
+  `;
+  document.getElementById('modalBg').classList.add('activa');
+  document.querySelector(`.post-thumb[data-n="${n}"]`).classList.add('examinada');
+}
+
+function cerrarModal(e) {
+  if (e && e.target.id !== 'modalBg' && e.target.tagName !== 'BUTTON') return;
+  document.getElementById('modalBg').classList.remove('activa');
+}
+
+document.getElementById('btnVeredicto').onclick = () => {
+  const examinadas = document.querySelectorAll('.post-thumb.examinada').length;
+  if (examinadas < 6) {
+    alert(`Antes de emitir veredicto debéis examinar las 6 publicaciones. Llevad ${examinadas} de 6.`);
+    return;
+  }
+  try{ localStorage.setItem('academia:reto:s13:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s13','*'); }catch(e){}
+
+  let aciertos = 0, total = 6;
+  const items = [];
+  for (let i = 1; i <= 6; i++) {
+    const valor = document.getElementById(`p${i}`).value.toLowerCase().trim();
+    const fuente = document.getElementById(`f${i}`).value;
+    const correcta = respuestasCorrectas[`p${i}`];
+    const acertada = correcta.acepta.some(r => valor.includes(r) || r.includes(valor) && valor.length > 2);
+    const fuenteOk = fuente === correcta.fuente;
+    const completo = acertada && fuenteOk;
+    if (completo) aciertos++;
+
+    let etiq = "";
+    if (acertada && fuenteOk) etiq = "✅ Bien";
+    else if (acertada && !fuenteOk) etiq = "⚠ Dato correcto pero fuente equivocada";
+    else etiq = "❌ Mal";
+
+    items.push({
+      bien: completo,
+      texto: `<b>P${i}:</b> ${etiq}. ${correcta.explicacion}`
+    });
+  }
+
+  const res = document.getElementById('resultado');
+  let nivel = "ALTO";
+  let recomend = "El perfil de Lucía está MUY expuesto. Habría que cerrar la cuenta o ponerla privada cuanto antes.";
+  if (aciertos <= 2) {
+    nivel = "BAJO";
+    recomend = "Habéis sacado pocos datos. Eso es bueno para Lucía: significa que su perfil está más protegido de lo que parece. O que vosotros aún tenéis que afilar el ojo de detective: volved a examinar.";
+  } else if (aciertos <= 4) {
+    nivel = "MEDIO";
+    recomend = "Habéis sacado datos preocupantes. Lucía debería revisar qué publica y poner la cuenta privada.";
+  }
+
+  res.innerHTML = `
+    <h3>🔍 Informe del detective</h3>
+    <div class="puntuacion">${aciertos} / ${total} datos identificados</div>
+    <p style="text-align:center;margin-bottom:14px;">Nivel de exposición de Lucía: <b style="color:#FFD700;">${nivel}</b></p>
+    ${items.map(it => `<div class="item ${it.bien ? 'bien' : 'mal'}">${it.texto}</div>`).join('')}
+    <p style="margin-top:14px;padding:12px;background:rgba(255,215,0,0.1);border-radius:6px;font-style:italic;">
+      <b>Recomendación para Lucía:</b> ${recomend}
+    </p>
+    <p style="margin-top:10px;color:#B8C5D6;font-size:13px;">
+      Anotad este informe en vuestra bitácora (Sesión 13) junto con vuestras 3 recomendaciones para Lucía y su familia.
+    </p>
+  `;
+  res.classList.add('activa');
+  res.scrollIntoView({ behavior: 'smooth' });
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carpeta del Investigador · Caso Marta Ruiz · Sesión 17 · v1</title>
+<style>
+  :root {
+    --azul-policia: #102A43;
+    --azul-policia-2: #1E3A5F;
+    --azul-acento: #486581;
+    --rojo-grave: #A02B2B;
+    --naranja-alerta: #C97B1E;
+    --crema: #F5EFE0;
+    --crema-papel: #FBF5E7;
+    --tinta: #1B1B1B;
+    --tinta-suave: #3D3D3D;
+    --gris-borde: #B0A78F;
+    --verde-pare: #2D6A4F;
+    --negro-mate: #0B0F14;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--negro-mate);
+    background-image:
+      radial-gradient(ellipse at top, rgba(72,101,129,0.18), transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(201,123,30,0.08), transparent 60%);
+    color: var(--crema);
+    min-height: 100vh;
+    padding: 20px 14px;
+  }
+  .carpeta-doc {
+    max-width: 920px;
+    margin: 0 auto;
+    background: var(--crema-papel);
+    color: var(--tinta);
+    border: 1px solid var(--gris-borde);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+    padding: 30px 38px;
+    position: relative;
+  }
+  .carpeta-doc::before {
+    content: "";
+    position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
+    border: 1px solid var(--gris-borde); opacity: 0.4; pointer-events: none;
+  }
+
+  /* CABECERA POLICIAL */
+  .cabecera {
+    border-bottom: 4px double var(--azul-policia);
+    padding-bottom: 16px; margin-bottom: 20px;
+    text-align: center;
+  }
+  .cabecera .escudo { font-size: 36px; }
+  .cabecera h1 {
+    font-family: 'Georgia', serif; font-weight: normal;
+    color: var(--azul-policia); font-size: 22px;
+    letter-spacing: 4px; text-transform: uppercase;
+    margin: 4px 0;
+  }
+  .cabecera .sub {
+    font-style: italic; color: var(--tinta-suave);
+    font-size: 13px; letter-spacing: 1px;
+  }
+  .cabecera .ref {
+    margin-top: 8px; font-family: 'Courier New', monospace;
+    background: var(--azul-policia); color: var(--crema);
+    display: inline-block; padding: 3px 14px;
+    font-size: 11px; letter-spacing: 3px;
+  }
+
+  /* PANTALLAS */
+  .pantalla { display: none; }
+  .pantalla.activa { display: block; animation: ap 0.4s; }
+  @keyframes ap { from {opacity:0;} to {opacity:1;} }
+
+  h2 {
+    color: var(--azul-policia); font-family: 'Georgia', serif;
+    font-size: 18px; letter-spacing: 3px;
+    text-transform: uppercase; font-weight: normal;
+    border-bottom: 1px solid var(--gris-borde);
+    padding-bottom: 5px; margin-bottom: 14px;
+  }
+  h3 {
+    color: var(--azul-policia); font-family: 'Georgia', serif;
+    font-size: 14px; letter-spacing: 2px; margin: 12px 0 6px;
+  }
+  p { line-height: 1.6; margin-bottom: 10px; font-size: 14.5px; }
+  .legal { font-style: italic; color: var(--tinta-suave); font-size: 13px; }
+
+  /* FICHA DE LA VÍCTIMA */
+  .ficha-victima {
+    background: var(--crema);
+    border-left: 5px solid var(--rojo-grave);
+    padding: 16px 22px; margin: 14px 0;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  }
+  .ficha-victima h3 {
+    color: var(--rojo-grave); margin-top: 0;
+  }
+  .ficha-victima .datos { font-size: 14px; line-height: 1.7; }
+  .ficha-victima .datos b { color: var(--azul-policia); }
+  .ficha-victima .perjuicio {
+    margin-top: 10px; padding: 8px 12px;
+    background: rgba(160,43,43,0.08);
+    border: 1px solid var(--rojo-grave);
+    font-weight: bold; color: var(--rojo-grave);
+    text-align: center; letter-spacing: 1px;
+  }
+
+  /* ACREDITACIÓN */
+  .acreditar {
+    background: rgba(72,101,129,0.06);
+    border: 1px solid var(--gris-borde);
+    padding: 18px 22px; margin: 14px 0;
+  }
+  .campo { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .campo label {
+    min-width: 200px; color: var(--azul-policia);
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .campo input {
+    flex: 1; padding: 8px 10px; border: none;
+    border-bottom: 1px solid var(--tinta-suave);
+    background: transparent; font-family: 'Georgia', serif;
+    font-size: 15px; color: var(--tinta);
+  }
+  .campo input:focus { outline: none; border-bottom-color: var(--azul-policia); }
+
+  /* BOTONES */
+  .btn {
+    font-family: 'Georgia', serif;
+    background: var(--azul-policia); color: var(--crema);
+    border: 1px solid var(--azul-policia);
+    padding: 12px 24px; font-size: 13px;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s; margin-top: 10px;
+  }
+  .btn:hover { background: var(--naranja-alerta); border-color: var(--naranja-alerta); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-naranja {
+    background: var(--naranja-alerta); border-color: var(--naranja-alerta);
+  }
+  .btn-naranja:hover { background: var(--azul-policia); border-color: var(--azul-policia); }
+
+  /* EVIDENCIAS — CARPETA DE FOTOS */
+  .grid-evidencias {
+    display: grid; grid-template-columns: 1fr; gap: 16px;
+    margin-top: 14px;
+  }
+  .evidencia {
+    background: var(--crema);
+    border: 1px solid var(--gris-borde);
+    padding: 16px 20px;
+    box-shadow: 3px 3px 0 rgba(16,42,67,0.15);
+    position: relative;
+  }
+  .evidencia .marca-ev {
+    position: absolute; top: -10px; left: 18px;
+    background: var(--azul-policia); color: var(--crema);
+    font-family: 'Courier New', monospace;
+    padding: 2px 14px; font-size: 11px;
+    letter-spacing: 3px; font-weight: bold;
+  }
+  .evidencia .tipo {
+    color: var(--azul-policia); font-size: 11px;
+    letter-spacing: 2px; font-weight: bold;
+    margin-top: 6px; margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .evidencia .contenido {
+    background: rgba(255,255,255,0.6);
+    border-left: 3px solid var(--azul-acento);
+    padding: 10px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 12.5px; line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .evidencia .contenido .meta {
+    font-size: 11px; color: var(--tinta-suave);
+    border-bottom: 1px dashed var(--tinta-suave);
+    padding-bottom: 4px; margin-bottom: 6px;
+  }
+  .evidencia .contenido .meta b { color: var(--azul-policia); }
+
+  /* PANEL DE ASIGNACIÓN POR EVIDENCIA */
+  .asignar-panel {
+    background: rgba(16,42,67,0.04);
+    border: 1px dashed var(--azul-policia);
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 700px) {
+    .asignar-panel { grid-template-columns: 1fr; }
+  }
+  .asignar-panel .campo-sel {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .asignar-panel label {
+    font-size: 10.5px; color: var(--azul-policia);
+    letter-spacing: 1.5px; font-weight: bold;
+    text-transform: uppercase;
+  }
+  .asignar-panel select {
+    padding: 7px 8px; font-family: 'Georgia', serif;
+    font-size: 12.5px; border: 1px solid var(--gris-borde);
+    background: var(--crema-papel); color: var(--tinta);
+  }
+  .asignar-panel select:focus { outline: none; border-color: var(--azul-policia); }
+
+  .evidencia.bien { box-shadow: 3px 3px 0 rgba(45,106,79,0.3), inset 0 0 0 2px var(--verde-pare); }
+  .evidencia.mal { box-shadow: 3px 3px 0 rgba(160,43,43,0.3), inset 0 0 0 2px var(--rojo-grave); }
+
+  /* RANURAS */
+  .ranuras-panel {
+    background: rgba(0,0,0,0.06); padding: 10px 14px;
+    margin: 14px 0; font-size: 12px;
+    border: 1px dashed var(--azul-policia);
+    color: var(--tinta-suave); line-height: 2;
+  }
+  .ranuras-panel b { color: var(--azul-policia); letter-spacing: 1px; }
+  .ranura {
+    display: inline-block; padding: 2px 10px; margin: 2px;
+    background: rgba(72,101,129,0.1);
+    border: 1px solid var(--azul-policia);
+    font-size: 11px; letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+  }
+  .ranura.ocupada { background: var(--azul-policia); color: var(--crema); }
+
+  /* DICTAMEN */
+  .dictamen {
+    margin-top: 16px; padding: 18px 22px;
+    border: 3px solid;
+    display: none;
+  }
+  .dictamen.activo { display: block; animation: ap 0.4s; }
+  .dictamen.bien { background: rgba(45,106,79,0.08); border-color: var(--verde-pare); color: var(--tinta); }
+  .dictamen.mal { background: rgba(160,43,43,0.06); border-color: var(--rojo-grave); color: var(--tinta); }
+  .dictamen .titulo-d {
+    font-family: 'Georgia', serif; font-size: 17px;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .dictamen.bien .titulo-d { color: var(--verde-pare); }
+  .dictamen.mal .titulo-d { color: var(--rojo-grave); }
+  .dictamen .tabla {
+    width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12.5px;
+  }
+  .dictamen .tabla th, .dictamen .tabla td {
+    padding: 6px 8px; border-bottom: 1px dashed var(--gris-borde);
+    text-align: left;
+  }
+  .dictamen .tabla th {
+    background: var(--azul-policia); color: var(--crema);
+    font-family: 'Georgia', serif; letter-spacing: 1.5px;
+    font-weight: normal; font-size: 12px;
+  }
+  .dictamen .ok { color: var(--verde-pare); font-weight: bold; }
+  .dictamen .ko { color: var(--rojo-grave); font-weight: bold; }
+  .dictamen .acciones { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .dictamen .acciones button {
+    padding: 10px 18px; font-family: 'Georgia', serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    border: 1px solid; cursor: pointer;
+  }
+  .btn-reint-d { background: transparent; color: var(--rojo-grave); border-color: var(--rojo-grave); }
+  .btn-reint-d:hover { background: var(--rojo-grave); color: var(--crema-papel); }
+  .btn-sig-d { background: var(--verde-pare); color: var(--crema-papel); border-color: var(--verde-pare); }
+  .btn-sig-d:hover { background: var(--azul-policia); border-color: var(--azul-policia); }
+
+  /* INFORME AUTO-GENERADO */
+  .informe-detective {
+    background: var(--crema-papel);
+    border: 1px solid var(--gris-borde);
+    padding: 24px 28px; margin: 14px 0;
+    box-shadow: 4px 4px 0 rgba(16,42,67,0.15);
+    position: relative;
+  }
+  .informe-detective::before {
+    content: "INFORME DEL INVESTIGADOR";
+    position: absolute; top: -12px; left: 22px;
+    background: var(--crema-papel); color: var(--azul-policia);
+    padding: 0 14px; font-size: 11px;
+    letter-spacing: 3px; font-weight: bold;
+  }
+  .informe-detective h4 {
+    color: var(--azul-policia); font-family: 'Georgia', serif;
+    font-size: 14px; letter-spacing: 1.5px;
+    margin: 14px 0 6px; padding-bottom: 3px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+  .informe-detective p { font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; }
+  .informe-detective .lista-prev {
+    list-style: none; padding-left: 0;
+  }
+  .informe-detective .lista-prev li {
+    padding: 6px 0 6px 24px; position: relative;
+    font-size: 13px; line-height: 1.5;
+  }
+  .informe-detective .lista-prev li::before {
+    content: "▸"; position: absolute; left: 6px;
+    color: var(--naranja-alerta); font-weight: bold;
+  }
+  .informe-detective .firma {
+    margin-top: 20px; display: flex; justify-content: space-between;
+    border-top: 1px solid var(--gris-borde);
+    padding-top: 14px; font-size: 12px;
+  }
+  .informe-detective .firma .col {
+    flex: 1; text-align: center;
+  }
+  .informe-detective .firma .nombre {
+    font-style: italic; color: var(--azul-policia);
+    font-weight: bold; padding-top: 18px;
+    border-top: 1px solid var(--tinta-suave);
+    margin: 0 12px;
+  }
+
+  /* DIPLOMA FINAL */
+  .diploma-preview {
+    background: var(--crema-papel);
+    border: 8px double var(--azul-policia);
+    padding: 28px; margin: 14px 0;
+    text-align: center;
+  }
+  .diploma-preview .titulo-dp {
+    font-family: 'Georgia', serif; font-size: 22px;
+    color: var(--azul-policia); letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .diploma-preview .sub-dp {
+    color: var(--tinta-suave); font-style: italic;
+    font-size: 13px; margin-bottom: 18px;
+  }
+  .diploma-preview .nombres-dp {
+    font-family: 'Georgia', serif; font-weight: bold;
+    color: var(--azul-policia); font-size: 20px;
+    margin: 14px 0;
+  }
+  .diploma-preview .resumen-dp {
+    background: rgba(16,42,67,0.06);
+    border: 1px solid var(--gris-borde);
+    padding: 12px 16px; margin: 14px 0;
+    text-align: left; font-size: 13px;
+  }
+  .diploma-preview .resumen-dp div {
+    display: flex; justify-content: space-between;
+    padding: 4px 0; border-bottom: 1px dashed var(--gris-borde);
+  }
+  .diploma-preview .resumen-dp div:last-child {
+    border-bottom: none; font-weight: bold; color: var(--azul-policia);
+  }
+
+  /* AVISO */
+  .aviso {
+    background: rgba(201,123,30,0.12);
+    border-left: 5px solid var(--naranja-alerta);
+    padding: 12px 16px; margin: 12px 0;
+    font-size: 13px; color: var(--tinta-suave); line-height: 1.6;
+  }
+  .aviso b { color: var(--naranja-alerta); }
+
+  footer.pie {
+    text-align: center; margin-top: 20px;
+    padding-top: 12px; border-top: 1px solid var(--gris-borde);
+    font-size: 10px; color: var(--tinta-suave);
+    font-family: 'Courier New', monospace; letter-spacing: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .carpeta-doc { padding: 22px 18px; }
+    .carpeta-doc::before { display: none; }
+    .campo { flex-direction: column; align-items: flex-start; }
+    .campo label { min-width: 0; }
+    .campo input { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="carpeta-doc">
+  <div class="cabecera">
+    <div class="escudo">🛡️</div>
+    <h1>Carpeta del Investigador</h1>
+    <div class="sub">Unidad de Delitos Informáticos · Reconstrucción de fraude</div>
+    <div class="ref">EXPEDIENTE GR-2026/MR-4800 · CONFIDENCIAL</div>
+  </div>
+
+  <!-- PANTALLA 0: INICIO Y CASO -->
+  <div class="pantalla activa" id="p-inicio">
+    <h2>Apertura del expediente</h2>
+
+    <div class="ficha-victima">
+      <h3>📁 Caso de fraude — Sra. Marta Ruiz</h3>
+      <div class="datos">
+        <p><b>VÍCTIMA:</b> Marta Ruiz, 52 años. Granada. Profesión: administrativa.</p>
+        <p><b>HECHOS:</b> En 72 horas, la Sra. Ruiz fue víctima de una estafa que combinó <b>varias técnicas</b>: email falso del banco, suplantación telefónica, voz que parecía oficial y manipulación emocional para mantener el secreto.</p>
+        <p><b>SE INCAUTARON 6 EVIDENCIAS</b> de su móvil y su email. Aparecen <b>en orden aleatorio</b> en la carpeta del investigador.</p>
+      </div>
+      <div class="perjuicio">
+        ⚠ PERJUICIO ECONÓMICO TOTAL: 4.800 € · Caso documentado en 2024 (nombre modificado)
+      </div>
+    </div>
+
+    <h3>Misión del investigador</h3>
+    <p>1. <b>Ordenar las 6 evidencias</b> en su línea temporal correcta (paso 1 a 6 del fraude).</p>
+    <p>2. <b>Para cada paso</b>, identificar la <b>técnica de ataque</b> empleada (phishing email, smishing, vishing, spoofing, etc.).</p>
+    <p>3. <b>Marcar el punto óptimo</b> donde la estafa podría haberse parado con menos esfuerzo.</p>
+    <p>4. <b>Emitir el INFORME DEL INVESTIGADOR</b> redactado automáticamente con las conclusiones, listo para entregar a la familia.</p>
+
+    <div class="acreditar">
+      <div class="campo">
+        <label>Investigador/a 1</label>
+        <input type="text" id="nombre1" placeholder="Nombre y apellidos">
+      </div>
+      <div class="campo">
+        <label>Investigador/a 2</label>
+        <input type="text" id="nombre2" placeholder="Nombre y apellidos">
+      </div>
+    </div>
+
+    <div class="aviso">
+      <b>Recordatorio:</b> ésta es la sesión de <b>integración del bloque</b>. Si no recordáis qué es un vishing o un spoofing, revisad antes la bitácora de las sesiones 9, 10 y 14.
+    </div>
+
+    <button class="btn btn-naranja" onclick="empezar()">▸ Abrir la carpeta de evidencias</button>
+  </div>
+
+  <!-- PANTALLA 1: MESA DE EVIDENCIAS -->
+  <div class="pantalla" id="p-mesa">
+    <h2>Carpeta de evidencias incautadas</h2>
+    <p>Cada evidencia tiene tres datos a completar: <b>(1)</b> posición en la línea temporal del fraude, <b>(2)</b> técnica utilizada y <b>(3)</b> si en ese momento podría haberse parado la estafa.</p>
+
+    <div class="ranuras-panel">
+      <b>POSICIONES OCUPADAS:</b>
+      <span class="ranura" id="r-1">Paso 1</span>
+      <span class="ranura" id="r-2">Paso 2</span>
+      <span class="ranura" id="r-3">Paso 3</span>
+      <span class="ranura" id="r-4">Paso 4</span>
+      <span class="ranura" id="r-5">Paso 5</span>
+      <span class="ranura" id="r-6">Paso 6</span>
+    </div>
+
+    <div class="grid-evidencias" id="grid-evidencias"></div>
+
+    <button class="btn btn-naranja" id="btn-dictamen" onclick="emitirDictamen()" disabled>
+      🔒 Completa las 3 casillas de cada evidencia para emitir dictamen
+    </button>
+
+    <div class="dictamen" id="dictamen"></div>
+  </div>
+
+  <!-- PANTALLA 2: INFORME FINAL Y DIPLOMA -->
+  <div class="pantalla" id="p-final">
+    <h2>Informe del investigador — Caso Marta Ruiz</h2>
+    <p class="legal">El sistema ha redactado automáticamente el informe a partir de tu reconstrucción. Lee, comprueba que dice lo que querías decir y firma.</p>
+
+    <div class="informe-detective" id="informe-cuerpo">
+      <!-- Se rellena por JS -->
+    </div>
+
+    <div class="diploma-preview" id="diploma-preview">
+      <div class="titulo-dp">Diploma del Investigador</div>
+      <div class="sub-dp">Caso Marta Ruiz · Línea temporal del fraude · Promoción 2026</div>
+      <div style="font-size:32px;color:var(--azul-policia);">🛡️</div>
+      <p style="margin: 10px 0; font-style: italic;">La Unidad de Delitos Informáticos del IES Jiménez de Quesada acredita a</p>
+      <div class="nombres-dp" id="nombres-finales"></div>
+      <p>por haber reconstruido el fraude sufrido por la Sra. Marta Ruiz, identificando las técnicas utilizadas y los puntos donde la estafa podría haberse parado.</p>
+
+      <div class="resumen-dp">
+        <div><span>Fecha del informe:</span> <span id="fecha-final"></span></div>
+        <div><span>Pasos correctamente ordenados:</span> <span id="orden-correcto"></span> / 6</div>
+        <div><span>Técnicas correctamente identificadas:</span> <span id="tecnicas-correcto"></span> / 6</div>
+        <div><span>Puntos de prevención acertados:</span> <span id="prev-correcto"></span> / 6</div>
+        <div><span>CALIFICACIÓN GLOBAL:</span> <span id="calif-final"></span></div>
+      </div>
+
+      <p style="font-style:italic;font-size:13px;color:var(--tinta-suave);margin-top:10px;">"Una estafa que dura 72 horas tiene 72 horas de oportunidades para detenerse. Solo hace falta una."</p>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn btn-naranja" onclick="descargarDiploma()">📥 Descargar diploma (PNG)</button>
+      <button class="btn" onclick="window.print()">🖨 Imprimir informe</button>
+    </div>
+
+    <div class="aviso" style="margin-top: 14px;">
+      <b>Entrega en Moodle:</b> subid el PNG del diploma a la tarea de la Sesión 17. Una sola entrega por pareja con ambos nombres en el diploma.
+    </div>
+  </div>
+
+  <footer class="pie">
+    IES JIMÉNEZ DE QUESADA · SANTA FE (GRANADA) · CIBERSEGURIDAD · SESIÓN 17 · v1
+  </footer>
+</div>
+
+<script>
+let nombre1 = '', nombre2 = '';
+let asignaciones = {}; // {idEv: {pos, tecnica, prevencion}}
+
+// 6 evidencias del Material S17, etiquetadas A-F, en orden aleatorio (como las tiene el cuadernillo)
+// Orden cronológico real: B → D → F → A → C → E
+//   B (Día 1 · 09:42) email falso BBVA → posición 1
+//   D (Día 1 · 12:18) SMS falso BBVA → posición 2
+//   F (Día 2 · 10:25) llamada Carlos Méndez → posición 3
+//   A (Día 3 · 09:15) segunda llamada urgente → posición 4
+//   C (Día 2 · 11:02) WhatsApp con la hija → posición 5  (cronológicamente intercalado en día 2 pero el cuadernillo lo presenta como momento de "oportunidad perdida" tras la 1ª transferencia)
+//   E (Día 3 · 18:50) llamada al teléfono oficial → posición 6
+//
+// IMPORTANTE: en el cuadernillo, la evidencia C (WhatsApp hija) está fechada Día 2 · 11:02, JUSTO DESPUÉS de la llamada F. Para mantener fidelidad al cuadernillo, ordenamos cronológicamente puro:
+// B (1) → D (2) → F (3) → C (4) → A (5) → E (6)
+const EVIDENCIAS = [
+  {
+    id: "A",
+    etiqueta: "EVIDENCIA A",
+    tipo: "📞 LLAMADA",
+    contenido: `<div class="meta"><b>Día 3 · 09:15</b> · Misma voz que el Día 2, más urgente</div>
+      "Sra. Ruiz, hemos detectado más intentos de cargo. Necesitamos que realice una segunda transferencia URGENTE de 3.200 € o sus ahorros estarán en riesgo. Le paso con mi supervisor."<br><br>
+      <i>(otra voz, más grave):</i> "Hola Marta, soy el supervisor Antonio. Confirmo que la operación es legítima. Por favor, hágala YA. Es la única forma de proteger sus ahorros."`,
+    posicion: 5,
+    tecnica: "vishing-presion",
+    prevencion: "no" // ya estaba dentro del engaño, no es el punto óptimo
+  },
+  {
+    id: "B",
+    etiqueta: "EVIDENCIA B",
+    tipo: "📧 EMAIL",
+    contenido: `<div class="meta">
+      <b>De:</b> BBVA Seguridad &lt;alerta@bbva-clientes.es&gt;<br>
+      <b>Asunto:</b> 🚨 Acceso sospechoso a su cuenta — Acción requerida<br>
+      <b>Día 1 · 09:42</b>
+    </div>
+      Estimada Sra. Ruiz, hemos detectado un intento de acceso a su cuenta BBVA desde Bucarest (Rumanía) el día de hoy a las 03:14h.<br>
+      Por motivos de seguridad, hemos bloqueado preventivamente las transferencias hasta que verifique su identidad.<br>
+      Acceda en las próximas 24h para evitar el bloqueo definitivo:<br>
+      <b>https://bbva-seguridad-cliente.es/verificar</b>`,
+    posicion: 1,
+    tecnica: "phishing-email",
+    prevencion: "si" // primer punto, donde más fácil habría sido parar
+  },
+  {
+    id: "C",
+    etiqueta: "EVIDENCIA C",
+    tipo: "💬 WHATSAPP",
+    contenido: `<div class="meta"><b>Día 2 · 11:02</b> · Su hija Laura (24 años) — conversación real con la hija</div>
+      <b>Laura:</b> "Mamá te he visto un poco rara cuando hablamos antes. ¿Pasa algo?"<br>
+      <b>Marta:</b> "Nada hija, cosas del banco que estoy resolviendo. Luego te cuento."<br>
+      <b>Laura:</b> "Vale, si necesitas algo me dices ❤"<br>
+      <i>[Marta NO le cuenta nada porque "Carlos Méndez" le pidió confidencialidad.]</i>`,
+    posicion: 4,
+    tecnica: "aislamiento",
+    prevencion: "si" // contar a su hija habría parado la estafa
+  },
+  {
+    id: "D",
+    etiqueta: "EVIDENCIA D",
+    tipo: "📱 SMS",
+    contenido: `<div class="meta"><b>Día 1 · 12:18</b> · Remitente aparente: BBVA</div>
+      BBVA: Confirme su acceso reciente desde Bucarest pinchando en<br>
+      <b>bbva.es-verifica.com/cli</b><br>
+      Si no fue usted, su cuenta será bloqueada en 12h.`,
+    posicion: 2,
+    tecnica: "smishing",
+    prevencion: "si" // segundo punto, fácil de detectar (dominio sospechoso)
+  },
+  {
+    id: "E",
+    etiqueta: "EVIDENCIA E",
+    tipo: "📞 LLAMADA AL BANCO REAL",
+    contenido: `<div class="meta"><b>Día 3 · 18:50</b> · Marta llama al teléfono OFICIAL de BBVA (902…)</div>
+      <b>Operadora real:</b> "Sra. Ruiz, en BBVA NUNCA llamamos para pedir transferencias. No tenemos ningún Carlos Méndez ni ningún Departamento de Fraude que opere así. Ha sido víctima de una estafa. Le voy a derivar inmediatamente al servicio de bloqueo de cuenta…"<br><br>
+      <i>Demasiado tarde. Los 4.800 € ya están en cuentas extranjeras irrastreables.</i>`,
+    posicion: 6,
+    tecnica: "verificacion-tardia",
+    prevencion: "no" // sucede DESPUÉS de las transferencias, no es punto de parada
+  },
+  {
+    id: "F",
+    etiqueta: "EVIDENCIA F",
+    tipo: "📞 LLAMADA",
+    contenido: `<div class="meta"><b>Día 2 · 10:25</b> · Prefijo de Madrid, voz profesional</div>
+      "Sra. Ruiz, soy Carlos Méndez, del Departamento de Fraude de BBVA. Hemos detenido un intento de cargo de 1.380 € desde Rumanía. Para protegerla, necesitamos que realice una transferencia preventiva de su saldo a una cuenta segura del banco, mientras emitimos sus nuevas claves. Le voy a leer el IBAN, anótelo.<br>
+      Es totalmente normal este procedimiento. Hoy mismo recibirá usted las claves nuevas en casa por correo certificado.<br>
+      Por favor, <b>no comente esto con nadie</b> hasta que tengamos las claves nuevas: es un procedimiento de seguridad."`,
+    posicion: 3,
+    tecnica: "vishing-suplantacion",
+    prevencion: "si" // momento clave: si Marta llama al teléfono oficial AQUÍ, se evita
+  }
+];
+
+const TECNICAS = {
+  "phishing-email": "Phishing por email (suplantación BBVA + dominio falso)",
+  "smishing": "Smishing (phishing por SMS con dominio sospechoso)",
+  "vishing-suplantacion": "Vishing — suplantación de empleado del banco",
+  "vishing-presion": "Vishing — presión adicional con \"supervisor\"",
+  "aislamiento": "Aislamiento — pedir confidencialidad para evitar consultas",
+  "verificacion-tardia": "Verificación con el banco real (demasiado tarde)"
+};
+
+// ============ NAVEGACIÓN ============
+function cambiarPantalla(id) {
+  document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+  document.getElementById(id).classList.add('activa');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function empezar() {
+  nombre1 = document.getElementById('nombre1').value.trim();
+  nombre2 = document.getElementById('nombre2').value.trim();
+  if (!nombre1 || !nombre2) {
+    alert('Se necesitan los dos nombres para emitir el diploma.');
+    return;
+  }
+  cambiarPantalla('p-mesa');
+  pintarEvidencias();
+}
+
+function pintarEvidencias() {
+  const grid = document.getElementById('grid-evidencias');
+  grid.innerHTML = '';
+  EVIDENCIAS.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'evidencia';
+    div.dataset.id = e.id;
+    div.innerHTML = `
+      <span class="marca-ev">${e.etiqueta}</span>
+      <div class="tipo">${e.tipo}</div>
+      <div class="contenido">${e.contenido}</div>
+      <div class="asignar-panel">
+        <div class="campo-sel">
+          <label>① Posición en línea temporal</label>
+          <select onchange="asignar('${e.id}','pos',this.value)">
+            <option value="">— Paso —</option>
+            <option value="1">Paso 1</option><option value="2">Paso 2</option>
+            <option value="3">Paso 3</option><option value="4">Paso 4</option>
+            <option value="5">Paso 5</option><option value="6">Paso 6</option>
+          </select>
+        </div>
+        <div class="campo-sel">
+          <label>② Técnica utilizada</label>
+          <select onchange="asignar('${e.id}','tecnica',this.value)">
+            <option value="">— Técnica —</option>
+            <option value="phishing-email">Phishing email</option>
+            <option value="smishing">Smishing (SMS)</option>
+            <option value="vishing-suplantacion">Vishing — suplantar empleado</option>
+            <option value="vishing-presion">Vishing — presión / supervisor</option>
+            <option value="aislamiento">Aislamiento — secretismo</option>
+            <option value="verificacion-tardia">Verificación tardía con el banco</option>
+          </select>
+        </div>
+        <div class="campo-sel">
+          <label>③ ¿Pudo pararse aquí?</label>
+          <select onchange="asignar('${e.id}','prevencion',this.value)">
+            <option value="">— Sí / No —</option>
+            <option value="si">SÍ — punto de parada</option>
+            <option value="no">NO — ya era tarde / no procede</option>
+          </select>
+        </div>
+      </div>
+    `;
+    grid.appendChild(div);
+  });
+  refrescarBotonDictamen();
+}
+
+function asignar(id, campo, valor) {
+  if (!asignaciones[id]) asignaciones[id] = {};
+  if (valor === '') delete asignaciones[id][campo];
+  else asignaciones[id][campo] = valor;
+
+  // Detectar conflicto de posición (dos evidencias mismo paso)
+  if (campo === 'pos' && valor !== '') {
+    Object.keys(asignaciones).forEach(otherId => {
+      if (otherId !== id && asignaciones[otherId] && asignaciones[otherId].pos === valor) {
+        delete asignaciones[otherId].pos;
+        const otherSel = document.querySelector(`.evidencia[data-id="${otherId}"] select`);
+        if (otherSel) otherSel.value = '';
+      }
+    });
+  }
+
+  refrescarRanuras();
+  refrescarBotonDictamen();
+}
+
+function refrescarRanuras() {
+  ['1','2','3','4','5','6'].forEach(p => {
+    const el = document.getElementById('r-' + p);
+    const ocupada = Object.values(asignaciones).some(a => a.pos === p);
+    el.classList.toggle('ocupada', ocupada);
+  });
+}
+
+function refrescarBotonDictamen() {
+  let listas = 0;
+  EVIDENCIAS.forEach(e => {
+    const a = asignaciones[e.id];
+    if (a && a.pos && a.tecnica && a.prevencion) listas++;
+  });
+  const btn = document.getElementById('btn-dictamen');
+  if (listas === 6) {
+    btn.disabled = false;
+    btn.textContent = '⚖ Emitir dictamen e informe';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `🔒 Faltan ${6 - listas} evidencias por completar`;
+  }
+}
+
+// ============ DICTAMEN ============
+function emitirDictamen() {
+  let ordenOk = 0, tecnicaOk = 0, prevencionOk = 0;
+  const detalles = [];
+
+  EVIDENCIAS.forEach(e => {
+    const a = asignaciones[e.id];
+    const okPos = String(a.pos) === String(e.posicion);
+    const okTec = a.tecnica === e.tecnica;
+    const okPrev = a.prevencion === e.prevencion;
+    if (okPos) ordenOk++;
+    if (okTec) tecnicaOk++;
+    if (okPrev) prevencionOk++;
+
+    detalles.push({
+      id: e.id, esperadoPos: e.posicion, dadoPos: a.pos, okPos,
+      esperadoTec: e.tecnica, dadoTec: a.tecnica, okTec,
+      esperadoPrev: e.prevencion, dadoPrev: a.prevencion, okPrev
+    });
+
+    const card = document.querySelector(`.evidencia[data-id="${e.id}"]`);
+    card.classList.remove('bien', 'mal');
+    card.classList.add((okPos && okTec && okPrev) ? 'bien' : 'mal');
+  });
+
+  const totalAciertos = ordenOk + tecnicaOk + prevencionOk;
+  const todoPerfecto = (totalAciertos === 18);
+
+  const dictamen = document.getElementById('dictamen');
+  dictamen.className = 'dictamen activo ' + (todoPerfecto ? 'bien' : 'mal');
+
+  let filas = '';
+  detalles.forEach(d => {
+    const tPos = d.okPos ? '<span class="ok">✓</span>' : '<span class="ko">✗</span>';
+    const tTec = d.okTec ? '<span class="ok">✓</span>' : '<span class="ko">✗</span>';
+    const tPrev = d.okPrev ? '<span class="ok">✓</span>' : '<span class="ko">✗</span>';
+    filas += `<tr>
+      <td><b>${d.id}</b></td>
+      <td>Paso ${d.dadoPos} ${tPos} (correcto: ${d.esperadoPos})</td>
+      <td>${TECNICAS[d.dadoTec] || '—'} ${tTec}</td>
+      <td>${d.dadoPrev === 'si' ? 'SÍ' : 'NO'} ${tPrev}</td>
+    </tr>`;
+  });
+
+  let titulo, acciones;
+  if (todoPerfecto) {
+    titulo = '✓ RECONSTRUCCIÓN COMPLETA — Informe listo para entregar';
+    acciones = `<button class="btn-sig-d" onclick="finalizar()">▸ Ir al informe e diploma</button>`;
+  } else {
+    titulo = '✗ RECONSTRUCCIÓN PARCIAL — Revisar antes de entregar';
+    acciones = `<button class="btn-reint-d" onclick="reintentar()">↻ Aún no es perfecto: vuelve a revisar (hay que clavar las 6 evidencias)</button>`;
+  }
+
+  dictamen.innerHTML = `
+    <div class="titulo-d">${titulo}</div>
+    <p>Orden correcto: <b>${ordenOk}/6</b> · Técnicas correctas: <b>${tecnicaOk}/6</b> · Puntos de prevención correctos: <b>${prevencionOk}/6</b> · TOTAL: <b>${totalAciertos}/18</b></p>
+    <table class="tabla">
+      <thead><tr><th>Ev.</th><th>① Posición</th><th>② Técnica</th><th>③ Pudo pararse</th></tr></thead>
+      <tbody>${filas}</tbody>
+    </table>
+    <div class="acciones">${acciones}</div>
+  `;
+  dictamen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function reintentar() {
+  document.getElementById('dictamen').classList.remove('activo');
+  document.querySelectorAll('.evidencia').forEach(c => c.classList.remove('bien','mal'));
+}
+
+// ============ INFORME AUTO-GENERADO ============
+function generarInforme() {
+  // Construimos el informe SOLO con los datos que el alumno asignó, para que aprenda a partir de SU reconstrucción.
+  // Ordenamos las evidencias según las posiciones que ELLOS marcaron.
+  const ordenadas = [...EVIDENCIAS].sort((a, b) => {
+    const pa = parseInt(asignaciones[a.id].pos) || 99;
+    const pb = parseInt(asignaciones[b.id].pos) || 99;
+    return pa - pb;
+  });
+
+  let pasosTxt = '';
+  ordenadas.forEach((e, i) => {
+    const a = asignaciones[e.id];
+    const tec = TECNICAS[a.tecnica] || 'técnica no identificada';
+    pasosTxt += `<p><b>Paso ${i+1}:</b> ${e.tipo.replace(/^[^a-zA-ZÀ-ÿ]+/, '')} — ${tec}.</p>`;
+  });
+
+  // Puntos donde el alumno marcó "sí podría haberse parado"
+  const puntosPara = EVIDENCIAS
+    .filter(e => asignaciones[e.id].prevencion === 'si')
+    .map(e => `Evidencia ${e.id} (${e.tipo.replace(/^[^a-zA-ZÀ-ÿ]+/, '').toLowerCase()})`);
+
+  let prevHtml = '';
+  if (puntosPara.length > 0) {
+    prevHtml = '<ul class="lista-prev">' + puntosPara.map(p => `<li>${p}</li>`).join('') + '</ul>';
+  } else {
+    prevHtml = '<p style="color:var(--rojo-grave);font-style:italic;">No se han identificado puntos de parada en esta reconstrucción.</p>';
+  }
+
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+
+  const cuerpo = `
+    <h4>QUÉ PASÓ (resumen para la familia)</h4>
+    <p>La Sra. Marta Ruiz fue víctima de un fraude que combinó varias técnicas durante 72 horas, desde el lunes hasta el miércoles. El atacante no la engañó con una sola maniobra: fue construyendo poco a poco la confianza usando un email falso del banco, mensajes SMS, llamadas telefónicas en las que se hizo pasar por empleado del banco e incluso por un supervisor. Pidió secretismo para que la víctima no consultara con la familia. El resultado fue una pérdida de 4.800 € en cuentas que no se han podido recuperar.</p>
+
+    <h4>SECUENCIA RECONSTRUIDA POR EL INVESTIGADOR</h4>
+    ${pasosTxt}
+
+    <h4>PUNTOS EN LOS QUE LA ESTAFA PUDO PARARSE</h4>
+    ${prevHtml}
+
+    <h4>RECOMENDACIONES PARA LA FAMILIA</h4>
+    <ul class="lista-prev">
+      <li>Si reciben un email o SMS del banco con un enlace, NUNCA pinchen el enlace: cierren todo y llamen ellos mismos al teléfono oficial del banco que tienen impreso en la tarjeta.</li>
+      <li>Si una llamada les pide hacer una transferencia "para protegerse", es estafa. Los bancos NUNCA piden eso por teléfono.</li>
+      <li>Si la persona al otro lado les pide "no contárselo a nadie", es la señal definitiva de fraude. Cuelguen y avisen a un familiar.</li>
+      <li>Antes de cualquier transferencia urgente: paren, cuelguen, y consulten con su hijo, hija o un vecino de confianza. Pedir ayuda no es debilidad.</li>
+    </ul>
+
+    <h4>SI VUELVE A OCURRIR — PASO A PASO</h4>
+    <ul class="lista-prev">
+      <li>No respondan, no transfieran, no den datos. Cuelguen o cierren la app.</li>
+      <li>Llamen al teléfono oficial del banco (el de la tarjeta), no al que les hayan dado por teléfono.</li>
+      <li>Si ya transfirieron, denuncien en comisaría o Guardia Civil ese mismo día. Cuanto antes, mejor.</li>
+      <li>Avisen a un familiar de confianza para no pasarlo solos.</li>
+    </ul>
+
+    <div class="firma">
+      <div class="col"><div class="nombre">${nombre1}</div>Investigador/a 1</div>
+      <div class="col"><div class="nombre">${nombre2}</div>Investigador/a 2</div>
+      <div class="col"><div class="nombre">${fecha}</div>Fecha del informe</div>
+    </div>
+  `;
+
+  document.getElementById('informe-cuerpo').innerHTML = cuerpo;
+}
+
+// ============ FINAL ============
+function finalizar() {
+  cambiarPantalla('p-final');
+  generarInforme();
+
+  const ordenOk = EVIDENCIAS.filter(e => String(asignaciones[e.id].pos) === String(e.posicion)).length;
+  const tecnicaOk = EVIDENCIAS.filter(e => asignaciones[e.id].tecnica === e.tecnica).length;
+  const prevencionOk = EVIDENCIAS.filter(e => asignaciones[e.id].prevencion === e.prevencion).length;
+  const total = ordenOk + tecnicaOk + prevencionOk;
+
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  document.getElementById('nombres-finales').textContent = `${nombre1}  ·  ${nombre2}`;
+  document.getElementById('fecha-final').textContent = fecha;
+  document.getElementById('orden-correcto').textContent = ordenOk;
+  document.getElementById('tecnicas-correcto').textContent = tecnicaOk;
+  document.getElementById('prev-correcto').textContent = prevencionOk;
+
+  let calif;
+  if (total === 18) calif = 'SOBRESALIENTE — Caso resuelto';
+  else if (total >= 14) calif = 'NOTABLE — Reconstrucción sólida';
+  else if (total >= 10) calif = 'SUFICIENTE — Hay puntos a revisar';
+  else calif = 'REVISIÓN — Falta consolidar la cronología';
+  document.getElementById('calif-final').textContent = calif;
+}
+
+// ============ DESCARGA PNG ============
+function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s17:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s17','*'); }catch(e){}
+  const canvas = document.createElement('canvas');
+  canvas.width = 1100; canvas.height = 800;
+  const ctx = canvas.getContext('2d');
+
+  // Fondo crema con vignette
+  ctx.fillStyle = '#FBF5E7';
+  ctx.fillRect(0, 0, 1100, 800);
+  const grad = ctx.createRadialGradient(550, 400, 100, 550, 400, 700);
+  grad.addColorStop(0, 'rgba(72,101,129,0.05)');
+  grad.addColorStop(1, 'rgba(11,15,20,0.18)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1100, 800);
+
+  // Bordes
+  ctx.strokeStyle = '#102A43'; ctx.lineWidth = 6;
+  ctx.strokeRect(30, 30, 1040, 740);
+  ctx.lineWidth = 2;
+  ctx.strokeRect(48, 48, 1004, 704);
+
+  // Cabecera
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#102A43';
+  ctx.font = '40px Georgia';
+  ctx.fillText('🛡', 550, 130);
+
+  ctx.font = 'bold 28px Georgia';
+  ctx.fillText('DIPLOMA DEL INVESTIGADOR', 550, 175);
+
+  ctx.font = 'italic 16px Georgia';
+  ctx.fillStyle = '#3D3D3D';
+  ctx.fillText('Caso Marta Ruiz · Reconstrucción de fraude por vishing · Promoción 2026', 550, 205);
+
+  ctx.strokeStyle = '#102A43'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(280, 232); ctx.lineTo(820, 232); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(280, 238); ctx.lineTo(820, 238); ctx.stroke();
+
+  // Cuerpo
+  ctx.fillStyle = '#1B1B1B';
+  ctx.font = 'italic 15px Georgia';
+  ctx.fillText('La Unidad de Delitos Informáticos del IES Jiménez de Quesada acredita a', 550, 280);
+
+  ctx.font = 'bold 24px Georgia';
+  ctx.fillStyle = '#102A43';
+  ctx.fillText(`${nombre1}  ·  ${nombre2}`, 550, 322);
+
+  ctx.font = '14px Georgia';
+  ctx.fillStyle = '#1B1B1B';
+  ctx.fillText('por haber reconstruido el fraude sufrido por la Sra. Marta Ruiz (52 años, Granada),', 550, 358);
+  ctx.fillText('identificando las técnicas empleadas y los puntos de prevención perdidos.', 550, 378);
+
+  // Caja
+  const ordenOk = EVIDENCIAS.filter(e => String(asignaciones[e.id].pos) === String(e.posicion)).length;
+  const tecnicaOk = EVIDENCIAS.filter(e => asignaciones[e.id].tecnica === e.tecnica).length;
+  const prevencionOk = EVIDENCIAS.filter(e => asignaciones[e.id].prevencion === e.prevencion).length;
+  const total = ordenOk + tecnicaOk + prevencionOk;
+
+  ctx.fillStyle = 'rgba(16,42,67,0.06)';
+  ctx.fillRect(170, 408, 760, 222);
+  ctx.strokeStyle = '#B0A78F'; ctx.lineWidth = 1;
+  ctx.strokeRect(170, 408, 760, 222);
+
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  const hora = `${String(ahora.getHours()).padStart(2,'0')}:${String(ahora.getMinutes()).padStart(2,'0')}`;
+
+  let calif;
+  if (total === 18) calif = 'SOBRESALIENTE';
+  else if (total >= 14) calif = 'NOTABLE';
+  else if (total >= 10) calif = 'SUFICIENTE';
+  else calif = 'REVISIÓN';
+
+  const lineas = [
+    ['FECHA DEL INFORME', `${fecha} · ${hora}`],
+    ['PASOS ORDENADOS', `${ordenOk} de 6`],
+    ['TÉCNICAS IDENTIFICADAS', `${tecnicaOk} de 6`],
+    ['PUNTOS DE PREVENCIÓN', `${prevencionOk} de 6`],
+    ['CALIFICACIÓN GLOBAL', `${calif} (${total}/18)`],
+  ];
+  ctx.font = '13px Georgia';
+  ctx.textAlign = 'left';
+  let y = 442;
+  lineas.forEach(([etiq, val]) => {
+    ctx.fillStyle = '#102A43'; ctx.font = 'bold 13px Georgia';
+    ctx.fillText(etiq, 210, y);
+    ctx.fillStyle = '#1B1B1B'; ctx.font = '15px Georgia';
+    ctx.textAlign = 'right';
+    ctx.fillText(val, 890, y);
+    ctx.textAlign = 'left';
+    y += 36;
+  });
+
+  // Sello
+  ctx.save();
+  ctx.translate(950, 670);
+  ctx.rotate(-0.18);
+  ctx.strokeStyle = '#A02B2B'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.arc(0, 0, 58, 0, Math.PI*2); ctx.stroke();
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(0, 0, 52, 0, Math.PI*2); ctx.stroke();
+  ctx.fillStyle = '#A02B2B';
+  ctx.font = 'bold 11px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText('UDI - 2026', 0, -12);
+  ctx.fillText('IES JIMÉNEZ', 0, 2);
+  ctx.font = '8px Georgia';
+  ctx.fillText('DE QUESADA', 0, 18);
+  ctx.restore();
+
+  // Pie
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#3D3D3D';
+  ctx.font = 'italic 13px Georgia';
+  ctx.fillText('"Una estafa que dura 72 horas tiene 72 horas de oportunidades para detenerse.', 550, 686);
+  ctx.fillText('Solo hace falta una."', 550, 705);
+
+  ctx.fillStyle = '#102A43';
+  ctx.font = '11px "Courier New"';
+  ctx.fillText('IES JIMÉNEZ DE QUESADA · SANTA FE (GRANADA)', 550, 735);
+  ctx.fillText('CIBERSEGURIDAD · 1ºESO B · SESIÓN 17 · CASO MARTA RUIZ · v1', 550, 753);
+
+  const safe = (s) => (s || 'Anonimo').replace(/[^a-zA-Z0-9_-]/g, '');
+  const filename = `Diploma_Investigador_S17_${safe(nombre1)}_${safe(nombre2)}_${fecha.replace(/\//g,'-')}.png`;
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+</script>
+
+</body>
+</html>

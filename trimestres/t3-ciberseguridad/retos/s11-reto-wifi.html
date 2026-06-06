@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wifi-trampa · Sesión 11 · v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #0f1729 0%, #1A3A5C 100%);
+    color: #fff; min-height: 100vh; padding: 20px;
+  }
+  .contenedor { max-width: 800px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 24px; }
+  h1 { color: #FFD700; font-size: 28px; }
+  .subtitulo { color: #B8C5D6; font-style: italic; font-size: 15px; margin-top: 6px; }
+
+  .pantalla { display: none; }
+  .pantalla.activa { display: block; }
+
+  .caja {
+    background: rgba(255,255,255,0.05); border: 2px solid #FFD700;
+    border-radius: 10px; padding: 22px; margin-bottom: 16px;
+  }
+  .caja h2 { color: #FFD700; font-size: 20px; margin-bottom: 12px; }
+  .caja p { line-height: 1.5; margin-bottom: 10px; }
+
+  /* Inputs nombres */
+  .campo { margin-bottom: 14px; }
+  .campo label { display: block; color: #FFE08A; font-weight: bold; margin-bottom: 4px; font-size: 14px; }
+  .campo input {
+    width: 100%; padding: 10px 14px; border: 1px solid rgba(255,215,0,0.4);
+    background: rgba(0,0,0,0.4); color: #fff; border-radius: 5px;
+    font-size: 15px; font-family: inherit;
+  }
+  .campo input:focus { outline: none; border-color: #FFD700; }
+
+  /* Botones principales */
+  .btn-primario {
+    background: linear-gradient(135deg, #C99B1F, #FFD700);
+    color: #1A3A5C; border: none; padding: 14px 28px;
+    border-radius: 6px; font-size: 16px; font-weight: bold;
+    cursor: pointer; width: 100%; margin-top: 8px;
+  }
+  .btn-primario:hover { transform: translateY(-1px); }
+  .btn-primario:disabled { background: #555; color: #888; cursor: not-allowed; transform: none; }
+
+  /* Progreso */
+  .progreso {
+    background: rgba(0,0,0,0.4); padding: 12px 18px; border-radius: 6px;
+    margin-bottom: 16px; display: flex; justify-content: space-between;
+    align-items: center; font-size: 14px;
+  }
+  .progreso .fase { color: #FFD700; font-weight: bold; }
+  .progreso .aciertos { color: #B8C5D6; }
+
+  /* Pantalla redes wifi (Fase 1) */
+  .panel-wifi {
+    background: #f5f5f5; color: #222; border-radius: 12px;
+    padding: 18px; margin-bottom: 16px;
+  }
+  .panel-wifi-header {
+    color: #555; font-weight: bold; font-size: 14px; padding-bottom: 10px;
+    border-bottom: 1px solid #ddd; margin-bottom: 10px;
+  }
+  .red-wifi {
+    padding: 12px 14px; border-radius: 6px; margin-bottom: 6px;
+    cursor: pointer; display: flex; justify-content: space-between;
+    align-items: center; transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .red-wifi:hover { background: #e8f0fe; border-color: #4a90e2; }
+  .red-wifi.seleccionada { background: #4a90e2; color: #fff; }
+  .red-wifi .nombre { font-weight: bold; }
+  .red-wifi .detalles { color: #666; font-size: 13px; margin-top: 2px; }
+  .red-wifi.seleccionada .detalles { color: #cfd8e0; }
+  .red-wifi .signal {
+    display: flex; align-items: center; gap: 6px;
+    color: #777; font-size: 13px;
+  }
+  .red-wifi.seleccionada .signal { color: #fff; }
+
+  /* Aeropuerto */
+  .escena {
+    background: rgba(0,0,0,0.4); border-left: 4px solid #6FB5E8;
+    padding: 14px 18px; margin-bottom: 14px; border-radius: 4px;
+  }
+  .escena .hora { color: #6FB5E8; font-weight: bold; font-size: 14px; margin-bottom: 6px; }
+  .escena .descripcion { color: #fff; line-height: 1.5; }
+
+  .opciones { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .opcion {
+    background: rgba(255,255,255,0.08); border: 2px solid rgba(255,215,0,0.3);
+    color: #fff; padding: 12px 16px; border-radius: 6px;
+    cursor: pointer; text-align: left; transition: all 0.2s;
+    font-size: 14px; font-family: inherit; line-height: 1.4;
+  }
+  .opcion:hover { background: rgba(255,215,0,0.15); border-color: #FFD700; }
+  .opcion:disabled { cursor: not-allowed; opacity: 0.6; }
+  .opcion.correcta { background: rgba(39,174,96,0.3); border-color: #27AE60; }
+  .opcion.incorrecta { background: rgba(192,57,43,0.3); border-color: #C0392B; }
+
+  /* Feedback */
+  .feedback {
+    margin-top: 14px; padding: 14px 18px; border-radius: 6px;
+    line-height: 1.5; display: none;
+  }
+  .feedback.activa { display: block; }
+  .feedback.bien { background: rgba(39,174,96,0.2); border-left: 4px solid #27AE60; }
+  .feedback.mal { background: rgba(192,57,43,0.2); border-left: 4px solid #C0392B; }
+  .feedback .titulo { font-weight: bold; margin-bottom: 6px; font-size: 15px; }
+  .feedback.bien .titulo { color: #27AE60; }
+  .feedback.mal .titulo { color: #FF8A7A; }
+  .btn-siguiente {
+    background: #FFD700; color: #1A3A5C; border: none;
+    padding: 10px 20px; border-radius: 5px; font-weight: bold;
+    cursor: pointer; margin-top: 10px; font-size: 14px;
+  }
+  .btn-reintentar {
+    background: #6FB5E8; color: #1A3A5C; border: none;
+    padding: 10px 20px; border-radius: 5px; font-weight: bold;
+    cursor: pointer; margin-top: 10px; font-size: 14px; margin-left: 8px;
+  }
+
+  /* Final: consejos */
+  .consejo-chip {
+    background: rgba(255,255,255,0.05); border: 2px solid rgba(255,215,0,0.3);
+    color: #fff; padding: 10px 14px; border-radius: 6px;
+    cursor: pointer; margin-bottom: 8px; transition: all 0.2s;
+    display: block; width: 100%; text-align: left;
+    font-size: 14px; font-family: inherit; line-height: 1.4;
+  }
+  .consejo-chip:hover { background: rgba(255,215,0,0.1); }
+  .consejo-chip.seleccionado {
+    background: rgba(39,174,96,0.25); border-color: #27AE60; color: #fff;
+  }
+  .contador-consejos {
+    text-align: center; color: #FFD700; font-weight: bold;
+    margin: 10px 0; font-size: 15px;
+  }
+
+  /* Pantalla diploma */
+  .resultado-final {
+    text-align: center; padding: 30px 20px;
+  }
+  .resultado-final .titulo-final {
+    color: #27AE60; font-size: 32px; margin-bottom: 10px;
+  }
+  .resultado-final .subtitulo-final {
+    color: #FFD700; font-size: 18px; margin-bottom: 16px;
+  }
+  .resultado-final .stats-finales {
+    background: rgba(0,0,0,0.4); padding: 18px; border-radius: 8px;
+    margin: 18px 0; display: inline-block; min-width: 320px;
+  }
+  .resultado-final .stats-finales div {
+    margin-bottom: 6px; font-size: 15px;
+  }
+  .resultado-final .stats-finales b { color: #FFD700; }
+
+  footer { text-align: center; margin-top: 24px; color: #6B7B8E; font-size: 12px; }
+
+  /* === Fase 0: TEORÍA === */
+  .tarjeta-teoria {
+    background: rgba(255,255,255,0.06);
+    border-left: 4px solid #FFD700;
+    padding: 16px 18px; margin-bottom: 14px;
+    border-radius: 6px;
+  }
+  .tarjeta-teoria h3 {
+    color: #FFD700; font-size: 17px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tarjeta-teoria .num-tarjeta {
+    background: #FFD700; color: #1A3A5C;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 14px;
+  }
+  .tarjeta-teoria p { line-height: 1.55; font-size: 14.5px; }
+  .tarjeta-teoria .destacado {
+    color: #FFE08A; font-weight: bold;
+  }
+  .tarjeta-teoria .alerta {
+    color: #FF8A7A; font-weight: bold;
+  }
+
+  /* Barra de progreso de lectura (scroll + tiempo) */
+  .barra-lectura {
+    position: sticky; top: 10px; z-index: 10;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,215,0,0.4); border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 14px;
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 13px;
+  }
+  .barra-lectura .estado {
+    display: flex; justify-content: space-between; color: #B8C5D6;
+  }
+  .barra-lectura .estado .ok { color: #27AE60; font-weight: bold; }
+  .barra-lectura .estado .pendiente { color: #FFE08A; }
+  .barra-lectura .progreso-visual {
+    background: rgba(0,0,0,0.4); border-radius: 4px; height: 6px; overflow: hidden;
+  }
+  .barra-lectura .progreso-visual .fill {
+    background: linear-gradient(90deg, #C99B1F, #FFD700);
+    height: 100%; width: 0%; transition: width 0.3s;
+  }
+
+  /* === Tests tipo selección múltiple === */
+  .pregunta-test {
+    background: rgba(255,255,255,0.04);
+    border: 2px solid rgba(255,215,0,0.25);
+    border-radius: 8px; padding: 16px 18px; margin-bottom: 16px;
+  }
+  .pregunta-test .num-pregunta {
+    color: #FFD700; font-weight: bold; font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .pregunta-test .enunciado {
+    color: #fff; line-height: 1.5; margin-bottom: 12px;
+    font-size: 14.5px;
+  }
+
+  /* Cabecera de tests */
+  .cabecera-test {
+    text-align: center; padding: 8px 0 14px;
+  }
+  .cabecera-test .titulo {
+    color: #FFD700; font-size: 18px; font-weight: bold;
+  }
+  .cabecera-test .subtitulo {
+    color: #B8C5D6; font-size: 13px; font-style: italic; margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <header>
+    <h1>📶 Wifi-trampa</h1>
+    <p class="subtitulo">Sesión 11 · 1º ESO B · Computación y Robótica</p>
+  </header>
+
+  <!-- PANTALLA 0: INICIO -->
+  <div class="pantalla activa" id="pantalla-inicio">
+    <div class="caja">
+      <h2>🎯 Tu misión</h2>
+      <p>Vais a vivir DOS escenarios con wifi público y a demostrar lo que habéis aprendido en dos tests.</p>
+      <p><b>📚 Fase 0 — Briefing:</b> 6 ideas clave sobre wifi público + 5 preguntas test.</p>
+      <p><b>☕ Fase 1 — La cafetería:</b> elegir a qué red wifi conectarse de entre 5 opciones (4 son trampas).</p>
+      <p><b>✈ Fase 2 — El aeropuerto de Ana:</b> ayudar a Ana a tomar 6 decisiones en 2 horas de espera.</p>
+      <p><b>🧠 Fase 3 — Test integrador:</b> 5 preguntas finales que mezclan todo lo vivido.</p>
+      <p><b>🏠 Fase 4 — Consejos para casa</b> + DIPLOMA DE WIFI SEGURO para entregar en Moodle.</p>
+      <p style="font-size:13px;color:#B8C5D6;margin-top:14px;">Si os equivocáis no pasa nada: podéis reintentar cada decisión y cada pregunta. La gracia es entender POR QUÉ se equivoca uno.</p>
+    </div>
+    <div class="caja">
+      <h2>📝 Vuestros nombres</h2>
+      <div class="campo">
+        <label>Investigador/a 1</label>
+        <input type="text" id="nombre1" placeholder="Nombre y apellido">
+      </div>
+      <div class="campo">
+        <label>Investigador/a 2</label>
+        <input type="text" id="nombre2" placeholder="Nombre y apellido">
+      </div>
+      <button class="btn-primario" onclick="empezar()">▶ Empezar misión</button>
+    </div>
+  </div>
+
+  <!-- PANTALLA 0.5: TEORÍA (Fase 0) -->
+  <div class="pantalla" id="pantalla-teoria">
+    <div class="progreso">
+      <span class="fase">📚 FASE 0 — Briefing</span>
+      <span class="aciertos">6 ideas clave</span>
+    </div>
+
+    <div class="barra-lectura">
+      <div class="estado">
+        <span>📖 Lectura: <span id="estado-scroll" class="pendiente">leyendo...</span></span>
+        <span>⏱ Tiempo mínimo: <span id="estado-tiempo" class="pendiente">75 s</span></span>
+      </div>
+      <div class="progreso-visual"><div class="fill" id="fill-tiempo"></div></div>
+    </div>
+
+    <div class="caja">
+      <h2>📡 Lo que tenéis que saber antes de salir a la calle</h2>
+      <p>Leed las 6 tarjetas. Cuando lleguéis al final y haya pasado el tiempo mínimo, se desbloqueará el botón para hacer 5 preguntas test.</p>
+    </div>
+
+    <div id="contenido-teoria">
+
+      <div class="tarjeta-teoria">
+        <h3><span class="num-tarjeta">1</span> ¿Qué tiene de raro una wifi pública?</h3>
+        <p>En tu casa la wifi tiene contraseña y la conocéis solo tu familia y tu router. En el bar, en el aeropuerto o en el centro comercial, en cambio, hay <span class="destacado">decenas de personas conectadas a la vez</span> a la misma red. Y entre ellas puede haber alguien con conocimientos espiando lo que hacen los demás.</p>
+        <p>Es como si tu móvil pasase su tráfico por las manos de todos los que están alrededor antes de llegar a internet.</p>
+      </div>
+
+      <div class="tarjeta-teoria">
+        <h3><span class="num-tarjeta">2</span> Redes gemelas: la trampa del nombre</h3>
+        <p>Cualquiera puede crear con su móvil una wifi y ponerle el nombre que quiera. Un atacante sentado en el Starbucks crea una wifi llamada <span class="destacado">"Starbucks_Free"</span>, la deja abierta y se sienta a esperar.</p>
+        <p>Tú llegas, ves el nombre familiar, te conectas... pero esa wifi <span class="alerta">NO es la del Starbucks</span>. Es la del atacante. Todo lo que haces pasa por su equipo. Eso es una "red gemela": <span class="destacado">mismo nombre, falsa identidad</span>.</p>
+      </div>
+
+      <div class="tarjeta-teoria">
+        <h3><span class="num-tarjeta">3</span> HTTPS y el candado</h3>
+        <p>Mira la barra del navegador cuando entras a una web. Si pone <span class="destacado">"https://" con un candadito 🔒</span>, la información viaja CIFRADA: aunque haya un atacante en la wifi, no puede leer lo que escribes (contraseñas, mensajes...).</p>
+        <p>Si pone solo <span class="alerta">"http://" sin candado</span>, lo lee TODO en claro. La mayoría de webs grandes (banco, Instagram, Gmail) usan HTTPS por defecto, pero ojo: las páginas FALSAS creadas por atacantes también pueden poner HTTPS para engañarte.</p>
+      </div>
+
+      <div class="tarjeta-teoria">
+        <h3><span class="num-tarjeta">4</span> El portal cautivo</h3>
+        <p>Es la pantalla que sale al conectarte a una wifi del aeropuerto o el hotel: <span class="destacado">"Introduce tu email para acceder"</span>.</p>
+        <p>NO es un control de seguridad: nadie comprueba si el email es real. Es solo una forma de <span class="alerta">recolectar correos electrónicos</span> para enviar spam, publicidad o, peor, suplantaciones. <span class="destacado">Truco: pon un email inventado. Te dejará pasar igual.</span></p>
+      </div>
+
+      <div class="tarjeta-teoria">
+        <h3><span class="num-tarjeta">5</span> La VPN: el túnel</h3>
+        <p>Una VPN es un <span class="destacado">"túnel" que cifra TODO tu tráfico</span>, incluso si la wifi es trampa. El atacante ve que estás conectado, pero no puede leer NADA de lo que haces.</p>
+        <p>Suena perfecto, pero ojo: <span class="alerta">hay VPN gratis que en realidad son trampas</span> (las empresas que están detrás venden tus datos, o son del propio atacante). Las VPN buenas suelen ser de pago o las que pone tu instituto/empresa. <span class="alerta">Una VPN mala es PEOR que no tener ninguna.</span></p>
+      </div>
+
+      <div class="tarjeta-teoria">
+        <h3><span class="num-tarjeta">6</span> Las 4 reglas de oro</h3>
+        <p><b>1.</b> Para tu <span class="destacado">banco, comprar online o cosas importantes</span>: usa SIEMPRE datos móviles del teléfono, NUNCA wifi público.</p>
+        <p><b>2.</b> Si el navegador avisa de <span class="alerta">"certificado no confiable"</span>: vuelve atrás, no continúes.</p>
+        <p><b>3.</b> En portales cautivos: <span class="destacado">email inventado</span>, NO el real.</p>
+        <p><b>4.</b> Cuando termines: marca <span class="destacado">"Olvidar esta red"</span> en tu móvil para que no se conecte sola la próxima vez.</p>
+      </div>
+
+      <div id="marca-fin-teoria" style="text-align:center;color:#27AE60;font-weight:bold;padding:8px;">
+        ✓ Has llegado al final del briefing
+      </div>
+
+    </div>
+
+    <button class="btn-primario" id="btn-pasar-test1" onclick="empezarTest1()" disabled style="margin-top:18px;">
+      🔒 Esperando lectura completa...
+    </button>
+  </div>
+
+  <!-- PANTALLA 0.6: TEST 1 (post-teoría) -->
+  <div class="pantalla" id="pantalla-test1">
+    <div class="progreso">
+      <span class="fase">📚 TEST DE BRIEFING</span>
+      <span class="aciertos">Pregunta <span id="num-test1">1</span> / 5 · Aciertos: <span id="aciertos-test1">0</span></span>
+    </div>
+    <div class="cabecera-test">
+      <div class="titulo">🧠 5 preguntas sobre lo que acabáis de leer</div>
+      <div class="subtitulo">Si falláis podéis reintentar. Los aciertos saldrán en el diploma.</div>
+    </div>
+    <div id="contenido-test1"></div>
+    <div class="feedback" id="feedback-test1"></div>
+  </div>
+
+  <!-- PANTALLA 1: CAFETERÍA -->
+  <div class="pantalla" id="pantalla-cafe">
+    <div class="progreso">
+      <span class="fase">📍 FASE 1 — La cafetería</span>
+      <span class="aciertos">Aciertos: <span id="aciertos-cafe">0</span> / 1</span>
+    </div>
+    <div class="caja">
+      <h2>☕ Estás en una cafetería del centro comercial</h2>
+      <p>Has quedado con una amiga. Mientras esperas, sacas el móvil. Abres el panel de redes wifi y ves estas 5 redes disponibles.</p>
+      <p><b>¿A cuál te conectarías?</b> Pulsa la que elegirías.</p>
+    </div>
+    <div class="panel-wifi">
+      <div class="panel-wifi-header">📶 Redes wifi disponibles</div>
+      <div id="lista-redes"></div>
+    </div>
+    <div class="feedback" id="feedback-cafe"></div>
+  </div>
+
+  <!-- PANTALLA 2: AEROPUERTO -->
+  <div class="pantalla" id="pantalla-aero">
+    <div class="progreso">
+      <span class="fase">✈ FASE 2 — Aeropuerto de Ana</span>
+      <span class="aciertos">Decisión <span id="momento-actual">1</span> / 6 · Aciertos: <span id="aciertos-aero">0</span></span>
+    </div>
+    <div class="caja" id="contexto-aero" style="display:none;">
+      <h2>✈ Ana en el aeropuerto de Málaga</h2>
+      <p>Ana tiene 19 años. Está esperando un vuelo a Berlín y le quedan 2 horas. Se conecta al wifi del aeropuerto (Airport_Free, sin contraseña). En las próximas 2 horas vivirá 6 momentos en los que tendrá que decidir.</p>
+      <p><b>Decidid POR ANA</b> qué haríais en cada momento.</p>
+      <button class="btn-primario" onclick="mostrarMomento(0)">▶ Empezar la aventura</button>
+    </div>
+    <div id="contenido-aero"></div>
+    <div class="feedback" id="feedback-aero"></div>
+  </div>
+
+  <!-- PANTALLA 2.5: TEST 2 INTEGRADOR -->
+  <div class="pantalla" id="pantalla-test2">
+    <div class="progreso">
+      <span class="fase">🧠 TEST INTEGRADOR</span>
+      <span class="aciertos">Pregunta <span id="num-test2">1</span> / 5 · Aciertos: <span id="aciertos-test2">0</span></span>
+    </div>
+    <div class="cabecera-test">
+      <div class="titulo">🎯 5 preguntas finales: lo que habéis vivido</div>
+      <div class="subtitulo">Mezclamos teoría + cafetería + aeropuerto. Última prueba antes de los consejos.</div>
+    </div>
+    <div id="contenido-test2"></div>
+    <div class="feedback" id="feedback-test2"></div>
+  </div>
+
+  <!-- PANTALLA 3: CONSEJOS PARA CASA -->
+  <div class="pantalla" id="pantalla-consejos">
+    <div class="caja">
+      <h2>🏠 Última decisión: 3 consejos para vuestra casa</h2>
+      <p>De estos 8 consejos sobre wifi público, elegid los <b style="color:#FFD700;">3 que llevaríais a vuestra casa esta noche</b> para contárselos a vuestros padres y abuelos. (No los 3 "mejores": los 3 que ELLOS necesiten más.)</p>
+      <div class="contador-consejos">Seleccionados: <span id="contador-consejos">0</span> / 3</div>
+      <div id="lista-consejos"></div>
+      <button class="btn-primario" id="btn-finalizar" onclick="finalizar()" disabled>🏆 Conseguir el diploma</button>
+    </div>
+  </div>
+
+  <!-- PANTALLA 4: DIPLOMA -->
+  <div class="pantalla" id="pantalla-final">
+    <div class="caja">
+      <div class="resultado-final">
+        <div class="titulo-final">🎉 ¡Diploma conseguido!</div>
+        <div class="subtitulo-final">Wifi seguro · Aeropuerto superado</div>
+        <div class="stats-finales">
+          <div><b>Pareja:</b> <span id="final-nombres"></span></div>
+          <div><b>Fecha:</b> <span id="final-fecha"></span></div>
+          <div style="margin-top:8px;border-top:1px solid rgba(255,215,0,0.3);padding-top:8px;">
+            <b>Test de briefing:</b> <span id="final-test1"></span> / 5
+          </div>
+          <div><b>Aciertos cafetería:</b> <span id="final-cafe"></span> / 1</div>
+          <div><b>Aciertos aeropuerto:</b> <span id="final-aero"></span> / 6</div>
+          <div><b>Test integrador:</b> <span id="final-test2"></span> / 5</div>
+          <div style="margin-top:8px;border-top:1px solid rgba(255,215,0,0.3);padding-top:8px;">
+            <b>Total:</b> <span id="final-total"></span> / 17
+          </div>
+        </div>
+        <p style="margin-top:16px;font-style:italic;color:#B8C5D6;">Descargad el diploma como PNG y subidlo a la tarea de Moodle "Sesión 11 — Wifi-trampa".</p>
+        <button class="btn-primario" style="max-width:340px;margin:18px auto 0;" onclick="descargarDiploma()">📥 Descargar diploma (PNG)</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>IES Jiménez de Quesada · Santa Fe (Granada) · Manuel Alonso Herrera</footer>
+</div>
+
+<script>
+// ====== ESTADO ======
+let nombre1 = '', nombre2 = '';
+let aciertosCafe = 0, aciertosAero = 0;
+let aciertosTest1 = 0, aciertosTest2 = 0;
+let momentoActual = 0;
+let preguntaTest1Actual = 0, preguntaTest2Actual = 0;
+let consejosSeleccionados = new Set();
+
+// Control de lectura Fase 0
+let scrollCompletado = false;
+let tiempoCompletado = false;
+const TIEMPO_MIN_LECTURA = 75; // segundos
+
+// ====== FASE 0: TEORÍA — bloqueo botón ======
+function inicializarBloqueoTeoria() {
+  scrollCompletado = false;
+  tiempoCompletado = false;
+  const btn = document.getElementById('btn-pasar-test1');
+  btn.disabled = true;
+  btn.textContent = '🔒 Esperando lectura completa...';
+  document.getElementById('estado-scroll').textContent = 'leyendo...';
+  document.getElementById('estado-scroll').className = 'pendiente';
+  document.getElementById('estado-tiempo').textContent = TIEMPO_MIN_LECTURA + ' s';
+  document.getElementById('estado-tiempo').className = 'pendiente';
+  document.getElementById('fill-tiempo').style.width = '0%';
+
+  // Timer
+  let segundos = 0;
+  const timer = setInterval(() => {
+    segundos++;
+    const restante = Math.max(0, TIEMPO_MIN_LECTURA - segundos);
+    const fillPct = Math.min(100, (segundos / TIEMPO_MIN_LECTURA) * 100);
+    document.getElementById('fill-tiempo').style.width = fillPct + '%';
+    if (restante > 0) {
+      document.getElementById('estado-tiempo').textContent = restante + ' s';
+    } else {
+      document.getElementById('estado-tiempo').textContent = '✓ completado';
+      document.getElementById('estado-tiempo').className = 'ok';
+      tiempoCompletado = true;
+      desbloquearTest1();
+      clearInterval(timer);
+    }
+  }, 1000);
+
+  // Detector de scroll hasta el final del briefing
+  const marca = document.getElementById('marca-fin-teoria');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !scrollCompletado) {
+        scrollCompletado = true;
+        document.getElementById('estado-scroll').textContent = '✓ completada';
+        document.getElementById('estado-scroll').className = 'ok';
+        desbloquearTest1();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+  observer.observe(marca);
+}
+
+function desbloquearTest1() {
+  if (scrollCompletado && tiempoCompletado) {
+    const btn = document.getElementById('btn-pasar-test1');
+    btn.disabled = false;
+    btn.textContent = '🧠 Pasar al test de briefing';
+  }
+}
+
+// ====== TEST 1 (post-teoría) ======
+const preguntasTest1 = [
+  {
+    enunciado: "Estás en el aeropuerto conectado al wifi público. Entras en tu Gmail por la web (https://gmail.com con candado 🔒). Otro pasajero está espiando la red con un programa. ¿Puede leer tu contraseña?",
+    opciones: [
+      { texto: "Sí, porque estamos en wifi público", correcta: false,
+        feedback: "El wifi público es peligroso, pero el HTTPS te protege LO BÁSICO: la contraseña va cifrada. El atacante ve que entras a Gmail, pero no puede leer la contraseña." },
+      { texto: "No, porque al usar HTTPS la contraseña viaja cifrada", correcta: true,
+        feedback: "✅ Exacto. HTTPS = candadito = contenido cifrado. El espía ve que estás conectado a Gmail, pero no puede leer tu contraseña ni tus mensajes." },
+      { texto: "Solo si tiene un ordenador caro", correcta: false,
+        feedback: "No depende del ordenador. Depende del cifrado: con HTTPS, ni el más experto puede leer el contenido sin la clave." }
+    ]
+  },
+  {
+    enunciado: "¿Por qué una red llamada \"Starbucks_Free\" puede engañarte si estás en un Starbucks?",
+    opciones: [
+      { texto: "Cualquiera puede crear una wifi con el nombre que quiera y tú no puedes saber a primera vista cuál es la auténtica", correcta: true,
+        feedback: "✅ Esa es la trampa. El nombre no garantiza nada. El atacante en la mesa de al lado puede llamar a su wifi exactamente igual que la del local." },
+      { texto: "Porque el Starbucks colabora con los atacantes", correcta: false,
+        feedback: "No, el local no tiene nada que ver. El problema es que el nombre de una wifi NO está protegido: cualquiera puede copiarlo." },
+      { texto: "Porque las wifis con \"_Free\" son más rápidas", correcta: false,
+        feedback: "La velocidad no tiene relación con el riesgo. El problema es que el atacante imita el nombre del local para confundirte." }
+    ]
+  },
+  {
+    enunciado: "Te conectas al wifi de un hotel y un portal cautivo te pide email y fecha de nacimiento \"para acceder\". ¿Qué pones?",
+    opciones: [
+      { texto: "Mi email y mi fecha de nacimiento de verdad, son datos básicos", correcta: false,
+        feedback: "Esos \"datos básicos\" se acumulan en bases de datos y acaban en listas de spam o, peor, en filtraciones. El hotel no comprueba nada." },
+      { texto: "Datos inventados, el hotel no comprueba nada", correcta: true,
+        feedback: "✅ Bien. El portal cautivo NO valida los datos. Es solo un mecanismo para recolectar correos. Email falso = funciona igual." },
+      { texto: "Solo el email real, la fecha la dejo en blanco", correcta: false,
+        feedback: "El email es justo el dato más valioso para un atacante: con él te puede mandar phishing personalizado. Mejor inventado." }
+    ]
+  },
+  {
+    enunciado: "Tu padre te dice que ha encontrado una VPN gratis en Google que se llama \"SuperVPN Free Forever\". ¿Qué le aconsejas?",
+    opciones: [
+      { texto: "Que la use sin problema, las VPN gratis funcionan igual que las de pago", correcta: false,
+        feedback: "Una VPN cifra tu tráfico, sí, pero pasa por los servidores de QUIEN te la ofrece. Si es gratis, normalmente esa empresa vive de vender tus datos. Mala señal." },
+      { texto: "Que la borre. Las VPN gratis suelen vender los datos del usuario o son del propio atacante", correcta: true,
+        feedback: "✅ Correcto. Una VPN mala es PEOR que ninguna, porque te da falsa sensación de seguridad mientras tus datos van a parar a quien no debe." },
+      { texto: "Que la use solo para Instagram", correcta: false,
+        feedback: "Aunque solo entre en Instagram, todo el tráfico pasa por la VPN. Si la VPN es trampa, ve qué webs visita, cuánto tiempo, etc. Mejor evitarla." }
+    ]
+  },
+  {
+    enunciado: "Estás en el wifi del hotel de vacaciones y te llega un Bizum. Quieres abrir la app del banco para verificarlo. ¿Es seguro?",
+    opciones: [
+      { texto: "Sí, las apps del banco siempre son seguras estés donde estés", correcta: false,
+        feedback: "Las apps del banco son seguras EN SÍ MISMAS, pero en una wifi pública el atacante puede intentar otros trucos (redirigirte a una app falsa, fingir caídas...). La regla es: para el banco, datos móviles." },
+      { texto: "No, para el banco hay que usar datos móviles del teléfono, no wifi público", correcta: true,
+        feedback: "✅ Regla de oro nº 1. Para banco, compras o gestiones sensibles: SIEMPRE datos móviles. La wifi del hotel queda solo para ver Wikipedia o noticias." },
+      { texto: "Solo si el wifi del hotel tiene contraseña", correcta: false,
+        feedback: "Que tenga contraseña no garantiza nada: el atacante también la conoce (es huésped del hotel) o la wifi puede ser una red gemela. Para el banco, datos móviles, punto." }
+    ]
+  }
+];
+
+function empezarTest1() {
+  preguntaTest1Actual = 0;
+  aciertosTest1 = 0;
+  document.getElementById('aciertos-test1').textContent = '0';
+  cambiarPantalla('pantalla-test1');
+  mostrarPreguntaTest1(0);
+}
+
+function mostrarPreguntaTest1(idx) {
+  if (idx >= preguntasTest1.length) {
+    // Fin del test 1 → cafetería
+    cambiarPantalla('pantalla-cafe');
+    pintarRedes();
+    return;
+  }
+  preguntaTest1Actual = idx;
+  document.getElementById('num-test1').textContent = idx + 1;
+  document.getElementById('feedback-test1').classList.remove('activa');
+
+  const p = preguntasTest1[idx];
+  const cont = document.getElementById('contenido-test1');
+  cont.innerHTML = `
+    <div class="pregunta-test">
+      <div class="num-pregunta">Pregunta ${idx + 1} / ${preguntasTest1.length}</div>
+      <div class="enunciado">${p.enunciado}</div>
+      <div class="opciones" id="opciones-test1"></div>
+    </div>
+  `;
+  const op = document.getElementById('opciones-test1');
+  p.opciones.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opcion';
+    btn.textContent = o.texto;
+    btn.onclick = () => responderTest1(i);
+    op.appendChild(btn);
+  });
+}
+
+function responderTest1(idx) {
+  const p = preguntasTest1[preguntaTest1Actual];
+  const o = p.opciones[idx];
+  const botones = document.querySelectorAll('#opciones-test1 .opcion');
+  botones.forEach(b => b.disabled = true);
+  botones[idx].classList.add(o.correcta ? 'correcta' : 'incorrecta');
+
+  const fb = document.getElementById('feedback-test1');
+  fb.className = 'feedback activa ' + (o.correcta ? 'bien' : 'mal');
+
+  if (o.correcta) {
+    aciertosTest1++;
+    document.getElementById('aciertos-test1').textContent = aciertosTest1;
+    fb.innerHTML = `
+      <div class="titulo">✅ Correcto</div>
+      <p>${o.feedback}</p>
+      <button class="btn-siguiente" onclick="mostrarPreguntaTest1(${preguntaTest1Actual + 1})">▶ Siguiente pregunta</button>
+    `;
+  } else {
+    fb.innerHTML = `
+      <div class="titulo">❌ No es la mejor opción</div>
+      <p>${o.feedback}</p>
+      <button class="btn-reintentar" onclick="reintentarTest1()">🔄 Volver a intentar</button>
+      <button class="btn-siguiente" onclick="mostrarPreguntaTest1(${preguntaTest1Actual + 1})">↪ Avanzar sin acierto</button>
+    `;
+  }
+}
+
+function reintentarTest1() {
+  mostrarPreguntaTest1(preguntaTest1Actual);
+}
+
+// ====== TEST 2 (post-aeropuerto) ======
+const preguntasTest2 = [
+  {
+    enunciado: "En la cafetería había 5 redes wifi. Para conectarte a la legítima, la camarera te dio la contraseña al pedir un café. ¿Qué nos dice eso sobre esa red?",
+    opciones: [
+      { texto: "Que es la legítima del local: la contraseña la controla el comercio y el atacante no puede tenerla", correcta: true,
+        feedback: "✅ Exacto. Una contraseña que te da el camarero es señal de que la red está controlada por el local, no por un desconocido. No es 100% segura, pero es lo más fiable de las 5 opciones." },
+      { texto: "Que es trampa, los locales nunca dan contraseñas", correcta: false,
+        feedback: "Al revés: que el local tenga contraseña que solo da a los clientes es BUEN síntoma. Significa que la red la controla el comercio." },
+      { texto: "Nada, todas las redes son iguales", correcta: false,
+        feedback: "No, sí dicen mucho. Una red abierta es accesible a todo el mundo; una con contraseña controlada por el local filtra a los desconocidos." }
+    ]
+  },
+  {
+    enunciado: "Ana recibió un email de \"AirportSecurity\" diciendo que había habido un acceso sospechoso a su cuenta. ¿Qué técnica de ataque es esa?",
+    opciones: [
+      { texto: "Un fallo del aeropuerto que avisa correctamente", correcta: false,
+        feedback: "El aeropuerto no envía emails de \"alertas de seguridad\" a los pasajeros. Eso siempre es phishing aprovechando el contexto." },
+      { texto: "Phishing: aprovechan el contexto (estás en el aeropuerto) para que te creas el email y pinches en el enlace", correcta: true,
+        feedback: "✅ Phishing puro. El atacante sabe que estás en wifi público y monta un email \"oportuno\" para que pinches sin pensar. Lo viste en S3 con VirusTotal: ante una URL sospechosa, no pinches, verifica." },
+      { texto: "Un virus que viaja por wifi", correcta: false,
+        feedback: "Los virus normalmente no \"viajan por wifi\" así. Lo que tenemos aquí es ingeniería social: convencerte para que tú mismo pinches en el enlace." }
+    ]
+  },
+  {
+    enunciado: "El navegador de Ana avisó: \"el certificado de seguridad NO es de confianza\". ¿Qué tipo de ataque indica eso normalmente en una wifi pública?",
+    opciones: [
+      { texto: "Que tu antivirus está roto", correcta: false,
+        feedback: "El aviso lo da el NAVEGADOR, no el antivirus. Y avisa porque la conexión no se puede verificar como auténtica." },
+      { texto: "Un ataque \"man in the middle\": alguien está entre tú y la web, intentando leer lo que mandas", correcta: true,
+        feedback: "✅ Eso. \"Hombre en el medio\" = alguien intercepta tu tráfico haciéndose pasar por la web destino. Por eso el certificado no cuadra: lo está sirviendo el atacante, no la web real." },
+      { texto: "Que la web está caída", correcta: false,
+        feedback: "Si la web estuviera caída, no cargaría nada. Aquí carga pero con aviso: alguien está manipulando la conexión." }
+    ]
+  },
+  {
+    enunciado: "Sobre el PDF de 47 MB que le mandaron a Ana por WhatsApp: ¿cuál es realmente el riesgo?",
+    opciones: [
+      { texto: "El riesgo está en descargarlo desde wifi pública", correcta: false,
+        feedback: "Descargar un archivo en wifi público no es el problema principal. La descarga en sí no ejecuta nada en tu móvil." },
+      { texto: "Descargarlo no es peligroso, lo peligroso es ABRIRLO sin saber qué contiene", correcta: true,
+        feedback: "✅ Esa es la clave. Un archivo bajado se queda quieto en tu móvil; el daño se hace al ABRIRLO (si lleva código malicioso o macros). Por eso documentos importantes, mejor abrirlos en una red de confianza y con cuidado." },
+      { texto: "WhatsApp no permite enviar archivos grandes", correcta: false,
+        feedback: "Sí los permite. La pregunta no es si WhatsApp deja, sino qué riesgo asume Ana." }
+    ]
+  },
+  {
+    enunciado: "Ana embarca y sale del aeropuerto. ¿Qué debería hacer con la wifi \"Airport_Free\" guardada en su móvil?",
+    opciones: [
+      { texto: "Dejarla como está, ya no la usará", correcta: false,
+        feedback: "Si la deja guardada, el móvil se volverá a conectar SOLO la próxima vez que detecte esa red... o cualquiera con el mismo nombre que cree un atacante en cualquier sitio." },
+      { texto: "Pulsar \"Olvidar esta red\" para que el móvil no se vuelva a conectar solo la próxima vez", correcta: true,
+        feedback: "✅ Regla de oro nº 4. Si no olvidas la red, tu móvil se conectará automáticamente cada vez que detecte algo con ese nombre, sin preguntarte. Un atacante puede aprovecharlo creando una red gemela." },
+      { texto: "Cambiarle el nombre en su móvil", correcta: false,
+        feedback: "Renombrarla en tu móvil no cambia el SSID real de la red. Lo correcto es OLVIDARLA, no renombrarla." }
+    ]
+  }
+];
+
+function empezarTest2() {
+  preguntaTest2Actual = 0;
+  aciertosTest2 = 0;
+  document.getElementById('aciertos-test2').textContent = '0';
+  cambiarPantalla('pantalla-test2');
+  mostrarPreguntaTest2(0);
+}
+
+function mostrarPreguntaTest2(idx) {
+  if (idx >= preguntasTest2.length) {
+    // Fin del test 2 → consejos
+    mostrarConsejos();
+    return;
+  }
+  preguntaTest2Actual = idx;
+  document.getElementById('num-test2').textContent = idx + 1;
+  document.getElementById('feedback-test2').classList.remove('activa');
+
+  const p = preguntasTest2[idx];
+  const cont = document.getElementById('contenido-test2');
+  cont.innerHTML = `
+    <div class="pregunta-test">
+      <div class="num-pregunta">Pregunta ${idx + 1} / ${preguntasTest2.length}</div>
+      <div class="enunciado">${p.enunciado}</div>
+      <div class="opciones" id="opciones-test2"></div>
+    </div>
+  `;
+  const op = document.getElementById('opciones-test2');
+  p.opciones.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opcion';
+    btn.textContent = o.texto;
+    btn.onclick = () => responderTest2(i);
+    op.appendChild(btn);
+  });
+}
+
+function responderTest2(idx) {
+  const p = preguntasTest2[preguntaTest2Actual];
+  const o = p.opciones[idx];
+  const botones = document.querySelectorAll('#opciones-test2 .opcion');
+  botones.forEach(b => b.disabled = true);
+  botones[idx].classList.add(o.correcta ? 'correcta' : 'incorrecta');
+
+  const fb = document.getElementById('feedback-test2');
+  fb.className = 'feedback activa ' + (o.correcta ? 'bien' : 'mal');
+
+  if (o.correcta) {
+    aciertosTest2++;
+    document.getElementById('aciertos-test2').textContent = aciertosTest2;
+    fb.innerHTML = `
+      <div class="titulo">✅ Correcto</div>
+      <p>${o.feedback}</p>
+      <button class="btn-siguiente" onclick="mostrarPreguntaTest2(${preguntaTest2Actual + 1})">▶ Siguiente pregunta</button>
+    `;
+  } else {
+    fb.innerHTML = `
+      <div class="titulo">❌ No es la mejor opción</div>
+      <p>${o.feedback}</p>
+      <button class="btn-reintentar" onclick="reintentarTest2()">🔄 Volver a intentar</button>
+      <button class="btn-siguiente" onclick="mostrarPreguntaTest2(${preguntaTest2Actual + 1})">↪ Avanzar sin acierto</button>
+    `;
+  }
+}
+
+function reintentarTest2() {
+  mostrarPreguntaTest2(preguntaTest2Actual);
+}
+
+// ====== FASE 1: REDES WIFI ======
+const redes = [
+  { ssid: "Starbucks_Free", protegida: false, signal: 5, correcta: false,
+    explicacion: "Sin contraseña + señal muy fuerte. Es la trampa más típica: un atacante crea una red gemela con el nombre de la marca y la deja abierta para que la gente se conecte sin pensar." },
+  { ssid: "Starbucks Clientes", protegida: true, signal: 4, correcta: true,
+    explicacion: "✅ Es la legítima. Pide contraseña (la da la camarera al pedir un café), el nombre es coherente con la marca y la señal es razonable. Conectarse a redes con contraseña SIEMPRE es más seguro que a las abiertas." },
+  { ssid: "STARBUCKS_PUBLIC", protegida: false, signal: 3, correcta: false,
+    explicacion: "El nombre en MAYÚSCULAS y el sufijo \"PUBLIC\" no son típicos de la marca. Trampa: el atacante imita el nombre con ligeros cambios para confundir." },
+  { ssid: "Starbucks5G", protegida: true, signal: 5, correcta: false,
+    explicacion: "Pide contraseña pero el nombre es sospechoso: \"5G\" es tecnología de móvil, no de wifi. Starbucks NO tiene una wifi llamada así. La contraseña no garantiza nada si la red es del atacante." },
+  { ssid: "FreeWifi2026", protegida: false, signal: 2, correcta: false,
+    explicacion: "Nombre genérico, no menciona Starbucks. Trampa clásica: \"wifi gratis\" para pescar al despistado." }
+];
+
+function pintarRedes() {
+  const cont = document.getElementById('lista-redes');
+  cont.innerHTML = '';
+  redes.forEach((r, idx) => {
+    const div = document.createElement('div');
+    div.className = 'red-wifi';
+    div.dataset.idx = idx;
+    const barras = '📶'.repeat(Math.min(r.signal, 5));
+    div.innerHTML = `
+      <div>
+        <div class="nombre">${r.ssid}</div>
+        <div class="detalles">${r.protegida ? '🔐 Pide contraseña' : '⚠ Abierta (sin contraseña)'}</div>
+      </div>
+      <div class="signal">${barras}</div>
+    `;
+    div.onclick = () => elegirRed(idx);
+    cont.appendChild(div);
+  });
+}
+
+function elegirRed(idx) {
+  // Limpiar selección anterior
+  document.querySelectorAll('.red-wifi').forEach(el => el.classList.remove('seleccionada'));
+  document.querySelector(`.red-wifi[data-idx="${idx}"]`).classList.add('seleccionada');
+
+  const r = redes[idx];
+  const fb = document.getElementById('feedback-cafe');
+  fb.className = 'feedback activa ' + (r.correcta ? 'bien' : 'mal');
+  fb.innerHTML = `
+    <div class="titulo">${r.correcta ? '✅ Buena elección' : '❌ Te habrían pillado'}</div>
+    <p>${r.explicacion}</p>
+    ${r.correcta
+      ? '<button class="btn-siguiente" onclick="terminarCafe(true)">▶ Continuar al aeropuerto</button>'
+      : '<button class="btn-reintentar" onclick="reintentarCafe()">🔄 Volver a elegir</button> <button class="btn-siguiente" onclick="terminarCafe(false)">↪ Pasar al aeropuerto sin acierto</button>'
+    }
+  `;
+}
+
+function reintentarCafe() {
+  document.querySelectorAll('.red-wifi').forEach(el => el.classList.remove('seleccionada'));
+  document.getElementById('feedback-cafe').classList.remove('activa');
+}
+
+function terminarCafe(acierto) {
+  if (acierto) {
+    aciertosCafe = 1;
+    document.getElementById('aciertos-cafe').textContent = '1';
+  }
+  cambiarPantalla('pantalla-aero');
+  document.getElementById('contexto-aero').style.display = 'block';
+}
+
+// ====== FASE 2: AEROPUERTO ======
+const momentos = [
+  {
+    hora: "10:15", titulo: "El portal cautivo",
+    descripcion: "Para conectarse al wifi del aeropuerto, una pantalla pide a Ana su email y su fecha de nacimiento \"para mejorar su experiencia\".",
+    opciones: [
+      { texto: "Rellenar los datos reales (es solo para acceder al wifi)", correcta: false,
+        feedback: "Dar el email real a un portal cautivo es regalar tu correo a quien quiera. Lo usarán para spam o phishing." },
+      { texto: "Poner un email inventado y una fecha falsa", correcta: true,
+        feedback: "✅ Para un wifi público de paso, datos inventados son suficientes. El aeropuerto no comprueba nada." },
+      { texto: "No conectarse al wifi y usar datos móviles", correcta: false,
+        feedback: "Es seguro pero gasta tu tarifa de datos en 2 horas. La solución inventada es más práctica si solo navegas por cosas sin riesgo." }
+    ]
+  },
+  {
+    hora: "10:42", titulo: "El banco",
+    descripcion: "A Ana le acaba de llegar un Bizum. Quiere abrir la app de su banco para confirmar que ha entrado en su cuenta.",
+    opciones: [
+      { texto: "Abrir la app del banco usando el wifi del aeropuerto", correcta: false,
+        feedback: "❌ NUNCA. En una wifi pública alguien puede estar interceptando el tráfico. Para el banco SIEMPRE datos móviles." },
+      { texto: "Esperar a llegar a casa para mirar el banco", correcta: true,
+        feedback: "✅ Lo más seguro. O alternativamente, desconectar el wifi y usar datos móviles del propio teléfono." },
+      { texto: "Abrir el banco solo si el wifi tiene contraseña", correcta: false,
+        feedback: "Tener contraseña no garantiza nada si la red es del atacante o está mal configurada. Para el banco, datos móviles o nada." }
+    ]
+  },
+  {
+    hora: "11:08", titulo: "Email de AirportSecurity",
+    descripcion: "Llega un email: \"Detectamos un acceso sospechoso a tu cuenta de email desde el dispositivo del aeropuerto. Verifica tu identidad pinchando aquí.\"",
+    opciones: [
+      { texto: "Pinchar el enlace para verificar (parece importante)", correcta: false,
+        feedback: "❌ Es phishing. \"AirportSecurity\" no existe. Te están aprovechando el contexto del aeropuerto para engañarte." },
+      { texto: "Ignorar el email y borrarlo", correcta: true,
+        feedback: "✅ Exacto. Email con urgencia + enlace sospechoso + remitente raro = phishing. Si te preocupa, entra TÚ a tu cuenta de email por tu cuenta, sin pinchar nada." },
+      { texto: "Responder al email pidiendo más información", correcta: false,
+        feedback: "Responder confirma al atacante que tu email está activo y eres tú leyéndolo. Lo añade a su lista de objetivos." }
+    ]
+  },
+  {
+    hora: "11:25", titulo: "El certificado raro",
+    descripcion: "Ana intenta entrar en la web de su universidad. El navegador le avisa: \"El certificado de seguridad de este sitio NO es de confianza. ¿Continuar de todas formas?\"",
+    opciones: [
+      { texto: "Continuar (es la universidad, tendrá un fallo temporal)", correcta: false,
+        feedback: "❌ Nunca ignores avisos de certificado. Suele significar que alguien está interceptando tu conexión (ataque \"man in the middle\")." },
+      { texto: "Volver atrás y NO entrar en la web", correcta: true,
+        feedback: "✅ Bien. Un certificado roto en una wifi pública es la señal típica de que alguien está espiando la red. Mejor probar más tarde desde otra conexión." },
+      { texto: "Apagar el antivirus para que no dé el aviso", correcta: false,
+        feedback: "Ese aviso lo da el NAVEGADOR, no el antivirus. Y apagar protecciones siempre es peor idea." }
+    ]
+  },
+  {
+    hora: "11:48", titulo: "Descarga del PDF",
+    descripcion: "Un compañero le manda por WhatsApp un PDF de 47 MB con \"los apuntes\". Ana piensa descargarlo desde la wifi del aeropuerto.",
+    opciones: [
+      { texto: "Descargarlo aprovechando la wifi gratis", correcta: false,
+        feedback: "Descargar archivos en wifi pública NO es la mayor amenaza (descargar ≠ ejecutar), pero si el archivo está manipulado, el daño se hace al abrirlo. El wifi no añade riesgo extra a esto." },
+      { texto: "Descargarlo y abrirlo después, ya en casa", correcta: true,
+        feedback: "✅ Razonable. Descargar archivos no es peligroso en sí; lo peligroso sería ABRIRLOS. Mejor abrir documentos importantes en una red de confianza." },
+      { texto: "No descargar nada, pedirle al compañero que lo reenvíe luego", correcta: false,
+        feedback: "Demasiado prudente: si confías en el compañero y el archivo es un PDF normal, no hay problema. Lo que sí debes evitar es ABRIRLO si te genera dudas." }
+    ]
+  },
+  {
+    hora: "12:03", titulo: "La VPN",
+    descripcion: "Ana se acuerda de que en clase le hablaron de las VPN. ¿Activa una? ¿Para qué?",
+    opciones: [
+      { texto: "Sí, activa una VPN gratis de las que salen en Google", correcta: false,
+        feedback: "❌ Las VPN gratis son peligrosas: muchas venden tus datos o son trampas. Una mala VPN es PEOR que ninguna." },
+      { texto: "Sí, activa una VPN de confianza (la del instituto o una de pago conocida)", correcta: true,
+        feedback: "✅ Bien. Una VPN seria cifra tu conexión incluso en wifis públicas. Pero solo si es de confianza: gratis y desconocida = no." },
+      { texto: "No hace falta VPN si solo navega por Instagram", correcta: false,
+        feedback: "Para Instagram puede valer sin VPN, sí. Pero para cualquier cosa que requiera login (correo, redes, banco) la VPN sí ayuda en wifi público." }
+    ]
+  }
+];
+
+function mostrarMomento(idx) {
+  if (idx >= momentos.length) { empezarTest2(); return; }
+  momentoActual = idx;
+  document.getElementById('momento-actual').textContent = idx + 1;
+  document.getElementById('contexto-aero').style.display = 'none';
+  document.getElementById('feedback-aero').classList.remove('activa');
+
+  const m = momentos[idx];
+  const cont = document.getElementById('contenido-aero');
+  cont.innerHTML = `
+    <div class="escena">
+      <div class="hora">⏱ ${m.hora} · ${m.titulo}</div>
+      <div class="descripcion">${m.descripcion}</div>
+    </div>
+    <div class="opciones" id="opciones-aero"></div>
+  `;
+  const op = document.getElementById('opciones-aero');
+  m.opciones.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opcion';
+    btn.textContent = o.texto;
+    btn.onclick = () => responderAero(i);
+    op.appendChild(btn);
+  });
+}
+
+function responderAero(idx) {
+  const m = momentos[momentoActual];
+  const o = m.opciones[idx];
+  const botones = document.querySelectorAll('#opciones-aero .opcion');
+  botones.forEach(b => b.disabled = true);
+  botones[idx].classList.add(o.correcta ? 'correcta' : 'incorrecta');
+
+  const fb = document.getElementById('feedback-aero');
+  fb.className = 'feedback activa ' + (o.correcta ? 'bien' : 'mal');
+
+  if (o.correcta) {
+    aciertosAero++;
+    document.getElementById('aciertos-aero').textContent = aciertosAero;
+    fb.innerHTML = `
+      <div class="titulo">✅ Buena decisión</div>
+      <p>${o.feedback}</p>
+      <button class="btn-siguiente" onclick="mostrarMomento(${momentoActual + 1})">▶ Siguiente momento</button>
+    `;
+  } else {
+    fb.innerHTML = `
+      <div class="titulo">❌ Decisión arriesgada</div>
+      <p>${o.feedback}</p>
+      <button class="btn-reintentar" onclick="reintentarMomento()">🔄 Volver a intentar</button>
+      <button class="btn-siguiente" onclick="mostrarMomento(${momentoActual + 1})">↪ Avanzar sin acierto</button>
+    `;
+  }
+}
+
+function reintentarMomento() {
+  mostrarMomento(momentoActual);
+}
+
+// ====== FASE 3: CONSEJOS ======
+const consejos = [
+  "No entres NUNCA a tu banco desde wifi público. Para el banco, datos móviles.",
+  "Si una red wifi no pide contraseña, no la uses para cosas importantes (solo prensa, Wikipedia, etc.).",
+  "Cuando te conectes a una wifi de un comercio, pide TÚ la contraseña al camarero. No te fíes del nombre de la red sin más.",
+  "Si tu navegador avisa de \"certificado no confiable\", VUELVE ATRÁS. No continúes.",
+  "En el portal cautivo (la pantalla que pide email para entrar al wifi), pon datos inventados. No tu correo real.",
+  "Las VPN gratis suelen ser peor que no tener nada. Si usas VPN, que sea seria (la del instituto, por ejemplo).",
+  "Si haces algo importante (banco, comprar, gestiones), USA DATOS MÓVILES, no el wifi del bar/hotel/aeropuerto.",
+  "Cuando termines de usar una wifi pública, OLVÍDALA en la configuración del móvil para que no se vuelva a conectar sola."
+];
+
+function mostrarConsejos() {
+  cambiarPantalla('pantalla-consejos');
+  const cont = document.getElementById('lista-consejos');
+  cont.innerHTML = '';
+  consejos.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'consejo-chip';
+    btn.textContent = c;
+    btn.onclick = () => toggleConsejo(i, btn);
+    cont.appendChild(btn);
+  });
+}
+
+function toggleConsejo(i, btn) {
+  if (consejosSeleccionados.has(i)) {
+    consejosSeleccionados.delete(i);
+    btn.classList.remove('seleccionado');
+  } else if (consejosSeleccionados.size < 3) {
+    consejosSeleccionados.add(i);
+    btn.classList.add('seleccionado');
+  }
+  document.getElementById('contador-consejos').textContent = consejosSeleccionados.size;
+  document.getElementById('btn-finalizar').disabled = consejosSeleccionados.size !== 3;
+}
+
+function finalizar() {
+  cambiarPantalla('pantalla-final');
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  document.getElementById('final-nombres').textContent = `${nombre1} · ${nombre2}`;
+  document.getElementById('final-fecha').textContent = fecha;
+  document.getElementById('final-test1').textContent = aciertosTest1;
+  document.getElementById('final-cafe').textContent = aciertosCafe;
+  document.getElementById('final-aero').textContent = aciertosAero;
+  document.getElementById('final-test2').textContent = aciertosTest2;
+  document.getElementById('final-total').textContent = aciertosTest1 + aciertosCafe + aciertosAero + aciertosTest2;
+}
+
+// ====== NAVEGACIÓN ======
+function empezar() {
+  nombre1 = document.getElementById('nombre1').value.trim();
+  nombre2 = document.getElementById('nombre2').value.trim();
+  if (!nombre1 || !nombre2) {
+    alert('Necesitamos los dos nombres para emitir el diploma al final.');
+    return;
+  }
+  cambiarPantalla('pantalla-teoria');
+  inicializarBloqueoTeoria();
+}
+
+function cambiarPantalla(id) {
+  document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+  document.getElementById(id).classList.add('activa');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ====== DIPLOMA PNG ======
+function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s11:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s11','*'); }catch(e){}
+  const canvas = document.createElement('canvas');
+  canvas.width = 1000; canvas.height = 700;
+  const ctx = canvas.getContext('2d');
+
+  // Fondo
+  const grad = ctx.createLinearGradient(0, 0, 1000, 700);
+  grad.addColorStop(0, '#0f1729');
+  grad.addColorStop(1, '#1A3A5C');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1000, 700);
+
+  // Marcos
+  ctx.strokeStyle = '#FFD700'; ctx.lineWidth = 6;
+  ctx.strokeRect(20, 20, 960, 660);
+  ctx.strokeStyle = 'rgba(255,215,0,0.4)'; ctx.lineWidth = 1;
+  ctx.strokeRect(40, 40, 920, 620);
+
+  ctx.textAlign = 'center';
+
+  // Emoji wifi
+  ctx.font = '64px serif';
+  ctx.fillText('📶', 500, 115);
+
+  // Título
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 36px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('DIPLOMA DE WIFI SEGURO', 500, 165);
+
+  ctx.fillStyle = '#B8C5D6';
+  ctx.font = 'italic 17px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('Sesión 11 — La cafetería y el aeropuerto', 500, 195);
+
+  // Línea
+  ctx.strokeStyle = 'rgba(255,215,0,0.4)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(150, 225); ctx.lineTo(850, 225); ctx.stroke();
+
+  ctx.fillStyle = '#fff';
+  ctx.font = '19px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('Se otorga a la pareja de investigadores:', 500, 270);
+
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 30px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText(`${nombre1}   ·   ${nombre2}`, 500, 320);
+
+  ctx.fillStyle = '#fff';
+  ctx.font = '16px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('Por superar las trampas del wifi público y demostrar criterio', 500, 375);
+  ctx.fillText('en las decisiones de la cafetería y el aeropuerto.', 500, 400);
+
+  // Caja de datos
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  const hora = `${String(ahora.getHours()).padStart(2,'0')}:${String(ahora.getMinutes()).padStart(2,'0')}`;
+  const total = aciertosTest1 + aciertosCafe + aciertosAero + aciertosTest2;
+
+  ctx.fillStyle = 'rgba(0,0,0,0.35)';
+  ctx.fillRect(80, 445, 840, 140);
+  ctx.strokeStyle = 'rgba(255,215,0,0.3)'; ctx.lineWidth = 1;
+  ctx.strokeRect(80, 445, 840, 140);
+
+  // 5 columnas: Fecha | Test1 | Cafetería | Aeropuerto | Test2
+  ctx.fillStyle = '#B8C5D6';
+  ctx.font = '12px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('FECHA', 165, 475);
+  ctx.fillText('TEST BRIEFING', 330, 475);
+  ctx.fillText('CAFETERÍA', 500, 475);
+  ctx.fillText('AEROPUERTO', 670, 475);
+  ctx.fillText('TEST INTEGRADOR', 835, 475);
+
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 17px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText(`${fecha}`, 165, 505);
+  ctx.font = '12px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText(`${hora}`, 165, 522);
+
+  ctx.font = 'bold 22px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText(`${aciertosTest1} / 5`, 330, 515);
+  ctx.fillText(`${aciertosCafe} / 1`, 500, 515);
+  ctx.fillText(`${aciertosAero} / 6`, 670, 515);
+  ctx.fillText(`${aciertosTest2} / 5`, 835, 515);
+
+  // Total
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 16px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText(`Total de aciertos: ${total} / 17`, 500, 560);
+
+  ctx.fillStyle = '#B8C5D6';
+  ctx.font = 'italic 13px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('"En wifi público: para curiosear sí, para cosas importantes no."', 500, 600);
+
+  ctx.fillStyle = '#7F8C8D';
+  ctx.font = '12px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('IES Jiménez de Quesada · Santa Fe (Granada)', 500, 640);
+  ctx.fillText('Computación y Robótica · 1º ESO B · Sesión 11 — Wifi-trampa · v2', 500, 660);
+
+  // Descarga
+  const limpio1 = (nombre1 || 'Inv1').replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]/g, '');
+  const limpio2 = (nombre2 || 'Inv2').replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]/g, '');
+  const fechaArchivo = new Date().toISOString().slice(0, 10);
+  const filename = `Diploma_S11_${limpio1}_${limpio2}_${fechaArchivo}.png`;
+
+  canvas.toBlob(function(blob) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url; link.download = filename;
+    document.body.appendChild(link); link.click();
+    document.body.removeChild(link); URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+</script>
+</body>
+</html>

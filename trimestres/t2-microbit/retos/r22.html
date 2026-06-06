@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Reto 22 · Micro:bit</title>
+<meta name="description" content="Reto 22 Micro:bit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Reto 22</div>
+  <h1>Barrera Con Sensor De Luz</h1>
+  <div class="duracion">Micro:bit · Computación física</div>
+</section>
+<div class="hub-main">
+  <div class="section-title">🧩 Descripción</div>
+  <p>Combina el sensor de luz con el servomotor. Cuando detectes poca luz (un coche se acerca), abre la barrera automáticamente. Cuando vuelva la luz, ciérrala. Es una barrera totalmente automática.</p>
+  <div class="section-title">🎯 Conceptos</div>
+  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Integración de sensores y actuadores</span><span class='badge'>Umbrales de detección</span><span class='badge'>Automatización</span><span class='badge'>Servomotores</span></p>
+  <div class="section-title">🧠 Pseudocódigo</div>
+  <div class="codebox">Al iniciar
+Configurar pin P0 como servo
+Mover servo a 0° (cerrado)
+Para siempre
+Si nivel de luz &lt; 50 entonces
+Mover servo a 90° (abrir)
+Mostrar flecha arriba
+Si no
+Mover servo a 0° (cerrar)
+Mostrar flecha abajo
+Pausa 500 ms</div>
+  <div class="section-title">💡 Ayuda</div>
+  <p>Este reto combina entrada (sensor) y salida (servomotor). El umbral de luz determina cuándo se activa. Ajusta el valor 50 según la luz de tu entorno.</p>
+  <div class="section-title">🚀 Reto extra</div>
+  <p>¿Puedes añadir un LED externo que se encienda en rojo cuando la barrera está cerrada y en verde cuando está abierta?</p>
+  <div class="section-title">✅ Autoevaluación</div>
+  <ul><li>La barrera se abre cuando hay poca luz</li><li>La barrera se cierra cuando hay luz</li><li>El sistema funciona de forma automática</li><li>Los iconos muestran el estado correcto</li><li>Consejo: ¡Has creado un sistema automático! Sensores + actuadores = automatización</li><li>inteligente.</li></ul>
+  <div class="section-title">🔗 Programar</div>
+  <div class="bg">
+    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
+    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+  </div>
+  <div class="section-title">Navegación</div>
+  <div class="bg"><a href="r21.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 21</span></a><a href="r23.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 23</span></a></div>
+</div>
+</div>
+
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  CyR 1º ESO · Curso 2025-26 · Manuel Alonso Herrera
+  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+  <br><span class="version">v1.0.0</span>
+</p>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

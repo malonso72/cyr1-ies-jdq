@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escape Room S9 — El ataque psicológico</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', 'Helvetica', sans-serif;
+    background: linear-gradient(135deg, #0f1729 0%, #1A3A5C 100%);
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.5;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 32px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  h1 { color: #FFD700; text-align: center; margin-bottom: 8px; font-size: 28px; }
+  .subtitulo { text-align: center; color: #B8C5D6; margin-bottom: 24px; font-style: italic; }
+  .progreso {
+    background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px;
+    margin-bottom: 24px; text-align: center; font-size: 14px;
+  }
+  .codigo {
+    display: inline-block; margin-left: 8px; letter-spacing: 8px;
+    font-family: 'Courier New', monospace; font-size: 20px;
+    color: #FFD700; font-weight: bold;
+  }
+  .pantalla { display: none; animation: fadeIn 0.4s ease; }
+  .pantalla.activa { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .nivel-titulo {
+    background: #1A3A5C; color: #FFD700; padding: 12px 18px;
+    border-radius: 8px; margin-bottom: 18px; font-weight: bold;
+    font-size: 18px; border-left: 4px solid #FFD700;
+  }
+  .fase {
+    display: inline-block; background: rgba(255,215,0,0.15);
+    color: #FFD700; padding: 3px 10px; border-radius: 12px;
+    font-size: 12px; margin-left: 10px; font-weight: normal;
+  }
+  .escena {
+    background: rgba(0,0,0,0.4); border-radius: 8px; padding: 20px;
+    margin-bottom: 20px; font-size: 15px; border: 1px solid rgba(255,255,255,0.1);
+  }
+  .escena strong { color: #FFD700; }
+  .escena .mensaje {
+    background: rgba(255,255,255,0.08); padding: 14px; border-radius: 6px;
+    margin: 12px 0; border-left: 3px solid #E67E22; font-style: italic;
+  }
+  .pregunta {
+    font-weight: bold; margin: 18px 0 12px 0;
+    color: #FFD700; font-size: 16px;
+  }
+  .opciones { display: flex; flex-direction: column; gap: 10px; }
+  .opcion {
+    background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.15);
+    color: #fff; padding: 14px 18px; border-radius: 8px;
+    cursor: pointer; font-size: 15px; transition: all 0.2s;
+    text-align: left; font-family: inherit; width: 100%;
+  }
+  .opcion:hover { background: rgba(255,255,255,0.15); border-color: #FFD700; transform: translateX(4px); }
+  .opcion.correcta { background: rgba(39,174,96,0.3); border-color: #27AE60; cursor: default; }
+  .opcion.incorrecta { background: rgba(192,57,43,0.3); border-color: #C0392B; }
+  .opcion .resaltable { color: #FFD700; }
+  .feedback {
+    margin-top: 16px; padding: 14px; border-radius: 8px;
+    display: none; animation: fadeIn 0.3s ease;
+  }
+  .feedback.exito { background: rgba(39,174,96,0.2); border-left: 4px solid #27AE60; display: block; }
+  .feedback.error { background: rgba(192,57,43,0.2); border-left: 4px solid #C0392B; display: block; }
+  .feedback .letra {
+    display: inline-block; background: #FFD700; color: #1A3A5C;
+    padding: 4px 14px; border-radius: 4px; font-weight: bold;
+    font-size: 18px; margin: 0 4px; letter-spacing: 2px;
+  }
+  .pista {
+    background: rgba(243,156,18,0.15); border-left: 4px solid #F39C12;
+    padding: 12px 14px; border-radius: 4px; margin: 12px 0;
+    font-size: 14px; font-style: italic;
+  }
+  .btn-avanzar, .btn-iniciar {
+    background: linear-gradient(135deg, #E67E22, #FFD700);
+    color: #1A3A5C; border: none; padding: 14px 32px;
+    border-radius: 8px; font-size: 16px; font-weight: bold;
+    cursor: pointer; margin-top: 16px; transition: transform 0.2s;
+    font-family: inherit;
+  }
+  .btn-avanzar:hover, .btn-iniciar:hover { transform: scale(1.05); }
+  .intro { text-align: center; }
+  .intro p { margin-bottom: 16px; font-size: 15px; }
+  .intro .historia {
+    background: rgba(192,57,43,0.15); border-left: 4px solid #C0392B;
+    padding: 18px; border-radius: 8px; text-align: left;
+    margin: 24px 0; font-style: italic;
+  }
+  .codigo-final-input {
+    display: flex; justify-content: center; gap: 10px; margin: 24px 0;
+  }
+  .codigo-final-input input {
+    width: 50px; height: 60px; text-align: center; font-size: 28px;
+    font-weight: bold; border: 2px solid #FFD700; border-radius: 8px;
+    background: rgba(0,0,0,0.4); color: #FFD700;
+    font-family: 'Courier New', monospace; text-transform: uppercase;
+  }
+  .codigo-final-input input:focus {
+    outline: none; border-color: #fff;
+    box-shadow: 0 0 12px rgba(255,215,0,0.5);
+  }
+  .victoria { text-align: center; padding: 24px; }
+  .victoria h2 { color: #27AE60; font-size: 32px; margin-bottom: 16px; }
+  .victoria .palabra-clave {
+    font-size: 48px; color: #FFD700; letter-spacing: 12px;
+    margin: 20px 0; font-weight: bold; font-family: 'Courier New', monospace;
+  }
+  .ranking {
+    background: rgba(0,0,0,0.4); padding: 16px; border-radius: 8px;
+    margin-top: 20px; font-size: 14px;
+  }
+  .nombres { margin: 18px 0; text-align: left; }
+  .nombres label { display: block; margin-bottom: 6px; font-size: 14px; color: #B8C5D6; }
+  .nombres input {
+    width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.3); color: #fff; border-radius: 6px;
+    font-family: inherit; font-size: 14px; margin-bottom: 12px;
+  }
+  .footer { text-align: center; margin-top: 24px; color: #7F8C8D; font-size: 12px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🔒 Escape Room S9</h1>
+  <div class="subtitulo">El ataque psicológico al instituto</div>
+
+  <div class="progreso" id="progreso" style="display: none;">
+    Nivel <span id="nivelActual">1</span> de 6 · Código: <span class="codigo" id="codigo">_ _ _ _ _ _</span>
+  </div>
+
+  <!-- INTRO -->
+  <div class="pantalla activa" id="intro">
+    <div class="intro">
+      <p style="font-size: 17px;">El IES Jiménez de Quesada ha recibido <strong>6 mensajes sospechosos</strong>. Vuestra misión es identificar la técnica psicológica que usa cada uno y la frase concreta que lo demuestra.</p>
+      
+      <div class="historia">
+        <strong style="color:#FFD700;">CASO:</strong> Alguien está intentando atacar al instituto usando ingeniería social. Cada mensaje aprovecha una técnica psicológica distinta de las 6 que habéis aprendido. Si las identificáis todas, conseguiréis el <strong>código final de 6 letras</strong> que desactiva el ataque.<br><br>
+        <strong style="color:#E67E22;">⚠️ Cuidado:</strong> En cada nivel tendréis que contestar <strong>dos preguntas</strong>: primero qué técnica se usa y luego qué frase exacta lo demuestra. Si falláis CUALQUIERA, el ataque os pilla y volvéis al principio.
+      </div>
+
+      <div class="nombres">
+        <label>Investigador/a 1:</label>
+        <input type="text" id="nombre1" placeholder="Nombre">
+        <label>Investigador/a 2:</label>
+        <input type="text" id="nombre2" placeholder="Nombre">
+      </div>
+
+      <button class="btn-iniciar" onclick="iniciar()">▶ Empezar el escape</button>
+    </div>
+  </div>
+
+  <div id="contenedorNiveles"></div>
+
+  <!-- PANTALLA INTERMEDIA: decisión real -->
+  <div class="pantalla" id="pantallaDecisionReal">
+    <div class="nivel-titulo">🛡️ ÚLTIMA PRUEBA · ¿Y ahora qué?</div>
+    <div class="escena">
+      <p>Habéis identificado las 6 técnicas y la frase que delata cada engaño. Pero falta lo más importante:</p>
+      <div class="mensaje" style="border-left-color: #E67E22;">
+        <strong>Imaginad que mañana os llega un mensaje sospechoso a vuestro móvil o correo.</strong> Reconocéis que usa una de las 6 técnicas. ¿Qué hacéis EN LA VIDA REAL?
+      </div>
+    </div>
+    <div class="pregunta">Elegid la respuesta más segura:</div>
+    <div class="opciones" id="opcionesDecisionReal"></div>
+    <div class="feedback" id="feedbackDecisionReal"></div>
+  </div>
+
+  <!-- PANTALLA FINAL: introducir código -->
+  <div class="pantalla" id="pantallaCodigo">
+    <div class="nivel-titulo">🔓 Código final</div>
+    <p style="margin-bottom: 18px;">Habéis conseguido las 6 letras. Introducidlas en orden para desactivar el ataque:</p>
+    <div class="codigo-final-input">
+      <input type="text" maxlength="1" id="l1" oninput="moverFoco(this, 'l2')">
+      <input type="text" maxlength="1" id="l2" oninput="moverFoco(this, 'l3')">
+      <input type="text" maxlength="1" id="l3" oninput="moverFoco(this, 'l4')">
+      <input type="text" maxlength="1" id="l4" oninput="moverFoco(this, 'l5')">
+      <input type="text" maxlength="1" id="l5" oninput="moverFoco(this, 'l6')">
+      <input type="text" maxlength="1" id="l6">
+    </div>
+    <div style="text-align: center;">
+      <button class="btn-avanzar" onclick="verificarCodigo()">Desactivar ataque 🛡️</button>
+    </div>
+    <div id="errorCodigo" style="text-align:center; margin-top:14px; color:#C0392B; display:none;">
+      ❌ Código incorrecto. Revisad las letras que habéis ido consiguiendo.
+    </div>
+  </div>
+
+  <!-- VICTORIA -->
+  <div class="pantalla" id="pantallaVictoria">
+    <div class="victoria">
+      <h2>🎉 ¡Ataque desactivado!</h2>
+      <p>Habéis identificado las 6 técnicas y conseguido el código:</p>
+      <div class="palabra-clave">PIENSA</div>
+      <p style="margin-top: 16px;">Esa es la mejor defensa contra la ingeniería social:<br><strong>parar y pensar antes de actuar</strong>.</p>
+      
+      <div class="ranking" id="rankingFinal">
+        <div style="font-size: 16px; color: #FFD700; margin-bottom: 12px;">📊 RESULTADO FINAL</div>
+        <strong>Investigadores:</strong><br>
+        <span id="nombreFinal1"></span> · <span id="nombreFinal2"></span><br><br>
+        <strong>Fecha:</strong> <span id="fechaFinal"></span><br>
+        <strong>Tiempo total:</strong> <span id="tiempoFinal" style="color: #FFD700;"></span><br>
+        <strong>Intentos fallidos:</strong> <span id="erroresFinal" style="color: #FFD700;"></span>
+      </div>
+
+      <div style="background: rgba(230,126,34,0.2); border: 2px solid #E67E22; border-radius: 8px; padding: 18px; margin-top: 24px; text-align: left;">
+        <div style="color: #FFD700; font-weight: bold; font-size: 17px; margin-bottom: 10px;">📜 Diploma final — Entrega en Moodle</div>
+        <p style="margin-bottom: 14px;">Para acreditar que habéis terminado el escape room, descargad vuestro diploma personalizado y subidlo a la tarea de Moodle "Sesión 9 — Escape Room".</p>
+        <div style="text-align: center; margin: 14px 0;">
+          <button class="btn-avanzar" onclick="descargarDiploma()" style="background: linear-gradient(135deg, #27AE60, #FFD700); font-size: 15px;">📥 Descargar diploma (PNG)</button>
+        </div>
+        <p style="margin-top: 12px; font-size: 13px; color: #B8C5D6;">El diploma se descarga como imagen PNG con vuestros nombres, fecha, tiempo y errores, y se sube directamente a Moodle. <strong>No hace falta hacer captura de pantalla.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">IES Jiménez de Quesada · Computación y Robótica 1º ESO B · Sesión 9</div>
+</div>
+
+<script>
+// ====== DATOS DE LAS 6 PRUEBAS ======
+const niveles = [
+  {
+    titulo: "El correo urgente",
+    escena: "Recibís este correo en el ordenador del aula:",
+    mensaje: "⚠️ De: soporte@iesjimenezquesada.com<br>Asunto: <strong>BLOQUEO EN 30 MINUTOS</strong><br><br>Tu cuenta del centro será BLOQUEADA en 30 minutos si no verificas tu contraseña pinchando AQUÍ. Actúa AHORA.",
+    tecnica: "URGENCIA",
+    fraseCorrecta: "BLOQUEADA en 30 minutos si no verificas",
+    fraseOpciones: [
+      "Tu cuenta del centro",
+      "BLOQUEADA en 30 minutos si no verificas",
+      "pinchando AQUÍ",
+      "soporte@iesjimenezquesada.com"
+    ],
+    letra: "P",
+    explicacionTecnica: "Las palabras \"30 minutos\" y \"AHORA\" son señales claras de urgencia: quieren que pinches sin pensar.",
+    explicacionFrase: "\"BLOQUEADA en 30 minutos\" es la trampa: te pone un plazo corto para que actúes sin reflexionar.",
+    pistaTecnica: "Fíjate en las palabras que te meten prisa: \"30 minutos\", \"AHORA\". ¿Qué emoción provocan?"
+  },
+  {
+    titulo: "La llamada oficial",
+    escena: "Suena el teléfono del aula:",
+    mensaje: "📞 \"Buenos días, le llamo del <strong>Departamento de Inspección del Ministerio de Educación</strong>. Necesito que me pase usted ahora mismo el número de su DNI para verificar una incidencia en el expediente del alumno...\"",
+    tecnica: "AUTORIDAD",
+    fraseCorrecta: "le llamo del Departamento de Inspección del Ministerio de Educación",
+    fraseOpciones: [
+      "le llamo del Departamento de Inspección del Ministerio de Educación",
+      "el número de su DNI",
+      "verificar una incidencia",
+      "el expediente del alumno"
+    ],
+    letra: "I",
+    explicacionTecnica: "\"Ministerio\", \"Inspección\", \"Departamento\" son palabras de autoridad. Imitan a quien manda para que obedezcas sin preguntar.",
+    explicacionFrase: "\"Departamento de Inspección del Ministerio\" suena oficial e intimida. Es la frase que te hace obedecer sin pedir explicaciones.",
+    pistaTecnica: "Fíjate en quién dice ser la persona que llama. ¿De dónde dice que es?"
+  },
+  {
+    titulo: "El chantaje",
+    escena: "Un alumno enseña un WhatsApp que ha recibido:",
+    mensaje: "💬 +34 612 33 78 91<br><br>\"Hemos detectado que desde TU usuario del centro se ha accedido a una <strong>web ilegal</strong>. Tenemos las pruebas. Si no nos pagas 50€ en 24 horas, <strong>avisamos a la policía y a tus padres hoy mismo</strong>.\"",
+    tecnica: "MIEDO",
+    fraseCorrecta: "avisamos a la policía y a tus padres hoy mismo",
+    fraseOpciones: [
+      "Tenemos las pruebas",
+      "se ha accedido a una web ilegal",
+      "avisamos a la policía y a tus padres hoy mismo",
+      "pagas 50€ en 24 horas"
+    ],
+    letra: "E",
+    explicacionTecnica: "El miedo bloquea la razón. La amenaza de \"la policía y tus padres\" está pensada para que entres en pánico y pagues sin pensar. NUNCA se paga a un chantajista: si pagas, te volverán a pedir más.",
+    explicacionFrase: "\"Avisamos a la policía y a tus padres hoy mismo\" es la frase que activa el pánico: mezcla autoridad + vergüenza familiar + plazo corto. Sin esa amenaza concreta, no habría miedo.",
+    pistaTecnica: "¿Qué emoción intenta provocar el mensaje? ¿Calma o pánico?"
+  },
+  {
+    titulo: "Todos lo usan",
+    escena: "En el ordenador del aula veis este anuncio mientras buscáis información:",
+    mensaje: "📺 <strong>\"EstudiaFácil: la app que arrasa entre estudiantes\"</strong><br><br>El <strong>80% de los alumnos que la prueban repiten</strong>. Tus compañeros confían en nosotros. Únete: <em>estudiafacil-app.com</em>",
+    tecnica: "PRUEBA SOCIAL",
+    fraseCorrecta: "El 80% de los alumnos que la prueban repiten",
+    fraseOpciones: [
+      "la app que arrasa entre estudiantes",
+      "El 80% de los alumnos que la prueban repiten",
+      "Tus compañeros confían en nosotros",
+      "Únete"
+    ],
+    letra: "N",
+    explicacionTecnica: "Si \"el 80% repite\" parece seguro, ¿no? La prueba social funciona así: el cerebro asume que si lo hacen muchos, es porque está bien. Casi siempre el dato está inventado.",
+    explicacionFrase: "El \"80%\" es un dato falso pero suena científico. Es la frase que genera la sensación de \"todos lo hacen\".",
+    pistaTecnica: "¿El mensaje te dice que muchas personas ya lo usan? ¿Qué técnica usa apelar a la mayoría?"
+  },
+  {
+    titulo: "Últimas plazas",
+    escena: "En el ordenador del aula veis este pop-up mientras buscáis información:",
+    mensaje: "🛒 <strong>¡SOLO 2 PLAZAS DISPONIBLES!</strong><br><br>Curso GRATIS de programación para alumnos de 1º ESO. <strong>Solo quedan 2 plazas</strong>. Apúntate antes de que sea tarde.",
+    tecnica: "ESCASEZ",
+    fraseCorrecta: "Solo quedan 2 plazas",
+    fraseOpciones: [
+      "Curso GRATIS de programación",
+      "para alumnos de 1º ESO",
+      "Solo quedan 2 plazas",
+      "Apúntate"
+    ],
+    letra: "S",
+    explicacionTecnica: "\"Solo 2 plazas\" → lo difícil de conseguir parece más valioso. Casi siempre el contador está manipulado para presionar.",
+    explicacionFrase: "El número concreto \"2 plazas\" es lo que activa la escasez. Si pusiera \"plazas limitadas\" no funcionaría igual.",
+    pistaTecnica: "¿Qué te dice el mensaje sobre la cantidad disponible? ¿Mucho o muy poco?"
+  },
+  {
+    titulo: "El regalo trampa",
+    escena: "Por Instagram os llega un mensaje de alguien que no conocéis:",
+    mensaje: "💬 \"¡Hola! Te mando este <strong>filtro premium gratis</strong> que normalmente cuesta dinero ✨. Es un regalo, sin compromiso.\"<br><br>(5 minutos después)<br><br>\"Oye, ya que somos amigos... ¿me pasas tu número de móvil? Es para mandarte cositas chulas.\"",
+    tecnica: "RECIPROCIDAD",
+    fraseCorrecta: "Es un regalo, sin compromiso",
+    fraseOpciones: [
+      "filtro premium gratis",
+      "Es un regalo, sin compromiso",
+      "ya que somos amigos... ¿me pasas tu número de móvil?",
+      "cositas chulas"
+    ],
+    letra: "A",
+    explicacionTecnica: "Te regalan un \"filtro premium\" para que te sientas en deuda. Es la técnica más sutil. Si alguien que no conoces te regala algo, no es generosidad: es una trampa preparada para pedirte algo después.",
+    explicacionFrase: "\"Es un regalo, sin compromiso\" es la frase que ACTIVA la reciprocidad: te aseguran que no debes nada... para que sientas que sí debes algo. La petición del móvil que viene después es solo el cobro de esa supuesta deuda.",
+    pistaTecnica: "Fíjate en el orden: primero hay un \"regalo\" y después una petición. ¿Por qué te regalan algo si no os conocéis?"
+  }
+];
+
+// Decisión final segura
+const opcionesDecisionReal = [
+  { texto: "Pinchar rápido para comprobar si es de verdad", correcta: false, feedback: "Si pinchas, ya has caído. Aunque sea \"solo para comprobar\", el atacante puede instalar malware o robar tus datos al instante." },
+  { texto: "Responder pidiendo más información al remitente", correcta: false, feedback: "Si respondes, confirmas que tu cuenta está activa. Los atacantes filtran números/correos que responden para venderlos o atacar más." },
+  { texto: "Reenviarlo al grupo de clase para que opinen", correcta: false, feedback: "Reenviar un bulo o un mensaje sospechoso solo lo propaga. Tus compañeros pueden caer también." },
+  { texto: "No pinchar, no dar datos y comprobar por otra vía (página oficial, llamada, adulto de confianza)", correcta: true, feedback: "EXACTO. La defensa correcta es no actuar bajo presión, no dar datos, y verificar la información por un canal distinto al que llegó el mensaje." }
+];
+
+// ====== ESTADO ======
+let nivelActual = 0;
+let faseActual = 'tecnica'; // 'tecnica' o 'frase'
+let codigo = ['_', '_', '_', '_', '_', '_'];
+let errores = 0;
+let tiempoInicio = null;
+let nombre1 = '';
+let nombre2 = '';
+const tecnicasPosibles = ['URGENCIA', 'AUTORIDAD', 'MIEDO', 'PRUEBA SOCIAL', 'ESCASEZ', 'RECIPROCIDAD'];
+
+// ====== FUNCIONES ======
+function iniciar() {
+  nombre1 = document.getElementById('nombre1').value.trim() || 'Investigador/a 1';
+  nombre2 = document.getElementById('nombre2').value.trim() || 'Investigador/a 2';
+  tiempoInicio = Date.now();
+  document.getElementById('intro').classList.remove('activa');
+  document.getElementById('progreso').style.display = 'block';
+  construirNivel(0, 'tecnica');
+}
+
+function construirNivel(n, fase) {
+  nivelActual = n;
+  faseActual = fase;
+  document.getElementById('nivelActual').textContent = n + 1;
+  document.getElementById('codigo').textContent = codigo.join(' ');
+  
+  const nivel = niveles[n];
+  let opciones, pregunta, faseTexto;
+  
+  if (fase === 'tecnica') {
+    // FASE 1: identificar la técnica
+    // Las 6 técnicas barajadas (la correcta SIEMPRE entre ellas)
+    opciones = [...tecnicasPosibles]
+      .sort(() => Math.random() - 0.5)
+      .map(tec => ({
+        texto: tec,
+        correcta: tec === nivel.tecnica
+      }));
+    pregunta = "¿Qué técnica psicológica está usando este mensaje?";
+    faseTexto = 'Pregunta 1 de 2';
+  } else {
+    // FASE 2: identificar la frase
+    opciones = [...nivel.fraseOpciones]
+      .sort(() => Math.random() - 0.5)
+      .map(frase => ({
+        texto: `"${frase}"`,
+        correcta: frase === nivel.fraseCorrecta
+      }));
+    pregunta = "¿Qué frase concreta del mensaje DEMUESTRA esa técnica?";
+    faseTexto = 'Pregunta 2 de 2';
+  }
+  
+  // Guardamos el orden actual de las opciones
+  niveles[n]._opcionesActuales = opciones;
+  
+  const cont = document.getElementById('contenedorNiveles');
+  cont.innerHTML = '';
+  
+  const div = document.createElement('div');
+  div.className = 'pantalla activa';
+  div.innerHTML = `
+    <div class="nivel-titulo">🔍 NIVEL ${n + 1} · ${nivel.titulo} <span class="fase">${faseTexto}</span></div>
+    <div class="escena">
+      <p>${nivel.escena}</p>
+      <div class="mensaje">${nivel.mensaje}</div>
+    </div>
+    <div class="pregunta">${pregunta}</div>
+    <div class="opciones" id="opciones-${n}">
+      ${opciones.map((op, i) => `
+        <button class="opcion" onclick="responder(${n}, ${i})">${op.texto}</button>
+      `).join('')}
+    </div>
+    <div class="feedback" id="feedback-${n}"></div>
+  `;
+  cont.appendChild(div);
+}
+
+function responder(n, idx) {
+  const nivel = niveles[n];
+  const opcionElegida = nivel._opcionesActuales[idx];
+  const opciones = document.querySelectorAll(`#opciones-${n} .opcion`);
+  const feedback = document.getElementById(`feedback-${n}`);
+  
+  if (opcionElegida.correcta) {
+    // Correcta
+    opciones.forEach(o => o.disabled = true);
+    opciones[idx].classList.add('correcta');
+    
+    if (faseActual === 'tecnica') {
+      // Acertaron la técnica → pasar a fase frase
+      feedback.className = 'feedback exito';
+      feedback.innerHTML = `
+        <strong>✅ ¡Técnica identificada!</strong> ${nivel.explicacionTecnica}
+        <button class="btn-avanzar" onclick="construirNivel(${n}, 'frase')">▶ Ahora identifica la frase</button>
+      `;
+    } else {
+      // Acertaron la frase → completaron el nivel, sumar letra
+      codigo[n] = nivel.letra;
+      document.getElementById('codigo').textContent = codigo.join(' ');
+      
+      feedback.className = 'feedback exito';
+      feedback.innerHTML = `
+        <strong>✅ ¡Frase identificada!</strong> ${nivel.explicacionFrase}
+        <div style="margin-top:12px;">Habéis conseguido la letra: <span class="letra">${nivel.letra}</span></div>
+        <button class="btn-avanzar" onclick="siguienteNivel()">
+          ${n < 5 ? '▶ Siguiente nivel' : '▶ Última prueba'}
+        </button>
+      `;
+    }
+  } else {
+    // Incorrecta → REINICIO TOTAL (con pista antes)
+    errores++;
+    opciones.forEach(o => o.disabled = true);
+    opciones[idx].classList.add('incorrecta');
+    
+    const pistaTexto = faseActual === 'tecnica' 
+      ? nivel.pistaTecnica
+      : `La frase clave es la que MEJOR resume la técnica de ${nivel.tecnica}. Releed el mensaje pensando: ¿qué parte concreta es la que activa esa técnica?`;
+    
+    feedback.className = 'feedback error';
+    feedback.innerHTML = `
+      <strong>❌ ¡FALLO! El ataque os ha pillado.</strong><br>
+      Habéis fallado en el nivel ${n + 1} (${nivel.titulo}). En la vida real, os habrían engañado.<br>
+      <div class="pista">💡 <strong>Pista para el próximo intento:</strong> ${pistaTexto}</div>
+      <strong>Tenéis que empezar de cero.</strong> Errores acumulados: ${errores}.
+      <button class="btn-avanzar" onclick="reiniciarTodo()">🔄 Empezar de nuevo</button>
+    `;
+  }
+}
+
+function reiniciarTodo() {
+  codigo = ['_', '_', '_', '_', '_', '_'];
+  document.getElementById('codigo').textContent = codigo.join(' ');
+  construirNivel(0, 'tecnica');
+}
+
+function siguienteNivel() {
+  if (nivelActual < 5) {
+    construirNivel(nivelActual + 1, 'tecnica');
+  } else {
+    // Pasar a la pantalla de decisión real
+    document.getElementById('contenedorNiveles').innerHTML = '';
+    document.getElementById('progreso').style.display = 'none';
+    mostrarDecisionReal();
+  }
+}
+
+function mostrarDecisionReal() {
+  const pantalla = document.getElementById('pantallaDecisionReal');
+  pantalla.classList.add('activa');
+  
+  // Barajar las opciones de decisión real
+  const opciones = [...opcionesDecisionReal].sort(() => Math.random() - 0.5);
+  opcionesDecisionReal._ordenActual = opciones;
+  
+  const cont = document.getElementById('opcionesDecisionReal');
+  cont.innerHTML = opciones.map((op, i) => 
+    `<button class="opcion" onclick="responderDecisionReal(${i})">${op.texto}</button>`
+  ).join('');
+  document.getElementById('feedbackDecisionReal').className = 'feedback';
+  document.getElementById('feedbackDecisionReal').innerHTML = '';
+}
+
+function responderDecisionReal(idx) {
+  const opcion = opcionesDecisionReal._ordenActual[idx];
+  const opciones = document.querySelectorAll('#opcionesDecisionReal .opcion');
+  const feedback = document.getElementById('feedbackDecisionReal');
+  
+  if (opcion.correcta) {
+    opciones.forEach(o => o.disabled = true);
+    opciones[idx].classList.add('correcta');
+    feedback.className = 'feedback exito';
+    feedback.innerHTML = `
+      <strong>✅ ¡Esa es la respuesta segura!</strong> ${opcion.feedback}
+      <button class="btn-avanzar" onclick="irACodigoFinal()">🔓 Introducir código final</button>
+    `;
+  } else {
+    errores++;
+    opciones[idx].classList.add('incorrecta');
+    opciones[idx].disabled = true;
+    feedback.className = 'feedback error';
+    feedback.innerHTML = `
+      <strong>❌ Esa no es la mejor opción.</strong> ${opcion.feedback}<br>
+      <div class="pista">💡 Sigue habiendo respuestas seguras entre las opciones. Pensad qué es lo MÁS prudente que se puede hacer.</div>
+    `;
+  }
+}
+
+function irACodigoFinal() {
+  document.getElementById('pantallaDecisionReal').classList.remove('activa');
+  document.getElementById('pantallaCodigo').classList.add('activa');
+  document.getElementById('l1').focus();
+}
+
+function moverFoco(actual, siguienteId) {
+  actual.value = actual.value.toUpperCase();
+  if (actual.value.length === 1) {
+    document.getElementById(siguienteId).focus();
+  }
+}
+
+function verificarCodigo() {
+  const codigoIntroducido = ['l1','l2','l3','l4','l5','l6']
+    .map(id => document.getElementById(id).value.toUpperCase()).join('');
+  
+  if (codigoIntroducido === 'PIENSA') {
+    document.getElementById('pantallaCodigo').classList.remove('activa');
+    document.getElementById('pantallaVictoria').classList.add('activa');
+    document.getElementById('nombreFinal1').textContent = nombre1;
+    document.getElementById('nombreFinal2').textContent = nombre2;
+    document.getElementById('erroresFinal').textContent = errores;
+    
+    const ahora = new Date();
+    const dd = String(ahora.getDate()).padStart(2, '0');
+    const mm = String(ahora.getMonth() + 1).padStart(2, '0');
+    const yyyy = ahora.getFullYear();
+    const hh = String(ahora.getHours()).padStart(2, '0');
+    const min = String(ahora.getMinutes()).padStart(2, '0');
+    document.getElementById('fechaFinal').textContent = `${dd}/${mm}/${yyyy} a las ${hh}:${min}`;
+    
+    const tiempoMs = Date.now() - tiempoInicio;
+    const mins = Math.floor(tiempoMs / 60000);
+    const segs = Math.floor((tiempoMs % 60000) / 1000);
+    document.getElementById('tiempoFinal').textContent = `${mins} min ${segs} seg`;
+  } else {
+    document.getElementById('errorCodigo').style.display = 'block';
+    setTimeout(() => {
+      document.getElementById('errorCodigo').style.display = 'none';
+    }, 3000);
+  }
+}
+
+// ====== DIPLOMA DESCARGABLE (PNG) ======
+function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s09:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s09','*'); }catch(e){}
+  const canvas = document.createElement('canvas');
+  canvas.width = 1000;
+  canvas.height = 700;
+  const ctx = canvas.getContext('2d');
+  
+  // Fondo degradado (mismo que el HTML)
+  const grad = ctx.createLinearGradient(0, 0, 1000, 700);
+  grad.addColorStop(0, '#0f1729');
+  grad.addColorStop(1, '#1A3A5C');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1000, 700);
+  
+  // Marco dorado externo grueso
+  ctx.strokeStyle = '#FFD700';
+  ctx.lineWidth = 6;
+  ctx.strokeRect(20, 20, 960, 660);
+  // Marco interior fino
+  ctx.strokeStyle = 'rgba(255,215,0,0.4)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(40, 40, 920, 620);
+  
+  ctx.textAlign = 'center';
+  
+  // Escudo emoji
+  ctx.font = '64px serif';
+  ctx.fillText('🛡️', 500, 115);
+  
+  // Título principal
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 36px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('DIPLOMA DE CIBERSEGURIDAD', 500, 165);
+  
+  // Subtítulo
+  ctx.fillStyle = '#B8C5D6';
+  ctx.font = 'italic 17px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('Escape Room S9 — Ataque psicológico desactivado', 500, 195);
+  
+  // Línea separadora dorada
+  ctx.strokeStyle = 'rgba(255,215,0,0.4)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(150, 225);
+  ctx.lineTo(850, 225);
+  ctx.stroke();
+  
+  // "Se otorga a..."
+  ctx.fillStyle = '#fff';
+  ctx.font = '19px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('Se otorga a la pareja de investigadores:', 500, 270);
+  
+  // Nombres en grande
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 30px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText(`${nombre1}   ·   ${nombre2}`, 500, 320);
+  
+  // Texto del logro (2 líneas)
+  ctx.fillStyle = '#fff';
+  ctx.font = '16px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('Por identificar correctamente las 6 técnicas de ingeniería social', 500, 375);
+  ctx.fillText('y demostrar capacidad para reconocer un ataque psicológico real.', 500, 400);
+  
+  // Caja de datos
+  const fechaTexto = document.getElementById('fechaFinal').textContent;
+  const tiempoTexto = document.getElementById('tiempoFinal').textContent;
+  const erroresTexto = document.getElementById('erroresFinal').textContent;
+  
+  ctx.fillStyle = 'rgba(0,0,0,0.35)';
+  ctx.fillRect(150, 445, 700, 130);
+  ctx.strokeStyle = 'rgba(255,215,0,0.3)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(150, 445, 700, 130);
+  
+  // Etiquetas
+  ctx.fillStyle = '#B8C5D6';
+  ctx.font = '13px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('FECHA', 270, 475);
+  ctx.fillText('TIEMPO TOTAL', 500, 475);
+  ctx.fillText('INTENTOS FALLIDOS', 730, 475);
+  
+  // Valores
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 18px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText(fechaTexto, 270, 510);
+  ctx.fillText(tiempoTexto, 500, 510);
+  ctx.fillText(erroresTexto, 730, 510);
+  
+  // Lema (sin desvelar la palabra clave)
+  ctx.fillStyle = '#fff';
+  ctx.font = 'italic 14px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('"La mejor defensa contra la ingeniería social es parar y pensar antes de actuar."', 500, 555);
+  
+  // Footer institucional
+  ctx.fillStyle = '#7F8C8D';
+  ctx.font = '13px "Segoe UI", Helvetica, sans-serif';
+  ctx.fillText('IES Jiménez de Quesada · Santa Fe (Granada)', 500, 625);
+  ctx.fillText('Computación y Robótica · 1º ESO B · Sesión 9 — Ingeniería social', 500, 648);
+  
+  // Disparar descarga
+  const fechaArchivo = new Date().toISOString().slice(0, 10);
+  const limpio1 = (nombre1 || 'Inv1').replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]/g, '');
+  const limpio2 = (nombre2 || 'Inv2').replace(/[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]/g, '');
+  const filename = `Diploma_S9_${limpio1}_${limpio2}_${fechaArchivo}.png`;
+  
+  canvas.toBlob(function(blob) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+</script>
+
+</body>
+</html>

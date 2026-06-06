@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#5B3D9B">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>S3 · Caza al phisher · Academia Cyber-IES</title>
+<meta name="description" content="Sesión 3 · Simulador SOC · análisis de URLs sospechosas · Academia Cyber-IES · CyR 1º ESO.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/academia.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<header class="curso-hd"><span class="curso-sb">Academia Cyber-IES · Sesión 3</span></header>
+<nav class="curso-navcross" role="navigation">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>🎓</span><span class="nc-lbl">Academia</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎣</span><span class="nc-lbl">S3 · Caza al phisher</span></span>
+</nav>
+
+<main id="main-content">
+<section class="acad-hero">
+  <div class="acad-num">SESIÓN 3 · 40-50 MIN</div>
+  <h1>Caza al phisher</h1>
+  <p class="acad-sub">Tienes 15 segundos por URL. Eres analista del SOC. ¿LEGÍTIMO, SOSPECHOSO o MALICIOSO?</p>
+</section>
+
+<div class="acad-progreso">
+  <div class="paso activo" data-bloque="mision"><div class="num">1</div><span>Misión</span></div>
+  <div class="paso" data-bloque="teoria"><div class="num">2</div><span>Teoría</span></div>
+  <div class="paso" data-bloque="entrenamiento"><div class="num">3</div><span>Entrenar</span></div>
+  <div class="paso" data-bloque="juego"><div class="num">4</div><span>Modo SOC</span></div>
+  <div class="paso" data-bloque="informe"><div class="num">5</div><span>Informe</span></div>
+  <div class="paso" data-bloque="diploma"><div class="num">6</div><span>Insignia</span></div>
+</div>
+
+<div class="acad-insignias-fila">
+  <div class="mi-insignia" data-mi="cadete" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Cadete</div><div class="et">tras teoría</div></div>
+  <div class="mi-insignia" data-mi="analista" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">Analista Junior</div><div class="et">tras entrenar</div></div>
+  <div class="mi-insignia" data-mi="investigador" data-ganada="false"><div class="emoji">🎖️</div><div class="nom">SOC Operator</div><div class="et">tras SOC</div></div>
+  <div class="mi-insignia" data-mi="detective" data-ganada="false"><div class="emoji">🏆</div><div class="nom">Analista SOC</div><div class="et">final</div></div>
+</div>
+
+<div class="acad-main">
+
+<section class="bloque acad-mision" data-bloque="mision" data-activo="true">
+  <div class="titulo-bloque">▸ Bloque 1 · Misión</div>
+  <h2>🎣 Te llaman del SOC</h2>
+  <div class="narrativa" style="background:#FFF8E1;border-left:4px solid var(--acad-oro);padding:12px 14px;border-radius:0 6px 6px 0">
+    <strong>🚨 Imagínate esto:</strong> tu profesor recibió ayer un email que parecía del banco. Pinchó "para verificar". 5 minutos después le habían vaciado la cuenta. <strong>¿Y si hubieras tenido 15 segundos para avisarle?</strong>
+  </div>
+  <div class="narrativa">
+    Eso es lo que hace un <strong>analista SOC</strong> (Security Operations Center): mira URLs que llegan a la empresa y decide en POCOS SEGUNDOS si dejan pasar el correo o lo bloquean. Hoy te conviertes en uno: vas a analizar <strong>10 URLs</strong> bajo cronómetro y emitir veredicto: <strong>LEGÍTIMO · SOSPECHOSO · MALICIOSO</strong>.
+  </div>
+  <div class="objetivo">
+    <strong>Qué vas a hacer hoy</strong>
+    <p>Estudiar 4 señales clave para detectar phishing. Entrenar con 6 V/F. Entrar al <strong>Modo SOC</strong>:
+    10 URLs con cronómetro de 15 segundos cada una. Si fallas, pierdes puntos. Si dudas, también.</p>
+  </div>
+  <div class="acad-identidad">
+    <div class="pareja">
+      <div><label for="nombre1">Investigador/a 1</label><input type="text" id="nombre1" data-acad="nombre1" placeholder="Tu nombre y apellido"></div>
+      <div><label for="nombre2">Investigador/a 2</label><input type="text" id="nombre2" data-acad="nombre2" placeholder="Nombre de tu pareja (opcional)"></div>
+    </div>
+  </div>
+  <div class="resumen">
+    <span class="chip">⏱️ 40-50 min</span>
+    <span class="chip">📚 4 señales clave</span>
+    <span class="chip">⚡ 10 URLs · 15s c/u</span>
+    <span class="chip">🏆 4 insignias</span>
+  </div>
+  <div class="barra-acciones"><span></span>
+    <button class="btn-acad" onclick="Academia.irABloque('teoria')">Activar el SOC ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-teoria" data-bloque="teoria">
+  <div class="titulo-bloque">▸ Bloque 2 · Teoría interactiva</div>
+  <h2>📖 4 señales para cazar a un phisher</h2>
+  <p class="intro">No mires el diseño bonito del email. Mira la URL. Es lo único que importa.</p>
+  <div class="tarjetas-teoria" id="tarjetas-teoria"></div>
+  <div class="barra-acciones" id="barra-fin-teoria" style="display:none">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('mision')">◂ Misión</button>
+    <button class="btn-acad" onclick="Academia.irABloque('entrenamiento')">A entrenar ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-entrenamiento" data-bloque="entrenamiento">
+  <div class="titulo-bloque">▸ Bloque 3 · Entrenamiento</div>
+  <h2>🏋️ 6 frases sobre phishing</h2>
+  <div class="pista"><strong>¿Verdadero o falso?</strong> Antes de entrar al SOC, calienta motores.</div>
+  <div class="entrenamiento-marcador">
+    <div><span>Aciertos</span><b id="vf-aciertos">0</b></div>
+    <div><span>Fallos</span><b id="vf-fallos">0</b></div>
+    <div><span>Restantes</span><b id="vf-restantes">6</b></div>
+  </div>
+  <div id="zona-frases-vf"></div>
+  <div class="barra-acciones">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('teoria')">◂ Teoría</button>
+    <button class="btn-acad" id="btn-al-reto" onclick="Academia.irABloque('juego')" disabled>Al Modo SOC ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-juego" data-bloque="juego">
+  <div class="titulo-bloque">▸ Bloque 4 · Modo SOC</div>
+  <h2>⚡ 10 URLs · 15 segundos cada una</h2>
+  <p class="intro">Recibes una URL. Tienes <strong>15 segundos</strong>. Decides <strong>LEGÍTIMO · SOSPECHOSO · MALICIOSO</strong>. Si no decides a tiempo, cuenta como fallo. Tu objetivo: cazar a todos los phishers sin marcar a un legítimo como malicioso (eso bloquearía a un cliente real).</p>
+
+  <div class="hud">
+    <div class="bloque-hud"><span>URL</span><b id="hud-num"><span id="num-url">0</span> / 10</b></div>
+    <div class="bloque-hud"><span>Aciertos</span><b id="hud-acierto">0</b></div>
+    <div class="bloque-hud"><span>Fallos</span><b id="hud-fallo">0</b></div>
+  </div>
+
+  <div id="zona-soc"></div>
+
+  <div class="resultado-juego" id="resultado-soc" style="display:none"></div>
+
+  <div class="barra-acciones" id="barra-fin-juego" style="display:none">
+    <button class="btn-acad secundario" onclick="iniciarSOC()">🔄 Repetir SOC</button>
+    <button class="btn-acad" onclick="Academia.irABloque('informe')">Al informe ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-informe" data-bloque="informe">
+  <div class="titulo-bloque">▸ Bloque 5 · Informe del analista</div>
+  <h2>📝 Cierra tu turno</h2>
+  <p class="intro-informe">Mínimo 8 palabras por respuesta.</p>
+  <div class="informe-pregunta">
+    <label for="inf-q1">1. De las 10 URLs del SOC, ¿cuál te confundió MÁS y por qué? (¿parecía legítima pero era falsa, o al revés?)</label>
+    <p class="ayuda">Identifica la URL que te hizo dudar más.</p>
+    <textarea id="inf-q1" data-q="q1" placeholder="Escribe tu respuesta..."></textarea>
+    <div class="contador-palabras" id="cnt-q1">0 palabras</div>
+  </div>
+  <div class="informe-pregunta">
+    <label for="inf-q2">2. ¿Qué es lo PRIMERO que vas a mirar a partir de hoy cuando te llegue un email del banco o de cualquier servicio?</label>
+    <p class="ayuda">La respuesta correcta empieza por "el dominio".</p>
+    <textarea id="inf-q2" data-q="q2" placeholder="Escribe tu respuesta..."></textarea>
+    <div class="contador-palabras" id="cnt-q2">0 palabras</div>
+  </div>
+  <div class="informe-pregunta">
+    <label for="inf-q3">3. Imagina que tu abuelo recibe un email "del banco" pidiéndole pinchar en un enlace. ¿Qué le dirías PASO a PASO para que no caiga?</label>
+    <p class="ayuda">Concreto: "Que cuelgue. Que no pinche. Que llame al teléfono detrás de su tarjeta. Que..."</p>
+    <textarea id="inf-q3" data-q="q3" placeholder="Escribe tu respuesta..."></textarea>
+    <div class="contador-palabras" id="cnt-q3">0 palabras</div>
+  </div>
+  <div class="feedback" id="fb-informe"></div>
+  <div class="barra-acciones">
+    <button class="btn-acad secundario" onclick="Academia.irABloque('juego')">◂ Volver al SOC</button>
+    <button class="btn-acad verde" onclick="finalizarInforme()">Recoger insignia ▸</button>
+  </div>
+</section>
+
+<section class="bloque acad-diploma" data-bloque="diploma">
+  <div class="titulo-bloque">▸ Bloque 6 · Insignia</div>
+  <h2>🏆 Has completado la Sesión 3</h2>
+  <div class="diploma-preview">
+    <div class="titulo-dp">Academia Cyber-IES</div>
+    <div class="sub-dp">Sesión 3 · Caza al phisher · Promoción 2026</div>
+    <div class="icono-dp">🎣</div>
+    <p class="body-dp" style="font-style:italic">Se acredita a</p>
+    <div class="nombres-dp">
+      <span data-acad="nombre1">Investigador/a 1</span><br>
+      <span style="font-style:italic;font-size:1rem;color:#666;font-family:Georgia,serif">y</span><br>
+      <span data-acad="nombre2">Investigador/a 2</span>
+    </div>
+    <p class="body-dp">por haber operado el SOC durante 10 análisis de URLs bajo cronómetro y aprendido las 4 señales que delatan a un phisher.</p>
+    <div class="insignia">Analista SOC</div>
+    <div class="resumen-dp">
+      <div><span>Teoría:</span> <span id="res-teoria">— microquiz</span></div>
+      <div><span>Entrenamiento:</span> <span id="res-entrenamiento">— V/F</span></div>
+      <div><span>Modo SOC:</span> <span id="res-reto">— / 10</span></div>
+      <div><span>Tiempo total:</span> <span id="res-tiempo">—</span></div>
+    </div>
+    <div class="codigo-final" id="cod-final">CÓDIGO: ————</div>
+    <p style="font-style:italic;font-size:.8rem;color:#666;margin-top:14px">"15 segundos te separan de un click que arruina una semana."</p>
+  </div>
+  <div class="barra-acciones centro">
+    <button class="btn-acad oro" onclick="descargarInsignia()">📥 Descargar insignia (PNG)</button>
+    <button class="btn-acad secundario" onclick="window.print()">🖨 Imprimir</button>
+  </div>
+  <div style="background:var(--acad-violeta-cl);border-radius:10px;padding:18px 22px;margin-top:18px;text-align:left">
+    <h3 style="font-family:var(--cond);color:var(--acad-violeta);margin-bottom:8px">🎯 Próximo paso</h3>
+    <p style="font-size:.95rem;color:var(--texto)">La Sesión 4 te lleva a investigar lo que internet sabe de ti (HIBP, MyActivity, WhatsMyName).</p>
+    <div class="barra-acciones" style="margin-top:12px">
+      <a class="btn-acad secundario" href="../index.html">🎓 Academia</a>
+      <a class="btn-acad" href="s04.html">Sesión 4 · Huella digital ▸</a>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+<footer style="text-align:center;padding:30px 14px 50px;color:var(--t2);font-size:.85rem">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  Academia Cyber-IES · Curso 2025-26 · Manuel Alonso Herrera
+</footer>
+<script src="../../../assets/js/common.js"></script>
+<script src="../assets/js/academia.js"></script>
+<script src="s03.js"></script>
+</body>
+</html>

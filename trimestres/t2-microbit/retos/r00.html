@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Reto 00 · Micro:bit</title>
+<meta name="description" content="Reto 00 Micro:bit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Reto 00</div>
+  <h1>Hola Mundo</h1>
+  <div class="duracion">Micro:bit · Computación física</div>
+</section>
+<div class="hub-main">
+  <div class="section-title">🧩 Descripción</div>
+  <p>Este es tu primer programa con Micro:bit. El programa mostrará continuamente el mensaje &quot;Hola&quot; seguido de un icono de corazón en la matriz de LEDs.</p>
+  <div class="section-title">🎯 Conceptos</div>
+  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Evento &quot;al iniciar&quot;</span><span class='badge'>Bucle &quot;para siempre&quot;</span><span class='badge'>Mostrar textos en la pantalla LED</span><span class='badge'>Secuencia de instrucciones</span></p>
+  <div class="section-title">🧠 Pseudocódigo</div>
+  <div class="codebox">Al iniciar
+Borrar la pantalla
+Para siempre
+Mostrar cadena &quot;Hola&quot;
+Mostrar icono corazón</div>
+  <div class="section-title">💡 Ayuda</div>
+  <p>La Micro:bit tiene una matriz de 25 LEDs (5×5). El bucle &quot;Para siempre&quot; hace que las instrucciones se repitan continuamente. Sistema de coordenadas de la matriz LED: x=0 x=1 x=2 x=3 x=4 y=0 0,0 1,0 2,0 3,0 4,0 y=1 0,1 1,1 2,1 3,1 4,1 y=2 0,2 1,2 2,2 3,2 4,2 y=3 0,3 1,3 2,3 3,3 4,3 y=4 0,4 1,4 2,4 3,4 4,4 Cada LED se identifica por sus coordenadas (x, y). Por ejemplo, el LED central está en (2, 2).</p>
+  <div class="section-title">🚀 Reto extra</div>
+  <p>¿Puedes añadir tu nombre después del corazón? Ejemplo: &quot;Hola&quot; → ♥ → &quot;Manuel&quot; → (se repite)</p>
+  <div class="section-title">✅ Autoevaluación</div>
+  <ul><li>Mi programa borra la pantalla al iniciar</li><li>El programa muestra &quot;Hola&quot; y luego el corazón</li><li>La animación se repite continuamente</li><li>El programa funciona correctamente</li><li>Recuerda: Este es tu primer programa. ¡Programar es practicar!</li></ul>
+  <div class="section-title">🔗 Programar</div>
+  <div class="bg">
+    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
+    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+  </div>
+  <div class="section-title">Navegación</div>
+  <div class="bg"><a href="index.html" class="bc"><span class="bi">⬅️</span><span class="bk">Índice</span><span class="bn">Volver al listado de retos</span></a><a href="r01.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 01</span></a></div>
+</div>
+</div>
+
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  CyR 1º ESO · Curso 2025-26 · Manuel Alonso Herrera
+  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+  <br><span class="version">v1.0.0</span>
+</p>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

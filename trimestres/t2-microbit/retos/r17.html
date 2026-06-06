@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Reto 17 · Micro:bit</title>
+<meta name="description" content="Reto 17 Micro:bit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Reto 17</div>
+  <h1>Esquiva Enemigos</h1>
+  <div class="duracion">Micro:bit · Computación física</div>
+</section>
+<div class="hub-main">
+  <div class="section-title">🧩 Descripción</div>
+  <p>Crea un juego donde controlas un LED en la fila inferior con los botones A (izquierda) y B (derecha). Caen enemigos desde arriba que debes esquivar. Si te tocan, pierdes.</p>
+  <div class="section-title">🎯 Conceptos</div>
+  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Variables de juego</span><span class='badge'>Sprites/LEDs</span><span class='badge'>Detección de colisiones</span><span class='badge'>Eventos de botones</span><span class='badge'>Números aleatorios</span></p>
+  <div class="section-title">🧠 Pseudocódigo</div>
+  <div class="codebox">Al iniciar
+Borrar la pantalla
+Establecer jugador_x = 2, jugador_y = 4
+Establecer enemigo_x = al azar (0 a 4), enemigo_y = 0
+Establecer tiempo = 500
+Para siempre
+Encender LED jugador (jugador_x, jugador_y)
+Encender LED enemigo (enemigo_x, enemigo_y)
+Pausa tiempo ms
+Si jugador_x = enemigo_x y jugador_y = enemigo_y entonces
+Mostrar icono triste
+Fin del juego
+Mover enemigo_y + 1
+Si enemigo_y &gt; 4 entonces crear nuevo enemigo arriba
+Al presionar botón A
+Si jugador_x &gt; 0: mover jugador_x - 1
+Al presionar botón B
+Si jugador_x &lt; 4: mover jugador_x + 1</div>
+  <div class="section-title">💡 Ayuda</div>
+  <p>Usa variables para las posiciones del jugador y del enemigo. Mueve el enemigo hacia abajo cada ciclo. Comprueba si las coordenadas coinciden (colisión).</p>
+  <div class="section-title">🚀 Reto extra</div>
+  <p>¿Puedes añadir puntuación? Suma 1 punto cada vez que esquives un enemigo. Usa A+B para mostrar el marcador.</p>
+  <div class="section-title">✅ Autoevaluación</div>
+  <ul><li>El jugador se mueve con A y B</li><li>Los enemigos caen desde arriba</li><li>El juego detecta las colisiones</li><li>El juego termina cuando te tocan</li><li>Consejo: ¡Has creado tu primer videojuego! La lógica de juegos es una de las aplicaciones</li><li>más divertidas de la programación.</li></ul>
+  <div class="section-title">🔗 Programar</div>
+  <div class="bg">
+    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
+    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+  </div>
+  <div class="section-title">Navegación</div>
+  <div class="bg"><a href="r16.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 16</span></a><a href="r18.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 18</span></a></div>
+</div>
+</div>
+
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  CyR 1º ESO · Curso 2025-26 · Manuel Alonso Herrera
+  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+  <br><span class="version">v1.0.0</span>
+</p>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

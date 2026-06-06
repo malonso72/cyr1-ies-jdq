@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Reto 11 · Micro:bit</title>
+<meta name="description" content="Reto 11 Micro:bit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Reto 11</div>
+  <h1>Termómetro De Barras</h1>
+  <div class="duracion">Micro:bit · Computación física</div>
+</section>
+<div class="hub-main">
+  <div class="section-title">🧩 Descripción</div>
+  <p>Crea un termómetro visual que encienda filas de LEDs según la temperatura. Cuanto más calor haga, más filas se encenderán, empezando desde abajo. Es como los indicadores de nivel que ves en equipos de música.</p>
+  <div class="section-title">🎯 Conceptos</div>
+  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Sensor de temperatura</span><span class='badge'>Bucle &quot;para siempre&quot;</span><span class='badge'>Condicionales múltiples (Si... sino si...)</span><span class='badge'>Encender LEDs por filas</span></p>
+  <div class="section-title">🧠 Pseudocódigo</div>
+  <div class="codebox">Para siempre
+Borrar la pantalla
+Si temperatura &lt; 25 entonces
+No encender ninguna fila
+Si no, si temperatura &gt;= 25 y &lt; 26 entonces
+Encender 1ª fila (desde abajo)
+Si no, si temperatura &gt;= 26 y &lt; 27 entonces
+Encender 1ª y 2ª fila
+...(continúa para 27, 28)
+Si no, si temperatura &gt;= 29 entonces
+Encender todas las filas</div>
+  <div class="section-title">💡 Ayuda</div>
+  <p>Para encender una fila completa de LEDs, usa las coordenadas y=4 (fila inferior), y=3, y=2, y=1, y=0 (fila superior). Necesitarás encender los 5 LEDs de cada fila: x=0, x=1, x=2, x=3, x=4.</p>
+  <div class="section-title">🚀 Reto extra</div>
+  <p>¿Puedes cambiar el color de las filas? Por ejemplo, primeras filas en verde (frío), medias en amarillo (templado), y últimas en rojo (caliente). Nota: Necesitarás una Micro:bit V2 para esto.</p>
+  <div class="section-title">✅ Autoevaluación</div>
+  <ul><li>No se enciende ninguna fila por debajo de 25ºC</li><li>Se enciende 1 fila entre 25-26ºC</li><li>Se encienden más filas al aumentar la temperatura</li><li>Todas las filas se encienden a partir de 29ºC</li><li>Consejo: Los indicadores visuales son muy útiles. ¡Piensa en los medidores de volumen,</li><li>batería, o velocidad!</li></ul>
+  <div class="section-title">🔗 Programar</div>
+  <div class="bg">
+    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
+    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+  </div>
+  <div class="section-title">Navegación</div>
+  <div class="bg"><a href="r10.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 10</span></a><a href="r12.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 12</span></a></div>
+</div>
+</div>
+
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  CyR 1º ESO · Curso 2025-26 · Manuel Alonso Herrera
+  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+  <br><span class="version">v1.0.0</span>
+</p>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>

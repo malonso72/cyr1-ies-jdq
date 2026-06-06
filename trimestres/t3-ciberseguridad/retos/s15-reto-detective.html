@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mesa del Detective · Caso Sr. Hernández · Sesión 15 · v1</title>
+<style>
+  :root {
+    --madera-oscura: #2A1810;
+    --madera-media: #3D2817;
+    --madera-clara: #5C3A21;
+    --papel-viejo: #F0E4CE;
+    --papel-sombra: #D9C9A8;
+    --tinta: #1A1408;
+    --tinta-suave: #3D3528;
+    --tinta-azul: #1B3A5C;
+    --rojo-marca: #8B1A1A;
+    --verde-aprobado: #2D5A3E;
+    --oro-detective: #B8941F;
+    --amarillo-nota: #F5E07A;
+    --gris-evidencia: #E8DCC0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Courier New', 'Courier', monospace;
+    background: var(--madera-oscura);
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0, rgba(0,0,0,0.18) 1px, transparent 1px, transparent 60px),
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 90px),
+      radial-gradient(ellipse at center, rgba(184,148,31,0.08), transparent 70%);
+    color: var(--papel-viejo);
+    min-height: 100vh;
+    padding: 20px 12px;
+  }
+  .mesa {
+    max-width: 920px; margin: 0 auto;
+    padding: 24px 28px;
+    background: var(--madera-media);
+    border: 2px solid var(--madera-clara);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .mesa::before {
+    content: ""; position: absolute; inset: 8px;
+    border: 1px dashed rgba(184,148,31,0.3); pointer-events: none;
+  }
+
+  /* ENCABEZADO */
+  .encabezado {
+    text-align: center; padding-bottom: 18px;
+    border-bottom: 3px double var(--oro-detective);
+    margin-bottom: 18px;
+  }
+  .encabezado .icono { font-size: 36px; }
+  .encabezado h1 {
+    font-family: 'Georgia', serif;
+    color: var(--oro-detective);
+    font-size: 22px; letter-spacing: 4px;
+    text-transform: uppercase; margin: 4px 0;
+    font-weight: normal;
+  }
+  .encabezado .subtitulo {
+    color: var(--papel-sombra); font-size: 13px;
+    font-style: italic; letter-spacing: 1px;
+  }
+  .encabezado .clasif {
+    background: var(--rojo-marca); color: var(--papel-viejo);
+    display: inline-block; padding: 3px 12px;
+    font-size: 11px; letter-spacing: 3px;
+    margin-top: 8px; border: 1px solid var(--papel-viejo);
+  }
+
+  /* PANTALLAS */
+  .pantalla { display: none; }
+  .pantalla.activa { display: block; animation: ap 0.4s; }
+  @keyframes ap { from {opacity:0; transform: translateY(10px);} to {opacity:1; transform: none;} }
+
+  h2 {
+    color: var(--oro-detective);
+    font-family: 'Georgia', serif; font-size: 18px;
+    letter-spacing: 3px; text-transform: uppercase;
+    border-bottom: 1px solid var(--oro-detective);
+    padding-bottom: 5px; margin-bottom: 14px;
+    font-weight: normal;
+  }
+  h3 {
+    color: var(--papel-viejo); font-family: 'Georgia', serif;
+    font-size: 15px; margin: 14px 0 8px;
+    letter-spacing: 2px;
+  }
+  p { color: var(--papel-sombra); line-height: 1.55; margin-bottom: 10px; font-size: 14px; }
+
+  /* CARPETA INICIAL */
+  .carpeta {
+    background: var(--papel-viejo);
+    color: var(--tinta);
+    padding: 22px 26px;
+    margin: 14px 0;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.4);
+    position: relative;
+  }
+  .carpeta::before {
+    content: "CONFIDENCIAL"; position: absolute;
+    top: 8px; right: 12px; font-size: 10px;
+    color: var(--rojo-marca); font-weight: bold;
+    letter-spacing: 2px; border: 1px solid var(--rojo-marca);
+    padding: 2px 8px;
+  }
+  .carpeta h3 {
+    color: var(--tinta-azul); font-family: 'Georgia', serif;
+    font-size: 15px; letter-spacing: 2px;
+    border-bottom: 1px solid var(--tinta-azul);
+    padding-bottom: 4px; margin-bottom: 12px;
+  }
+  .carpeta p { color: var(--tinta-suave); }
+  .carpeta .datos { font-size: 13px; line-height: 1.7; }
+  .carpeta .datos b { color: var(--tinta-azul); letter-spacing: 1px; }
+
+  /* CAMPOS ACREDITACIÓN */
+  .campos {
+    background: rgba(184,148,31,0.08);
+    border: 1px solid var(--oro-detective);
+    padding: 18px 22px;
+    margin: 14px 0;
+  }
+  .campo { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .campo label {
+    min-width: 180px; color: var(--oro-detective);
+    font-size: 12px; letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .campo input {
+    flex: 1; padding: 8px 10px;
+    border: none; border-bottom: 1px solid var(--papel-sombra);
+    background: transparent; color: var(--papel-viejo);
+    font-family: 'Courier New', monospace; font-size: 14px;
+  }
+  .campo input:focus { outline: none; border-bottom-color: var(--oro-detective); }
+  .campo input::placeholder { color: rgba(240,228,206,0.4); }
+
+  /* BOTONES */
+  .btn {
+    font-family: 'Courier New', monospace;
+    background: var(--madera-oscura); color: var(--oro-detective);
+    border: 2px solid var(--oro-detective);
+    padding: 12px 22px; font-size: 13px;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s;
+    margin-top: 10px;
+  }
+  .btn:hover { background: var(--oro-detective); color: var(--madera-oscura); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-oro { background: var(--oro-detective); color: var(--madera-oscura); }
+  .btn-oro:hover { background: var(--papel-viejo); }
+
+  /* MURO DE EVIDENCIAS */
+  .muro {
+    background: var(--madera-oscura);
+    border: 1px solid var(--madera-clara);
+    padding: 18px;
+    margin: 14px 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 8px);
+  }
+  .muro .titulo-muro {
+    color: var(--oro-detective); font-size: 13px;
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 12px; padding-bottom: 6px;
+    border-bottom: 1px dashed var(--oro-detective);
+  }
+
+  .grid-evidencias {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 600px) {
+    .grid-evidencias { grid-template-columns: 1fr; }
+  }
+
+  /* EVIDENCIA — NOTA AMARILLA O FICHA */
+  .evidencia {
+    background: var(--gris-evidencia);
+    color: var(--tinta);
+    padding: 12px 14px;
+    border: 1px solid var(--madera-clara);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.5);
+    position: relative;
+    transform: rotate(-0.5deg);
+  }
+  .evidencia:nth-child(2n) { transform: rotate(0.7deg); }
+  .evidencia:nth-child(3n) { transform: rotate(-1.2deg); }
+  .evidencia:nth-child(5n) { transform: rotate(0.3deg); }
+
+  .evidencia .etiqueta {
+    position: absolute; top: -8px; left: 8px;
+    background: var(--tinta-azul); color: var(--papel-viejo);
+    padding: 2px 10px; font-size: 11px;
+    letter-spacing: 2px; font-weight: bold;
+    border: 1px solid var(--papel-viejo);
+  }
+  .evidencia .tipo {
+    color: var(--tinta-azul); font-size: 11px;
+    letter-spacing: 2px; font-weight: bold;
+    margin-top: 6px; margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .evidencia .contenido {
+    font-size: 12.5px; line-height: 1.5;
+    background: rgba(255,255,255,0.4);
+    padding: 8px 10px;
+    border-left: 3px solid var(--tinta-azul);
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+    color: var(--tinta);
+    max-height: 200px; overflow-y: auto;
+  }
+  .evidencia .contenido .meta-mail {
+    font-size: 10.5px; color: var(--tinta-suave);
+    border-bottom: 1px dashed var(--tinta-suave);
+    padding-bottom: 4px; margin-bottom: 6px;
+  }
+  .evidencia .contenido .meta-mail b { color: var(--tinta-azul); }
+
+  .evidencia label.asignar {
+    display: block; color: var(--tinta-azul);
+    font-size: 10px; letter-spacing: 1.5px;
+    margin-bottom: 4px; font-weight: bold;
+  }
+  .evidencia select {
+    width: 100%; padding: 7px 8px;
+    border: 1px solid var(--madera-clara);
+    background: var(--papel-viejo); color: var(--tinta);
+    font-family: 'Courier New', monospace;
+    font-size: 12px; letter-spacing: 1px;
+  }
+  .evidencia select:focus { outline: none; border-color: var(--tinta-azul); }
+  .evidencia.bloqueada select { opacity: 0.5; pointer-events: none; }
+  .evidencia.asignada-correcto { box-shadow: 2px 2px 5px rgba(45,90,62,0.5), inset 0 0 0 2px var(--verde-aprobado); }
+  .evidencia.asignada-incorrecto { box-shadow: 2px 2px 5px rgba(139,26,26,0.5), inset 0 0 0 2px var(--rojo-marca); }
+
+  /* MARCADOR DE RANURAS */
+  .estado-ranuras {
+    margin: 14px 0;
+    background: rgba(0,0,0,0.3);
+    padding: 12px;
+    border: 1px dashed var(--oro-detective);
+    font-size: 12px; color: var(--papel-sombra);
+    line-height: 1.7;
+  }
+  .estado-ranuras b { color: var(--oro-detective); letter-spacing: 1px; }
+  .ranura {
+    display: inline-block; padding: 2px 8px;
+    margin: 2px; background: rgba(184,148,31,0.15);
+    border: 1px solid var(--oro-detective);
+    font-size: 11px; letter-spacing: 1px;
+  }
+  .ranura.ocupada { background: var(--oro-detective); color: var(--madera-oscura); }
+
+  /* CONFIGURACIÓN DE LA TÉCNICA */
+  .panel-tecnica {
+    background: rgba(184,148,31,0.08);
+    border: 2px solid var(--oro-detective);
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+  .panel-tecnica .titulo-pt {
+    color: var(--oro-detective); letter-spacing: 3px;
+    text-transform: uppercase; font-size: 13px;
+    margin-bottom: 8px; font-weight: bold;
+  }
+  .panel-tecnica select {
+    width: 100%; padding: 10px 12px;
+    background: var(--papel-viejo); color: var(--tinta);
+    border: 1px solid var(--oro-detective);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+  }
+
+  /* DICTAMEN FINAL */
+  .dictamen {
+    margin-top: 16px; padding: 18px 22px;
+    border: 3px solid;
+    display: none; background: var(--papel-viejo);
+    color: var(--tinta);
+  }
+  .dictamen.activo { display: block; animation: ap 0.4s; }
+  .dictamen.bien { border-color: var(--verde-aprobado); }
+  .dictamen.mal { border-color: var(--rojo-marca); }
+  .dictamen .titulo-d {
+    font-family: 'Georgia', serif; font-size: 17px;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .dictamen.bien .titulo-d { color: var(--verde-aprobado); }
+  .dictamen.mal .titulo-d { color: var(--rojo-marca); }
+  .dictamen .tabla-resul {
+    width: 100%; border-collapse: collapse;
+    margin: 12px 0; font-size: 13px;
+  }
+  .dictamen .tabla-resul td {
+    padding: 6px 10px; border-bottom: 1px dashed var(--tinta-suave);
+  }
+  .dictamen .tabla-resul td.ok { color: var(--verde-aprobado); font-weight: bold; }
+  .dictamen .tabla-resul td.ko { color: var(--rojo-marca); font-weight: bold; }
+  .dictamen .acciones { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .dictamen .acciones button {
+    padding: 10px 18px; font-family: 'Courier New', monospace;
+    border: 1px solid; cursor: pointer; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .btn-reint-d { background: transparent; color: var(--rojo-marca); border-color: var(--rojo-marca); }
+  .btn-reint-d:hover { background: var(--rojo-marca); color: var(--papel-viejo); }
+  .btn-sig-d { background: var(--verde-aprobado); color: var(--papel-viejo); border-color: var(--verde-aprobado); }
+  .btn-sig-d:hover { background: var(--papel-viejo); color: var(--verde-aprobado); }
+
+  /* AVISO */
+  .aviso {
+    background: rgba(184,148,31,0.12);
+    border-left: 5px solid var(--oro-detective);
+    padding: 12px 16px; margin: 12px 0;
+    font-size: 12.5px; color: var(--papel-sombra); line-height: 1.6;
+  }
+  .aviso b { color: var(--oro-detective); }
+
+  /* PANTALLA FINAL: DIPLOMA */
+  .diploma-preview {
+    background: var(--papel-viejo); color: var(--tinta);
+    border: 8px double var(--oro-detective);
+    padding: 28px;
+    text-align: center;
+    margin: 14px 0;
+  }
+  .diploma-preview .titulo-dp {
+    font-family: 'Georgia', serif; font-size: 22px;
+    color: var(--tinta-azul); letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .diploma-preview .sub-dp {
+    color: var(--tinta-suave); font-style: italic;
+    font-size: 13px; margin-bottom: 18px;
+  }
+  .diploma-preview .nombres-dp {
+    font-family: 'Georgia', serif; font-weight: bold;
+    color: var(--tinta-azul); font-size: 20px;
+    margin: 14px 0;
+  }
+  .diploma-preview .resumen-dp {
+    background: rgba(27,58,92,0.06);
+    border: 1px solid var(--madera-clara);
+    padding: 12px 16px; margin: 14px 0;
+    text-align: left; font-size: 13px;
+  }
+  .diploma-preview .resumen-dp div {
+    display: flex; justify-content: space-between;
+    padding: 4px 0; border-bottom: 1px dashed var(--madera-clara);
+  }
+  .diploma-preview .resumen-dp div:last-child {
+    border-bottom: none; font-weight: bold; color: var(--tinta-azul);
+  }
+
+  footer.pie {
+    text-align: center; margin-top: 20px;
+    padding-top: 12px; border-top: 1px solid var(--madera-clara);
+    font-size: 10px; color: rgba(240,228,206,0.5);
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .mesa { padding: 18px 14px; }
+    .campo { flex-direction: column; align-items: stretch; }
+    .campo label { min-width: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mesa">
+  <div class="encabezado">
+    <div class="icono">🔍</div>
+    <h1>Mesa del Detective</h1>
+    <div class="subtitulo">Reconstrucción forense de incidente de ciberseguridad</div>
+    <div class="clasif">EXPEDIENTE CONFIDENCIAL · CIBER-2026/IES-JQ</div>
+  </div>
+
+  <!-- PANTALLA 0: INICIO -->
+  <div class="pantalla activa" id="p-inicio">
+    <h2>Briefing del caso</h2>
+
+    <div class="carpeta">
+      <h3>📁 Caso IES-JQ/2026/05 — Sr. Hernández</h3>
+      <div class="datos">
+        <p><b>VÍCTIMA:</b> Antonio Hernández, secretario administrativo del IES Federico García Lorca (Granada). Edad: 54. Funciones: gestión académica y acceso al sistema Séneca de la Junta de Andalucía.</p>
+        <p><b>FECHA DEL INCIDENTE:</b> Lunes 12 de mayo de 2026. Posible filtración de credenciales con consecuencias económicas y reputacionales.</p>
+        <p><b>SITUACIÓN:</b> En el ordenador y el móvil del Sr. Hernández se han recogido <b>6 evidencias</b>. NO están en orden cronológico, y una de ellas — fundamental advertencia — es <b>una pista FALSA</b>: parece pertinente, pero no tiene relación alguna con el ataque.</p>
+        <p><b>VUESTRA MISIÓN:</b> ordenar las evidencias relevantes en la línea temporal del ataque, identificar y descartar la pista falsa, y emitir un dictamen final con la técnica utilizada.</p>
+      </div>
+    </div>
+
+    <div class="campos">
+      <div class="campo">
+        <label>Detective 1</label>
+        <input type="text" id="nombre1" placeholder="Nombre y apellidos">
+      </div>
+      <div class="campo">
+        <label>Detective 2</label>
+        <input type="text" id="nombre2" placeholder="Nombre y apellidos">
+      </div>
+    </div>
+
+    <div class="aviso">
+      <b>Aviso operativo:</b> esta sesión es la PARTE B de la S15. La PARTE A (Ciber Cluedo del CCN) se juega ANTES en su portal oficial. Esta mesa de evidencias se abre solo después.
+    </div>
+
+    <button class="btn btn-oro" onclick="empezar()">▸ Abrir la mesa de evidencias</button>
+  </div>
+
+  <!-- PANTALLA 1: ASIGNACIÓN DE EVIDENCIAS -->
+  <div class="pantalla" id="p-mesa">
+    <h2>Asignación de evidencias en la línea temporal</h2>
+    <p>Examinad cada una de las 6 evidencias. Para cada una, decidid en qué momento del ataque ocurre (posiciones 1 a 5) o si es la <b>pista FALSA</b> que debe descartarse. <span style="color:var(--oro-detective);">Cada posición acepta una sola evidencia.</span></p>
+
+    <div class="estado-ranuras" id="estado-ranuras">
+      <b>RANURAS:</b>
+      <span class="ranura" id="r-1">1</span>
+      <span class="ranura" id="r-2">2</span>
+      <span class="ranura" id="r-3">3</span>
+      <span class="ranura" id="r-4">4</span>
+      <span class="ranura" id="r-5">5</span>
+      <span class="ranura" id="r-FALSA">PISTA FALSA</span>
+    </div>
+
+    <div class="muro">
+      <div class="titulo-muro">📌 6 evidencias recogidas en el dispositivo</div>
+      <div class="grid-evidencias" id="grid-evidencias"></div>
+    </div>
+
+    <div class="panel-tecnica">
+      <div class="titulo-pt">🎯 Identificación de la técnica de phishing utilizada</div>
+      <p style="font-size:12px;color:var(--papel-sombra);margin-bottom:8px;">Una vez ordenadas todas las evidencias, identificad qué técnica empleó el atacante:</p>
+      <select id="tecnica-sel">
+        <option value="">— Seleccionar técnica —</option>
+        <option value="seneca-spoofing">Phishing por suplantación de Séneca (dominio falso "seneka-andalucia.es")</option>
+        <option value="microsoft">Phishing genérico imitando Microsoft</option>
+        <option value="bbva-spoofing">Phishing de BBVA con SMS</option>
+        <option value="spear-phishing">Spear phishing dirigido al rol del secretario administrativo</option>
+        <option value="ransomware">Ataque ransomware con archivo adjunto</option>
+      </select>
+    </div>
+
+    <button class="btn btn-oro" id="btn-dictamen" onclick="emitirDictamen()" disabled>
+      🔒 Asigna las 6 evidencias y la técnica para emitir dictamen
+    </button>
+
+    <div class="dictamen" id="dictamen"></div>
+  </div>
+
+  <!-- PANTALLA 2: DIPLOMA FINAL -->
+  <div class="pantalla" id="p-final">
+    <h2>Dictamen del caso — Acreditación</h2>
+
+    <div class="diploma-preview" id="diploma-preview">
+      <div class="titulo-dp">Diploma del Detective Forense</div>
+      <div class="sub-dp">Por la reconstrucción del Caso Sr. Hernández · Promoción 2026</div>
+      <div style="font-size:32px;color:var(--oro-detective);">🔍</div>
+      <p style="margin: 10px 0; font-style: italic;">La Unidad de Análisis Forense Digital del IES Jiménez de Quesada acredita a</p>
+      <div class="nombres-dp" id="nombres-finales"></div>
+      <p>por haber colaborado en la reconstrucción del incidente cibernético del Sr. Hernández, identificando las evidencias relevantes, descartando la pista falsa y reconociendo la técnica del atacante.</p>
+
+      <div class="resumen-dp">
+        <div><span>Fecha del dictamen:</span> <span id="fecha-final"></span></div>
+        <div><span>Evidencias ordenadas (5):</span> <span id="orden-correcto"></span> / 5</div>
+        <div><span>Pista falsa identificada:</span> <span id="pista-correcta"></span></div>
+        <div><span>Técnica de ataque reconocida:</span> <span id="tecnica-correcta"></span></div>
+        <div><span>VEREDICTO FINAL:</span> <span id="veredicto-final"></span></div>
+      </div>
+
+      <p style="font-style:italic;font-size:13px;color:var(--tinta-suave);margin-top:10px;">"Una buena reconstrucción no requiere reunir todas las pistas, sino saber cuál sobra."</p>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <button class="btn btn-oro" onclick="descargarDiploma()">📥 Descargar diploma (PNG)</button>
+      <button class="btn" onclick="window.print()">🖨 Imprimir</button>
+    </div>
+
+    <div class="aviso" style="margin-top: 14px;">
+      <b>Entrega en Moodle:</b> subid el PNG del diploma a la tarea de la Sesión 15. Una sola entrega por pareja con ambos nombres en el diploma.
+    </div>
+  </div>
+
+  <footer class="pie">
+    IES JIMÉNEZ DE QUESADA · SANTA FE (GRANADA) · CIBERSEGURIDAD · SESIÓN 15 · v1
+  </footer>
+</div>
+
+<script>
+// ============ DATOS ============
+let nombre1 = '', nombre2 = '';
+let asignaciones = {}; // {idEvidencia: ranura}
+
+// Las 6 evidencias literales del Material S15 del cuadernillo.
+// posicion_correcta: 1-5 para la línea temporal, "FALSA" para la pista falsa.
+const EVIDENCIAS = [
+  {
+    id: "A",
+    etiqueta: "EVIDENCIA A",
+    tipo: "📧 Email recibido",
+    contenido: `<div class="meta-mail">
+      <b>De:</b> soporte-junta@seneka-andalucia.es<br>
+      <b>Para:</b> a.hernandez@ies.lorca.es<br>
+      <b>Asunto:</b> Actualización urgente del programa Séneca<br>
+      <b>Fecha:</b> lunes 12/05 · 08:14
+    </div>
+    Estimado Sr. Hernández, debe actualizar Séneca antes de las 14:00 de hoy. Su acceso al sistema de notas se bloqueará. Pinche aquí: seneka-andalucia.es/login`,
+    posicion: 1,
+    notaCorrecta: "Es el email DE PHISHING que inicia el ataque. El dominio 'seneka-andalucia.es' (con K) imita al real 'juntadeandalucia.es' pero NO lo es. Suplantación clásica del programa Séneca."
+  },
+  {
+    id: "B",
+    etiqueta: "EVIDENCIA B",
+    tipo: "📷 Captura del navegador",
+    contenido: `<div class="meta-mail"><b>Captura del navegador del Sr. Hernández</b></div>
+    Pantalla de inicio de sesión idéntica a Séneca: logo, colores oficiales de la Junta. <br><br>
+    <b>DETALLE CLAVE:</b> en la barra de direcciones aparece <b>"seneka-andalucia.es/login"</b> (no "seneca.juntadeandalucia.es", que sería el legítimo).<br><br>
+    Imagen con sello del navegador "no es seguro" (HTTP sin candado).`,
+    posicion: 2,
+    notaCorrecta: "El Sr. Hernández pinchó el enlace del email y llegó a la página falsa. La captura del navegador confirma el momento del clic. Sigue cronológicamente al email."
+  },
+  {
+    id: "C",
+    etiqueta: "EVIDENCIA C",
+    tipo: "📱 WhatsApp Director",
+    contenido: `<div class="meta-mail"><b>Director del IES</b> · lunes 12/05 · 13:42</div>
+    "Antonio, no olvides la reunión del claustro de mañana a las 10. Trae el listado de las optativas."`,
+    posicion: "FALSA",
+    notaCorrecta: "Es un WhatsApp legítimo del Director del IES sobre un tema cotidiano (reunión del claustro). No tiene ninguna relación con el ataque informático. Es la PISTA FALSA del caso."
+  },
+  {
+    id: "D",
+    etiqueta: "EVIDENCIA D",
+    tipo: "🗂 Log del antivirus",
+    contenido: `<div class="meta-mail"><b>Log del antivirus del PC</b> · lunes 12/05 · 08:17</div>
+    Acceso saliente a IP <b>185.244.x.x</b> (geolocalización: Rumanía)<br>
+    Protocolo: TLS<br>
+    Estado: <b>permitido</b> (no bloqueado por el AV)`,
+    posicion: 3,
+    notaCorrecta: "Tras introducir las credenciales en la web falsa, el atacante (desde Rumanía) accedió. El log muestra la conexión saliente del propio equipo del Sr. Hernández hacia los servidores del atacante."
+  },
+  {
+    id: "E",
+    etiqueta: "EVIDENCIA E",
+    tipo: "📨 Email JUNTA (real)",
+    contenido: `<div class="meta-mail">
+      <b>De:</b> noreply@juntadeandalucia.es<br>
+      <b>Asunto:</b> Confirmación de acceso a su cuenta Séneca<br>
+      <b>Fecha:</b> lunes 12/05 · 08:23
+    </div>
+    Se ha registrado un acceso a su cuenta Séneca el 12/05/2026 a las <b>08:22</b> desde la IP 185.244.x.x (Rumanía). Si no ha sido usted, contacte con CAU Séneca: 902 510 100.`,
+    posicion: 4,
+    notaCorrecta: "Email LEGÍTIMO de la Junta confirmando el acceso fraudulento desde Rumanía. Mismo IP del log (185.244.x.x). Es la alerta automática del sistema Séneca cuando detecta acceso desde lugar inusual."
+  },
+  {
+    id: "F",
+    etiqueta: "EVIDENCIA F",
+    tipo: "📱 SMS móvil personal",
+    contenido: `<div class="meta-mail"><b>SMS</b> · lunes 12/05 · 09:01</div>
+    BBVA: Acceso desde nuevo dispositivo en Madrid el 12/05 a las 08:55. Si no ha sido usted, llame al 91 374 25 25.`,
+    posicion: 5,
+    notaCorrecta: "Los atacantes, ya con credenciales válidas del Sr. Hernández, intentaron entrar también en su banco BBVA. El SMS legítimo del banco le avisa del intento. Es la consecuencia del ataque a Séneca."
+  }
+];
+
+const TECNICA_CORRECTA = "seneca-spoofing";
+const NOMBRE_TECNICA_CORRECTA = "Phishing por suplantación de Séneca (dominio falso \"seneka-andalucia.es\")";
+
+// ============ NAVEGACIÓN ============
+function cambiarPantalla(id) {
+  document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+  document.getElementById(id).classList.add('activa');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function empezar() {
+  nombre1 = document.getElementById('nombre1').value.trim();
+  nombre2 = document.getElementById('nombre2').value.trim();
+  if (!nombre1 || !nombre2) {
+    alert('Se necesitan los dos nombres para emitir el diploma.');
+    return;
+  }
+  cambiarPantalla('p-mesa');
+  pintarEvidencias();
+}
+
+// ============ PINTAR EVIDENCIAS ============
+function pintarEvidencias() {
+  const grid = document.getElementById('grid-evidencias');
+  grid.innerHTML = '';
+  EVIDENCIAS.forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'evidencia';
+    div.dataset.id = e.id;
+    div.innerHTML = `
+      <span class="etiqueta">${e.etiqueta}</span>
+      <div class="tipo">${e.tipo}</div>
+      <div class="contenido">${e.contenido}</div>
+      <label class="asignar">Asignar a:</label>
+      <select onchange="asignar('${e.id}', this.value)">
+        <option value="">— Sin asignar —</option>
+        <option value="1">Posición 1 (primer momento del ataque)</option>
+        <option value="2">Posición 2</option>
+        <option value="3">Posición 3</option>
+        <option value="4">Posición 4</option>
+        <option value="5">Posición 5 (último momento)</option>
+        <option value="FALSA">PISTA FALSA (descartar)</option>
+      </select>
+    `;
+    grid.appendChild(div);
+  });
+  refrescarRanuras();
+}
+
+function asignar(idEv, ranura) {
+  if (ranura === '') {
+    delete asignaciones[idEv];
+  } else {
+    // Si esa ranura ya está ocupada por OTRA evidencia, quitarla
+    Object.keys(asignaciones).forEach(otherId => {
+      if (otherId !== idEv && asignaciones[otherId] === ranura) {
+        delete asignaciones[otherId];
+        // Resetear el select de esa otra evidencia
+        const sel = document.querySelector(`.evidencia[data-id="${otherId}"] select`);
+        if (sel) sel.value = '';
+      }
+    });
+    asignaciones[idEv] = ranura;
+  }
+  refrescarRanuras();
+  refrescarBotonDictamen();
+}
+
+function refrescarRanuras() {
+  ['1','2','3','4','5','FALSA'].forEach(r => {
+    const el = document.getElementById('r-' + r);
+    const ocupada = Object.values(asignaciones).includes(r);
+    el.classList.toggle('ocupada', ocupada);
+  });
+}
+
+function refrescarBotonDictamen() {
+  const total = Object.keys(asignaciones).length;
+  const tec = document.getElementById('tecnica-sel').value;
+  const btn = document.getElementById('btn-dictamen');
+  if (total === 6 && tec) {
+    btn.disabled = false;
+    btn.textContent = '⚖ Emitir dictamen del caso';
+  } else {
+    btn.disabled = true;
+    const faltanEv = 6 - total;
+    if (faltanEv > 0) btn.textContent = `🔒 Faltan ${faltanEv} evidencias por asignar`;
+    else btn.textContent = '🔒 Selecciona la técnica de ataque';
+  }
+}
+
+document.addEventListener('change', (e) => {
+  if (e.target.id === 'tecnica-sel') refrescarBotonDictamen();
+});
+
+// ============ DICTAMEN ============
+function emitirDictamen() {
+  // Calcular aciertos
+  let aciertosOrden = 0;
+  let pistaFalsaOk = false;
+  const detalles = [];
+
+  EVIDENCIAS.forEach(e => {
+    const asignada = asignaciones[e.id];
+    const ok = String(asignada) === String(e.posicion);
+    if (ok) {
+      if (e.posicion === "FALSA") pistaFalsaOk = true;
+      else aciertosOrden++;
+    }
+    detalles.push({
+      id: e.id, esperado: e.posicion, dado: asignada, ok: ok,
+      nota: e.notaCorrecta
+    });
+
+    // Marcar visualmente
+    const card = document.querySelector(`.evidencia[data-id="${e.id}"]`);
+    card.classList.remove('asignada-correcto', 'asignada-incorrecto');
+    card.classList.add(ok ? 'asignada-correcto' : 'asignada-incorrecto');
+  });
+
+  const tecnicaDada = document.getElementById('tecnica-sel').value;
+  const tecnicaOk = (tecnicaDada === TECNICA_CORRECTA);
+  const todoPerfecto = aciertosOrden === 5 && pistaFalsaOk && tecnicaOk;
+
+  const dictamen = document.getElementById('dictamen');
+  dictamen.className = 'dictamen activo ' + (todoPerfecto ? 'bien' : 'mal');
+
+  // Construir tabla de evidencias
+  let filas = '';
+  detalles.forEach(d => {
+    const marca = d.ok ? '<td class="ok">✓ Correcto</td>' : '<td class="ko">✗ Incorrecto</td>';
+    const esperadoTxt = d.esperado === 'FALSA' ? 'PISTA FALSA' : 'Posición ' + d.esperado;
+    const dadoTxt = d.dado === 'FALSA' ? 'PISTA FALSA' : 'Posición ' + d.dado;
+    filas += `<tr><td><b>Evidencia ${d.id}</b></td><td>Esperado: ${esperadoTxt}</td><td>Tu asignación: ${dadoTxt}</td>${marca}</tr>`;
+  });
+
+  const tecnicaTxt = tecnicaOk
+    ? `<p style="color:var(--verde-aprobado);"><b>✓ Técnica correctamente identificada:</b> ${NOMBRE_TECNICA_CORRECTA}</p>`
+    : `<p style="color:var(--rojo-marca);"><b>✗ Técnica incorrecta.</b> La correcta era: <b>${NOMBRE_TECNICA_CORRECTA}</b>. El dominio falso "seneka-andalucia.es" con K es el indicio definitivo de suplantación dirigida del sistema Séneca de la Junta.</p>`;
+
+  let titulo, acciones;
+  if (todoPerfecto) {
+    titulo = '✓ DICTAMEN APROBADO — Reconstrucción completa';
+    acciones = `<button class="btn-sig-d" onclick="finalizar()">▸ Emitir diploma del detective</button>`;
+  } else {
+    titulo = '✗ DICTAMEN INCOMPLETO — Reconstrucción a revisar';
+    acciones = `<button class="btn-reint-d" onclick="reintentar()">↻ Aún no está perfecto: vuelve a revisar el caso (hay que clavarlo todo)</button>`;
+  }
+
+  // Notas explicativas por evidencia (siempre, para aprender)
+  let notas = '<h3 style="color:var(--tinta-azul);font-family:Georgia;font-size:14px;letter-spacing:1px;margin-top:14px;">Explicación de la reconstrucción correcta:</h3>';
+  EVIDENCIAS.forEach(e => {
+    const esperadoTxt = e.posicion === 'FALSA' ? '⚠ PISTA FALSA' : 'Posición ' + e.posicion;
+    notas += `<div style="margin-bottom:8px;font-size:12.5px;line-height:1.5;"><b style="color:var(--tinta-azul);">${e.etiqueta} (${esperadoTxt}):</b> ${e.notaCorrecta}</div>`;
+  });
+
+  dictamen.innerHTML = `
+    <div class="titulo-d">${titulo}</div>
+    <p>Evidencias correctamente ordenadas: <b>${aciertosOrden} / 5</b> · Pista falsa identificada: <b>${pistaFalsaOk ? 'SÍ ✓' : 'NO ✗'}</b></p>
+    ${tecnicaTxt}
+    <table class="tabla-resul">${filas}</table>
+    ${notas}
+    <div class="acciones">${acciones}</div>
+  `;
+
+  dictamen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function reintentar() {
+  document.getElementById('dictamen').classList.remove('activo');
+  // Permitir cambiar selects de nuevo
+  document.querySelectorAll('.evidencia').forEach(c => {
+    c.classList.remove('asignada-correcto', 'asignada-incorrecto');
+  });
+}
+
+// ============ FINAL Y DIPLOMA ============
+function finalizar() {
+  cambiarPantalla('p-final');
+
+  const aciertosOrden = EVIDENCIAS.filter(e => e.posicion !== 'FALSA' && String(asignaciones[e.id]) === String(e.posicion)).length;
+  const pistaFalsaOk = EVIDENCIAS.some(e => e.posicion === 'FALSA' && asignaciones[e.id] === 'FALSA');
+  const tecnicaOk = document.getElementById('tecnica-sel').value === TECNICA_CORRECTA;
+
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  document.getElementById('nombres-finales').textContent = `${nombre1}  ·  ${nombre2}`;
+  document.getElementById('fecha-final').textContent = fecha;
+  document.getElementById('orden-correcto').textContent = aciertosOrden;
+  document.getElementById('pista-correcta').textContent = pistaFalsaOk ? 'SÍ ✓' : 'NO ✗';
+  document.getElementById('tecnica-correcta').textContent = tecnicaOk ? 'SÍ ✓' : 'NO ✗';
+
+  let vered;
+  if (aciertosOrden === 5 && pistaFalsaOk && tecnicaOk) vered = 'CASO CERRADO — RECONSTRUCCIÓN COMPLETA';
+  else if (aciertosOrden + (pistaFalsaOk?1:0) + (tecnicaOk?1:0) >= 5) vered = 'CASO RECONSTRUIDO CON FALLOS MENORES';
+  else vered = 'RECONSTRUCCIÓN PARCIAL — REVISAR EL CASO';
+  document.getElementById('veredicto-final').textContent = vered;
+}
+
+// ============ DESCARGA PNG ============
+function descargarDiploma() {
+  try{ localStorage.setItem('academia:reto:s15:done','1'); }catch(e){}
+  try{ if(window.parent && window.parent!==window) window.parent.postMessage('academia:reto-completado:s15','*'); }catch(e){}
+  const canvas = document.createElement('canvas');
+  canvas.width = 1100; canvas.height = 800;
+  const ctx = canvas.getContext('2d');
+
+  // Fondo papel viejo
+  ctx.fillStyle = '#F0E4CE';
+  ctx.fillRect(0, 0, 1100, 800);
+  const grad = ctx.createRadialGradient(550, 400, 100, 550, 400, 700);
+  grad.addColorStop(0, 'rgba(184,148,31,0.06)');
+  grad.addColorStop(1, 'rgba(42,24,16,0.18)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1100, 800);
+
+  // Bordes dobles
+  ctx.strokeStyle = '#B8941F'; ctx.lineWidth = 6;
+  ctx.strokeRect(30, 30, 1040, 740);
+  ctx.lineWidth = 2;
+  ctx.strokeRect(48, 48, 1004, 704);
+
+  // Encabezado
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#B8941F';
+  ctx.font = '40px Georgia';
+  ctx.fillText('🔍', 550, 130);
+
+  ctx.fillStyle = '#1B3A5C';
+  ctx.font = 'bold 30px Georgia';
+  ctx.fillText('DIPLOMA DEL DETECTIVE FORENSE', 550, 180);
+
+  ctx.font = 'italic 16px Georgia';
+  ctx.fillStyle = '#3D3528';
+  ctx.fillText('Caso Sr. Hernández · Reconstrucción Forense · Promoción 2026', 550, 208);
+
+  // Líneas separadoras
+  ctx.strokeStyle = '#B8941F'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(280, 234); ctx.lineTo(820, 234); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(280, 240); ctx.lineTo(820, 240); ctx.stroke();
+
+  // Cuerpo
+  ctx.fillStyle = '#1A1408';
+  ctx.font = 'italic 15px Georgia';
+  ctx.fillText('La Unidad de Análisis Forense Digital del IES Jiménez de Quesada acredita a', 550, 282);
+
+  ctx.font = 'bold 24px Georgia';
+  ctx.fillStyle = '#1B3A5C';
+  ctx.fillText(`${nombre1}  ·  ${nombre2}`, 550, 326);
+
+  ctx.font = '14px Georgia';
+  ctx.fillStyle = '#1A1408';
+  ctx.fillText('por su contribución a la reconstrucción del incidente cibernético sufrido por el', 550, 362);
+  ctx.fillText('Sr. Hernández, secretario administrativo del IES Federico García Lorca.', 550, 382);
+
+  // Caja de stats
+  const aciertosOrden = EVIDENCIAS.filter(e => e.posicion !== 'FALSA' && String(asignaciones[e.id]) === String(e.posicion)).length;
+  const pistaFalsaOk = EVIDENCIAS.some(e => e.posicion === 'FALSA' && asignaciones[e.id] === 'FALSA');
+  const tecnicaOk = document.getElementById('tecnica-sel').value === TECNICA_CORRECTA;
+
+  ctx.fillStyle = 'rgba(27,58,92,0.06)';
+  ctx.fillRect(180, 412, 740, 220);
+  ctx.strokeStyle = '#5C3A21'; ctx.lineWidth = 1;
+  ctx.strokeRect(180, 412, 740, 220);
+
+  const ahora = new Date();
+  const fecha = `${String(ahora.getDate()).padStart(2,'0')}/${String(ahora.getMonth()+1).padStart(2,'0')}/${ahora.getFullYear()}`;
+  const hora = `${String(ahora.getHours()).padStart(2,'0')}:${String(ahora.getMinutes()).padStart(2,'0')}`;
+
+  let vered;
+  if (aciertosOrden === 5 && pistaFalsaOk && tecnicaOk) vered = 'CASO CERRADO';
+  else if (aciertosOrden + (pistaFalsaOk?1:0) + (tecnicaOk?1:0) >= 5) vered = 'FALLOS MENORES';
+  else vered = 'PARCIAL';
+
+  const lineas = [
+    ['FECHA DEL DICTAMEN', `${fecha} · ${hora}`],
+    ['EVIDENCIAS ORDENADAS', `${aciertosOrden} de 5`],
+    ['PISTA FALSA IDENTIFICADA', pistaFalsaOk ? 'SÍ ✓' : 'NO ✗'],
+    ['TÉCNICA RECONOCIDA', tecnicaOk ? 'SÍ ✓' : 'NO ✗'],
+    ['VEREDICTO FINAL', vered],
+  ];
+  ctx.font = '13px Georgia';
+  ctx.textAlign = 'left';
+  let y = 444;
+  lineas.forEach(([etiq, val]) => {
+    ctx.fillStyle = '#1B3A5C'; ctx.font = 'bold 13px Georgia';
+    ctx.fillText(etiq, 220, y);
+    ctx.fillStyle = '#1A1408'; ctx.font = '15px Georgia';
+    ctx.textAlign = 'right';
+    ctx.fillText(val, 880, y);
+    ctx.textAlign = 'left';
+    y += 36;
+  });
+
+  // Sello dorado
+  ctx.save();
+  ctx.translate(945, 670);
+  ctx.rotate(-0.18);
+  ctx.strokeStyle = '#B8941F'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.arc(0, 0, 58, 0, Math.PI*2); ctx.stroke();
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(0, 0, 52, 0, Math.PI*2); ctx.stroke();
+  ctx.fillStyle = '#B8941F';
+  ctx.font = 'bold 11px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText('UAF DIGITAL', 0, -12);
+  ctx.fillText('IES JIMÉNEZ', 0, 2);
+  ctx.font = '8px Georgia';
+  ctx.fillText('DE QUESADA · 2026', 0, 22);
+  ctx.restore();
+
+  // Pie
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#3D3528';
+  ctx.font = 'italic 13px Georgia';
+  ctx.fillText('"Una buena reconstrucción no requiere reunir todas las pistas,', 550, 686);
+  ctx.fillText('sino saber cuál sobra."', 550, 705);
+
+  ctx.fillStyle = '#1B3A5C';
+  ctx.font = '11px "Courier New"';
+  ctx.fillText('IES JIMÉNEZ DE QUESADA · SANTA FE (GRANADA)', 550, 735);
+  ctx.fillText('CIBERSEGURIDAD · 1ºESO B · SESIÓN 15 · CASO HERNÁNDEZ · v1', 550, 753);
+
+  const safe = (s) => (s || 'Anonimo').replace(/[^a-zA-Z0-9_-]/g, '');
+  const filename = `Diploma_Detective_S15_${safe(nombre1)}_${safe(nombre2)}_${fecha.replace(/\//g,'-')}.png`;
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+}
+</script>
+
+</body>
+</html>

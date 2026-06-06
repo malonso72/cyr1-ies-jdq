@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Reto 27 · Micro:bit</title>
+<meta name="description" content="Reto 27 Micro:bit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
+  <span class="nc-sep">·</span>
+  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Reto 27</div>
+  <h1>Juego De Disparos Con Naves</h1>
+  <div class="duracion">Micro:bit · Computación física</div>
+</section>
+<div class="hub-main">
+  <div class="section-title">🧩 Descripción</div>
+  <p>Crea un juego de disparos espacial. Controlas una nave en la fila inferior (botones A/B para moverse). Pulsa A+B para disparar. Los enemigos caen desde arriba. Si tu disparo alcanza un enemigo, desaparece y sumas puntos.</p>
+  <div class="section-title">🎯 Conceptos</div>
+  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Sprites múltiples</span><span class='badge'>Detección de colisiones avanzada</span><span class='badge'>Sistema de disparos</span><span class='badge'>Puntuación</span><span class='badge'>Variables de juego complejas</span></p>
+  <div class="section-title">🧠 Pseudocódigo</div>
+  <div class="codebox">Al iniciar
+Establecer nave_x = 2, nave_y = 4
+Establecer enemigo_x = al azar (0-4), enemigo_y = 0
+Establecer disparo_activo = falso
+Establecer disparo_x = 0, disparo_y = 0
+Establecer puntos = 0
+Para siempre
+Borrar pantalla
+Encender LED nave (nave_x, nave_y)
+Encender LED enemigo (enemigo_x, enemigo_y)
+Si disparo_activo entonces
+Encender LED disparo (disparo_x, disparo_y)
+Mover disparo_y - 1 (hacia arriba)
+Si disparo_y &lt; 0 entonces disparo_activo = falso
+Si disparo_x = enemigo_x y disparo_y = enemigo_y entonces
+Cambiar puntos por +1
+Crear nuevo enemigo arriba
+Establecer disparo_activo = falso
+Mover enemigo_y + 1
+Si enemigo_y &gt; 4 entonces crear nuevo enemigo arriba
+Pausa 300 ms
+Al presionar botón A
+Si nave_x &gt; 0: mover nave_x - 1
+Al presionar botón B
+Si nave_x &lt; 4: mover nave_x + 1
+Al presionar botón A+B
+Si no disparo_activo entonces
+Establecer disparo_x = nave_x
+Establecer disparo_y = nave_y - 1
+Establecer disparo_activo = verdadero</div>
+  <div class="section-title">💡 Ayuda</div>
+  <p>Necesitas gestionar tres sprites: nave, enemigo y disparo. El disparo solo puede estar activo si no hay otro en pantalla. Comprueba colisiones entre disparo y enemigo cada ciclo.</p>
+  <div class="section-title">🚀 Reto extra</div>
+  <p>¿Puedes añadir varios enemigos a la vez? Usa arrays o listas para gestionar múltiples enemigos simultáneos.</p>
+  <div class="section-title">✅ Autoevaluación</div>
+  <ul><li>La nave se mueve correctamente</li><li>Los disparos funcionan</li><li>Se detectan las colisiones</li><li>Los puntos se cuentan correctamente</li><li>Consejo: ¡Este es un juego completo! Has usado sprites, colisiones, física simple y</li><li>puntuación. ¡Eres un game developer!</li></ul>
+  <div class="section-title">🔗 Programar</div>
+  <div class="bg">
+    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
+    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+  </div>
+  <div class="section-title">Navegación</div>
+  <div class="bg"><a href="r26.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 26</span></a><a href="r28.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 28</span></a></div>
+</div>
+</div>
+
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  CyR 1º ESO · Curso 2025-26 · Manuel Alonso Herrera
+  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+  <br><span class="version">v1.0.0</span>
+</p>
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+</body>
+</html>
