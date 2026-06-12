@@ -1,6 +1,6 @@
 # CyR 1º ESO · IES Jiménez de Quesada
 
-**Computación y Robótica · 1º ESO · Curso 2025-26**
+**Computación y Robótica · 1º ESO · Curso 2026-27**
 Profesor: Manuel Alonso Herrera · Santa Fe (Granada)
 
 Sitio estático servido por Cloudflare Workers Static Assets en

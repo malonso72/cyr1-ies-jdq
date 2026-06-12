@@ -1,6 +1,6 @@
 # Programación didáctica · CyR 1º ESO
 
-**Curso:** 2025-26 · IES Jiménez de Quesada · Profesor: Manuel Alonso Herrera
+**Curso:** 2026-27 · IES Jiménez de Quesada · Profesor: Manuel Alonso Herrera
 
 ## Distribución temporal
 
