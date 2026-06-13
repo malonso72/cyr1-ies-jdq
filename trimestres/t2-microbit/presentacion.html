@@ -12,4 +12,5 @@ h1{font-size:clamp(52px,9vw,130px);line-height:1;margin:.1em 0;text-align:center
 <div class="slide"><div class="grid"></div><div class="tag">SISTEMA LISTO</div><h1>¿Preparados?</h1><p>El reto 0 empieza ahora: Hola mundo.</p></div>
 <div class="counter" id="c">01 / 06</div><div class="nav"><button onclick="go(-1)">‹</button><button onclick="go(1)">›</button></div>
 <script>let s=0;const slides=[...document.querySelectorAll('.slide')];function show(){slides.forEach((x,i)=>x.classList.toggle('active',i===s));document.getElementById('c').textContent=String(s+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0')}function go(d){s=Math.max(0,Math.min(slides.length-1,s+d));show()}document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1)}});show();</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body></html>
