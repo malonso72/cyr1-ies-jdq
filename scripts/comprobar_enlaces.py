@@ -45,6 +45,10 @@ def main():
             # Saltar enlaces externos, mailto, anclas puras y URLs sin protocolo (//ejemplo.com)
             if link.startswith(("http", "https", "mailto:", "#", "data:", "javascript:", "//")):
                 continue
+            # Saltar template literals de JavaScript (${...}) que aparecen dentro
+            # de bloques <script> de los libros digitales y se interpolan en runtime.
+            if "${" in link:
+                continue
             total_links += 1
             # Quitar query y ancla
             target = link.split("?")[0].split("#")[0]
