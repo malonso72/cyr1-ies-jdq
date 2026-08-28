@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+"""
+verificar_enlaces.py — Verifica la integridad de los enlaces internos del sitio.
+
+QUÉ VERIFICA
+    1. Todos los href="..." relativos a ficheros del propio sitio resuelven a
+       ficheros existentes (se omiten enlaces http/https, mailto, tel, data, #ancla-local).
+    2. Todos los anchors #id referenciados por enlaces existen en su fichero destino.
+    3. No hay enlaces entrantes a _soluciones/ desde el sitio visible al alumnado
+       (esa carpeta es privada y no debe enlazarse desde páginas públicas).
+
+CÓMO SE EJECUTA
+    Desde la raíz del sitio:
+        python3 scripts/verificar_enlaces.py
+
+OUTPUT
+    - Resumen de cada categoría.
+    - Lista de enlaces rotos con fichero origen y URL destino.
+    Exit code 0 si 0 rotos, 1 si hay rotos.
+
+ORIGEN
+    Adaptado del verificador usado en teci2-ies-jdq (verano 2026), simplificado
+    para sitios sin las convenciones específicas de exámenes PAU de Bachillerato
+    (cross-refs a Ponencia resuelta, navcross). Si este sitio incorpora en el
+    futuro convenciones equivalentes, se pueden añadir aquí siguiendo ese patrón.
+"""
+from __future__ import annotations
+import os, re, sys
+from pathlib import Path
+from urllib.parse import urlparse, unquote
+
+try:
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+except Exception:
+    pass
+
+ROOT = Path(__file__).resolve().parent.parent
+EXCLUDE_DIRS = {'templates', 'node_modules'}
+
+
+def listar_htmls() -> list[Path]:
+    out = []
+    for p in ROOT.rglob('*.html'):
+        if any(part in EXCLUDE_DIRS for part in p.parts):
+            continue
+        out.append(p)
+    return sorted(out)
+
+
+def extraer_hrefs(html: str) -> list[str]:
+    return re.findall(r'(?:^|[\s<])href=["\']([^"\']+)["\']', html, re.MULTILINE)
+
+
+def es_externo(href: str) -> bool:
+    u = urlparse(href)
+    return u.scheme in ('http', 'https', 'mailto', 'tel', 'data')
+
+
+def resolver(origen: Path, href: str) -> tuple[Path | None, str | None]:
+    if es_externo(href):
+        return None, None
+    if href.startswith('#'):
+        return origen.resolve(), href[1:]
+    if '#' in href:
+        ruta, anchor = href.split('#', 1)
+    else:
+        ruta, anchor = href, None
+    if not ruta:
+        return origen.resolve(), anchor
+    if '?' in ruta:
+        ruta = ruta.split('?', 1)[0]
+    if not ruta:
+        return origen.resolve(), anchor
+    ruta = unquote(ruta)
+    try:
+        destino = (origen.parent / ruta).resolve()
+    except Exception:
+        return None, anchor
+    return destino, anchor
+
+
+def main() -> int:
+    htmls = listar_htmls()
+    print(f'[info] HTML escaneados: {len(htmls)}')
+
+    rotos = []
+    anchors_por_fichero: dict[Path, set[str]] = {}
+    for p in htmls:
+        txt = p.read_text(encoding='utf-8', errors='ignore')
+        anchors_por_fichero[p.resolve()] = set(re.findall(r'id="([^"]+)"', txt))
+
+    for p in htmls:
+        txt = p.read_text(encoding='utf-8', errors='ignore')
+        for href in extraer_hrefs(txt):
+            if es_externo(href):
+                continue
+            destino, anchor = resolver(p, href)
+            if destino is None:
+                continue
+            if not destino.exists():
+                rotos.append((p.relative_to(ROOT), href, 'fichero no existe'))
+                continue
+            if anchor and destino.suffix == '.html':
+                if anchor not in anchors_por_fichero.get(destino, set()):
+                    rotos.append((p.relative_to(ROOT), href, f'anchor #{anchor} no existe'))
+
+    soluciones_entrantes = []
+    for p in htmls:
+        if '_soluciones' in p.parts:
+            continue
+        txt = p.read_text(encoding='utf-8', errors='ignore')
+        if '_soluciones/' in txt or '_soluciones"' in txt:
+            soluciones_entrantes.append(p.relative_to(ROOT))
+
+    print('\n=== 1 · Enlaces internos (href + anchors) ===')
+    if rotos:
+        print(f'  ❌ {len(rotos)} enlaces rotos:')
+        for p, href, motivo in rotos[:50]:
+            print(f'     · {p}:  href="{href}"  [{motivo}]')
+        if len(rotos) > 50:
+            print(f'     · ... y {len(rotos)-50} más')
+    else:
+        print('  ✅ 0 enlaces rotos')
+
+    print('\n=== 2 · Ocultación de _soluciones/ ===')
+    if soluciones_entrantes:
+        print(f'  ❌ {len(soluciones_entrantes)} HTML con mención a _soluciones/:')
+        for p in soluciones_entrantes:
+            print(f'     · {p}')
+    else:
+        print('  ✅ 0 enlaces entrantes a _soluciones/')
+
+    errores = len(rotos) + len(soluciones_entrantes)
+    print('\n=== RESUMEN ===')
+    if errores == 0:
+        print('✅ Integridad OK')
+        return 0
+    print(f'❌ {errores} problemas detectados')
+    return 1
+
+
+if __name__ == '__main__':
+    sys.exit(main())
