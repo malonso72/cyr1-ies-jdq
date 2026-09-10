@@ -5,54 +5,209 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FF8C1A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>S12 · Laberinto I · Scratch</title>
-<meta name="description" content="Sesión 12 del bloque Scratch.">
-<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/">
+<title>S12 · Laberinto I · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Sesión 12 de Scratch: mover un personaje con cambiar x e y, y detectar las paredes con ¿tocando el color? Primera parte del laberinto. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s12.html">
+<meta property="og:title" content="S12 · Laberinto I · CyR 1º ESO">
+<meta property="og:description" content="Sesión 12 de Scratch: mover un personaje con cambiar x e y, y detectar las paredes con ¿tocando el color? Primera parte del laberinto. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
-
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child{border-bottom:none;}
+  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
+    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
 <header class="curso-hd">
-  <span class="curso-sb">T1 · Scratch</span>
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T1 · Scratch</span>
 </header>
-
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🗓️</span><span class="nc-lbl">Sesiones</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">S12</span></span>
+<span class="nc-sep">·</span>
+<a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
 </nav>
 
 <div id="main-content">
-<section class="unidad-titulo-hero"><div class="num">Sesión 12</div><h1>Laberinto I</h1><div class="duracion">Scratch · 1º ESO</div></section>
-<div class="hub-main">
-  <div class="section-title">🎯 Objetivo</div><p>Crear un laberinto básico con inicio, meta y paredes.</p>
-  <div class="section-title">🧠 Conceptos clave</div><p>Colisiones, obstáculos y meta.</p>
-  <div class="section-title">📒 Material base</div><p>Guía de juego laberinto.</p>
-  <div class="bg"><a href="../materiales/cuadernillo-scratch-parte-1.pdf" class="bc"><span class="bi">📒</span><span class="bk">Cuadernillo Scratch</span><span class="bn">Abrir PDF de ejercicios guiados</span></a><a href="https://scratch.mit.edu/projects/editor/" target="_blank" class="bc tipo-tool"><span class="bi">🎮</span><span class="bk">Abrir Scratch</span><span class="bn">Editor oficial online</span></a></div>
-  <div class="section-title">🚀 Reto opcional</div><p>Mejora tu proyecto añadiendo al menos un sonido, un cambio de disfraz o una variable visible en pantalla.</p>
-  <div class="section-title">Navegación</div><div class="bg"><a href="s11.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S11</span></a><a href="s13.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S13</span></a></div>
-</div></div>
+<section class="unidad-titulo-hero">
+  <div class="num">Sesión 12</div>
+  <h1>Laberinto I</h1>
+  <div class="duracion">T1 · Scratch · 1º ESO</div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> un <strong>laberinto</strong> por el que se mueve tu personaje, con paredes que no se pueden atravesar.</p>
+
+<a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
+<p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
+
+<h2><span class="h2n">1</span>Dos bloques nuevos y una idea</h2>
+<ol class="paso-lista">
+  <li><span class="n">1</span><span><strong>cambiar x por (4)</strong> y <strong>cambiar y por (4)</strong> mueven el personaje en horizontal y en vertical sin girarlo. Para un laberinto van mucho mejor que <em>apuntar en dirección</em>, porque el personaje no tiene que dar la vuelta para bajar.</span></li>
+  <li><span class="n">2</span><span><strong>¿tocando el color ( )?</strong> es una condición que mira si el personaje está pisando un color concreto de la pantalla. Es así como el programa se entera de que ha chocado con una pared.</span></li>
+  <li><span class="n">3</span><span>La <strong>idea</strong>: en Scratch las paredes no existen. Lo que hay es un dibujo de color negro y un programa que dice «si estás tocando negro, vuelve al principio». El efecto para el jugador es el mismo.</span></li>
+</ol>
+
+<h2><span class="h2n">2</span>Lee estos dos trozos</h2>
+<p>Primero, el movimiento. Cuatro condicionales, uno por flecha, dentro de un <strong>por siempre</strong> que los vigila todo el rato:</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 433 540" width="433" height="540" class="bloques" role="img" aria-label="Programa de movimiento: fijar tamaño al 40 por ciento, ir a la posición de salida y después, por siempre, cuatro condicionales que cambian x o y según la flecha que esté pulsada"><title>Programa de movimiento: fijar tamaño al 40 por ciento, ir a la posición de salida y después, por siempre, cuatro condicionales que cambian x o y según la flecha que esté pulsada</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L174.2 62.0 Q180.2 62.0 180.2 68.0 L180.2 90.0 Q180.2 96.0 174.2 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#9966FF"/><text x="22.0" y="83.6" class="sb-t" textLength="88.1" lengthAdjust="spacingAndGlyphs">fijar tamaño al</text><rect x="117.1" y="69.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="133.4" y="83.3" class="sb-n">40</text><text x="156.6" y="83.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">%</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L183.3 96.0 Q189.3 96.0 189.3 102.0 L189.3 124.0 Q189.3 130.0 183.3 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#4C97FF"/><text x="22.0" y="117.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="63.7" y="103.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="85.7" y="117.3" class="sb-n">-200</text><text x="114.7" y="117.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="133.3" y="103.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="155.3" y="117.3" class="sb-n">-140</text><path d="M10.0 136.0 Q10.0 130.0 16.0 130.0 L24.0 130.0 L28.0 134.0 L40.0 134.0 L44.0 130.0  L417.0 130.0 Q423.0 130.0 423.0 136.0 L423.0 158.0 Q423.0 164.0 417.0 164.0 L58.0 164.0 L54.0 168.0 L42.0 168.0 L38.0 164.0 L30.0 164.0 Q24.0 164.0 24.0 170.0 L24.0 502.0 Q24.0 508.0 30.0 508.0 L417.0 508.0 Q423.0 508.0 423.0 514.0 L423.0 520.0 Q423.0 526.0 417.0 526.0 L44.0 526.0 L40.0 530.0 L28.0 530.0 L24.0 526.0 L16.0 526.0  Q10.0 526.0 10.0 520.0 Z" fill="#FFAB19"/><text x="22.0" y="151.6" class="sb-t" textLength="74.4" lengthAdjust="spacingAndGlyphs">por siempre</text><path d="M24.0 170.0 Q24.0 164.0 30.0 164.0 L38.0 164.0 L42.0 168.0 L54.0 168.0 L58.0 164.0  L409.9 164.0 Q415.9 164.0 415.9 170.0 L415.9 192.0 Q415.9 198.0 409.9 198.0 L72.0 198.0 L68.0 202.0 L56.0 202.0 L52.0 198.0 L44.0 198.0 Q38.0 198.0 38.0 204.0 L38.0 226.0 Q38.0 232.0 44.0 232.0 L409.9 232.0 Q415.9 232.0 415.9 238.0 L415.9 244.0 Q415.9 250.0 409.9 250.0 L58.0 250.0 L54.0 254.0 L42.0 254.0 L38.0 250.0 L30.0 250.0  Q24.0 250.0 24.0 244.0 Z" fill="#FFAB19"/><text x="36.0" y="185.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 169.0 l-9 12.0 l9 12.0 h267.9 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="185.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="170.0" width="123.1" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="185.4" class="sb-t" textLength="91.1" lengthAdjust="spacingAndGlyphs">flecha derecha</text><path d="M223.5 178.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="245.5" y="185.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="346.8" y="185.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 204.0 Q38.0 198.0 44.0 198.0 L52.0 198.0 L56.0 202.0 L68.0 202.0 L72.0 198.0  L178.3 198.0 Q184.3 198.0 184.3 204.0 L184.3 226.0 Q184.3 232.0 178.3 232.0 L44.0 232.0 Q38.0 232.0 38.0 226.0 Z" fill="#4C97FF"/><text x="50.0" y="219.6" class="sb-t" textLength="85.3" lengthAdjust="spacingAndGlyphs">cambiar x por</text><rect x="142.3" y="205.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="157.3" y="219.3" class="sb-n">4</text><path d="M24.0 256.0 Q24.0 250.0 30.0 250.0 L38.0 250.0 L42.0 254.0 L54.0 254.0 L58.0 250.0  L417.0 250.0 Q423.0 250.0 423.0 256.0 L423.0 278.0 Q423.0 284.0 417.0 284.0 L72.0 284.0 L68.0 288.0 L56.0 288.0 L52.0 284.0 L44.0 284.0 Q38.0 284.0 38.0 290.0 L38.0 312.0 Q38.0 318.0 44.0 318.0 L417.0 318.0 Q423.0 318.0 423.0 324.0 L423.0 330.0 Q423.0 336.0 417.0 336.0 L58.0 336.0 L54.0 340.0 L42.0 340.0 L38.0 336.0 L30.0 336.0  Q24.0 336.0 24.0 330.0 Z" fill="#FFAB19"/><text x="36.0" y="271.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 255.0 l-9 12.0 l9 12.0 h275.1 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="271.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="256.0" width="130.2" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="271.4" class="sb-t" textLength="98.2" lengthAdjust="spacingAndGlyphs">flecha izquierda</text><path d="M230.7 264.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="252.7" y="271.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="354.0" y="271.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 290.0 Q38.0 284.0 44.0 284.0 L52.0 284.0 L56.0 288.0 L68.0 288.0 L72.0 284.0  L178.3 284.0 Q184.3 284.0 184.3 290.0 L184.3 312.0 Q184.3 318.0 178.3 318.0 L44.0 318.0 Q38.0 318.0 38.0 312.0 Z" fill="#4C97FF"/><text x="50.0" y="305.6" class="sb-t" textLength="85.3" lengthAdjust="spacingAndGlyphs">cambiar x por</text><rect x="142.3" y="291.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="157.3" y="305.3" class="sb-n">-4</text><path d="M24.0 342.0 Q24.0 336.0 30.0 336.0 L38.0 336.0 L42.0 340.0 L54.0 340.0 L58.0 336.0  L396.1 336.0 Q402.1 336.0 402.1 342.0 L402.1 364.0 Q402.1 370.0 396.1 370.0 L72.0 370.0 L68.0 374.0 L56.0 374.0 L52.0 370.0 L44.0 370.0 Q38.0 370.0 38.0 376.0 L38.0 398.0 Q38.0 404.0 44.0 404.0 L396.1 404.0 Q402.1 404.0 402.1 410.0 L402.1 416.0 Q402.1 422.0 396.1 422.0 L58.0 422.0 L54.0 426.0 L42.0 426.0 L38.0 422.0 L30.0 422.0  Q24.0 422.0 24.0 416.0 Z" fill="#FFAB19"/><text x="36.0" y="357.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 341.0 l-9 12.0 l9 12.0 h254.2 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="357.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="342.0" width="109.3" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="357.4" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">flecha arriba</text><path d="M209.8 350.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="231.8" y="357.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="333.0" y="357.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 376.0 Q38.0 370.0 44.0 370.0 L52.0 370.0 L56.0 374.0 L68.0 374.0 L72.0 370.0  L178.3 370.0 Q184.3 370.0 184.3 376.0 L184.3 398.0 Q184.3 404.0 178.3 404.0 L44.0 404.0 Q38.0 404.0 38.0 398.0 Z" fill="#4C97FF"/><text x="50.0" y="391.6" class="sb-t" textLength="85.3" lengthAdjust="spacingAndGlyphs">cambiar y por</text><rect x="142.3" y="377.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="157.3" y="391.3" class="sb-n">4</text><path d="M24.0 428.0 Q24.0 422.0 30.0 422.0 L38.0 422.0 L42.0 426.0 L54.0 426.0 L58.0 422.0  L393.9 422.0 Q399.9 422.0 399.9 428.0 L399.9 450.0 Q399.9 456.0 393.9 456.0 L72.0 456.0 L68.0 460.0 L56.0 460.0 L52.0 456.0 L44.0 456.0 Q38.0 456.0 38.0 462.0 L38.0 484.0 Q38.0 490.0 44.0 490.0 L393.9 490.0 Q399.9 490.0 399.9 496.0 L399.9 502.0 Q399.9 508.0 393.9 508.0 L30.0 508.0 Q24.0 508.0 24.0 502.0 Z" fill="#FFAB19"/><text x="36.0" y="443.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 427.0 l-9 12.0 l9 12.0 h252.0 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="443.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="428.0" width="107.1" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="443.4" class="sb-t" textLength="75.1" lengthAdjust="spacingAndGlyphs">flecha abajo</text><path d="M207.6 436.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="229.6" y="443.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="330.9" y="443.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 462.0 Q38.0 456.0 44.0 456.0 L52.0 456.0 L56.0 460.0 L68.0 460.0 L72.0 456.0  L178.3 456.0 Q184.3 456.0 184.3 462.0 L184.3 484.0 Q184.3 490.0 178.3 490.0 L44.0 490.0 Q38.0 490.0 38.0 484.0 Z" fill="#4C97FF"/><text x="50.0" y="477.6" class="sb-t" textLength="85.3" lengthAdjust="spacingAndGlyphs">cambiar y por</text><rect x="142.3" y="463.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="157.3" y="477.3" class="sb-n">-4</text></svg>
+</div><p>Y ahora las paredes. Este trozo va <strong>dentro del mismo por siempre</strong>, debajo de los cuatro anteriores:</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 316 144" width="316" height="144" class="bloques" role="img" aria-label="Condicional: si está tocando el color negro, iniciar el sonido Pop y volver a la posición de salida"><title>Condicional: si está tocando el color negro, iniciar el sonido Pop y volver a la posición de salida</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L300.2 10.0 Q306.2 10.0 306.2 16.0 L306.2 38.0 Q306.2 44.0 300.2 44.0 L58.0 44.0 L54.0 48.0 L42.0 48.0 L38.0 44.0 L30.0 44.0 Q24.0 44.0 24.0 50.0 L24.0 106.0 Q24.0 112.0 30.0 112.0 L300.2 112.0 Q306.2 112.0 306.2 118.0 L306.2 124.0 Q306.2 130.0 300.2 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#FFAB19"/><text x="22.0" y="31.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M48.8 15.0 l-9 12.0 l9 12.0 h172.3 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="56.8" y="31.6" class="sb-t" textLength="108.3" lengthAdjust="spacingAndGlyphs">¿tocando el color</text><rect x="175.2" y="17.0" width="20" height="20" rx="4" fill="#1A1A1A" stroke="#FFFFFF" stroke-width="2"/><text x="205.2" y="31.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><text x="237.1" y="31.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M24.0 50.0 Q24.0 44.0 30.0 44.0 L38.0 44.0 L42.0 48.0 L54.0 48.0 L58.0 44.0  L190.0 44.0 Q196.0 44.0 196.0 50.0 L196.0 72.0 Q196.0 78.0 190.0 78.0 L58.0 78.0 L54.0 82.0 L42.0 82.0 L38.0 78.0 L30.0 78.0  Q24.0 78.0 24.0 72.0 Z" fill="#CF63CF"/><text x="36.0" y="65.6" class="sb-t" textLength="84.5" lengthAdjust="spacingAndGlyphs">iniciar sonido</text><rect x="127.5" y="50.0" width="56.5" height="22" rx="4" fill="#BD42BD"/><text x="136.5" y="65.4" class="sb-t" textLength="24.5" lengthAdjust="spacingAndGlyphs">Pop</text><path d="M169.0 58.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M24.0 84.0 Q24.0 78.0 30.0 78.0 L38.0 78.0 L42.0 82.0 L54.0 82.0 L58.0 78.0  L197.3 78.0 Q203.3 78.0 203.3 84.0 L203.3 106.0 Q203.3 112.0 197.3 112.0 L30.0 112.0 Q24.0 112.0 24.0 106.0 Z" fill="#4C97FF"/><text x="36.0" y="99.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="77.7" y="85.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="99.7" y="99.3" class="sb-n">-200</text><text x="128.7" y="99.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="147.3" y="85.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="169.3" y="99.3" class="sb-n">-140</text></svg>
+  <p class="pie">Si tocas la pared, vuelves a la casilla de salida. Es el castigo clásico del laberinto, y se resuelve con un solo bloque.</p>
+</div>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="color">
+  <p class="preg">Pintas el laberinto de negro y usas <em>¿tocando el color?</em>. Al probarlo, el personaje atraviesa las paredes como un fantasma. ¿Cuál es la causa más probable?</p>
+  <div class="ops">
+    <button data-op="color" data-ex="Casi seguro que es esto. El bloque compara colores &lt;b&gt;exactos&lt;/b&gt;. Hay que abrir el cuadradito de color del bloque, elegir el &lt;b&gt;cuentagotas&lt;/b&gt; y pinchar directamente sobre la pared del escenario.">El color del bloque no es exactamente el mismo que el de la pared</button>
+    <button data-op="fondo" data-ex="No. &lt;em&gt;¿tocando el color?&lt;/em&gt; mira los píxeles de la pantalla, vengan del fondo o de otro objeto. Justamente por eso sirve para laberintos pintados.">El bloque sólo detecta objetos, no dibujos del fondo</button>
+    <button data-op="siempre" data-ex="Eso sí lo haría fallar, pero de otra forma: comprobaría una sola vez al arrancar y ya nunca más. Aquí el condicional ya está dentro del bucle.">Falta meterlo dentro de un por siempre</button>
+  </div>
+  <div class="fb" id="fb1"></div>
+</div>
+
+<h2><span class="h2n">4</span>Tu actividad</h2>
+<ol class="paso-lista">
+  <li><span class="n">1</span><span>Haz clic en el escenario (abajo a la derecha) y elige <strong>Pintar</strong> para dibujar tu propio laberinto. Usa el rectángulo relleno de <strong>negro</strong> para las paredes.</span></li>
+  <li><span class="n">2</span><span>Deja los pasillos <strong>anchos</strong>. Si son estrechos, el juego es imposible.</span></li>
+  <li><span class="n">3</span><span>Vuelve al objeto, ponle un tamaño pequeño (30–40 %) y colócalo en la salida.</span></li>
+  <li><span class="n">4</span><span>Monta el movimiento y pruébalo <em>sin</em> el condicional de las paredes.</span></li>
+  <li><span class="n">5</span><span>Añade el condicional de las paredes y vuelve a probar. Coge el color con el <strong>cuentagotas</strong>, no lo elijas a ojo.</span></li>
+  <li><span class="n">6</span><span>Ajusta los <strong>4</strong> pasos: si va muy rápido se cuela por las paredes, si va muy lento aburre.</span></li>
+</ol><div class="aviso-ojo">
+  <h3>⚠️ El fallo de atravesar paredes yendo deprisa</h3>
+<p>Si pones <em>cambiar x por (20)</em>, el personaje da saltos de 20 píxeles y puede aparecer <strong>al otro lado</strong> de una pared fina sin haberla tocado nunca. No es un fallo de Scratch: es que entre un fotograma y el siguiente nadie ha mirado.</p><p style="margin-bottom:0">Solución: pasos pequeños y paredes gruesas.</p>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>Hay un laberinto pintado en el fondo con pasillos por los que se puede pasar.</li>
+  <li>El personaje se mueve con las cuatro flechas, sin girar.</li>
+  <li>Al tocar una pared vuelve a la salida y suena algo.</li>
+  <li>No se cuela por las paredes yendo deprisa.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
+<ol>
+  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
+  <li>Cámbiale el nombre a <strong>Sesion12_TuNombre.sb3</strong>.</li>
+  <li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 12.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="s11.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S11</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s13.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S13</span></a><a href="../materiales/guias-juegos/ejercicio-de-juego-laberinto.pdf" class="bc"><span class="bi">📕</span><span class="bk">Guía en PDF</span><span class="bn">Laberinto, material de apoyo</span></a></div>
+
+</main>
+</div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ') + b.getAttribute('data-ex');
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
