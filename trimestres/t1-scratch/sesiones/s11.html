@@ -5,54 +5,213 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FF8C1A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>S11 · Mensajes entre objetos · Scratch</title>
-<meta name="description" content="Sesión 11 del bloque Scratch.">
-<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/">
+<title>S11 · Mensajes entre objetos · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Sesión 11 de Scratch: enviar y al recibir. Coordinar dos objetos para que uno reaccione a lo que hace el otro. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s11.html">
+<meta property="og:title" content="S11 · Mensajes entre objetos · CyR 1º ESO">
+<meta property="og:description" content="Sesión 11 de Scratch: enviar y al recibir. Coordinar dos objetos para que uno reaccione a lo que hace el otro. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
-
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child{border-bottom:none;}
+  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
+    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
 <header class="curso-hd">
-  <span class="curso-sb">T1 · Scratch</span>
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T1 · Scratch</span>
 </header>
-
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🗓️</span><span class="nc-lbl">Sesiones</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">S11</span></span>
+<span class="nc-sep">·</span>
+<a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
 </nav>
 
 <div id="main-content">
-<section class="unidad-titulo-hero"><div class="num">Sesión 11</div><h1>Mensajes entre objetos</h1><div class="duracion">Scratch · 1º ESO</div></section>
-<div class="hub-main">
-  <div class="section-title">🎯 Objetivo</div><p>Crear una acción entre dos objetos: patada, choque o aviso.</p>
-  <div class="section-title">🧠 Conceptos clave</div><p>Emitir y recibir mensajes.</p>
-  <div class="section-title">📒 Material base</div><p>Cuadernillo: ejercicio 11.</p>
-  <div class="bg"><a href="../materiales/cuadernillo-scratch-parte-1.pdf" class="bc"><span class="bi">📒</span><span class="bk">Cuadernillo Scratch</span><span class="bn">Abrir PDF de ejercicios guiados</span></a><a href="https://scratch.mit.edu/projects/editor/" target="_blank" class="bc tipo-tool"><span class="bi">🎮</span><span class="bk">Abrir Scratch</span><span class="bn">Editor oficial online</span></a></div>
-  <div class="section-title">🚀 Reto opcional</div><p>Mejora tu proyecto añadiendo al menos un sonido, un cambio de disfraz o una variable visible en pantalla.</p>
-  <div class="section-title">Navegación</div><div class="bg"><a href="s10.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S10</span></a><a href="s12.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S12</span></a></div>
+<section class="unidad-titulo-hero">
+  <div class="num">Sesión 11</div>
+  <h1>Mensajes entre objetos</h1>
+  <div class="duracion">T1 · Scratch · 1º ESO</div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> que un personaje <strong>reaccione a lo que hace otro</strong>: el gato chuta y el balón sale disparado en ese preciso momento.</p>
+
+<a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
+<p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
+
+<h2><span class="h2n">1</span>El problema: los objetos no se ven entre ellos</h2>
+<p>En la carrera de la sesión anterior los dos corredores hacían su vida por separado y daba igual. Pero si el balón tiene que salir <em>justo cuando</em> el gato lo toca, hace falta que uno le avise al otro.</p><p>Para eso están los <strong>mensajes</strong>. Un objeto <strong>envía</strong> un aviso; cualquier otro que tenga un <strong>al recibir</strong> con ese mismo nombre se pone en marcha. Es como gritar una palabra en clase: la oye todo el que esté atento.</p>
+
+<h2><span class="h2n">2</span>Lee estos dos programas</h2>
+<p>Son dos programas, en dos objetos distintos. Ninguno de los dos funciona solo.</p><div class="dos-col">
+<div><p class="col-tit">Objeto <strong>Gato</strong></p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 212" width="196" height="212" class="bloques" role="img" aria-label="Programa del gato: ir a x menos 120 y menos 60, esperar 1 segundo, mover 60 pasos y enviar el mensaje patada"><title>Programa del gato: ir a x menos 120 y menos 60, esperar 1 segundo, mover 60 pasos y enviar el mensaje patada</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L176.1 62.0 Q182.1 62.0 182.1 68.0 L182.1 90.0 Q182.1 96.0 176.1 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#4C97FF"/><text x="22.0" y="83.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="63.7" y="69.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="85.7" y="83.3" class="sb-n">-120</text><text x="114.7" y="83.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="133.3" y="69.0" width="36.8" height="20" rx="10" fill="#FFFFFF"/><text x="151.7" y="83.3" class="sb-n">-60</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L180.4 96.0 Q186.4 96.0 186.4 102.0 L186.4 124.0 Q186.4 130.0 180.4 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#FFAB19"/><text x="22.0" y="117.6" class="sb-t" textLength="47.0" lengthAdjust="spacingAndGlyphs">esperar</text><rect x="76.0" y="103.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="91.0" y="117.3" class="sb-n">1</text><text x="113.0" y="117.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text><path d="M10.0 136.0 Q10.0 130.0 16.0 130.0 L24.0 130.0 L28.0 134.0 L40.0 134.0 L44.0 130.0  L151.1 130.0 Q157.1 130.0 157.1 136.0 L157.1 158.0 Q157.1 164.0 151.1 164.0 L44.0 164.0 L40.0 168.0 L28.0 168.0 L24.0 164.0 L16.0 164.0  Q10.0 164.0 10.0 158.0 Z" fill="#4C97FF"/><text x="22.0" y="151.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="68.0" y="137.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="84.3" y="151.3" class="sb-n">60</text><text x="107.5" y="151.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M10.0 170.0 Q10.0 164.0 16.0 164.0 L24.0 164.0 L28.0 168.0 L40.0 168.0 L44.0 164.0  L147.2 164.0 Q153.2 164.0 153.2 170.0 L153.2 192.0 Q153.2 198.0 147.2 198.0 L44.0 198.0 L40.0 202.0 L28.0 202.0 L24.0 198.0 L16.0 198.0  Q10.0 198.0 10.0 192.0 Z" fill="#FFBF00"/><text x="22.0" y="185.6" class="sb-t" textLength="38.3" lengthAdjust="spacingAndGlyphs">enviar</text><rect x="67.3" y="170.0" width="73.9" height="22" rx="4" fill="#CC9900"/><text x="76.3" y="185.4" class="sb-t" textLength="41.9" lengthAdjust="spacingAndGlyphs">patada</text><path d="M126.2 178.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
 </div></div>
+<div><p class="col-tit">Objeto <strong>Balón</strong></p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 338 230" width="338" height="230" class="bloques" role="img" aria-label="Programa del balón: al recibir el mensaje patada, iniciar el sonido Pop y repetir hasta que toque un borde moviendo 10 pasos y girando 15 grados"><title>Programa del balón: al recibir el mensaje patada, iniciar el sonido Pop y repetir hasta que toque un borde moviendo 10 pasos y girando 15 grados</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L163.1 28.0 Q169.1 28.0 169.1 34.0 L169.1 56.0 Q169.1 62.0 163.1 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="54.2" lengthAdjust="spacingAndGlyphs">al recibir</text><rect x="83.2" y="34.0" width="73.9" height="22" rx="4" fill="#CC9900"/><text x="92.2" y="49.4" class="sb-t" textLength="41.9" lengthAdjust="spacingAndGlyphs">patada</text><path d="M142.1 42.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L176.0 62.0 Q182.0 62.0 182.0 68.0 L182.0 90.0 Q182.0 96.0 176.0 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#CF63CF"/><text x="22.0" y="83.6" class="sb-t" textLength="84.5" lengthAdjust="spacingAndGlyphs">iniciar sonido</text><rect x="113.5" y="68.0" width="56.5" height="22" rx="4" fill="#BD42BD"/><text x="122.5" y="83.4" class="sb-t" textLength="24.5" lengthAdjust="spacingAndGlyphs">Pop</text><path d="M155.0 76.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L322.3 96.0 Q328.3 96.0 328.3 102.0 L328.3 124.0 Q328.3 130.0 322.3 130.0 L58.0 130.0 L54.0 134.0 L42.0 134.0 L38.0 130.0 L30.0 130.0 Q24.0 130.0 24.0 136.0 L24.0 192.0 Q24.0 198.0 30.0 198.0 L322.3 198.0 Q328.3 198.0 328.3 204.0 L328.3 210.0 Q328.3 216.0 322.3 216.0 L44.0 216.0 L40.0 220.0 L28.0 220.0 L24.0 216.0 L16.0 216.0  Q10.0 216.0 10.0 210.0 Z" fill="#FFAB19"/><text x="22.0" y="117.6" class="sb-t" textLength="104.8" lengthAdjust="spacingAndGlyphs">repetir hasta que</text><path d="M142.8 101.0 l-9 12.0 l9 12.0 h164.5 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="150.8" y="117.6" class="sb-t" textLength="58.5" lengthAdjust="spacingAndGlyphs">¿tocando</text><rect x="216.2" y="102.0" width="68.1" height="22" rx="4" fill="#2E8EB8"/><text x="225.2" y="117.4" class="sb-t" textLength="36.1" lengthAdjust="spacingAndGlyphs">borde</text><path d="M269.4 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="291.4" y="117.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><path d="M24.0 136.0 Q24.0 130.0 30.0 130.0 L38.0 130.0 L42.0 134.0 L54.0 134.0 L58.0 130.0  L165.1 130.0 Q171.1 130.0 171.1 136.0 L171.1 158.0 Q171.1 164.0 165.1 164.0 L58.0 164.0 L54.0 168.0 L42.0 168.0 L38.0 164.0 L30.0 164.0  Q24.0 164.0 24.0 158.0 Z" fill="#4C97FF"/><text x="36.0" y="151.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="137.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="98.3" y="151.3" class="sb-n">10</text><text x="121.5" y="151.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M24.0 170.0 Q24.0 164.0 30.0 164.0 L38.0 164.0 L42.0 168.0 L54.0 168.0 L58.0 164.0  L185.7 164.0 Q191.7 164.0 191.7 170.0 L191.7 192.0 Q191.7 198.0 185.7 198.0 L30.0 198.0 Q24.0 198.0 24.0 192.0 Z" fill="#4C97FF"/><text x="36.0" y="185.6" class="sb-t" textLength="28.9" lengthAdjust="spacingAndGlyphs">girar</text><path d="M74.4 180.0 A6.5 6.5 0 1 1 80.9 186.5" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/><path d="M82.4 182.0 L82.4 191.0 L76.9 186.5 z" fill="#FFFFFF"/><rect x="96.9" y="171.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="113.1" y="185.3" class="sb-n">15</text><text x="136.4" y="185.6" class="sb-t" textLength="43.3" lengthAdjust="spacingAndGlyphs">grados</text></svg>
+</div></div>
+</div><ol class="paso-lista">
+  <li><span class="n">1</span><span>El gato se coloca, espera un segundo y avanza hacia el balón.</span></li>
+  <li><span class="n">2</span><span>Al llegar, <strong>envía (patada)</strong>. Ese bloque no mueve nada: sólo lanza el aviso, y el gato sigue a lo suyo inmediatamente.</span></li>
+  <li><span class="n">3</span><span>El balón tiene un sombrero <strong>al recibir (patada)</strong>. Estaba esperando ese aviso, y en cuanto llega arranca su programa.</span></li>
+  <li><span class="n">4</span><span>El balón suena, sale rodando y gira mientras avanza, hasta chocar con un borde.</span></li>
+  <li><span class="n">5</span><span>Antes de poder usar el mensaje hay que <strong>crearlo</strong>: en el desplegable del bloque, opción <strong>Nuevo mensaje</strong>, y le pones nombre. Ponle uno que signifique algo — «patada», no «mensaje1».</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="balon">
+  <p class="preg">¿En qué objeto tiene que estar el bloque <em>al recibir (patada)</em>?</p>
+  <div class="ops">
+    <button data-op="gato" data-ex="No. El gato es quien &lt;b&gt;envía&lt;/b&gt;. El que necesita el &lt;em&gt;al recibir&lt;/em&gt; es quien tiene que reaccionar.">En el gato, que es quien da la patada</button>
+    <button data-op="balon" data-ex="Correcto. &lt;b&gt;enviar&lt;/b&gt; va en el que avisa; &lt;b&gt;al recibir&lt;/b&gt; va en el que reacciona. Pueden reaccionar varios objetos al mismo mensaje a la vez.">En el balón, que es quien tiene que salir disparado</button>
+    <button data-op="fondo" data-ex="No. El escenario también puede recibir mensajes, pero aquí quien se tiene que mover es el balón, así que el bloque va en el balón.">En el escenario, que es donde se coordina todo</button>
+  </div>
+  <div class="fb" id="fb1"></div>
+</div>
+
+<h2><span class="h2n">4</span>Tu actividad</h2>
+<ol class="paso-lista">
+  <li><span class="n">1</span><span>Elige dos objetos: uno que actúe y otro que reaccione.</span></li>
+  <li><span class="n">2</span><span>Crea el mensaje con un nombre que se entienda.</span></li>
+  <li><span class="n">3</span><span>Monta los dos programas, cada uno en su objeto.</span></li>
+  <li><span class="n">4</span><span>Añade un <strong>cambio de disfraz</strong> al gato justo antes de enviar el mensaje, para que se vea el gesto de chutar.</span></li>
+  <li><span class="n">5</span><span><strong>Reto:</strong> añade un <strong>tercer objeto</strong> — un portero, un marcador, una nube — que también tenga <em>al recibir (patada)</em> y haga algo. Comprobarás que los dos reaccionan a la vez con un solo aviso.</span></li>
+</ol><div class="aviso-ojo">
+  <h3>⚠️ Dos diferencias con tu cuadernillo</h3>
+<p>El bloque ya <strong>no</strong> se llama «enviar a todos». Hoy es simplemente <strong>enviar (patada)</strong>, aunque siga avisando a todo el mundo.</p><p style="margin-bottom:0">Y ojo: existe otro parecido, <strong>enviar (patada) y esperar</strong>. Ese <em>sí</em> deja al que envía parado hasta que los demás terminen. Aquí no lo queremos.</p>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>El balón no se mueve hasta que el gato llega.</li>
+  <li>El mensaje tiene un nombre que explica lo que pasa.</li>
+  <li>Los dos programas están cada uno en su objeto.</li>
+  <li>Hay un tercer objeto que reacciona al mismo aviso.</li>
+  <li>Sabrías explicar la diferencia entre <em>enviar</em> y <em>enviar y esperar</em>.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
+<ol>
+  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
+  <li>Cámbiale el nombre a <strong>Sesion11_TuNombre.sb3</strong>.</li>
+  <li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 11.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="s10.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S10</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s12.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S12</span></a><a href="../materiales/cuadernillo-scratch-parte-1.pdf#page=17" class="bc"><span class="bi">📒</span><span class="bk">Cuadernillo</span><span class="bn">Página 17, para consultar</span></a></div>
+
+</main>
+</div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ') + b.getAttribute('data-ex');
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
