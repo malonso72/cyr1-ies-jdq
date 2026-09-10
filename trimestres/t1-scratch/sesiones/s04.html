@@ -5,54 +5,207 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FF8C1A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>S04 · Condicionales I · Scratch</title>
-<meta name="description" content="Sesión 4 del bloque Scratch.">
-<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/">
+<title>S04 · Condicionales I · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Sesión 4 de Scratch: repetir hasta que. Un bucle que vigila una condición y se para cuando ocurre algo. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s04.html">
+<meta property="og:title" content="S04 · Condicionales I · CyR 1º ESO">
+<meta property="og:description" content="Sesión 4 de Scratch: repetir hasta que. Un bucle que vigila una condición y se para cuando ocurre algo. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
-
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child{border-bottom:none;}
+  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
+    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
 <header class="curso-hd">
-  <span class="curso-sb">T1 · Scratch</span>
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T1 · Scratch</span>
 </header>
-
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🗓️</span><span class="nc-lbl">Sesiones</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">S04</span></span>
+<span class="nc-sep">·</span>
+<a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
 </nav>
 
 <div id="main-content">
-<section class="unidad-titulo-hero"><div class="num">Sesión 04</div><h1>Condicionales I</h1><div class="duracion">Scratch · 1º ESO</div></section>
-<div class="hub-main">
-  <div class="section-title">🎯 Objetivo</div><p>Programar un personaje que se mueva hasta que se pulse una tecla.</p>
-  <div class="section-title">🧠 Conceptos clave</div><p>Condición, tecla pulsada y parada del programa.</p>
-  <div class="section-title">📒 Material base</div><p>Cuadernillo: ejercicio 4.</p>
-  <div class="bg"><a href="../materiales/cuadernillo-scratch-parte-1.pdf" class="bc"><span class="bi">📒</span><span class="bk">Cuadernillo Scratch</span><span class="bn">Abrir PDF de ejercicios guiados</span></a><a href="https://scratch.mit.edu/projects/editor/" target="_blank" class="bc tipo-tool"><span class="bi">🎮</span><span class="bk">Abrir Scratch</span><span class="bn">Editor oficial online</span></a></div>
-  <div class="section-title">🚀 Reto opcional</div><p>Mejora tu proyecto añadiendo al menos un sonido, un cambio de disfraz o una variable visible en pantalla.</p>
-  <div class="section-title">Navegación</div><div class="bg"><a href="s03.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S03</span></a><a href="s05.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S05</span></a></div>
-</div></div>
+<section class="unidad-titulo-hero">
+  <div class="num">Sesión 04</div>
+  <h1>Condicionales I</h1>
+  <div class="duracion">T1 · Scratch · 1º ESO</div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> un personaje que se mueve sin parar y <strong>sólo se detiene cuando tú se lo dices</strong>.</p>
+
+<a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
+<p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
+
+<div class="aviso-ojo">
+  <h3>⚠️ El nombre de esta sesión engaña un poco</h3>
+<p>Se llama «Condicionales I», pero aquí todavía <strong>no vas a usar un «si… entonces»</strong>. Eso llega en la sesión siguiente. Lo de hoy es un bucle que lleva una <em>condición</em> dentro: <strong>repetir hasta que</strong>. Es el paso previo, y el nombre viene del cuadernillo antiguo.</p>
+</div>
+
+<h2><span class="h2n">2</span>Lee este programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 399 298" width="399" height="298" class="bloques" role="img" aria-label="Programa: ir a x 0 y 0, repetir hasta que la tecla espacio esté presionada moviendo 4 pasos y rebotando en los bordes, después decir ¡Me has parado! durante 2 segundos y detener todos"><title>Programa: ir a x 0 y 0, repetir hasta que la tecla espacio esté presionada moviendo 4 pasos y rebotando en los bordes, después decir ¡Me has parado! durante 2 segundos y detener todos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L155.2 62.0 Q161.2 62.0 161.2 68.0 L161.2 90.0 Q161.2 96.0 155.2 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#4C97FF"/><text x="22.0" y="83.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="63.7" y="69.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="78.7" y="83.3" class="sb-n">0</text><text x="100.7" y="83.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="119.2" y="69.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="134.2" y="83.3" class="sb-n">0</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L383.1 96.0 Q389.1 96.0 389.1 102.0 L389.1 124.0 Q389.1 130.0 383.1 130.0 L58.0 130.0 L54.0 134.0 L42.0 134.0 L38.0 130.0 L30.0 130.0 Q24.0 130.0 24.0 136.0 L24.0 192.0 Q24.0 198.0 30.0 198.0 L383.1 198.0 Q389.1 198.0 389.1 204.0 L389.1 210.0 Q389.1 216.0 383.1 216.0 L44.0 216.0 L40.0 220.0 L28.0 220.0 L24.0 216.0 L16.0 216.0  Q10.0 216.0 10.0 210.0 Z" fill="#FFAB19"/><text x="22.0" y="117.6" class="sb-t" textLength="104.8" lengthAdjust="spacingAndGlyphs">repetir hasta que</text><path d="M142.8 101.0 l-9 12.0 l9 12.0 h225.3 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6"/><text x="150.8" y="117.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="195.3" y="102.0" width="80.4" height="22" rx="4" fill="#2E8EB8"/><text x="204.3" y="117.4" class="sb-t" textLength="48.4" lengthAdjust="spacingAndGlyphs">espacio</text><path d="M260.8 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="282.8" y="117.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><path d="M24.0 136.0 Q24.0 130.0 30.0 130.0 L38.0 130.0 L42.0 134.0 L54.0 134.0 L58.0 130.0  L162.6 130.0 Q168.6 130.0 168.6 136.0 L168.6 158.0 Q168.6 164.0 162.6 164.0 L58.0 164.0 L54.0 168.0 L42.0 168.0 L38.0 164.0 L30.0 164.0  Q24.0 164.0 24.0 158.0 Z" fill="#4C97FF"/><text x="36.0" y="151.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="137.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="97.0" y="151.3" class="sb-n">4</text><text x="119.0" y="151.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M24.0 170.0 Q24.0 164.0 30.0 164.0 L38.0 164.0 L42.0 168.0 L54.0 168.0 L58.0 164.0  L194.4 164.0 Q200.4 164.0 200.4 170.0 L200.4 192.0 Q200.4 198.0 194.4 198.0 L30.0 198.0 Q24.0 198.0 24.0 192.0 Z" fill="#4C97FF"/><text x="36.0" y="185.6" class="sb-t" textLength="152.4" lengthAdjust="spacingAndGlyphs">si toca un borde, rebotar</text><path d="M10.0 222.0 Q10.0 216.0 16.0 216.0 L24.0 216.0 L28.0 220.0 L40.0 220.0 L44.0 216.0  L343.8 216.0 Q349.8 216.0 349.8 222.0 L349.8 244.0 Q349.8 250.0 343.8 250.0 L44.0 250.0 L40.0 254.0 L28.0 254.0 L24.0 250.0 L16.0 250.0  Q10.0 250.0 10.0 244.0 Z" fill="#9966FF"/><text x="22.0" y="237.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">decir</text><rect x="60.1" y="223.0" width="117.7" height="20" rx="10" fill="#FFFFFF"/><text x="118.9" y="237.3" class="sb-n">¡Me has parado!</text><text x="184.8" y="237.6" class="sb-t" textLength="47.7" lengthAdjust="spacingAndGlyphs">durante</text><rect x="239.4" y="223.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="254.4" y="237.3" class="sb-n">2</text><text x="276.4" y="237.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text><path d="M10.0 256.0 Q10.0 250.0 16.0 250.0 L24.0 250.0 L28.0 254.0 L40.0 254.0 L44.0 250.0  L149.3 250.0 Q155.3 250.0 155.3 256.0 L155.3 278.0 Q155.3 284.0 149.3 284.0 L16.0 284.0 Q10.0 284.0 10.0 278.0 Z" fill="#FFAB19"/><text x="22.0" y="271.6" class="sb-t" textLength="47.0" lengthAdjust="spacingAndGlyphs">detener</text><rect x="76.0" y="256.0" width="67.4" height="22" rx="4" fill="#CF8B17"/><text x="85.0" y="271.4" class="sb-t" textLength="35.4" lengthAdjust="spacingAndGlyphs">todos</text><path d="M128.3 264.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
+  <p class="pie">El bloque azul claro con forma de hexágono es una <strong>condición</strong>: sólo puede valer sí o no. Encaja únicamente en huecos de esa misma forma.</p>
+</div><ol class="paso-lista">
+  <li><span class="n">1</span><span>El gato empieza en el centro.</span></li>
+  <li><span class="n">2</span><span><strong>repetir hasta que</strong> mira la condición <em>antes de cada vuelta</em>: ¿está pulsada la barra espaciadora?</span></li>
+  <li><span class="n">3</span><span>Si la respuesta es <strong>no</strong>, ejecuta lo de dentro (avanza y rebota) y vuelve a preguntar.</span></li>
+  <li><span class="n">4</span><span>Si la respuesta es <strong>sí</strong>, se sale del bucle y pasa al bloque de abajo.</span></li>
+  <li><span class="n">5</span><span>El <strong>detener (todos)</strong> del final apaga el programa entero. Fíjate en su forma: no tiene muesca abajo, porque después de él no puede ir nada.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="siempre">
+  <p class="preg">Arrancas el programa y no pulsas nunca la barra espaciadora. ¿Qué pasa?</p>
+  <div class="ops">
+    <button data-op="para" data-ex="No. El bucle no tiene un número de vueltas ni un tiempo límite: sólo mira esa condición.">El gato se para solo al cabo de un rato</button>
+    <button data-op="siempre" data-ex="Correcto. La condición nunca se cumple, así que el bucle nunca termina y los bloques de debajo nunca llegan a ejecutarse. Puedes pararlo con el círculo rojo.">El gato sigue moviéndose y rebotando indefinidamente</button>
+    <button data-op="error" data-ex="No. Para Scratch esto es perfectamente válido: hay muchos programas pensados para no acabar nunca, como los videojuegos.">Scratch da un error</button>
+  </div>
+  <div class="fb" id="fb1"></div>
+</div>
+
+<h2><span class="h2n">4</span>Tu actividad</h2>
+<p>Haz estas tres versiones, una detrás de otra. Descarga sólo la última.</p><ol class="paso-lista">
+  <li><span class="n">1</span><span>Monta el programa tal cual está arriba y compruébalo.</span></li>
+  <li><span class="n">2</span><span>Cambia la condición por <strong>¿ratón presionado?</strong> — está en Sensores, y tiene la misma forma de hexágono, así que encaja en el mismo hueco.</span></li>
+  <li><span class="n">3</span><span>Cambia la condición por <strong>¿tocando (borde)?</strong> El gato se moverá hasta chocar con el borde y ahí se parará. Para esta versión tendrás que quitar el bloque de rebotar, o no chocará nunca.</span></li>
+</ol><div class="caja-bloques" style="max-width:380px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 338 110" width="338" height="110" class="bloques" role="img" aria-label="Tercera versión: repetir hasta que tocando borde, mover 4 pasos"><title>Tercera versión: repetir hasta que tocando borde, mover 4 pasos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L322.3 10.0 Q328.3 10.0 328.3 16.0 L328.3 38.0 Q328.3 44.0 322.3 44.0 L58.0 44.0 L54.0 48.0 L42.0 48.0 L38.0 44.0 L30.0 44.0 Q24.0 44.0 24.0 50.0 L24.0 72.0 Q24.0 78.0 30.0 78.0 L322.3 78.0 Q328.3 78.0 328.3 84.0 L328.3 90.0 Q328.3 96.0 322.3 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#FFAB19"/><text x="22.0" y="31.6" class="sb-t" textLength="104.8" lengthAdjust="spacingAndGlyphs">repetir hasta que</text><path d="M142.8 15.0 l-9 12.0 l9 12.0 h164.5 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6"/><text x="150.8" y="31.6" class="sb-t" textLength="58.5" lengthAdjust="spacingAndGlyphs">¿tocando</text><rect x="216.2" y="16.0" width="68.1" height="22" rx="4" fill="#2E8EB8"/><text x="225.2" y="31.4" class="sb-t" textLength="36.1" lengthAdjust="spacingAndGlyphs">borde</text><path d="M269.4 24.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="291.4" y="31.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><path d="M24.0 50.0 Q24.0 44.0 30.0 44.0 L38.0 44.0 L42.0 48.0 L54.0 48.0 L58.0 44.0  L162.6 44.0 Q168.6 44.0 168.6 50.0 L168.6 72.0 Q168.6 78.0 162.6 78.0 L30.0 78.0 Q24.0 78.0 24.0 72.0 Z" fill="#4C97FF"/><text x="36.0" y="65.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="51.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="97.0" y="65.3" class="sb-n">4</text><text x="119.0" y="65.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text></svg>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>El gato se mueve y rebota hasta que pulsas espacio.</li>
+  <li>Al pararse, dice algo y el programa termina.</li>
+  <li>Has probado las tres condiciones distintas en el mismo hueco.</li>
+  <li>Sabrías explicar la diferencia entre <em>repetir (10)</em> y <em>repetir hasta que</em>.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
+<ol>
+  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
+  <li>Cámbiale el nombre a <strong>Sesion04_TuNombre.sb3</strong>.</li>
+  <li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 04.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="s03.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S03</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s05.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S05</span></a><a href="../materiales/cuadernillo-scratch-parte-1.pdf#page=10" class="bc"><span class="bi">📒</span><span class="bk">Cuadernillo</span><span class="bn">Página 10, para consultar</span></a></div>
+
+</main>
+</div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ') + b.getAttribute('data-ex');
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

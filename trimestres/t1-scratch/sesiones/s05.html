@@ -5,54 +5,209 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FF8C1A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>S05 · Condicionales II y teclado · Scratch</title>
-<meta name="description" content="Sesión 5 del bloque Scratch.">
-<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/">
+<title>S05 · Condicionales II y teclado · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Sesión 5 de Scratch: condicionales anidados dentro de un bucle. Mover el personaje con las cuatro flechas del teclado. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s05.html">
+<meta property="og:title" content="S05 · Condicionales II y teclado · CyR 1º ESO">
+<meta property="og:description" content="Sesión 5 de Scratch: condicionales anidados dentro de un bucle. Mover el personaje con las cuatro flechas del teclado. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
-
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child{border-bottom:none;}
+  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
+    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
 <header class="curso-hd">
-  <span class="curso-sb">T1 · Scratch</span>
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T1 · Scratch</span>
 </header>
-
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🗓️</span><span class="nc-lbl">Sesiones</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">S05</span></span>
+<span class="nc-sep">·</span>
+<a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
 </nav>
 
 <div id="main-content">
-<section class="unidad-titulo-hero"><div class="num">Sesión 05</div><h1>Condicionales II y teclado</h1><div class="duracion">Scratch · 1º ESO</div></section>
-<div class="hub-main">
-  <div class="section-title">🎯 Objetivo</div><p>Mover un personaje con izquierda, derecha, arriba y abajo.</p>
-  <div class="section-title">🧠 Conceptos clave</div><p>Condicionales anidados y control con flechas.</p>
-  <div class="section-title">📒 Material base</div><p>Cuadernillo: ejercicio 5.</p>
-  <div class="bg"><a href="../materiales/cuadernillo-scratch-parte-1.pdf" class="bc"><span class="bi">📒</span><span class="bk">Cuadernillo Scratch</span><span class="bn">Abrir PDF de ejercicios guiados</span></a><a href="https://scratch.mit.edu/projects/editor/" target="_blank" class="bc tipo-tool"><span class="bi">🎮</span><span class="bk">Abrir Scratch</span><span class="bn">Editor oficial online</span></a></div>
-  <div class="section-title">🚀 Reto opcional</div><p>Mejora tu proyecto añadiendo al menos un sonido, un cambio de disfraz o una variable visible en pantalla.</p>
-  <div class="section-title">Navegación</div><div class="bg"><a href="s04.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S04</span></a><a href="s06.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S06</span></a></div>
+<section class="unidad-titulo-hero">
+  <div class="num">Sesión 05</div>
+  <h1>Condicionales II y teclado</h1>
+  <div class="duracion">T1 · Scratch · 1º ESO</div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> que tu personaje se mueva por el escenario con las <strong>cuatro flechas</strong> del teclado, y que maúlle cuando pulses la barra espaciadora.</p>
+
+<a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
+<p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
+
+<h2><span class="h2n">1</span>Lee este programa</h2>
+<p>Este es el programa de partida. Todavía <em>no</em> es el tuyo: tú vas a completarlo.</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 433 402" width="433" height="402" class="bloques" role="img" aria-label="Programa: al hacer clic en la bandera verde, repetir hasta que se pulse espacio, con dos condicionales dentro que mueven el personaje a la derecha y a la izquierda; al salir del bucle, iniciar el sonido Miau"><title>Programa: al hacer clic en la bandera verde, repetir hasta que se pulse espacio, con dos condicionales dentro que mueven el personaje a la derecha y a la izquierda; al salir del bucle, iniciar el sonido Miau</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L417.0 62.0 Q423.0 62.0 423.0 68.0 L423.0 90.0 Q423.0 96.0 417.0 96.0 L58.0 96.0 L54.0 100.0 L42.0 100.0 L38.0 96.0 L30.0 96.0 Q24.0 96.0 24.0 102.0 L24.0 330.0 Q24.0 336.0 30.0 336.0 L417.0 336.0 Q423.0 336.0 423.0 342.0 L423.0 348.0 Q423.0 354.0 417.0 354.0 L44.0 354.0 L40.0 358.0 L28.0 358.0 L24.0 354.0 L16.0 354.0  Q10.0 354.0 10.0 348.0 Z" fill="#FFAB19"/><text x="22.0" y="83.6" class="sb-t" textLength="104.8" lengthAdjust="spacingAndGlyphs">repetir hasta que</text><path d="M142.8 67.0 l-9 12.0 l9 12.0 h225.3 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6"/><text x="150.8" y="83.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="195.3" y="68.0" width="80.4" height="22" rx="4" fill="#2E8EB8"/><text x="204.3" y="83.4" class="sb-t" textLength="48.4" lengthAdjust="spacingAndGlyphs">espacio</text><path d="M260.8 76.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="282.8" y="83.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><path d="M24.0 102.0 Q24.0 96.0 30.0 96.0 L38.0 96.0 L42.0 100.0 L54.0 100.0 L58.0 96.0  L409.9 96.0 Q415.9 96.0 415.9 102.0 L415.9 124.0 Q415.9 130.0 409.9 130.0 L72.0 130.0 L68.0 134.0 L56.0 134.0 L52.0 130.0 L44.0 130.0 Q38.0 130.0 38.0 136.0 L38.0 192.0 Q38.0 198.0 44.0 198.0 L409.9 198.0 Q415.9 198.0 415.9 204.0 L415.9 210.0 Q415.9 216.0 409.9 216.0 L58.0 216.0 L54.0 220.0 L42.0 220.0 L38.0 216.0 L30.0 216.0  Q24.0 216.0 24.0 210.0 Z" fill="#FFAB19"/><text x="36.0" y="117.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 101.0 l-9 12.0 l9 12.0 h267.9 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6"/><text x="70.8" y="117.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="102.0" width="123.1" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="117.4" class="sb-t" textLength="91.1" lengthAdjust="spacingAndGlyphs">flecha derecha</text><path d="M223.5 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="245.5" y="117.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="346.8" y="117.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 136.0 Q38.0 130.0 44.0 130.0 L52.0 130.0 L56.0 134.0 L68.0 134.0 L72.0 130.0  L223.3 130.0 Q229.3 130.0 229.3 136.0 L229.3 158.0 Q229.3 164.0 223.3 164.0 L72.0 164.0 L68.0 168.0 L56.0 168.0 L52.0 164.0 L44.0 164.0  Q38.0 164.0 38.0 158.0 Z" fill="#4C97FF"/><text x="50.0" y="151.6" class="sb-t" textLength="127.9" lengthAdjust="spacingAndGlyphs">apuntar en dirección</text><rect x="184.9" y="137.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="201.1" y="151.3" class="sb-n">90</text><path d="M38.0 170.0 Q38.0 164.0 44.0 164.0 L52.0 164.0 L56.0 168.0 L68.0 168.0 L72.0 164.0  L179.1 164.0 Q185.1 164.0 185.1 170.0 L185.1 192.0 Q185.1 198.0 179.1 198.0 L44.0 198.0 Q38.0 198.0 38.0 192.0 Z" fill="#4C97FF"/><text x="50.0" y="185.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="96.0" y="171.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="112.3" y="185.3" class="sb-n">10</text><text x="135.5" y="185.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M24.0 222.0 Q24.0 216.0 30.0 216.0 L38.0 216.0 L42.0 220.0 L54.0 220.0 L58.0 216.0  L417.0 216.0 Q423.0 216.0 423.0 222.0 L423.0 244.0 Q423.0 250.0 417.0 250.0 L72.0 250.0 L68.0 254.0 L56.0 254.0 L52.0 250.0 L44.0 250.0 Q38.0 250.0 38.0 256.0 L38.0 312.0 Q38.0 318.0 44.0 318.0 L417.0 318.0 Q423.0 318.0 423.0 324.0 L423.0 330.0 Q423.0 336.0 417.0 336.0 L30.0 336.0 Q24.0 336.0 24.0 330.0 Z" fill="#FFAB19"/><text x="36.0" y="237.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 221.0 l-9 12.0 l9 12.0 h275.1 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6"/><text x="70.8" y="237.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="222.0" width="130.2" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="237.4" class="sb-t" textLength="98.2" lengthAdjust="spacingAndGlyphs">flecha izquierda</text><path d="M230.7 230.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="252.7" y="237.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="354.0" y="237.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 256.0 Q38.0 250.0 44.0 250.0 L52.0 250.0 L56.0 254.0 L68.0 254.0 L72.0 250.0  L227.7 250.0 Q233.7 250.0 233.7 256.0 L233.7 278.0 Q233.7 284.0 227.7 284.0 L72.0 284.0 L68.0 288.0 L56.0 288.0 L52.0 284.0 L44.0 284.0  Q38.0 284.0 38.0 278.0 Z" fill="#4C97FF"/><text x="50.0" y="271.6" class="sb-t" textLength="127.9" lengthAdjust="spacingAndGlyphs">apuntar en dirección</text><rect x="184.9" y="257.0" width="36.8" height="20" rx="10" fill="#FFFFFF"/><text x="203.3" y="271.3" class="sb-n">-90</text><path d="M38.0 290.0 Q38.0 284.0 44.0 284.0 L52.0 284.0 L56.0 288.0 L68.0 288.0 L72.0 284.0  L179.1 284.0 Q185.1 284.0 185.1 290.0 L185.1 312.0 Q185.1 318.0 179.1 318.0 L44.0 318.0 Q38.0 318.0 38.0 312.0 Z" fill="#4C97FF"/><text x="50.0" y="305.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="96.0" y="291.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="112.3" y="305.3" class="sb-n">10</text><text x="135.5" y="305.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M10.0 360.0 Q10.0 354.0 16.0 354.0 L24.0 354.0 L28.0 358.0 L40.0 358.0 L44.0 354.0  L181.1 354.0 Q187.1 354.0 187.1 360.0 L187.1 382.0 Q187.1 388.0 181.1 388.0 L44.0 388.0 L40.0 392.0 L28.0 392.0 L24.0 388.0 L16.0 388.0  Q10.0 388.0 10.0 382.0 Z" fill="#CF63CF"/><text x="22.0" y="375.6" class="sb-t" textLength="84.5" lengthAdjust="spacingAndGlyphs">iniciar sonido</text><rect x="113.5" y="360.0" width="61.6" height="22" rx="4" fill="#BD42BD"/><text x="122.5" y="375.4" class="sb-t" textLength="29.6" lengthAdjust="spacingAndGlyphs">Miau</text><path d="M160.1 368.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
+  <p class="pie">Si en tu cuadernillo ves <strong>270</strong> donde aquí pone <strong>−90</strong>, es lo mismo: dos formas de nombrar la dirección hacia la izquierda.</p>
+</div>
+
+<h2><span class="h2n">2</span>Qué hace, paso a paso</h2>
+<ol class="paso-lista">
+  <li><span class="n">1</span><span>Al pulsar la bandera verde, el programa arranca.</span></li>
+  <li><span class="n">2</span><span><strong>repetir hasta que</strong> vigila una y otra vez si has pulsado la barra espaciadora. Mientras no la pulses, todo lo de dentro se repite sin parar.</span></li>
+  <li><span class="n">3</span><span>Dentro hay <strong>dos condicionales</strong>, uno debajo del otro. Cada uno pregunta por una flecha distinta. A esto se le llama <em>anidar</em>: meter código dentro de otro código.</span></li>
+  <li><span class="n">4</span><span>Si pulsas la <strong>flecha derecha</strong>, el personaje apunta a la derecha (dirección 90) y avanza. Con la <strong>flecha izquierda</strong>, apunta a −90 y avanza también.</span></li>
+  <li><span class="n">5</span><span>El <strong>miau</strong> está <em>fuera</em> del bucle. Por eso no suena mientras te mueves: suena cuando el bucle termina.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="espacio">
+  <p class="preg">Antes de tocar nada: ¿cuándo suena el miau?</p>
+  <div class="ops">
+    <button data-op="mover" data-ex="No. El miau no está dentro del bucle: está debajo, fuera. Los bloques de dentro se repiten muchas veces; el de fuera espera a que el bucle acabe.">Cada vez que el personaje se mueve</button>
+    <button data-op="espacio" data-ex="Correcto. El bloque del sonido está fuera del bucle, así que no se ejecuta hasta que el bucle termina — y el bucle termina justo al pulsar espacio.">Sólo cuando pulsas la barra espaciadora</button>
+    <button data-op="inicio" data-ex="No. Al pulsar la bandera lo primero que se ejecuta es el bucle, y el bucle no deja pasar al siguiente bloque hasta que termina.">Al pulsar la bandera verde, nada más empezar</button>
+  </div>
+  <div class="fb" id="fb1"></div>
+</div>
+
+<h2><span class="h2n">4</span>Tu actividad</h2>
+<p>El programa sólo sabe ir a la derecha y a la izquierda. <strong>Añádele lo que le falta para subir y bajar</strong> con las otras dos flechas.</p><p>Necesitarás dos condicionales más, iguales a los que ya hay pero preguntando por la <strong>flecha arriba</strong> y la <strong>flecha abajo</strong>. Las direcciones son <strong>0</strong> para arriba y <strong>180</strong> para abajo.</p><details class="pista">
+  <summary>¿Te has atascado? Abre la pista</summary>
+  <div class="cuerpo"><p>Así queda el condicional de subir. El de bajar es idéntico, cambiando la flecha y la dirección. Ojo: los dos nuevos van <em>dentro</em> del <strong>repetir hasta que</strong>, debajo de los que ya hay.</p><div class="caja-bloques" style="max-width:420px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 398 144" width="398" height="144" class="bloques" role="img" aria-label="Pista: si la tecla flecha arriba está presionada, apuntar en dirección 0 y mover 10 pasos"><title>Pista: si la tecla flecha arriba está presionada, apuntar en dirección 0 y mover 10 pasos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L382.1 10.0 Q388.1 10.0 388.1 16.0 L388.1 38.0 Q388.1 44.0 382.1 44.0 L58.0 44.0 L54.0 48.0 L42.0 48.0 L38.0 44.0 L30.0 44.0 Q24.0 44.0 24.0 50.0 L24.0 106.0 Q24.0 112.0 30.0 112.0 L382.1 112.0 Q388.1 112.0 388.1 118.0 L388.1 124.0 Q388.1 130.0 382.1 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#FFAB19"/><text x="22.0" y="31.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M48.8 15.0 l-9 12.0 l9 12.0 h254.2 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6"/><text x="56.8" y="31.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="101.4" y="16.0" width="109.3" height="22" rx="4" fill="#2E8EB8"/><text x="110.4" y="31.4" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">flecha arriba</text><path d="M195.8 24.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="217.8" y="31.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="319.0" y="31.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M24.0 50.0 Q24.0 44.0 30.0 44.0 L38.0 44.0 L42.0 48.0 L54.0 48.0 L58.0 44.0  L206.9 44.0 Q212.9 44.0 212.9 50.0 L212.9 72.0 Q212.9 78.0 206.9 78.0 L58.0 78.0 L54.0 82.0 L42.0 82.0 L38.0 78.0 L30.0 78.0  Q24.0 78.0 24.0 72.0 Z" fill="#4C97FF"/><text x="36.0" y="65.6" class="sb-t" textLength="127.9" lengthAdjust="spacingAndGlyphs">apuntar en dirección</text><rect x="170.9" y="51.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="185.9" y="65.3" class="sb-n">0</text><path d="M24.0 84.0 Q24.0 78.0 30.0 78.0 L38.0 78.0 L42.0 82.0 L54.0 82.0 L58.0 78.0  L165.1 78.0 Q171.1 78.0 171.1 84.0 L171.1 106.0 Q171.1 112.0 165.1 112.0 L30.0 112.0 Q24.0 112.0 24.0 106.0 Z" fill="#4C97FF"/><text x="36.0" y="99.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="85.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="98.3" y="99.3" class="sb-n">10</text><text x="121.5" y="99.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text></svg>
 </div></div>
+</details><div class="aviso-ojo">
+  <h3>⚠️ Ojo con esto</h3>
+<p>Al ir hacia la izquierda verás que el gato aparece <strong>boca abajo</strong>. No es un fallo tuyo: al apuntar en dirección −90 el personaje gira entero.</p><p style="margin-bottom:8px;">Si quieres que no le pase, pon este bloque justo debajo de la bandera verde:</p><div class="caja-bloques" style="max-width:400px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 278 58" width="278" height="58" class="bloques" role="img" aria-label="Bloque fijar estilo de rotación a no rotar"><title>Bloque fijar estilo de rotación a no rotar</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L262.0 10.0 Q268.0 10.0 268.0 16.0 L268.0 38.0 Q268.0 44.0 262.0 44.0 L44.0 44.0 L40.0 48.0 L28.0 48.0 L24.0 44.0 L16.0 44.0  Q10.0 44.0 10.0 38.0 Z" fill="#4C97FF"/><text x="22.0" y="31.6" class="sb-t" textLength="145.9" lengthAdjust="spacingAndGlyphs">fijar estilo de rotación a</text><rect x="174.9" y="16.0" width="81.1" height="22" rx="4" fill="#3373CC"/><text x="183.9" y="31.4" class="sb-t" textLength="49.1" lengthAdjust="spacingAndGlyphs">no rotar</text><path d="M241.0 24.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
+</div>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>El personaje se mueve con las <strong>cuatro</strong> flechas.</li>
+  <li>Se mueve <strong>mientras</strong> mantienes la tecla, no una sola vez.</li>
+  <li>Al pulsar la barra espaciadora, se para y suena el miau.</li>
+  <li>Sabrías explicar con tus palabras qué hace <em>repetir hasta que</em>.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
+<ol>
+  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
+  <li>Cámbiale el nombre a <strong>Sesion05_TuNombre.sb3</strong>.</li>
+  <li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 05.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="s04.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S04</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s06.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S06</span></a><a href="../materiales/cuadernillo-scratch-parte-1.pdf#page=11" class="bc"><span class="bi">📒</span><span class="bk">Cuadernillo</span><span class="bn">Página 11, para consultar</span></a></div>
+
+</main>
+</div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ') + b.getAttribute('data-ex');
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
