@@ -18,13 +18,9 @@ python3 gen_s06_s11.py     # sesiones 06 a 11
 python3 gen_s12_s16.py     # sesiones 12 a 16
 python3 gen_s17_s20.py     # sesiones 17 a 20 (proyecto final)
 python3 gen_proyectos.py   # las tres bases del proyecto final + el índice de juegos
-python3 gen_indices.py     # índice de sesiones + parches del hub del trimestre
+python3 gen_presentacion.py # la presentación inicial, para proyectar
+python3 gen_indices.py     # índice de sesiones + hub del trimestre
 ```
-
-`gen_indices.py` **parchea** el hub en vez de rehacerlo, así que sus reemplazos están escritos
-para poder ejecutarse dos veces: cuando un texto se cambia por segunda vez, la entrada vieja y la
-nueva llevan al mismo destino. Si añades uno, hazlo igual o el generador empezará a avisar de
-textos que no encuentra.
 
 Las rutas se calculan solas a partir de la posición de estos archivos, así que funciona desde
 cualquier equipo sin tocar nada.
@@ -33,8 +29,10 @@ cualquier equipo sin tocar nada.
 después de regenerar, `git status` tiene que salir limpio si no has cambiado el contenido.
 Eso es la comprobación rápida de que no has roto nada.
 
-`fix_presentacion.py` es de un solo uso (ya aplicado): arreglaba los metadatos y el doble `h1`
-de `presentacion.html`. Se conserva para dejar constancia de qué se cambió.
+`fix_presentacion.py` es de un solo uso y **ya no sirve**: la presentación la escribe entera
+`gen_presentacion.py`. Se conserva sólo para dejar constancia de qué se arregló en su día
+(metadatos, doble `h1`, nombre accesible de las flechas); esos arreglos están incorporados al
+generador.
 
 ## Cómo comprobar
 
@@ -73,7 +71,8 @@ python3 scripts/verificar_enlaces.py
 | `comun.py` | Rutas y la tabla sesión → página del cuadernillo. |
 | `gen_s*.py` | El **contenido** de las sesiones: textos, programas de bloques, preguntas y explicaciones. |
 | `gen_proyectos.py` | Las **tres bases del proyecto final** (`juegos/arkanoid.html`, `space-invaders.html`, `esquivar.html`) y el índice de `juegos/`. |
-| `gen_indices.py` | El índice de sesiones y los parches del hub del trimestre. |
+| `gen_presentacion.py` | La **presentación inicial** (`presentacion.html`). Reutiliza el mapa del editor de la S01 y un script de bloques de verdad, en vez de capturas de otra versión de Scratch. |
+| `gen_indices.py` | El índice de sesiones y el **hub del trimestre**, que se escribe entero. Antes se parcheaba a base de reemplazos y cada cambio dejaba una entrada más que mantener viva; se abandonó. |
 | `test_sesiones.js` | Las 678 comprobaciones. |
 
 ---

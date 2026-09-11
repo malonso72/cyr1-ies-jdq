@@ -293,3 +293,53 @@ de la rúbrica, y ese es el que más peso tiene.
 Carreras, laberinto, piedra-papel-tijera y pong siguen en `juegos/`, pero el índice ya no
 las llama «obligatorias»: dicen en qué sesión se hicieron y se quedan ahí por su guía en PDF.
 Borrarlas habría dejado los PDF sin puerta de entrada.
+
+---
+
+# Cuarta tanda · la portada y la presentación (sept-2026)
+
+## 27. La portada se queda en tres tarjetas, y lo que se quita no se esconde: se borra
+
+Me dijiste que sobraba casi todo y que lo ocultara o lo quitara. **Lo he borrado**, no ocultado,
+y el motivo es concreto: `proyectos/` no sólo sobraba, **contradecía** la S17 — su página de
+ideas seguía ofreciendo «historia interactiva» y «mascota virtual», que es justo lo que
+quitamos, y su checklist no era la rúbrica. Una página oculta pero publicada sigue saliendo en
+Google y sigue funcionando si alguien tiene el enlace. Lo mismo con `teoria.html` y
+`actividades.html`, que eran «🚧 En construcción».
+
+**Deshacer:** `git revert` del commit. No se ha perdido nada, está todo en el historial.
+
+**Lo que no he tocado:** las `teoria.html` y `actividades.html` de **T2 micro:bit**, que están
+igual de en construcción. El encargo era T1.
+
+## 28. El panel «Saber / Hacer / Evaluar» se pliega, no se borra
+
+Es lenguaje curricular en la portada que ve un niño de doce años, pero tiene un lector legítimo
+—tú, el departamento, una inspección— así que borrarlo era pasarse. Queda plegado, como ya
+estaba el «Enfoque de trabajo». Un clic y está.
+
+## 29. El hub deja de parchearse y pasa a generarse entero
+
+No es una decisión de contenido, pero se nota. `gen_indices.py` cambiaba el hub a base de
+reemplazos de texto, y cada cambio dejaba una entrada más en la lista que había que mantener
+viva para que el generador no avisara de textos que ya no existían. Hoy ha pasado dos veces en
+la misma sesión. Ahora se escribe entero, como el resto.
+
+## 30. La presentación pasa de seis diapositivas a nueve, y explica Scratch
+
+Tenías razón en que era pobre: 104 palabras y ni una idea de cómo funciona Scratch. Lo que he
+añadido no es relleno, son las tres cosas que faltaban:
+
+- **Así es por dentro:** el mapa del editor de la S01, que ya estaba dibujado. Se reutiliza tal
+  cual, no es una captura de otra versión.
+- **Un programa es una pila de bloques:** el programa de la S01, dibujado con el mismo motor.
+- **No usamos cuenta:** si cierras la pestaña sin descargar, se pierde. Es el mensaje número uno
+  del trimestre y no aparecía en ninguna diapositiva.
+
+Y he **corregido** la que estaba mal: la de «JUEGOS GUIADOS» listaba Carreras, Laberinto,
+Piedra papel tijera, Pong y Space Invaders como si fueran cosas aparte. Ahora es «el proyecto
+final» con las tres bases.
+
+La presentación se genera desde `gen_presentacion.py`, precisamente para poder reutilizar esos
+dos dibujos. El diseño visual —el fondo oscuro, la rejilla, las etiquetas amarillas— no se ha
+tocado.

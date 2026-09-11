@@ -151,3 +151,25 @@ Las tandas 1 a 4 son las que más devuelven por lo que cuestan: **unas 5 horas**
 - Análisis estático del HTML: assets compartidos por página, dominios externos, patrones de clase por trimestre, textos repetidos sección a sección.
 - Contraste de `sitemap.xml` y de `.assetsignore` con los archivos reales, y de `PENDIENTES.md` con lo publicado.
 - Comprobación del sitio en producción (`sitemap.xml` servido correctamente).
+
+---
+
+## Estado de las cuatro decisiones (sept-2026)
+
+1. **Los «En construcción» (H1) — contestada para T1.** `teoria.html` y `actividades.html` de
+   T1 se han **borrado**, junto con `proyectos/`, y se ha quitado «Teoría» de la barra de
+   navegación de las páginas que lo llevaban. Una página en construcción es peor que no tener
+   página. **Las de T2 micro:bit siguen ahí**: el encargo era T1.
+2. **T3 y su identidad (H6) — sin contestar.**
+3. **Las sesiones de T1 (H5) — contestada.** Se reescribieron enteras: son material autónomo,
+   no un índice hacia el PDF. Ver `PLAN_T1_SCRATCH.md` y `REVISION_T1_SESIONES.md`.
+4. **`node_modules` (H2) — sin contestar.**
+
+De propina, dos hallazgos más que han salido al trabajar T1 y que la auditoría no recogía:
+
+- **Las once guías en PDF de `materiales/guias-juegos/` están hechas con Scratch 2**, igual que
+  el cuadernillo, y sus bloques son capturas: no se pueden corregir con una nota al pie. Por eso
+  las tres bases del proyecto final se han redibujado enteras en Scratch 3.
+- **Las once páginas de `juegos/` eran plantillas vacías**: la misma frase de «conceptos que
+  trabaja» repetida en las once, incluido un «variables, puntuación o mensajes según el juego»
+  sin rellenar. Tres se han rehecho; las otras ocho siguen como estaban, ya clasificadas.

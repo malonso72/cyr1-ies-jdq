@@ -81,6 +81,9 @@ clase sin que las presentaciones de la S20 salgan iguales.
 
 ### Dónde está cada cosa
 
+- La portada del trimestre está en **tres tarjetas** —presentación, abrir Scratch y sesiones—
+  porque el alumnado no entra por ahí: entra desde Moodle directo a la sesión. Si se añade algo,
+  que sea porque hace falta desde la portada, no porque exista.
 - Las páginas: `trimestres/t1-scratch/sesiones/s01..s20.html`
 - Las tres bases del proyecto: `trimestres/t1-scratch/juegos/` (`arkanoid`, `space-invaders`,
   `esquivar`, más su índice). El resto de páginas de esa carpeta son las viejas, con su PDF.
@@ -106,8 +109,9 @@ clase sin que las presentaciones de la S20 salgan iguales.
    Moodle («Condicionales I» avisa en la propia página de que hoy no hay ningún `si… entonces`),
    y si el sonido `Pop` que usan S11, S12, S16 y S18 aparece con ese nombre en el editor — el
    `COTEJO` sólo dejó cerrado `Miau`.
-2. Las **cuatro decisiones de la auditoría** siguen sin contestar: qué hacer con las páginas
-   «🚧 En construcción», si T3 converge con el resto, y si se saca `node_modules` del repo.
+2. De las **cuatro decisiones de la auditoría** quedan dos: si T3 converge con el resto del
+   sitio, y si se saca `node_modules` del repo. Las otras dos están contestadas — ver el final
+   de `AUDITORIA_CyR_1ESO.md`. Ojo: los «🚧 En construcción» de **T2 micro:bit** siguen ahí.
 3. **`node_modules` está comprometido y además roto** (la carpeta `jsdom` no tiene
    `package.json`). Pendiente `git rm -r --cached` + `.gitignore`.
 4. **`s02.js` se carga dos veces** en una página de T3 Ciberseguridad →
