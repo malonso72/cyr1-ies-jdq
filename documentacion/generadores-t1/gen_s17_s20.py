@@ -13,6 +13,18 @@ def si(cond, hijos):
     return ('c', 'control', ['si', cond, 'entonces'], hijos)
 
 
+# La rubrica del proyecto final: se publica en S17 y se repite en S20.
+RUBRICA = [
+    ['<strong>Funciona</strong>', 'Se juega de principio a fin sin romperse. Se puede ganar y '
+     'perder. Al volver a empezar, empieza bien.', '3'],
+    ['<strong>Usa lo aprendido</strong>', 'Bucles, condicionales y al menos una variable. Puntos '
+     'extra si hay mensajes entre objetos o azar.', '3'],
+    ['<strong>Se entiende solo</strong>', 'Otra persona sabe jugar sin que se lo expliques: hay '
+     'instrucciones, marcador visible y se ve cuándo aciertas o fallas.', '2'],
+    ['<strong>Lo cuentas bien</strong>', 'En un minuto explicas qué es, cómo se juega y qué te '
+     'costó más.', '2'],
+]
+
 # ============================================================ S17
 FICHA = [
     ('1. Título', 'Cómo se llama tu juego o tu historia.'),
@@ -86,10 +98,19 @@ s17 = pagina(
              'Tiene que ser algo que un bloque pueda comprobar: <em>«se gana cuando Puntos llega a '
              '10»</em>, <em>«se pierde cuando Vidas llega a 0»</em>.</p>'
              '<p style="margin-bottom:0">Si consigues escribir esas dos frases así, el proyecto '
-             'está prácticamente resuelto: ya sabes qué variables necesitas.</p>')),
+             'está prácticamente resuelto: ya sabes qué variables necesitas.</p>') +
+         '<h3 id="rubrica">Con qué se te va a evaluar</h3>'
+         '<p>No es ningún secreto y no va a cambiar. Ténla delante mientras escribes la ficha: '
+         'lo que más puntúa es que el juego <strong>funcione</strong> y que <strong>se entienda '
+         'sin que estés al lado</strong>.</p>' +
+         tabla(['Criterio', 'Qué se mira', 'Puntos'], RUBRICA) +
+         '<p style="margin-bottom:0">«Funciona» y «se entiende solo» suman <strong>5 de los 10 '
+         'puntos</strong>. Un juego sencillo y terminado saca mejor nota que uno ambicioso a '
+         'medias — por eso la pregunta de arriba tenía la respuesta que tenía.</p>'),
 
         ('Lo has conseguido si…',
          logros(['Has contestado a los nueve puntos.',
+                 'Has leído la rúbrica y sabes qué es lo que más puntúa.',
                  'Las condiciones de ganar y de perder están escritas con números concretos.',
                  'Sabes decir de qué sesiones vas a copiar bloques.',
                  'Un compañero puede leer tu ficha y entender a qué se juega, sin que se lo cuentes.'])),
@@ -148,6 +169,16 @@ K7 = [
                             'durante', ('num', '3'), 'segundos']),
         ('cap', 'control', ['detener', ('drop', 'todos')])]),
 ]
+K8 = [
+    si(hexa('sensing', '¿tocando', ('drop', 'Jugador'), '?'),
+       [('stack', 'looks', ['esconder']),
+        ('stack', 'variables', ['sumar a', ('drop', 'Puntos'), ('num', '1')]),
+        ('stack', 'control', ['esperar', ('num', '1'), 'segundos']),
+        ('stack', 'motion', ['ir a x:',
+                             op('número aleatorio entre', ('num', '-200'), 'y', ('num', '200')),
+                             'y:', ('num', '140')]),
+        ('stack', 'looks', ['mostrar'])]),
+]
 
 s18 = pagina(
     18, 'Proyecto final: construcción',
@@ -164,7 +195,7 @@ s18 = pagina(
          'añade en la sesión 19; lo que no se puede añadir el último día es que funcione.</p>'),
 
         ('Kit de piezas',
-         '<p>Casi nada de tu proyecto es nuevo. Estas siete piezas salen de las sesiones anteriores '
+         '<p>Casi nada de tu proyecto es nuevo. Estas ocho piezas salen de las sesiones anteriores '
          'y resuelven el 90 % de lo que vas a necesitar. Cópialas y cámbiales los nombres y los '
          'números.</p>'
          '<h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">1 · Mover con el teclado</h3>'
@@ -199,7 +230,14 @@ s18 = pagina(
          '<h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">7 · Fin de partida</h3>'
          + caja(K7, 'Pieza de fin de partida: si Vidas es 0, cambiar el fondo a fin, decir Fin '
                     'seguido de los puntos durante 3 segundos y detener todos',
-                pie='Acuérdate: <strong>detener (todos) siempre el último</strong>.')),
+                pie='Acuérdate: <strong>detener (todos) siempre el último</strong>.') +
+         '<h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">8 · Aparecer y desaparecer</h3>'
+         + caja(K8, 'Pieza: si está tocando al Jugador, esconder, sumar 1 a Puntos, esperar 1 '
+                    'segundo, ir a una x aleatoria con y 140 y volver a mostrarse',
+                pie='La moneda que recoges, el meteorito que esquivas, el bicho que cazas: '
+                    'desaparece, cuenta, y vuelve a salir por otro sitio. <strong>Pon un '
+                    '<em>mostrar</em> también al arrancar</strong>: si la partida anterior acabó '
+                    'con el objeto escondido, sin eso no vuelve a aparecer nunca.')),
 
         ('Comprueba que lo has entendido',
          pregunta('1', 'Tu juego funciona a la primera. Pero al pulsar la bandera verde por '
@@ -262,12 +300,16 @@ FALLOS = [
      'Pestaña Sonidos del objeto: si no está, añádelo desde la biblioteca'],
 ]
 PULIDO = [
-    ['Pantalla de inicio', 'Un fondo de portada con el título y cómo se juega', 'Pieza 6 de la S18'],
+    ['<strong>Pantalla de inicio</strong> ✱', 'Un fondo de portada con el título y cómo se juega',
+     'Pieza 6 de la S18'],
+    ['<strong>Pantalla de fin</strong> ✱', 'Un fondo distinto con la puntuación final',
+     'Pieza 7 de la S18 · S13'],
     ['Instrucciones', 'Un <em>decir</em> al empezar que explique las teclas', 'S01'],
-    ['Sonido', 'Al puntuar, al chocar y al terminar', 'S02'],
-    ['Reacción visible', 'Cambio de disfraz o de color al acertar o fallar', 'S06'],
-    ['Marcador a la vista', 'Variables mostradas, y sólo las que interesan al jugador', 'S08'],
-    ['Pantalla de fin', 'Un fondo distinto con la puntuación final', 'S13'],
+    ['Sonido', 'Al puntuar, al chocar y al terminar', 'S01 · S11'],
+    ['Reacción visible', 'Cambio de disfraz al acertar o al fallar', 'S06'],
+    ['Marcador a la vista', 'Variables mostradas, y sólo las que interesan al jugador', 'S08 · S09'],
+    ['Aparecer y desaparecer', 'Que lo que recoges o esquivas se esconda y vuelva a salir',
+     'Pieza 8 de la S18'],
     ['Dificultad creciente', 'Que se vaya poniendo más difícil según avanzas', 'S16'],
 ]
 DEPURA19 = [
@@ -327,7 +369,10 @@ s19 = pagina(
              'Arregla los fallos de la lista, de arriba abajo. Después de cada arreglo, vuelve a '
              'jugar una partida entera.',
              'Cuando ya no se rompa nada, y sólo entonces, coge la lista de pulido de abajo.',
-             'Elige <strong>tres</strong> mejoras. No todas: tres, bien hechas.',
+             'Haz las <strong>dos marcadas con ✱</strong> —la pantalla de inicio y la de fin— y '
+             'elige <strong>una más</strong> de las otras. Tres en total, bien hechas, no siete a '
+             'medias. Las dos obligatorias son las que hacen que el juego se entienda sin ti, y '
+             'eso vale 2 puntos de la rúbrica.',
              'Deja que un compañero juegue <strong>sin decirle nada</strong>. Si tiene que '
              'preguntarte cómo se juega, te faltan instrucciones.']) +
          tabla(['Mejora', 'En qué consiste', 'De dónde sale'], PULIDO) +
@@ -340,23 +385,12 @@ s19 = pagina(
         ('Lo has conseguido si…',
          logros(['Has jugado tres partidas enteras sin que aparezca ningún fallo.',
                  'Un compañero ha sabido jugar sin que le expliques nada.',
-                 'Has añadido al menos tres mejoras de la lista.',
                  'El juego tiene pantalla de inicio y pantalla de fin.',
+                 'Has añadido una tercera mejora de la lista, terminada.',
                  'Has descargado la versión buena del <code>.sb3</code>.'])),
     ])
 
 # ============================================================ S20
-RUBRICA = [
-    ['<strong>Funciona</strong>', 'Se juega de principio a fin sin romperse. Se puede ganar y '
-     'perder. Al volver a empezar, empieza bien.', '3'],
-    ['<strong>Usa lo aprendido</strong>', 'Bucles, condicionales y al menos una variable. Puntos '
-     'extra si hay mensajes entre objetos o azar.', '3'],
-    ['<strong>Se entiende solo</strong>', 'Otra persona sabe jugar sin que se lo expliques: hay '
-     'instrucciones, marcador visible y se ve cuándo aciertas o fallas.', '2'],
-    ['<strong>Lo cuentas bien</strong>', 'En un minuto explicas qué es, cómo se juega y qué te '
-     'costó más.', '2'],
-]
-
 s20 = pagina(
     20, 'Presentación de proyectos',
     'Sesión 20 de Scratch: presentar el proyecto final en un minuto, rúbrica de evaluación y '
@@ -364,7 +398,8 @@ s20 = pagina(
     'presentar tu proyecto en <strong>un minuto</strong> y entregarlo. Último día del trimestre.',
     [
         ('Con qué se te va a evaluar',
-         '<p>Esto no es una sorpresa: es la misma lista que tienes desde la sesión 17. '
+         '<p>Esto no es ninguna sorpresa: es la misma lista que se publicó en la '
+         '<a href="s17.html#rubrica">sesión 17</a>, el día que diseñaste el proyecto. '
          'Léela antes de presentar y comprueba tú mismo por dónde andas.</p>' +
          tabla(['Criterio', 'Qué se mira', 'Puntos'], RUBRICA) +
          '<p>Fíjate en que <strong>«funciona» y «se entiende solo» suman 5 de los 10 puntos</strong>. '
