@@ -1,0 +1,153 @@
+# Auditoría · Computación y Robótica 1º ESO
+
+**Sitio:** `ESO Web/cyr1-ies-jdq` → cyr1-ies-jdq.malonso72.workers.dev
+**Fecha:** 10 de septiembre de 2026 · **Estado del repo:** limpio, sincronizado con `origin/main`
+**Alcance:** las 112 páginas HTML del sitio, sus hojas de estilo, sus scripts y la configuración de despliegue.
+**No se ha modificado ningún archivo.**
+
+---
+
+## 1. Resumen ejecutivo
+
+El sitio está **mucho más completo de lo que aparenta desde la portada**. Hay 20 sesiones de Scratch, 12 fichas de juego, 30 retos de micro:bit, 19 sesiones de ciberseguridad con 10 retos interactivos gamificados y 14 PDFs. La infraestructura técnica es sólida: los tres verificadores pasan en verde, no hay ni un enlace roto sobre 1.137, y el 100 % del HTML parsea bien.
+
+Los problemas no son de solidez, son de **acabado y de coherencia**:
+
+| Área | Nota | Comentario en una línea |
+|---|---|---|
+| Integridad técnica (HTML, enlaces) | **92** | Todo en verde; un solo defecto real de JS |
+| Contenido T3 · Ciberseguridad | **85** | Lo mejor del sitio, con diferencia |
+| Contenido T2 · micro:bit | **70** | Bien escrito, pero lleno de restos del generador |
+| Accesibilidad | **60** | T1 y T2 correctos; los retos de T3 no |
+| Despliegue y mantenimiento | **55** | Se está publicando `node_modules` entero |
+| Coherencia entre trimestres | **45** | T3 es, de hecho, otro sitio |
+| Contenido T1 · Scratch | **40** | 20 sesiones de 120 palabras, casi clonadas |
+| Portada | **35** | Tres tarjetas y poco más |
+| **Global** | **≈ 62** | |
+
+**Las tres cosas que arreglaría primero**, por orden de daño que hacen:
+
+1. Los cuatro **"🚧 En construcción"** que cuelgan de la navegación de 73 páginas.
+2. Los **restos del generador** en los 30 retos de micro:bit (se ven a simple vista).
+3. **`node_modules` publicándose** en producción: 24 MB y 1.760 archivos.
+
+---
+
+## 2. Hallazgos por severidad
+
+### 🔴 Alta
+
+**H1 · Cuatro páginas "En construcción" enlazadas desde toda la navegación.**
+`t1-scratch/teoria.html`, `t1-scratch/actividades.html`, `t2-microbit/teoria.html` y `t2-microbit/actividades.html` contienen literalmente *«Esta página estará disponible próximamente»*. No son páginas escondidas: el botón **📖 Teoría** de la barra de navegación transversal aparece en **39 páginas de T1 y 34 de T2**. Es decir, 73 de las 112 páginas del sitio ofrecen a un alumno de 1º ESO un botón que no lleva a ninguna parte.
+
+**H2 · `node_modules/` está en el repositorio y se publica.**
+- No existe `.gitignore` en el repo.
+- `git ls-files` cuenta 1.937 archivos, de los cuales **1.760 son `node_modules/`** (24 MB): el 91 % del repositorio.
+- `wrangler.toml` publica `directory = "./"` y `.assetsignore` **no excluye `node_modules/`**, así que esos 24 MB van a producción en cada despliegue.
+- Son 31 paquetes (jsdom y sus dependencias) que ningún script del sitio usa: los verificadores del repo son Python, y de hecho todos ellos ya excluyen `node_modules` explícitamente.
+- De paso, `scripts/` (los verificadores) también se publica sin necesidad.
+
+**H3 · Los 10 retos de T3 no son accesibles ni navegables.**
+Son las páginas más ricas del sitio (escape room, torneo Real/Fake, Cluedo, caso Marta Ruiz…) y las que peor tratadas están:
+- **0 de 10** tienen `<main>` o `#main-content`.
+- **0 de 10** tienen enlace "Saltar al contenido".
+- **0 de 33** páginas de T3 tienen pie de página.
+- **44 controles de formulario sin etiqueta** (`s13-reto-lucia` 12 de 12, `s09-reto-piensa` 8 de 8, `s15-reto-detective` 3 de 3…).
+- 2 elementos con `onclick` sin `role` ni `tabindex` (no se pueden usar con teclado).
+- Ninguno de los 10 está en el `sitemap.xml`.
+
+### 🟠 Media
+
+**H4 · Restos del generador en los 30 retos de micro:bit.** Todo esto se ve a simple vista:
+- **120 badges vacíos** (`<span class='badge'></span>`), unos 4 por reto, en los 30.
+- **22 viñetas huérfanas**: frases partidas en dos elementos de lista. Ejemplos: *«ayuda mucho!»*, *«sensor crepuscular!»*, *«control de flujo!»*, *«batería, o velocidad!»*.
+- En **29 de los 30**, un *«Consejo: …»* está metido dentro de la lista de autoevaluación como si fuera un criterio evaluable.
+- **20 de 30 títulos en Title Case inglés**: «Escribir Y Borrar Un Número», «Animación De Corazón», «Termostato Con Icono».
+
+**H5 · Las 20 sesiones de T1 son casi la misma página.**
+- Longitud: entre 118 y 135 palabras. Todas con las mismas cinco secciones.
+- El **«🚀 Reto opcional» es literalmente idéntico en las 20**: *«Mejora tu proyecto añadiendo al menos un sonido, un cambio de disfraz o una variable visible en pantalla»*.
+- El «Material base» de s17–s20 dice sólo «Proyecto final.».
+- Los objetivos y los conceptos clave sí están escritos uno a uno, y son correctos. El problema es que la sesión no es material de trabajo: es un índice hacia el cuadernillo PDF.
+
+Contraste útil: en T2, «Reto extra» y «Ayuda» tienen **30 textos distintos** cada uno. Ahí sí se escribió reto a reto.
+
+**H6 · T3 es un sitio dentro del sitio.**
+
+| | T1 | T2 | T3 |
+|---|---|---|---|
+| Páginas | 40 | 35 | 33 |
+| Con cabecera `curso-hd` | 39 | 34 | **21** |
+| Con navegación transversal | 39 | 34 | **21** |
+| Con pie de página | 37 | 32 | **0** |
+| Usan `hub-main`/`section-title` | 37 | 32 | **0** |
+| CSS propio | — | inline en 32 | `academia.css`, 36 KB |
+| Peso medio por página | 4 KB | 5 KB | **20 KB** |
+
+T3 tiene su propio lenguaje visual (`paso`, `bloque-hud`, `mi-insignia`, `btn-acad`, `chip`), su propio JS con progreso en `localStorage`, insignias y códigos de finalización. **Funciona muy bien** — pero un alumno que salta de T2 a T3 cambia de sitio web. Hay que decidir si eso es un problema o una decisión.
+
+### 🟡 Baja
+
+**H7 · `s02.html` de T3 carga `s02.js` dos veces.** La segunda copia lanza `SyntaxError: Identifier 'SESION_ID' has already been declared` en la consola. Como es un error de análisis, la segunda copia no llega a ejecutarse y la página funciona; pero es el **único error real de JavaScript de las 112 páginas** y se arregla borrando una línea.
+
+**H8 · Versión incoherente en el pie.** `v1.0.0` en 70 páginas, `v1.1.0` sólo en la portada.
+
+**H9 · Sitemap incompleto.** 97 URLs para 109 páginas publicables: faltan los 10 retos de T3 (las otras 2 ausencias son redirecciones con `noindex`, y ahí está bien que no aparezcan).
+
+**H10 · El buscador está escrito pero no conectado.** Existe `assets/js/search.js`, y las tarjetas de la portada llevan sus `data-keywords` cuidadosamente rellenados… pero **ninguna página del sitio carga ese script**. Es una funcionalidad terminada y sin enchufar.
+
+**H11 · Google Fonts en 98 de las 112 páginas.** Sin conexión, la tipografía cae al respaldo del sistema (que está bien declarado en el CSS: `var(--sans), system-ui, sans-serif`). El impacto es sólo estético. Matiz importante frente a TECI II: **esta asignatura depende de Internet por naturaleza** — 31 enlaces a scratch.mit.edu, 30 a makecode.microbit.org y 31 al Moodle de la Junta. Sin red no hay clase, con o sin fuentes.
+
+**H12 · Documentación desactualizada.** `PENDIENTES.md` afirma que existe `t3-ciberseguridad/moodle.html` (no existe) y habla de 19 sesiones publicadas cuando la portada anuncia 18.
+
+**H13 · El sitio no tiene imágenes.** 112 páginas y 2 imágenes en total (el logo y la fachada, ambas en la portada). Para 1º ESO es un dato a considerar, sobre todo en T2, donde los retos describen patrones de LEDs con texto y coordenadas.
+
+---
+
+## 3. Lo que está bien y conviene no tocar
+
+- **La red de verificación funciona.** Los tres scripts pasan en verde y el hook de pre-push está instalado: 0 enlaces rotos sobre 1.137, 112/112 HTML válidos.
+- **La navegación transversal de T1 y T2 es excelente**: cabecera, migas, anterior/siguiente, skip-link. Se nota el patrón bien pensado.
+- **T3 es material de primera.** La Academia Cyber-IES, con sus insignias, su progreso persistente y sus 10 retos narrativos, es lo mejor del ecosistema para esta etapa.
+- **Los contenidos de T2 están escritos de verdad**, reto a reto, con pseudocódigo propio.
+- **Metadatos y curso al día**: 2026-27 coherente en 98 páginas, canonical y Open Graph en la portada, `robots.txt` y `_headers` correctos.
+- `.assetsignore` ya protege bien `documentacion/`, `_soluciones/` y `_academia-v3/`.
+
+---
+
+## 4. Plan por tandas propuesto
+
+Ordenadas por relación impacto/coste. Ninguna se ejecuta sin tu visto bueno.
+
+| # | Tanda | Qué incluye | Coste | Riesgo |
+|---|---|---|---|---|
+| **1** | Higiene de despliegue | `.gitignore`, sacar `node_modules` del repo y del despliegue, excluir `scripts/`, arreglar el `s02.js` duplicado, unificar la versión del pie, completar el sitemap | 45 min | Muy bajo |
+| **2** | Limpieza de los 30 retos de T2 | 120 badges vacíos, 22 viñetas partidas, sacar el «Consejo:» de la autoevaluación, 20 títulos a mayúscula inicial | 1,5 h | Bajo |
+| **3** | Resolver los "En construcción" | Escribir la teoría real de T1 y T2, **o** retirar esos botones de la navegación | 30 min o 4 h | Bajo / decisión tuya |
+| **4** | Accesibilidad de los 10 retos de T3 | `main`, skip-link, pie, etiquetas en los 44 controles, teclado en los 2 `onclick` | 2 h | Bajo |
+| **5** | Enriquecer las 20 sesiones de T1 | Reto propio por sesión (fuera el clon ×20), errores típicos, criterio de logro | 3-4 h | Medio |
+| **6** | Conectar el buscador | Enchufar `search.js` en la portada y en los hubs | 45 min | Bajo |
+| **7** | Portada | Decidir si crece (buscador, acceso directo a sesiones, estado del curso) o se deja | 2-3 h | Medio |
+| **8** | Coherencia de T3 | Acercar la Academia al lenguaje del resto, o declararla identidad propia y dejarla | 4 h o 0 | Medio |
+| **9** | Google Fonts local | Como se hizo en TECI II | 1 h | Bajo |
+
+Las tandas 1 a 4 son las que más devuelven por lo que cuestan: **unas 5 horas** y se llevan por delante casi todo lo visible.
+
+---
+
+## 5. Lo que necesito que decidas
+
+1. **Los "En construcción"** (H1): ¿escribimos teoría de verdad para T1 y T2, o quitamos esos dos botones de la navegación hasta que la haya? Quitarlos cuesta 30 minutos; escribirla, unas cuatro horas por trimestre.
+2. **T3 y su identidad** (H6): ¿la Academia Cyber-IES se acerca al resto del sitio, o la damos por buena como está y asumimos que es un bloque con voz propia?
+3. **Las sesiones de T1** (H5): ¿son deliberadamente un índice hacia el cuadernillo PDF, o quieres que se conviertan en material que se sostenga solo?
+4. **`node_modules`** (H2): confirmo que puedo sacarlo del repositorio. Es un `git rm -r --cached` más `.gitignore`; no se pierde nada, porque no lo usa ningún script del sitio.
+
+---
+
+## 6. Cómo se ha comprobado todo esto
+
+- Los tres verificadores del repo: `verificar_html.py`, `verificar_enlaces.py`, `comprobar_enlaces.py`.
+- Carga de **las 112 páginas en jsdom sin acceso a red**, recogiendo errores de JavaScript e indicadores de estructura y accesibilidad (h1, main, etiquetas de controles, alt, roles, tablas, longitud de texto).
+- Análisis estático del HTML: assets compartidos por página, dominios externos, patrones de clase por trimestre, textos repetidos sección a sección.
+- Contraste de `sitemap.xml` y de `.assetsignore` con los archivos reales, y de `PENDIENTES.md` con lo publicado.
+- Comprobación del sitio en producción (`sitemap.xml` servido correctamente).

@@ -72,9 +72,12 @@ lado en media pantalla.
 - Las páginas: `trimestres/t1-scratch/sesiones/s01..s20.html`
 - **Se generan, no se editan a mano:** `documentacion/generadores-t1/` (tiene su propio README
   con cómo regenerar, cómo probar y cómo se escribe un programa de bloques).
-- Documentos de trabajo, **fuera del repo**, en la carpeta de Manuel `00 ECOSISTEMAS`:
-  `AUDITORIA_CyR_1ESO.md`, `COTEJO_Cuadernillo_Scratch3.md` (tabla verificada de nombres de
-  bloques Scratch 2 → 3), `PLAN_T1_SCRATCH.md` (el guion de las 20) y `DECISIONES_T1.md`.
+- Documentos de trabajo, en `documentacion/` (privada, no se despliega):
+  - `AUDITORIA_CyR_1ESO.md` — auditoría del sitio entero, con notas por área y hallazgos H1–H13.
+  - `COTEJO_Cuadernillo_Scratch3.md` — **tabla verificada** de nombres de bloques Scratch 2 → 3,
+    transcrita de capturas del editor real. Consúltala antes de escribir cualquier bloque.
+  - `PLAN_T1_SCRATCH.md` — el guion de las 20 sesiones y las reglas de estilo del material.
+  - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta en la reescritura, con el porqué.
 
 ### Lo que queda pendiente en CyR
 

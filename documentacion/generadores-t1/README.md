@@ -122,8 +122,9 @@ Fijadas con Manuel y aplicadas en las 20 sesiones:
 1. Segunda persona y frases cortas: es 1º de ESO.
 2. **Nombres exactos de la paleta de Scratch 3**, verificados contra capturas del editor real:
    `Sprite1`, `costume1`, `Miau`, `¿Cómo te llamas?`, `sumar a`, `dar a … el valor`,
-   `si toca un borde, rebotar`. La tabla completa está en `COTEJO_Cuadernillo_Scratch3.md`,
-   fuera del repo, en la carpeta de trabajo de Manuel.
+   `si toca un borde, rebotar`. La tabla completa está en
+   [`../COTEJO_Cuadernillo_Scratch3.md`](../COTEJO_Cuadernillo_Scratch3.md). Consúltala
+   antes de escribir cualquier bloque nuevo.
 3. Ningún bloque de extensión (Música, Lápiz) sin decir que hay que añadirla.
 4. Bloques en SVG, nunca capturas: se leen a media pantalla y no pesan.
 5. Todo SVG con `role="img"`, `aria-label` y `<title>`.
