@@ -180,6 +180,25 @@ CAMBIOS = [
     # la tarjeta de sesiones
     ('<span class="bn">20 sesiones guiadas (s01–s20) con objetivos y entregas</span>',
      '<span class="bn">20 sesiones completas, para trabajar con Scratch abierto al lado</span>'),
+    # «Saber» y «Evaluar», en el idioma de quien los lee: son la portada del alumno
+    ('<li>Pensamiento computacional: descomposición, abstracción, patrones, algoritmia</li>',
+     '<li>Partir un problema grande en problemas pequeños, y resolverlos de uno en uno</li>'),
+    ('<li>Eventos, sensores, hilos paralelos y mensajes (broadcast)</li>',
+     '<li>Hacer que varios personajes funcionen a la vez y se avisen entre ellos</li>'),
+    ('<li>Estructuras de control: secuencia, alternativa (si/sino), iteración (bucles)</li>',
+     '<li>Programar con decisiones (<em>si… entonces</em>) y repeticiones (<em>bucles</em>)</li>'),
+    # los criterios del hub tienen que ser los de la rúbrica de la S17, no otros
+    ('<li>El programa funciona y resuelve la tarea pedida</li>',
+     '<li><strong>Funciona:</strong> se juega entero sin romperse, se puede ganar y perder</li>'),
+    ('<li>Se usan estructuras de control adecuadas a cada problema</li>',
+     '<li><strong>Usa lo aprendido:</strong> bucles, condicionales y al menos una variable</li>'),
+    ('<li>El proyecto está documentado: qué hace, cómo se usa, créditos</li>',
+     '<li><strong>Se entiende solo:</strong> otra persona sabe jugar sin que se lo expliques</li>'),
+    ('<li>Se valoran y comentan los proyectos de los compañeros con criterio</li>',
+     '<li><strong>Lo cuentas bien:</strong> en un minuto explicas qué es y qué te costó más</li>'),
+    # en juegos/ hay once, no doce
+    ('<span class="bn">12 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>',
+     '<span class="bn">11 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>'),
     # el cuadernillo deja de venderse como material de trabajo
     ('<span class="bk">Cuadernillo Scratch · Parte 1</span>\n'
      '    <span class="bn">PDF imprimible para alumnado</span>',
@@ -220,11 +239,21 @@ NUEVO_ENF = ('<p>Cada sesión tiene su propia página: un programa que hay que <
              'sin instalar nada y sin cuenta.</p>\n'
              '    <p>Las <strong>cuatro últimas sesiones</strong> son un proyecto propio: diseño, '
              'construcción, depuración y presentación. La evaluación combina las entregas de cada '
-             'sesión en Moodle y ese proyecto final, con una rúbrica que el alumnado conoce desde '
-             'la sesión 17.</p>')
+             'sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
+             '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño.</p>')
+# Version anterior de este mismo parrafo: la rubrica se prometia "desde la sesion 17"
+# cuando todavia no estaba publicada alli. Se reemplaza tambien, para que el
+# generador se pueda reejecutar sobre un hub ya parcheado.
+ENF_V1 = ('sesión en Moodle y ese proyecto final, con una rúbrica que el alumnado conoce desde '
+          'la sesión 17.</p>')
+ENF_V2 = ('sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
+          '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño.</p>')
+
 if VIEJO_ENF in hub:
     hub = hub.replace(VIEJO_ENF, NUEVO_ENF)
-else:
+elif ENF_V1 in hub:
+    hub = hub.replace(ENF_V1, ENF_V2)
+elif ENF_V2 not in hub:
     print('  AVISO: no encontrado el párrafo de enfoque')
 
 open(BASE + 'index.html', 'w', encoding='utf-8').write(hub)

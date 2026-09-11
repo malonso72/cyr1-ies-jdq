@@ -4,28 +4,29 @@
 
 ## Distribución temporal
 
-CyR de 1º ESO se imparte como una asignatura cuatrimestral (1 sesión/semana
-o similar; ajustar a la dotación real). Cada trimestre cubre un bloque
+CyR de 1º ESO tiene **2 sesiones semanales**. Cada trimestre cubre un bloque
 distinto:
 
-| Evaluación | Trimestre | Sesiones aprox. |
+| Evaluación | Trimestre | Sesiones escritas |
 |---|---|---|
-| 1.ª evaluación | T1 Scratch | ~30-36 |
-| 2.ª evaluación | T2 micro:bit | ~30-36 |
-| 3.ª evaluación | T3 Ciberseguridad | 16-17 |
+| 1.ª evaluación | T1 Scratch | 20 |
+| 2.ª evaluación | T2 micro:bit | — (pendiente) |
+| 3.ª evaluación | T3 Ciberseguridad | 18 |
 
-> Las duraciones son orientativas. Si la asignatura tiene menos sesiones
-> semanales en alguno de los trimestres, el de Ciberseguridad
-> (16-17 sesiones) suele encajar bien en el tercer trimestre, que es el
-> más corto del curso.
+> **El material no llena el trimestre, y es a propósito.** A 2 sesiones por
+> semana, las 20 de Scratch son unas 10 semanas y el primer trimestre da para
+> más. Ese margen es el colchón: hay sesiones que se van a comer dos clases
+> —la S09 del quiz, la S12 del laberinto y la S18 de construcción son las
+> candidatas— y no pasa nada, porque no hay que llegar a la S16 «porque
+> tocaba». Vale más que entiendan bien variables y condicionales.
 
 ## Listado de trimestres
 
 | # | Slug | Título | Sesiones | Estado del material |
 |---|---|---|---|---|
-| T1 | `t1-scratch` | Scratch | 30-36 | Hub + placeholders |
-| T2 | `t2-microbit` | micro:bit | 30-36 | Hub + placeholders |
-| T3 | `t3-ciberseguridad` | Ciberseguridad | 16-17 | Hub completo · presentación / cuadernillo / sesiones / Moodle pendientes Fase E |
+| T1 | `t1-scratch` | Scratch | 20 | **Completo**: hub, índice, presentación y las 20 sesiones. Se generan desde `generadores-t1/` |
+| T2 | `t2-microbit` | micro:bit | — | Hub + placeholders. Sin sesiones |
+| T3 | `t3-ciberseguridad` | Ciberseguridad | 18 | Hub «Academia Cyber-IES» + 18 sesiones + retos |
 
 ## Estructura interna de T3 Ciberseguridad
 
