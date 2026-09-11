@@ -324,21 +324,18 @@ s19 = pagina(
     'explicándolo.',
     [
         ('Depurar es buscar, no adivinar',
-         '<p>Cuando algo no funciona, la tentación es cambiar bloques a ver si suena la flauta. '
-         'Eso casi nunca sale bien y además rompe cosas que iban bien.</p>'
-         '<p>Depurar de verdad es otra cosa: <strong>reducir el número de sospechosos</strong> '
-         'hasta que sólo quede uno. Estas dos herramientas sirven para eso y están dentro de '
-         'Scratch:</p>' +
+         '<p>Cuando algo falla, la tentación es cambiar bloques a ver si suena la flauta. Casi '
+         'nunca sale bien, y de paso rompes lo que iba.</p>'
+         '<p>Depurar es otra cosa: <strong>ir quitando sospechosos</strong> hasta que quede uno. '
+         'Dos herramientas, las dos dentro de Scratch:</p>' +
          pasos([
-             '<strong>Haz clic sobre un montón de bloques</strong> en el área de código y se '
-             'ejecuta solo, ahí mismo, sin pulsar la bandera. Así compruebas una pieza aislada del '
-             'resto.',
-             '<strong>Mete un <em>decir</em> donde sospeches.</strong> Si pones un bloque que diga '
-             'el valor de una variable en mitad del programa, ves lo que está pasando por dentro. '
-             'Luego lo quitas.'
+             '<strong>Haz clic sobre un montón de bloques.</strong> Se ejecuta ahí mismo, sin la '
+             'bandera. Así pruebas una pieza sola.',
+             '<strong>Mete un <em>decir</em> donde sospeches.</strong> Te enseña lo que vale una '
+             'variable en ese punto. Luego lo quitas.'
          ]) +
          caja(DEPURA19, 'Bloque decir la variable Vidas durante 1 segundo', ancho=340,
-              pie='Un espía. Colócalo donde no entiendas qué está pasando y te lo cuenta.')),
+              pie='Un espía: cuenta lo que pasa por dentro.')),
 
         ('Los seis fallos de siempre',
          '<p>Busca aquí tu síntoma antes de tocar nada.</p>' +
@@ -364,23 +361,19 @@ s19 = pagina(
         ('Tu actividad',
          '<p><strong>Primero arregla, después adorna.</strong> En este orden:</p>' +
          pasos([
-             'Juega tres partidas enteras y apunta en un papel todo lo raro que veas. Todo, aunque '
-             'sea pequeño.',
-             'Arregla los fallos de la lista, de arriba abajo. Después de cada arreglo, vuelve a '
-             'jugar una partida entera.',
+             'Juega tres partidas enteras. Apunta en un papel todo lo raro, por pequeño que sea.',
+             'Arregla los fallos de arriba abajo. Después de cada arreglo, juega otra partida.',
              'Cuando ya no se rompa nada, y sólo entonces, coge la lista de pulido de abajo.',
-             'Haz las <strong>dos marcadas con ✱</strong> —la pantalla de inicio y la de fin— y '
-             'elige <strong>una más</strong> de las otras. Tres en total, bien hechas, no siete a '
-             'medias. Las dos obligatorias son las que hacen que el juego se entienda sin ti, y '
-             'eso vale 2 puntos de la rúbrica.',
-             'Deja que un compañero juegue <strong>sin decirle nada</strong>. Si tiene que '
-             'preguntarte cómo se juega, te faltan instrucciones.']) +
+             'Haz las <strong>dos marcadas con ✱</strong> y elige <strong>una más</strong>. '
+             'Tres bien hechas, no siete a medias. Las dos obligatorias son las que hacen que el '
+             'juego se entienda sin ti: 2 puntos de la rúbrica.',
+             'Deja que un compañero juegue <strong>sin decirle nada</strong>. Si te pregunta cómo '
+             'se juega, te faltan instrucciones.']) +
          tabla(['Mejora', 'En qué consiste', 'De dónde sale'], PULIDO) +
          ojo('La prueba del compañero es la más dura y la más útil',
-             '<p>Tú sabes jugar a tu juego porque lo has hecho tú. Un compañero que se sienta '
-             'delante sin explicaciones te va a encontrar en dos minutos cosas que tú no habías '
-             'visto en tres sesiones. Déjale jugar y <strong>no le ayudes</strong>: apunta dónde se '
-             'atasca.</p>')),
+             '<p>Tú sabes jugar porque lo has hecho tú. Un compañero encuentra en dos minutos '
+             'cosas que tú no has visto en tres sesiones. Déjale jugar y <strong>no le '
+             'ayudes</strong>: apunta dónde se atasca.</p>')),
 
         ('Lo has conseguido si…',
          logros(['Has jugado tres partidas enteras sin que aparezca ningún fallo.',

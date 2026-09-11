@@ -53,9 +53,18 @@ Valen para este repo y para el hermano `teci2-ies-jdq`. No son negociables salvo
 
 ## T1 · SCRATCH — ESTADO (sept-2026)
 
-**Reescrito entero.** Las 20 sesiones dejaron de ser un índice que abría el cuadernillo completo
-por la página 1 y son ahora páginas de trabajo autónomas, pensadas para tener Scratch abierto al
-lado en media pantalla.
+**Reescrito entero y revisado.** Las 20 sesiones dejaron de ser un índice que abría el cuadernillo
+completo por la página 1 y son ahora páginas de trabajo autónomas, pensadas para tener Scratch
+abierto al lado en media pantalla.
+
+Después de la reescritura se hizo una **revisión pedagógica de las 20** contra el plan y el
+cotejo (`REVISION_T1_SESIONES.md`). Salieron cuatro programas que no funcionaban al ejecutarlos
+—no al leerlos— y varias promesas que el material no cumplía. Está todo arreglado. Lo que
+decidí por mi cuenta al arreglarlo está en `DECISIONES_T1.md`, puntos 12 a 20.
+
+**Dotación real: 2 sesiones semanales.** Las 20 sesiones son unas 10 semanas y el trimestre da
+para 26 clases: ese margen es el colchón de las sesiones que se comen dos. No hay que llegar a
+la S16 «porque tocaba».
 
 ### Contexto real de clase — importa para todo lo que escribas
 
@@ -77,12 +86,17 @@ lado en media pantalla.
   - `COTEJO_Cuadernillo_Scratch3.md` — **tabla verificada** de nombres de bloques Scratch 2 → 3,
     transcrita de capturas del editor real. Consúltala antes de escribir cualquier bloque.
   - `PLAN_T1_SCRATCH.md` — el guion de las 20 sesiones y las reglas de estilo del material.
-  - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta en la reescritura, con el porqué.
+  - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta, con el porqué. Puntos 1-11 de la
+    reescritura; 12-20 de la ronda de arreglos posterior.
+  - `REVISION_T1_SESIONES.md` — la revisión pedagógica de las 20 sesiones: qué fallaba, qué se
+    arregló y qué queda.
 
 ### Lo que queda pendiente en CyR
 
-1. **Validación de Manuel** del material nuevo: tono y longitud para 1º de ESO. Sugeridas S09,
-   S12 y S18.
+1. **Dos cosas que sólo puede contestar Manuel:** si el título de la S04 se puede cambiar en
+   Moodle («Condicionales I» avisa en la propia página de que hoy no hay ningún `si… entonces`),
+   y si el sonido `Pop` que usan S11, S12, S16 y S18 aparece con ese nombre en el editor — el
+   `COTEJO` sólo dejó cerrado `Miau`.
 2. Las **cuatro decisiones de la auditoría** siguen sin contestar: qué hacer con las páginas
    «🚧 En construcción», si T3 converge con el resto, y si se saca `node_modules` del repo.
 3. **`node_modules` está comprometido y además roto** (la carpeta `jsdom` no tiene

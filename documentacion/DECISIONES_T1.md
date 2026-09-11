@@ -131,3 +131,95 @@ explican confusiones que habrás visto en clase:
    (borrar `ejercicios/`), la 6 (sumas en vez de multiplicaciones) y la 9 (el skip-link que no he
    puesto).
 3. **Hacer push** desde GitHub Desktop si te parece bien.
+
+---
+
+# Segunda tanda · revisión de las 20 sesiones (sept-2026)
+
+Me dijiste otra vez que tirara adelante y aplicara mi criterio. Esto es lo que he
+decidido yo, en la ronda que arregla lo que encontró la revisión
+(`REVISION_T1_SESIONES.md`). Mismo trato: el porqué, y qué costaría deshacerlo.
+
+## 12. El balón de la S11 gana un segundo programa, no se le mete la colocación dentro del `al recibir`
+
+**Por qué:** si la colocación va dentro del `al recibir (patada)`, el balón da un salto
+justo en el momento del chute y se ve feo. Con un `al hacer clic en 🏳` propio, el balón se
+coloca antes de empezar y el chute es limpio. De paso el alumno ve que **un objeto puede
+tener varios programas**, que es lo que va a necesitar en el proyecto final.
+
+**Deshacer:** trivial, es la lista `C11` del generador.
+
+## 13. El umbral del Pong baja a −155, y desaparece la alternativa del rebote selectivo
+
+**Por qué:** −170 sólo salta si la pelota es pequeña; con una más grande la partida no
+acaba nunca. Con la pala en −140, a −155 la pelota ya ha pasado de largo y se detecta
+siempre, antes de llegar al borde. Y he quitado lo de «cambia el rebote por uno que sólo
+mire los lados y el techo» porque **eso no es un bloque**: montarlo pide condicionales
+sobre `posición x` que no se enseñan.
+
+**Si no te convence:** el número está en `FIN16`, en un sitio.
+
+## 14. La rúbrica se publica al final de la ficha de diseño de la S17, no como sección aparte
+
+**Por qué:** como sección propia habría dejado la S17 con seis, y el trimestre entero
+acaba de quedar con «Comprueba» en el 3 y «Tu actividad» en el 4. Y donde de verdad sirve
+es ahí: el alumno escribe cómo se gana y cómo se pierde con los puntos delante.
+
+## 15. En la S19 la pantalla de inicio y la de fin pasan a ser obligatorias
+
+**Por qué:** la actividad decía «elige tres, no todas» y el checklist exigía esas tres
+**más** las dos pantallas. Había que romper el empate por un lado. He elegido hacerlas
+obligatorias porque son las dos que sostienen «se entiende solo», que vale 2 puntos.
+
+**Alternativa:** quitarlas del checklist y dejar las tres libres.
+
+## 16. La octava pieza del kit es `esconder` / `mostrar`, y no entran ni «rebotar» ni «mensajes»
+
+El plan hablaba de ocho piezas y había siete. He añadido la que faltaba de verdad:
+`esconder` / `mostrar` no aparecía en **ninguna** de las 20 sesiones y la necesitan dos de
+las ideas que el catálogo de la S17 marca como fáciles.
+
+**Las otras dos no las he metido a propósito:** `si toca un borde, rebotar` es un bloque
+suelto que ya sale en S03, S04, S06 y S15 y no necesita ficha; y los mensajes ya están
+dentro de la pieza 6, que es como se usan de verdad en un proyecto.
+
+## 17. La S20 se queda con cuatro secciones
+
+Las otras diecinueve van 1–5. La S20 no tiene nada que construir: su actividad es
+presentar. Añadirle un «Tu actividad» de relleno para cuadrar la numeración habría sido
+peor que la asimetría. Queda a sabiendas.
+
+## 18. La S03 cambia «dibujar» por «recorrer» en vez de añadir la extensión Lápiz
+
+**Por qué:** la sesión prometía dibujar tres figuras y sin la extensión **Lápiz** no queda
+ni una línea en pantalla. Se podía arreglar de dos maneras y he elegido la barata: cambiar
+el verbo y avisar de que el camino no se queda pintado. Meter una extensión en la sesión 3
+—que es justo lo que la regla de estilo 3 desaconseja— para adornar un ejercicio de bucles
+no compensa.
+
+**Si prefieres el lápiz:** son dos bloques (`bajar lápiz` y el botón de extensiones) y una
+frase, en `P03`.
+
+## 19. El bloque «Saber» del hub se reescribe sólo en T1
+
+El hub hablaba de *descomposición, abstracción, algoritmia, hilos paralelos y broadcast* en
+la portada que ve un niño de doce años. El contenido es el mismo, dicho en su idioma. **T2
+comparte la plantilla pero no el texto** —sus contenidos son de micro:bit—, así que nada se
+descuadra. El vocabulario curricular sigue donde le corresponde, en `PROGRAMACION.md`.
+
+## 20. `iniciar sonido (Pop)` se queda, pendiente de verificar
+
+Aparece en S11, S12, S16 y S18. El `COTEJO` sólo dejó cerrado **Miau**. No lo he cambiado
+porque casi todos los objetos de la biblioteca traen ese sonido, pero **conviene que lo
+mires en el editor**: si el objeto que elige el alumno no lo trae, el bloque saldrá con
+otro nombre — que es el sexto fallo de la tabla de la S19.
+
+---
+
+## Y una corrección a mi propia revisión
+
+Dije que la S19 era «la candidata clara a recortar» por sus 861 palabras. Medí mal: **300
+de esas palabras son las dos tablas de consulta**, que se escanean, no se leen. Su prosa
+son 559 palabras, por debajo de la media de las veinte (609). La he aligerado igualmente
+—las frases eran largas— pero la alarma estaba inflada. La sesión con más prosa es ahora la
+**S11**, con 753, y es a propósito: es la que ha ganado el programa de colocación del balón.
