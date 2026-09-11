@@ -13,6 +13,17 @@ def si(cond, hijos):
     return ('c', 'control', ['si', cond, 'entonces'], hijos)
 
 
+def opcion(slug, icono, nombre, nota):
+    return ('<a href="../juegos/%s.html" class="bc"><span class="bi">%s</span>'
+            '<span class="bk">%s</span><span class="bn">%s</span></a>'
+            % (slug, icono, nombre, nota))
+
+
+NAV_OPCIONES = (opcion('arkanoid', '\U0001F9F1', 'A · Arkanoid', 'Rompe los ladrillos') +
+                opcion('space-invaders', '\U0001F47E', 'B · Space Invaders', 'Nave y marcianos') +
+                opcion('esquivar', '\u2604\uFE0F', 'C · Esquivar lo que cae', 'Tres vidas'))
+
+
 # La rubrica del proyecto final: se publica en S17 y se repite en S20.
 RUBRICA = [
     ['<strong>Funciona</strong>', 'Se juega de principio a fin sin romperse. Se puede ganar y '
@@ -27,26 +38,31 @@ RUBRICA = [
 
 # ============================================================ S17
 FICHA = [
-    ('1. Título', 'Cómo se llama tu juego o tu historia.'),
-    ('2. Tipo', 'Juego de habilidad, quiz, laberinto, historia con decisiones…'),
-    ('3. Personajes', 'Cuántos objetos vas a necesitar y qué hace cada uno.'),
-    ('4. Escenario', 'Cuántos fondos y para qué (portada, juego, fin).'),
-    ('5. Cómo se juega', 'Qué teclas o qué ratón usa el jugador. En una frase.'),
-    ('6. Cómo se gana', 'La condición exacta. «Llegar a 10 puntos», no «hacerlo bien».'),
-    ('7. Cómo se pierde', 'La condición exacta. Si no se puede perder, no es un juego.'),
-    ('8. Qué voy a reutilizar', 'De qué sesiones vas a copiar los bloques. Sé concreto.'),
-    ('9. Si me sobra tiempo', 'Dos mejoras que añadirías. Sólo si acabas lo de arriba.'),
+    ('1. Título', 'Cómo se llama <em>tu</em> versión. No «Arkanoid»: el tuyo.'),
+    ('2. Base', 'Cuál de las tres eliges: Arkanoid, Space Invaders o Esquivar lo que cae.'),
+    ('3. Qué le cambias', '<strong>Tres cosas concretas.</strong> De la lista «Tu versión» de '
+                          'tu juego, o tuyas.'),
+    ('4. Personajes', 'Qué objetos necesitas y qué hace cada uno.'),
+    ('5. Escenario', 'Cuántos fondos y para qué (portada, juego, fin).'),
+    ('6. Cómo se juega', 'Qué teclas o qué ratón usa el jugador. En una frase.'),
+    ('7. Cómo se gana', 'La condición exacta. «Romper los diez ladrillos», no «hacerlo bien».'),
+    ('8. Cómo se pierde', 'La condición exacta. Si no se puede perder, no es un juego.'),
+    ('9. Si me sobra tiempo', 'Dos mejoras más. Sólo si acabas lo de arriba.'),
 ]
 
-IDEAS = [
-    ['Esquivar lo que cae', 'S05 flechas · S09 marcador · S12 tocando', '⭐ Fácil'],
-    ['Quiz de una asignatura', 'S07 preguntar · S09 marcador y azar', '⭐ Fácil'],
-    ['Piedra, papel o tijera al mejor de 5', 'S14 entero · S09 marcador', '⭐ Fácil'],
-    ['Cazar al que huye', 'S10 azar · S12 tocando · S13 cronómetro', '⭐ Fácil'],
-    ['Laberinto de dos o tres niveles', 'S12 y S13 enteras', '⭐⭐ Media'],
-    ['Pong con dificultad creciente', 'S15 y S16 enteras', '⭐⭐ Media'],
-    ['Juego de reflejos contra el reloj', 'S13 cronómetro · S06 disfraces', '⭐⭐ Media'],
-    ['Historia con decisiones', 'S07 preguntar · S11 mensajes · varios fondos', '⭐⭐ Media'],
+OPCIONES = [
+    ['<strong><a href="../juegos/arkanoid.html">A · Arkanoid</a></strong>',
+     'Rompe todos los ladrillos con una pelota que no puedes dejar caer',
+     'El Pong entero: S15 y S16',
+     '⭐⭐ Media'],
+    ['<strong><a href="../juegos/space-invaders.html">B · Space Invaders</a></strong>',
+     'Una nave que dispara y una fila de marcianos que se mueve',
+     'Flechas, mensajes y variables: S05, S08 y S11',
+     '⭐⭐⭐ La más larga'],
+    ['<strong><a href="../juegos/esquivar.html">C · Esquivar lo que cae</a></strong>',
+     'Aguanta debajo de una lluvia de cosas con tres vidas',
+     'Cuatro piezas del kit de la S18',
+     '⭐ La más corta'],
 ]
 
 s17 = pagina(
@@ -63,37 +79,44 @@ s17 = pagina(
          '<p>Media hora pensando hoy te ahorra dos sesiones de líos. Es así en clase y es así en '
          'los trabajos de verdad.</p>'),
 
-        ('Catálogo de ideas',
-         '<p>No tienes que elegir de aquí, pero míralo antes de inventarte nada. Cada idea dice '
-         '<strong>de qué sesiones puedes copiar los bloques</strong>, que es lo que de verdad '
-         'importa: no vas a partir de cero.</p>' +
-         tabla(['Idea', 'Se apoya en…', 'Dificultad'], IDEAS) +
-         '<p>Si se te ocurre otra cosa, perfecto — pero antes contesta a esto: '
-         '<em>¿de qué sesión saco los bloques?</em> Si no sabes contestar, la idea es demasiado '
-         'grande.</p>'),
+        ('Elige tu base',
+         '<p>No partes de cero. Hay <strong>tres juegos montados</strong>, cada uno con su página: '
+         'los programas dibujados bloque a bloque, con qué pieza sale de qué sesión. Eliges uno y '
+         'lo montas.</p>' +
+         tabla(['Opción', 'Qué es', 'Lo que ya tienes hecho', 'Cuánto cuesta'], OPCIONES) +
+         '<p><strong>Y aquí está el asunto: el proyecto no es copiar el juego.</strong> Copiarlo es '
+         'el primer día. El proyecto es <em>tu versión</em>: qué le cambias, qué le añades, de qué '
+         'va. Cada una de las tres páginas termina con una lista de ideas, y en cada idea pone qué '
+         'hay que tocar.</p>'
+         '<p>Si ninguna te convence y tienes otra cosa en la cabeza, dilo — pero antes contesta a '
+         'esto: <em>¿de qué sesión saco los bloques?</em> Si no sabes contestar, la idea es '
+         'demasiado grande.</p>'),
 
         ('Comprueba que lo has entendido',
-         pregunta('1', 'Tres compañeros proponen esto. Para el tiempo que hay (tres sesiones), '
-                       '¿cuál está bien dimensionado?',
-                  [('grande', 'Un juego de plataformas con cinco niveles, enemigos, tienda de '
+         pregunta('1', 'Tres compañeros eligen el <strong>Arkanoid</strong> y proponen estas tres '
+                       'versiones. Para lo que queda —dos sesiones de construir y una de pulir—, '
+                       '¿cuál está bien dimensionada?',
+                  [('grande', 'Convertirlo en un juego de plataformas con enemigos, tienda de '
                     'objetos y jefe final',
-                    'Eso es trabajo de meses, no de tres sesiones. El resultado casi seguro sería '
-                    'un primer nivel a medias. Es el error más común: no falta capacidad, sobra '
-                    'ambición.'),
-                   ('justo', 'Un juego de esquivar objetos que caen, con marcador y tres vidas',
-                    'Correcto. Tiene una mecánica clara, se puede ganar y perder, usa cosas que ya '
-                    'sabes hacer, y si sobra tiempo se le pueden añadir mejoras. Un proyecto bien '
-                    'dimensionado <b>se termina y luego crece</b>.'),
-                   ('pequeno', 'Dos personajes que se saludan y se despiden',
-                    'Se queda corto: no hay nada que el jugador pueda hacer, así que no hay ni '
-                    'condicionales ni variables que enseñar. Eso era la sesión 1.')],
+                    'Eso ya no es una versión del Arkanoid: es otro juego, y de meses. El '
+                    'resultado casi seguro sería un primer nivel a medias. Es el error más común: '
+                    'no falta capacidad, sobra ambición.'),
+                   ('justo', 'Tres filas de ladrillos de colores que valen distinto, tres vidas y '
+                    'una pantalla de inicio',
+                    'Correcto. Son <b>tres cambios concretos</b>, cada uno se toca en un sitio que '
+                    'ya sabes, y si sobra tiempo se le añade más. Una versión bien dimensionada '
+                    '<b>se termina y luego crece</b>.'),
+                   ('pequeno', 'Cambiarle el disfraz a los ladrillos, y ya',
+                    'Se queda corto: por dentro el juego sigue siendo exactamente el mismo. La '
+                    'rúbrica mira lo que has <em>programado</em>, no lo que has dibujado.')],
                   'justo')),
 
         ('Tu actividad: la ficha de diseño',
-         '<p>Contesta a los nueve puntos. Escríbelos directamente en la tarea de Moodle. '
-         'No hace falta que sea largo: hace falta que sea <strong>concreto</strong>.</p>' +
+         '<p>Contesta a los nueve puntos con tu base ya elegida delante. Escríbelos directamente '
+         'en la tarea de Moodle. No hace falta que sea largo: hace falta que sea '
+         '<strong>concreto</strong>.</p>' +
          tabla(['Punto', 'Qué tienes que escribir'], [[a, b] for a, b in FICHA]) +
-         ojo('Las dos preguntas que más cuestan son la 6 y la 7',
+         ojo('Las dos preguntas que más cuestan son la 7 y la 8',
              '<p>«Se gana cuando lo haces bien» no sirve. El ordenador no sabe qué es «bien». '
              'Tiene que ser algo que un bloque pueda comprobar: <em>«se gana cuando Puntos llega a '
              '10»</em>, <em>«se pierde cuando Vidas llega a 0»</em>.</p>'
@@ -112,10 +135,12 @@ s17 = pagina(
          logros(['Has contestado a los nueve puntos.',
                  'Has leído la rúbrica y sabes qué es lo que más puntúa.',
                  'Las condiciones de ganar y de perder están escritas con números concretos.',
-                 'Sabes decir de qué sesiones vas a copiar bloques.',
+                 'Has elegido una de las tres bases y sabes dónde está su página.',
+                 'Los <strong>tres cambios</strong> del punto 3 son cosas que se programan, no '
+                 'sólo dibujos.',
                  'Un compañero puede leer tu ficha y entender a qué se juega, sin que se lo cuentes.'])),
     ],
-    abrir=False,
+    abrir=False, nav_extra=NAV_OPCIONES,
     entrega='<p style="margin:0 0 10px;">Hoy <strong>no</strong> se entrega un <code>.sb3</code>: '
             'todavía no hay nada que programar.</p><ol>'
             '<li>Escribe los <strong>nueve puntos</strong> de la ficha en la tarea de Moodle de la '
@@ -258,11 +283,13 @@ s18 = pagina(
 
         ('Tu actividad',
          pasos([
-             'Saca tu ficha de la sesión 17 y ténla al lado.',
+             'Saca tu ficha de la sesión 17 y abre <strong>la página de la base que elegiste</strong>.',
              'Crea los objetos y los fondos que dice la ficha. Sin programar nada todavía.',
-             'Monta <strong>primero la mecánica principal</strong>: lo que hace el jugador. Nada más.',
-             'Pruébala. Cuando funcione, añade la condición de <strong>ganar</strong>.',
-             'Pruébala otra vez. Después la de <strong>perder</strong>.',
+             'Monta la <strong>base tal cual viene en su página</strong> y pruébala. Hasta que el '
+             'juego de todos no funcione, no empieces con lo tuyo.',
+             'Ahora sí: el <strong>primero</strong> de los tres cambios del punto 3 de tu ficha. '
+             'Compruébalo antes de seguir.',
+             'El segundo y el tercero, uno cada vez, probando entre medias.',
              'Repasa la <strong>inicialización</strong>: pulsa la bandera tres veces seguidas y '
              'comprueba que las tres partidas empiezan exactamente igual.',
              'Descarga el <code>.sb3</code> aunque no hayas terminado.']) +
@@ -274,9 +301,11 @@ s18 = pagina(
         ('Lo has conseguido si…',
          logros(['El juego se puede jugar de principio a fin.',
                  'Se puede ganar y se puede perder.',
+                 'Tiene al menos uno de los tres cambios de tu ficha, terminado.',
                  'Tres partidas seguidas empiezan exactamente igual.',
                  'Has descargado el <code>.sb3</code>.'])),
-    ])
+    ],
+    nav_extra=NAV_OPCIONES)
 
 # ============================================================ S19
 FALLOS = [

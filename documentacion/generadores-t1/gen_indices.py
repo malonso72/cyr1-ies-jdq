@@ -169,6 +169,10 @@ print('escrito sesiones/index.html (%d bytes)' % os.path.getsize(ruta))
 # ------------------------------------------------------------------ hub T1
 hub = open(BASE + 'index.html', encoding='utf-8').read()
 
+TARJETA_JUEGOS = ('<span class="bk">Juegos y proyecto final</span>\n'
+                  '    <span class="bn">Las tres bases entre las que se elige el proyecto, y '
+                  'ocho juegos más de ampliación</span>')
+
 CAMBIOS = [
     # coherencia con lo que de verdad se hace en clase
     ('<li>Variables, listas y mensajes en Scratch</li>',
@@ -196,9 +200,15 @@ CAMBIOS = [
      '<li><strong>Se entiende solo:</strong> otra persona sabe jugar sin que se lo expliques</li>'),
     ('<li>Se valoran y comentan los proyectos de los compañeros con criterio</li>',
      '<li><strong>Lo cuentas bien:</strong> en un minuto explicas qué es y qué te costó más</li>'),
-    # en juegos/ hay once, no doce
-    ('<span class="bn">12 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>',
-     '<span class="bn">11 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>'),
+    # la tarjeta de juegos: ni son doce, ni son un extra — son el proyecto final.
+    # Las dos entradas llevan al MISMO texto final, para que el generador se pueda
+    # reejecutar sobre un hub ya parcheado sin avisar de nada.
+    ('<span class="bk">Juegos</span>\n'
+     '    <span class="bn">12 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>',
+     TARJETA_JUEGOS),
+    ('<span class="bk">Juegos</span>\n'
+     '    <span class="bn">11 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>',
+     TARJETA_JUEGOS),
     # el cuadernillo deja de venderse como material de trabajo
     ('<span class="bk">Cuadernillo Scratch · Parte 1</span>\n'
      '    <span class="bn">PDF imprimible para alumnado</span>',
@@ -240,7 +250,9 @@ NUEVO_ENF = ('<p>Cada sesión tiene su propia página: un programa que hay que <
              '    <p>Las <strong>cuatro últimas sesiones</strong> son un proyecto propio: diseño, '
              'construcción, depuración y presentación. La evaluación combina las entregas de cada '
              'sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
-             '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño.</p>')
+             '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño. '
+             'El proyecto no se parte de cero: se elige una de '
+             '<a href="juegos/index.html">tres bases</a> y se hace una versión propia.</p>')
 # Version anterior de este mismo parrafo: la rubrica se prometia "desde la sesion 17"
 # cuando todavia no estaba publicada alli. Se reemplaza tambien, para que el
 # generador se pueda reejecutar sobre un hub ya parcheado.
@@ -248,12 +260,18 @@ ENF_V1 = ('sesión en Moodle y ese proyecto final, con una rúbrica que el alumn
           'la sesión 17.</p>')
 ENF_V2 = ('sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
           '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño.</p>')
+ENF_V3 = ('sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
+          '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño. '
+          'El proyecto no se parte de cero: se elige una de '
+          '<a href="juegos/index.html">tres bases</a> y se hace una versión propia.</p>')
 
 if VIEJO_ENF in hub:
     hub = hub.replace(VIEJO_ENF, NUEVO_ENF)
 elif ENF_V1 in hub:
-    hub = hub.replace(ENF_V1, ENF_V2)
-elif ENF_V2 not in hub:
+    hub = hub.replace(ENF_V1, ENF_V3)
+elif ENF_V2 in hub:
+    hub = hub.replace(ENF_V2, ENF_V3)
+elif ENF_V3 not in hub:
     print('  AVISO: no encontrado el párrafo de enfoque')
 
 open(BASE + 'index.html', 'w', encoding='utf-8').write(hub)
