@@ -114,8 +114,6 @@ INDICE = '''<!DOCTYPE html>
 <span class="nc-current"><span>🗓️</span><span class="nc-lbl">Sesiones</span></span>
 <span class="nc-sep">·</span>
 <a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
-<span class="nc-sep">·</span>
-<a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
 </nav>
 
 <div id="main-content">
@@ -167,112 +165,157 @@ print('escrito sesiones/index.html (%d bytes)' % os.path.getsize(ruta))
 
 
 # ------------------------------------------------------------------ hub T1
-hub = open(BASE + 'index.html', encoding='utf-8').read()
+# Antes esto parcheaba el hub a base de reemplazos. Se generaba mal: cada
+# cambio dejaba una entrada más que había que mantener viva para que el
+# generador no avisara de textos que ya no existían. Ahora se escribe entero.
+#
+# La portada se dejó en TRES tarjetas —presentación, abrir Scratch y sesiones—
+# porque el alumnado no entra por aquí: entra desde Moodle directo a la sesión.
+# Todo lo demás tiene ya su puerta: el cuadernillo se enlaza página a página
+# desde cada sesión, y a los juegos se llega desde la S17 y la S18.
+HUB = '''<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B4F8A">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<title>T1 · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Trimestre 1 · Scratch · Programación por bloques: juegos y animaciones · CyR 1º ESO · IES Jiménez de Quesada.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/">
 
-TARJETA_JUEGOS = ('<span class="bk">Juegos y proyecto final</span>\n'
-                  '    <span class="bn">Las tres bases entre las que se elige el proyecto, y '
-                  'ocho juegos más de ampliación</span>')
+<!-- ══ Open Graph ══ -->
+<meta property="og:title" content="T1 · Scratch · CyR 1º ESO">
+<meta property="og:description" content="Trimestre 1 · Scratch · Programación por bloques: juegos y animaciones · CyR 1º ESO · IES Jiménez de Quesada.">
+<meta property="og:image" content="https://cyr1-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<meta property="og:url" content="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="CyR 1º ESO — IES Jiménez de Quesada">
 
-CAMBIOS = [
-    # coherencia con lo que de verdad se hace en clase
-    ('<li>Variables, listas y mensajes en Scratch</li>',
-     '<li>Variables y mensajes entre objetos en Scratch</li>'),
-    ('<li>Usar variables y listas para guardar el estado del juego (puntos, vidas, niveles)</li>',
-     '<li>Usar variables para guardar el estado del juego (puntos, vidas, niveles)</li>'),
-    ('<li>Compartir y comentar proyectos en la comunidad Scratch</li>',
-     '<li>Descargar el proyecto en un archivo <code>.sb3</code> y entregarlo en Moodle</li>'),
-    # la tarjeta de sesiones
-    ('<span class="bn">20 sesiones guiadas (s01–s20) con objetivos y entregas</span>',
-     '<span class="bn">20 sesiones completas, para trabajar con Scratch abierto al lado</span>'),
-    # «Saber» y «Evaluar», en el idioma de quien los lee: son la portada del alumno
-    ('<li>Pensamiento computacional: descomposición, abstracción, patrones, algoritmia</li>',
-     '<li>Partir un problema grande en problemas pequeños, y resolverlos de uno en uno</li>'),
-    ('<li>Eventos, sensores, hilos paralelos y mensajes (broadcast)</li>',
-     '<li>Hacer que varios personajes funcionen a la vez y se avisen entre ellos</li>'),
-    ('<li>Estructuras de control: secuencia, alternativa (si/sino), iteración (bucles)</li>',
-     '<li>Programar con decisiones (<em>si… entonces</em>) y repeticiones (<em>bucles</em>)</li>'),
-    # los criterios del hub tienen que ser los de la rúbrica de la S17, no otros
-    ('<li>El programa funciona y resuelve la tarea pedida</li>',
-     '<li><strong>Funciona:</strong> se juega entero sin romperse, se puede ganar y perder</li>'),
-    ('<li>Se usan estructuras de control adecuadas a cada problema</li>',
-     '<li><strong>Usa lo aprendido:</strong> bucles, condicionales y al menos una variable</li>'),
-    ('<li>El proyecto está documentado: qué hace, cómo se usa, créditos</li>',
-     '<li><strong>Se entiende solo:</strong> otra persona sabe jugar sin que se lo expliques</li>'),
-    ('<li>Se valoran y comentan los proyectos de los compañeros con criterio</li>',
-     '<li><strong>Lo cuentas bien:</strong> en un minuto explicas qué es y qué te costó más</li>'),
-    # la tarjeta de juegos: ni son doce, ni son un extra — son el proyecto final.
-    # Las dos entradas llevan al MISMO texto final, para que el generador se pueda
-    # reejecutar sobre un hub ya parcheado sin avisar de nada.
-    ('<span class="bk">Juegos</span>\n'
-     '    <span class="bn">12 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>',
-     TARJETA_JUEGOS),
-    ('<span class="bk">Juegos</span>\n'
-     '    <span class="bn">11 juegos para construir paso a paso (pong, naves, laberinto, arkanoid…)</span>',
-     TARJETA_JUEGOS),
-    # el cuadernillo deja de venderse como material de trabajo
-    ('<span class="bk">Cuadernillo Scratch · Parte 1</span>\n'
-     '    <span class="bn">PDF imprimible para alumnado</span>',
-     '<span class="bk">Cuadernillo Scratch (consulta)</span>\n'
-     '    <span class="bn">PDF antiguo, hecho con Scratch 2: varios bloques ya no se llaman '
-     'así. Cada sesión enlaza su página exacta</span>'),
-]
+<!-- ══ Twitter Card ══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="T1 · Scratch · CyR 1º ESO">
+<meta name="twitter:description" content="Trimestre 1 · Scratch · Programación por bloques: juegos y animaciones · CyR 1º ESO · IES Jiménez de Quesada.">
+<meta name="twitter:image" content="https://cyr1-ies-jdq.malonso72.workers.dev/img/fachadaiesjdq.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/common.css">
+<link rel="stylesheet" href="../../assets/css/hub.css">
+<style>
+  /* el panel de saberes va plegado, dentro de un details */
+  details.criterios .aprender-grid{margin:0;padding:0;max-width:none}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-for viejo, nuevo in CAMBIOS:
-    if viejo not in hub and nuevo not in hub:
-        print('  AVISO: no encontrado ->', viejo[:70])
-    hub = hub.replace(viejo, nuevo)
+<header class="curso-hd">
+  <span class="curso-sb">T1 · Scratch</span>
+</header>
 
-# botón para abrir Scratch, el primero de los recursos
-ANCLA = '<div class="section-title">📚 Recursos del trimestre</div>\n<div class="bg bg-large">'
-BOTON = ANCLA + '''
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+  <a href="../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+  <span class="nc-sep">·</span>
+  <span class="nc-current"><span>📋</span><span class="nc-lbl">Hub T1</span></span>
+  <span class="nc-sep">·</span>
+  <a href="sesiones/index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+  <span class="nc-sep">·</span>
+  <a href="juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
+</nav>
+
+<div id="main-content">
+
+<section class="unidad-titulo-hero">
+  <div class="num">Trimestre 1</div>
+  <h1>🎮 Scratch</h1>
+  <div class="duracion">⏱️ 20 sesiones · Programación, juegos y proyecto final</div>
+</section>
+
+<div class="hub-main">
+
+<div class="section-title">📚 Por dónde empezar</div>
+<div class="bg bg-large">
+  <a href="presentacion.html" class="bc">
+    <span class="bi">📺</span>
+    <span class="bk">Presentación</span>
+    <span class="bn">Qué es Scratch, cómo es por dentro y qué vamos a hacer este trimestre</span>
+  </a>
   <a href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener" class="bc tipo-tool">
     <span class="bi">🐱</span>
     <span class="bk">Abrir Scratch</span>
     <span class="bn">Editor oficial, en el navegador. Sin instalar nada y sin cuenta</span>
-  </a>'''
-if 'Abrir Scratch' in hub:
-    pass                      # ya estaba: el generador se puede reejecutar sin duplicar
-elif ANCLA in hub:
-    hub = hub.replace(ANCLA, BOTON)
-else:
-    print('  AVISO: no encontrado el ancla de recursos')
+  </a>
+  <a href="sesiones/index.html" class="bc">
+    <span class="bi">🗓️</span>
+    <span class="bk">Las 20 sesiones</span>
+    <span class="bn">Cada una con su programa, su pregunta, su actividad y su entrega</span>
+  </a>
+</div>
 
-# el enfoque de trabajo, puesto al día
-VIEJO_ENF = ('<p>Cada semana se trabaja sobre un mini-reto del cuadernillo y se cierra con una '
-             'pequeña entrega. Al final del trimestre se realiza un <strong>proyecto integrador'
-             '</strong> (animación o videojuego propio) en parejas, que incluye guion, diseño y '
-             'código. La evaluación combina las entregas semanales, el cuaderno del alumno y el '
-             'proyecto final.</p>')
-NUEVO_ENF = ('<p>Cada sesión tiene su propia página: un programa que hay que <strong>leer y '
-             'entender antes de escribir el tuyo</strong>, una pregunta de comprensión, la '
-             'actividad y la entrega. Se trabaja con Scratch abierto al lado, en el navegador, '
-             'sin instalar nada y sin cuenta.</p>\n'
-             '    <p>Las <strong>cuatro últimas sesiones</strong> son un proyecto propio: diseño, '
-             'construcción, depuración y presentación. La evaluación combina las entregas de cada '
-             'sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
-             '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño. '
-             'El proyecto no se parte de cero: se elige una de '
-             '<a href="juegos/index.html">tres bases</a> y se hace una versión propia.</p>')
-# Version anterior de este mismo parrafo: la rubrica se prometia "desde la sesion 17"
-# cuando todavia no estaba publicada alli. Se reemplaza tambien, para que el
-# generador se pueda reejecutar sobre un hub ya parcheado.
-ENF_V1 = ('sesión en Moodle y ese proyecto final, con una rúbrica que el alumnado conoce desde '
-          'la sesión 17.</p>')
-ENF_V2 = ('sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
-          '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño.</p>')
-ENF_V3 = ('sesión en Moodle y ese proyecto final, con una rúbrica que se publica en la '
-          '<a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño. '
-          'El proyecto no se parte de cero: se elige una de '
-          '<a href="juegos/index.html">tres bases</a> y se hace una versión propia.</p>')
+<details class="criterios">
+  <summary>📋 Enfoque de trabajo</summary>
+  <div class="criterios-body">
+    <p>Cada sesión tiene su propia página: un programa que hay que <strong>leer y entender antes de escribir el tuyo</strong>, una pregunta de comprensión, la actividad y la entrega. Se trabaja con Scratch abierto al lado, en el navegador, sin instalar nada y sin cuenta. El cuadernillo antiguo queda como consulta: cada sesión enlaza su página exacta.</p>
+    <p>Las <strong>cuatro últimas sesiones</strong> son el proyecto final, y no se parte de cero: se elige una de <a href="juegos/index.html">tres bases</a> —Arkanoid, Space Invaders o Esquivar lo que cae— y se hace una versión propia. La evaluación combina las entregas de cada sesión en Moodle y ese proyecto, con una rúbrica que se publica en la <a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño.</p>
+  </div>
+</details>
 
-if VIEJO_ENF in hub:
-    hub = hub.replace(VIEJO_ENF, NUEVO_ENF)
-elif ENF_V1 in hub:
-    hub = hub.replace(ENF_V1, ENF_V3)
-elif ENF_V2 in hub:
-    hub = hub.replace(ENF_V2, ENF_V3)
-elif ENF_V3 not in hub:
-    print('  AVISO: no encontrado el párrafo de enfoque')
+<details class="criterios">
+  <summary>📖 Qué se aprende y con qué se evalúa</summary>
+  <div class="criterios-body">
+<section class="aprender-grid">
+  <div class="aprender-card saber">
+    <h3>📖 Saber</h3>
+    <ul>
+      <li>Partir un problema grande en problemas pequeños, y resolverlos de uno en uno</li>
+      <li>Programar con decisiones (<em>si… entonces</em>) y repeticiones (<em>bucles</em>)</li>
+      <li>Variables y mensajes entre objetos en Scratch</li>
+      <li>Hacer que varios personajes funcionen a la vez y se avisen entre ellos</li>
+      <li>Diseño de juegos y animaciones: escenarios, personajes (sprites), interacción</li>
+    </ul>
+  </div>
+  <div class="aprender-card hacer">
+    <h3>🛠️ Hacer</h3>
+    <ul>
+      <li>Diseñar el algoritmo de un juego antes de programarlo</li>
+      <li>Implementar interacción con teclado, ratón y sensores</li>
+      <li>Usar variables para guardar el estado del juego (puntos, vidas, niveles)</li>
+      <li>Depurar errores rastreando el flujo de un programa</li>
+      <li>Descargar el proyecto en un archivo <code>.sb3</code> y entregarlo en Moodle</li>
+    </ul>
+  </div>
+  <div class="aprender-card evaluar">
+    <h3>✅ Evaluar</h3>
+    <ul>
+      <li><strong>Funciona:</strong> se juega entero sin romperse, se puede ganar y perder</li>
+      <li><strong>Usa lo aprendido:</strong> bucles, condicionales y al menos una variable</li>
+      <li><strong>Se entiende solo:</strong> otra persona sabe jugar sin que se lo expliques</li>
+      <li><strong>Lo cuentas bien:</strong> en un minuto explicas qué es y qué te costó más</li>
+    </ul>
+  </div>
+</section>
+  </div>
+</details>
 
-open(BASE + 'index.html', 'w', encoding='utf-8').write(hub)
-print('parcheado index.html del hub (%d bytes)' % os.path.getsize(BASE + 'index.html'))
+<p class="foot">
+  IES Jiménez de Quesada · Santa Fe (Granada)<br>
+  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+  <br><span class="version">v1.0.0</span>
+</p>
+
+</div>
+
+</div>
+
+<script src="../../assets/js/common.js"></script>
+<script src="../../assets/js/header.js"></script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
+'''
+
+open(BASE + 'index.html', 'w', encoding='utf-8').write(HUB)
+print('escrito index.html del hub (%d bytes)' % os.path.getsize(BASE + 'index.html'))

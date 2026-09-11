@@ -606,8 +606,6 @@ INDICE = '''<!DOCTYPE html>
   <a href="../sesiones/index.html"><span>\U0001F5D3️</span><span class="nc-lbl">Sesiones</span></a>
   <span class="nc-sep">·</span>
   <span class="nc-current"><span>\U0001F3AE</span><span class="nc-lbl">Juegos</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>\U0001F4D6</span><span class="nc-lbl">Teoría</span></a>
 </nav>
 
 <div id="main-content">

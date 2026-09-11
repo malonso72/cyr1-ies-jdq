@@ -8,16 +8,16 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/actividades.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/juegos/esquivar.html</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/juegos/arkanoid.html</loc>
@@ -96,24 +96,6 @@
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/proyectos/checklist.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/proyectos/ideas.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/proyectos/</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/</loc>
@@ -240,12 +222,6 @@
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/teoria.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/actividades.html</loc>
