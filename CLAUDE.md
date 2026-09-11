@@ -63,8 +63,9 @@ cotejo (`REVISION_T1_SESIONES.md`). Salieron cuatro programas que no funcionaban
 decidí por mi cuenta al arreglarlo está en `DECISIONES_T1.md`, puntos 12 a 20.
 
 **Dotación real: 2 sesiones semanales.** Las 20 sesiones son unas 10 semanas y el trimestre da
-para 26 clases: ese margen es el colchón de las sesiones que se comen dos. No hay que llegar a
-la S16 «porque tocaba».
+para unas 13. Manuel cubre esas clases de más **con los juegos guiados** de `t1-scratch/juegos/`,
+así que los juegos son parte de la programación, no un extra. Y dan margen para las sesiones que
+se comen dos clases: no hay que llegar a la S16 «porque tocaba».
 
 ### Contexto real de clase — importa para todo lo que escribas
 
