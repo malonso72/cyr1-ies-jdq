@@ -207,13 +207,14 @@ SIEMPRE03 = [
 
 s03 = pagina(
     3, 'Bucles',
-    'Sesión 3 de Scratch: repetir y por siempre. Dibujar polígonos sin escribir el mismo '
+    'Sesión 3 de Scratch: repetir y por siempre. Recorrer polígonos sin escribir el mismo '
     'bloque muchas veces. CyR 1º ESO.',
-    'dibujar un cuadrado, un triángulo y un pentágono <strong>sin repetir ni un bloque</strong>.',
+    'que el gato <strong>recorra</strong> un cuadrado, un triángulo y un pentágono y vuelva al '
+    'punto de partida, <strong>sin repetir ni un bloque</strong>.',
     [
         ('El problema que resuelve un bucle',
-         '<p>Para hacer un cuadrado hay que avanzar y girar cuatro veces. Se puede escribir así, '
-         'y funciona:</p>' +
+         '<p>Para recorrer un cuadrado hay que avanzar y girar cuatro veces. Se puede escribir '
+         'así, y funciona:</p>' +
          caja(LARGO03, 'Programa largo: mover 100 pasos y girar 90 grados a la derecha, repetido '
                        'cuatro veces seguidas', ancho=330,
               pie='Ocho bloques. Y para un pentágono harían falta diez.') +
@@ -245,13 +246,20 @@ s03 = pagina(
                   'abierto')),
 
         ('Tu actividad',
-         '<p>Con el mismo programa, cambiando sólo dos números, dibuja estas tres figuras:</p>' +
+         '<p>Con el mismo programa, cambiando sólo dos números, recorre estas tres figuras:</p>' +
          tabla(['Figura', 'Repetir', 'Girar', 'Comprobación'],
                [['Cuadrado', '4', '90', '4 × 90 = 360 ✔'],
                 ['Triángulo', '3', '120', '3 × 120 = 360 ✔'],
                 ['Pentágono', '5', '72', '5 × 72 = 360 ✔']]) +
          '<p>¿Ves la regla? <strong>Los grados son 360 dividido entre el número de lados.</strong> '
          'Pruébala con un hexágono (6 lados) sin mirar la tabla.</p>' +
+         ojo('El cuadrado no se queda pintado',
+             '<p>El gato <strong>recorre</strong> el cuadrado, pero no deja ninguna línea detrás: '
+             'en la pantalla no vas a ver ninguna figura dibujada. Lo que tienes que mirar es '
+             'que <strong>acabe donde empezó</strong>, y ahí sabes que ha cerrado.</p>'
+             '<p style="margin-bottom:0">Para que deje rastro haría falta añadir la extensión '
+             '<strong>Lápiz</strong>, con el botón de abajo a la izquierda. No está en la paleta '
+             'por defecto y hoy no la necesitamos.</p>') +
          pista('¿Y el bucle que no se acaba nunca?',
                '<p>Existe otro bucle, <strong>por siempre</strong>, que no lleva número: repite '
                'hasta que pares el programa con el círculo rojo. Se usa para cosas que tienen que '
@@ -262,8 +270,8 @@ s03 = pagina(
                'no se le puede encajar nada detrás, porque nunca llegaría el turno.</p>')),
 
         ('Lo has conseguido si…',
-         logros(['Has dibujado las tres figuras cambiando sólo dos números.',
-                 'Las tres cierran: el gato acaba donde empezó.',
+         logros(['Has hecho las tres figuras cambiando sólo dos números.',
+                 'Las tres cierran: el gato acaba exactamente donde empezó.',
                  'Sabrías explicar por qué los giros tienen que sumar 360.',
                  'Sabes la diferencia entre <em>repetir (10)</em> y <em>por siempre</em>.'])),
     ],
@@ -424,8 +432,8 @@ s05 = pagina(
          ojo('Ojo con esto',
              '<p>Al ir hacia la izquierda verás que el gato aparece <strong>boca abajo</strong>. '
              'No es un fallo tuyo: al apuntar en dirección −90 el personaje gira entero.</p>'
-             '<p style="margin-bottom:8px;">Si quieres que no le pase, pon este bloque justo '
-             'debajo de la bandera verde:</p>' +
+             '<p style="margin-bottom:8px;">Ya lo arreglaste en la <strong>sesión 2</strong>: '
+             'es el mismo bloque, y va otra vez justo debajo de la bandera verde.</p>' +
              caja(ROT05, 'Bloque fijar estilo de rotación a no rotar', ancho=400))),
 
         ('Lo has conseguido si…',

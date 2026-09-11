@@ -47,7 +47,7 @@ s06 = pagina(
          pasos([
              '<strong>siguiente disfraz</strong> pasa al siguiente dibujo del personaje. Cuando se '
              'acaban, vuelve al primero.',
-             'La <strong>espera de 0,2 segundos</strong> es la clave de toda la sesión: sin ella, '
+             'La <strong>espera de 0.2 segundos</strong> es la clave de toda la sesión: sin ella, '
              'el cambio va tan rápido que no se ve un paso, se ve un borrón.',
              '<strong>mover 10 pasos</strong> lo desplaza mientras «camina».',
              '<strong>si toca un borde, rebotar</strong> le da la vuelta al llegar al final.',
@@ -55,7 +55,7 @@ s06 = pagina(
              'hace que al rebotar se dé la vuelta como un espejo, en vez de quedarse cabeza abajo.'])),
 
         ('Comprueba que lo has entendido',
-         pregunta('1', 'Quitas el bloque <em>esperar (0,2) segundos</em> y dejas todo lo demás igual. '
+         pregunta('1', 'Quitas el bloque <em>esperar (0.2) segundos</em> y dejas todo lo demás igual. '
                        '¿Qué se ve?',
                   [('rapido', 'Lo mismo, pero el personaje camina más rápido',
                     'No exactamente. Sí va más rápido, pero el problema es otro: la animación deja '
@@ -73,7 +73,7 @@ s06 = pagina(
         ('Tu actividad',
          pasos([
              'Monta el programa con el gato y comprueba que camina.',
-             'Prueba la espera con <strong>0,05</strong>, con <strong>0,2</strong> y con '
+             'Prueba la espera con <strong>0.05</strong>, con <strong>0.2</strong> y con '
              '<strong>1</strong> segundo. Quédate con el valor que mejor se vea.',
              'Ahora cámbiate de personaje: pulsa el botón del gato (abajo a la derecha) y '
              '<strong>elige uno que tenga varios disfraces</strong>. Antes de decidirte, míralo en '

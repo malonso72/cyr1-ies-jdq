@@ -350,8 +350,9 @@ s15 = pagina(
                     'la posición x del ratón manteniendo la y en menos 140')) +
          pasos([
              'La pelota se coloca arriba y apunta hacia abajo y a la derecha (dirección 160).',
-             'Su <strong>por siempre</strong> hace sólo dos cosas: avanzar un poco y rebotar si '
-             'toca un borde. Ese par de bloques es todo el «motor» del juego.',
+             'Su <strong>por siempre</strong> hace sólo dos cosas: <em>mover (8) pasos</em> y '
+             '<em>si toca un borde, rebotar</em>. Ese par de bloques es todo el «motor» del '
+             'juego.',
              'La pala tiene su propio <strong>por siempre</strong>, que se ejecuta a la vez.',
              '<strong>posición x del ratón</strong> es un informador de Sensores: vale la '
              'coordenada horizontal del cursor. Al metérselo al <em>ir a x:</em>, la pala se pega '
