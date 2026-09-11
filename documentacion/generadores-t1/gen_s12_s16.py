@@ -178,11 +178,17 @@ s13 = pagina(
              'comprueba que el tiempo empieza de cero las dos.',
              'Dibuja un <strong>segundo fondo</strong> con un laberinto más difícil. Los fondos se '
              'crean igual que el primero, con el botón de abajo a la derecha.',
+             'Crea la variable <strong>Nivel</strong> y añade al arranque, justo debajo de '
+             '<em>reiniciar cronómetro</em>, el bloque <strong>dar a (Nivel) el valor (1)</strong>. '
+             'Si no lo pones, la segunda partida empieza en el nivel donde acabó la primera: es el '
+             'mismo fallo del marcador de la sesión 9.',
              'Cambia el condicional de la meta para que, en vez de terminar, pase al nivel 2:']) +
          caja(NIVEL13, 'Condicional: si está tocando la Meta, cambiar el fondo a nivel2, volver a '
-                       'la salida y sumar 1 a la variable Nivel') +
+                       'la salida y sumar 1 a la variable Nivel',
+              pie='Acuérdate de <strong>mover el objeto Meta</strong> al final del segundo '
+                  'laberinto: cambiar el fondo no lo cambia a él de sitio.') +
          pista('¿Y cómo hago que en el nivel 2 termine de verdad?',
-               '<p>Con la variable <strong>Nivel</strong> que acabas de crear. En vez de mirar sólo '
+               '<p>Con la variable <strong>Nivel</strong> que has creado en el paso 5. En vez de mirar sólo '
                'si tocas la Meta, mira <em>además</em> en qué nivel estás: si <code>Nivel</code> '
                'vale 2, el juego termina; si vale 1, pasa al siguiente fondo.</p>'
                '<p style="margin-bottom:0">Para juntar dos condiciones en una se usa el operador '
@@ -191,6 +197,7 @@ s13 = pagina(
         ('Lo has conseguido si…',
          logros(['Al llegar a la meta pasa algo: mensaje, sonido o cambio de nivel.',
                  'El cronómetro empieza en cero en cada partida.',
+                 'Al volver a jugar se empieza otra vez en el nivel 1.',
                  'Hay dos niveles con laberintos distintos.',
                  'El juego termina de verdad al acabar el último nivel.',
                  'Sabrías explicar por qué <em>detener (todos)</em> va siempre al final.'])),
@@ -397,7 +404,7 @@ PUNTOS16 = [
         ('stack', 'motion', ['mover', ('num', '20'), 'pasos'])]),
 ]
 FIN16 = [
-    si(hexa('operators', rep('motion', 'posición y'), '<', ('num', '-170')),
+    si(hexa('operators', rep('motion', 'posición y'), '<', ('num', '-155')),
        [('stack', 'looks', ['decir', op('unir', ('txt', 'Fin. Puntos: '), var('Puntos')),
                             'durante', ('num', '3'), 'segundos']),
         ('cap', 'control', ['detener', ('drop', 'todos')])]),
@@ -448,25 +455,23 @@ s16 = pagina(
                     'El problema es cuántas veces se ejecuta.')],
                   'bucle')),
 
-        ('Perder la partida',
-         '<p>Primero quita el rebote de abajo: en la pestaña de la pelota, cambia '
-         '<em>si toca un borde, rebotar</em> por un rebote que sólo mire los lados y el techo… o, '
-         'más sencillo, déjalo como está y añade esta comprobación, que se dispara antes:</p>' +
-         caja(FIN16, 'Condicional: si la posición y de la pelota es menor que menos 170, decir Fin '
-                     'seguido de los puntos durante 3 segundos y detener todos',
-              pie='<strong>posición y</strong> vale cuánto está de arriba o de abajo la pelota, de '
-                  '−180 a 180. Por debajo de −170 ya ha pasado de largo la pala.')),
-
         ('Tu actividad',
          pasos([
              'Crea <code>Puntos</code>, ponla a 0 al arrancar y añade el condicional de la pala.',
              'Prueba primero <strong>sin</strong> el <em>mover 20 pasos</em> para ver el fallo del '
              'marcador con tus propios ojos. Después añádelo y comprueba que se arregla.',
-             'Añade el final de partida.',
+             'Añade el <strong>final de partida</strong>: cuando la pelota se te escapa por '
+             'abajo, se acabó. Va en el mismo <em>por siempre</em>, debajo de todo.',
              'Sube la dificultad: sustituye el <em>mover (8) pasos</em> por este otro, que hace que '
              'la pelota vaya más rápido cuanto más puntos llevas.',
              '<strong>Reto:</strong> guarda el récord en una variable <code>Récord</code> y '
              'muéstralo. Pista: sólo hay que actualizarlo si <code>Puntos</code> es mayor.']) +
+         caja(FIN16, 'Condicional: si la posición y de la pelota es menor que menos 155, decir Fin '
+                     'seguido de los puntos durante 3 segundos y detener todos',
+              pie='<strong>posición y</strong> vale cuánto está de arriba o de abajo la pelota, de '
+                  '−180 a 180. La pala está en −140, así que por debajo de −155 la pelota ya ha '
+                  'pasado de largo. No hace falta quitar el <em>si toca un borde, rebotar</em>: '
+                  'esta comprobación salta antes de que la pelota llegue al borde de abajo.') +
          caja(DIFI16, 'Bloque mover, con el operador 8 más Puntos dividido entre 5, pasos',
               pie='Con 0 puntos avanza 8; con 20 puntos avanza 12. La dificultad sube sola.') +
          ojo('Prueba tu propio juego a fondo',

@@ -353,7 +353,7 @@ s09 = pagina(
              'Al final, añade un <strong>si … si no</strong> más: si has sacado más de la mitad, '
              'que diga «¡Aprobado!»; si no, «A repasar».',
              '<strong>Reto:</strong> cambia las sumas por multiplicaciones y baja el rango de los '
-             'números aleatorios a 1–10. Piensa por qué conviene bajarlo.']) +
+             'números aleatorios a <strong>1–5</strong>. Piensa por qué hay que bajarlo.']) +
          ojo('El bloque de contar ha cambiado de nombre',
              '<p>Tu cuadernillo lo llama <strong>cambiar (Aciertos) por (1)</strong>. Ese nombre '
              '<strong>ya no existe</strong>. Hoy se llama <strong>sumar a (Aciertos) (1)</strong> '
@@ -457,9 +457,15 @@ s10 = pagina(
 A11 = [
     BANDERA,
     ('stack', 'motion', ['ir a x:', ('num', '-120'), 'y:', ('num', '-60')]),
+    ('stack', 'motion', ['apuntar en dirección', ('num', '90')]),
     ('stack', 'control', ['esperar', ('num', '1'), 'segundos']),
     ('stack', 'motion', ['mover', ('num', '60'), 'pasos']),
     ('stack', 'events', ['enviar', ('drop', 'patada')]),
+]
+C11 = [
+    BANDERA,
+    ('stack', 'motion', ['ir a x:', ('num', '0'), 'y:', ('num', '-60')]),
+    ('stack', 'motion', ['apuntar en dirección', ('num', '90')]),
 ]
 B11 = [
     ('hat', 'events', ['al recibir', ('drop', 'patada')]),
@@ -488,11 +494,17 @@ s11 = pagina(
         ('Lee estos dos programas',
          '<p>Son dos programas, en dos objetos distintos. Ninguno de los dos funciona solo.</p>' +
          dos_cajas(('Objeto <strong>Gato</strong>', A11,
-                    'Programa del gato: ir a x menos 120 y menos 60, esperar 1 segundo, mover 60 '
-                    'pasos y enviar el mensaje patada'),
+                    'Programa del gato: ir a x menos 120 y menos 60, apuntar en dirección 90, '
+                    'esperar 1 segundo, mover 60 pasos y enviar el mensaje patada'),
                    ('Objeto <strong>Balón</strong>', B11,
                     'Programa del balón: al recibir el mensaje patada, iniciar el sonido Pop y '
                     'repetir hasta que toque un borde moviendo 10 pasos y girando 15 grados')) +
+         '<p>Y el balón necesita además un <strong>segundo programa</strong>, con su propia '
+         'bandera verde, que lo devuelva al sitio antes de cada partida:</p>' +
+         caja(C11, 'Segundo programa del balón: al hacer clic en la bandera verde, ir a x 0 y '
+                   'menos 60 y apuntar en dirección 90',
+              pie='Un mismo objeto puede tener varios programas. Este sólo coloca; el otro espera '
+                  'el aviso.') +
          pasos([
              'El gato se coloca, espera un segundo y avanza hacia el balón.',
              'Al llegar, <strong>envía (patada)</strong>. Ese bloque no mueve nada: sólo lanza el '
@@ -500,6 +512,10 @@ s11 = pagina(
              'El balón tiene un sombrero <strong>al recibir (patada)</strong>. Estaba esperando '
              'ese aviso, y en cuanto llega arranca su programa.',
              'El balón suena, sale rodando y gira mientras avanza, hasta chocar con un borde.',
+             'El segundo programa del balón es el que hace que la <strong>segunda partida sea '
+             'igual que la primera</strong>. Sin él, el balón se queda donde acabó —pegado al '
+             'borde—, y como <em>repetir hasta que ¿tocando (borde)?</em> ya se cumple de entrada, '
+             'no se movería nunca más.',
              'Antes de poder usar el mensaje hay que <strong>crearlo</strong>: en el desplegable '
              'del bloque, opción <strong>Nuevo mensaje</strong>, y le pones nombre. Ponle uno que '
              'signifique algo — «patada», no «mensaje1».'])),
@@ -521,7 +537,7 @@ s11 = pagina(
          pasos([
              'Elige dos objetos: uno que actúe y otro que reaccione.',
              'Crea el mensaje con un nombre que se entienda.',
-             'Monta los dos programas, cada uno en su objeto.',
+             'Monta los programas, cada uno en su objeto. No te olvides del que coloca.',
              'Añade un <strong>cambio de disfraz</strong> al gato justo antes de enviar el mensaje, '
              'para que se vea el gesto de chutar.',
              '<strong>Reto:</strong> añade un <strong>tercer objeto</strong> — un portero, un '
@@ -536,6 +552,8 @@ s11 = pagina(
 
         ('Lo has conseguido si…',
          logros(['El balón no se mueve hasta que el gato llega.',
+                 'Al pulsar la bandera <strong>dos veces seguidas</strong> pasa exactamente lo '
+                 'mismo las dos.',
                  'El mensaje tiene un nombre que explica lo que pasa.',
                  'Los dos programas están cada uno en su objeto.',
                  'Hay un tercer objeto que reacciona al mismo aviso.',
