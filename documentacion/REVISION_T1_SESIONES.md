@@ -312,3 +312,22 @@ en `PROGRAMACION.md` para que dentro de un año siga teniendo sentido.
 
 De la lista de `CLAUDE.md`: las cuatro decisiones de la auditoría, el `node_modules`
 comprometido y roto, y el `s02.js` que se carga dos veces en T3 Ciberseguridad.
+
+---
+
+## 7. Lo que vino después: el proyecto final
+
+Esta revisión se hizo sobre las 20 sesiones. Al decidir Manuel que el proyecto final sería
+un juego completo elegido entre varias opciones, y que esas opciones serían las de
+`juegos/`, apareció una pieza que esta revisión no había mirado: **las once páginas de
+juegos eran plantillas vacías** —la misma frase de «conceptos que trabaja» en las once, con
+un marcador de posición sin rellenar— **y sus once guías en PDF están hechas con
+Scratch 2**.
+
+Eso está resuelto en la tanda siguiente (`DECISIONES_T1.md`, puntos 21 a 26): tres bases
+redibujadas en Scratch 3 con el formato de las sesiones, la S17 reescrita alrededor de
+ellas, y el índice de juegos separando las tres opciones, las cuatro que ya son sesiones y
+las de ampliación.
+
+Queda pendiente de la lista de arriba, sin cambios: el **título de la S04 en Moodle** y el
+nombre del **sonido `Pop`** en el editor.

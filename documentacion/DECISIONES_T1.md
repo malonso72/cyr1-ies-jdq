@@ -223,3 +223,73 @@ de esas palabras son las dos tablas de consulta**, que se escanean, no se leen. 
 son 559 palabras, por debajo de la media de las veinte (609). La he aligerado igualmente
 —las frases eran largas— pero la alarma estaba inflada. La sesión con más prosa es ahora la
 **S11**, con 753, y es a propósito: es la que ha ganado el programa de colocación del balón.
+
+---
+
+# Tercera tanda · el proyecto final pasa a elegirse entre tres bases (sept-2026)
+
+Decidiste que el proyecto final fuera un juego completo a elegir, con los juegos de
+`juegos/` como opciones en vez de una sección aparte, y que fueran tres. Esto es lo que
+he decidido yo al montarlo.
+
+## 21. Las tres son Arkanoid, Space Invaders y Esquivar lo que cae
+
+**Arkanoid** porque el curso pasado lo hizo toda la clase y porque es el único que arranca
+con medio juego hecho: la pelota y la pala son las de la S15 y la S16, sin tocar.
+**Space Invaders** como la opción larga. Y **Esquivar lo que cae** como la corta, para el
+que vaya justo; no estaba en `juegos/`, pero sí en el catálogo viejo de la S17 marcado como
+fácil, y se monta entero con el kit.
+
+**Fuera tres en raya**, que sí estaba: su guía monta el tablero y **nunca comprueba quién
+gana**. Termina en «ya está pronta la versión básica». Tal cual suspende el primer criterio
+de la rúbrica, y arreglarlo pide las ocho líneas ganadoras, que es lo más duro de los cuatro.
+Se queda como ampliación.
+
+**Fuera también** naves (usa clones, que no se enseñan), cumpleaños feliz (no es un juego y
+pide la extensión Música), bomb-jack (plataformas) y carrera de autos (es la S10 otra vez).
+
+## 22. Las guías en PDF no se usan como material, y se dice por qué
+
+Las once están hechas con **Scratch 2**: se lee `al presionar`, `fijar (puntos) a` y
+`número al azar entre` en las capturas. Y los bloques son **imágenes**, así que no se
+arreglan con una nota al pie como se hizo con el cuadernillo. Las tres bases se han
+redibujado enteras en Scratch 3 con el motor del taller; los PDF quedan enlazados como
+consulta, con el mismo aviso que el cuadernillo.
+
+## 23. Space Invaders se monta sin clones, con una variable de puente
+
+El clásico pide `crear clon de`, que no aparece en ninguna de las 20 sesiones. Y la guía lo
+resuelve duplicando doce marcianitos a mano con una tabla de coordenadas y seis `repetir`
+encadenados, que es copiar, no programar.
+
+La versión de la página usa ocho marcianos que van y vienen con dos `repetir`, y resuelve el
+disparo con **una variable como recado**: la nave escribe su `posición x` en `NaveX` y la
+bala la lee al salir. Es la única idea nueva de las tres páginas, no es un bloque nuevo, y
+es de las más útiles que se pueden aprender en Scratch.
+
+**Los marcianos no bajan.** Un marciano muerto se esconde, pero si además bajara seguiría
+bajando escondido y acabaría disparando el «te han invadido». Se pierde por **tiempo**, con
+la cuenta atrás de la pieza 5, y eso deja el juego sin casos raros.
+
+## 24. Lo que se entrega no es el juego: es la versión
+
+Si los tres juegos vienen montados, copiarlos es el primer día y la S20 serían veinticinco
+presentaciones iguales. Por eso la ficha de la S17 ya no pregunta «qué juego inventas» sino
+**qué le cambias**, con tres cambios concretos, y cada página termina con una tabla de ideas
+que dice qué hay que tocar para cada una.
+
+Esto es lo que hace que puedas decir «todos el Arkanoid» y que las presentaciones sigan
+siendo distintas.
+
+## 25. Desaparece «historia con decisiones»
+
+Estaba en el catálogo viejo de la S17 y chocaba con siete sitios del material que exigen que
+se pueda ganar y perder —incluida la rúbrica—. Con tres bases que son juegos, el problema se
+va solo. Si alguna vez quieres recuperar la historia, hay que ensanchar el primer criterio
+de la rúbrica, y ese es el que más peso tiene.
+
+## 26. Las cuatro páginas de juegos que ya son sesiones se quedan
+
+Carreras, laberinto, piedra-papel-tijera y pong siguen en `juegos/`, pero el índice ya no
+las llama «obligatorias»: dicen en qué sesión se hicieron y se quedan ahí por su guía en PDF.
+Borrarlas habría dejado los PDF sin puerta de entrada.

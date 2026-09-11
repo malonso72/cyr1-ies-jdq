@@ -21,17 +21,33 @@ distinto:
 > la S18 de construcción son las candidatas—: no hay que llegar a la S16
 > «porque tocaba».
 
-### Los juegos guiados
+### El proyecto final y los juegos
 
-Once páginas en `t1-scratch/juegos/`, cada una con su guía en PDF en
-`t1-scratch/materiales/guias-juegos/`. Están clasificados por nivel en su
-índice: obligatorios, intermedio, ampliación, avanzado y extra.
+Las clases de más se van en el **proyecto final**, que no es un juego inventado
+sino **uno completo elegido entre tres bases**, en `t1-scratch/juegos/`:
 
-**Ojo con el solape:** cuatro de ellos ya son sesiones completas —carreras es
-la S10, laberinto son la S12 y la S13, piedra-papel-tijera es la S14 y pong son
-la S15 y la S16—, y esas sesiones ya enlazan su PDF como material de apoyo. Los
-que de verdad aportan clases nuevas son los otros siete: Space Invaders,
-Arkanoid, Bomb Jack, naves, tres en raya, cumpleaños feliz y carrera de autos.
+| Opción | Cuánto cuesta | Se apoya en |
+|---|---|---|
+| A · Arkanoid | Media | El Pong entero (S15 y S16) |
+| B · Space Invaders | La más larga | S05, S08 y S11 |
+| C · Esquivar lo que cae | La más corta | Cuatro piezas del kit de la S18 |
+
+Las tres están escritas en Scratch 3 y con el formato de las sesiones. **Lo que
+se evalúa no es el juego, es la versión de cada uno**: la ficha de la S17 pide
+tres cambios concretos sobre la base. Así se puede mandar el mismo juego a toda
+la clase sin que las presentaciones de la S20 sean todas iguales.
+
+En la misma carpeta quedan otros ocho juegos, con sus guías en PDF en
+`t1-scratch/materiales/guias-juegos/`:
+
+- **Cuatro ya son sesiones** —carreras es la S10, laberinto la S12 y la S13,
+  piedra-papel-tijera la S14 y pong la S15 y la S16— y el índice lo dice.
+- **Cuatro son ampliación** para quien quiera seguir por su cuenta: tres en
+  raya, naves, bomb-jack, carrera de autos y cumpleaños feliz.
+
+> **Las once guías en PDF están hechas con Scratch 2**, igual que el cuadernillo,
+> y sus bloques son capturas: no se pueden corregir con una nota. Se enlazan como
+> consulta y con aviso, nunca como material de trabajo.
 
 ## Listado de trimestres
 

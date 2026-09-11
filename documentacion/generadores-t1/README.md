@@ -1,7 +1,8 @@
 # Taller de generación de T1 · Scratch
 
-Las 20 páginas de `trimestres/t1-scratch/sesiones/` **no se editan a mano**: se generan con
-estos scripts. Si tocas el HTML directamente, el siguiente que ejecute un generador te lo pisa.
+Las 20 páginas de `trimestres/t1-scratch/sesiones/` y las de `t1-scratch/juegos/` **no se editan
+a mano**: se generan con estos scripts. Si tocas el HTML directamente, el siguiente que ejecute un
+generador te lo pisa.
 
 Esta carpeta está dentro de `documentacion/`, que **no se despliega** (ver `.assetsignore`).
 
@@ -16,8 +17,14 @@ python3 gen_s01_s05.py     # sesiones 01 a 05
 python3 gen_s06_s11.py     # sesiones 06 a 11
 python3 gen_s12_s16.py     # sesiones 12 a 16
 python3 gen_s17_s20.py     # sesiones 17 a 20 (proyecto final)
+python3 gen_proyectos.py   # las tres bases del proyecto final + el índice de juegos
 python3 gen_indices.py     # índice de sesiones + parches del hub del trimestre
 ```
+
+`gen_indices.py` **parchea** el hub en vez de rehacerlo, así que sus reemplazos están escritos
+para poder ejecutarse dos veces: cuando un texto se cambia por segunda vez, la entrada vieja y la
+nueva llevan al mismo destino. Si añades uno, hazlo igual o el generador empezará a avisar de
+textos que no encuentra.
 
 Las rutas se calculan solas a partir de la posición de estos archivos, así que funciona desde
 cualquier equipo sin tocar nada.
@@ -62,9 +69,10 @@ python3 scripts/verificar_enlaces.py
 |---|---|
 | `scratchsvg.py` | **El motor.** Dibuja bloques de Scratch 3 en SVG: colores oficiales, siluetas con muescas, sombreros, bloques C, `si … si no` con dos bocas, informadores ovalados, hexágonos booleanos, desplegables, muestras de color e iconos. |
 | `diagramas.py` | Los dos dibujos que no son bloques: el mapa del editor de Scratch (S01) y la rosa de direcciones (S02). |
-| `plantilla.py` | La estructura común de toda página de sesión, el CSS y el JS de la pregunta. Aquí se cambia el diseño de las 20 a la vez. |
+| `plantilla.py` | La estructura común de toda página de sesión, el CSS y el JS de la pregunta. Aquí se cambia el diseño de las 20 a la vez. `pagina_juego()` reaprovecha ese mismo esqueleto para las páginas de `juegos/`: misma profundidad de rutas, mismo CSS, otro hero y otra navegación. |
 | `comun.py` | Rutas y la tabla sesión → página del cuadernillo. |
 | `gen_s*.py` | El **contenido** de las sesiones: textos, programas de bloques, preguntas y explicaciones. |
+| `gen_proyectos.py` | Las **tres bases del proyecto final** (`juegos/arkanoid.html`, `space-invaders.html`, `esquivar.html`) y el índice de `juegos/`. |
 | `gen_indices.py` | El índice de sesiones y los parches del hub del trimestre. |
 | `test_sesiones.js` | Las 678 comprobaciones. |
 
@@ -132,3 +140,9 @@ Fijadas con Manuel y aplicadas en las 20 sesiones:
    incorrecta**, no sólo de cuál es la buena.
 7. Entrega siempre igual: Archivo → Guardar en tu ordenador → `SesionNN_TuNombre.sb3` → Moodle.
 8. El cuadernillo se enlaza con `#page=` o no se enlaza.
+9. **Las tres bases del proyecto final no estrenan ningún bloque.** Todo lo que aparece en
+   `juegos/` sale de S01-S16 o de las ocho piezas del kit de la S18. Si al escribir una necesitas
+   un bloque nuevo, o lo enseñas antes en una sesión o cambias el diseño del juego.
+10. Las guías en PDF de `materiales/guias-juegos/` **están hechas con Scratch 2** y sus bloques son
+    capturas, no texto: no se pueden corregir con una nota. Se enlazan como consulta y con aviso,
+    nunca como material de trabajo.

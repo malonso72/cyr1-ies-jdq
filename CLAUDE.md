@@ -63,9 +63,11 @@ cotejo (`REVISION_T1_SESIONES.md`). Salieron cuatro programas que no funcionaban
 decidí por mi cuenta al arreglarlo está en `DECISIONES_T1.md`, puntos 12 a 20.
 
 **Dotación real: 2 sesiones semanales.** Las 20 sesiones son unas 10 semanas y el trimestre da
-para unas 13. Manuel cubre esas clases de más **con los juegos guiados** de `t1-scratch/juegos/`,
-así que los juegos son parte de la programación, no un extra. Y dan margen para las sesiones que
-se comen dos clases: no hay que llegar a la S16 «porque tocaba».
+para unas 13. Esas clases de más se van en el **proyecto final**, que no es un juego inventado:
+es **uno completo elegido entre tres bases** —Arkanoid, Space Invaders y Esquivar lo que cae—, en
+`t1-scratch/juegos/`. Lo que se evalúa no es el juego, es **la versión de cada uno**: la ficha de
+la S17 pide tres cambios concretos sobre la base. Así se puede mandar el mismo juego a toda la
+clase sin que las presentaciones de la S20 salgan iguales.
 
 ### Contexto real de clase — importa para todo lo que escribas
 
@@ -80,8 +82,14 @@ se comen dos clases: no hay que llegar a la S16 «porque tocaba».
 ### Dónde está cada cosa
 
 - Las páginas: `trimestres/t1-scratch/sesiones/s01..s20.html`
+- Las tres bases del proyecto: `trimestres/t1-scratch/juegos/` (`arkanoid`, `space-invaders`,
+  `esquivar`, más su índice). El resto de páginas de esa carpeta son las viejas, con su PDF.
 - **Se generan, no se editan a mano:** `documentacion/generadores-t1/` (tiene su propio README
   con cómo regenerar, cómo probar y cómo se escribe un programa de bloques).
+- **Las guías en PDF de `materiales/guias-juegos/` están hechas con Scratch 2** y sus bloques son
+  capturas, así que no se arreglan con una nota como se hizo con el cuadernillo. Son consulta con
+  aviso, nunca material de trabajo. Si hace falta un juego nuevo, se redibuja en Scratch 3 con
+  `gen_proyectos.py`.
 - Documentos de trabajo, en `documentacion/` (privada, no se despliega):
   - `AUDITORIA_CyR_1ESO.md` — auditoría del sitio entero, con notas por área y hallazgos H1–H13.
   - `COTEJO_Cuadernillo_Scratch3.md` — **tabla verificada** de nombres de bloques Scratch 2 → 3,
@@ -106,6 +114,9 @@ se comen dos clases: no hay que llegar a la S16 «porque tocaba».
    `SyntaxError: Identifier 'SESION_ID' has already been declared`. Diagnosticado, sin arreglar.
    Era el único error real de JavaScript de las 112 páginas del sitio.
 5. T2 y T3 sin tocar. Manuel acotó el trabajo a T1.
+6. Las **cuatro páginas de juegos que ya son sesiones** (carreras, laberinto,
+   piedra-papel-tijera, pong) siguen siendo las plantillas viejas de 3,7 KB. Se conservan por su
+   PDF y el índice ya avisa de que son sesiones, pero si alguna vez estorban, ahí están.
 
 ---
 
