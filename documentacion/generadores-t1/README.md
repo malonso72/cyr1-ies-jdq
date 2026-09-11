@@ -71,7 +71,7 @@ python3 scripts/verificar_enlaces.py
 | `comun.py` | Rutas y la tabla sesión → página del cuadernillo. |
 | `gen_s*.py` | El **contenido** de las sesiones: textos, programas de bloques, preguntas y explicaciones. |
 | `gen_proyectos.py` | Las **tres bases del proyecto final** (`juegos/arkanoid.html`, `space-invaders.html`, `esquivar.html`) y el índice de `juegos/`. |
-| `gen_presentacion.py` | La **presentación inicial** (`presentacion.html`). Reutiliza el mapa del editor de la S01 y un script de bloques de verdad, en vez de capturas de otra versión de Scratch. |
+| `gen_presentacion.py` | La **presentación inicial** (`presentacion.html`): 17 diapositivas de visita guiada al editor. Reutiliza el mapa del editor de la S01 y el motor de bloques, y dibuja el escenario con coordenadas. Ni una captura de otra versión de Scratch. |
 | `gen_indices.py` | El índice de sesiones y el **hub del trimestre**, que se escribe entero. Antes se parcheaba a base de reemplazos y cada cambio dejaba una entrada más que mantener viva; se abandonó. |
 | `test_sesiones.js` | Las 678 comprobaciones. |
 

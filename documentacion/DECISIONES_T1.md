@@ -325,21 +325,35 @@ reemplazos de texto, y cada cambio dejaba una entrada más en la lista que habí
 viva para que el generador no avisara de textos que ya no existían. Hoy ha pasado dos veces en
 la misma sesión. Ahora se escribe entero, como el resto.
 
-## 30. La presentación pasa de seis diapositivas a nueve, y explica Scratch
+## 30. La presentación deja de ser una apertura y pasa a ser la visita guiada al programa
 
-Tenías razón en que era pobre: 104 palabras y ni una idea de cómo funciona Scratch. Lo que he
-añadido no es relleno, son las tres cosas que faltaban:
+Primero la amplié de seis a nueve diapositivas y me dijiste, con razón, que **seguía floja**:
+tú la habías pensado para explicar cómo funciona Scratch —qué hay en cada pestaña, qué hay en
+cada cajón de la paleta—, y lo que yo había hecho era una apertura motivacional con dos dibujos.
 
-- **Así es por dentro:** el mapa del editor de la S01, que ya estaba dibujado. Se reutiliza tal
-  cual, no es una captura de otra versión.
-- **Un programa es una pila de bloques:** el programa de la S01, dibujado con el mismo motor.
-- **No usamos cuenta:** si cierras la pestaña sin descargar, se pierde. Es el mensaje número uno
-  del trimestre y no aparecía en ninguna diapositiva.
+Son **17 diapositivas** y el orden es el de una visita guiada:
 
-Y he **corregido** la que estaba mal: la de «JUEGOS GUIADOS» listaba Carreras, Laberinto,
-Piedra papel tijera, Pong y Space Invaders como si fueran cosas aparte. Ahora es «el proyecto
-final» con las tres bases.
+1. Apertura (2): el título y la pregunta cero.
+2. **La pantalla** (4): el mapa del editor · el escenario con sus coordenadas, 480 × 360 y el
+   centro en 0,0 · que cada objeto tiene su propio código, sus disfraces y sus sonidos · las
+   tres pestañas.
+3. **La paleta** (5): los nueve cajones con su color y para qué es cada uno —más el aviso de
+   que las extensiones no están hasta que las añades—, y cuatro diapositivas de bloques de
+   verdad agrupados por familias.
+4. **La forma de los bloques** (1): sombrero, apilable y final dibujados, y por qué el hexágono
+   y el óvalo sólo entran en huecos de su forma. Es lo que hace que el editor deje de parecer
+   arbitrario.
+5. **Cómo se trabaja** (5): un programa es una pila · sin cuenta se pierde · 16 + 4 sesiones ·
+   las tres bases del proyecto · ¿preparados?
 
-La presentación se genera desde `gen_presentacion.py`, precisamente para poder reutilizar esos
-dos dibujos. El diseño visual —el fondo oscuro, la rejilla, las etiquetas amarillas— no se ha
-tocado.
+**Todo lo dibujado es Scratch 3 y sale del motor del taller**: el mapa del editor es el de la
+S01, los bloques son los mismos que las 20 sesiones y el escenario con coordenadas es nuevo,
+dibujado aquí. Ni una captura de pantalla de otra versión, que es exactamente el problema que
+tiene el cuadernillo y tienen las once guías de juegos.
+
+He **corregido** además la diapositiva que estaba mal: la de «JUEGOS GUIADOS» listaba Carreras,
+Laberinto, Piedra papel tijera, Pong y Space Invaders como si fueran cosas aparte, cuando cuatro
+de esas son sesiones.
+
+El diseño visual no se ha tocado: mismo fondo, misma rejilla, mismas etiquetas amarillas. Las 17
+están comprobadas a 1280 × 720, que es un proyector: ninguna se sale de pantalla.
