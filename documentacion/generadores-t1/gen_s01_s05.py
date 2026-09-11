@@ -292,8 +292,8 @@ s04 = pagina(
     'cuando ocurre algo. CyR 1º ESO.',
     'un personaje que se mueve sin parar y <strong>sólo se detiene cuando tú se lo dices</strong>.',
     [
-        (None,
-         ojo('El nombre de esta sesión engaña un poco',
+        ('El nombre de esta sesión engaña un poco',
+         ojo('Hoy todavía no hay ningún «si… entonces»',
              '<p>Se llama «Condicionales I», pero aquí todavía <strong>no vas a usar un '
              '«si… entonces»</strong>. Eso llega en la sesión siguiente. Lo de hoy es un bucle que '
              'lleva una <em>condición</em> dentro: <strong>repetir hasta que</strong>. Es el paso '

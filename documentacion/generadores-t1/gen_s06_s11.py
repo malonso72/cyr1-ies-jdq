@@ -120,9 +120,15 @@ s07 = pagina(
     'un diálogo: tu personaje te hace preguntas y <strong>usa lo que tú contestas</strong> en lo '
     'que dice después.',
     [
+        ('Un programa que te escucha',
+         '<p>Hasta ahora tus programas hacían siempre lo mismo. Da igual quién pulse la bandera: '
+         'el gato dice lo mismo y se mueve igual.</p>'
+         '<p>El de hoy <strong>cambia según lo que tú escribas</strong>. Es el primero que de '
+         'verdad es <em>interactivo</em>, y para eso hacen falta dos piezas nuevas: un bloque que '
+         '<strong>pregunta y espera</strong>, y un sitio donde queda guardado lo que has '
+         'contestado.</p>'),
+
         ('Lee este programa',
-         '<p>Hasta ahora tus programas hacían siempre lo mismo. Este cambia según lo que escribas: '
-         'es el primero que de verdad es <em>interactivo</em>.</p>' +
          caja(P07, 'Programa: preguntar ¿Cómo te llamas? y esperar, decir unir Hola coma con '
                    'respuesta durante 2 segundos, preguntar ¿Cuántos años tienes? y esperar, y '
                    'decir unir respuesta con años qué bien durante 2 segundos',

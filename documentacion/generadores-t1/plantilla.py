@@ -273,11 +273,14 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
     """
     nn = '%02d' % num
     cuerpo = []
-    for i, (tit, cont) in enumerate(secciones):
+    n = 0
+    for tit, cont in secciones:
         if tit is None:
+            # Una sección sin título no lleva número y no gasta ninguno.
             cuerpo.append(cont)
         else:
-            cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (i + 1, tit, cont))
+            n += 1
+            cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (n, tit, cont))
 
     nav = []
     if num > 1:
