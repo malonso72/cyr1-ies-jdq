@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FF8C1A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Esquivar lo que cae · Proyecto final · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Esquivar lo que cae, en Scratch 3: la opción más directa del proyecto final. Tres vidas, un marcador que sube solo y cosas que caen. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/juegos/esquivar.html">
+<meta property="og:title" content="Esquivar lo que cae · Proyecto final · CyR 1º ESO">
+<meta property="og:description" content="Esquivar lo que cae, en Scratch 3: la opción más directa del proyecto final. Tres vidas, un marcador que sube solo y cosas que caen. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child{border-bottom:none;}
+  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
+    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T1 · Scratch</span>
+</header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
+<span class="nc-sep">·</span>
+<a href="../sesiones/index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>🚀</span><span class="nc-lbl">Esquivar lo que cae</span></span>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Proyecto final · opción C</div>
+  <h1>Esquivar lo que cae</h1>
+  <div class="duracion">T1 · Scratch · 1º ESO</div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> aguantar lo máximo posible debajo de una lluvia de cosas que caen. Tres vidas, y un punto por cada segundo que sobrevives.</p>
+
+<a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
+<p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
+
+<h2><span class="h2n">1</span>El más corto de los tres</h2>
+<p>Dos objetos y cuatro programas. Si vas justo de tiempo o el Pong se te atragantó, este es el tuyo: <strong>se monta entero con piezas del kit</strong>, sin nada que no hayas hecho ya.</p><p>Y tiene una ventaja para el proyecto: como es corto, te sobra sesión para hacerlo <em>tuyo</em>, que es lo que de verdad puntúa.</p><p>Nada de esto es nuevo. Cada pieza sale de una sesión que ya has hecho, y por eso este juego se puede montar en tres sesiones:</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Pieza</th><th scope="col">De dónde sale</th></tr></thead><tbody><tr><td>Moverse con las flechas</td><td>S05 · Pieza 1 de la S18</td></tr><tr><td>Aparecer arriba en un sitio al azar</td><td>Pieza 3 de la S18</td></tr><tr><td>Caer hasta abajo</td><td>S12 · <em>cambiar y por</em></td></tr><tr><td>Chocar y perder una vida</td><td>Pieza 4 de la S18</td></tr><tr><td>Esconderse y volver a salir</td><td>Pieza 8 de la S18</td></tr><tr><td>Marcador y fin de partida</td><td>Piezas 2 y 7 de la S18</td></tr></tbody></table></div>
+
+<h2><span class="h2n">2</span>Los dos objetos</h2>
+<p>Necesitas un <strong>Jugador</strong> —el que esquiva— y una <strong>Piedra</strong>, que luego duplicarás.</p><h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">Jugador · moverse</h3><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 433 436" width="433" height="436" class="bloques" role="img" aria-label="Programa del jugador: colocarse abajo con tres vidas y el marcador a cero y, por siempre, moverse a derecha e izquierda con las flechas"><title>Programa del jugador: colocarse abajo con tres vidas y el marcador a cero y, por siempre, moverse a derecha e izquierda con las flechas</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L174.2 62.0 Q180.2 62.0 180.2 68.0 L180.2 90.0 Q180.2 96.0 174.2 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#9966FF"/><text x="22.0" y="83.6" class="sb-t" textLength="88.1" lengthAdjust="spacingAndGlyphs">fijar tamaño al</text><rect x="117.1" y="69.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="133.4" y="83.3" class="sb-n">40</text><text x="156.6" y="83.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">%</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L222.1 96.0 Q228.1 96.0 228.1 102.0 L228.1 124.0 Q228.1 130.0 222.1 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#FF8C1A"/><text x="22.0" y="117.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">dar a</text><rect x="60.1" y="102.0" width="66.5" height="22" rx="4" fill="#DB6E00"/><text x="69.1" y="117.4" class="sb-t" textLength="34.5" lengthAdjust="spacingAndGlyphs">Vidas</text><path d="M111.5 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="133.5" y="117.6" class="sb-t" textLength="45.5" lengthAdjust="spacingAndGlyphs">el valor</text><rect x="186.1" y="103.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="201.1" y="117.3" class="sb-n">3</text><path d="M10.0 136.0 Q10.0 130.0 16.0 130.0 L24.0 130.0 L28.0 134.0 L40.0 134.0 L44.0 130.0  L231.7 130.0 Q237.7 130.0 237.7 136.0 L237.7 158.0 Q237.7 164.0 231.7 164.0 L44.0 164.0 L40.0 168.0 L28.0 168.0 L24.0 164.0 L16.0 164.0  Q10.0 164.0 10.0 158.0 Z" fill="#FF8C1A"/><text x="22.0" y="151.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">dar a</text><rect x="60.1" y="136.0" width="76.0" height="22" rx="4" fill="#DB6E00"/><text x="69.1" y="151.4" class="sb-t" textLength="44.0" lengthAdjust="spacingAndGlyphs">Puntos</text><path d="M121.1 144.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="143.1" y="151.6" class="sb-t" textLength="45.5" lengthAdjust="spacingAndGlyphs">el valor</text><rect x="195.7" y="137.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="210.7" y="151.3" class="sb-n">0</text><path d="M10.0 170.0 Q10.0 164.0 16.0 164.0 L24.0 164.0 L28.0 168.0 L40.0 168.0 L44.0 164.0  L169.3 164.0 Q175.3 164.0 175.3 170.0 L175.3 192.0 Q175.3 198.0 169.3 198.0 L44.0 198.0 L40.0 202.0 L28.0 202.0 L24.0 198.0 L16.0 198.0  Q10.0 198.0 10.0 192.0 Z" fill="#4C97FF"/><text x="22.0" y="185.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="63.7" y="171.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="78.7" y="185.3" class="sb-n">0</text><text x="100.7" y="185.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="119.2" y="171.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="141.3" y="185.3" class="sb-n">-140</text><path d="M10.0 204.0 Q10.0 198.0 16.0 198.0 L24.0 198.0 L28.0 202.0 L40.0 202.0 L44.0 198.0  L417.0 198.0 Q423.0 198.0 423.0 204.0 L423.0 226.0 Q423.0 232.0 417.0 232.0 L58.0 232.0 L54.0 236.0 L42.0 236.0 L38.0 232.0 L30.0 232.0 Q24.0 232.0 24.0 238.0 L24.0 398.0 Q24.0 404.0 30.0 404.0 L417.0 404.0 Q423.0 404.0 423.0 410.0 L423.0 416.0 Q423.0 422.0 417.0 422.0 L44.0 422.0 L40.0 426.0 L28.0 426.0 L24.0 422.0 L16.0 422.0  Q10.0 422.0 10.0 416.0 Z" fill="#FFAB19"/><text x="22.0" y="219.6" class="sb-t" textLength="74.4" lengthAdjust="spacingAndGlyphs">por siempre</text><path d="M24.0 238.0 Q24.0 232.0 30.0 232.0 L38.0 232.0 L42.0 236.0 L54.0 236.0 L58.0 232.0  L409.9 232.0 Q415.9 232.0 415.9 238.0 L415.9 260.0 Q415.9 266.0 409.9 266.0 L72.0 266.0 L68.0 270.0 L56.0 270.0 L52.0 266.0 L44.0 266.0 Q38.0 266.0 38.0 272.0 L38.0 294.0 Q38.0 300.0 44.0 300.0 L409.9 300.0 Q415.9 300.0 415.9 306.0 L415.9 312.0 Q415.9 318.0 409.9 318.0 L58.0 318.0 L54.0 322.0 L42.0 322.0 L38.0 318.0 L30.0 318.0  Q24.0 318.0 24.0 312.0 Z" fill="#FFAB19"/><text x="36.0" y="253.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 237.0 l-9 12.0 l9 12.0 h267.9 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="253.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="238.0" width="123.1" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="253.4" class="sb-t" textLength="91.1" lengthAdjust="spacingAndGlyphs">flecha derecha</text><path d="M223.5 246.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="245.5" y="253.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="346.8" y="253.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 272.0 Q38.0 266.0 44.0 266.0 L52.0 266.0 L56.0 270.0 L68.0 270.0 L72.0 266.0  L178.3 266.0 Q184.3 266.0 184.3 272.0 L184.3 294.0 Q184.3 300.0 178.3 300.0 L44.0 300.0 Q38.0 300.0 38.0 294.0 Z" fill="#4C97FF"/><text x="50.0" y="287.6" class="sb-t" textLength="85.3" lengthAdjust="spacingAndGlyphs">cambiar x por</text><rect x="142.3" y="273.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="157.3" y="287.3" class="sb-n">6</text><path d="M24.0 324.0 Q24.0 318.0 30.0 318.0 L38.0 318.0 L42.0 322.0 L54.0 322.0 L58.0 318.0  L417.0 318.0 Q423.0 318.0 423.0 324.0 L423.0 346.0 Q423.0 352.0 417.0 352.0 L72.0 352.0 L68.0 356.0 L56.0 356.0 L52.0 352.0 L44.0 352.0 Q38.0 352.0 38.0 358.0 L38.0 380.0 Q38.0 386.0 44.0 386.0 L417.0 386.0 Q423.0 386.0 423.0 392.0 L423.0 398.0 Q423.0 404.0 417.0 404.0 L30.0 404.0 Q24.0 404.0 24.0 398.0 Z" fill="#FFAB19"/><text x="36.0" y="339.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 323.0 l-9 12.0 l9 12.0 h275.1 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="339.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="324.0" width="130.2" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="339.4" class="sb-t" textLength="98.2" lengthAdjust="spacingAndGlyphs">flecha izquierda</text><path d="M230.7 332.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="252.7" y="339.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="354.0" y="339.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 358.0 Q38.0 352.0 44.0 352.0 L52.0 352.0 L56.0 356.0 L68.0 356.0 L72.0 352.0  L178.3 352.0 Q184.3 352.0 184.3 358.0 L184.3 380.0 Q184.3 386.0 178.3 386.0 L44.0 386.0 Q38.0 386.0 38.0 380.0 Z" fill="#4C97FF"/><text x="50.0" y="373.6" class="sb-t" textLength="85.3" lengthAdjust="spacingAndGlyphs">cambiar x por</text><rect x="142.3" y="359.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="157.3" y="373.3" class="sb-n">-6</text></svg>
+</div><h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">Jugador · dos programas más</h3><div class="dos-col">
+<div><p class="col-tit">Un punto por segundo</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 196" width="228" height="196" class="bloques" role="img" aria-label="Al hacer clic en la bandera, por siempre esperar un segundo y sumar un punto"><title>Al hacer clic en la bandera, por siempre esperar un segundo y sumar un punto</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L211.9 62.0 Q217.9 62.0 217.9 68.0 L217.9 90.0 Q217.9 96.0 211.9 96.0 L58.0 96.0 L54.0 100.0 L42.0 100.0 L38.0 96.0 L30.0 96.0 Q24.0 96.0 24.0 102.0 L24.0 158.0 Q24.0 164.0 30.0 164.0 L211.9 164.0 Q217.9 164.0 217.9 170.0 L217.9 176.0 Q217.9 182.0 211.9 182.0 L44.0 182.0 L40.0 186.0 L28.0 186.0 L24.0 182.0 L16.0 182.0  Q10.0 182.0 10.0 176.0 Z" fill="#FFAB19"/><text x="22.0" y="83.6" class="sb-t" textLength="74.4" lengthAdjust="spacingAndGlyphs">por siempre</text><path d="M24.0 102.0 Q24.0 96.0 30.0 96.0 L38.0 96.0 L42.0 100.0 L54.0 100.0 L58.0 96.0  L194.4 96.0 Q200.4 96.0 200.4 102.0 L200.4 124.0 Q200.4 130.0 194.4 130.0 L58.0 130.0 L54.0 134.0 L42.0 134.0 L38.0 130.0 L30.0 130.0  Q24.0 130.0 24.0 124.0 Z" fill="#FFAB19"/><text x="36.0" y="117.6" class="sb-t" textLength="47.0" lengthAdjust="spacingAndGlyphs">esperar</text><rect x="90.0" y="103.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="105.0" y="117.3" class="sb-n">1</text><text x="127.0" y="117.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text><path d="M24.0 136.0 Q24.0 130.0 30.0 130.0 L38.0 130.0 L42.0 134.0 L54.0 134.0 L58.0 130.0  L211.9 130.0 Q217.9 130.0 217.9 136.0 L217.9 158.0 Q217.9 164.0 211.9 164.0 L30.0 164.0 Q24.0 164.0 24.0 158.0 Z" fill="#FF8C1A"/><text x="36.0" y="151.6" class="sb-t" textLength="49.9" lengthAdjust="spacingAndGlyphs">sumar a</text><rect x="92.9" y="136.0" width="76.0" height="22" rx="4" fill="#DB6E00"/><text x="101.9" y="151.4" class="sb-t" textLength="44.0" lengthAdjust="spacingAndGlyphs">Puntos</text><path d="M153.9 144.0 l5 6 l5 -6 z" fill="#FFFFFF"/><rect x="175.9" y="137.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="190.9" y="151.3" class="sb-n">1</text></svg>
+</div></div>
+<div><p class="col-tit">Cuando te quedas sin vidas</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 457 178" width="457" height="178" class="bloques" role="img" aria-label="Al hacer clic en la bandera, esperar hasta que Vidas sea 0, decir Fin con los puntos durante 3 segundos y detener todos"><title>Al hacer clic en la bandera, esperar hasta que Vidas sea 0, decir Fin con los puntos durante 3 segundos y detener todos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L284.3 62.0 Q290.3 62.0 290.3 68.0 L290.3 90.0 Q290.3 96.0 284.3 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#FFAB19"/><text x="22.0" y="83.6" class="sb-t" textLength="111.3" lengthAdjust="spacingAndGlyphs">esperar hasta que</text><path d="M149.3 67.0 l-9 12.0 l9 12.0 h120.0 l9 -12.0 l-9 -12.0 z" fill="#59C059" stroke="#389438" stroke-width="1"/><rect x="157.3" y="67.0" width="52.5" height="24" rx="12" fill="#FF8C1A" stroke="#DB6E00" stroke-width="1"/><text x="166.3" y="83.6" class="sb-t" textLength="34.5" lengthAdjust="spacingAndGlyphs">Vidas</text><text x="216.8" y="83.6" class="sb-t" textLength="7.6" lengthAdjust="spacingAndGlyphs">=</text><rect x="231.3" y="69.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="246.3" y="83.3" class="sb-n">0</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L441.4 96.0 Q447.4 96.0 447.4 102.0 L447.4 124.0 Q447.4 130.0 441.4 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#9966FF"/><text x="22.0" y="117.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">decir</text><rect x="60.1" y="101.0" width="215.3" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1"/><text x="69.1" y="117.6" class="sb-t" textLength="24.5" lengthAdjust="spacingAndGlyphs">unir</text><rect x="100.6" y="103.0" width="96.7" height="20" rx="10" fill="#FFFFFF"/><text x="149.0" y="117.3" class="sb-n">Fin. Puntos: </text><rect x="204.3" y="101.0" width="62.0" height="24" rx="12" fill="#FF8C1A" stroke="#DB6E00" stroke-width="1"/><text x="213.3" y="117.6" class="sb-t" textLength="44.0" lengthAdjust="spacingAndGlyphs">Puntos</text><text x="282.4" y="117.6" class="sb-t" textLength="47.7" lengthAdjust="spacingAndGlyphs">durante</text><rect x="337.0" y="103.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="352.0" y="117.3" class="sb-n">3</text><text x="374.0" y="117.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text><path d="M10.0 136.0 Q10.0 130.0 16.0 130.0 L24.0 130.0 L28.0 134.0 L40.0 134.0 L44.0 130.0  L149.3 130.0 Q155.3 130.0 155.3 136.0 L155.3 158.0 Q155.3 164.0 149.3 164.0 L16.0 164.0 Q10.0 164.0 10.0 158.0 Z" fill="#FFAB19"/><text x="22.0" y="151.6" class="sb-t" textLength="47.0" lengthAdjust="spacingAndGlyphs">detener</text><rect x="76.0" y="136.0" width="67.4" height="22" rx="4" fill="#CF8B17"/><text x="85.0" y="151.4" class="sb-t" textLength="35.4" lengthAdjust="spacingAndGlyphs">todos</text><path d="M128.3 144.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
+</div></div>
+</div><p>El marcador de este juego <strong>no lo sube acertar: lo sube aguantar</strong>. Cuanto más tardas en perder las tres vidas, más puntos.</p><h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">Piedra</h3><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 436 504" width="436" height="504" class="bloques" role="img" aria-label="Programa de la piedra: por siempre mostrarse, ir a una x al azar arriba del todo y bajar de 8 en 8 hasta pasar de menos 150; si por el camino toca al Jugador, sonar, restar una vida, esconderse y bajar del todo"><title>Programa de la piedra: por siempre mostrarse, ir a una x al azar arriba del todo y bajar de 8 en 8 hasta pasar de menos 150; si por el camino toca al Jugador, sonar, restar una vida, esconderse y bajar del todo</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L174.2 62.0 Q180.2 62.0 180.2 68.0 L180.2 90.0 Q180.2 96.0 174.2 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#9966FF"/><text x="22.0" y="83.6" class="sb-t" textLength="88.1" lengthAdjust="spacingAndGlyphs">fijar tamaño al</text><rect x="117.1" y="69.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="133.4" y="83.3" class="sb-n">40</text><text x="156.6" y="83.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">%</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L419.8 96.0 Q425.8 96.0 425.8 102.0 L425.8 124.0 Q425.8 130.0 419.8 130.0 L58.0 130.0 L54.0 134.0 L42.0 134.0 L38.0 130.0 L30.0 130.0 Q24.0 130.0 24.0 136.0 L24.0 466.0 Q24.0 472.0 30.0 472.0 L419.8 472.0 Q425.8 472.0 425.8 478.0 L425.8 484.0 Q425.8 490.0 419.8 490.0 L44.0 490.0 L40.0 494.0 L28.0 494.0 L24.0 490.0 L16.0 490.0  Q10.0 490.0 10.0 484.0 Z" fill="#FFAB19"/><text x="22.0" y="117.6" class="sb-t" textLength="74.4" lengthAdjust="spacingAndGlyphs">por siempre</text><path d="M24.0 136.0 Q24.0 130.0 30.0 130.0 L38.0 130.0 L42.0 134.0 L54.0 134.0 L58.0 130.0  L90.4 130.0 Q96.4 130.0 96.4 136.0 L96.4 158.0 Q96.4 164.0 90.4 164.0 L58.0 164.0 L54.0 168.0 L42.0 168.0 L38.0 164.0 L30.0 164.0  Q24.0 164.0 24.0 158.0 Z" fill="#9966FF"/><text x="36.0" y="151.6" class="sb-t" textLength="48.4" lengthAdjust="spacingAndGlyphs">mostrar</text><path d="M24.0 170.0 Q24.0 164.0 30.0 164.0 L38.0 164.0 L42.0 168.0 L54.0 168.0 L58.0 164.0  L419.8 164.0 Q425.8 164.0 425.8 170.0 L425.8 192.0 Q425.8 198.0 419.8 198.0 L58.0 198.0 L54.0 202.0 L42.0 202.0 L38.0 198.0 L30.0 198.0  Q24.0 198.0 24.0 192.0 Z" fill="#4C97FF"/><text x="36.0" y="185.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="77.7" y="169.0" width="270.8" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1"/><text x="86.7" y="185.6" class="sb-t" textLength="140.9" lengthAdjust="spacingAndGlyphs">número aleatorio entre</text><rect x="234.6" y="171.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="256.6" y="185.3" class="sb-n">-200</text><text x="285.6" y="185.6" class="sb-t" textLength="7.2" lengthAdjust="spacingAndGlyphs">y</text><rect x="299.8" y="171.0" width="39.7" height="20" rx="10" fill="#FFFFFF"/><text x="319.7" y="185.3" class="sb-n">200</text><text x="355.5" y="185.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="374.1" y="171.0" width="39.7" height="20" rx="10" fill="#FFFFFF"/><text x="393.9" y="185.3" class="sb-n">160</text><path d="M24.0 204.0 Q24.0 198.0 30.0 198.0 L38.0 198.0 L42.0 202.0 L54.0 202.0 L58.0 198.0  L335.7 198.0 Q341.7 198.0 341.7 204.0 L341.7 226.0 Q341.7 232.0 335.7 232.0 L72.0 232.0 L68.0 236.0 L56.0 236.0 L52.0 232.0 L44.0 232.0 Q38.0 232.0 38.0 238.0 L38.0 448.0 Q38.0 454.0 44.0 454.0 L335.7 454.0 Q341.7 454.0 341.7 460.0 L341.7 466.0 Q341.7 472.0 335.7 472.0 L30.0 472.0 Q24.0 472.0 24.0 466.0 Z" fill="#FFAB19"/><text x="36.0" y="219.6" class="sb-t" textLength="104.8" lengthAdjust="spacingAndGlyphs">repetir hasta que</text><path d="M156.8 203.0 l-9 12.0 l9 12.0 h163.9 l9 -12.0 l-9 -12.0 z" fill="#59C059" stroke="#389438" stroke-width="1"/><rect x="164.8" y="203.0" width="82.3" height="24" rx="12" fill="#4C97FF" stroke="#3373CC" stroke-width="1"/><text x="173.8" y="219.6" class="sb-t" textLength="64.3" lengthAdjust="spacingAndGlyphs">posición y</text><text x="254.0" y="219.6" class="sb-t" textLength="7.6" lengthAdjust="spacingAndGlyphs">&lt;</text><rect x="268.6" y="205.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="290.7" y="219.3" class="sb-n">-150</text><path d="M38.0 238.0 Q38.0 232.0 44.0 232.0 L52.0 232.0 L56.0 236.0 L68.0 236.0 L72.0 232.0  L178.3 232.0 Q184.3 232.0 184.3 238.0 L184.3 260.0 Q184.3 266.0 178.3 266.0 L72.0 266.0 L68.0 270.0 L56.0 270.0 L52.0 266.0 L44.0 266.0  Q38.0 266.0 38.0 260.0 Z" fill="#4C97FF"/><text x="50.0" y="253.6" class="sb-t" textLength="85.3" lengthAdjust="spacingAndGlyphs">cambiar y por</text><rect x="142.3" y="239.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="157.3" y="253.3" class="sb-n">-8</text><path d="M38.0 272.0 Q38.0 266.0 44.0 266.0 L52.0 266.0 L56.0 270.0 L68.0 270.0 L72.0 266.0  L335.6 266.0 Q341.6 266.0 341.6 272.0 L341.6 294.0 Q341.6 300.0 335.6 300.0 L86.0 300.0 L82.0 304.0 L70.0 304.0 L66.0 300.0 L58.0 300.0 Q52.0 300.0 52.0 306.0 L52.0 430.0 Q52.0 436.0 58.0 436.0 L335.6 436.0 Q341.6 436.0 341.6 442.0 L341.6 448.0 Q341.6 454.0 335.6 454.0 L44.0 454.0 Q38.0 454.0 38.0 448.0 Z" fill="#FFAB19"/><text x="50.0" y="287.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M76.8 271.0 l-9 12.0 l9 12.0 h179.7 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="84.8" y="287.6" class="sb-t" textLength="58.5" lengthAdjust="spacingAndGlyphs">¿tocando</text><rect x="150.3" y="272.0" width="83.3" height="22" rx="4" fill="#2E8EB8"/><text x="159.3" y="287.4" class="sb-t" textLength="51.3" lengthAdjust="spacingAndGlyphs">Jugador</text><path d="M218.6 280.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="240.6" y="287.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><text x="272.5" y="287.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M52.0 306.0 Q52.0 300.0 58.0 300.0 L66.0 300.0 L70.0 304.0 L82.0 304.0 L86.0 300.0  L218.0 300.0 Q224.0 300.0 224.0 306.0 L224.0 328.0 Q224.0 334.0 218.0 334.0 L86.0 334.0 L82.0 338.0 L70.0 338.0 L66.0 334.0 L58.0 334.0  Q52.0 334.0 52.0 328.0 Z" fill="#CF63CF"/><text x="64.0" y="321.6" class="sb-t" textLength="84.5" lengthAdjust="spacingAndGlyphs">iniciar sonido</text><rect x="155.5" y="306.0" width="56.5" height="22" rx="4" fill="#BD42BD"/><text x="164.5" y="321.4" class="sb-t" textLength="24.5" lengthAdjust="spacingAndGlyphs">Pop</text><path d="M197.0 314.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M52.0 340.0 Q52.0 334.0 58.0 334.0 L66.0 334.0 L70.0 338.0 L82.0 338.0 L86.0 334.0  L230.3 334.0 Q236.3 334.0 236.3 340.0 L236.3 362.0 Q236.3 368.0 230.3 368.0 L86.0 368.0 L82.0 372.0 L70.0 372.0 L66.0 368.0 L58.0 368.0  Q52.0 368.0 52.0 362.0 Z" fill="#FF8C1A"/><text x="64.0" y="355.6" class="sb-t" textLength="49.9" lengthAdjust="spacingAndGlyphs">sumar a</text><rect x="120.9" y="340.0" width="66.5" height="22" rx="4" fill="#DB6E00"/><text x="129.9" y="355.4" class="sb-t" textLength="34.5" lengthAdjust="spacingAndGlyphs">Vidas</text><path d="M172.3 348.0 l5 6 l5 -6 z" fill="#FFFFFF"/><rect x="194.3" y="341.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="209.3" y="355.3" class="sb-n">-1</text><path d="M52.0 374.0 Q52.0 368.0 58.0 368.0 L66.0 368.0 L70.0 372.0 L82.0 372.0 L86.0 368.0  L127.8 368.0 Q133.8 368.0 133.8 374.0 L133.8 396.0 Q133.8 402.0 127.8 402.0 L86.0 402.0 L82.0 406.0 L70.0 406.0 L66.0 402.0 L58.0 402.0  Q52.0 402.0 52.0 396.0 Z" fill="#9966FF"/><text x="64.0" y="389.6" class="sb-t" textLength="57.8" lengthAdjust="spacingAndGlyphs">esconder</text><path d="M52.0 408.0 Q52.0 402.0 58.0 402.0 L66.0 402.0 L70.0 406.0 L82.0 406.0 L86.0 402.0  L211.3 402.0 Q217.3 402.0 217.3 408.0 L217.3 430.0 Q217.3 436.0 211.3 436.0 L58.0 436.0 Q52.0 436.0 52.0 430.0 Z" fill="#4C97FF"/><text x="64.0" y="423.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="105.7" y="409.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="120.7" y="423.3" class="sb-n">0</text><text x="142.7" y="423.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="161.2" y="409.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="183.3" y="423.3" class="sb-n">-160</text></svg>
+  <p class="pie">Cuando la piedra sale por abajo —o te da—, el <em>por siempre</em> la devuelve arriba, a otro sitio al azar. Así una sola piedra cae una y otra vez.</p>
+</div><p>Cuando funcione, <strong>duplícala dos o tres veces</strong>. No hace falta cambiarles nada: cada copia sortea su propia <code>x</code>. Con más de cuatro o cinco, el juego se vuelve imposible.</p>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="sumar">
+  <p class="preg">Quieres que chocar quite <strong>una</strong> vida. ¿Cuál de estos bloques lo hace?<div style="margin:10px 0"><div class="caja-bloques" style="max-width:330px;background:#FFFDF4">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 238 58" width="238" height="58" class="bloques" role="img" aria-label="Bloque dar a Vidas el valor menos 1"><title>Bloque dar a Vidas el valor menos 1</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L222.1 10.0 Q228.1 10.0 228.1 16.0 L228.1 38.0 Q228.1 44.0 222.1 44.0 L44.0 44.0 L40.0 48.0 L28.0 48.0 L24.0 44.0 L16.0 44.0  Q10.0 44.0 10.0 38.0 Z" fill="#FF8C1A"/><text x="22.0" y="31.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">dar a</text><rect x="60.1" y="16.0" width="66.5" height="22" rx="4" fill="#DB6E00"/><text x="69.1" y="31.4" class="sb-t" textLength="34.5" lengthAdjust="spacingAndGlyphs">Vidas</text><path d="M111.5 24.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="133.5" y="31.6" class="sb-t" textLength="45.5" lengthAdjust="spacingAndGlyphs">el valor</text><rect x="186.1" y="17.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="201.1" y="31.3" class="sb-n">-1</text></svg>
+</div></div>¿Ese, u otro?</p>
+  <div class="ops">
+    <button data-op="dar" data-ex="No. Ese &lt;b&gt;machaca&lt;/b&gt; el marcador: te pone las vidas en −1 a la primera, sin pasar por 2 y por 1. Es el fallo de la sesión 9 otra vez.">Ese mismo: dar a (Vidas) el valor (−1)</button>
+    <button data-op="sumar" data-ex="Correcto. &lt;b&gt;sumar a&lt;/b&gt; también resta, si le pones un número negativo. No existe ningún bloque «restar a»: es el mismo con el signo cambiado.">Otro: sumar a (Vidas) (−1)</button>
+    <button data-op="restar" data-ex="Ese bloque no existe en la paleta. Búscalo en Variables y verás que sólo están &lt;em&gt;dar a … el valor&lt;/em&gt; y &lt;em&gt;sumar a …&lt;/em&gt;">Otro: restar a (Vidas) (1)</button>
+  </div>
+  <div class="fb" id="fb1"></div>
+</div>
+
+<h2><span class="h2n">4</span>Tu versión</h2>
+<p>Este es el que más margen te deja, porque el juego base se monta en una sesión. Elige de la lista o inventa, pero apúntalo en la ficha de la <a href="../sesiones/s17.html">sesión 17</a> antes de empezar:</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Idea</th><th scope="col">Qué tienes que tocar</th></tr></thead><tbody><tr><td>Monedas que en vez de quitar, suman</td><td>Duplicar la piedra, cambiarle el disfraz y poner <em>sumar a (Puntos) (5)</em></td></tr><tr><td>Que caigan más rápido cuanto más aguantas</td><td><em>cambiar y por (−8 − Puntos / 10)</em>, como la dificultad del Pong en la S16</td></tr><tr><td>Un escudo que aguante un golpe</td><td>Variable <code>Escudo</code>: si vale 1, en vez de quitar vida se gasta el escudo</td></tr><tr><td>Que el jugador también salte</td><td>Dos condicionales más con <em>cambiar y por</em> y las flechas arriba y abajo</td></tr><tr><td>Aviso visual al perder una vida</td><td>Un <em>cambiar disfraz a</em> del jugador, o un <em>decir (¡Ay!)</em></td></tr><tr><td>Meteoritos, gotas de lluvia, exámenes, calcetines…</td><td>Sólo los disfraces y el fondo. El código es el mismo</td></tr></tbody></table></div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>El jugador se mueve con las flechas y las piedras caen desde arriba.</li>
+  <li>Chocar quita <strong>una</strong> vida, no todas.</li>
+  <li>La misma piedra vuelve a salir arriba después de caer.</li>
+  <li>El marcador sube solo mientras aguantas.</li>
+  <li>Al llegar a 0 vidas, la partida termina y dice la puntuación.</li>
+  <li>Tres partidas seguidas empiezan exactamente igual.</li>
+  <li>Tiene algo tuyo que no está en esta página.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
+<ol>
+  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
+  <li>Cámbiale el nombre a <strong>ProyectoFinal_TuNombre.sb3</strong>.</li>
+  <li>Súbelo a la tarea de <strong>Moodle</strong> que toque: la primera versión jugable en la sesión 18, la mejorada en la 19 y la definitiva en la 20.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="index.html" class="bc"><span class="bi">🎮</span><span class="bk">Las tres opciones</span><span class="bn">Volver a elegir</span></a><a href="../sesiones/s17.html" class="bc"><span class="bi">📝</span><span class="bk">S17 · Tu versión</span><span class="bn">La ficha de diseño</span></a><a href="../sesiones/s18.html" class="bc"><span class="bi">🧰</span><span class="bk">S18 · Kit de piezas</span><span class="bn">Las ocho piezas para montarlo</span></a></div>
+
+</main>
+</div>
+
+<p class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+</p>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ') + b.getAttribute('data-ex');
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -21,3 +21,14 @@ def escribir(num, html):
     os.makedirs(DESTINO, exist_ok=True)
     open(ruta, 'w', encoding='utf-8').write(html)
     print('  s%02d.html  %6d bytes' % (num, len(html)))
+
+
+# Las tres bases del proyecto final viven en trimestres/t1-scratch/juegos/
+DESTINO_JUEGOS = os.path.join(T1, 'juegos') + os.sep
+
+
+def escribir_juego(slug, html):
+    ruta = os.path.join(DESTINO_JUEGOS, '%s.html' % slug)
+    os.makedirs(DESTINO_JUEGOS, exist_ok=True)
+    open(ruta, 'w', encoding='utf-8').write(html)
+    print('  %-16s %6d bytes' % (slug + '.html', len(html)))

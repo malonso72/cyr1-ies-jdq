@@ -306,3 +306,83 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
             .replace('{SECCIONES}', '\n\n'.join(cuerpo))
             .replace('{ENTREGA}', (entrega or _ENTREGA_STD).replace('{NN}', nn))
             .replace('{NAV}', ''.join(nav)))
+
+
+# ------------------------------------------------------------------ página de juego
+# Las tres bases del proyecto final viven en trimestres/t1-scratch/juegos/ y usan el
+# mismo esqueleto que una sesión: misma profundidad de rutas, mismo CSS y mismo JS de
+# la pregunta. Sólo cambian el hero, la barra de navegación y la entrega.
+RAIZ_J = '../../../'        # desde trimestres/t1-scratch/juegos/
+
+_NAV_SES = (
+    '<a href="index.html"><span>\U0001F5D3️</span><span class="nc-lbl">Sesiones</span></a>\n'
+    '<span class="nc-sep">·</span>\n'
+    '<span class="nc-current"><span>✏️</span><span class="nc-lbl">S{NN}</span></span>\n'
+    '<span class="nc-sep">·</span>\n'
+    '<a href="../juegos/index.html"><span>\U0001F3AE</span>'
+    '<span class="nc-lbl">Juegos</span></a>')
+
+_NAV_JUE = (
+    '<a href="../sesiones/index.html"><span>\U0001F5D3️</span>'
+    '<span class="nc-lbl">Sesiones</span></a>\n'
+    '<span class="nc-sep">·</span>\n'
+    '<a href="index.html"><span>\U0001F3AE</span><span class="nc-lbl">Juegos</span></a>\n'
+    '<span class="nc-sep">·</span>\n'
+    '<span class="nc-current"><span>\U0001F680</span><span class="nc-lbl">{TIT}</span></span>')
+
+_PAG_JUEGO = (_PAG
+    .replace('<title>S{NN} · {TIT} · Scratch · CyR 1º ESO</title>',
+             '<title>{TIT} · Proyecto final · Scratch · CyR 1º ESO</title>')
+    .replace('https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s{NN}.html',
+             'https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/juegos/{SLUG}.html')
+    .replace('<meta property="og:title" content="S{NN} · {TIT} · CyR 1º ESO">',
+             '<meta property="og:title" content="{TIT} · Proyecto final · CyR 1º ESO">')
+    .replace(_NAV_SES, _NAV_JUE)
+    .replace('<div class="num">Sesión {NN}</div>',
+             '<div class="num">Proyecto final · opción {OPC}</div>'))
+
+_ENTREGA_JUEGO = (
+    '<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de '
+    'Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, '
+    '<strong>se pierde</strong>.</p>\n<ol>\n'
+    '  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo '
+    '<code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>\n'
+    '  <li>Cámbiale el nombre a <strong>ProyectoFinal_TuNombre.sb3</strong>.</li>\n'
+    '  <li>Súbelo a la tarea de <strong>Moodle</strong> que toque: la primera versión jugable '
+    'en la sesión 18, la mejorada en la 19 y la definitiva en la 20.</li>\n</ol>')
+
+
+def pagina_juego(slug, titulo, opcion, desc, consigue, secciones, guia=None, guia_nota=None):
+    """Renderiza una de las bases del proyecto final (carpeta juegos/)."""
+    cuerpo = []
+    n = 0
+    for tit, cont in secciones:
+        if tit is None:
+            cuerpo.append(cont)
+        else:
+            n += 1
+            cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (n, tit, cont))
+
+    nav = [_boton('index.html', '\U0001F3AE', 'Las tres opciones', 'Volver a elegir'),
+           _boton('../sesiones/s17.html', '\U0001F4DD', 'S17 · Tu versión',
+                  'La ficha de diseño'),
+           _boton('../sesiones/s18.html', '\U0001F9F0', 'S18 · Kit de piezas',
+                  'Las ocho piezas para montarlo')]
+    if guia:
+        nav.append(_boton('../materiales/guias-juegos/' + guia, '\U0001F4D5',
+                          'Guía antigua en PDF',
+                          guia_nota or 'Consulta. Está hecha con Scratch 2'))
+
+    return (_PAG_JUEGO
+            .replace('{CSS}', CSS)
+            .replace('{JS}', JS)
+            .replace('{R}', RAIZ_J)
+            .replace('{SLUG}', slug)
+            .replace('{OPC}', opcion)
+            .replace('{TIT}', titulo)
+            .replace('{DESC}', desc)
+            .replace('{CONSIGUE}', consigue)
+            .replace('{ABRIR}', _ABRIR)
+            .replace('{SECCIONES}', '\n\n'.join(cuerpo))
+            .replace('{ENTREGA}', _ENTREGA_JUEGO)
+            .replace('{NAV}', ''.join(nav)))
