@@ -145,3 +145,41 @@ Fijadas con Manuel y aplicadas en las 20 sesiones:
 10. Las guías en PDF de `materiales/guias-juegos/` **están hechas con Scratch 2** y sus bloques son
     capturas, no texto: no se pueden corregir con una nota. Se enlazan como consulta y con aviso,
     nunca como material de trabajo.
+11. **Un número por cada cosa, y sólo donde significa algo.** Ver la sección siguiente.
+
+---
+
+## La regla de la numeración
+
+Había tres numeraciones distintas con la misma pinta en la misma pantalla —el número de sección,
+el número de una zona del dibujo y el número de un paso—, y en la S01 llegaban a chocar: la
+sección se llamaba **2** y dentro del dibujo había otro **2**. Decir «mirad el dos» no significaba
+nada.
+
+Hay **cuatro categorías** y cada una tiene su forma:
+
+| Qué es | Cómo se escribe | Ejemplo |
+|---|---|---|
+| **Sección** de la página | Número grande en círculo relleno, el estilo actual. Sólo lo usa esto | `3 · Comprueba que lo has entendido` |
+| **Acción que hace el alumno** | **`Paso 1`, `Paso 2`…**, con la palabra escrita | Las listas de «Tu actividad» |
+| **Secuencia de funcionamiento** de un programa | Número simple, sin la palabra «paso» | «Cómo funciona» |
+| **Lista de conceptos, zonas o herramientas** sin orden | **Sin número.** Nombre destacado + explicación | Las cuatro zonas del editor |
+
+Y una excepción, con **prueba objetiva**: un número que **es una referencia** se queda, aunque la
+lista no tenga orden. La prueba no es opinable — se busca en el sitio:
+
+```
+grep -roih "pieza [0-9]\|punto [0-9]\|paso [0-9]" --include=*.html trimestres/
+```
+
+Si algún texto dice «Pieza 6 de la S18» o «el punto 3 de tu ficha», ese número es un enlace entre
+páginas y **no se toca**. Hoy pasan la prueba dos listas: las **ocho piezas del kit de la S18** y
+los **nueve puntos de la ficha de la S17**. Ninguna otra.
+
+Consecuencias que hay que respetar al escribir:
+
+- **La palabra «paso» queda reservada** para lo que hace el alumno. Por eso el título de sección
+  «Qué hace, paso a paso» pasó a llamarse **«Cómo funciona»**.
+- **En clase se dice «sección 4, paso 3»**, y eso apunta a un sitio único.
+- Una lista numerada **promete un orden**. Si lo que tienes son dos programas que corren a la vez,
+  o notas sueltas mezcladas con la ejecución, esa lista está mintiendo: sácalo de la lista.

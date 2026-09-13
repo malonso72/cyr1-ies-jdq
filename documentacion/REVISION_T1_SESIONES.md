@@ -331,3 +331,69 @@ las de ampliación.
 
 Queda pendiente de la lista de arriba, sin cambios: el **título de la S04 en Moodle** y el
 nombre del **sonido `Pop`** en el editor.
+
+---
+
+## 8. Inventario de numeraciones (sept-2026)
+
+Manuel vio en la S01 que la numeración no se entendía: «se confunden los pasos generales con los
+particulares y la numeración de qué es cada cosa». Tenía razón, y no era una manía estética.
+En esa pantalla había **tres numeraciones con la misma pinta**: la sección `❷ Lee este programa`,
+la zona `❷ Área de código` dentro del dibujo, y los pasos `1, 2, 3…` de tres listas distintas.
+La regla que resuelve esto está en el README del taller. Este es el inventario que la aplica.
+
+**32 listas numeradas** en las 20 sesiones y las 3 páginas de juego.
+
+### Sin número · lista de conceptos sin orden (4)
+
+| Dónde | Qué es |
+|---|---|
+| S01 · 1 · Dónde está cada cosa | Las cuatro zonas del editor |
+| S09 · 1 · Tres cosas nuevas | Tres bloques que se estrenan |
+| S12 · 1 · Dos bloques nuevos y una idea | Dos bloques y un concepto |
+| S19 · 1 · Depurar es buscar, no adivinar | Dos herramientas alternativas |
+
+Ninguna tiene orden: nadie hace «primero la paleta y luego el área de código».
+
+### «Paso N» · acciones del alumno (15)
+
+Las catorce listas de **«Tu actividad»** (S01, S04, S06, S08–S16, S18, S19) y el **guion del
+minuto de la S20**.
+
+De propina, esto arregla una referencia que ya existía: la pista de la S13 dice «la variable Nivel
+que has creado en el **paso 5**», y hasta ahora el alumno tenía que contar renglones. Ahora el
+renglón se llama literalmente «Paso 5».
+
+### Número simple · secuencia de funcionamiento (13)
+
+Las listas que explican qué hace un programa: S01, S02, S03, S04, S05, S06, S07, S08, S09, S10,
+S11, S14 y S15, todas en su sección 2.
+
+**Cuatro de ellas prometen un orden que no cumplen**, y eso es contenido, no diseño:
+
+| Sesión | Qué pasa |
+|---|---|
+| **S06** | El punto 5 explica el `fijar estilo de rotación`, que es **el primer bloque** del programa |
+| **S11** | Los puntos 5 y 6 no son ejecución: uno explica por qué hace falta el segundo programa y el otro dice cómo se crea un mensaje |
+| **S15** | Son **dos programas que corren a la vez**. No hay un orden único que numerar |
+| **S04** | Los puntos 3 y 4 son **las dos ramas** de una decisión, no dos pasos seguidos |
+
+Se arreglan las tres primeras. La S04 se deja: leída como narración de lo que pasa en cada vuelta
+del bucle funciona, y tocarla sería reescribir por una regla, no por un problema.
+
+### Identificadores · se quedan con su número (2)
+
+| Dónde | Quién apunta |
+|---|---|
+| Las **8 piezas del kit** de la S18 | 13 veces desde la S19 y las tres páginas de juego: «Pieza 6 de la S18» |
+| Los **9 puntos de la ficha** de la S17 | Desde la S18 («el punto 3 de tu ficha») y desde su propio checklist |
+
+Comprobado buscando en el sitio, no a ojo. Nada más pasa la prueba: **ningún texto apunta a un
+número de sección**, así que las secciones son posición pura y se quedan como están.
+
+### Lo único que no es texto
+
+El dibujo del editor de la S01 lleva los números **dentro del SVG** (`diagramas.py`, la función
+`badge`). Si la leyenda pierde los números, el dibujo también: pasa a llevar los nombres. Y cae
+con ellos la frase «Fíjate en la **1**: los bloques están repartidos por colores», que hay que
+reescribir.
