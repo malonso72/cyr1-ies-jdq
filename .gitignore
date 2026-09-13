@@ -1,0 +1,18 @@
+# ═══════════════════════════════════════════════════════════════
+# Qué NO entra en el repositorio
+# ═══════════════════════════════════════════════════════════════
+
+# Capturas y archivos que deja Claude al trabajar. Son de usar y tirar:
+# se quedan en el disco, pero no se versionan ni se publican.
+Claude outputs/
+
+# Editores y sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Python del taller de generadores
+__pycache__/
+*.pyc

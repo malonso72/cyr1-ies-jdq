@@ -16,6 +16,9 @@
 # Documentación interna del proyecto (no para el público)
 documentacion/
 
+# Capturas de trabajo que deja Claude (no para el público)
+Claude outputs/
+
 # Material privado de soluciones (no para el público)
 _soluciones/
 
