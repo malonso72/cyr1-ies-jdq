@@ -26,12 +26,29 @@
   .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
     width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
     margin-right:9px;vertical-align:2px;}
-  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
-  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
     padding:9px 0;border-bottom:1px dashed #D8DDE5;}
-  .paso-lista li:last-child{border-bottom:none;}
-  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
-    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
   .bloques{max-width:100%;height:auto;display:block;}
   .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
     padding:12px;margin:10px 0 16px;overflow-x:auto;}
@@ -122,12 +139,13 @@
 <div class="caja-bloques">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 298" width="340" height="298" class="bloques" role="img" aria-label="Programa: fijar estilo de rotación a izquierda-derecha y después, por siempre, siguiente disfraz, esperar 0.2 segundos, mover 10 pasos y si toca un borde rebotar"><title>Programa: fijar estilo de rotación a izquierda-derecha y después, por siempre, siguiente disfraz, esperar 0.2 segundos, mover 10 pasos y si toca un borde rebotar</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L324.2 62.0 Q330.2 62.0 330.2 68.0 L330.2 90.0 Q330.2 96.0 324.2 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#4C97FF"/><text x="22.0" y="83.6" class="sb-t" textLength="145.9" lengthAdjust="spacingAndGlyphs">fijar estilo de rotación a</text><rect x="174.9" y="68.0" width="143.3" height="22" rx="4" fill="#3373CC"/><text x="183.9" y="83.4" class="sb-t" textLength="111.3" lengthAdjust="spacingAndGlyphs">izquierda-derecha</text><path d="M303.2 76.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L200.5 96.0 Q206.5 96.0 206.5 102.0 L206.5 124.0 Q206.5 130.0 200.5 130.0 L58.0 130.0 L54.0 134.0 L42.0 134.0 L38.0 130.0 L30.0 130.0 Q24.0 130.0 24.0 136.0 L24.0 260.0 Q24.0 266.0 30.0 266.0 L200.5 266.0 Q206.5 266.0 206.5 272.0 L206.5 278.0 Q206.5 284.0 200.5 284.0 L44.0 284.0 L40.0 288.0 L28.0 288.0 L24.0 284.0 L16.0 284.0  Q10.0 284.0 10.0 278.0 Z" fill="#FFAB19"/><text x="22.0" y="117.6" class="sb-t" textLength="74.4" lengthAdjust="spacingAndGlyphs">por siempre</text><path d="M24.0 136.0 Q24.0 130.0 30.0 130.0 L38.0 130.0 L42.0 134.0 L54.0 134.0 L58.0 130.0  L144.6 130.0 Q150.6 130.0 150.6 136.0 L150.6 158.0 Q150.6 164.0 144.6 164.0 L58.0 164.0 L54.0 168.0 L42.0 168.0 L38.0 164.0 L30.0 164.0  Q24.0 164.0 24.0 158.0 Z" fill="#9966FF"/><text x="36.0" y="151.6" class="sb-t" textLength="102.6" lengthAdjust="spacingAndGlyphs">siguiente disfraz</text><path d="M24.0 170.0 Q24.0 164.0 30.0 164.0 L38.0 164.0 L42.0 168.0 L54.0 168.0 L58.0 164.0  L200.5 164.0 Q206.5 164.0 206.5 170.0 L206.5 192.0 Q206.5 198.0 200.5 198.0 L58.0 198.0 L54.0 202.0 L42.0 202.0 L38.0 198.0 L30.0 198.0  Q24.0 198.0 24.0 192.0 Z" fill="#FFAB19"/><text x="36.0" y="185.6" class="sb-t" textLength="47.0" lengthAdjust="spacingAndGlyphs">esperar</text><rect x="90.0" y="171.0" width="36.1" height="20" rx="10" fill="#FFFFFF"/><text x="108.0" y="185.3" class="sb-n">0.2</text><text x="133.1" y="185.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text><path d="M24.0 204.0 Q24.0 198.0 30.0 198.0 L38.0 198.0 L42.0 202.0 L54.0 202.0 L58.0 198.0  L165.1 198.0 Q171.1 198.0 171.1 204.0 L171.1 226.0 Q171.1 232.0 165.1 232.0 L58.0 232.0 L54.0 236.0 L42.0 236.0 L38.0 232.0 L30.0 232.0  Q24.0 232.0 24.0 226.0 Z" fill="#4C97FF"/><text x="36.0" y="219.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="205.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="98.3" y="219.3" class="sb-n">10</text><text x="121.5" y="219.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M24.0 238.0 Q24.0 232.0 30.0 232.0 L38.0 232.0 L42.0 236.0 L54.0 236.0 L58.0 232.0  L194.4 232.0 Q200.4 232.0 200.4 238.0 L200.4 260.0 Q200.4 266.0 194.4 266.0 L30.0 266.0 Q24.0 266.0 24.0 260.0 Z" fill="#4C97FF"/><text x="36.0" y="253.6" class="sb-t" textLength="152.4" lengthAdjust="spacingAndGlyphs">si toca un borde, rebotar</text></svg>
   <p class="pie">Los cuatro bloques de dentro se repiten sin parar: cambiar de disfraz, esperar un poco, avanzar y rebotar si llega al borde.</p>
-</div><ol class="paso-lista">
-  <li><span class="n">1</span><span><strong>siguiente disfraz</strong> pasa al siguiente dibujo del personaje. Cuando se acaban, vuelve al primero.</span></li>
-  <li><span class="n">2</span><span>La <strong>espera de 0.2 segundos</strong> es la clave de toda la sesión: sin ella, el cambio va tan rápido que no se ve un paso, se ve un borrón.</span></li>
-  <li><span class="n">3</span><span><strong>mover 10 pasos</strong> lo desplaza mientras «camina».</span></li>
-  <li><span class="n">4</span><span><strong>si toca un borde, rebotar</strong> le da la vuelta al llegar al final.</span></li>
-  <li><span class="n">5</span><span>El <strong>fijar estilo de rotación a (izquierda-derecha)</strong> del principio hace que al rebotar se dé la vuelta como un espejo, en vez de quedarse cabeza abajo.</span></li>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span><strong>fijar estilo de rotación a (izquierda-derecha)</strong> se ejecuta <em>una sola vez</em>, al principio: hace que al rebotar el personaje se dé la vuelta como un espejo, en vez de quedarse cabeza abajo.</span></li>
+  <li><span class="o">2</span><span>Arranca el <strong>por siempre</strong>, y lo de dentro ya no para. Los cuatro bloques que vienen ahora se repiten en este orden, una y otra vez.</span></li>
+  <li><span class="o">3</span><span><strong>siguiente disfraz</strong> pasa al siguiente dibujo del personaje. Cuando se acaban, vuelve al primero.</span></li>
+  <li><span class="o">4</span><span><strong>esperar (0.2) segundos.</strong> Esta es la clave de toda la sesión: sin ella, el cambio va tan rápido que no se ve un paso, se ve un borrón.</span></li>
+  <li><span class="o">5</span><span><strong>mover 10 pasos</strong> lo desplaza mientras «camina».</span></li>
+  <li><span class="o">6</span><span><strong>si toca un borde, rebotar</strong> le da la vuelta al llegar al final. Y se vuelve al 3.</span></li>
 </ol>
 
 <h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
@@ -143,11 +161,11 @@
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
 <ol class="paso-lista">
-  <li><span class="n">1</span><span>Monta el programa con el gato y comprueba que camina.</span></li>
-  <li><span class="n">2</span><span>Prueba la espera con <strong>0.05</strong>, con <strong>0.2</strong> y con <strong>1</strong> segundo. Quédate con el valor que mejor se vea.</span></li>
-  <li><span class="n">3</span><span>Ahora cámbiate de personaje: pulsa el botón del gato (abajo a la derecha) y <strong>elige uno que tenga varios disfraces</strong>. Antes de decidirte, míralo en la pestaña Disfraces: los que sólo traen uno no sirven para animar.</span></li>
-  <li><span class="n">4</span><span>Vuelve a ajustar la espera: un personaje con cuatro disfraces necesita una espera más corta que uno con dos.</span></li>
-  <li><span class="n">5</span><span>Cambia también el fondo para que la escena tenga sentido.</span></li>
+  <li><span class="p">Paso 1</span><span>Monta el programa con el gato y comprueba que camina.</span></li>
+  <li><span class="p">Paso 2</span><span>Prueba la espera con <strong>0.05</strong>, con <strong>0.2</strong> y con <strong>1</strong> segundo. Quédate con el valor que mejor se vea.</span></li>
+  <li><span class="p">Paso 3</span><span>Ahora cámbiate de personaje: pulsa el botón del gato (abajo a la derecha) y <strong>elige uno que tenga varios disfraces</strong>. Antes de decidirte, míralo en la pestaña Disfraces: los que sólo traen uno no sirven para animar.</span></li>
+  <li><span class="p">Paso 4</span><span>Vuelve a ajustar la espera: un personaje con cuatro disfraces necesita una espera más corta que uno con dos.</span></li>
+  <li><span class="p">Paso 5</span><span>Cambia también el fondo para que la escena tenga sentido.</span></li>
 </ol><details class="pista">
   <summary>¿Y si quiero un disfraz concreto y no el siguiente?</summary>
   <div class="cuerpo"><p>Para eso está este otro bloque, que va directamente al disfraz que le digas. Se usa, por ejemplo, para dejar al personaje quieto en una postura concreta cuando el programa termina:</p><div class="caja-bloques" style="max-width:360px">

@@ -3,7 +3,7 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scratchsvg import op, var, rep, hexa, tecla
-from plantilla import pagina, caja, pasos, pregunta, pista, ojo, logros, tabla
+from plantilla import pagina, caja, pasos, secuencia, claves, pregunta, pista, ojo, logros, tabla
 from comun import escribir
 
 BANDERA = ('hat', 'events', ['al hacer clic en', ('icon', 'bandera')])
@@ -357,11 +357,11 @@ s19 = pagina(
          'nunca sale bien, y de paso rompes lo que iba.</p>'
          '<p>Depurar es otra cosa: <strong>ir quitando sospechosos</strong> hasta que quede uno. '
          'Dos herramientas, las dos dentro de Scratch:</p>' +
-         pasos([
-             '<strong>Haz clic sobre un montón de bloques.</strong> Se ejecuta ahí mismo, sin la '
-             'bandera. Así pruebas una pieza sola.',
-             '<strong>Mete un <em>decir</em> donde sospeches.</strong> Te enseña lo que vale una '
-             'variable en ese punto. Luego lo quitas.'
+         claves([
+             ('Haz clic sobre un montón de bloques',
+              'Se ejecuta ahí mismo, sin la bandera. Así pruebas una pieza sola.'),
+             ('Mete un <em>decir</em> donde sospeches',
+              'Te enseña lo que vale una variable en ese punto. Luego lo quitas.'),
          ]) +
          caja(DEPURA19, 'Bloque decir la variable Vidas durante 1 segundo', ancho=340,
               pie='Un espía: cuenta lo que pasa por dentro.')),

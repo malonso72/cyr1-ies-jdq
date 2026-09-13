@@ -3,7 +3,7 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scratchsvg import op, var, rep, hexa, tecla
-from plantilla import pagina, caja, dos_cajas, pasos, pregunta, pista, ojo, logros, tabla
+from plantilla import pagina, caja, dos_cajas, pasos, secuencia, claves, pregunta, pista, ojo, logros, tabla
 from comun import escribir, GUIA
 
 BANDERA = ('hat', 'events', ['al hacer clic en', ('icon', 'bandera')])
@@ -47,17 +47,18 @@ s12 = pagina(
     'atravesar.',
     [
         ('Dos bloques nuevos y una idea',
-         pasos([
-             '<strong>cambiar x por (4)</strong> y <strong>cambiar y por (4)</strong> mueven el '
-             'personaje en horizontal y en vertical sin girarlo. Para un laberinto van mucho mejor '
-             'que <em>apuntar en dirección</em>, porque el personaje no tiene que dar la vuelta '
-             'para bajar.',
-             '<strong>¿tocando el color ( )?</strong> es una condición que mira si el personaje '
-             'está pisando un color concreto de la pantalla. Es así como el programa se entera de '
-             'que ha chocado con una pared.',
-             'La <strong>idea</strong>: en Scratch las paredes no existen. Lo que hay es un dibujo '
-             'de color negro y un programa que dice «si estás tocando negro, vuelve al principio». '
-             'El efecto para el jugador es el mismo.'])),
+         claves([
+             ('cambiar x por (4) y cambiar y por (4)',
+              'Mueven el personaje en horizontal y en vertical sin girarlo. Para un laberinto van '
+              'mucho mejor que <em>apuntar en dirección</em>, porque el personaje no tiene que dar '
+              'la vuelta para bajar.'),
+             ('¿tocando el color ( )?',
+              'Una condición que mira si el personaje está pisando un color concreto de la '
+              'pantalla. Es así como el programa se entera de que ha chocado con una pared.'),
+             ('Y la idea',
+              'En Scratch las paredes no existen. Lo que hay es un dibujo de color negro y un '
+              'programa que dice «si estás tocando negro, vuelve al principio». El efecto para el '
+              'jugador es el mismo.')])),
 
         ('Lee estos dos trozos',
          '<p>Primero, el movimiento. Cuatro condicionales, uno por flecha, dentro de un '
@@ -251,7 +252,7 @@ s14 = pagina(
                    'piedra, papel o tijera en la variable maquina, preguntar al jugador, anunciar '
                    'la jugada de la máquina y, si coinciden, decir ¡Empate!, si no, decir que uno '
                    'de los dos ha ganado') +
-         pasos([
+         secuencia([
              'Se sortea <code>sorteo</code>: 1, 2 o 3.',
              'Los tres condicionales traducen ese número a una palabra en <code>maquina</code>. '
              'Sólo uno de los tres se cumple.',
@@ -348,15 +349,19 @@ s15 = pagina(
                    ('Objeto <strong>Pala</strong>', PALA15,
                     'Programa de la pala: fijar estilo de rotación a no rotar y, por siempre, ir a '
                     'la posición x del ratón manteniendo la y en menos 140')) +
-         pasos([
-             'La pelota se coloca arriba y apunta hacia abajo y a la derecha (dirección 160).',
-             'Su <strong>por siempre</strong> hace sólo dos cosas: <em>mover (8) pasos</em> y '
-             '<em>si toca un borde, rebotar</em>. Ese par de bloques es todo el «motor» del '
-             'juego.',
-             'La pala tiene su propio <strong>por siempre</strong>, que se ejecuta a la vez.',
-             '<strong>posición x del ratón</strong> es un informador de Sensores: vale la '
-             'coordenada horizontal del cursor. Al metérselo al <em>ir a x:</em>, la pala se pega '
-             'al ratón en horizontal, pero se queda siempre a la misma altura.'])),
+         '<p>Aquí no hay un orden que seguir: los dos programas arrancan con la bandera y '
+         '<strong>corren a la vez</strong>, cada uno a lo suyo.</p>' +
+         claves([
+             ('La pelota',
+              'Se coloca arriba y apunta hacia abajo y a la derecha (dirección 160). Su '
+              '<strong>por siempre</strong> hace sólo dos cosas: <em>mover (8) pasos</em> y '
+              '<em>si toca un borde, rebotar</em>. Ese par de bloques es todo el «motor» del '
+              'juego.'),
+             ('La pala',
+              'Tiene su propio <strong>por siempre</strong>. <strong>posición x del ratón</strong> '
+              'es un informador de Sensores: vale la coordenada horizontal del cursor. Al '
+              'metérselo al <em>ir a x:</em>, la pala se pega al ratón en horizontal, pero se '
+              'queda siempre a la misma altura.')])),
 
         ('Comprueba que lo has entendido',
          pregunta('1', '¿Por qué la pala usa <em>ir a x: (…) y: (−140)</em> y no <em>mover (…) pasos</em>?',

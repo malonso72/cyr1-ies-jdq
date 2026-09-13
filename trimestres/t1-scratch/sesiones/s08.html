@@ -26,12 +26,29 @@
   .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
     width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
     margin-right:9px;vertical-align:2px;}
-  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
-  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
     padding:9px 0;border-bottom:1px dashed #D8DDE5;}
-  .paso-lista li:last-child{border-bottom:none;}
-  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
-    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
   .bloques{max-width:100%;height:auto;display:block;}
   .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
     padding:12px;margin:10px 0 16px;overflow-x:auto;}
@@ -121,12 +138,12 @@
 <h2><span class="h2n">2</span>Lee este programa</h2>
 <div class="caja-bloques">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 536 246" width="536" height="246" class="bloques" role="img" aria-label="Programa: preguntar Dime un número y esperar, dar a num1 el valor respuesta, preguntar Dime otro número y esperar, dar a num2 el valor respuesta, y decir unir La suma es con num1 más num2 durante 3 segundos"><title>Programa: preguntar Dime un número y esperar, dar a num1 el valor respuesta, preguntar Dime otro número y esperar, dar a num2 el valor respuesta, y decir unir La suma es con num1 más num2 durante 3 segundos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L281.1 62.0 Q287.1 62.0 287.1 68.0 L287.1 90.0 Q287.1 96.0 281.1 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#5CB1D6"/><text x="22.0" y="83.6" class="sb-t" textLength="60.7" lengthAdjust="spacingAndGlyphs">preguntar</text><rect x="89.7" y="69.0" width="120.6" height="20" rx="10" fill="#FFFFFF"/><text x="150.0" y="83.3" class="sb-n">Dime un número</text><text x="217.2" y="83.6" class="sb-t" textLength="57.8" lengthAdjust="spacingAndGlyphs">y esperar</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L271.7 96.0 Q277.7 96.0 277.7 102.0 L277.7 124.0 Q277.7 130.0 271.7 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#FF8C1A"/><text x="22.0" y="117.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">dar a</text><rect x="60.1" y="102.0" width="66.7" height="22" rx="4" fill="#DB6E00"/><text x="69.1" y="117.4" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">num1</text><path d="M111.8 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="133.8" y="117.6" class="sb-t" textLength="45.5" lengthAdjust="spacingAndGlyphs">el valor</text><rect x="186.3" y="101.0" width="79.4" height="24" rx="12" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="195.3" y="117.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">respuesta</text><path d="M10.0 136.0 Q10.0 130.0 16.0 130.0 L24.0 130.0 L28.0 134.0 L40.0 134.0 L44.0 130.0  L290.5 130.0 Q296.5 130.0 296.5 136.0 L296.5 158.0 Q296.5 164.0 290.5 164.0 L44.0 164.0 L40.0 168.0 L28.0 168.0 L24.0 164.0 L16.0 164.0  Q10.0 164.0 10.0 158.0 Z" fill="#5CB1D6"/><text x="22.0" y="151.6" class="sb-t" textLength="60.7" lengthAdjust="spacingAndGlyphs">preguntar</text><rect x="89.7" y="137.0" width="130.0" height="20" rx="10" fill="#FFFFFF"/><text x="154.6" y="151.3" class="sb-n">Dime otro número</text><text x="226.6" y="151.6" class="sb-t" textLength="57.8" lengthAdjust="spacingAndGlyphs">y esperar</text><path d="M10.0 170.0 Q10.0 164.0 16.0 164.0 L24.0 164.0 L28.0 168.0 L40.0 168.0 L44.0 164.0  L271.7 164.0 Q277.7 164.0 277.7 170.0 L277.7 192.0 Q277.7 198.0 271.7 198.0 L44.0 198.0 L40.0 202.0 L28.0 202.0 L24.0 198.0 L16.0 198.0  Q10.0 198.0 10.0 192.0 Z" fill="#FF8C1A"/><text x="22.0" y="185.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">dar a</text><rect x="60.1" y="170.0" width="66.7" height="22" rx="4" fill="#DB6E00"/><text x="69.1" y="185.4" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">num2</text><path d="M111.8 178.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="133.8" y="185.6" class="sb-t" textLength="45.5" lengthAdjust="spacingAndGlyphs">el valor</text><rect x="186.3" y="169.0" width="79.4" height="24" rx="12" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="195.3" y="185.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">respuesta</text><path d="M10.0 204.0 Q10.0 198.0 16.0 198.0 L24.0 198.0 L28.0 202.0 L40.0 202.0 L44.0 198.0  L520.1 198.0 Q526.1 198.0 526.1 204.0 L526.1 226.0 Q526.1 232.0 520.1 232.0 L44.0 232.0 L40.0 236.0 L28.0 236.0 L24.0 232.0 L16.0 232.0  Q10.0 232.0 10.0 226.0 Z" fill="#9966FF"/><text x="22.0" y="219.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">decir</text><rect x="60.1" y="203.0" width="293.9" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1"/><text x="69.1" y="219.6" class="sb-t" textLength="24.5" lengthAdjust="spacingAndGlyphs">unir</text><rect x="100.6" y="205.0" width="92.4" height="20" rx="10" fill="#FFFFFF"/><text x="146.8" y="219.3" class="sb-n">La suma es </text><rect x="200.1" y="203.0" width="144.9" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1"/><rect x="209.1" y="203.0" width="52.7" height="24" rx="12" fill="#FF8C1A" stroke="#DB6E00" stroke-width="1"/><text x="218.1" y="219.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">num1</text><text x="268.7" y="219.6" class="sb-t" textLength="7.6" lengthAdjust="spacingAndGlyphs">+</text><rect x="283.3" y="203.0" width="52.7" height="24" rx="12" fill="#FF8C1A" stroke="#DB6E00" stroke-width="1"/><text x="292.3" y="219.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">num2</text><text x="361.0" y="219.6" class="sb-t" textLength="47.7" lengthAdjust="spacingAndGlyphs">durante</text><rect x="415.7" y="205.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="430.7" y="219.3" class="sb-n">3</text><text x="452.7" y="219.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text></svg>
-</div><ol class="paso-lista">
-  <li><span class="n">1</span><span>Pregunta el primer número. Se queda en <strong>respuesta</strong>.</span></li>
-  <li><span class="n">2</span><span><strong>dar a (num1) el valor (respuesta)</strong> copia ese dato a la caja <code>num1</code>. Ahora está en dos sitios.</span></li>
-  <li><span class="n">3</span><span>Pregunta el segundo número. <strong>respuesta</strong> cambia — pero <code>num1</code> no, porque es una caja aparte.</span></li>
-  <li><span class="n">4</span><span>El segundo número se copia a <code>num2</code>.</span></li>
-  <li><span class="n">5</span><span>El bloque verde <strong>(num1) + (num2)</strong> es un operador: coge las dos cajas, las suma, y el resultado se mete dentro del <em>unir</em>.</span></li>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>Pregunta el primer número. Se queda en <strong>respuesta</strong>.</span></li>
+  <li><span class="o">2</span><span><strong>dar a (num1) el valor (respuesta)</strong> copia ese dato a la caja <code>num1</code>. Ahora está en dos sitios.</span></li>
+  <li><span class="o">3</span><span>Pregunta el segundo número. <strong>respuesta</strong> cambia — pero <code>num1</code> no, porque es una caja aparte.</span></li>
+  <li><span class="o">4</span><span>El segundo número se copia a <code>num2</code>.</span></li>
+  <li><span class="o">5</span><span>El bloque verde <strong>(num1) + (num2)</strong> es un operador: coge las dos cajas, las suma, y el resultado se mete dentro del <em>unir</em>.</span></li>
 </ol>
 
 <h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
@@ -142,10 +159,10 @@
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
 <ol class="paso-lista">
-  <li><span class="n">1</span><span>Crea las dos variables <code>num1</code> y <code>num2</code> y monta el programa.</span></li>
-  <li><span class="n">2</span><span>Añade la <strong>resta</strong> y la <strong>multiplicación</strong>, cada una en su propio bocadillo, uno detrás de otro.</span></li>
-  <li><span class="n">3</span><span>Quita las marcas de las casillas de las variables para que no se vean en el escenario y quede más limpio.</span></li>
-  <li><span class="n">4</span><span><strong>Reto:</strong> añade la división. Prueba a dividir entre 0 y mira qué contesta Scratch — no es un fallo tuyo.</span></li>
+  <li><span class="p">Paso 1</span><span>Crea las dos variables <code>num1</code> y <code>num2</code> y monta el programa.</span></li>
+  <li><span class="p">Paso 2</span><span>Añade la <strong>resta</strong> y la <strong>multiplicación</strong>, cada una en su propio bocadillo, uno detrás de otro.</span></li>
+  <li><span class="p">Paso 3</span><span>Quita las marcas de las casillas de las variables para que no se vean en el escenario y quede más limpio.</span></li>
+  <li><span class="p">Paso 4</span><span><strong>Reto:</strong> añade la división. Prueba a dividir entre 0 y mira qué contesta Scratch — no es un fallo tuyo.</span></li>
 </ol><div class="caja-bloques">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 58" width="530" height="58" class="bloques" role="img" aria-label="Bloque decir unir La resta es con num1 menos num2 durante 3 segundos"><title>Bloque decir unir La resta es con num1 menos num2 durante 3 segundos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L513.9 10.0 Q519.9 10.0 519.9 16.0 L519.9 38.0 Q519.9 44.0 513.9 44.0 L44.0 44.0 L40.0 48.0 L28.0 48.0 L24.0 44.0 L16.0 44.0  Q10.0 44.0 10.0 38.0 Z" fill="#9966FF"/><text x="22.0" y="31.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">decir</text><rect x="60.1" y="15.0" width="287.8" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1"/><text x="69.1" y="31.6" class="sb-t" textLength="24.5" lengthAdjust="spacingAndGlyphs">unir</text><rect x="100.6" y="17.0" width="89.6" height="20" rx="10" fill="#FFFFFF"/><text x="145.4" y="31.3" class="sb-n">La resta es </text><rect x="197.2" y="15.0" width="141.7" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1"/><rect x="206.2" y="15.0" width="52.7" height="24" rx="12" fill="#FF8C1A" stroke="#DB6E00" stroke-width="1"/><text x="215.2" y="31.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">num1</text><text x="265.9" y="31.6" class="sb-t" textLength="4.3" lengthAdjust="spacingAndGlyphs">-</text><rect x="277.2" y="15.0" width="52.7" height="24" rx="12" fill="#FF8C1A" stroke="#DB6E00" stroke-width="1"/><text x="286.2" y="31.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">num2</text><text x="354.9" y="31.6" class="sb-t" textLength="47.7" lengthAdjust="spacingAndGlyphs">durante</text><rect x="409.5" y="17.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="424.5" y="31.3" class="sb-n">3</text><text x="446.5" y="31.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text></svg>
   <p class="pie">El bloque de la resta es idéntico al de la suma cambiando el operador verde.</p>

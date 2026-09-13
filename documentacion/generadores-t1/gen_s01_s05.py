@@ -3,7 +3,7 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scratchsvg import hexa, tecla
-from plantilla import pagina, caja, pasos, pregunta, pista, ojo, logros, tabla
+from plantilla import pagina, caja, pasos, secuencia, claves, pregunta, pista, ojo, logros, tabla
 from diagramas import mapa_editor, rosa_direcciones
 from comun import escribir, CUADERNILLO
 
@@ -28,18 +28,22 @@ s01 = pagina(
          '<p>Scratch se abre en el navegador. No hay que instalar nada y no hace falta cuenta. '
          'Esta es la pantalla que te vas a encontrar:</p>\n'
          '<div class="caja-bloques">' + mapa_editor() +
-         '<p class="pie">Las cuatro zonas que vas a usar todo el trimestre. '
-         'Fíjate en la <strong>1</strong>: los bloques están repartidos por colores, y el color '
-         'te dice en qué categoría buscarlos.</p></div>\n' +
-         pasos([
-             '<strong>Paleta.</strong> Todos los bloques que existen, ordenados por color. '
-             'Azul es movimiento, morado apariencia, rosa sonido, amarillo eventos…',
-             '<strong>Área de código.</strong> Arrastras los bloques aquí y los encajas unos '
-             'debajo de otros, como piezas de construcción.',
-             '<strong>Escenario.</strong> Lo que se ve cuando el programa funciona. '
-             'La <strong>bandera verde</strong> lo arranca y el <strong>círculo rojo</strong> lo para.',
-             '<strong>Objetos.</strong> Los personajes. Empiezas con uno solo, el gato, que se '
-             'llama <strong>Sprite1</strong>. Cada objeto tiene <em>su propio</em> código.'])),
+         '<p class="pie">Las cuatro zonas que vas a usar todo el trimestre. En la '
+         '<strong>paleta</strong>, los bloques están repartidos por colores, y el color te dice '
+         'en qué categoría buscarlos.</p></div>\n' +
+         claves([
+             ('Paleta',
+              'Todos los bloques que existen, ordenados por color. Azul es movimiento, morado '
+              'apariencia, rosa sonido, amarillo eventos…'),
+             ('Área de código',
+              'Arrastras los bloques aquí y los encajas unos debajo de otros, como piezas de '
+              'construcción.'),
+             ('Escenario',
+              'Lo que se ve cuando el programa funciona. La <strong>bandera verde</strong> lo '
+              'arranca y el <strong>círculo rojo</strong> lo para.'),
+             ('Objetos',
+              'Los personajes. Empiezas con uno solo, el gato, que se llama '
+              '<strong>Sprite1</strong>. Cada objeto tiene <em>su propio</em> código.')])),
 
         ('Lee este programa',
          '<p>Este es el programa que vas a montar hoy. Son cuatro bloques y cada uno viene de una '
@@ -48,7 +52,7 @@ s01 = pagina(
                    '2 segundos, mover 100 pasos e iniciar el sonido Miau',
               pie='El bloque amarillo de arriba tiene forma de sombrero: es el que <em>arranca</em> '
                   'todo. Ningún programa funciona sin uno.') +
-         pasos([
+         secuencia([
              'Pulsas la bandera verde y el programa empieza.',
              'El gato saca un bocadillo con el texto durante 2 segundos.',
              'Se desplaza 100 pasos en la dirección a la que esté mirando.',
@@ -135,7 +139,7 @@ s02 = pagina(
          caja(P02, 'Programa: fijar estilo de rotación a no rotar, ir a x menos 120 y 0, '
                    'apuntar en dirección 90, mover 120 pasos, esperar 1 segundo, apuntar en '
                    'dirección 180, mover 120 pasos, esperar 1 segundo e iniciar sonido Miau') +
-         pasos([
+         secuencia([
              'El <strong>ir a x: y:</strong> del principio coloca al gato siempre en el mismo '
              'sitio. Sin él, cada vez que pulses la bandera empezaría donde acabó la vez anterior.',
              'Apunta a la <strong>derecha</strong> (90) y avanza 120 pasos.',
@@ -223,8 +227,8 @@ s03 = pagina(
          caja(P03, 'Programa con bucle: ir a x 0 y 0, apuntar en dirección 90, repetir 4 veces '
                    'mover 100 pasos y girar 90 grados a la derecha, e iniciar sonido Miau')),
 
-        ('Qué hace, paso a paso',
-         pasos([
+        ('Cómo funciona',
+         secuencia([
              'El gato se coloca en el centro mirando a la derecha.',
              'Entra en el <strong>repetir (4)</strong>. Ejecuta lo de dentro: avanza y gira.',
              'Vuelve arriba y lo hace otra vez. Y otra. Y otra. Cuatro en total.',
@@ -313,7 +317,7 @@ s04 = pagina(
                    'durante 2 segundos y detener todos',
               pie='El bloque azul claro con forma de hexágono es una <strong>condición</strong>: '
                   'sólo puede valer sí o no. Encaja únicamente en huecos de esa misma forma.') +
-         pasos([
+         secuencia([
              'El gato empieza en el centro.',
              '<strong>repetir hasta que</strong> mira la condición <em>antes de cada vuelta</em>: '
              '¿está pulsada la barra espaciadora?',
@@ -390,8 +394,8 @@ s05 = pagina(
               pie='Si en tu cuadernillo ves <strong>270</strong> donde aquí pone <strong>−90</strong>, '
                   'es lo mismo: dos formas de nombrar la dirección hacia la izquierda.')),
 
-        ('Qué hace, paso a paso',
-         pasos([
+        ('Cómo funciona',
+         secuencia([
              'Al pulsar la bandera verde, el programa arranca.',
              '<strong>repetir hasta que</strong> vigila una y otra vez si has pulsado la barra '
              'espaciadora. Mientras no la pulses, todo lo de dentro se repite sin parar.',

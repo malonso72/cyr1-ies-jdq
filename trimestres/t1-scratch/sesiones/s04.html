@@ -26,12 +26,29 @@
   .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
     width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
     margin-right:9px;vertical-align:2px;}
-  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
-  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
     padding:9px 0;border-bottom:1px dashed #D8DDE5;}
-  .paso-lista li:last-child{border-bottom:none;}
-  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
-    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
   .bloques{max-width:100%;height:auto;display:block;}
   .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
     padding:12px;margin:10px 0 16px;overflow-x:auto;}
@@ -125,12 +142,12 @@
 <div class="caja-bloques">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 399 298" width="399" height="298" class="bloques" role="img" aria-label="Programa: ir a x 0 y 0, repetir hasta que la tecla espacio esté presionada moviendo 4 pasos y rebotando en los bordes, después decir ¡Me has parado! durante 2 segundos y detener todos"><title>Programa: ir a x 0 y 0, repetir hasta que la tecla espacio esté presionada moviendo 4 pasos y rebotando en los bordes, después decir ¡Me has parado! durante 2 segundos y detener todos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L155.2 62.0 Q161.2 62.0 161.2 68.0 L161.2 90.0 Q161.2 96.0 155.2 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#4C97FF"/><text x="22.0" y="83.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="63.7" y="69.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="78.7" y="83.3" class="sb-n">0</text><text x="100.7" y="83.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="119.2" y="69.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="134.2" y="83.3" class="sb-n">0</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L383.1 96.0 Q389.1 96.0 389.1 102.0 L389.1 124.0 Q389.1 130.0 383.1 130.0 L58.0 130.0 L54.0 134.0 L42.0 134.0 L38.0 130.0 L30.0 130.0 Q24.0 130.0 24.0 136.0 L24.0 192.0 Q24.0 198.0 30.0 198.0 L383.1 198.0 Q389.1 198.0 389.1 204.0 L389.1 210.0 Q389.1 216.0 383.1 216.0 L44.0 216.0 L40.0 220.0 L28.0 220.0 L24.0 216.0 L16.0 216.0  Q10.0 216.0 10.0 210.0 Z" fill="#FFAB19"/><text x="22.0" y="117.6" class="sb-t" textLength="104.8" lengthAdjust="spacingAndGlyphs">repetir hasta que</text><path d="M142.8 101.0 l-9 12.0 l9 12.0 h225.3 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="150.8" y="117.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="195.3" y="102.0" width="80.4" height="22" rx="4" fill="#2E8EB8"/><text x="204.3" y="117.4" class="sb-t" textLength="48.4" lengthAdjust="spacingAndGlyphs">espacio</text><path d="M260.8 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="282.8" y="117.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><path d="M24.0 136.0 Q24.0 130.0 30.0 130.0 L38.0 130.0 L42.0 134.0 L54.0 134.0 L58.0 130.0  L162.6 130.0 Q168.6 130.0 168.6 136.0 L168.6 158.0 Q168.6 164.0 162.6 164.0 L58.0 164.0 L54.0 168.0 L42.0 168.0 L38.0 164.0 L30.0 164.0  Q24.0 164.0 24.0 158.0 Z" fill="#4C97FF"/><text x="36.0" y="151.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="137.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="97.0" y="151.3" class="sb-n">4</text><text x="119.0" y="151.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M24.0 170.0 Q24.0 164.0 30.0 164.0 L38.0 164.0 L42.0 168.0 L54.0 168.0 L58.0 164.0  L194.4 164.0 Q200.4 164.0 200.4 170.0 L200.4 192.0 Q200.4 198.0 194.4 198.0 L30.0 198.0 Q24.0 198.0 24.0 192.0 Z" fill="#4C97FF"/><text x="36.0" y="185.6" class="sb-t" textLength="152.4" lengthAdjust="spacingAndGlyphs">si toca un borde, rebotar</text><path d="M10.0 222.0 Q10.0 216.0 16.0 216.0 L24.0 216.0 L28.0 220.0 L40.0 220.0 L44.0 216.0  L343.8 216.0 Q349.8 216.0 349.8 222.0 L349.8 244.0 Q349.8 250.0 343.8 250.0 L44.0 250.0 L40.0 254.0 L28.0 254.0 L24.0 250.0 L16.0 250.0  Q10.0 250.0 10.0 244.0 Z" fill="#9966FF"/><text x="22.0" y="237.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">decir</text><rect x="60.1" y="223.0" width="117.7" height="20" rx="10" fill="#FFFFFF"/><text x="118.9" y="237.3" class="sb-n">¡Me has parado!</text><text x="184.8" y="237.6" class="sb-t" textLength="47.7" lengthAdjust="spacingAndGlyphs">durante</text><rect x="239.4" y="223.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="254.4" y="237.3" class="sb-n">2</text><text x="276.4" y="237.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text><path d="M10.0 256.0 Q10.0 250.0 16.0 250.0 L24.0 250.0 L28.0 254.0 L40.0 254.0 L44.0 250.0  L149.3 250.0 Q155.3 250.0 155.3 256.0 L155.3 278.0 Q155.3 284.0 149.3 284.0 L16.0 284.0 Q10.0 284.0 10.0 278.0 Z" fill="#FFAB19"/><text x="22.0" y="271.6" class="sb-t" textLength="47.0" lengthAdjust="spacingAndGlyphs">detener</text><rect x="76.0" y="256.0" width="67.4" height="22" rx="4" fill="#CF8B17"/><text x="85.0" y="271.4" class="sb-t" textLength="35.4" lengthAdjust="spacingAndGlyphs">todos</text><path d="M128.3 264.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
   <p class="pie">El bloque azul claro con forma de hexágono es una <strong>condición</strong>: sólo puede valer sí o no. Encaja únicamente en huecos de esa misma forma.</p>
-</div><ol class="paso-lista">
-  <li><span class="n">1</span><span>El gato empieza en el centro.</span></li>
-  <li><span class="n">2</span><span><strong>repetir hasta que</strong> mira la condición <em>antes de cada vuelta</em>: ¿está pulsada la barra espaciadora?</span></li>
-  <li><span class="n">3</span><span>Si la respuesta es <strong>no</strong>, ejecuta lo de dentro (avanza y rebota) y vuelve a preguntar.</span></li>
-  <li><span class="n">4</span><span>Si la respuesta es <strong>sí</strong>, se sale del bucle y pasa al bloque de abajo.</span></li>
-  <li><span class="n">5</span><span>El <strong>detener (todos)</strong> del final apaga el programa entero. Fíjate en su forma: no tiene muesca abajo, porque después de él no puede ir nada.</span></li>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>El gato empieza en el centro.</span></li>
+  <li><span class="o">2</span><span><strong>repetir hasta que</strong> mira la condición <em>antes de cada vuelta</em>: ¿está pulsada la barra espaciadora?</span></li>
+  <li><span class="o">3</span><span>Si la respuesta es <strong>no</strong>, ejecuta lo de dentro (avanza y rebota) y vuelve a preguntar.</span></li>
+  <li><span class="o">4</span><span>Si la respuesta es <strong>sí</strong>, se sale del bucle y pasa al bloque de abajo.</span></li>
+  <li><span class="o">5</span><span>El <strong>detener (todos)</strong> del final apaga el programa entero. Fíjate en su forma: no tiene muesca abajo, porque después de él no puede ir nada.</span></li>
 </ol>
 
 <h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
@@ -146,9 +163,9 @@
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
 <p>Haz estas tres versiones, una detrás de otra. Descarga sólo la última.</p><ol class="paso-lista">
-  <li><span class="n">1</span><span>Monta el programa tal cual está arriba y compruébalo.</span></li>
-  <li><span class="n">2</span><span>Cambia la condición por <strong>¿ratón presionado?</strong> — está en Sensores, y tiene la misma forma de hexágono, así que encaja en el mismo hueco.</span></li>
-  <li><span class="n">3</span><span>Cambia la condición por <strong>¿tocando (borde)?</strong> El gato se moverá hasta chocar con el borde y ahí se parará. Para esta versión tendrás que quitar el bloque de rebotar, o no chocará nunca.</span></li>
+  <li><span class="p">Paso 1</span><span>Monta el programa tal cual está arriba y compruébalo.</span></li>
+  <li><span class="p">Paso 2</span><span>Cambia la condición por <strong>¿ratón presionado?</strong> — está en Sensores, y tiene la misma forma de hexágono, así que encaja en el mismo hueco.</span></li>
+  <li><span class="p">Paso 3</span><span>Cambia la condición por <strong>¿tocando (borde)?</strong> El gato se moverá hasta chocar con el borde y ahí se parará. Para esta versión tendrás que quitar el bloque de rebotar, o no chocará nunca.</span></li>
 </ol><div class="caja-bloques" style="max-width:380px">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 338 110" width="338" height="110" class="bloques" role="img" aria-label="Tercera versión: repetir hasta que tocando borde, mover 4 pasos"><title>Tercera versión: repetir hasta que tocando borde, mover 4 pasos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L322.3 10.0 Q328.3 10.0 328.3 16.0 L328.3 38.0 Q328.3 44.0 322.3 44.0 L58.0 44.0 L54.0 48.0 L42.0 48.0 L38.0 44.0 L30.0 44.0 Q24.0 44.0 24.0 50.0 L24.0 72.0 Q24.0 78.0 30.0 78.0 L322.3 78.0 Q328.3 78.0 328.3 84.0 L328.3 90.0 Q328.3 96.0 322.3 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#FFAB19"/><text x="22.0" y="31.6" class="sb-t" textLength="104.8" lengthAdjust="spacingAndGlyphs">repetir hasta que</text><path d="M142.8 15.0 l-9 12.0 l9 12.0 h164.5 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="150.8" y="31.6" class="sb-t" textLength="58.5" lengthAdjust="spacingAndGlyphs">¿tocando</text><rect x="216.2" y="16.0" width="68.1" height="22" rx="4" fill="#2E8EB8"/><text x="225.2" y="31.4" class="sb-t" textLength="36.1" lengthAdjust="spacingAndGlyphs">borde</text><path d="M269.4 24.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="291.4" y="31.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><path d="M24.0 50.0 Q24.0 44.0 30.0 44.0 L38.0 44.0 L42.0 48.0 L54.0 48.0 L58.0 44.0  L162.6 44.0 Q168.6 44.0 168.6 50.0 L168.6 72.0 Q168.6 78.0 162.6 78.0 L30.0 78.0 Q24.0 78.0 24.0 72.0 Z" fill="#4C97FF"/><text x="36.0" y="65.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="51.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="97.0" y="65.3" class="sb-n">4</text><text x="119.0" y="65.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text></svg>
 </div>

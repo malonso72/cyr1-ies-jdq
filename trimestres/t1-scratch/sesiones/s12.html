@@ -26,12 +26,29 @@
   .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
     width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
     margin-right:9px;vertical-align:2px;}
-  .paso-lista{list-style:none;margin:0 0 12px;padding:0;}
-  .paso-lista li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
     padding:9px 0;border-bottom:1px dashed #D8DDE5;}
-  .paso-lista li:last-child{border-bottom:none;}
-  .paso-lista .n{width:26px;height:26px;border-radius:50%;background:#1B4F8A;color:#fff;
-    font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
   .bloques{max-width:100%;height:auto;display:block;}
   .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
     padding:12px;margin:10px 0 16px;overflow-x:auto;}
@@ -116,11 +133,11 @@
 <p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
 
 <h2><span class="h2n">1</span>Dos bloques nuevos y una idea</h2>
-<ol class="paso-lista">
-  <li><span class="n">1</span><span><strong>cambiar x por (4)</strong> y <strong>cambiar y por (4)</strong> mueven el personaje en horizontal y en vertical sin girarlo. Para un laberinto van mucho mejor que <em>apuntar en dirección</em>, porque el personaje no tiene que dar la vuelta para bajar.</span></li>
-  <li><span class="n">2</span><span><strong>¿tocando el color ( )?</strong> es una condición que mira si el personaje está pisando un color concreto de la pantalla. Es así como el programa se entera de que ha chocado con una pared.</span></li>
-  <li><span class="n">3</span><span>La <strong>idea</strong>: en Scratch las paredes no existen. Lo que hay es un dibujo de color negro y un programa que dice «si estás tocando negro, vuelve al principio». El efecto para el jugador es el mismo.</span></li>
-</ol>
+<ul class="clave-lista">
+  <li><b>cambiar x por (4) y cambiar y por (4).</b> Mueven el personaje en horizontal y en vertical sin girarlo. Para un laberinto van mucho mejor que <em>apuntar en dirección</em>, porque el personaje no tiene que dar la vuelta para bajar.</li>
+  <li><b>¿tocando el color ( )?.</b> Una condición que mira si el personaje está pisando un color concreto de la pantalla. Es así como el programa se entera de que ha chocado con una pared.</li>
+  <li><b>Y la idea.</b> En Scratch las paredes no existen. Lo que hay es un dibujo de color negro y un programa que dice «si estás tocando negro, vuelve al principio». El efecto para el jugador es el mismo.</li>
+</ul>
 
 <h2><span class="h2n">2</span>Lee estos dos trozos</h2>
 <p>Primero, el movimiento. Cuatro condicionales, uno por flecha, dentro de un <strong>por siempre</strong> que los vigila todo el rato:</p><div class="caja-bloques">
@@ -143,12 +160,12 @@
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
 <ol class="paso-lista">
-  <li><span class="n">1</span><span>Haz clic en el escenario (abajo a la derecha) y elige <strong>Pintar</strong> para dibujar tu propio laberinto. Usa el rectángulo relleno de <strong>negro</strong> para las paredes.</span></li>
-  <li><span class="n">2</span><span>Deja los pasillos <strong>anchos</strong>. Si son estrechos, el juego es imposible.</span></li>
-  <li><span class="n">3</span><span>Vuelve al objeto, ponle un tamaño pequeño (30–40 %) y colócalo en la salida.</span></li>
-  <li><span class="n">4</span><span>Monta el movimiento y pruébalo <em>sin</em> el condicional de las paredes.</span></li>
-  <li><span class="n">5</span><span>Añade el condicional de las paredes y vuelve a probar. Coge el color con el <strong>cuentagotas</strong>, no lo elijas a ojo.</span></li>
-  <li><span class="n">6</span><span>Ajusta los <strong>4</strong> pasos: si va muy rápido se cuela por las paredes, si va muy lento aburre.</span></li>
+  <li><span class="p">Paso 1</span><span>Haz clic en el escenario (abajo a la derecha) y elige <strong>Pintar</strong> para dibujar tu propio laberinto. Usa el rectángulo relleno de <strong>negro</strong> para las paredes.</span></li>
+  <li><span class="p">Paso 2</span><span>Deja los pasillos <strong>anchos</strong>. Si son estrechos, el juego es imposible.</span></li>
+  <li><span class="p">Paso 3</span><span>Vuelve al objeto, ponle un tamaño pequeño (30–40 %) y colócalo en la salida.</span></li>
+  <li><span class="p">Paso 4</span><span>Monta el movimiento y pruébalo <em>sin</em> el condicional de las paredes.</span></li>
+  <li><span class="p">Paso 5</span><span>Añade el condicional de las paredes y vuelve a probar. Coge el color con el <strong>cuentagotas</strong>, no lo elijas a ojo.</span></li>
+  <li><span class="p">Paso 6</span><span>Ajusta los <strong>4</strong> pasos: si va muy rápido se cuela por las paredes, si va muy lento aburre.</span></li>
 </ol><div class="aviso-ojo">
   <h3>⚠️ El fallo de atravesar paredes yendo deprisa</h3>
 <p>Si pones <em>cambiar x por (20)</em>, el personaje da saltos de 20 píxeles y puede aparecer <strong>al otro lado</strong> de una pared fina sin haberla tocado nunca. No es un fallo de Scratch: es que entre un fotograma y el siguiente nadie ha mirado.</p><p style="margin-bottom:0">Solución: pasos pequeños y paredes gruesas.</p>

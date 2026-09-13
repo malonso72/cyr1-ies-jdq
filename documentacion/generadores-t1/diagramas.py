@@ -37,9 +37,12 @@ def mapa_editor():
     a = p.append
 
     def badge(n, x, y, texto):
-        a('<circle cx="%d" cy="%d" r="10" fill="#1B4F8A"/>' % (x, y))
-        a('<text x="%d" y="%d" class="num" text-anchor="middle">%d</text>' % (x, y + 4, n))
-        a('<text x="%d" y="%d" class="lab">%s</text>' % (x + 16, y + 5, texto))
+        # `n` ya no se dibuja: las zonas se identifican por su NOMBRE, que es lo que se
+        # dice en voz alta («búscalo en la paleta»). Ver la regla de numeración en el
+        # README del taller. Se conserva el parámetro para no tocar las llamadas.
+        a('<rect x="%d" y="%d" width="7" height="14" rx="3" fill="#1B4F8A"/>'
+          % (x - 5, y - 7))
+        a('<text x="%d" y="%d" class="lab">%s</text>' % (x + 9, y + 5, texto.upper()))
 
     a('<rect x="4" y="4" width="692" height="424" rx="10" fill="#EEF2F7" '
       'stroke="#C7D0DB" stroke-width="2"/>')
@@ -102,9 +105,9 @@ def mapa_editor():
     a('<circle cx="660" cy="392" r="16" fill="#4C97FF"/>')
     a(_gato(660, 392, 9, '#FFFFFF'))
     return _svg(700, 432, ''.join(p),
-                'Esquema de la pantalla de Scratch: 1 la paleta de bloques con las nueve '
-                'categorías, 2 el área de código en el centro, 3 el escenario arriba a la derecha '
-                'con la bandera verde, y 4 la lista de objetos debajo, con Sprite1',
+                'Esquema de la pantalla de Scratch: la paleta de bloques con las nueve categorías '
+                'a la izquierda, el área de código en el centro, el escenario arriba a la derecha '
+                'con la bandera verde, y la lista de objetos debajo, con Sprite1',
                 css)
 
 

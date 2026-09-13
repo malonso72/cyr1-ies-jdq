@@ -3,7 +3,7 @@
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scratchsvg import op, var, rep, hexa
-from plantilla import pagina, caja, dos_cajas, pasos, pregunta, pista, ojo, logros, tabla
+from plantilla import pagina, caja, dos_cajas, pasos, secuencia, claves, pregunta, pista, ojo, logros, tabla
 from comun import escribir, CUADERNILLO
 
 BANDERA = ('hat', 'events', ['al hacer clic en', ('icon', 'bandera')])
@@ -44,15 +44,19 @@ s06 = pagina(
                    'rebotar',
               pie='Los cuatro bloques de dentro se repiten sin parar: cambiar de disfraz, esperar '
                   'un poco, avanzar y rebotar si llega al borde.') +
-         pasos([
+         secuencia([
+             '<strong>fijar estilo de rotación a (izquierda-derecha)</strong> se ejecuta '
+             '<em>una sola vez</em>, al principio: hace que al rebotar el personaje se dé la '
+             'vuelta como un espejo, en vez de quedarse cabeza abajo.',
+             'Arranca el <strong>por siempre</strong>, y lo de dentro ya no para. Los cuatro '
+             'bloques que vienen ahora se repiten en este orden, una y otra vez.',
              '<strong>siguiente disfraz</strong> pasa al siguiente dibujo del personaje. Cuando se '
              'acaban, vuelve al primero.',
-             'La <strong>espera de 0.2 segundos</strong> es la clave de toda la sesión: sin ella, '
-             'el cambio va tan rápido que no se ve un paso, se ve un borrón.',
+             '<strong>esperar (0.2) segundos.</strong> Esta es la clave de toda la sesión: sin '
+             'ella, el cambio va tan rápido que no se ve un paso, se ve un borrón.',
              '<strong>mover 10 pasos</strong> lo desplaza mientras «camina».',
-             '<strong>si toca un borde, rebotar</strong> le da la vuelta al llegar al final.',
-             'El <strong>fijar estilo de rotación a (izquierda-derecha)</strong> del principio '
-             'hace que al rebotar se dé la vuelta como un espejo, en vez de quedarse cabeza abajo.'])),
+             '<strong>si toca un borde, rebotar</strong> le da la vuelta al llegar al final. Y se '
+             'vuelve al 3.'])),
 
         ('Comprueba que lo has entendido',
          pregunta('1', 'Quitas el bloque <em>esperar (0.2) segundos</em> y dejas todo lo demás igual. '
@@ -135,7 +139,7 @@ s07 = pagina(
               pie='El óvalo azul claro que pone <strong>respuesta</strong> no es un bloque que se '
                   'apile: es un bloque <em>informador</em>. Vale lo último que hayas escrito, y se '
                   'arrastra dentro del hueco de otro bloque.') +
-         pasos([
+         secuencia([
              '<strong>preguntar … y esperar</strong> saca un cuadro de texto abajo del escenario y '
              '<em>para el programa</em> hasta que escribes algo y pulsas Intro.',
              'Lo que escribes se guarda en <strong>respuesta</strong>.',
@@ -224,7 +228,7 @@ s08 = pagina(
          caja(P08, 'Programa: preguntar Dime un número y esperar, dar a num1 el valor respuesta, '
                    'preguntar Dime otro número y esperar, dar a num2 el valor respuesta, y decir '
                    'unir La suma es con num1 más num2 durante 3 segundos') +
-         pasos([
+         secuencia([
              'Pregunta el primer número. Se queda en <strong>respuesta</strong>.',
              '<strong>dar a (num1) el valor (respuesta)</strong> copia ese dato a la caja '
              '<code>num1</code>. Ahora está en dos sitios.',
@@ -306,14 +310,16 @@ s09 = pagina(
     'tus aciertos.',
     [
         ('Tres cosas nuevas',
-         pasos([
-             '<strong>número aleatorio entre (1) y (10)</strong> — un operador verde que devuelve '
-             'un número distinto cada vez. Es lo que hace que el juego no sea siempre igual.',
-             '<strong>si … entonces / si no</strong> — como el condicional de la sesión 5, pero '
-             'con <em>dos</em> huecos: uno para cuando la respuesta es sí y otro para cuando es no. '
-             'Siempre se ejecuta uno de los dos, nunca los dos ni ninguno.',
-             '<strong>sumar a (Aciertos) (1)</strong> — añade 1 a lo que ya hubiera. '
-             'Es el bloque de contar.'])),
+         claves([
+             ('número aleatorio entre (1) y (10)',
+              'Un operador verde que devuelve un número distinto cada vez. Es lo que hace que el '
+              'juego no sea siempre igual.'),
+             ('si … entonces / si no',
+              'Como el condicional de la sesión 5, pero con <em>dos</em> huecos: uno para cuando '
+              'la respuesta es sí y otro para cuando es no. Siempre se ejecuta uno de los dos, '
+              'nunca los dos ni ninguno.'),
+             ('sumar a (Aciertos) (1)',
+              'Añade 1 a lo que ya hubiera. Es el bloque de contar.')])),
 
         ('Lee este programa',
          caja(P09, 'Programa del quiz: poner Aciertos a 0, mostrar las variables a y b, y repetir '
@@ -323,7 +329,7 @@ s09 = pagina(
               pie='Fíjate en el hexágono verde: <strong>(respuesta) = ((a) + (b))</strong>. '
                   'Dentro de una condición se pueden meter operadores, y dentro de los operadores, '
                   'variables. Se encajan como muñecas rusas.') +
-         pasos([
+         secuencia([
              'El marcador se pone a <strong>0</strong> antes de empezar. Si no lo hicieras, seguiría '
              'con la puntuación de la partida anterior.',
              '<strong>mostrar variable</strong> hace que <code>a</code> y <code>b</code> se vean en '
@@ -409,7 +415,7 @@ s10 = pagina(
                    'entre 1 y 10 pasos, después decir ¡He ganado! durante 2 segundos y detener todos',
               pie='<strong>posición x</strong> es un informador azul de Movimiento: vale lo lejos '
                   'que está el objeto del centro, de −240 a 240. Aquí lo usamos como línea de meta.') +
-         pasos([
+         secuencia([
              'El corredor se coloca en la línea de salida, a la izquierda del todo.',
              'El bucle vigila una condición: <strong>¿ya he pasado de x = 200?</strong> Mientras la '
              'respuesta sea no, avanza.',
@@ -511,20 +517,23 @@ s11 = pagina(
                    'menos 60 y apuntar en dirección 90',
               pie='Un mismo objeto puede tener varios programas. Este sólo coloca; el otro espera '
                   'el aviso.') +
-         pasos([
+         secuencia([
              'El gato se coloca, espera un segundo y avanza hacia el balón.',
              'Al llegar, <strong>envía (patada)</strong>. Ese bloque no mueve nada: sólo lanza el '
              'aviso, y el gato sigue a lo suyo inmediatamente.',
              'El balón tiene un sombrero <strong>al recibir (patada)</strong>. Estaba esperando '
              'ese aviso, y en cuanto llega arranca su programa.',
-             'El balón suena, sale rodando y gira mientras avanza, hasta chocar con un borde.',
-             'El segundo programa del balón es el que hace que la <strong>segunda partida sea '
-             'igual que la primera</strong>. Sin él, el balón se queda donde acabó —pegado al '
-             'borde—, y como <em>repetir hasta que ¿tocando (borde)?</em> ya se cumple de entrada, '
-             'no se movería nunca más.',
-             'Antes de poder usar el mensaje hay que <strong>crearlo</strong>: en el desplegable '
-             'del bloque, opción <strong>Nuevo mensaje</strong>, y le pones nombre. Ponle uno que '
-             'signifique algo — «patada», no «mensaje1».'])),
+             'El balón suena, sale rodando y gira mientras avanza, hasta chocar con un borde.'])
+         + '<p>Dos cosas que no van en ese orden, pero que hacen falta:</p>'
+         + claves([
+             ('Por qué el balón tiene dos programas',
+              'El segundo es el que hace que la <strong>segunda partida sea igual que la '
+              'primera</strong>. Sin él, el balón se queda donde acabó —pegado al borde—, y como '
+              '<em>repetir hasta que ¿tocando (borde)?</em> ya se cumple de entrada, no se '
+              'movería nunca más.'),
+             ('El mensaje hay que crearlo antes',
+              'En el desplegable del bloque, opción <strong>Nuevo mensaje</strong>, y le pones '
+              'nombre. Ponle uno que signifique algo — «patada», no «mensaje1».')])),
 
         ('Comprueba que lo has entendido',
          pregunta('1', '¿En qué objeto tiene que estar el bloque <em>al recibir (patada)</em>?',
