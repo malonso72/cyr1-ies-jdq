@@ -47,6 +47,47 @@ const Academia = {
     return JSON.parse(localStorage.getItem('academia:completadas') || '{}');
   },
 
+  // ── ORDENADORES COMPARTIDOS ──────────────────────────────────
+  // Todo lo de la Academia vive en el localStorage del navegador. En un aula con
+  // ordenadores compartidos, la pareja siguiente se encuentra los nombres y las
+  // insignias de la anterior. Cuando una pareja dice «somos otros», lo de la
+  // anterior se guarda aparte (archivo) y se recupera solo si esa pareja vuelve
+  // a escribir sus nombres en este mismo ordenador.
+  _clavePareja(n1, n2) {
+    const norm = s => (s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    return norm(n1) + '|' + norm(n2);
+  },
+  _clavesActivas() {
+    const out = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.startsWith('academia:') && !k.startsWith('academia:archivo:')) out.push(k);
+    }
+    return out;
+  },
+  archivarParejaActual() {
+    const n1 = Academia.getNombre1(), n2 = Academia.getNombre2();
+    const activas = Academia._clavesActivas();
+    if (n1 || n2) {
+      const datos = {};
+      activas.forEach(k => { datos[k] = localStorage.getItem(k); });
+      localStorage.setItem('academia:archivo:' + Academia._clavePareja(n1, n2),
+                           JSON.stringify({ ts: Date.now(), datos }));
+    }
+    activas.forEach(k => localStorage.removeItem(k));
+  },
+  restaurarParejaSiExiste(n1, n2) {
+    const k = 'academia:archivo:' + Academia._clavePareja(n1, n2);
+    const raw = localStorage.getItem(k);
+    if (!raw) return false;
+    try {
+      const datos = JSON.parse(raw).datos || {};
+      Object.keys(datos).forEach(key => localStorage.setItem(key, datos[key]));
+      localStorage.removeItem(k);
+      return true;
+    } catch (e) { return false; }
+  },
+
   // ── NAVEGACIÓN ENTRE BLOQUES ─────────────────────────────────
   bloques: ['mision', 'teoria', 'entrenamiento', 'juego', 'informe', 'diploma'],
 
@@ -264,6 +305,36 @@ const Academia = {
 // Auto-rellenar identidad al cargar cualquier sesión
 document.addEventListener('DOMContentLoaded', () => {
   Academia.rellenarIdentidad();
+
+  // Aviso de pareja: si ya hay nombres guardados en este ordenador, preguntar
+  // antes de que la pareja nueva siga con el progreso de la anterior.
+  const inp1 = document.querySelector('input[data-acad="nombre1"]');
+  if (inp1 && (Academia.getNombre1() || Academia.getNombre2())) {
+    const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const quien = [Academia.getNombre1(), Academia.getNombre2()].filter(Boolean).map(esc).join(' y ');
+    const aviso = document.createElement('div');
+    aviso.className = 'acad-aviso-pareja';
+    aviso.setAttribute('role', 'status');
+    aviso.innerHTML = `<p>En este ordenador la última pareja fue <b>${quien}</b>. ¿Sois vosotros?</p>
+      <div class="botones">
+        <button type="button" class="btn-acad" data-si>Sí, seguimos</button>
+        <button type="button" class="btn-acad secundario" data-no>No, somos otra pareja</button>
+      </div>`;
+    const ancla = inp1.closest('.acad-identidad') || inp1.parentElement.parentElement;
+    ancla.parentElement.insertBefore(aviso, ancla);
+    aviso.querySelector('[data-si]').addEventListener('click', () => aviso.remove());
+    aviso.querySelector('[data-no]').addEventListener('click', () => {
+      Academia.archivarParejaActual();   // lo de la otra pareja se guarda aparte
+      location.reload();                 // la página arranca limpia, sin nombres
+    });
+  }
+  // Si una pareja escribe unos nombres que ya estuvieron en este ordenador,
+  // recupera su progreso (insignias, informes) y recarga.
+  document.querySelectorAll('input[data-acad="nombre1"], input[data-acad="nombre2"]').forEach(inp => {
+    inp.addEventListener('change', () => {
+      if (Academia.restaurarParejaSiExiste(Academia.getNombre1(), Academia.getNombre2())) location.reload();
+    });
+  });
   // Sincronizar inputs de nombre con localStorage
   document.querySelectorAll('input[data-acad="nombre1"]').forEach(inp => {
     inp.addEventListener('input', e => Academia.setNombres(e.target.value, null));

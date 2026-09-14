@@ -114,9 +114,10 @@ clase sin que las presentaciones de la S20 salgan iguales.
    de `AUDITORIA_CyR_1ESO.md`. Ojo: los «🚧 En construcción» de **T2 micro:bit** siguen ahí.
 3. ~~`node_modules` comprometido~~ **Hecho (sept-2026):** fuera del repo y del despliegue,
    en `.gitignore`. La carpeta sigue en el disco de Manuel por si quiere borrarla; no la usa nada.
-4. **`s02.js` se carga dos veces** en una página de T3 Ciberseguridad →
-   `SyntaxError: Identifier 'SESION_ID' has already been declared`. Diagnosticado, sin arreglar.
-   Era el único error real de JavaScript de las 112 páginas del sitio.
+4. ~~`s02.js` se carga dos veces~~ **Hecho (sept-2026)**, junto con los arreglos técnicos de
+   los 10 retos de T3 y el **aviso de pareja** de `academia.js`: en ordenadores compartidos, si
+   ya hay nombres guardados la sesión pregunta «¿sois vosotros?»; si no, el progreso de la otra
+   pareja se archiva en `academia:archivo:<nombres>` y se recupera si vuelven a escribirlos.
 5. **Segunda auditoría (14-sept-2026), al final de `AUDITORIA_CyR_1ESO.md`:** diagnóstico
    completo y el orden acordado con Manuel. T2 es el hueco y no se toca hasta que exista la
    tabla `CLASIFICACION_RETOS_T2.md` y Manuel decida el troncal.
