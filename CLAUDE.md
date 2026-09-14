@@ -97,6 +97,9 @@ clase sin que las presentaciones de la S20 salgan iguales.
   - `AUDITORIA_CyR_1ESO.md` — auditoría del sitio entero, con notas por área y hallazgos H1–H13.
   - `COTEJO_Cuadernillo_Scratch3.md` — **tabla verificada** de nombres de bloques Scratch 2 → 3,
     transcrita de capturas del editor real. Consúltala antes de escribir cualquier bloque.
+  - `COTEJO_MakeCode.md` — lo mismo para **micro:bit**: tipo, forma, color, texto en español y
+    desplegables de cada bloque, leídos del Blockly del editor real; más la geometría de los
+    bloques. Consúltalo antes de escribir cualquier bloque de T2.
   - `PLAN_T1_SCRATCH.md` — el guion de las 20 sesiones y las reglas de estilo del material.
   - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta, con el porqué. Puntos 1-11 de la
     reescritura; 12-20 de la ronda de arreglos posterior.
