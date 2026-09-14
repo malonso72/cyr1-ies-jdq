@@ -224,12 +224,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/actividades.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
@@ -246,12 +240,6 @@
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r00.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r01.html</loc>
@@ -342,96 +330,6 @@
     <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r16.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r17.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r18.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r19.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r20.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r21.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r22.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r23.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r24.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r25.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r26.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r27.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r28.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r29.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/teoria.html</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/</loc>
@@ -618,5 +516,95 @@
     <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a01.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a02.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a03.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a04.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a05.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a06.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a07.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a08.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a09.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a10.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a11.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a12.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/m01.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/m02.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/m03.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

@@ -122,10 +122,13 @@ clase sin que las presentaciones de la S20 salgan iguales.
    ya hay nombres guardados la sesión pregunta «¿sois vosotros?»; si no, el progreso de la otra
    pareja se archiva en `academia:archivo:<nombres>` y se recupera si vuelven a escribirlos.
 5. **Segunda auditoría (14-sept-2026), al final de `AUDITORIA_CyR_1ESO.md`:** diagnóstico
-   completo y el orden acordado con Manuel. **T2 está decidido** en `CLASIFICACION_RETOS_T2.md`:
-   troncal de 15 en orden nuevo, 12 ampliaciones que se conservan, 3 sin material (servo).
-   Sin proyecto final, editor en español, entrega del `.hex`. Aula: 7–8 micro:bit V2 por
-   parejas, pinzas de cocodrilo, nada más. El curso pasado llegaron al r19.
+   completo y el orden acordado con Manuel. **T2 está rehecho** (sept-2026) según
+   `CLASIFICACION_RETOS_T2.md`: 15 troncales `r01…r15` en orden nuevo, 12 ampliaciones
+   `a01…a12`, 3 sin material `m01…m03`; hub e índice nuevos; se generan desde
+   `documentacion/generadores-t2/` (su README dice cómo) con los nombres de bloque del
+   `COTEJO_MakeCode.md`. Lo decidido por el camino, en `DECISIONES_T2.md`. **Queda la
+   presentación de T2**, que sigue siendo la antigua. Aula: 7–8 micro:bit V2 por parejas,
+   pinzas, nada más; sin proyecto final; entrega del `.hex`.
 6. Las **cuatro páginas de juegos que ya son sesiones** (carreras, laberinto,
    piedra-papel-tijera, pong) siguen siendo las plantillas viejas de 3,7 KB. Se conservan por su
    PDF y el índice ya avisa de que son sesiones, pero si alguna vez estorban, ahí están.

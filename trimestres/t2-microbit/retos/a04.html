@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E90FF">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Ampliación 4 · Termómetro de barras · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Ampliación 4 de micro:bit: cascada de si no, si con cinco tramos de temperatura, cada uno enciende más filas. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a04.html">
+<meta property="og:title" content="Ampliación 4 · Termómetro de barras · CyR 1º ESO">
+<meta property="og:description" content="Ampliación 4 de micro:bit: cascada de si no, si con cinco tramos de temperatura, cada uno enciende más filas. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">A4</span></span>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Ampliación 4</div>
+  <h1>Termómetro de barras</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-a">ampliación</span></div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> un termómetro de <strong>barras</strong>: cuantos más grados, más filas encendidas, como el indicador de batería.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>De dónde sale</h2>
+<p>Es la continuación de <a href="r05.html">Reto 5 · La luz que se enciende sola</a>. Y de la cascada del <a href="r12.html">reto 12</a>: aquí hay seis ramas.</p>
+
+<h2><span class="h2n">2</span>El programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 404 788" width="404" height="788" class="bloques" role="img" aria-label="Para siempre: fijar grados a temperatura; si grados &lt; 20 borrar la pantalla; si no, si &lt; 22 una fila; si no, si &lt; 24 dos filas; si no, si &lt; 26 tres; si no, si &lt; 28 cuatro; si no, todas; pausa 1000"><title>Para siempre: fijar grados a temperatura; si grados &lt; 20 borrar la pantalla; si no, si &lt; 22 una fila; si no, si &lt; 24 dos filas; si no, si &lt; 26 tres; si no, si &lt; 28 cuatro; si no, todas; pausa 1000</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L389.7 10.0 Q393.7 10.0 393.7 14.0 L393.7 44.0 Q393.7 48.0 389.7 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 751.0 Q23.0 755.0 27.0 755.0 L389.7 755.0 Q393.7 755.0 393.7 759.0 L393.7 771.0 Q393.7 775.0 389.7 775.0 L14.0 775.0 Q10.0 775.0 10.0 771.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">para siempre</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L330.3 48.0 Q334.3 48.0 334.3 52.0 L334.3 82.0 Q334.3 86.0 330.3 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="55.0" width="76.8" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="71.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">grados</text><path d="M142.8 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="163.8" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="178.6" y="52.0" width="144.8" height="30" rx="15" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="188.6" y="71.6" class="mc-t" textLength="124.8" lengthAdjust="spacing">temperatura (°C)</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L381.7 86.0 Q385.7 86.0 385.7 90.0 L385.7 120.0 Q385.7 124.0 381.7 124.0 L68.0 124.0 L62.0 127.5 L52.0 127.5 L46.0 124.0 L40.0 124.0 Q36.0 124.0 36.0 128.0 L36.0 158.0 Q36.0 162.0 40.0 162.0 L381.7 162.0 Q385.7 162.0 385.7 166.0 L385.7 196.0 Q385.7 200.0 381.7 200.0 L68.0 200.0 L62.0 203.5 L52.0 203.5 L46.0 200.0 L40.0 200.0 Q36.0 200.0 36.0 204.0 L36.0 265.0 Q36.0 269.0 40.0 269.0 L381.7 269.0 Q385.7 269.0 385.7 273.0 L385.7 303.0 Q385.7 307.0 381.7 307.0 L68.0 307.0 L62.0 310.5 L52.0 310.5 L46.0 307.0 L40.0 307.0 Q36.0 307.0 36.0 311.0 L36.0 372.0 Q36.0 376.0 40.0 376.0 L381.7 376.0 Q385.7 376.0 385.7 380.0 L385.7 410.0 Q385.7 414.0 381.7 414.0 L68.0 414.0 L62.0 417.5 L52.0 417.5 L46.0 414.0 L40.0 414.0 Q36.0 414.0 36.0 418.0 L36.0 479.0 Q36.0 483.0 40.0 483.0 L381.7 483.0 Q385.7 483.0 385.7 487.0 L385.7 517.0 Q385.7 521.0 381.7 521.0 L68.0 521.0 L62.0 524.5 L52.0 524.5 L46.0 521.0 L40.0 521.0 Q36.0 521.0 36.0 525.0 L36.0 586.0 Q36.0 590.0 40.0 590.0 L381.7 590.0 Q385.7 590.0 385.7 594.0 L385.7 624.0 Q385.7 628.0 381.7 628.0 L68.0 628.0 L62.0 631.5 L52.0 631.5 L46.0 628.0 L40.0 628.0 Q36.0 628.0 36.0 632.0 L36.0 693.0 Q36.0 697.0 40.0 697.0 L381.7 697.0 Q385.7 697.0 385.7 701.0 L385.7 713.0 Q385.7 717.0 381.7 717.0 L55.0 717.0 L49.0 720.5 L39.0 720.5 L33.0 717.0 L27.0 717.0  Q23.0 717.0 23.0 713.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 90.0 h170.2 l12 15.0 l-12 15.0 h-170.2 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="78.6" y="90.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="88.6" y="109.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">grados</text><rect x="152.4" y="93.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="160.4" y="109.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&lt;</text><path d="M176.2 102.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="197.2" y="93.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="213.0" y="109.3" class="mc-n">20</text><text x="257.8" y="109.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 128.0 Q36.0 124.0 40.0 124.0 L46.0 124.0 L52.0 127.5 L62.0 127.5 L68.0 124.0  L194.3 124.0 Q198.3 124.0 198.3 128.0 L198.3 158.0 Q198.3 162.0 194.3 162.0 L40.0 162.0 Q36.0 162.0 36.0 158.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="147.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">borrar la pantalla</text><text x="34.0" y="185.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">si no, si</text><path d="M123.2 166.0 h170.2 l12 15.0 l-12 15.0 h-170.2 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="133.2" y="166.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="143.2" y="185.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">grados</text><rect x="207.0" y="169.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="215.0" y="185.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&lt;</text><path d="M230.8 178.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="251.8" y="169.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="267.5" y="185.3" class="mc-n">22</text><text x="312.3" y="185.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 204.0 Q36.0 200.0 40.0 200.0 L46.0 200.0 L52.0 203.5 L62.0 203.5 L68.0 200.0  L215.6 200.0 Q219.6 200.0 219.6 204.0 L219.6 265.0 Q219.6 269.0 215.6 269.0 L40.0 269.0 Q36.0 269.0 36.0 265.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="239.1" class="mc-t" textLength="93.6" lengthAdjust="spacing">mostrar LEDs</text><rect x="148.6" y="205.0" width="59.0" height="59.0" rx="3" fill="#1F1F1F"/><rect x="151.6" y="208.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="208.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="208.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="208.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="208.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="219.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="219.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="219.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="219.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="219.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="230.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="230.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="230.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="230.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="230.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="241.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="241.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="241.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="241.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="241.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="252.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="252.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="252.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="252.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="252.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><text x="34.0" y="292.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">si no, si</text><path d="M123.2 273.0 h170.2 l12 15.0 l-12 15.0 h-170.2 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="133.2" y="273.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="143.2" y="292.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">grados</text><rect x="207.0" y="276.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="215.0" y="292.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&lt;</text><path d="M230.8 285.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="251.8" y="276.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="267.5" y="292.3" class="mc-n">24</text><text x="312.3" y="292.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 311.0 Q36.0 307.0 40.0 307.0 L46.0 307.0 L52.0 310.5 L62.0 310.5 L68.0 307.0  L215.6 307.0 Q219.6 307.0 219.6 311.0 L219.6 372.0 Q219.6 376.0 215.6 376.0 L40.0 376.0 Q36.0 376.0 36.0 372.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="346.1" class="mc-t" textLength="93.6" lengthAdjust="spacing">mostrar LEDs</text><rect x="148.6" y="312.0" width="59.0" height="59.0" rx="3" fill="#1F1F1F"/><rect x="151.6" y="315.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="315.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="315.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="315.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="315.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="326.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="326.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="326.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="326.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="326.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="337.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="337.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="337.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="337.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="337.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="348.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="348.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="348.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="348.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="348.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="359.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="359.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="359.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="359.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="359.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><text x="34.0" y="399.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">si no, si</text><path d="M123.2 380.0 h170.2 l12 15.0 l-12 15.0 h-170.2 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="133.2" y="380.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="143.2" y="399.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">grados</text><rect x="207.0" y="383.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="215.0" y="399.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&lt;</text><path d="M230.8 392.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="251.8" y="383.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="267.5" y="399.3" class="mc-n">26</text><text x="312.3" y="399.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 418.0 Q36.0 414.0 40.0 414.0 L46.0 414.0 L52.0 417.5 L62.0 417.5 L68.0 414.0  L215.6 414.0 Q219.6 414.0 219.6 418.0 L219.6 479.0 Q219.6 483.0 215.6 483.0 L40.0 483.0 Q36.0 483.0 36.0 479.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="453.1" class="mc-t" textLength="93.6" lengthAdjust="spacing">mostrar LEDs</text><rect x="148.6" y="419.0" width="59.0" height="59.0" rx="3" fill="#1F1F1F"/><rect x="151.6" y="422.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="422.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="422.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="422.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="422.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="433.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="433.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="433.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="433.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="433.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="444.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="444.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="444.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="444.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="444.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="455.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="455.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="455.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="455.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="455.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="466.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="466.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="466.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="466.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="466.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><text x="34.0" y="506.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">si no, si</text><path d="M123.2 487.0 h170.2 l12 15.0 l-12 15.0 h-170.2 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="133.2" y="487.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="143.2" y="506.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">grados</text><rect x="207.0" y="490.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="215.0" y="506.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&lt;</text><path d="M230.8 499.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="251.8" y="490.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="267.5" y="506.3" class="mc-n">28</text><text x="312.3" y="506.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 525.0 Q36.0 521.0 40.0 521.0 L46.0 521.0 L52.0 524.5 L62.0 524.5 L68.0 521.0  L215.6 521.0 Q219.6 521.0 219.6 525.0 L219.6 586.0 Q219.6 590.0 215.6 590.0 L40.0 590.0 Q36.0 590.0 36.0 586.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="560.1" class="mc-t" textLength="93.6" lengthAdjust="spacing">mostrar LEDs</text><rect x="148.6" y="526.0" width="59.0" height="59.0" rx="3" fill="#1F1F1F"/><rect x="151.6" y="529.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="162.6" y="529.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="173.6" y="529.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="184.6" y="529.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="195.6" y="529.0" width="9" height="9" rx="1.5" fill="#4A4A4A"/><rect x="151.6" y="540.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="540.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="540.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="540.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="540.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="551.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="551.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="551.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="551.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="551.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="562.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="562.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="562.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="562.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="562.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="573.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="573.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="573.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="573.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="573.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><text x="34.0" y="613.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">si no</text><path d="M36.0 632.0 Q36.0 628.0 40.0 628.0 L46.0 628.0 L52.0 631.5 L62.0 631.5 L68.0 628.0  L215.6 628.0 Q219.6 628.0 219.6 632.0 L219.6 693.0 Q219.6 697.0 215.6 697.0 L40.0 697.0 Q36.0 697.0 36.0 693.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="667.1" class="mc-t" textLength="93.6" lengthAdjust="spacing">mostrar LEDs</text><rect x="148.6" y="633.0" width="59.0" height="59.0" rx="3" fill="#1F1F1F"/><rect x="151.6" y="636.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="636.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="636.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="636.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="636.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="647.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="647.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="647.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="647.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="647.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="658.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="658.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="658.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="658.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="658.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="669.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="669.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="669.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="669.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="669.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="151.6" y="680.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="162.6" y="680.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="173.6" y="680.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="184.6" y="680.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><rect x="195.6" y="680.0" width="9" height="9" rx="1.5" fill="#FFFFFF"/><path d="M23.0 721.0 Q23.0 717.0 27.0 717.0 L33.0 717.0 L39.0 720.5 L49.0 720.5 L55.0 717.0  L173.2 717.0 Q177.2 717.0 177.2 721.0 L177.2 751.0 Q177.2 755.0 173.2 755.0 L27.0 755.0 Q23.0 755.0 23.0 751.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="740.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="724.0" width="47.2" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="142.6" y="740.3" class="mc-n">1000</text></svg>
+</div><p>Los tramos van de dos en dos grados desde 20. Los LEDs son rojos y sólo rojos: no hay forma de que las barras cambien de color, así que el «frío» es tener pocas filas.</p>
+
+<h2><span class="h2n">3</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Mide primero la temperatura del aula y coloca los tramos alrededor de ella, si no siempre saldrán las mismas filas.</span></li>
+  <li><span class="p">Paso 2</span><span>Monta la cascada. Cada rama tiene su <span class="bl">mostrar LEDs</span> con las filas que toquen, contando desde abajo.</span></li>
+  <li><span class="p">Paso 3</span><span>Que A muestre el número exacto durante un segundo.</span></li>
+  <li><span class="p">Paso 4</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol>
+
+<h2><span class="h2n">4</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>Con la mano encima suben las filas; al quitarla, bajan.</li>
+  <li>Los tramos están pensados para tu aula, no copiados.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Ampliacion4_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Ampliacion4_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="a03.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Ampliación 3</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="a05.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Ampliación 5</span></a></div>
+
+</main>
+</div>
+
+<p class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+</p>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

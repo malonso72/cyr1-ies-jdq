@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E90FF">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Ampliación 1 · Dibujar el «1» LED a LED · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Ampliación 1 de micro:bit: dibujar un número encendiendo LEDs por coordenadas con pausas, y borrarlo en orden inverso. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a01.html">
+<meta property="og:title" content="Ampliación 1 · Dibujar el «1» LED a LED · CyR 1º ESO">
+<meta property="og:description" content="Ampliación 1 de micro:bit: dibujar un número encendiendo LEDs por coordenadas con pausas, y borrarlo en orden inverso. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">A1</span></span>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Ampliación 1</div>
+  <h1>Dibujar el «1» LED a LED</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-a">ampliación</span></div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> que al pulsar A el número <strong>1</strong> aparezca LED a LED, como si alguien lo escribiera, y que B lo borre en el orden contrario.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>De dónde sale</h2>
+<p>Es la continuación de <a href="r04.html">Reto 4 · Cada LED tiene su dirección</a>. Aquí no hay nada nuevo: son ocho <span class="bl">graficar</span> con una pausa entre cada uno. Lo que se entrena es <strong>planificar</strong> antes de programar.</p>
+
+<h2><span class="h2n">2</span>El programa</h2>
+<div class="placa"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 196" width="196" height="196" class="matriz" role="img" aria-label="La matriz con el número 1 encendido"><title>La matriz con el número 1 encendido</title><style>.mx-c{font:700 12px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#1B4F8A;text-anchor:middle}</style><rect x="26" y="26" width="170" height="170" rx="10" fill="#2E2E2E"/><rect x="40.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="111.0" cy="51.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="100.0" y="40.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="130.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="81.0" cy="81.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="70.0" y="70.0" width="22" height="22" rx="3" fill="#FF3B3B"/><circle cx="111.0" cy="81.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="100.0" y="70.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="130.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="111.0" cy="111.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="100.0" y="100.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="130.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="111.0" cy="141.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="100.0" y="130.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="130.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="160.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="81.0" cy="171.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="70.0" y="160.0" width="22" height="22" rx="3" fill="#FF3B3B"/><circle cx="111.0" cy="171.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="100.0" y="160.0" width="22" height="22" rx="3" fill="#FF3B3B"/><circle cx="141.0" cy="171.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="130.0" y="160.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="160.0" y="160.0" width="22" height="22" rx="3" fill="#5A2626"/><text x="51.0" y="18" class="mx-c">x=0</text><text x="13" y="55.0" class="mx-c">y=0</text><text x="81.0" y="18" class="mx-c">x=1</text><text x="13" y="85.0" class="mx-c">y=1</text><text x="111.0" y="18" class="mx-c">x=2</text><text x="13" y="115.0" class="mx-c">y=2</text><text x="141.0" y="18" class="mx-c">x=3</text><text x="13" y="145.0" class="mx-c">y=3</text><text x="171.0" y="18" class="mx-c">x=4</text><text x="13" y="175.0" class="mx-c">y=4</text></svg><figcaption>El 1 son ocho LEDs. Apunta sus coordenadas antes de tocar el editor.</figcaption></figure></div><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266 1370" width="266" height="1370" class="bloques" role="img" aria-label="Al presionarse el botón A: graficar los ocho LEDs del 1 con pausa 100 entre cada uno. Al presionarse el botón B: ocultarlos en orden inverso"><title>Al presionarse el botón A: graficar los ocho LEDs del 1 con pausa 100 entre cada uno. Al presionarse el botón B: ocultarlos en orden inverso</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L252.1 10.0 Q256.1 10.0 256.1 14.0 L256.1 44.0 Q256.1 48.0 252.1 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 652.0 Q23.0 656.0 27.0 656.0 L252.1 656.0 Q256.1 656.0 256.1 660.0 L256.1 672.0 Q256.1 676.0 252.1 676.0 L14.0 676.0 Q10.0 676.0 10.0 672.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="17.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="33.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">A</text><path d="M231.1 26.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L203.8 48.0 Q207.8 48.0 207.8 52.0 L207.8 82.0 Q207.8 86.0 203.8 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="71.3" class="mc-n">2</text><text x="154.0" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="71.3" class="mc-n">0</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L165.4 86.0 Q169.4 86.0 169.4 90.0 L169.4 120.0 Q169.4 124.0 165.4 124.0 L55.0 124.0 L49.0 127.5 L39.0 127.5 L33.0 124.0 L27.0 124.0  Q23.0 124.0 23.0 120.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="93.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="109.3" class="mc-n">100</text><path d="M23.0 128.0 Q23.0 124.0 27.0 124.0 L33.0 124.0 L39.0 127.5 L49.0 127.5 L55.0 124.0  L203.8 124.0 Q207.8 124.0 207.8 128.0 L207.8 158.0 Q207.8 162.0 203.8 162.0 L55.0 162.0 L49.0 165.5 L39.0 165.5 L33.0 162.0 L27.0 162.0  Q23.0 162.0 23.0 158.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="147.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="131.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="147.3" class="mc-n">1</text><text x="154.0" y="147.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="131.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="147.3" class="mc-n">1</text><path d="M23.0 166.0 Q23.0 162.0 27.0 162.0 L33.0 162.0 L39.0 165.5 L49.0 165.5 L55.0 162.0  L165.4 162.0 Q169.4 162.0 169.4 166.0 L169.4 196.0 Q169.4 200.0 165.4 200.0 L55.0 200.0 L49.0 203.5 L39.0 203.5 L33.0 200.0 L27.0 200.0  Q23.0 200.0 23.0 196.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="185.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="169.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="185.3" class="mc-n">100</text><path d="M23.0 204.0 Q23.0 200.0 27.0 200.0 L33.0 200.0 L39.0 203.5 L49.0 203.5 L55.0 200.0  L203.8 200.0 Q207.8 200.0 207.8 204.0 L207.8 234.0 Q207.8 238.0 203.8 238.0 L55.0 238.0 L49.0 241.5 L39.0 241.5 L33.0 238.0 L27.0 238.0  Q23.0 238.0 23.0 234.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="223.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="207.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="223.3" class="mc-n">2</text><text x="154.0" y="223.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="207.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="223.3" class="mc-n">1</text><path d="M23.0 242.0 Q23.0 238.0 27.0 238.0 L33.0 238.0 L39.0 241.5 L49.0 241.5 L55.0 238.0  L165.4 238.0 Q169.4 238.0 169.4 242.0 L169.4 272.0 Q169.4 276.0 165.4 276.0 L55.0 276.0 L49.0 279.5 L39.0 279.5 L33.0 276.0 L27.0 276.0  Q23.0 276.0 23.0 272.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="261.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="245.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="261.3" class="mc-n">100</text><path d="M23.0 280.0 Q23.0 276.0 27.0 276.0 L33.0 276.0 L39.0 279.5 L49.0 279.5 L55.0 276.0  L203.8 276.0 Q207.8 276.0 207.8 280.0 L207.8 310.0 Q207.8 314.0 203.8 314.0 L55.0 314.0 L49.0 317.5 L39.0 317.5 L33.0 314.0 L27.0 314.0  Q23.0 314.0 23.0 310.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="299.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="283.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="299.3" class="mc-n">2</text><text x="154.0" y="299.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="283.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="299.3" class="mc-n">2</text><path d="M23.0 318.0 Q23.0 314.0 27.0 314.0 L33.0 314.0 L39.0 317.5 L49.0 317.5 L55.0 314.0  L165.4 314.0 Q169.4 314.0 169.4 318.0 L169.4 348.0 Q169.4 352.0 165.4 352.0 L55.0 352.0 L49.0 355.5 L39.0 355.5 L33.0 352.0 L27.0 352.0  Q23.0 352.0 23.0 348.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="337.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="321.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="337.3" class="mc-n">100</text><path d="M23.0 356.0 Q23.0 352.0 27.0 352.0 L33.0 352.0 L39.0 355.5 L49.0 355.5 L55.0 352.0  L203.8 352.0 Q207.8 352.0 207.8 356.0 L207.8 386.0 Q207.8 390.0 203.8 390.0 L55.0 390.0 L49.0 393.5 L39.0 393.5 L33.0 390.0 L27.0 390.0  Q23.0 390.0 23.0 386.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="375.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="359.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="375.3" class="mc-n">2</text><text x="154.0" y="375.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="359.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="375.3" class="mc-n">3</text><path d="M23.0 394.0 Q23.0 390.0 27.0 390.0 L33.0 390.0 L39.0 393.5 L49.0 393.5 L55.0 390.0  L165.4 390.0 Q169.4 390.0 169.4 394.0 L169.4 424.0 Q169.4 428.0 165.4 428.0 L55.0 428.0 L49.0 431.5 L39.0 431.5 L33.0 428.0 L27.0 428.0  Q23.0 428.0 23.0 424.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="413.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="397.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="413.3" class="mc-n">100</text><path d="M23.0 432.0 Q23.0 428.0 27.0 428.0 L33.0 428.0 L39.0 431.5 L49.0 431.5 L55.0 428.0  L203.8 428.0 Q207.8 428.0 207.8 432.0 L207.8 462.0 Q207.8 466.0 203.8 466.0 L55.0 466.0 L49.0 469.5 L39.0 469.5 L33.0 466.0 L27.0 466.0  Q23.0 466.0 23.0 462.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="451.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="435.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="451.3" class="mc-n">1</text><text x="154.0" y="451.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="435.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="451.3" class="mc-n">4</text><path d="M23.0 470.0 Q23.0 466.0 27.0 466.0 L33.0 466.0 L39.0 469.5 L49.0 469.5 L55.0 466.0  L165.4 466.0 Q169.4 466.0 169.4 470.0 L169.4 500.0 Q169.4 504.0 165.4 504.0 L55.0 504.0 L49.0 507.5 L39.0 507.5 L33.0 504.0 L27.0 504.0  Q23.0 504.0 23.0 500.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="489.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="473.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="489.3" class="mc-n">100</text><path d="M23.0 508.0 Q23.0 504.0 27.0 504.0 L33.0 504.0 L39.0 507.5 L49.0 507.5 L55.0 504.0  L203.8 504.0 Q207.8 504.0 207.8 508.0 L207.8 538.0 Q207.8 542.0 203.8 542.0 L55.0 542.0 L49.0 545.5 L39.0 545.5 L33.0 542.0 L27.0 542.0  Q23.0 542.0 23.0 538.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="527.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="511.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="527.3" class="mc-n">2</text><text x="154.0" y="527.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="511.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="527.3" class="mc-n">4</text><path d="M23.0 546.0 Q23.0 542.0 27.0 542.0 L33.0 542.0 L39.0 545.5 L49.0 545.5 L55.0 542.0  L165.4 542.0 Q169.4 542.0 169.4 546.0 L169.4 576.0 Q169.4 580.0 165.4 580.0 L55.0 580.0 L49.0 583.5 L39.0 583.5 L33.0 580.0 L27.0 580.0  Q23.0 580.0 23.0 576.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="565.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="549.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="565.3" class="mc-n">100</text><path d="M23.0 584.0 Q23.0 580.0 27.0 580.0 L33.0 580.0 L39.0 583.5 L49.0 583.5 L55.0 580.0  L203.8 580.0 Q207.8 580.0 207.8 584.0 L207.8 614.0 Q207.8 618.0 203.8 618.0 L55.0 618.0 L49.0 621.5 L39.0 621.5 L33.0 618.0 L27.0 618.0  Q23.0 618.0 23.0 614.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="603.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="587.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="603.3" class="mc-n">3</text><text x="154.0" y="603.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="587.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="603.3" class="mc-n">4</text><path d="M23.0 622.0 Q23.0 618.0 27.0 618.0 L33.0 618.0 L39.0 621.5 L49.0 621.5 L55.0 618.0  L165.4 618.0 Q169.4 618.0 169.4 622.0 L169.4 652.0 Q169.4 656.0 165.4 656.0 L27.0 656.0 Q23.0 656.0 23.0 652.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="641.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="625.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="641.3" class="mc-n">100</text><path d="M10.0 694.0 Q10.0 690.0 14.0 690.0 L252.1 690.0 Q256.1 690.0 256.1 694.0 L256.1 724.0 Q256.1 728.0 252.1 728.0 L55.0 728.0 L49.0 731.5 L39.0 731.5 L33.0 728.0 L27.0 728.0 Q23.0 728.0 23.0 732.0 L23.0 1332.0 Q23.0 1336.0 27.0 1336.0 L252.1 1336.0 Q256.1 1336.0 256.1 1340.0 L256.1 1352.0 Q256.1 1356.0 252.1 1356.0 L14.0 1356.0 Q10.0 1356.0 10.0 1352.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="713.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="697.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="713.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">B</text><path d="M231.1 706.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 732.0 Q23.0 728.0 27.0 728.0 L33.0 728.0 L39.0 731.5 L49.0 731.5 L55.0 728.0  L196.0 728.0 Q200.0 728.0 200.0 732.0 L200.0 762.0 Q200.0 766.0 196.0 766.0 L55.0 766.0 L49.0 769.5 L39.0 769.5 L33.0 766.0 L27.0 766.0  Q23.0 766.0 23.0 762.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="751.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="735.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="751.3" class="mc-n">3</text><text x="146.2" y="751.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="735.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="751.3" class="mc-n">4</text><path d="M23.0 770.0 Q23.0 766.0 27.0 766.0 L33.0 766.0 L39.0 769.5 L49.0 769.5 L55.0 766.0  L165.4 766.0 Q169.4 766.0 169.4 770.0 L169.4 800.0 Q169.4 804.0 165.4 804.0 L55.0 804.0 L49.0 807.5 L39.0 807.5 L33.0 804.0 L27.0 804.0  Q23.0 804.0 23.0 800.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="789.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="773.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="789.3" class="mc-n">100</text><path d="M23.0 808.0 Q23.0 804.0 27.0 804.0 L33.0 804.0 L39.0 807.5 L49.0 807.5 L55.0 804.0  L196.0 804.0 Q200.0 804.0 200.0 808.0 L200.0 838.0 Q200.0 842.0 196.0 842.0 L55.0 842.0 L49.0 845.5 L39.0 845.5 L33.0 842.0 L27.0 842.0  Q23.0 842.0 23.0 838.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="827.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="811.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="827.3" class="mc-n">2</text><text x="146.2" y="827.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="811.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="827.3" class="mc-n">4</text><path d="M23.0 846.0 Q23.0 842.0 27.0 842.0 L33.0 842.0 L39.0 845.5 L49.0 845.5 L55.0 842.0  L165.4 842.0 Q169.4 842.0 169.4 846.0 L169.4 876.0 Q169.4 880.0 165.4 880.0 L55.0 880.0 L49.0 883.5 L39.0 883.5 L33.0 880.0 L27.0 880.0  Q23.0 880.0 23.0 876.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="865.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="849.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="865.3" class="mc-n">100</text><path d="M23.0 884.0 Q23.0 880.0 27.0 880.0 L33.0 880.0 L39.0 883.5 L49.0 883.5 L55.0 880.0  L196.0 880.0 Q200.0 880.0 200.0 884.0 L200.0 914.0 Q200.0 918.0 196.0 918.0 L55.0 918.0 L49.0 921.5 L39.0 921.5 L33.0 918.0 L27.0 918.0  Q23.0 918.0 23.0 914.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="903.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="887.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="903.3" class="mc-n">1</text><text x="146.2" y="903.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="887.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="903.3" class="mc-n">4</text><path d="M23.0 922.0 Q23.0 918.0 27.0 918.0 L33.0 918.0 L39.0 921.5 L49.0 921.5 L55.0 918.0  L165.4 918.0 Q169.4 918.0 169.4 922.0 L169.4 952.0 Q169.4 956.0 165.4 956.0 L55.0 956.0 L49.0 959.5 L39.0 959.5 L33.0 956.0 L27.0 956.0  Q23.0 956.0 23.0 952.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="941.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="925.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="941.3" class="mc-n">100</text><path d="M23.0 960.0 Q23.0 956.0 27.0 956.0 L33.0 956.0 L39.0 959.5 L49.0 959.5 L55.0 956.0  L196.0 956.0 Q200.0 956.0 200.0 960.0 L200.0 990.0 Q200.0 994.0 196.0 994.0 L55.0 994.0 L49.0 997.5 L39.0 997.5 L33.0 994.0 L27.0 994.0  Q23.0 994.0 23.0 990.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="979.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="963.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="979.3" class="mc-n">2</text><text x="146.2" y="979.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="963.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="979.3" class="mc-n">3</text><path d="M23.0 998.0 Q23.0 994.0 27.0 994.0 L33.0 994.0 L39.0 997.5 L49.0 997.5 L55.0 994.0  L165.4 994.0 Q169.4 994.0 169.4 998.0 L169.4 1028.0 Q169.4 1032.0 165.4 1032.0 L55.0 1032.0 L49.0 1035.5 L39.0 1035.5 L33.0 1032.0 L27.0 1032.0  Q23.0 1032.0 23.0 1028.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="1017.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="1001.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="1017.3" class="mc-n">100</text><path d="M23.0 1036.0 Q23.0 1032.0 27.0 1032.0 L33.0 1032.0 L39.0 1035.5 L49.0 1035.5 L55.0 1032.0  L196.0 1032.0 Q200.0 1032.0 200.0 1036.0 L200.0 1066.0 Q200.0 1070.0 196.0 1070.0 L55.0 1070.0 L49.0 1073.5 L39.0 1073.5 L33.0 1070.0 L27.0 1070.0  Q23.0 1070.0 23.0 1066.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="1055.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="1039.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="1055.3" class="mc-n">2</text><text x="146.2" y="1055.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="1039.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="1055.3" class="mc-n">2</text><path d="M23.0 1074.0 Q23.0 1070.0 27.0 1070.0 L33.0 1070.0 L39.0 1073.5 L49.0 1073.5 L55.0 1070.0  L165.4 1070.0 Q169.4 1070.0 169.4 1074.0 L169.4 1104.0 Q169.4 1108.0 165.4 1108.0 L55.0 1108.0 L49.0 1111.5 L39.0 1111.5 L33.0 1108.0 L27.0 1108.0  Q23.0 1108.0 23.0 1104.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="1093.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="1077.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="1093.3" class="mc-n">100</text><path d="M23.0 1112.0 Q23.0 1108.0 27.0 1108.0 L33.0 1108.0 L39.0 1111.5 L49.0 1111.5 L55.0 1108.0  L196.0 1108.0 Q200.0 1108.0 200.0 1112.0 L200.0 1142.0 Q200.0 1146.0 196.0 1146.0 L55.0 1146.0 L49.0 1149.5 L39.0 1149.5 L33.0 1146.0 L27.0 1146.0  Q23.0 1146.0 23.0 1142.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="1131.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="1115.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="1131.3" class="mc-n">2</text><text x="146.2" y="1131.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="1115.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="1131.3" class="mc-n">1</text><path d="M23.0 1150.0 Q23.0 1146.0 27.0 1146.0 L33.0 1146.0 L39.0 1149.5 L49.0 1149.5 L55.0 1146.0  L165.4 1146.0 Q169.4 1146.0 169.4 1150.0 L169.4 1180.0 Q169.4 1184.0 165.4 1184.0 L55.0 1184.0 L49.0 1187.5 L39.0 1187.5 L33.0 1184.0 L27.0 1184.0  Q23.0 1184.0 23.0 1180.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="1169.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="1153.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="1169.3" class="mc-n">100</text><path d="M23.0 1188.0 Q23.0 1184.0 27.0 1184.0 L33.0 1184.0 L39.0 1187.5 L49.0 1187.5 L55.0 1184.0  L196.0 1184.0 Q200.0 1184.0 200.0 1188.0 L200.0 1218.0 Q200.0 1222.0 196.0 1222.0 L55.0 1222.0 L49.0 1225.5 L39.0 1225.5 L33.0 1222.0 L27.0 1222.0  Q23.0 1222.0 23.0 1218.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="1207.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="1191.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="1207.3" class="mc-n">1</text><text x="146.2" y="1207.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="1191.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="1207.3" class="mc-n">1</text><path d="M23.0 1226.0 Q23.0 1222.0 27.0 1222.0 L33.0 1222.0 L39.0 1225.5 L49.0 1225.5 L55.0 1222.0  L165.4 1222.0 Q169.4 1222.0 169.4 1226.0 L169.4 1256.0 Q169.4 1260.0 165.4 1260.0 L55.0 1260.0 L49.0 1263.5 L39.0 1263.5 L33.0 1260.0 L27.0 1260.0  Q23.0 1260.0 23.0 1256.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="1245.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="1229.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="1245.3" class="mc-n">100</text><path d="M23.0 1264.0 Q23.0 1260.0 27.0 1260.0 L33.0 1260.0 L39.0 1263.5 L49.0 1263.5 L55.0 1260.0  L196.0 1260.0 Q200.0 1260.0 200.0 1264.0 L200.0 1294.0 Q200.0 1298.0 196.0 1298.0 L55.0 1298.0 L49.0 1301.5 L39.0 1301.5 L33.0 1298.0 L27.0 1298.0  Q23.0 1298.0 23.0 1294.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="1283.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="1267.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="1283.3" class="mc-n">2</text><text x="146.2" y="1283.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="1267.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="1283.3" class="mc-n">0</text><path d="M23.0 1302.0 Q23.0 1298.0 27.0 1298.0 L33.0 1298.0 L39.0 1301.5 L49.0 1301.5 L55.0 1298.0  L165.4 1298.0 Q169.4 1298.0 169.4 1302.0 L169.4 1332.0 Q169.4 1336.0 165.4 1336.0 L27.0 1336.0 Q23.0 1336.0 23.0 1332.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="1321.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="1305.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="1321.3" class="mc-n">100</text></svg>
+</div><p>Para borrar, el mismo orden al revés: el último que se encendió es el primero que se apaga.</p>
+
+<h2><span class="h2n">3</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Dibuja en un papel la rejilla 5×5 y marca los LEDs del 1. Apunta sus coordenadas (x, y).</span></li>
+  <li><span class="p">Paso 2</span><span>Monta el evento de A. Un truco: haz un <span class="bl">graficar</span> con su <span class="bl">pausa</span>, y duplícalos con el botón derecho.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el de B en orden inverso.</span></li>
+  <li><span class="p">Paso 4</span><span>Otro número: el 2 o el 7. ¿Cuál tiene menos LEDs?</span></li>
+  <li><span class="p">Paso 5</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol>
+
+<h2><span class="h2n">4</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>El 1 aparece trazo a trazo con A y desaparece al revés con B.</li>
+  <li>Has planificado las coordenadas en papel antes de programar.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Ampliacion1_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Ampliacion1_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="a02.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Ampliación 2</span></a></div>
+
+</main>
+</div>
+
+<p class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+</p>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

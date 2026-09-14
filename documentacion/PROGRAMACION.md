@@ -10,7 +10,7 @@ distinto:
 | Evaluación | Trimestre | Sesiones escritas |
 |---|---|---|
 | 1.ª evaluación | T1 Scratch | 20 |
-| 2.ª evaluación | T2 micro:bit | — (pendiente) |
+| 2.ª evaluación | T2 micro:bit | 15 troncales + 12 ampliaciones |
 | 3.ª evaluación | T3 Ciberseguridad | 18 |
 
 > **Las 20 sesiones no llenan el trimestre, y es a propósito.** A 2 sesiones
@@ -54,7 +54,7 @@ En la misma carpeta quedan otros ocho juegos, con sus guías en PDF en
 | # | Slug | Título | Sesiones | Estado del material |
 |---|---|---|---|---|
 | T1 | `t1-scratch` | Scratch | 20 | **Completo**: hub, índice, presentación y las 20 sesiones. Se generan desde `generadores-t1/` |
-| T2 | `t2-microbit` | micro:bit | — | Hub + placeholders. Sin sesiones |
+| T2 | `t2-microbit` | micro:bit | 15 (+12) | **Completo**: hub, índice y 30 páginas de reto con bloques dibujados. Se generan desde `generadores-t2/`. Presentación pendiente de rehacer |
 | T3 | `t3-ciberseguridad` | Ciberseguridad | 18 | Hub «Academia Cyber-IES» + 18 sesiones + retos |
 
 ## Estructura interna de T3 Ciberseguridad

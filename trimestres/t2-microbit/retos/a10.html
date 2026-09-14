@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E90FF">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Ampliación 10 · Naves: dispara con A+B · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Ampliación 10 de micro:bit: juego de disparos con tres sprites, bala que sube, enemigo que baja, puntuación y fin del juego. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a10.html">
+<meta property="og:title" content="Ampliación 10 · Naves: dispara con A+B · CyR 1º ESO">
+<meta property="og:description" content="Ampliación 10 de micro:bit: juego de disparos con tres sprites, bala que sube, enemigo que baja, puntuación y fin del juego. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">A10</span></span>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Ampliación 10</div>
+  <h1>Naves: dispara con A+B</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-a">ampliación</span></div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> el juego del reto 15 con <strong>disparo</strong>: A+B lanza una bala que sube; si alcanza al enemigo, punto y enemigo nuevo. Si el enemigo te toca, fin.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>De dónde sale</h2>
+<p>Es la continuación de <a href="r15.html">Reto 15 · Esquiva enemigos</a>. Un sprite más, la bala, y una variable que dice si está en el aire. Es el programa más largo del trimestre: léelo dos veces antes de montarlo.</p>
+
+<h2><span class="h2n">2</span>El programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 727 1344" width="727" height="1344" class="bloques" role="img" aria-label="Al iniciar: nave en 2,4; enemigo arriba al azar; disparando a falso. A y B mueven la nave. A+B: si no está disparando, crear la bala encima de la nave y disparando a verdadero. Para siempre: pausa 300; si disparando, la bala sube una fila, si toca al enemigo punto y ambos se eliminan, si llega a y=0 se elimina; el enemigo baja una fila; si toca la nave, fin del juego"><title>Al iniciar: nave en 2,4; enemigo arriba al azar; disparando a falso. A y B mueven la nave. A+B: si no está disparando, crear la bala encima de la nave y disparando a verdadero. Para siempre: pausa 300; si disparando, la bala sube una fila, si toca al enemigo punto y ambos se eliminan, si llega a y=0 se elimina; el enemigo baja una fila; si toca la nave, fin del juego</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L671.4 10.0 Q675.4 10.0 675.4 14.0 L675.4 44.0 Q675.4 48.0 671.4 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 158.0 Q23.0 162.0 27.0 162.0 L671.4 162.0 Q675.4 162.0 675.4 166.0 L675.4 178.0 Q675.4 182.0 671.4 182.0 L14.0 182.0 Q10.0 182.0 10.0 178.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">al iniciar</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L422.9 48.0 Q426.9 48.0 426.9 52.0 L426.9 82.0 Q426.9 86.0 422.9 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="55.0" width="61.2" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="71.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">nave</text><path d="M127.2 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="148.2" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="163.0" y="52.0" width="252.9" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="173.0" y="71.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">crear sprite en x:</text><rect x="320.3" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="334.3" y="71.3" class="mc-n">2</text><text x="355.3" y="71.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">y:</text><rect x="377.9" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="391.9" y="71.3" class="mc-n">4</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L663.4 86.0 Q667.4 86.0 667.4 90.0 L667.4 120.0 Q667.4 124.0 663.4 124.0 L55.0 124.0 L49.0 127.5 L39.0 127.5 L33.0 124.0 L27.0 124.0  Q23.0 124.0 23.0 120.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="93.0" width="84.6" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="109.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">enemigo</text><path d="M150.6 102.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="171.6" y="109.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="186.4" y="90.0" width="470.1" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="196.4" y="109.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">crear sprite en x:</text><rect x="343.7" y="90.0" width="245.1" height="30" rx="15" fill="#9400D3" stroke="#6F009E" stroke-width="1"/><text x="353.7" y="109.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">escoger al azar de</text><rect x="501.0" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="515.0" y="109.3" class="mc-n">0</text><text x="536.0" y="109.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="550.8" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="564.8" y="109.3" class="mc-n">4</text><text x="595.8" y="109.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">y:</text><rect x="618.4" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="632.4" y="109.3" class="mc-n">0</text><path d="M23.0 128.0 Q23.0 124.0 27.0 124.0 L33.0 124.0 L39.0 127.5 L49.0 127.5 L55.0 124.0  L275.7 124.0 Q279.7 124.0 279.7 128.0 L279.7 158.0 Q279.7 162.0 275.7 162.0 L27.0 162.0 Q23.0 162.0 23.0 158.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="147.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="131.0" width="108.0" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="147.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">disparando</text><path d="M174.0 140.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="195.0" y="147.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="209.8" y="128.0" width="59.0" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="219.8" y="147.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">falso</text><path d="M10.0 200.0 Q10.0 196.0 14.0 196.0 L275.5 196.0 Q279.5 196.0 279.5 200.0 L279.5 230.0 Q279.5 234.0 275.5 234.0 L55.0 234.0 L49.0 237.5 L39.0 237.5 L33.0 234.0 L27.0 234.0 Q23.0 234.0 23.0 238.0 L23.0 268.0 Q23.0 272.0 27.0 272.0 L275.5 272.0 Q279.5 272.0 279.5 276.0 L279.5 288.0 Q279.5 292.0 275.5 292.0 L14.0 292.0 Q10.0 292.0 10.0 288.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="219.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="203.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="219.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">A</text><path d="M231.1 212.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 238.0 Q23.0 234.0 27.0 234.0 L33.0 234.0 L39.0 237.5 L49.0 237.5 L55.0 234.0  L267.5 234.0 Q271.5 234.0 271.5 238.0 L271.5 268.0 Q271.5 272.0 267.5 272.0 L27.0 272.0 Q23.0 272.0 23.0 268.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="34.0" y="238.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="44.0" y="257.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">nave</text><text x="92.2" y="257.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="153.8" y="241.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="161.8" y="257.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M177.6 250.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="198.6" y="257.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="229.0" y="241.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="244.8" y="257.3" class="mc-n">-1</text><path d="M10.0 310.0 Q10.0 306.0 14.0 306.0 L272.0 306.0 Q276.0 306.0 276.0 310.0 L276.0 340.0 Q276.0 344.0 272.0 344.0 L55.0 344.0 L49.0 347.5 L39.0 347.5 L33.0 344.0 L27.0 344.0 Q23.0 344.0 23.0 348.0 L23.0 378.0 Q23.0 382.0 27.0 382.0 L272.0 382.0 Q276.0 382.0 276.0 386.0 L276.0 398.0 Q276.0 402.0 272.0 402.0 L14.0 402.0 Q10.0 402.0 10.0 398.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="329.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="313.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="329.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">B</text><path d="M231.1 322.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 348.0 Q23.0 344.0 27.0 344.0 L33.0 344.0 L39.0 347.5 L49.0 347.5 L55.0 344.0  L264.0 344.0 Q268.0 344.0 268.0 348.0 L268.0 378.0 Q268.0 382.0 264.0 382.0 L27.0 382.0 Q23.0 382.0 23.0 378.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="34.0" y="348.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="44.0" y="367.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">nave</text><text x="92.2" y="367.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="153.8" y="351.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="161.8" y="367.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M177.6 360.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="198.6" y="367.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="229.0" y="351.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="243.0" y="367.3" class="mc-n">1</text><path d="M10.0 420.0 Q10.0 416.0 14.0 416.0 L539.9 416.0 Q543.9 416.0 543.9 420.0 L543.9 450.0 Q543.9 454.0 539.9 454.0 L55.0 454.0 L49.0 457.5 L39.0 457.5 L33.0 454.0 L27.0 454.0 Q23.0 454.0 23.0 458.0 L23.0 584.0 Q23.0 588.0 27.0 588.0 L539.9 588.0 Q543.9 588.0 543.9 592.0 L543.9 604.0 Q543.9 608.0 539.9 608.0 L14.0 608.0 Q10.0 608.0 10.0 604.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="439.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="423.0" width="53.4" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="439.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">A+B</text><path d="M246.7 432.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 458.0 Q23.0 454.0 27.0 454.0 L33.0 454.0 L39.0 457.5 L49.0 457.5 L55.0 454.0  L531.9 454.0 Q535.9 454.0 535.9 458.0 L535.9 488.0 Q535.9 492.0 531.9 492.0 L68.0 492.0 L62.0 495.5 L52.0 495.5 L46.0 492.0 L40.0 492.0 Q36.0 492.0 36.0 496.0 L36.0 564.0 Q36.0 568.0 40.0 568.0 L531.9 568.0 Q535.9 568.0 535.9 572.0 L535.9 584.0 Q535.9 588.0 531.9 588.0 L27.0 588.0 Q23.0 588.0 23.0 584.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="477.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 458.0 h228.8 l12 15.0 l-12 15.0 h-228.8 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="78.6" y="458.0" width="98.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="88.6" y="477.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">disparando</text><rect x="183.6" y="461.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="191.6" y="477.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">=</text><path d="M207.4 470.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="228.4" y="458.0" width="59.0" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="238.4" y="477.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">falso</text><text x="316.3" y="477.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 496.0 Q36.0 492.0 40.0 492.0 L46.0 492.0 L52.0 495.5 L62.0 495.5 L68.0 492.0  L523.9 492.0 Q527.9 492.0 527.9 496.0 L527.9 526.0 Q527.9 530.0 523.9 530.0 L68.0 530.0 L62.0 533.5 L52.0 533.5 L46.0 530.0 L40.0 530.0  Q36.0 530.0 36.0 526.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="47.0" y="515.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="93.0" y="499.0" width="61.2" height="24" rx="4" fill="#A50F2D"/><text x="101.0" y="515.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">bala</text><path d="M140.2 508.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="161.2" y="515.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="176.0" y="496.0" width="340.9" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="186.0" y="515.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">crear sprite en x:</text><rect x="333.3" y="496.0" width="116.0" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="343.3" y="496.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="353.3" y="515.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">nave</text><rect x="401.5" y="499.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="409.5" y="515.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M425.3 508.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="456.3" y="515.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">y:</text><rect x="478.9" y="499.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="492.9" y="515.3" class="mc-n">3</text><path d="M36.0 534.0 Q36.0 530.0 40.0 530.0 L46.0 530.0 L52.0 533.5 L62.0 533.5 L68.0 530.0  L319.9 530.0 Q323.9 530.0 323.9 534.0 L323.9 564.0 Q323.9 568.0 319.9 568.0 L40.0 568.0 Q36.0 568.0 36.0 564.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="47.0" y="553.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="93.0" y="537.0" width="108.0" height="24" rx="4" fill="#A50F2D"/><text x="101.0" y="553.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">disparando</text><path d="M187.0 546.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="208.0" y="553.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="222.8" y="534.0" width="90.2" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="232.8" y="553.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">verdadero</text><path d="M10.0 626.0 Q10.0 622.0 14.0 622.0 L713.4 622.0 Q717.4 622.0 717.4 626.0 L717.4 656.0 Q717.4 660.0 713.4 660.0 L55.0 660.0 L49.0 663.5 L39.0 663.5 L33.0 660.0 L27.0 660.0 Q23.0 660.0 23.0 664.0 L23.0 1306.0 Q23.0 1310.0 27.0 1310.0 L713.4 1310.0 Q717.4 1310.0 717.4 1314.0 L717.4 1326.0 Q717.4 1330.0 713.4 1330.0 L14.0 1330.0 Q10.0 1330.0 10.0 1326.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="645.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">para siempre</text><path d="M23.0 664.0 Q23.0 660.0 27.0 660.0 L33.0 660.0 L39.0 663.5 L49.0 663.5 L55.0 660.0  L165.4 660.0 Q169.4 660.0 169.4 664.0 L169.4 694.0 Q169.4 698.0 165.4 698.0 L55.0 698.0 L49.0 701.5 L39.0 701.5 L33.0 698.0 L27.0 698.0  Q23.0 698.0 23.0 694.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="683.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="667.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="683.3" class="mc-n">300</text><path d="M23.0 702.0 Q23.0 698.0 27.0 698.0 L33.0 698.0 L39.0 701.5 L49.0 701.5 L55.0 698.0  L705.4 698.0 Q709.4 698.0 709.4 702.0 L709.4 732.0 Q709.4 736.0 705.4 736.0 L68.0 736.0 L62.0 739.5 L52.0 739.5 L46.0 736.0 L40.0 736.0 Q36.0 736.0 36.0 740.0 L36.0 1152.0 Q36.0 1156.0 40.0 1156.0 L705.4 1156.0 Q709.4 1156.0 709.4 1160.0 L709.4 1172.0 Q709.4 1176.0 705.4 1176.0 L55.0 1176.0 L49.0 1179.5 L39.0 1179.5 L33.0 1176.0 L27.0 1176.0  Q23.0 1176.0 23.0 1172.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="721.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><rect x="56.6" y="702.0" width="98.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="66.6" y="721.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">disparando</text><text x="161.6" y="721.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 740.0 Q36.0 736.0 40.0 736.0 L46.0 736.0 L52.0 739.5 L62.0 739.5 L68.0 736.0  L280.5 736.0 Q284.5 736.0 284.5 740.0 L284.5 770.0 Q284.5 774.0 280.5 774.0 L68.0 774.0 L62.0 777.5 L52.0 777.5 L46.0 774.0 L40.0 774.0  Q36.0 774.0 36.0 770.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="47.0" y="740.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="57.0" y="759.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">bala</text><text x="105.2" y="759.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="166.8" y="743.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="174.8" y="759.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><path d="M190.6 752.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="211.6" y="759.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="242.0" y="743.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="257.8" y="759.3" class="mc-n">-1</text><path d="M36.0 778.0 Q36.0 774.0 40.0 774.0 L46.0 774.0 L52.0 777.5 L62.0 777.5 L68.0 774.0  L697.4 774.0 Q701.4 774.0 701.4 778.0 L701.4 808.0 Q701.4 812.0 697.4 812.0 L81.0 812.0 L75.0 815.5 L65.0 815.5 L59.0 812.0 L53.0 812.0 Q49.0 812.0 49.0 816.0 L49.0 998.0 Q49.0 1002.0 53.0 1002.0 L697.4 1002.0 Q701.4 1002.0 701.4 1006.0 L701.4 1018.0 Q701.4 1022.0 697.4 1022.0 L68.0 1022.0 L62.0 1025.5 L52.0 1025.5 L46.0 1022.0 L40.0 1022.0  Q36.0 1022.0 36.0 1018.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="47.0" y="797.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M81.6 778.0 h252.5 l12 15.0 l-12 15.0 h-252.5 l-12 -15.0 z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="91.6" y="797.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">esta</text><rect x="129.8" y="778.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="139.8" y="797.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">bala</text><text x="188.0" y="797.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">tocando</text><rect x="249.5" y="778.0" width="74.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="259.5" y="797.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">enemigo</text><text x="353.1" y="797.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M49.0 816.0 Q49.0 812.0 53.0 812.0 L59.0 812.0 L65.0 815.5 L75.0 815.5 L81.0 812.0  L390.5 812.0 Q394.5 812.0 394.5 816.0 L394.5 846.0 Q394.5 850.0 390.5 850.0 L81.0 850.0 L75.0 853.5 L65.0 853.5 L59.0 850.0 L53.0 850.0  Q49.0 850.0 49.0 846.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="60.0" y="835.6" class="mc-t" textLength="288.5" lengthAdjust="spacing">agregar puntos a la puntuación actual</text><rect x="355.5" y="819.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="369.5" y="835.3" class="mc-n">1</text><path d="M49.0 854.0 Q49.0 850.0 53.0 850.0 L59.0 850.0 L65.0 853.5 L75.0 853.5 L81.0 850.0  L211.0 850.0 Q215.0 850.0 215.0 854.0 L215.0 884.0 Q215.0 888.0 211.0 888.0 L81.0 888.0 L75.0 891.5 L65.0 891.5 L59.0 888.0 L53.0 888.0  Q49.0 888.0 49.0 884.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="60.0" y="873.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">eliminar</text><rect x="129.4" y="854.0" width="74.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="139.4" y="873.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">enemigo</text><path d="M49.0 892.0 Q49.0 888.0 53.0 888.0 L59.0 888.0 L65.0 891.5 L75.0 891.5 L81.0 888.0  L187.6 888.0 Q191.6 888.0 191.6 892.0 L191.6 922.0 Q191.6 926.0 187.6 926.0 L81.0 926.0 L75.0 929.5 L65.0 929.5 L59.0 926.0 L53.0 926.0  Q49.0 926.0 49.0 922.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="60.0" y="911.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">eliminar</text><rect x="129.4" y="892.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="139.4" y="911.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">bala</text><path d="M49.0 930.0 Q49.0 926.0 53.0 926.0 L59.0 926.0 L65.0 929.5 L75.0 929.5 L81.0 926.0  L301.7 926.0 Q305.7 926.0 305.7 930.0 L305.7 960.0 Q305.7 964.0 301.7 964.0 L81.0 964.0 L75.0 967.5 L65.0 967.5 L59.0 964.0 L53.0 964.0  Q49.0 964.0 49.0 960.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="60.0" y="949.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="106.0" y="933.0" width="108.0" height="24" rx="4" fill="#A50F2D"/><text x="114.0" y="949.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">disparando</text><path d="M200.0 942.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="221.0" y="949.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="235.8" y="930.0" width="59.0" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="245.8" y="949.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">falso</text><path d="M49.0 968.0 Q49.0 964.0 53.0 964.0 L59.0 964.0 L65.0 967.5 L75.0 967.5 L81.0 964.0  L689.4 964.0 Q693.4 964.0 693.4 968.0 L693.4 998.0 Q693.4 1002.0 689.4 1002.0 L53.0 1002.0 Q49.0 1002.0 49.0 998.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="60.0" y="987.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="106.0" y="971.0" width="84.6" height="24" rx="4" fill="#A50F2D"/><text x="114.0" y="987.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">enemigo</text><path d="M176.6 980.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="197.6" y="987.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="212.4" y="968.0" width="470.1" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="222.4" y="987.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">crear sprite en x:</text><rect x="369.7" y="968.0" width="245.1" height="30" rx="15" fill="#9400D3" stroke="#6F009E" stroke-width="1"/><text x="379.7" y="987.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">escoger al azar de</text><rect x="527.0" y="971.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="541.0" y="987.3" class="mc-n">0</text><text x="562.0" y="987.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="576.8" y="971.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="590.8" y="987.3" class="mc-n">4</text><text x="621.8" y="987.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">y:</text><rect x="644.4" y="971.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="658.4" y="987.3" class="mc-n">0</text><path d="M36.0 1026.0 Q36.0 1022.0 40.0 1022.0 L46.0 1022.0 L52.0 1025.5 L62.0 1025.5 L68.0 1022.0  L385.8 1022.0 Q389.8 1022.0 389.8 1026.0 L389.8 1056.0 Q389.8 1060.0 385.8 1060.0 L81.0 1060.0 L75.0 1063.5 L65.0 1063.5 L59.0 1060.0 L53.0 1060.0 Q49.0 1060.0 49.0 1064.0 L49.0 1132.0 Q49.0 1136.0 53.0 1136.0 L385.8 1136.0 Q389.8 1136.0 389.8 1140.0 L389.8 1152.0 Q389.8 1156.0 385.8 1156.0 L40.0 1156.0 Q36.0 1156.0 36.0 1152.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="47.0" y="1045.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M81.6 1026.0 h215.8 l12 15.0 l-12 15.0 h-215.8 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="91.6" y="1026.0" width="116.0" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="101.6" y="1026.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="111.6" y="1045.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">bala</text><rect x="159.8" y="1029.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="167.8" y="1045.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><path d="M183.6 1038.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="214.6" y="1029.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="222.6" y="1045.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">=</text><path d="M238.4 1038.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="259.4" y="1029.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="273.4" y="1045.3" class="mc-n">0</text><text x="316.4" y="1045.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M49.0 1064.0 Q49.0 1060.0 53.0 1060.0 L59.0 1060.0 L65.0 1063.5 L75.0 1063.5 L81.0 1060.0  L187.6 1060.0 Q191.6 1060.0 191.6 1064.0 L191.6 1094.0 Q191.6 1098.0 187.6 1098.0 L81.0 1098.0 L75.0 1101.5 L65.0 1101.5 L59.0 1098.0 L53.0 1098.0  Q49.0 1098.0 49.0 1094.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="60.0" y="1083.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">eliminar</text><rect x="129.4" y="1064.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="139.4" y="1083.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">bala</text><path d="M49.0 1102.0 Q49.0 1098.0 53.0 1098.0 L59.0 1098.0 L65.0 1101.5 L75.0 1101.5 L81.0 1098.0  L301.7 1098.0 Q305.7 1098.0 305.7 1102.0 L305.7 1132.0 Q305.7 1136.0 301.7 1136.0 L53.0 1136.0 Q49.0 1136.0 49.0 1132.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="60.0" y="1121.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="106.0" y="1105.0" width="108.0" height="24" rx="4" fill="#A50F2D"/><text x="114.0" y="1121.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">disparando</text><path d="M200.0 1114.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="221.0" y="1121.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="235.8" y="1102.0" width="59.0" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="245.8" y="1121.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">falso</text><path d="M23.0 1180.0 Q23.0 1176.0 27.0 1176.0 L33.0 1176.0 L39.0 1179.5 L49.0 1179.5 L55.0 1176.0  L287.3 1176.0 Q291.3 1176.0 291.3 1180.0 L291.3 1210.0 Q291.3 1214.0 287.3 1214.0 L55.0 1214.0 L49.0 1217.5 L39.0 1217.5 L33.0 1214.0 L27.0 1214.0  Q23.0 1214.0 23.0 1210.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="34.0" y="1180.0" width="74.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="44.0" y="1199.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">enemigo</text><text x="115.6" y="1199.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="177.2" y="1183.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="185.2" y="1199.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><path d="M201.0 1192.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="222.0" y="1199.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="252.3" y="1183.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="266.3" y="1199.3" class="mc-n">1</text><path d="M23.0 1218.0 Q23.0 1214.0 27.0 1214.0 L33.0 1214.0 L39.0 1217.5 L49.0 1217.5 L55.0 1214.0  L409.5 1214.0 Q413.5 1214.0 413.5 1218.0 L413.5 1248.0 Q413.5 1252.0 409.5 1252.0 L68.0 1252.0 L62.0 1255.5 L52.0 1255.5 L46.0 1252.0 L40.0 1252.0 Q36.0 1252.0 36.0 1256.0 L36.0 1286.0 Q36.0 1290.0 40.0 1290.0 L409.5 1290.0 Q413.5 1290.0 413.5 1294.0 L413.5 1306.0 Q413.5 1310.0 409.5 1310.0 L27.0 1310.0 Q23.0 1310.0 23.0 1306.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="1237.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 1218.0 h252.5 l12 15.0 l-12 15.0 h-252.5 l-12 -15.0 z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="78.6" y="1237.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">esta</text><rect x="116.8" y="1218.0" width="74.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="126.8" y="1237.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">enemigo</text><text x="198.4" y="1237.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">tocando</text><rect x="259.9" y="1218.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="269.9" y="1237.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">nave</text><text x="340.1" y="1237.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 1256.0 Q36.0 1252.0 40.0 1252.0 L46.0 1252.0 L52.0 1255.5 L62.0 1255.5 L68.0 1252.0  L155.4 1252.0 Q159.4 1252.0 159.4 1256.0 L159.4 1286.0 Q159.4 1290.0 155.4 1290.0 L40.0 1290.0 Q36.0 1290.0 36.0 1286.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="47.0" y="1275.6" class="mc-t" textLength="101.4" lengthAdjust="spacing">fin del juego</text></svg>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>Sólo puede haber <strong>una bala</strong> en el aire: por eso A+B pregunta antes por <strong>disparando</strong>.</span></li>
+  <li><span class="o">2</span><span>La bala nace en la fila 3, justo encima de la nave, en la misma columna: <span class="bl">nave x</span>.</span></li>
+  <li><span class="o">3</span><span>Cada vuelta la bala sube. Si toca al enemigo: punto, desaparecen los dos y nace otro enemigo. Si llega arriba sin tocar nada, desaparece sin más.</span></li>
+  <li><span class="o">4</span><span>Después mueve el enemigo, y si te toca, se acabó.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Crea las variables nave, enemigo, bala y disparando. Monta primero A, B y el movimiento del enemigo; cuando funcione, añade el disparo.</span></li>
+  <li><span class="p">Paso 2</span><span>Que el enemigo baje sólo una de cada dos vueltas (una variable que cuenta vueltas), para que la bala sea más rápida que él.</span></li>
+  <li><span class="p">Paso 3</span><span>Cuenta atrás de 30 segundos con <span class="bl">iniciar cuenta regresiva</span>: a ver cuántos puntos haces.</span></li>
+  <li><span class="p">Paso 4</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol>
+
+<h2><span class="h2n">4</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>A+B dispara, la bala sube y los enemigos caen cuando les das.</li>
+  <li>No se puede disparar dos balas a la vez.</li>
+  <li>Sabes explicar para qué sirve la variable disparando.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Ampliacion10_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Ampliacion10_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="a09.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Ampliación 9</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="a11.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Ampliación 11</span></a></div>
+
+</main>
+</div>
+
+<p class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+</p>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

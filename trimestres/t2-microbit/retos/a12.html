@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E90FF">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Ampliación 12 · Dos jugadores por radio · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Ampliación 12 de micro:bit: dos placas, cada una mueve su sprite y envía su posición por radio con enviar valor; cuando coinciden, corazón. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a12.html">
+<meta property="og:title" content="Ampliación 12 · Dos jugadores por radio · CyR 1º ESO">
+<meta property="og:description" content="Ampliación 12 de micro:bit: dos placas, cada una mueve su sprite y envía su posición por radio con enviar valor; cuando coinciden, corazón. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">A12</span></span>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Ampliación 12</div>
+  <h1>Dos jugadores por radio</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-a">ampliación</span></div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> un juego para <strong>dos placas</strong>: cada uno mueve su punto y ve el del otro parpadeando; cuando los dos coinciden, corazón en las dos pantallas.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>De dónde sale</h2>
+<p>Es la continuación de <a href="r13.html">Reto 13 · Radio</a>. Y de los sprites del <a href="r15.html">reto 15</a>. En vez de un número suelto se envía un <strong>valor con nombre</strong>, «x».</p>
+
+<h2><span class="h2n">2</span>El programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 445 884" width="445" height="884" class="bloques" role="img" aria-label="Al iniciar: grupo 7; yo en 2,2; otro en 0,2 parpadeando. A y B mueven yo y envían por radio el valor x = yo x. Al recibir radio name value: otro establecer x en value. Para siempre: si yo toca a otro, corazón medio segundo"><title>Al iniciar: grupo 7; yo en 2,2; otro en 0,2 parpadeando. A y B mueven yo y envían por radio el valor x = yo x. Al recibir radio name value: otro establecer x en value. Para siempre: si yo toca a otro, corazón medio segundo</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L430.9 10.0 Q434.9 10.0 434.9 14.0 L434.9 44.0 Q434.9 48.0 430.9 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 196.0 Q23.0 200.0 27.0 200.0 L430.9 200.0 Q434.9 200.0 434.9 204.0 L434.9 216.0 Q434.9 220.0 430.9 220.0 L14.0 220.0 Q10.0 220.0 10.0 216.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">al iniciar</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L247.5 48.0 Q251.5 48.0 251.5 52.0 L251.5 82.0 Q251.5 86.0 247.5 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#E3008C" stroke="#AA0069" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="171.5" lengthAdjust="spacing">radio establecer grupo</text><rect x="212.5" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="226.5" y="71.3" class="mc-n">7</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L407.3 86.0 Q411.3 86.0 411.3 90.0 L411.3 120.0 Q411.3 124.0 407.3 124.0 L55.0 124.0 L49.0 127.5 L39.0 127.5 L33.0 124.0 L27.0 124.0  Q23.0 124.0 23.0 120.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="93.0" width="45.6" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="109.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">yo</text><path d="M111.6 102.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="132.6" y="109.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="147.4" y="90.0" width="252.9" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="157.4" y="109.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">crear sprite en x:</text><rect x="304.7" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="318.7" y="109.3" class="mc-n">2</text><text x="339.7" y="109.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">y:</text><rect x="362.3" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="376.3" y="109.3" class="mc-n">2</text><path d="M23.0 128.0 Q23.0 124.0 27.0 124.0 L33.0 124.0 L39.0 127.5 L49.0 127.5 L55.0 124.0  L422.9 124.0 Q426.9 124.0 426.9 128.0 L426.9 158.0 Q426.9 162.0 422.9 162.0 L55.0 162.0 L49.0 165.5 L39.0 165.5 L33.0 162.0 L27.0 162.0  Q23.0 162.0 23.0 158.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="147.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="131.0" width="61.2" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="147.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">otro</text><path d="M127.2 140.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="148.2" y="147.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="163.0" y="128.0" width="252.9" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="173.0" y="147.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">crear sprite en x:</text><rect x="320.3" y="131.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="334.3" y="147.3" class="mc-n">0</text><text x="355.3" y="147.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">y:</text><rect x="377.9" y="131.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="391.9" y="147.3" class="mc-n">2</text><path d="M23.0 166.0 Q23.0 162.0 27.0 162.0 L33.0 162.0 L39.0 165.5 L49.0 165.5 L55.0 162.0  L337.7 162.0 Q341.7 162.0 341.7 166.0 L341.7 196.0 Q341.7 200.0 337.7 200.0 L27.0 200.0 Q23.0 200.0 23.0 196.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="34.0" y="166.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="44.0" y="185.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">otro</text><text x="92.2" y="185.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="153.8" y="169.0" width="100.2" height="24" rx="4" fill="#005B38"/><text x="161.8" y="185.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">parpadear</text><path d="M239.9 178.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="260.9" y="185.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="291.3" y="169.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="311.0" y="185.3" class="mc-n">200</text><path d="M10.0 238.0 Q10.0 234.0 14.0 234.0 L346.5 234.0 Q350.5 234.0 350.5 238.0 L350.5 268.0 Q350.5 272.0 346.5 272.0 L55.0 272.0 L49.0 275.5 L39.0 275.5 L33.0 272.0 L27.0 272.0 Q23.0 272.0 23.0 276.0 L23.0 344.0 Q23.0 348.0 27.0 348.0 L346.5 348.0 Q350.5 348.0 350.5 352.0 L350.5 364.0 Q350.5 368.0 346.5 368.0 L14.0 368.0 Q10.0 368.0 10.0 364.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="257.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="241.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="257.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">A</text><path d="M231.1 250.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 276.0 Q23.0 272.0 27.0 272.0 L33.0 272.0 L39.0 275.5 L49.0 275.5 L55.0 272.0  L252.0 272.0 Q256.0 272.0 256.0 276.0 L256.0 306.0 Q256.0 310.0 252.0 310.0 L55.0 310.0 L49.0 313.5 L39.0 313.5 L33.0 310.0 L27.0 310.0  Q23.0 310.0 23.0 306.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="34.0" y="276.0" width="35.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="44.0" y="295.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">yo</text><text x="76.6" y="295.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="138.2" y="279.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="146.2" y="295.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M162.0 288.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="183.0" y="295.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="213.4" y="279.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="229.2" y="295.3" class="mc-n">-1</text><path d="M23.0 314.0 Q23.0 310.0 27.0 310.0 L33.0 310.0 L39.0 313.5 L49.0 313.5 L55.0 310.0  L338.5 310.0 Q342.5 310.0 342.5 314.0 L342.5 344.0 Q342.5 348.0 338.5 348.0 L27.0 348.0 Q23.0 348.0 23.0 344.0 Z" fill="#E3008C" stroke="#AA0069" stroke-width="1"/><text x="34.0" y="333.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">radio enviar valor</text><rect x="181.3" y="317.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="195.3" y="333.3" class="mc-n">x</text><text x="216.3" y="333.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">=</text><rect x="231.1" y="314.0" width="100.4" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="241.1" y="314.0" width="35.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="251.1" y="333.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">yo</text><rect x="283.7" y="317.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="291.7" y="333.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M307.5 326.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M10.0 386.0 Q10.0 382.0 14.0 382.0 L346.5 382.0 Q350.5 382.0 350.5 386.0 L350.5 416.0 Q350.5 420.0 346.5 420.0 L55.0 420.0 L49.0 423.5 L39.0 423.5 L33.0 420.0 L27.0 420.0 Q23.0 420.0 23.0 424.0 L23.0 492.0 Q23.0 496.0 27.0 496.0 L346.5 496.0 Q350.5 496.0 350.5 500.0 L350.5 512.0 Q350.5 516.0 346.5 516.0 L14.0 516.0 Q10.0 516.0 10.0 512.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="405.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="389.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="405.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">B</text><path d="M231.1 398.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 424.0 Q23.0 420.0 27.0 420.0 L33.0 420.0 L39.0 423.5 L49.0 423.5 L55.0 420.0  L248.4 420.0 Q252.4 420.0 252.4 424.0 L252.4 454.0 Q252.4 458.0 248.4 458.0 L55.0 458.0 L49.0 461.5 L39.0 461.5 L33.0 458.0 L27.0 458.0  Q23.0 458.0 23.0 454.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="34.0" y="424.0" width="35.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="44.0" y="443.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">yo</text><text x="76.6" y="443.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="138.2" y="427.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="146.2" y="443.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M162.0 436.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="183.0" y="443.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="213.4" y="427.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="227.4" y="443.3" class="mc-n">1</text><path d="M23.0 462.0 Q23.0 458.0 27.0 458.0 L33.0 458.0 L39.0 461.5 L49.0 461.5 L55.0 458.0  L338.5 458.0 Q342.5 458.0 342.5 462.0 L342.5 492.0 Q342.5 496.0 338.5 496.0 L27.0 496.0 Q23.0 496.0 23.0 492.0 Z" fill="#E3008C" stroke="#AA0069" stroke-width="1"/><text x="34.0" y="481.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">radio enviar valor</text><rect x="181.3" y="465.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="195.3" y="481.3" class="mc-n">x</text><text x="216.3" y="481.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">=</text><rect x="231.1" y="462.0" width="100.4" height="30" rx="15" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="241.1" y="462.0" width="35.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="251.1" y="481.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">yo</text><rect x="283.7" y="465.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="291.7" y="481.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M307.5 474.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M10.0 534.0 Q10.0 530.0 14.0 530.0 L318.5 530.0 Q322.5 530.0 322.5 534.0 L322.5 564.0 Q322.5 568.0 318.5 568.0 L55.0 568.0 L49.0 571.5 L39.0 571.5 L33.0 568.0 L27.0 568.0 Q23.0 568.0 23.0 572.0 L23.0 602.0 Q23.0 606.0 27.0 606.0 L318.5 606.0 Q322.5 606.0 322.5 610.0 L322.5 622.0 Q322.5 626.0 318.5 626.0 L14.0 626.0 Q10.0 626.0 10.0 622.0 Z" fill="#E3008C" stroke="#AA0069" stroke-width="1"/><text x="21.0" y="553.6" class="mc-t" textLength="124.8" lengthAdjust="spacing">al recibir radio</text><rect x="152.8" y="534.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="162.8" y="553.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">name</text><rect x="210.9" y="534.0" width="59.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="220.9" y="553.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">value</text><path d="M23.0 572.0 Q23.0 568.0 27.0 568.0 L33.0 568.0 L39.0 571.5 L49.0 571.5 L55.0 568.0  L310.5 568.0 Q314.5 568.0 314.5 572.0 L314.5 602.0 Q314.5 606.0 310.5 606.0 L27.0 606.0 Q23.0 606.0 23.0 602.0 Z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><rect x="34.0" y="572.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="44.0" y="591.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">otro</text><text x="92.2" y="591.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">establecer</text><rect x="177.2" y="575.0" width="37.8" height="24" rx="4" fill="#005B38"/><text x="185.2" y="591.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">x</text><path d="M201.0 584.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="222.0" y="591.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">en</text><rect x="244.5" y="572.0" width="59.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="254.5" y="591.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">value</text><path d="M10.0 644.0 Q10.0 640.0 14.0 640.0 L378.5 640.0 Q382.5 640.0 382.5 644.0 L382.5 674.0 Q382.5 678.0 378.5 678.0 L55.0 678.0 L49.0 681.5 L39.0 681.5 L33.0 678.0 L27.0 678.0 Q23.0 678.0 23.0 682.0 L23.0 846.0 Q23.0 850.0 27.0 850.0 L378.5 850.0 Q382.5 850.0 382.5 854.0 L382.5 866.0 Q382.5 870.0 378.5 870.0 L14.0 870.0 Q10.0 870.0 10.0 866.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="663.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">para siempre</text><path d="M23.0 682.0 Q23.0 678.0 27.0 678.0 L33.0 678.0 L39.0 681.5 L49.0 681.5 L55.0 678.0  L370.5 678.0 Q374.5 678.0 374.5 682.0 L374.5 712.0 Q374.5 716.0 370.5 716.0 L68.0 716.0 L62.0 719.5 L52.0 719.5 L46.0 716.0 L40.0 716.0 Q36.0 716.0 36.0 720.0 L36.0 788.0 Q36.0 792.0 40.0 792.0 L370.5 792.0 Q374.5 792.0 374.5 796.0 L374.5 808.0 Q374.5 812.0 370.5 812.0 L55.0 812.0 L49.0 815.5 L39.0 815.5 L33.0 812.0 L27.0 812.0  Q23.0 812.0 23.0 808.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="701.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 682.0 h213.5 l12 15.0 l-12 15.0 h-213.5 l-12 -15.0 z" fill="#007A4B" stroke="#005B38" stroke-width="1"/><text x="78.6" y="701.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">esta</text><rect x="116.8" y="682.0" width="35.6" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="126.8" y="701.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">yo</text><text x="159.4" y="701.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">tocando</text><rect x="221.0" y="682.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="231.0" y="701.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">otro</text><text x="301.1" y="701.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 720.0 Q36.0 716.0 40.0 716.0 L46.0 716.0 L52.0 719.5 L62.0 719.5 L68.0 716.0  L246.9 716.0 Q250.9 716.0 250.9 720.0 L250.9 750.0 Q250.9 754.0 246.9 754.0 L68.0 754.0 L62.0 757.5 L52.0 757.5 L46.0 754.0 L40.0 754.0  Q36.0 754.0 36.0 750.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="739.6" class="mc-t" textLength="101.4" lengthAdjust="spacing">mostrar ícono</text><rect x="155.4" y="723.0" width="84.6" height="24" rx="4" fill="#176CBF"/><text x="163.4" y="739.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">corazón</text><path d="M225.9 732.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M36.0 758.0 Q36.0 754.0 40.0 754.0 L46.0 754.0 L52.0 757.5 L62.0 757.5 L68.0 754.0  L178.4 754.0 Q182.4 754.0 182.4 758.0 L182.4 788.0 Q182.4 792.0 178.4 792.0 L40.0 792.0 Q36.0 792.0 36.0 788.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="777.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="132.0" y="761.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="151.7" y="777.3" class="mc-n">500</text><path d="M23.0 816.0 Q23.0 812.0 27.0 812.0 L33.0 812.0 L39.0 815.5 L49.0 815.5 L55.0 812.0  L165.4 812.0 Q169.4 812.0 169.4 816.0 L169.4 846.0 Q169.4 850.0 165.4 850.0 L27.0 850.0 Q23.0 850.0 23.0 846.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="835.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="819.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="835.3" class="mc-n">100</text></svg>
+</div><ul class="clave-lista">
+  <li><b>radio enviar valor «x» = ….</b> manda un nombre y un número juntos. Al recibir, el nombre llega en <span class="bl">name</span> y el número en <span class="bl">value</span>. Así, cuando haya más cosas que enviar, se distinguen por el nombre.</li>
+  <li><b>otro parpadear 200.</b> el punto del otro jugador parpadea para que sepas cuál es el tuyo. Las dos placas llevan el mismo programa.</li>
+</ul>
+
+<h2><span class="h2n">3</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Con otra pareja: mismo programa, mismo grupo, un número que no use nadie más.</span></li>
+  <li><span class="p">Paso 2</span><span>Moveos hasta coincidir: corazón en las dos.</span></li>
+  <li><span class="p">Paso 3</span><span>Movimiento vertical también: A+B cambia entre mover en x y mover en y (una variable de modo), y se envían dos valores, «x» e «y».</span></li>
+  <li><span class="p">Paso 4</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol>
+
+<h2><span class="h2n">4</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>Cada placa ve el punto de la otra moverse en tiempo real.</li>
+  <li>Al coincidir, las dos muestran el corazón.</li>
+  <li>Sabes explicar la diferencia entre enviar número y enviar valor.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Ampliacion12_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Ampliacion12_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="a11.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Ampliación 11</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a></div>
+
+</main>
+</div>
+
+<p class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+</p>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

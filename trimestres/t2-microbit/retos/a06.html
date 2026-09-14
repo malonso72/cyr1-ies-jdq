@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1E90FF">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>Ampliación 6 · El parking: contar sombras · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Ampliación 6 de micro:bit: contar cada vez que algo tapa el sensor de luz, una sola vez por sombra, con una variable de estado. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/a06.html">
+<meta property="og:title" content="Ampliación 6 · El parking: contar sombras · CyR 1º ESO">
+<meta property="og:description" content="Ampliación 6 de micro:bit: contar cada vez que algo tapa el sensor de luz, una sola vez por sombra, con una variable de estado. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">A6</span></span>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Ampliación 6</div>
+  <h1>El parking: contar sombras</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-a">ampliación</span></div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> un contador de coches para un parking: cada vez que algo <strong>pasa por encima</strong> del sensor, suma uno. Y sólo uno, aunque se quede parado encima.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>De dónde sale</h2>
+<p>Es la continuación de <a href="r05.html">Reto 5 · La luz que se enciende sola</a>. Y del interruptor del <a href="r07.html">reto 7</a>: hace falta acordarse de si ya se ha contado esta sombra.</p>
+
+<h2><span class="h2n">2</span>El programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 713 780" width="713" height="780" class="bloques" role="img" aria-label="Al iniciar: coches a 0, tapado a falso. Para siempre: si nivel de luz &lt; 30 y tapado = falso, cambiar coches por 1, mostrar número coches, tapado a verdadero; si nivel de luz &gt; 60, tapado a falso; pausa 100. Botón B: resta uno si hay coches"><title>Al iniciar: coches a 0, tapado a falso. Para siempre: si nivel de luz &lt; 30 y tapado = falso, cambiar coches por 1, mostrar número coches, tapado a verdadero; si nivel de luz &gt; 60, tapado a falso; pausa 100. Botón B: resta uno si hay coches</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L252.5 10.0 Q256.5 10.0 256.5 14.0 L256.5 44.0 Q256.5 48.0 252.5 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 158.0 Q23.0 162.0 27.0 162.0 L252.5 162.0 Q256.5 162.0 256.5 166.0 L256.5 178.0 Q256.5 182.0 252.5 182.0 L14.0 182.0 Q10.0 182.0 10.0 178.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">al iniciar</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L213.6 48.0 Q217.6 48.0 217.6 52.0 L217.6 82.0 Q217.6 86.0 213.6 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="55.0" width="76.8" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="71.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">coches</text><path d="M142.8 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="163.8" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="178.6" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="192.6" y="71.3" class="mc-n">0</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L244.5 86.0 Q248.5 86.0 248.5 90.0 L248.5 120.0 Q248.5 124.0 244.5 124.0 L55.0 124.0 L49.0 127.5 L39.0 127.5 L33.0 124.0 L27.0 124.0  Q23.0 124.0 23.0 120.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="93.0" width="76.8" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="109.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">tapado</text><path d="M142.8 102.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="163.8" y="109.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="178.6" y="90.0" width="59.0" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="188.6" y="109.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">falso</text><path d="M23.0 128.0 Q23.0 124.0 27.0 124.0 L33.0 124.0 L39.0 127.5 L49.0 127.5 L55.0 124.0  L185.2 124.0 Q189.2 124.0 189.2 128.0 L189.2 158.0 Q189.2 162.0 185.2 162.0 L27.0 162.0 Q23.0 162.0 23.0 158.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="147.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="150.2" y="131.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="164.2" y="147.3" class="mc-n">0</text><path d="M10.0 200.0 Q10.0 196.0 14.0 196.0 L699.3 196.0 Q703.3 196.0 703.3 200.0 L703.3 230.0 Q703.3 234.0 699.3 234.0 L55.0 234.0 L49.0 237.5 L39.0 237.5 L33.0 234.0 L27.0 234.0 Q23.0 234.0 23.0 238.0 L23.0 536.0 Q23.0 540.0 27.0 540.0 L699.3 540.0 Q703.3 540.0 703.3 544.0 L703.3 556.0 Q703.3 560.0 699.3 560.0 L14.0 560.0 Q10.0 560.0 10.0 556.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="219.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">para siempre</text><path d="M23.0 238.0 Q23.0 234.0 27.0 234.0 L33.0 234.0 L39.0 237.5 L49.0 237.5 L55.0 234.0  L691.3 234.0 Q695.3 234.0 695.3 238.0 L695.3 268.0 Q695.3 272.0 691.3 272.0 L68.0 272.0 L62.0 275.5 L52.0 275.5 L46.0 272.0 L40.0 272.0 Q36.0 272.0 36.0 276.0 L36.0 382.0 Q36.0 386.0 40.0 386.0 L691.3 386.0 Q695.3 386.0 695.3 390.0 L695.3 402.0 Q695.3 406.0 691.3 406.0 L55.0 406.0 L49.0 409.5 L39.0 409.5 L33.0 406.0 L27.0 406.0  Q23.0 406.0 23.0 402.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="257.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 238.0 h534.3 l12 15.0 l-12 15.0 h-534.3 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><path d="M90.6 238.0 h217.0 l12 15.0 l-12 15.0 h-217.0 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="100.6" y="238.0" width="113.6" height="30" rx="15" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="110.6" y="257.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">nivel de luz</text><rect x="221.2" y="241.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="229.2" y="257.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&lt;</text><path d="M245.0 250.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="266.0" y="241.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="281.8" y="257.3" class="mc-n">30</text><rect x="326.5" y="241.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="334.5" y="257.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><path d="M350.3 250.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M383.3 238.0 h197.6 l12 15.0 l-12 15.0 h-197.6 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="393.3" y="238.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="403.3" y="257.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">tapado</text><rect x="467.1" y="241.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="475.1" y="257.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">=</text><path d="M490.9 250.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="511.9" y="238.0" width="59.0" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="521.9" y="257.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">falso</text><text x="621.9" y="257.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 276.0 Q36.0 272.0 40.0 272.0 L46.0 272.0 L52.0 275.5 L62.0 275.5 L68.0 272.0  L257.8 272.0 Q261.8 272.0 261.8 276.0 L261.8 306.0 Q261.8 310.0 257.8 310.0 L68.0 310.0 L62.0 313.5 L52.0 313.5 L46.0 310.0 L40.0 310.0  Q36.0 310.0 36.0 306.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="47.0" y="295.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="108.6" y="279.0" width="76.8" height="24" rx="4" fill="#A50F2D"/><text x="116.6" y="295.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">coches</text><path d="M171.4 288.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="192.4" y="295.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="222.8" y="279.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="236.8" y="295.3" class="mc-n">1</text><path d="M36.0 314.0 Q36.0 310.0 40.0 310.0 L46.0 310.0 L52.0 313.5 L62.0 313.5 L68.0 310.0  L236.9 310.0 Q240.9 310.0 240.9 314.0 L240.9 344.0 Q240.9 348.0 236.9 348.0 L68.0 348.0 L62.0 351.5 L52.0 351.5 L46.0 348.0 L40.0 348.0  Q36.0 348.0 36.0 344.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="333.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="163.2" y="314.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="173.2" y="333.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">coches</text><path d="M36.0 352.0 Q36.0 348.0 40.0 348.0 L46.0 348.0 L52.0 351.5 L62.0 351.5 L68.0 348.0  L288.7 348.0 Q292.7 348.0 292.7 352.0 L292.7 382.0 Q292.7 386.0 288.7 386.0 L40.0 386.0 Q36.0 386.0 36.0 382.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="47.0" y="371.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="93.0" y="355.0" width="76.8" height="24" rx="4" fill="#A50F2D"/><text x="101.0" y="371.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">tapado</text><path d="M155.8 364.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="176.8" y="371.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="191.6" y="352.0" width="90.2" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="201.6" y="371.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">verdadero</text><path d="M23.0 410.0 Q23.0 406.0 27.0 406.0 L33.0 406.0 L39.0 409.5 L49.0 409.5 L55.0 406.0  L373.9 406.0 Q377.9 406.0 377.9 410.0 L377.9 440.0 Q377.9 444.0 373.9 444.0 L68.0 444.0 L62.0 447.5 L52.0 447.5 L46.0 444.0 L40.0 444.0 Q36.0 444.0 36.0 448.0 L36.0 478.0 Q36.0 482.0 40.0 482.0 L373.9 482.0 Q377.9 482.0 377.9 486.0 L377.9 498.0 Q377.9 502.0 373.9 502.0 L55.0 502.0 L49.0 505.5 L39.0 505.5 L33.0 502.0 L27.0 502.0  Q23.0 502.0 23.0 498.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="429.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 410.0 h217.0 l12 15.0 l-12 15.0 h-217.0 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="78.6" y="410.0" width="113.6" height="30" rx="15" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="88.6" y="429.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">nivel de luz</text><rect x="199.2" y="413.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="207.2" y="429.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&gt;</text><path d="M223.0 422.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="244.0" y="413.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="259.8" y="429.3" class="mc-n">60</text><text x="304.5" y="429.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 448.0 Q36.0 444.0 40.0 444.0 L46.0 444.0 L52.0 447.5 L62.0 447.5 L68.0 444.0  L257.5 444.0 Q261.5 444.0 261.5 448.0 L261.5 478.0 Q261.5 482.0 257.5 482.0 L40.0 482.0 Q36.0 482.0 36.0 478.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="47.0" y="467.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="93.0" y="451.0" width="76.8" height="24" rx="4" fill="#A50F2D"/><text x="101.0" y="467.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">tapado</text><path d="M155.8 460.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="176.8" y="467.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="191.6" y="448.0" width="59.0" height="30" rx="15" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="201.6" y="467.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">falso</text><path d="M23.0 506.0 Q23.0 502.0 27.0 502.0 L33.0 502.0 L39.0 505.5 L49.0 505.5 L55.0 502.0  L165.4 502.0 Q169.4 502.0 169.4 506.0 L169.4 536.0 Q169.4 540.0 165.4 540.0 L27.0 540.0 Q23.0 540.0 23.0 536.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="525.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="509.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="525.3" class="mc-n">100</text><path d="M10.0 578.0 Q10.0 574.0 14.0 574.0 L331.5 574.0 Q335.5 574.0 335.5 578.0 L335.5 608.0 Q335.5 612.0 331.5 612.0 L55.0 612.0 L49.0 615.5 L39.0 615.5 L33.0 612.0 L27.0 612.0 Q23.0 612.0 23.0 616.0 L23.0 742.0 Q23.0 746.0 27.0 746.0 L331.5 746.0 Q335.5 746.0 335.5 750.0 L335.5 762.0 Q335.5 766.0 331.5 766.0 L14.0 766.0 Q10.0 766.0 10.0 762.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="597.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="581.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="597.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">B</text><path d="M231.1 590.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 616.0 Q23.0 612.0 27.0 612.0 L33.0 612.0 L39.0 615.5 L49.0 615.5 L55.0 612.0  L323.5 612.0 Q327.5 612.0 327.5 616.0 L327.5 646.0 Q327.5 650.0 323.5 650.0 L68.0 650.0 L62.0 653.5 L52.0 653.5 L46.0 650.0 L40.0 650.0 Q36.0 650.0 36.0 654.0 L36.0 684.0 Q36.0 688.0 40.0 688.0 L323.5 688.0 Q327.5 688.0 327.5 692.0 L327.5 704.0 Q327.5 708.0 323.5 708.0 L55.0 708.0 L49.0 711.5 L39.0 711.5 L33.0 708.0 L27.0 708.0  Q23.0 708.0 23.0 704.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="635.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 616.0 h166.6 l12 15.0 l-12 15.0 h-166.6 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="78.6" y="616.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="88.6" y="635.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">coches</text><rect x="152.4" y="619.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="160.4" y="635.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&gt;</text><path d="M176.2 628.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="197.2" y="619.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="211.2" y="635.3" class="mc-n">0</text><text x="254.2" y="635.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 654.0 Q36.0 650.0 40.0 650.0 L46.0 650.0 L52.0 653.5 L62.0 653.5 L68.0 650.0  L261.3 650.0 Q265.3 650.0 265.3 654.0 L265.3 684.0 Q265.3 688.0 261.3 688.0 L40.0 688.0 Q36.0 688.0 36.0 684.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="47.0" y="673.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="108.6" y="657.0" width="76.8" height="24" rx="4" fill="#A50F2D"/><text x="116.6" y="673.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">coches</text><path d="M171.4 666.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="192.4" y="673.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="222.8" y="657.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="238.5" y="673.3" class="mc-n">-1</text><path d="M23.0 712.0 Q23.0 708.0 27.0 708.0 L33.0 708.0 L39.0 711.5 L49.0 711.5 L55.0 708.0  L223.9 708.0 Q227.9 708.0 227.9 712.0 L227.9 742.0 Q227.9 746.0 223.9 746.0 L27.0 746.0 Q23.0 746.0 23.0 742.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="731.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="150.2" y="712.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="160.2" y="731.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">coches</text></svg>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>Llega una sombra: la luz baja de 30 y <strong>tapado</strong> era falso. Se cuenta un coche y se apunta que ya está tapado.</span></li>
+  <li><span class="o">2</span><span>Mientras la sombra sigue, la luz sigue baja pero tapado es verdadero: no se vuelve a contar. Eso es lo que evita contar el mismo coche diez veces.</span></li>
+  <li><span class="o">3</span><span>La sombra se va: la luz sube de 60 y tapado vuelve a falso. Listo para el siguiente.</span></li>
+  <li><span class="o">4</span><span>Los dos umbrales son distintos a propósito (30 y 60): así una luz que tiembla en el borde no cuenta coches fantasma.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Mide tu luz con y sin la mano y coloca los dos umbrales entre medias, separados.</span></li>
+  <li><span class="p">Paso 2</span><span>Monta el programa. El <span class="bl">y</span> está en Lógica.</span></li>
+  <li><span class="p">Paso 3</span><span>Lleno: si coches llega a 10, <span class="bl">mostrar cadena</span> «LLENO» y que A no cuente más.</span></li>
+  <li><span class="p">Paso 4</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol>
+
+<h2><span class="h2n">4</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>Cada pasada de la mano suma exactamente uno.</li>
+  <li>Sabes explicar para qué sirve la variable tapado.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Ampliacion6_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Ampliacion6_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="a05.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Ampliación 5</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="a07.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Ampliación 7</span></a></div>
+
+</main>
+</div>
+
+<p class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+</p>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
