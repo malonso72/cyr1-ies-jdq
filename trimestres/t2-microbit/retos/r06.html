@@ -3,72 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1B4F8A">
+<meta name="theme-color" content="#1E90FF">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>Reto 06 · Micro:bit</title>
-<meta name="description" content="Reto 06 Micro:bit.">
+<title>Reto 6 · El contador de turnos · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Reto 6 de micro:bit: variables. Crear una variable, fijar, cambiar por, mostrar número. Contador que no baja de cero. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r06.html">
+<meta property="og:title" content="Reto 6 · El contador de turnos · CyR 1º ESO">
+<meta property="og:description" content="Reto 6 de micro:bit: variables. Crear una variable, fijar, cambiar por, mostrar número. Contador que no baja de cero. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
 <link rel="stylesheet" href="../../../assets/css/unidad.css">
-<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">R6</span></span>
 </nav>
 
 <div id="main-content">
 <section class="unidad-titulo-hero">
-  <div class="num">Reto 06</div>
-  <h1>Enciende Y Apaga Con Dos Botones</h1>
-  <div class="duracion">Micro:bit · Computación física</div>
+  <div class="num">Reto 6</div>
+  <h1>El contador de turnos</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-t">troncal</span></div>
 </section>
-<div class="hub-main">
-  <div class="section-title">🧩 Descripción</div>
-  <p>Crea un programa que encienda un corazón grande al pulsar el botón A y lo apague al pulsar el botón B. Es tu primer control con botones.</p>
-  <div class="section-title">🎯 Conceptos</div>
-  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Eventos de botones</span><span class='badge'>Mostrar iconos</span><span class='badge'>Borrar pantalla</span></p>
-  <div class="section-title">🧠 Pseudocódigo</div>
-  <div class="codebox">Al presionar botón A
-Mostrar icono corazón grande
-Al presionar botón B
-Borrar la pantalla</div>
-  <div class="section-title">💡 Ayuda</div>
-  <p>Los botones A y B son entradas digitales. Cada botón puede tener su propio evento independiente. Es muy sencillo: un evento para encender y otro para apagar.</p>
-  <div class="section-title">🚀 Reto extra</div>
-  <p>¿Puedes hacer que el botón A+B (ambos a la vez) muestre un icono diferente?</p>
-  <div class="section-title">✅ Autoevaluación</div>
-  <ul><li>El botón A enciende el corazón</li><li>El botón B apaga la pantalla</li><li>Los botones responden correctamente</li><li>El programa funciona de forma fiable</li><li>Consejo: Los eventos de botones son la base de la interacción. ¡Ahora puedes controlar la</li><li>Micro:bit!</li></ul>
-  <div class="section-title">🔗 Programar</div>
-  <div class="bg">
-    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
-    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> la máquina de turnos de la carnicería: A suma uno, B resta uno y el número nunca baja de cero. Para recordar el número necesitas una <strong>variable</strong>, la misma idea que los puntos en Scratch.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>La idea: una caja con nombre</h2>
+<p>Una variable es una caja donde la placa guarda un número, con un nombre para encontrarla. Se crea en <span class="cat cat-variables">Variables</span> con el botón <strong>Crear una variable…</strong>. Ponle <strong>turno</strong>. Al crearla aparecen tres bloques:</p><ul class="clave-lista">
+  <li><b>fijar turno a 0.</b> mete un número en la caja, borrando el que hubiera. Es el <span class="bl">dar a … el valor</span> de Scratch.</li>
+  <li><b>cambiar turno por 1.</b> suma al número que ya hay. Con <strong>-1</strong>, resta.</li>
+  <li><b>turno.</b> el redondeado: vale lo que hay en la caja, y se mete en huecos de otros bloques.</li>
+</ul>
+
+<h2><span class="h2n">2</span>Lee este programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 338 512" width="338" height="512" class="bloques" role="img" aria-label="Al iniciar: fijar turno a 0 y mostrar número turno. Al presionarse el botón A: cambiar turno por 1 y mostrar número turno. Al presionarse el botón B: si turno es mayor que 0 entonces cambiar turno por -1; mostrar número turno"><title>Al iniciar: fijar turno a 0 y mostrar número turno. Al presionarse el botón A: cambiar turno por 1 y mostrar número turno. Al presionarse el botón B: si turno es mayor que 0 entonces cambiar turno por -1; mostrar número turno</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L224.1 10.0 Q228.1 10.0 228.1 14.0 L228.1 44.0 Q228.1 48.0 224.1 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 120.0 Q23.0 124.0 27.0 124.0 L224.1 124.0 Q228.1 124.0 228.1 128.0 L228.1 140.0 Q228.1 144.0 224.1 144.0 L14.0 144.0 Q10.0 144.0 10.0 140.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">al iniciar</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L205.8 48.0 Q209.8 48.0 209.8 52.0 L209.8 82.0 Q209.8 86.0 205.8 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="55.0" width="69.0" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="71.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text><path d="M135.0 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="156.0" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="170.8" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="184.8" y="71.3" class="mc-n">0</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L216.1 86.0 Q220.1 86.0 220.1 90.0 L220.1 120.0 Q220.1 124.0 216.1 124.0 L27.0 124.0 Q23.0 124.0 23.0 120.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="150.2" y="90.0" width="59.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="160.2" y="109.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text><path d="M10.0 162.0 Q10.0 158.0 14.0 158.0 L252.1 158.0 Q256.1 158.0 256.1 162.0 L256.1 192.0 Q256.1 196.0 252.1 196.0 L55.0 196.0 L49.0 199.5 L39.0 199.5 L33.0 196.0 L27.0 196.0 Q23.0 196.0 23.0 200.0 L23.0 268.0 Q23.0 272.0 27.0 272.0 L252.1 272.0 Q256.1 272.0 256.1 276.0 L256.1 288.0 Q256.1 292.0 252.1 292.0 L14.0 292.0 Q10.0 292.0 10.0 288.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="181.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="165.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="181.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">A</text><path d="M231.1 174.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 200.0 Q23.0 196.0 27.0 196.0 L33.0 196.0 L39.0 199.5 L49.0 199.5 L55.0 196.0  L237.0 196.0 Q241.0 196.0 241.0 200.0 L241.0 230.0 Q241.0 234.0 237.0 234.0 L55.0 234.0 L49.0 237.5 L39.0 237.5 L33.0 234.0 L27.0 234.0  Q23.0 234.0 23.0 230.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="219.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="95.6" y="203.0" width="69.0" height="24" rx="4" fill="#A50F2D"/><text x="103.6" y="219.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text><path d="M150.6 212.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="171.6" y="219.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="202.0" y="203.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="216.0" y="219.3" class="mc-n">1</text><path d="M23.0 238.0 Q23.0 234.0 27.0 234.0 L33.0 234.0 L39.0 237.5 L49.0 237.5 L55.0 234.0  L216.1 234.0 Q220.1 234.0 220.1 238.0 L220.1 268.0 Q220.1 272.0 216.1 272.0 L27.0 272.0 Q23.0 272.0 23.0 268.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="257.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="150.2" y="238.0" width="59.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="160.2" y="257.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text><path d="M10.0 310.0 Q10.0 306.0 14.0 306.0 L323.8 306.0 Q327.8 306.0 327.8 310.0 L327.8 340.0 Q327.8 344.0 323.8 344.0 L55.0 344.0 L49.0 347.5 L39.0 347.5 L33.0 344.0 L27.0 344.0 Q23.0 344.0 23.0 348.0 L23.0 474.0 Q23.0 478.0 27.0 478.0 L323.8 478.0 Q327.8 478.0 327.8 482.0 L327.8 494.0 Q327.8 498.0 323.8 498.0 L14.0 498.0 Q10.0 498.0 10.0 494.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="329.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="313.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="329.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">B</text><path d="M231.1 322.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 348.0 Q23.0 344.0 27.0 344.0 L33.0 344.0 L39.0 347.5 L49.0 347.5 L55.0 344.0  L315.8 344.0 Q319.8 344.0 319.8 348.0 L319.8 378.0 Q319.8 382.0 315.8 382.0 L68.0 382.0 L62.0 385.5 L52.0 385.5 L46.0 382.0 L40.0 382.0 Q36.0 382.0 36.0 386.0 L36.0 416.0 Q36.0 420.0 40.0 420.0 L315.8 420.0 Q319.8 420.0 319.8 424.0 L319.8 436.0 Q319.8 440.0 315.8 440.0 L55.0 440.0 L49.0 443.5 L39.0 443.5 L33.0 440.0 L27.0 440.0  Q23.0 440.0 23.0 436.0 Z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><text x="34.0" y="367.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><path d="M68.6 348.0 h158.8 l12 15.0 l-12 15.0 h-158.8 l-12 -15.0 z" fill="#00A4A6" stroke="#007B7D" stroke-width="1"/><rect x="78.6" y="348.0" width="59.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="88.6" y="367.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text><rect x="144.6" y="351.0" width="37.8" height="24" rx="4" fill="#007B7D"/><text x="152.6" y="367.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">&gt;</text><path d="M168.4 360.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><rect x="189.4" y="351.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="203.4" y="367.3" class="mc-n">0</text><text x="246.4" y="367.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">entonces</text><path d="M36.0 386.0 Q36.0 382.0 40.0 382.0 L46.0 382.0 L52.0 385.5 L62.0 385.5 L68.0 382.0  L253.5 382.0 Q257.5 382.0 257.5 386.0 L257.5 416.0 Q257.5 420.0 253.5 420.0 L40.0 420.0 Q36.0 420.0 36.0 416.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="47.0" y="405.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">cambiar</text><rect x="108.6" y="389.0" width="69.0" height="24" rx="4" fill="#A50F2D"/><text x="116.6" y="405.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text><path d="M163.6 398.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="184.6" y="405.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">por</text><rect x="215.0" y="389.0" width="31.6" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="230.8" y="405.3" class="mc-n">-1</text><path d="M23.0 444.0 Q23.0 440.0 27.0 440.0 L33.0 440.0 L39.0 443.5 L49.0 443.5 L55.0 440.0  L216.1 440.0 Q220.1 440.0 220.1 444.0 L220.1 474.0 Q220.1 478.0 216.1 478.0 L27.0 478.0 Q23.0 478.0 23.0 474.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="463.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="150.2" y="444.0" width="59.0" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="160.2" y="463.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text></svg>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span><strong>al iniciar</strong> pone la caja a 0 y lo enseña. Sin este bloque el contador también empezaría en 0, pero es mejor decirlo: así el programa se lee solo.</span></li>
+  <li><span class="o">2</span><span>Cada pulsación de <strong>A</strong> suma 1 y vuelve a enseñar el número. Si no lo enseñas, la caja cambia por dentro pero tú no te enteras.</span></li>
+  <li><span class="o">3</span><span><strong>B</strong> resta 1, pero <em>sólo si el turno es mayor que 0</em>. Esa es la condición que evita el −1.</span></li>
+  <li><span class="o">4</span><span>El <strong>mostrar número</strong> de B está <em>fuera</em> del <span class="bl">si</span>: se enseña el número siempre, haya restado o no.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="nada">
+  <p class="preg">Sacas el <em>mostrar número</em> de B y lo metes dentro del <em>si</em>, debajo de <em>cambiar turno por -1</em>. El turno vale 0 y pulsas B. ¿Qué se ve?</p>
+  <div class="ops">
+    <button data-op="cero" data-ex="No. Como el turno no es mayor que 0, no se entra en el si, y ahora el mostrar número está dentro.">Un 0, igual que antes</button>
+    <button data-op="nada" data-ex="Correcto. El si no se cumple, así que no se ejecuta nada de lo que hay dentro, tampoco el mostrar. Por eso estaba fuera.">Nada cambia en la pantalla: se queda lo que hubiera</button>
+    <button data-op="menos" data-ex="No. La condición sigue protegiendo el cero: no se resta.">Un −1</button>
   </div>
-  <div class="section-title">Navegación</div>
-  <div class="bg"><a href="r05.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 05</span></a><a href="r07.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 07</span></a></div>
+  <div class="fb" id="fb1"></div>
 </div>
+
+<h2><span class="h2n">4</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Crea la variable <strong>turno</strong> y monta los tres eventos.</span></li>
+  <li><span class="p">Paso 2</span><span>Pruébalo en el simulador: sube, baja, e intenta bajar de cero.</span></li>
+  <li><span class="p">Paso 3</span><span>Añade <strong>A+B</strong>: pone el turno a cero y muestra una cara triste («no quedan turnos»).</span></li>
+  <li><span class="p">Paso 4</span><span>Cambia el programa para que sea el marcador de un partido: A suma 1 a <strong>local</strong> y B a <strong>visitante</strong>. Necesitas dos variables. ¿Cómo enseñas los dos números?</span></li>
+  <li><span class="p">Paso 5</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol><div class="caja-bloques" style="max-width:380px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 282 158" width="282" height="158" class="bloques" role="img" aria-label="Al presionarse el botón A+B: fijar turno a 0, mostrar ícono triste"><title>Al presionarse el botón A+B: fijar turno a 0, mostrar ícono triste</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L267.7 10.0 Q271.7 10.0 271.7 14.0 L271.7 44.0 Q271.7 48.0 267.7 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 120.0 Q23.0 124.0 27.0 124.0 L267.7 124.0 Q271.7 124.0 271.7 128.0 L271.7 140.0 Q271.7 144.0 267.7 144.0 L14.0 144.0 Q10.0 144.0 10.0 140.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="17.0" width="53.4" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="33.6" class="mc-t" textLength="23.4" lengthAdjust="spacing">A+B</text><path d="M246.7 26.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L205.8 48.0 Q209.8 48.0 209.8 52.0 L209.8 82.0 Q209.8 86.0 205.8 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="55.0" width="69.0" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="71.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">turno</text><path d="M135.0 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="156.0" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="170.8" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="184.8" y="71.3" class="mc-n">0</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L226.1 86.0 Q230.1 86.0 230.1 90.0 L230.1 120.0 Q230.1 124.0 226.1 124.0 L27.0 124.0 Q23.0 124.0 23.0 120.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="101.4" lengthAdjust="spacing">mostrar ícono</text><rect x="142.4" y="93.0" width="76.8" height="24" rx="4" fill="#176CBF"/><text x="150.4" y="109.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">triste</text><path d="M205.1 102.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/></svg>
+</div><div class="aviso-ojo">
+  <h3>⚠️ Los números de dos cifras se desplazan</h3>
+<p>Un 7 cabe en la pantalla, un 12 no: la placa lo hace pasar deslizándose, y tarda casi un segundo. Es normal. Si pulsas muy rápido, verás que se pierde alguna pulsación mientras el número pasa.</p>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>A sube, B baja y nunca aparece un número negativo.</li>
+  <li>A+B vuelve a cero.</li>
+  <li>Sabes cuál es la diferencia entre <span class="bl">fijar</span> y <span class="bl">cambiar por</span>.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Reto6_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Reto6_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="r05.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Reto 5</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="r07.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Reto 7 · El interruptor</span></a></div>
+
+</main>
 </div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

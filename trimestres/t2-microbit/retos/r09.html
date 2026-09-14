@@ -3,84 +3,253 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1B4F8A">
+<meta name="theme-color" content="#1E90FF">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>Reto 09 · Micro:bit</title>
-<meta name="description" content="Reto 09 Micro:bit.">
+<title>Reto 9 · El bucle «para»: una fila que se enciende · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Reto 9 de micro:bit: bucle para índice de 0 a 4. La variable índice como coordenada. Animación de una fila de LEDs. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r09.html">
+<meta property="og:title" content="Reto 9 · El bucle «para»: una fila que se enciende · CyR 1º ESO">
+<meta property="og:description" content="Reto 9 de micro:bit: bucle para índice de 0 a 4. La variable índice como coordenada. Animación de una fila de LEDs. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
 <link rel="stylesheet" href="../../../assets/css/unidad.css">
-<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">R9</span></span>
 </nav>
 
 <div id="main-content">
 <section class="unidad-titulo-hero">
-  <div class="num">Reto 09</div>
-  <h1>Cronómetro</h1>
-  <div class="duracion">Micro:bit · Computación física</div>
+  <div class="num">Reto 9</div>
+  <h1>El bucle «para»: una fila que se enciende</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-t">troncal</span></div>
 </section>
-<div class="hub-main">
-  <div class="section-title">🧩 Descripción</div>
-  <p>Crea un cronómetro simple. El botón A lo inicia y cuenta los segundos, el botón B lo para y muestra el tiempo transcurrido. A+B lo reinicia a cero.</p>
-  <div class="section-title">🎯 Conceptos</div>
-  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Variables de tiempo</span><span class='badge'>Bucles con pausas</span><span class='badge'>Control de flujo</span><span class='badge'>Eventos de botones</span></p>
-  <div class="section-title">🧠 Pseudocódigo</div>
-  <div class="codebox">Al iniciar
-Establecer tiempo = 0
-Establecer corriendo = falso
-Para siempre
-Si corriendo = verdadero entonces
-Cambiar tiempo por +1
-Mostrar número tiempo
-Pausa 1000 ms
-Al presionar botón A
-Establecer corriendo = verdadero
-Al presionar botón B
-Establecer corriendo = falso
-Al presionar botón A+B
-Establecer tiempo = 0
-Establecer corriendo = falso
-Borrar pantalla</div>
-  <div class="section-title">💡 Ayuda</div>
-  <p>Una variable booleana controla si el cronómetro está corriendo. Mientras sea verdadero, suma 1 cada segundo (1000 ms). Los botones cambian el estado.</p>
-  <div class="section-title">🚀 Reto extra</div>
-  <p>¿Puedes hacer una cuenta atrás? Empieza en 10 y baja hasta 0, luego muestra &quot;FIN&quot;.</p>
-  <div class="section-title">✅ Autoevaluación</div>
-  <ul><li>El botón A inicia el cronómetro</li><li>El botón B lo para</li><li>A+B lo reinicia a cero</li><li>Cuenta correctamente los segundos</li><li>Consejo: Los cronómetros usan el concepto de &quot;estado&quot;. ¡Fundamental en programación!</li></ul>
-  <div class="section-title">🔗 Programar</div>
-  <div class="bg">
-    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
-    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> que la fila de arriba se encienda LED a LED, de izquierda a derecha, y vuelva a empezar. Con cinco <span class="bl">graficar</span> se puede; con un <strong>bucle</strong> se hace con uno solo, y así aprendes el bloque que más trabajo ahorra.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>La idea: un bloque que cuenta por ti</h2>
+<p>El bloque <span class="bl">para índice de 0 a 4 ejecutar</span>, en <span class="cat cat-bucles">Bucles</span>, repite lo de dentro <strong>cinco veces</strong>, y en cada vuelta la variable <strong>índice</strong> vale un número distinto: 0, luego 1, 2, 3 y 4. Tú no la creas ni la cambias: el bucle lo hace solo.</p><p>El truco está en usar <strong>índice</strong> como coordenada: <span class="bl">graficar x índice y 0</span> enciende en cada vuelta un LED distinto de la misma fila.</p>
+
+<h2><span class="h2n">2</span>Lee este programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 254" width="336" height="254" class="bloques" role="img" aria-label="Para siempre: para índice de 0 a 4 ejecutar: graficar x índice y 0, pausa 200 ms, ocultar x índice y 0"><title>Para siempre: para índice de 0 a 4 ejecutar: graficar x índice y 0, pausa 200 ms, ocultar x índice y 0</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L322.1 10.0 Q326.1 10.0 326.1 14.0 L326.1 44.0 Q326.1 48.0 322.1 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 216.0 Q23.0 220.0 27.0 220.0 L322.1 220.0 Q326.1 220.0 326.1 224.0 L326.1 236.0 Q326.1 240.0 322.1 240.0 L14.0 240.0 Q10.0 240.0 10.0 236.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">para siempre</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L314.1 48.0 Q318.1 48.0 318.1 52.0 L318.1 82.0 Q318.1 86.0 314.1 86.0 L68.0 86.0 L62.0 89.5 L52.0 89.5 L46.0 86.0 L40.0 86.0 Q36.0 86.0 36.0 90.0 L36.0 196.0 Q36.0 200.0 40.0 200.0 L314.1 200.0 Q318.1 200.0 318.1 204.0 L318.1 216.0 Q318.1 220.0 314.1 220.0 L27.0 220.0 Q23.0 220.0 23.0 216.0 Z" fill="#00AA00" stroke="#008000" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">para</text><rect x="72.2" y="55.0" width="76.8" height="24" rx="4" fill="#008000"/><text x="80.2" y="71.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">índice</text><path d="M135.0 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="156.0" y="71.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">de 0 a</text><rect x="209.8" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="223.8" y="71.3" class="mc-n">4</text><text x="244.8" y="71.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">ejecutar</text><path d="M36.0 90.0 Q36.0 86.0 40.0 86.0 L46.0 86.0 L52.0 89.5 L62.0 89.5 L68.0 86.0  L255.5 86.0 Q259.5 86.0 259.5 90.0 L259.5 120.0 Q259.5 124.0 255.5 124.0 L68.0 124.0 L62.0 127.5 L52.0 127.5 L46.0 124.0 L40.0 124.0  Q36.0 124.0 36.0 120.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="47.0" y="109.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="132.0" y="90.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="142.0" y="109.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">índice</text><text x="205.8" y="109.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="220.5" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="234.5" y="109.3" class="mc-n">0</text><path d="M36.0 128.0 Q36.0 124.0 40.0 124.0 L46.0 124.0 L52.0 127.5 L62.0 127.5 L68.0 124.0  L178.4 124.0 Q182.4 124.0 182.4 128.0 L182.4 158.0 Q182.4 162.0 178.4 162.0 L68.0 162.0 L62.0 165.5 L52.0 165.5 L46.0 162.0 L40.0 162.0  Q36.0 162.0 36.0 158.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="47.0" y="147.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="132.0" y="131.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="151.7" y="147.3" class="mc-n">200</text><path d="M36.0 166.0 Q36.0 162.0 40.0 162.0 L46.0 162.0 L52.0 165.5 L62.0 165.5 L68.0 162.0  L247.8 162.0 Q251.8 162.0 251.8 166.0 L251.8 196.0 Q251.8 200.0 247.8 200.0 L40.0 200.0 Q36.0 200.0 36.0 196.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="47.0" y="185.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="124.2" y="166.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="134.2" y="185.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">índice</text><text x="198.0" y="185.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="212.8" y="169.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="226.8" y="185.3" class="mc-n">0</text></svg>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>Empieza el <strong>para</strong>: índice vale 0.</span></li>
+  <li><span class="o">2</span><span><strong>graficar x índice y 0</strong> enciende el LED x=0 de la fila de arriba; <strong>pausa</strong> 200 ms; <strong>ocultar</strong> lo apaga.</span></li>
+  <li><span class="o">3</span><span>Vuelta siguiente: índice vale 1. Se enciende y apaga el LED x=1. Y así hasta el 4.</span></li>
+  <li><span class="o">4</span><span>Cuando índice ha valido 4, el <strong>para</strong> termina. Como está dentro de <strong>para siempre</strong>, empieza otra vez desde 0: la luz recorre la fila sin parar.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="tres">
+  <p class="preg">Cambias el 4 del bucle por un 2. ¿Cuántos LEDs se encienden en cada pasada?</p>
+  <div class="ops">
+    <button data-op="dos" data-ex="No. El bucle empieza siempre en 0: 0, 1 y 2.">Dos: el 1 y el 2</button>
+    <button data-op="tres" data-ex="Correcto. «De 0 a 2» son tres valores. Es el mismo truco de siempre: se empieza a contar en cero.">Tres: el 0, el 1 y el 2</button>
+    <button data-op="ninguno" data-ex="Sí existe: x va de 0 a 4. El 2 es el del centro de la fila.">Ninguno: un LED con x=2 no existe</button>
   </div>
-  <div class="section-title">Navegación</div>
-  <div class="bg"><a href="r08.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 08</span></a><a href="r10.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 10</span></a></div>
+  <div class="fb" id="fb1"></div>
 </div>
+
+<h2><span class="h2n">4</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Monta el programa. Al sacar el <span class="bl">para</span>, la variable <strong>índice</strong> aparece sola en <span class="cat cat-variables">Variables</span>; arrástrala desde ahí a los huecos de la x.</span></li>
+  <li><span class="p">Paso 2</span><span>Cámbialo para que recorra la fila de <strong>abajo</strong> (y=4).</span></li>
+  <li><span class="p">Paso 3</span><span>Ahora la <strong>columna</strong> de la izquierda, de arriba abajo: índice va en la y y la x se queda fija en 0.</span></li>
+  <li><span class="p">Paso 4</span><span>Quita el <span class="bl">ocultar</span>: la fila se llena en vez de recorrerse. Añade un <span class="bl">borrar la pantalla</span> al final del <span class="bl">para siempre</span> para que vuelva a empezar limpia.</span></li>
+  <li><span class="p">Paso 5</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol><div class="caja-bloques" style="max-width:420px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 315 158" width="315" height="158" class="bloques" role="img" aria-label="Para índice de 0 a 4 ejecutar: graficar x 0 y índice, pausa 200 ms"><title>Para índice de 0 a 4 ejecutar: graficar x 0 y índice, pausa 200 ms</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L20.0 10.0 L26.0 13.5 L36.0 13.5 L42.0 10.0  L301.1 10.0 Q305.1 10.0 305.1 14.0 L305.1 44.0 Q305.1 48.0 301.1 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 120.0 Q23.0 124.0 27.0 124.0 L301.1 124.0 Q305.1 124.0 305.1 128.0 L305.1 140.0 Q305.1 144.0 301.1 144.0 L42.0 144.0 L36.0 147.5 L26.0 147.5 L20.0 144.0 L14.0 144.0  Q10.0 144.0 10.0 140.0 Z" fill="#00AA00" stroke="#008000" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">para</text><rect x="59.2" y="17.0" width="76.8" height="24" rx="4" fill="#008000"/><text x="67.2" y="33.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">índice</text><path d="M122.0 26.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="143.0" y="33.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">de 0 a</text><rect x="196.8" y="17.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="210.8" y="33.3" class="mc-n">4</text><text x="231.8" y="33.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">ejecutar</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L242.5 48.0 Q246.5 48.0 246.5 52.0 L246.5 82.0 Q246.5 86.0 242.5 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="71.3" class="mc-n">0</text><text x="154.0" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="52.0" width="66.8" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="178.8" y="71.6" class="mc-t" textLength="46.8" lengthAdjust="spacing">índice</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L165.4 86.0 Q169.4 86.0 169.4 90.0 L169.4 120.0 Q169.4 124.0 165.4 124.0 L27.0 124.0 Q23.0 124.0 23.0 120.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="93.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="109.3" class="mc-n">200</text></svg>
+  <p class="pie">La columna: índice en la y.</p>
+</div><div class="amplia">
+<h3>🚀 Si vas sobrado</h3>
+<p style="margin:0 0 6px">Estas ampliaciones salen de este reto. No son obligatorias: son para cuando lo tienes hecho y comprobado en la placa.</p><ul>
+  <li><a href="a05.html">Ampliación 5 · La fila al revés</a>: de derecha a izquierda, con el bucle <span class="bl">mientras</span>.</li>
+</ul>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>La luz recorre la fila de arriba, luego la de abajo, luego la columna.</li>
+  <li>Sabes decir qué valores toma <span class="bl">índice</span> y cuántas vueltas da el bucle.</li>
+  <li>Has escrito un solo <span class="bl">graficar</span>, no cinco.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Reto9_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Reto9_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="r08.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Reto 8</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="r10.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Reto 10 · La serpiente</span></a></div>
+
+</main>
 </div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

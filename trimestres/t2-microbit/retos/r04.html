@@ -3,76 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1B4F8A">
+<meta name="theme-color" content="#1E90FF">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>Reto 04 · Micro:bit</title>
-<meta name="description" content="Reto 04 Micro:bit.">
+<title>Reto 4 · Cada LED tiene su dirección · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Reto 4 de micro:bit: coordenadas x e y de la matriz, bloques graficar e ocultar de LED. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r04.html">
+<meta property="og:title" content="Reto 4 · Cada LED tiene su dirección · CyR 1º ESO">
+<meta property="og:description" content="Reto 4 de micro:bit: coordenadas x e y de la matriz, bloques graficar e ocultar de LED. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
 <link rel="stylesheet" href="../../../assets/css/unidad.css">
-<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">R4</span></span>
 </nav>
 
 <div id="main-content">
 <section class="unidad-titulo-hero">
-  <div class="num">Reto 04</div>
-  <h1>Enciende Leds Con Umbral De Luz</h1>
-  <div class="duracion">Micro:bit · Computación física</div>
+  <div class="num">Reto 4</div>
+  <h1>Cada LED tiene su dirección</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-t">troncal</span></div>
 </section>
-<div class="hub-main">
-  <div class="section-title">🧩 Descripción</div>
-  <p>Crea un programa que encienda todos los LEDs al máximo cuando el nivel de luz baje de 25. Cuando haya más luz, todos los LEDs deben estar apagados. Es como una luz automática que se enciende cuando oscurece.</p>
-  <div class="section-title">🎯 Conceptos</div>
-  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Sensor de luz</span><span class='badge'>Bucle &quot;para siempre&quot;</span><span class='badge'>Condicionales (Si... entonces...)</span><span class='badge'>Control de brillo de LEDs</span></p>
-  <div class="section-title">🧠 Pseudocódigo</div>
-  <div class="codebox">Al iniciar
-Borrar la pantalla
-Para siempre
-Si nivel de luz &lt; 25 entonces
-Ajustar brillo a 255
-Mostrar todos los LEDs
-Si no
-Borrar la pantalla</div>
-  <div class="section-title">💡 Ayuda</div>
-  <p>El sensor de luz de la Micro:bit está en la matriz de LEDs. Devuelve valores entre 0 (oscuridad total) y 255 (mucha luz). El brillo de los LEDs también va de 0 a 255. Puedes tapar el sensor con la mano para probarlo.</p>
-  <div class="section-title">🚀 Reto extra</div>
-  <p>¿Puedes hacer que muestre un icono específico (como una bombilla) en lugar de todos los LEDs encendidos?</p>
-  <div class="section-title">✅ Autoevaluación</div>
-  <ul><li>Los LEDs se encienden cuando hay poca luz</li><li>Los LEDs se apagan cuando hay mucha luz</li><li>El umbral de 25 funciona correctamente</li><li>El programa responde rápidamente a los cambios</li><li>Consejo: Puedes tapar el sensor de luz con la mano para probar el programa. ¡Es como un</li><li>sensor crepuscular!</li></ul>
-  <div class="section-title">🔗 Programar</div>
-  <div class="bg">
-    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
-    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> encender y apagar <strong>un LED concreto</strong>, el que tú digas, usando sus coordenadas. Con eso se dibuja cualquier cosa, LED a LED.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>La idea: x e y, empezando en cero</h2>
+<div class="placa"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 196" width="196" height="196" class="matriz" role="img" aria-label="La matriz con las coordenadas x de 0 a 4 arriba e y de 0 a 4 a la izquierda; el LED central, x 2 y 2, está señalado"><title>La matriz con las coordenadas x de 0 a 4 arriba e y de 0 a 4 a la izquierda; el LED central, x 2 y 2, está señalado</title><style>.mx-c{font:700 12px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#1B4F8A;text-anchor:middle}</style><rect x="26" y="26" width="170" height="170" rx="10" fill="#2E2E2E"/><rect x="40.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="100.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="130.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="40.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="100.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="130.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="70.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="100.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="96.0" y="96.0" width="30" height="30" rx="5" fill="none" stroke="#FFD166" stroke-width="3"/><rect x="130.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="100.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="100.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="130.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="130.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="40.0" y="160.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="70.0" y="160.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="100.0" y="160.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="130.0" y="160.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="160.0" y="160.0" width="22" height="22" rx="3" fill="#5A2626"/><text x="51.0" y="18" class="mx-c">x=0</text><text x="13" y="55.0" class="mx-c">y=0</text><text x="81.0" y="18" class="mx-c">x=1</text><text x="13" y="85.0" class="mx-c">y=1</text><text x="111.0" y="18" class="mx-c">x=2</text><text x="13" y="115.0" class="mx-c">y=2</text><text x="141.0" y="18" class="mx-c">x=3</text><text x="13" y="145.0" class="mx-c">y=3</text><text x="171.0" y="18" class="mx-c">x=4</text><text x="13" y="175.0" class="mx-c">y=4</text></svg><figcaption>El LED del centro es x=2, y=2.</figcaption></figure><div class="lado"><p>Cada LED tiene dos números: la <strong>x</strong> dice la columna, de 0 a 4 de izquierda a derecha; la <strong>y</strong> dice la fila, de 0 a 4 <strong>de arriba abajo</strong>. Se empieza a contar en <strong>cero</strong>, no en uno.</p><p>Ojo con la <strong>y</strong>: en Scratch, subir era sumar. Aquí la fila 0 es la de <em>arriba</em> y la 4 la de <em>abajo</em>. Es al revés, y es el error más típico de todo el trimestre.</p></div></div>
+
+<h2><span class="h2n">2</span>Lee este programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266 230" width="266" height="230" class="bloques" role="img" aria-label="Al presionarse el botón A, graficar x 2 y 2; al presionarse el botón B, ocultar x 2 y 2"><title>Al presionarse el botón A, graficar x 2 y 2; al presionarse el botón B, ocultar x 2 y 2</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L252.1 10.0 Q256.1 10.0 256.1 14.0 L256.1 44.0 Q256.1 48.0 252.1 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 82.0 Q23.0 86.0 27.0 86.0 L252.1 86.0 Q256.1 86.0 256.1 90.0 L256.1 102.0 Q256.1 106.0 252.1 106.0 L14.0 106.0 Q10.0 106.0 10.0 102.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="17.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="33.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">A</text><path d="M231.1 26.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L203.8 48.0 Q207.8 48.0 207.8 52.0 L207.8 82.0 Q207.8 86.0 203.8 86.0 L27.0 86.0 Q23.0 86.0 23.0 82.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="71.3" class="mc-n">2</text><text x="154.0" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="71.3" class="mc-n">2</text><path d="M10.0 124.0 Q10.0 120.0 14.0 120.0 L252.1 120.0 Q256.1 120.0 256.1 124.0 L256.1 154.0 Q256.1 158.0 252.1 158.0 L55.0 158.0 L49.0 161.5 L39.0 161.5 L33.0 158.0 L27.0 158.0 Q23.0 158.0 23.0 162.0 L23.0 192.0 Q23.0 196.0 27.0 196.0 L252.1 196.0 Q256.1 196.0 256.1 200.0 L256.1 212.0 Q256.1 216.0 252.1 216.0 L14.0 216.0 Q10.0 216.0 10.0 212.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="143.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="127.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="143.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">B</text><path d="M231.1 136.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 162.0 Q23.0 158.0 27.0 158.0 L33.0 158.0 L39.0 161.5 L49.0 161.5 L55.0 158.0  L196.0 158.0 Q200.0 158.0 200.0 162.0 L200.0 192.0 Q200.0 196.0 196.0 196.0 L27.0 196.0 Q23.0 196.0 23.0 192.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="181.6" class="mc-t" textLength="70.2" lengthAdjust="spacing">ocultar x</text><rect x="111.2" y="165.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="125.2" y="181.3" class="mc-n">2</text><text x="146.2" y="181.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="161.0" y="165.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="175.0" y="181.3" class="mc-n">2</text></svg>
+</div><ul class="clave-lista">
+  <li><b>graficar x 2 y 2.</b> enciende el LED de la columna 2, fila 2: el del centro. Está en <span class="cat cat-led">LED</span>. «Graficar» es la palabra que usa el editor para «encender».</li>
+  <li><b>ocultar x 2 y 2.</b> lo apaga. Sólo ese; los demás no se tocan.</li>
+  <li><b>invertir x 2 y 2.</b> existe también: si estaba encendido lo apaga y si estaba apagado lo enciende. Con él, un solo botón hace las dos cosas.</li>
+</ul>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="ard">
+  <p class="preg">¿Qué LED enciende <em>graficar x 4 y 0</em>?</p>
+  <div class="ops">
+    <button data-op="abi" data-ex="No. x=4 es la última columna, la de la derecha; y=0 es la primera fila, la de arriba.">El de la esquina de abajo a la izquierda</button>
+    <button data-op="ard" data-ex="Correcto. x=4 es la columna de más a la derecha, y=0 la fila de arriba.">El de la esquina de arriba a la derecha</button>
+    <button data-op="abd" data-ex="La columna sí es la derecha, pero y=0 es arriba, no abajo. La fila de abajo es y=4.">El de la esquina de abajo a la derecha</button>
   </div>
-  <div class="section-title">Navegación</div>
-  <div class="bg"><a href="r03.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 03</span></a><a href="r05.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 05</span></a></div>
+  <div class="fb" id="fb1"></div>
 </div>
+
+<h2><span class="h2n">4</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Monta el programa. <span class="bl">graficar</span> y <span class="bl">ocultar</span> están en <span class="cat cat-led">LED</span>.</span></li>
+  <li><span class="p">Paso 2</span><span>Prueba en el simulador con otras coordenadas hasta que aciertes a la primera qué LED se va a encender.</span></li>
+  <li><span class="p">Paso 3</span><span>Cambia el evento de A para que encienda una <strong>cruz</strong>: el LED central y los cuatro que lo rodean. Son cinco <span class="bl">graficar</span> seguidos.</span></li>
+  <li><span class="p">Paso 4</span><span>Haz que B la apague entera (o usa <span class="bl">borrar la pantalla</span>, que para eso está).</span></li>
+  <li><span class="p">Paso 5</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol><div class="caja-bloques" style="max-width:420px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266 272" width="266" height="272" class="bloques" role="img" aria-label="Al presionarse el botón A: graficar x 2 y 2, x 2 y 1, x 2 y 3, x 1 y 2, x 3 y 2"><title>Al presionarse el botón A: graficar x 2 y 2, x 2 y 1, x 2 y 3, x 1 y 2, x 3 y 2</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L252.1 10.0 Q256.1 10.0 256.1 14.0 L256.1 44.0 Q256.1 48.0 252.1 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 234.0 Q23.0 238.0 27.0 238.0 L252.1 238.0 Q256.1 238.0 256.1 242.0 L256.1 254.0 Q256.1 258.0 252.1 258.0 L14.0 258.0 Q10.0 258.0 10.0 254.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="179.3" lengthAdjust="spacing">al presionarse el botón</text><rect x="207.3" y="17.0" width="37.8" height="24" rx="4" fill="#9F009F"/><text x="215.3" y="33.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">A</text><path d="M231.1 26.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L203.8 48.0 Q207.8 48.0 207.8 52.0 L207.8 82.0 Q207.8 86.0 203.8 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="71.3" class="mc-n">2</text><text x="154.0" y="71.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="55.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="71.3" class="mc-n">2</text><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L203.8 86.0 Q207.8 86.0 207.8 90.0 L207.8 120.0 Q207.8 124.0 203.8 124.0 L55.0 124.0 L49.0 127.5 L39.0 127.5 L33.0 124.0 L27.0 124.0  Q23.0 124.0 23.0 120.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="109.3" class="mc-n">2</text><text x="154.0" y="109.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="93.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="109.3" class="mc-n">1</text><path d="M23.0 128.0 Q23.0 124.0 27.0 124.0 L33.0 124.0 L39.0 127.5 L49.0 127.5 L55.0 124.0  L203.8 124.0 Q207.8 124.0 207.8 128.0 L207.8 158.0 Q207.8 162.0 203.8 162.0 L55.0 162.0 L49.0 165.5 L39.0 165.5 L33.0 162.0 L27.0 162.0  Q23.0 162.0 23.0 158.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="147.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="131.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="147.3" class="mc-n">2</text><text x="154.0" y="147.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="131.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="147.3" class="mc-n">3</text><path d="M23.0 166.0 Q23.0 162.0 27.0 162.0 L33.0 162.0 L39.0 165.5 L49.0 165.5 L55.0 162.0  L203.8 162.0 Q207.8 162.0 207.8 166.0 L207.8 196.0 Q207.8 200.0 203.8 200.0 L55.0 200.0 L49.0 203.5 L39.0 203.5 L33.0 200.0 L27.0 200.0  Q23.0 200.0 23.0 196.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="185.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="169.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="185.3" class="mc-n">1</text><text x="154.0" y="185.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="169.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="185.3" class="mc-n">2</text><path d="M23.0 204.0 Q23.0 200.0 27.0 200.0 L33.0 200.0 L39.0 203.5 L49.0 203.5 L55.0 200.0  L203.8 200.0 Q207.8 200.0 207.8 204.0 L207.8 234.0 Q207.8 238.0 203.8 238.0 L27.0 238.0 Q23.0 238.0 23.0 234.0 Z" fill="#5C2D91" stroke="#45226D" stroke-width="1"/><text x="34.0" y="223.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">graficar x</text><rect x="119.0" y="207.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="133.0" y="223.3" class="mc-n">3</text><text x="154.0" y="223.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">y</text><rect x="168.8" y="207.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="182.8" y="223.3" class="mc-n">2</text></svg>
+  <p class="pie">La cruz: el centro y sus cuatro vecinos.</p>
+</div><div class="amplia">
+<h3>🚀 Si vas sobrado</h3>
+<p style="margin:0 0 6px">Estas ampliaciones salen de este reto. No son obligatorias: son para cuando lo tienes hecho y comprobado en la placa.</p><ul>
+  <li><a href="a01.html">Ampliación 1 · Dibujar el «1» LED a LED</a>: un número que aparece poco a poco y se borra al revés.</li>
+</ul>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>Dices sin dudar qué LED es x=0, y=4.</li>
+  <li>A dibuja la cruz y B la quita.</li>
+  <li>No has confundido la fila de arriba con la de abajo (o lo has arreglado).</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Reto4_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Reto4_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="r03.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Reto 3</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="r05.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Reto 5 · Luz automática</span></a></div>
+
+</main>
 </div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

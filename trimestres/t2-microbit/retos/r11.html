@@ -3,79 +3,247 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1B4F8A">
+<meta name="theme-color" content="#1E90FF">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>Reto 11 · Micro:bit</title>
-<meta name="description" content="Reto 11 Micro:bit.">
+<title>Reto 11 · El dado: agitar y azar · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Reto 11 de micro:bit: evento si agitado y bloque escoger al azar. Dado electrónico. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r11.html">
+<meta property="og:title" content="Reto 11 · El dado: agitar y azar · CyR 1º ESO">
+<meta property="og:description" content="Reto 11 de micro:bit: evento si agitado y bloque escoger al azar. Dado electrónico. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
 <link rel="stylesheet" href="../../../assets/css/unidad.css">
-<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">R11</span></span>
 </nav>
 
 <div id="main-content">
 <section class="unidad-titulo-hero">
   <div class="num">Reto 11</div>
-  <h1>Termómetro De Barras</h1>
-  <div class="duracion">Micro:bit · Computación física</div>
+  <h1>El dado: agitar y azar</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-t">troncal</span></div>
 </section>
-<div class="hub-main">
-  <div class="section-title">🧩 Descripción</div>
-  <p>Crea un termómetro visual que encienda filas de LEDs según la temperatura. Cuanto más calor haga, más filas se encenderán, empezando desde abajo. Es como los indicadores de nivel que ves en equipos de música.</p>
-  <div class="section-title">🎯 Conceptos</div>
-  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Sensor de temperatura</span><span class='badge'>Bucle &quot;para siempre&quot;</span><span class='badge'>Condicionales múltiples (Si... sino si...)</span><span class='badge'>Encender LEDs por filas</span></p>
-  <div class="section-title">🧠 Pseudocódigo</div>
-  <div class="codebox">Para siempre
-Borrar la pantalla
-Si temperatura &lt; 25 entonces
-No encender ninguna fila
-Si no, si temperatura &gt;= 25 y &lt; 26 entonces
-Encender 1ª fila (desde abajo)
-Si no, si temperatura &gt;= 26 y &lt; 27 entonces
-Encender 1ª y 2ª fila
-...(continúa para 27, 28)
-Si no, si temperatura &gt;= 29 entonces
-Encender todas las filas</div>
-  <div class="section-title">💡 Ayuda</div>
-  <p>Para encender una fila completa de LEDs, usa las coordenadas y=4 (fila inferior), y=3, y=2, y=1, y=0 (fila superior). Necesitarás encender los 5 LEDs de cada fila: x=0, x=1, x=2, x=3, x=4.</p>
-  <div class="section-title">🚀 Reto extra</div>
-  <p>¿Puedes cambiar el color de las filas? Por ejemplo, primeras filas en verde (frío), medias en amarillo (templado), y últimas en rojo (caliente). Nota: Necesitarás una Micro:bit V2 para esto.</p>
-  <div class="section-title">✅ Autoevaluación</div>
-  <ul><li>No se enciende ninguna fila por debajo de 25ºC</li><li>Se enciende 1 fila entre 25-26ºC</li><li>Se encienden más filas al aumentar la temperatura</li><li>Todas las filas se encienden a partir de 29ºC</li><li>Consejo: Los indicadores visuales son muy útiles. ¡Piensa en los medidores de volumen,</li><li>batería, o velocidad!</li></ul>
-  <div class="section-title">🔗 Programar</div>
-  <div class="bg">
-    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
-    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> un <strong>dado</strong>: agitas la placa y sale un número del 1 al 6. Dos bloques nuevos: el evento de <strong>agitar</strong> y el <strong>azar</strong>.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>La idea: la placa nota que la mueves</h2>
+<p>La micro:bit lleva un <strong>acelerómetro</strong>, el mismo sensor que hace que el móvil gire la pantalla. Con él sabe si la agitas, si la inclinas o si se cae. En <span class="cat cat-entrada">Entrada</span> está el evento <span class="bl">si agitado</span>: se lee raro, pero es el «al agitar». En el simulador se prueba con el botón <strong>SHAKE</strong> que aparece al pasar el ratón por la placa dibujada.</p><p>El otro bloque nuevo es <span class="bl">escoger al azar de 1 a 6</span>, en <span class="cat cat-matematica">Matemática</span>: cada vez que se ejecuta vale un número distinto entre los dos que le digas. Es el <span class="bl">número aleatorio</span> de Scratch.</p>
+
+<h2><span class="h2n">2</span>Lee este programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 437 268" width="437" height="268" class="bloques" role="img" aria-label="Al iniciar: mostrar ícono cuadrado. Si agitado: fijar dado a escoger al azar de 1 a 6, mostrar número dado"><title>Al iniciar: mostrar ícono cuadrado. Si agitado: fijar dado a escoger al azar de 1 a 6, mostrar número dado</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L249.7 10.0 Q253.7 10.0 253.7 14.0 L253.7 44.0 Q253.7 48.0 249.7 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 82.0 Q23.0 86.0 27.0 86.0 L249.7 86.0 Q253.7 86.0 253.7 90.0 L253.7 102.0 Q253.7 106.0 249.7 106.0 L14.0 106.0 Q10.0 106.0 10.0 102.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">al iniciar</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L241.7 48.0 Q245.7 48.0 245.7 52.0 L245.7 82.0 Q245.7 86.0 241.7 86.0 L27.0 86.0 Q23.0 86.0 23.0 82.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="101.4" lengthAdjust="spacing">mostrar ícono</text><rect x="142.4" y="55.0" width="92.4" height="24" rx="4" fill="#176CBF"/><text x="150.4" y="71.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">cuadrado</text><path d="M220.7 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M10.0 124.0 Q10.0 120.0 14.0 120.0 L423.1 120.0 Q427.1 120.0 427.1 124.0 L427.1 154.0 Q427.1 158.0 423.1 158.0 L55.0 158.0 L49.0 161.5 L39.0 161.5 L33.0 158.0 L27.0 158.0 Q23.0 158.0 23.0 162.0 L23.0 230.0 Q23.0 234.0 27.0 234.0 L423.1 234.0 Q427.1 234.0 427.1 238.0 L427.1 250.0 Q427.1 254.0 423.1 254.0 L14.0 254.0 Q10.0 254.0 10.0 250.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="143.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><rect x="43.6" y="127.0" width="84.6" height="24" rx="4" fill="#9F009F"/><text x="51.6" y="143.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">agitado</text><path d="M114.2 136.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 162.0 Q23.0 158.0 27.0 158.0 L33.0 158.0 L39.0 161.5 L49.0 161.5 L55.0 158.0  L415.1 158.0 Q419.1 158.0 419.1 162.0 L419.1 192.0 Q419.1 196.0 415.1 196.0 L55.0 196.0 L49.0 199.5 L39.0 199.5 L33.0 196.0 L27.0 196.0  Q23.0 196.0 23.0 192.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="181.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="165.0" width="61.2" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="181.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">dado</text><path d="M127.2 174.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="148.2" y="181.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="163.0" y="162.0" width="245.1" height="30" rx="15" fill="#9400D3" stroke="#6F009E" stroke-width="1"/><text x="173.0" y="181.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">escoger al azar de</text><rect x="320.3" y="165.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="334.3" y="181.3" class="mc-n">1</text><text x="355.3" y="181.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="370.1" y="165.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="384.1" y="181.3" class="mc-n">6</text><path d="M23.0 200.0 Q23.0 196.0 27.0 196.0 L33.0 196.0 L39.0 199.5 L49.0 199.5 L55.0 196.0  L208.3 196.0 Q212.3 196.0 212.3 200.0 L212.3 230.0 Q212.3 234.0 208.3 234.0 L27.0 234.0 Q23.0 234.0 23.0 230.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="219.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="150.2" y="200.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="160.2" y="219.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">dado</text></svg>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>Al arrancar, un cuadrado: es el dado «en reposo», para que se vea que la placa está lista.</span></li>
+  <li><span class="o">2</span><span>Agitas. El evento guarda en <strong>dado</strong> un número al azar del 1 al 6.</span></li>
+  <li><span class="o">3</span><span><strong>mostrar número dado</strong> lo enseña. Se queda hasta que vuelves a agitar.</span></li>
+  <li><span class="o">4</span><span>¿Por qué guardar el azar en una variable en vez de meterlo directamente en <span class="bl">mostrar número</span>? Porque en el siguiente reto vas a necesitar <em>preguntar</em> por ese número, y para eso hay que tenerlo guardado.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="no">
+  <p class="preg">Pones <em>escoger al azar de 1 a 6</em> directamente dentro de <em>mostrar número</em>, sin variable, y además otro igual dentro de un <em>si</em>. ¿Son el mismo número?</p>
+  <div class="ops">
+    <button data-op="si" data-ex="No. Cada bloque de azar elige su propio número cada vez que se ejecuta. Dos bloques, dos números.">Sí: el azar se elige una vez por agitada</button>
+    <button data-op="no" data-ex="Correcto. Por eso se guarda en una variable: se elige una vez y se usa las veces que haga falta.">No: cada bloque de azar saca un número distinto</button>
+    <button data-op="error" data-ex="Sí deja. El problema no es que no se pueda, es que no hacen lo que quieres.">MakeCode no deja poner dos bloques de azar</button>
   </div>
-  <div class="section-title">Navegación</div>
-  <div class="bg"><a href="r10.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 10</span></a><a href="r12.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 12</span></a></div>
+  <div class="fb" id="fb1"></div>
 </div>
+
+<h2><span class="h2n">4</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Crea la variable <strong>dado</strong> y monta el programa. Pruébalo con SHAKE en el simulador y agitando la placa.</span></li>
+  <li><span class="p">Paso 2</span><span>Dale emoción: antes del número, dos iconos rápidos (cuadrado pequeño, cuadrado) como si el dado rodara.</span></li>
+  <li><span class="p">Paso 3</span><span>Haz también que <strong>A</strong> tire el dado, para quien no quiera agitar.</span></li>
+  <li><span class="p">Paso 4</span><span>Un dado de <strong>20</strong> para rol: cambia el 6 y fíjate en cómo pasan los números de dos cifras.</span></li>
+  <li><span class="p">Paso 5</span><span>Pásalo a la placa y entrégalo.</span></li>
+</ol><div class="caja-bloques" style="max-width:460px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 437 310" width="437" height="310" class="bloques" role="img" aria-label="Si agitado: mostrar ícono cuadrado pequeño, pausa 150, mostrar ícono cuadrado, pausa 150, fijar dado a escoger al azar de 1 a 6, mostrar número dado"><title>Si agitado: mostrar ícono cuadrado pequeño, pausa 150, mostrar ícono cuadrado, pausa 150, fijar dado a escoger al azar de 1 a 6, mostrar número dado</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L423.1 10.0 Q427.1 10.0 427.1 14.0 L427.1 44.0 Q427.1 48.0 423.1 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 272.0 Q23.0 276.0 27.0 276.0 L423.1 276.0 Q427.1 276.0 427.1 280.0 L427.1 292.0 Q427.1 296.0 423.1 296.0 L14.0 296.0 Q10.0 296.0 10.0 292.0 Z" fill="#D400D4" stroke="#9F009F" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="15.6" lengthAdjust="spacing">si</text><rect x="43.6" y="17.0" width="84.6" height="24" rx="4" fill="#9F009F"/><text x="51.6" y="33.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">agitado</text><path d="M114.2 26.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L304.1 48.0 Q308.1 48.0 308.1 52.0 L308.1 82.0 Q308.1 86.0 304.1 86.0 L55.0 86.0 L49.0 89.5 L39.0 89.5 L33.0 86.0 L27.0 86.0  Q23.0 86.0 23.0 82.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="101.4" lengthAdjust="spacing">mostrar ícono</text><rect x="142.4" y="55.0" width="154.8" height="24" rx="4" fill="#176CBF"/><text x="150.4" y="71.6" class="mc-t" textLength="124.8" lengthAdjust="spacing">cuadrado pequeño</text><path d="M283.1 64.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 90.0 Q23.0 86.0 27.0 86.0 L33.0 86.0 L39.0 89.5 L49.0 89.5 L55.0 86.0  L165.4 86.0 Q169.4 86.0 169.4 90.0 L169.4 120.0 Q169.4 124.0 165.4 124.0 L55.0 124.0 L49.0 127.5 L39.0 127.5 L33.0 124.0 L27.0 124.0  Q23.0 124.0 23.0 120.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="109.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="93.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="109.3" class="mc-n">150</text><path d="M23.0 128.0 Q23.0 124.0 27.0 124.0 L33.0 124.0 L39.0 127.5 L49.0 127.5 L55.0 124.0  L241.7 124.0 Q245.7 124.0 245.7 128.0 L245.7 158.0 Q245.7 162.0 241.7 162.0 L55.0 162.0 L49.0 165.5 L39.0 165.5 L33.0 162.0 L27.0 162.0  Q23.0 162.0 23.0 158.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="147.6" class="mc-t" textLength="101.4" lengthAdjust="spacing">mostrar ícono</text><rect x="142.4" y="131.0" width="92.4" height="24" rx="4" fill="#176CBF"/><text x="150.4" y="147.6" class="mc-t" textLength="62.4" lengthAdjust="spacing">cuadrado</text><path d="M220.7 140.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 166.0 Q23.0 162.0 27.0 162.0 L33.0 162.0 L39.0 165.5 L49.0 165.5 L55.0 162.0  L165.4 162.0 Q169.4 162.0 169.4 166.0 L169.4 196.0 Q169.4 200.0 165.4 200.0 L55.0 200.0 L49.0 203.5 L39.0 203.5 L33.0 200.0 L27.0 200.0  Q23.0 200.0 23.0 196.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="185.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="169.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="185.3" class="mc-n">150</text><path d="M23.0 204.0 Q23.0 200.0 27.0 200.0 L33.0 200.0 L39.0 203.5 L49.0 203.5 L55.0 200.0  L415.1 200.0 Q419.1 200.0 419.1 204.0 L419.1 234.0 Q419.1 238.0 415.1 238.0 L55.0 238.0 L49.0 241.5 L39.0 241.5 L33.0 238.0 L27.0 238.0  Q23.0 238.0 23.0 234.0 Z" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="34.0" y="223.6" class="mc-t" textLength="39.0" lengthAdjust="spacing">fijar</text><rect x="80.0" y="207.0" width="61.2" height="24" rx="4" fill="#A50F2D"/><text x="88.0" y="223.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">dado</text><path d="M127.2 216.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><text x="148.2" y="223.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="163.0" y="204.0" width="245.1" height="30" rx="15" fill="#9400D3" stroke="#6F009E" stroke-width="1"/><text x="173.0" y="223.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">escoger al azar de</text><rect x="320.3" y="207.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="334.3" y="223.3" class="mc-n">1</text><text x="355.3" y="223.6" class="mc-t" textLength="7.8" lengthAdjust="spacing">a</text><rect x="370.1" y="207.0" width="28.0" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="384.1" y="223.3" class="mc-n">6</text><path d="M23.0 242.0 Q23.0 238.0 27.0 238.0 L33.0 238.0 L39.0 241.5 L49.0 241.5 L55.0 238.0  L208.3 238.0 Q212.3 238.0 212.3 242.0 L212.3 272.0 Q212.3 276.0 208.3 276.0 L27.0 276.0 Q23.0 276.0 23.0 272.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="261.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar número</text><rect x="150.2" y="242.0" width="51.2" height="30" rx="15" fill="#DC143C" stroke="#A50F2D" stroke-width="1"/><text x="160.2" y="261.6" class="mc-t" textLength="31.2" lengthAdjust="spacing">dado</text></svg>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>Al agitar sale un número del 1 al 6 y se queda en pantalla.</li>
+  <li>Hay una pequeña animación antes del número.</li>
+  <li>Sabes explicar por qué el azar se guarda en una variable.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Reto11_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Reto11_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="r10.html" class="bc"><span class="bi">⬅️</span><span class="bk">Anterior</span><span class="bn">Reto 10</span></a><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="r12.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Reto 12 · Piedra, papel o tijera</span></a></div>
+
+</main>
 </div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

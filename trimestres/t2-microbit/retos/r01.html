@@ -3,75 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1B4F8A">
+<meta name="theme-color" content="#1E90FF">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>Reto 01 · Micro:bit</title>
-<meta name="description" content="Reto 01 Micro:bit.">
+<title>Reto 1 · Hola, micro:bit · micro:bit · CyR 1º ESO</title>
+<meta name="description" content="Reto 1 de micro:bit: primer programa en MakeCode con al iniciar, para siempre, mostrar cadena y mostrar ícono. La matriz de 25 LEDs. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t2-microbit/retos/r01.html">
+<meta property="og:title" content="Reto 1 · Hola, micro:bit · CyR 1º ESO">
+<meta property="og:description" content="Reto 1 de micro:bit: primer programa en MakeCode con al iniciar, para siempre, mostrar cadena y mostrar ícono. La matriz de 25 LEDs. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/common.css">
 <link rel="stylesheet" href="../../../assets/css/hub.css">
 <link rel="stylesheet" href="../../../assets/css/unidad.css">
-<style>.codebox{white-space:pre-wrap;font-family:"JetBrains Mono",monospace;background:#111827;color:#e5e7eb;border-radius:14px;padding:1rem;line-height:1.45;overflow:auto}.badge{display:inline-block;margin:.25rem;padding:.35rem .7rem;border-radius:999px;background:rgba(27,79,138,.12);border:1px solid rgba(27,79,138,.35)}</style>
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+
+  .matriz{display:block;max-width:100%;height:auto;}
+  .placa{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:10px 0 16px;}
+  .placa figure{margin:0;}
+  .placa figcaption{font-size:.85rem;color:#555D6B;margin-top:6px;text-align:center;}
+  .placa .lado{flex:1 1 260px;}
+  .cat{display:inline-block;padding:1px 8px;border-radius:5px;color:#fff;font-weight:600;
+    font-size:.86rem;font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;white-space:nowrap;}
+  .cat-basico{background:#1E90FF}.cat-entrada{background:#D400D4}.cat-led{background:#5C2D91}
+  .cat-radio{background:#E3008C}.cat-bucles{background:#00AA00}.cat-logica{background:#00A4A6}
+  .cat-variables{background:#DC143C}.cat-matematica{background:#9400D3}.cat-juego{background:#007A4B}
+  .cat-musica{background:#E63022}
+  .bl{font-family:Consolas,Monaco,Menlo,'Liberation Mono',monospace;font-weight:600;
+    background:#EEF3F9;padding:0 5px;border-radius:4px;white-space:nowrap;}
+  .nivel{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:2px 10px;border-radius:12px;margin-left:8px;vertical-align:middle;}
+  .nivel-t{background:#1B4F8A;color:#fff;}
+  .nivel-a{background:#D4700A;color:#fff;}
+  .nivel-m{background:#666;color:#fff;}
+  .amplia{border:1px dashed #D4700A;background:#FFF9F2;border-radius:10px;padding:12px 16px;margin:18px 0;}
+  .amplia h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .amplia ul{margin:0;padding-left:20px;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<header class="curso-hd"><span class="curso-sb">T2 · Micro:bit</span></header>
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T2 · micro:bit</span>
+</header>
 <nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
-  <a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
-  <span class="nc-sep">·</span>
-  <a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
-  <span class="nc-sep">·</span>
-  <span class="nc-current"><span>🎯</span><span class="nc-lbl">Retos</span></span>
-  <span class="nc-sep">·</span>
-  <a href="../teoria.html"><span>📖</span><span class="nc-lbl">Teoría</span></a>
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T2</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🎯</span><span class="nc-lbl">Retos</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">R1</span></span>
 </nav>
 
 <div id="main-content">
 <section class="unidad-titulo-hero">
-  <div class="num">Reto 01</div>
-  <h1>Animación De Corazón</h1>
-  <div class="duracion">Micro:bit · Computación física</div>
+  <div class="num">Reto 1</div>
+  <h1>Hola, micro:bit</h1>
+  <div class="duracion">T2 · micro:bit · 1º ESO <span class="nivel nivel-t">troncal</span></div>
 </section>
-<div class="hub-main">
-  <div class="section-title">🧩 Descripción</div>
-  <p>Crea una animación de un corazón que late. El programa debe alternar continuamente entre un corazón grande y un corazón pequeño para simular el latido.</p>
-  <div class="section-title">🎯 Conceptos</div>
-  <p><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'></span><span class='badge'>Evento &quot;al iniciar&quot;</span><span class='badge'>Bucle &quot;para siempre&quot;</span><span class='badge'>Mostrar iconos predefinidos</span><span class='badge'>Pausas (control de tiempo)</span></p>
-  <div class="section-title">🧠 Pseudocódigo</div>
-  <div class="codebox">Al iniciar
-Borrar la pantalla
-Para siempre
-Mostrar icono corazón grande
-Pausa 500 ms
-Mostrar icono corazón pequeño
-Pausa 500 ms</div>
-  <div class="section-title">💡 Ayuda</div>
-  <p>Las pausas (en milisegundos) controlan la velocidad de la animación. 1000 ms = 1 segundo. Puedes experimentar con diferentes tiempos para hacer que el corazón lata más rápido o más lento.</p>
-  <div class="section-title">🚀 Reto extra</div>
-  <p>¿Puedes hacer que el corazón lata más rápido cada vez? Experimenta cambiando los tiempos de pausa para crear diferentes ritmos de latido.</p>
-  <div class="section-title">✅ Autoevaluación</div>
-  <ul><li>El corazón grande aparece en pantalla</li><li>El corazón pequeño aparece en pantalla</li><li>La animación se repite continuamente</li><li>El efecto de latido es visible y fluido</li><li>Consejo: Las animaciones hacen que tus programas sean más visuales y atractivos.</li><li>¡Experimenta con diferentes velocidades!</li></ul>
-  <div class="section-title">🔗 Programar</div>
-  <div class="bg">
-    <a href="https://makecode.microbit.org/" target="_blank" class="bc tipo-tool"><span class="bi">🧩</span><span class="bk">Abrir MakeCode</span><span class="bn">Editor oficial de Micro:bit</span></a>
-    <a href="https://educacionadistancia.juntadeandalucia.es/centros/granada/login/index.php" target="_blank" class="bc tipo-tool"><span class="bi">📤</span><span class="bk">Entrega Moodle</span><span class="bn">Subida o seguimiento del bloque</span></a>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> que la placa te salude con tu nombre y después haga parpadear un corazón sin parar. Es tu primer programa en MakeCode y ya tiene las dos piezas que llevan casi todos: <strong>al iniciar</strong> y <strong>para siempre</strong>.</p>
+
+<a class="abrir-scratch" href="https://makecode.microbit.org/?lang=es" target="_blank" rel="noopener">🔌 Abrir MakeCode en otra pestaña</a>
+<p class="consejo">Consejo: deja MakeCode a un lado de la pantalla y esta página al otro. El simulador de la izquierda del editor te enseña lo que hará la placa antes de copiarle el programa.</p>
+
+<h2><span class="h2n">1</span>La placa: 25 luces y dos botones</h2>
+<div class="placa"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170" width="170" height="170" class="matriz" role="img" aria-label="La matriz de la micro:bit con una cara sonriente encendida"><title>La matriz de la micro:bit con una cara sonriente encendida</title><style>.mx-c{font:700 12px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#1B4F8A;text-anchor:middle}</style><rect x="0" y="0" width="170" height="170" rx="10" fill="#2E2E2E"/><rect x="14.0" y="14.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="44.0" y="14.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="74.0" y="14.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="104.0" y="14.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="134.0" y="14.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="14.0" y="44.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="55.0" cy="55.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="44.0" y="44.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="74.0" y="44.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="115.0" cy="55.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="104.0" y="44.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="134.0" y="44.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="14.0" y="74.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="44.0" y="74.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="74.0" y="74.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="104.0" y="74.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="134.0" y="74.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="25.0" cy="115.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="14.0" y="104.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="44.0" y="104.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="74.0" y="104.0" width="22" height="22" rx="3" fill="#5A2626"/><rect x="104.0" y="104.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="145.0" cy="115.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="134.0" y="104.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="14.0" y="134.0" width="22" height="22" rx="3" fill="#5A2626"/><circle cx="55.0" cy="145.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="44.0" y="134.0" width="22" height="22" rx="3" fill="#FF3B3B"/><circle cx="85.0" cy="145.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="74.0" y="134.0" width="22" height="22" rx="3" fill="#FF3B3B"/><circle cx="115.0" cy="145.0" r="15.8" fill="#FF3B3B" opacity=".35"/><rect x="104.0" y="134.0" width="22" height="22" rx="3" fill="#FF3B3B"/><rect x="134.0" y="134.0" width="22" height="22" rx="3" fill="#5A2626"/></svg><figcaption>Cada cuadrado es un LED. Sólo se encienden en rojo.</figcaption></figure><div class="lado"><p>La micro:bit no tiene pantalla: tiene <strong>25 LEDs</strong> en una rejilla de 5 por 5. Con ellos se escriben letras, números y dibujos. Debajo tiene los botones <strong>A</strong> y <strong>B</strong>, y dentro lleva sensores de luz, temperatura, movimiento y brújula, un micrófono y un altavoz. Todo eso lo vas a usar este trimestre.</p><p>Se programa en <strong>MakeCode</strong>, en el navegador, con bloques que se encajan igual que en Scratch. Lo que cambia es que el programa no corre en el ordenador: se <strong>copia a la placa</strong> y la placa lo ejecuta sola, aunque la desconectes del ordenador.</p></div></div>
+
+<h2><span class="h2n">2</span>Lee este programa</h2>
+<div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 344" width="256" height="344" class="bloques" role="img" aria-label="Programa: al iniciar, mostrar cadena Hola; para siempre: mostrar ícono corazón, pausa 500 ms, borrar la pantalla, pausa 500 ms"><title>Programa: al iniciar, mostrar cadena Hola; para siempre: mostrar ícono corazón, pausa 500 ms, borrar la pantalla, pausa 500 ms</title><style>.mc-t{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#FFFFFF}.mc-n{font:600 13px Consolas,Monaco,Menlo,'Ubuntu Mono','Liberation Mono',monospace;fill:#2B2B2B;text-anchor:middle}</style><path d="M10.0 14.0 Q10.0 10.0 14.0 10.0 L212.3 10.0 Q216.3 10.0 216.3 14.0 L216.3 44.0 Q216.3 48.0 212.3 48.0 L55.0 48.0 L49.0 51.5 L39.0 51.5 L33.0 48.0 L27.0 48.0 Q23.0 48.0 23.0 52.0 L23.0 82.0 Q23.0 86.0 27.0 86.0 L212.3 86.0 Q216.3 86.0 216.3 90.0 L216.3 102.0 Q216.3 106.0 212.3 106.0 L14.0 106.0 Q10.0 106.0 10.0 102.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="33.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">al iniciar</text><path d="M23.0 52.0 Q23.0 48.0 27.0 48.0 L33.0 48.0 L39.0 51.5 L49.0 51.5 L55.0 48.0  L204.3 48.0 Q208.3 48.0 208.3 52.0 L208.3 82.0 Q208.3 86.0 204.3 86.0 L27.0 86.0 Q23.0 86.0 23.0 82.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="71.6" class="mc-t" textLength="109.2" lengthAdjust="spacing">mostrar cadena</text><rect x="150.2" y="55.0" width="47.2" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="173.8" y="71.3" class="mc-n">Hola</text><path d="M10.0 124.0 Q10.0 120.0 14.0 120.0 L241.9 120.0 Q245.9 120.0 245.9 124.0 L245.9 154.0 Q245.9 158.0 241.9 158.0 L55.0 158.0 L49.0 161.5 L39.0 161.5 L33.0 158.0 L27.0 158.0 Q23.0 158.0 23.0 162.0 L23.0 306.0 Q23.0 310.0 27.0 310.0 L241.9 310.0 Q245.9 310.0 245.9 314.0 L245.9 326.0 Q245.9 330.0 241.9 330.0 L14.0 330.0 Q10.0 330.0 10.0 326.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="21.0" y="143.6" class="mc-t" textLength="93.6" lengthAdjust="spacing">para siempre</text><path d="M23.0 162.0 Q23.0 158.0 27.0 158.0 L33.0 158.0 L39.0 161.5 L49.0 161.5 L55.0 158.0  L233.9 158.0 Q237.9 158.0 237.9 162.0 L237.9 192.0 Q237.9 196.0 233.9 196.0 L55.0 196.0 L49.0 199.5 L39.0 199.5 L33.0 196.0 L27.0 196.0  Q23.0 196.0 23.0 192.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="181.6" class="mc-t" textLength="101.4" lengthAdjust="spacing">mostrar ícono</text><rect x="142.4" y="165.0" width="84.6" height="24" rx="4" fill="#176CBF"/><text x="150.4" y="181.6" class="mc-t" textLength="54.6" lengthAdjust="spacing">corazón</text><path d="M212.9 174.5 l4.5 5.5 l4.5 -5.5 z" fill="#FFFFFF"/><path d="M23.0 200.0 Q23.0 196.0 27.0 196.0 L33.0 196.0 L39.0 199.5 L49.0 199.5 L55.0 196.0  L165.4 196.0 Q169.4 196.0 169.4 200.0 L169.4 230.0 Q169.4 234.0 165.4 234.0 L55.0 234.0 L49.0 237.5 L39.0 237.5 L33.0 234.0 L27.0 234.0  Q23.0 234.0 23.0 230.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="219.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="203.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="219.3" class="mc-n">500</text><path d="M23.0 238.0 Q23.0 234.0 27.0 234.0 L33.0 234.0 L39.0 237.5 L49.0 237.5 L55.0 234.0  L181.3 234.0 Q185.3 234.0 185.3 238.0 L185.3 268.0 Q185.3 272.0 181.3 272.0 L55.0 272.0 L49.0 275.5 L39.0 275.5 L33.0 272.0 L27.0 272.0  Q23.0 272.0 23.0 268.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="257.6" class="mc-t" textLength="140.3" lengthAdjust="spacing">borrar la pantalla</text><path d="M23.0 276.0 Q23.0 272.0 27.0 272.0 L33.0 272.0 L39.0 275.5 L49.0 275.5 L55.0 272.0  L165.4 272.0 Q169.4 272.0 169.4 276.0 L169.4 306.0 Q169.4 310.0 165.4 310.0 L27.0 310.0 Q23.0 310.0 23.0 306.0 Z" fill="#1E90FF" stroke="#176CBF" stroke-width="1"/><text x="34.0" y="295.6" class="mc-t" textLength="78.0" lengthAdjust="spacing">pausa (ms)</text><rect x="119.0" y="279.0" width="39.4" height="24" rx="12" fill="#FFFFFF" stroke="#BFBFBF" stroke-width="1"/><text x="138.7" y="295.3" class="mc-n">500</text></svg>
+  <p class="pie">Dos bloques de evento sueltos. En MakeCode no hace falta que estén pegados: cada uno arranca por su cuenta.</p>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span><strong>al iniciar</strong> se ejecuta <em>una sola vez</em>, en cuanto la placa arranca. Es el sitio de las cosas que sólo pasan al principio.</span></li>
+  <li><span class="o">2</span><span><strong>mostrar cadena «Hola»</strong> escribe el texto. Como no cabe en 5 LEDs de ancho, las letras <em>se desplazan</em> de derecha a izquierda, una detrás de otra.</span></li>
+  <li><span class="o">3</span><span><strong>para siempre</strong> es el <span class="bl">por siempre</span> de Scratch: lo de dentro se repite sin parar mientras la placa tenga corriente.</span></li>
+  <li><span class="o">4</span><span><strong>mostrar ícono corazón</strong> enciende los LEDs que forman el dibujo. Hay cuarenta dibujos ya hechos en el desplegable.</span></li>
+  <li><span class="o">5</span><span><strong>pausa (ms) 500</strong> espera medio segundo. Los tiempos en MakeCode van en <strong>milisegundos</strong>: 1000 ms es 1 segundo.</span></li>
+  <li><span class="o">6</span><span><strong>borrar la pantalla</strong> apaga todos los LEDs, otra pausa, y vuelta al 4: el corazón parpadea.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="una">
+  <p class="preg">Mueves los cuatro bloques de dentro de <em>para siempre</em> a <em>al iniciar</em>, debajo del «Hola». ¿Qué hace la placa?</p>
+  <div class="ops">
+    <button data-op="igual" data-ex="No. &lt;b&gt;al iniciar&lt;/b&gt; se ejecuta una vez y se acaba; nada de lo que hay dentro se repite.">Lo mismo: el corazón parpadea sin parar</button>
+    <button data-op="una" data-ex="Correcto. Sin &lt;b&gt;para siempre&lt;/b&gt; no hay repetición: la placa hace la lista de arriba abajo una sola vez y se queda quieta.">Escribe «Hola», enciende el corazón una vez, lo apaga, y ya no hace nada más</button>
+    <button data-op="nada" data-ex="No. Cualquier bloque funciona en cualquier evento. Lo que cambia es cuántas veces se ejecuta.">No enciende nada, porque «mostrar ícono» sólo funciona dentro de «para siempre»</button>
   </div>
-  <div class="section-title">Navegación</div>
-  <div class="bg"><a href="r00.html" class="bc"><span class="bi">⬅️</span><span class="bk">Reto anterior</span><span class="bn">Volver al reto 00</span></a><a href="r02.html" class="bc"><span class="bi">➡️</span><span class="bk">Reto siguiente</span><span class="bn">Ir al reto 02</span></a></div>
+  <div class="fb" id="fb1"></div>
 </div>
+
+<h2><span class="h2n">4</span>Tu reto</h2>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Abre MakeCode y pulsa <strong>Nuevo proyecto</strong>. Verás que <span class="bl">al iniciar</span> y <span class="bl">para siempre</span> ya están puestos.</span></li>
+  <li><span class="p">Paso 2</span><span>Monta el programa. Los bloques azules están en <span class="cat cat-basico">Básico</span>. Arrastra <span class="bl">mostrar cadena</span> dentro de <span class="bl">al iniciar</span> y escribe <strong>tu nombre</strong> en vez de «Hola».</span></li>
+  <li><span class="p">Paso 3</span><span>Mira el <strong>simulador</strong> de la izquierda: la placa dibujada hace lo mismo que hará la de verdad.</span></li>
+  <li><span class="p">Paso 4</span><span>Cambia el corazón por otro dibujo del desplegable y las pausas por <strong>200</strong>. ¿Parpadea más rápido o más lento?</span></li>
+  <li><span class="p">Paso 5</span><span>Pon el programa en la placa de verdad siguiendo la entrega de abajo. Fíjate en que sigue funcionando aunque desconectes el USB y la enchufes a la pila.</span></li>
+</ol>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>Al arrancar, la placa escribe tu nombre.</li>
+  <li>Después, un dibujo parpadea sin parar.</li>
+  <li>Sabes decir qué va en <span class="bl">al iniciar</span> y qué va en <span class="bl">para siempre</span>.</li>
+  <li>Lo has probado en el simulador y en la placa.</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> MakeCode guarda el proyecto en este navegador, pero el ordenador es de todos: lo que vale es el <strong>archivo</strong>.</p>
+<ol>
+  <li>Abajo, en la casilla del nombre del proyecto (junto al botón <strong>Descargar</strong>), escribe <strong>Reto1_TuNombre</strong>.</li>
+  <li>Pulsa <strong>Descargar</strong>. Aparece en tu carpeta <strong>Descargas</strong> un archivo <code>microbit-Reto1_TuNombre.hex</code>. Si el navegador te ofrece conectar la placa, puedes decir que no: el archivo ya está.</li>
+  <li>Para probarlo en la placa: conéctala por USB. Aparece una unidad llamada <strong>MICROBIT</strong>; arrastra el <code>.hex</code> dentro. La luz amarilla de detrás parpadea unos segundos y el programa arranca solo.</li>
+  <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="index.html" class="bc"><span class="bi">🎯</span><span class="bk">Todos los retos</span><span class="bn">Índice del trimestre</span></a><a href="r02.html" class="bc"><span class="bi">➡️</span><span class="bk">Siguiente</span><span class="bn">Reto 2 · El corazón que late</span></a></div>
+
+</main>
 </div>
 
 <p class="foot">
-  IES Jiménez de Quesada · Santa Fe (Granada)<br>
-  CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
-  <br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
-  <br><span class="version">v1.0.0</span>
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
 </p>
+
 <script src="../../../assets/js/common.js"></script>
 <script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
 <script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
