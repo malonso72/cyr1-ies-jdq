@@ -12,6 +12,7 @@ python3 gen_r01_r08.py        # retos troncales 1 a 8
 python3 gen_r09_r15.py        # retos troncales 9 a 15
 python3 gen_ampliaciones.py   # las 12 ampliaciones (a01…a12) y las 3 sin material (m01…m03)
 python3 gen_indices_t2.py     # hub del trimestre + índice de retos
+python3 gen_presentacion_t2.py # la presentación inicial, para proyectar (15 diapositivas)
 ```
 
 Después, los tres verificadores de `scripts/` y la prueba:
@@ -37,7 +38,8 @@ cd documentacion/generadores-t2 && NODE_PATH=/tmp/node_modules node test_retos.j
   Helpers propios: `caja`, `caja_varios` (varios eventos sueltos en una caja), `placa`
   (la matriz con texto al lado), `cat` (etiqueta de categoría con su color), `bl` (nombre
   de bloque en el texto), `amplia` (enlaces a las ampliaciones que salen del reto).
-- `diagramas_t2.py` — la rosa de la brújula del reto 14.
+- `diagramas_t2.py` — la rosa de la brújula del reto 14, la placa vista de frente y el esquema
+  de la pantalla de MakeCode (los dos, para la presentación).
 - `comun_t2.py` — rutas y `escribir()`.
 
 ## Reglas

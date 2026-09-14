@@ -126,8 +126,8 @@ clase sin que las presentaciones de la S20 salgan iguales.
    `CLASIFICACION_RETOS_T2.md`: 15 troncales `r01…r15` en orden nuevo, 12 ampliaciones
    `a01…a12`, 3 sin material `m01…m03`; hub e índice nuevos; se generan desde
    `documentacion/generadores-t2/` (su README dice cómo) con los nombres de bloque del
-   `COTEJO_MakeCode.md`. Lo decidido por el camino, en `DECISIONES_T2.md`. **Queda la
-   presentación de T2**, que sigue siendo la antigua. Aula: 7–8 micro:bit V2 por parejas,
+   `COTEJO_MakeCode.md`. Lo decidido por el camino, en `DECISIONES_T2.md`. La presentación
+   también está rehecha (15 diapositivas, `gen_presentacion_t2.py`). Aula: 7–8 micro:bit V2 por parejas,
    pinzas, nada más; sin proyecto final; entrega del `.hex`.
 6. Las **cuatro páginas de juegos que ya son sesiones** (carreras, laberinto,
    piedra-papel-tijera, pong) siguen siendo las plantillas viejas de 3,7 KB. Se conservan por su

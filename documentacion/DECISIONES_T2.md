@@ -34,7 +34,9 @@ con bloques dibujados, siguiendo `CLASIFICACION_RETOS_T2.md` (que Manuel cerró)
    no como problema.
 10. **Fin del juego:** para volver a jugar, el botón de reinicio de la placa; no se afirma
     nada sobre A+B tras el GAME OVER porque no se ha comprobado.
-11. **La presentación del trimestre sigue siendo la antigua** (6 diapositivas). Se rehace en
-    la siguiente tanda, con el motor de bloques, como la de T1.
+11. **La presentación es una visita guiada**, como la de T1: quince diapositivas con la placa
+    dibujada, el esquema de la pantalla de MakeCode, los nueve cajones, la forma de los
+    bloques, un programa de varios eventos, la matriz con coordenadas y el camino
+    simulador → Descargar → unidad MICROBIT. Sin capturas: todo sale del motor de bloques.
 12. **Hub en tres tarjetas**, como T1, sin las promesas de «proyecto en parejas» ni «cuaderno
     del alumno», que no existían.
