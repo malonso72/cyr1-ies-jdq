@@ -87,6 +87,9 @@ clase sin que las presentaciones de la S20 salgan iguales.
 - Las páginas: `trimestres/t1-scratch/sesiones/s01..s20.html`
 - Las tres bases del proyecto: `trimestres/t1-scratch/juegos/` (`arkanoid`, `space-invaders`,
   `esquivar`, más su índice). El resto de páginas de esa carpeta son las viejas, con su PDF.
+  Las mismas tres bases existen como **`.sb3` en `_soluciones/sb3/`** (privada): las escribe
+  `gen_sb3.py` a partir de los mismos programas dibujados, y `test_sb3.js` comprueba que cargan
+  en scratch-vm. Si se toca un programa de `gen_proyectos.py`, regenerar también los `.sb3`.
 - **Se generan, no se editan a mano:** `documentacion/generadores-t1/` (tiene su propio README
   con cómo regenerar, cómo probar y cómo se escribe un programa de bloques).
 - **Las guías en PDF de `materiales/guias-juegos/` están hechas con Scratch 2** y sus bloques son
@@ -102,7 +105,7 @@ clase sin que las presentaciones de la S20 salgan iguales.
     bloques. Consúltalo antes de escribir cualquier bloque de T2.
   - `PLAN_T1_SCRATCH.md` — el guion de las 20 sesiones y las reglas de estilo del material.
   - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta, con el porqué. Puntos 1-11 de la
-    reescritura; 12-20 de la ronda de arreglos posterior.
+    reescritura; 12-20 de la ronda de arreglos posterior; 31, el exportador a `.sb3`.
   - `REVISION_T1_SESIONES.md` — la revisión pedagógica de las 20 sesiones: qué fallaba, qué se
     arregló y qué queda.
 

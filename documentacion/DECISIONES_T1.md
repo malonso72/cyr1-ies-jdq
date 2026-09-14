@@ -357,3 +357,28 @@ de esas son sesiones.
 
 El diseño visual no se ha tocado: mismo fondo, misma rejilla, mismas etiquetas amarillas. Las 17
 están comprobadas a 1280 × 720, que es un proyector: ninguna se sale de pantalla.
+
+## 31. Las tres bases existen también como `.sb3`, en `_soluciones/`
+
+Hasta ahora las bases del proyecto final sólo existían dibujadas: el alumno tenía que montar
+Arkanoid, Space Invaders o Esquivar bloque a bloque desde la página. Ahora el taller también
+las **exporta a `.sb3`** (`sb3.py` + `gen_sb3.py`), a partir de las mismas tuplas que dibuja las
+páginas, así que no hay dos versiones que mantener. Lo que decidí:
+
+- **Van a `_soluciones/sb3/`, no a `juegos/`.** Un `.sb3` publicado junto a la página es la
+  solución a un clic, y el sentido de la S17–S20 es que cada pareja monte su base y la cambie.
+  Si quieres darlo —a una pareja que se atasca, o a toda la clase para que empiece por los
+  tres cambios—, lo subes a Moodle tú.
+- **Disfraces esquemáticos** (pelota, pala, ladrillo, nave, bala, marciano, jugador, piedra),
+  dibujados en SVG, porque el taller no tiene la biblioteca de Scratch. Están pensados para
+  que se sustituyan: en la S17 ya se pide elegir los disfraces.
+- **Los sonidos «Pop» y «Miau» son tonos sintetizados** con esos nombres, no los de la
+  biblioteca de Scratch, para que los bloques `tocar sonido Pop` funcionen al abrir el
+  proyecto. Sigue en pie la pregunta de si «Pop» aparece con ese nombre en el editor.
+- Los ladrillos y marcianos van **ya duplicados y colocados** (10 y 8), con su primer «ir a
+  x: y:» apuntando a su sitio, que es lo que la página pide hacer a mano tras duplicar.
+- `test_sb3.js` comprueba que los tres `.sb3` y los 62 programas de las sesiones **cargan en
+  el motor de Scratch** con todos sus bloques reconocidos. No comprueba que se jueguen bien:
+  eso sólo lo hace el navegador. **Queda pendiente abrir los tres en scratch.mit.edu y
+  jugarlos** antes de darlos a nadie.
+

@@ -42,7 +42,7 @@ cd <esta carpeta>
 node test_sesiones.js 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 ```
 
-Son **678 comprobaciones**: estructura (un solo `h1`, `main`, skip-link, navcross, pie),
+Son **713 comprobaciones**: estructura (un solo `h1`, `main`, skip-link, navcross, pie),
 metadatos, accesibilidad de los SVG (`role`, `aria-label`, `<title>`, `viewBox`), `rel=noopener`
 en los enlaces externos, y que la pregunta de comprensión de cada página corrige bien, se
 bloquea tras responder y resalta la opción correcta.
@@ -55,9 +55,26 @@ python3 scripts/comprobar_enlaces.py
 python3 scripts/verificar_enlaces.py
 ```
 
-> **Ojo:** el `node_modules/` que hay comprometido en la raíz del repo está roto —la carpeta
-> `jsdom` no tiene ni `package.json`—, así que no sirve para nada. Por eso jsdom se instala en
-> `/tmp`. Sigue pendiente sacar ese `node_modules` del control de versiones.
+> El `node_modules/` de la raíz del repo ya no está en el control de versiones (está en
+> `.gitignore`) y el que queda en disco está roto, así que jsdom y scratch-vm se instalan en `/tmp`.
+
+## Los `.sb3`: las bases como proyectos de Scratch de verdad
+
+```
+cd /tmp && npm i scratch-vm       # sólo la primera vez de cada sesión
+cd <esta carpeta>
+python3 gen_sb3.py --todos        # _soluciones/sb3/{arkanoid,space-invaders,esquivar}.sb3
+node test_sb3.js                  # y /tmp/_todos_los_programas.sb3 (62 programas)
+```
+
+`sb3.py` traduce las tuplas de bloques a `project.json` **sin duplicar nada**: `gen_sb3.py`
+importa `gen_proyectos.py` y las sesiones, así que cualquier cambio en un programa dibujado
+cambia también el `.sb3`. Los `.sb3` van a `_soluciones/` porque son los juegos ya montados y
+es Manuel quien decide cuándo darlos (Moodle, por ejemplo); no se despliegan. `test_sb3.js`
+comprueba que **cargan** en el motor de Scratch y que cada bloque es un bloque que Scratch conoce
+—es el equivalente, para Scratch, del cotejo de T2 en MakeCode—, pero no que el juego sea
+jugable: sin renderizador no hay «¿tocando…?». Eso hay que probarlo abriendo el `.sb3` en
+scratch.mit.edu.
 
 ---
 
@@ -73,7 +90,10 @@ python3 scripts/verificar_enlaces.py
 | `gen_proyectos.py` | Las **tres bases del proyecto final** (`juegos/arkanoid.html`, `space-invaders.html`, `esquivar.html`) y el índice de `juegos/`. |
 | `gen_presentacion.py` | La **presentación inicial** (`presentacion.html`): 17 diapositivas de visita guiada al editor. Reutiliza el mapa del editor de la S01 y el motor de bloques, y dibuja el escenario con coordenadas. Ni una captura de otra versión de Scratch. |
 | `gen_indices.py` | El índice de sesiones y el **hub del trimestre**, que se escribe entero. Antes se parcheaba a base de reemplazos y cada cambio dejaba una entrada más que mantener viva; se abandonó. |
-| `test_sesiones.js` | Las 678 comprobaciones. |
+| `test_sesiones.js` | Las 713 comprobaciones. |
+| `sb3.py` | **El exportador a Scratch.** Convierte las mismas tuplas que dibuja `scratchsvg.py` en el `project.json` de un `.sb3` de verdad (opcodes de Scratch 3, sombras, variables, mensajes), con disfraces esquemáticos en SVG y los sonidos «Pop» y «Miau» sintetizados. |
+| `gen_sb3.py` | Escribe las **tres bases del proyecto como `.sb3`** en `_soluciones/sb3/` (privada) y, con `--todos`, un proyecto de prueba con los 62 programas de las sesiones. |
+| `test_sb3.js` | Abre esos `.sb3` en `scratch-vm` (el motor de Scratch sin pantalla) y comprueba que cargan, que todos los bloques existen y que la bandera verde arranca los hilos. |
 
 ---
 
