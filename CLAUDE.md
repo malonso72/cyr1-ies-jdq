@@ -119,9 +119,10 @@ clase sin que las presentaciones de la S20 salgan iguales.
    ya hay nombres guardados la sesión pregunta «¿sois vosotros?»; si no, el progreso de la otra
    pareja se archiva en `academia:archivo:<nombres>` y se recupera si vuelven a escribirlos.
 5. **Segunda auditoría (14-sept-2026), al final de `AUDITORIA_CyR_1ESO.md`:** diagnóstico
-   completo y el orden acordado con Manuel. T2 es el hueco y **no se toca** hasta que Manuel
-   decida sobre `CLASIFICACION_RETOS_T2.md` (la tabla de los 30 retos: troncal de 13, bases de
-   proyecto, errores de contenido, y las cinco preguntas que sólo él puede contestar).
+   completo y el orden acordado con Manuel. **T2 está decidido** en `CLASIFICACION_RETOS_T2.md`:
+   troncal de 15 en orden nuevo, 12 ampliaciones que se conservan, 3 sin material (servo).
+   Sin proyecto final, editor en español, entrega del `.hex`. Aula: 7–8 micro:bit V2 por
+   parejas, pinzas de cocodrilo, nada más. El curso pasado llegaron al r19.
 6. Las **cuatro páginas de juegos que ya son sesiones** (carreras, laberinto,
    piedra-papel-tijera, pong) siguen siendo las plantillas viejas de 3,7 KB. Se conservan por su
    PDF y el índice ya avisa de que son sesiones, pero si alguna vez estorban, ahí están.
