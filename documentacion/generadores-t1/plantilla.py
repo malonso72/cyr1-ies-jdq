@@ -184,7 +184,10 @@ JS = '''
       b.addEventListener('click', function(){
         var bien = (b.getAttribute('data-op') === correcta);
         fb.className = 'fb ver';
-        fb.textContent = (bien ? '\\u2714 ' : '\\u2718 ') + b.getAttribute('data-ex');
+        fb.textContent = (bien ? '\\u2714 ' : '\\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
         bots.forEach(function(x){
           x.disabled = true;
           if (x.getAttribute('data-op') === correcta) x.classList.add('ok');

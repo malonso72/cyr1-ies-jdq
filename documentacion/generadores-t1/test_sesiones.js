@@ -103,6 +103,11 @@ function ok(cond, msg) {
       const fb = caja.querySelector('.fb');
       ok(fb.className.includes('ver'), P + 'no aparece el feedback al pulsar');
       ok(fb.textContent.startsWith('✘'), P + 'una opción incorrecta no se marca como fallo');
+      // La explicación lleva <b>/<em>: tienen que renderizarse, no verse como texto.
+      ok(!/<\/?(b|em|strong|i)>/.test(fb.textContent),
+         P + 'el feedback muestra etiquetas HTML como texto: ' + fb.textContent.slice(0, 60));
+      if (/<(b|em)>/.test(mala.getAttribute('data-ex')))
+        ok(fb.querySelector('b, em') !== null, P + 'la explicación tenía <b>/<em> y no se han renderizado');
       ok(bots.every(b => b.disabled), P + 'los botones no se bloquean tras responder');
       ok(bots.find(b => b.getAttribute('data-op') === correcta).classList.contains('ok'),
          P + 'no se resalta la respuesta correcta');
