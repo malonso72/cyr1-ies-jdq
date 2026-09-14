@@ -371,11 +371,16 @@
     .campo { flex-direction: column; align-items: stretch; }
     .campo label { min-width: 0; }
   }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<div class="mesa">
+<div class="mesa" id="main-content" role="main">
   <div class="encabezado">
     <div class="icono">🔍</div>
     <h1>Mesa del Detective</h1>
@@ -399,11 +404,11 @@
 
     <div class="campos">
       <div class="campo">
-        <label>Detective 1</label>
+        <label for="nombre1">Detective 1</label>
         <input type="text" id="nombre1" placeholder="Nombre y apellidos">
       </div>
       <div class="campo">
-        <label>Detective 2</label>
+        <label for="nombre2">Detective 2</label>
         <input type="text" id="nombre2" placeholder="Nombre y apellidos">
       </div>
     </div>
@@ -438,7 +443,7 @@
     <div class="panel-tecnica">
       <div class="titulo-pt">🎯 Identificación de la técnica de phishing utilizada</div>
       <p style="font-size:12px;color:var(--papel-sombra);margin-bottom:8px;">Una vez ordenadas todas las evidencias, identificad qué técnica empleó el atacante:</p>
-      <select id="tecnica-sel">
+      <select id="tecnica-sel" aria-label="Técnica empleada por el atacante">
         <option value="">— Seleccionar técnica —</option>
         <option value="seneca-spoofing">Phishing por suplantación de Séneca (dominio falso "seneka-andalucia.es")</option>
         <option value="microsoft">Phishing genérico imitando Microsoft</option>
@@ -604,7 +609,7 @@ function pintarEvidencias() {
       <div class="tipo">${e.tipo}</div>
       <div class="contenido">${e.contenido}</div>
       <label class="asignar">Asignar a:</label>
-      <select onchange="asignar('${e.id}', this.value)">
+      <select aria-label="Asignar la evidencia ${e.id} a un momento del ataque" onchange="asignar('${e.id}', this.value)">
         <option value="">— Sin asignar —</option>
         <option value="1">Posición 1 (primer momento del ataque)</option>
         <option value="2">Posición 2</option>

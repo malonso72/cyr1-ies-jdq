@@ -222,11 +222,16 @@
     .campo input { width: 100%; }
     .hud-examen { flex-wrap: wrap; gap: 10px; }
   }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<div class="terminal">
+<div class="terminal" id="main-content" role="main">
   <div class="barra-term">
     <div class="puntos-term"><span class="r"></span><span class="y"></span><span class="g"></span></div>
     <div class="titulo-term">examen_analista_ciberseguridad — 1ESOB</div>
@@ -248,11 +253,11 @@
 
       <div class="acreditar">
         <div class="campo">
-          <label>analista_1</label>
+          <label for="nombre1">analista_1</label>
           <input type="text" id="nombre1" placeholder="Nombre y apellidos">
         </div>
         <div class="campo">
-          <label>analista_2</label>
+          <label for="nombre2">analista_2</label>
           <input type="text" id="nombre2" placeholder="Nombre y apellidos">
         </div>
       </div>
@@ -428,7 +433,7 @@ function mostrarPregunta(idx) {
   const q = PREGUNTAS[idx];
   const letras = ['A', 'B', 'C', 'D'];
   let opcionesHtml = q.opciones.map((op, i) =>
-    `<div class="opcion" data-i="${i}" onclick="responder(${i})">
+    `<div class="opcion" data-i="${i}" role="button" tabindex="0" onclick="responder(${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();responder(${i});}">
       <span class="letra">${letras[i]}</span>
       <span class="texto-op">${op}</span>
     </div>`

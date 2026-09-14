@@ -136,11 +136,16 @@
     font-family: inherit; font-size: 14px; margin-bottom: 12px;
   }
   .footer { text-align: center; margin-top: 24px; color: #7F8C8D; font-size: 12px; font-style: italic; }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<div class="container">
+<div class="container" id="main-content" role="main">
   <h1>🔒 Escape Room S9</h1>
   <div class="subtitulo">El ataque psicológico al instituto</div>
 
@@ -159,9 +164,9 @@
       </div>
 
       <div class="nombres">
-        <label>Investigador/a 1:</label>
+        <label for="nombre1">Investigador/a 1:</label>
         <input type="text" id="nombre1" placeholder="Nombre">
-        <label>Investigador/a 2:</label>
+        <label for="nombre2">Investigador/a 2:</label>
         <input type="text" id="nombre2" placeholder="Nombre">
       </div>
 
@@ -190,12 +195,12 @@
     <div class="nivel-titulo">🔓 Código final</div>
     <p style="margin-bottom: 18px;">Habéis conseguido las 6 letras. Introducidlas en orden para desactivar el ataque:</p>
     <div class="codigo-final-input">
-      <input type="text" maxlength="1" id="l1" oninput="moverFoco(this, 'l2')">
-      <input type="text" maxlength="1" id="l2" oninput="moverFoco(this, 'l3')">
-      <input type="text" maxlength="1" id="l3" oninput="moverFoco(this, 'l4')">
-      <input type="text" maxlength="1" id="l4" oninput="moverFoco(this, 'l5')">
-      <input type="text" maxlength="1" id="l5" oninput="moverFoco(this, 'l6')">
-      <input type="text" maxlength="1" id="l6">
+      <input type="text" maxlength="1" id="l1" aria-label="Letra 1 del código" oninput="moverFoco(this, 'l2')">
+      <input type="text" maxlength="1" id="l2" aria-label="Letra 2 del código" oninput="moverFoco(this, 'l3')">
+      <input type="text" maxlength="1" id="l3" aria-label="Letra 3 del código" oninput="moverFoco(this, 'l4')">
+      <input type="text" maxlength="1" id="l4" aria-label="Letra 4 del código" oninput="moverFoco(this, 'l5')">
+      <input type="text" maxlength="1" id="l5" aria-label="Letra 5 del código" oninput="moverFoco(this, 'l6')">
+      <input type="text" maxlength="1" id="l6" aria-label="Letra 6 del código">
     </div>
     <div style="text-align: center;">
       <button class="btn-avanzar" onclick="verificarCodigo()">Desactivar ataque 🛡️</button>

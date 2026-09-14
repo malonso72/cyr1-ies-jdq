@@ -378,11 +378,16 @@
     .campo label { min-width: 0; }
     .campo input { width: 100%; }
   }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<div class="carpeta-doc">
+<div class="carpeta-doc" id="main-content" role="main">
   <div class="cabecera">
     <div class="escudo">🛡️</div>
     <h1>Carpeta del Investigador</h1>
@@ -414,11 +419,11 @@
 
     <div class="acreditar">
       <div class="campo">
-        <label>Investigador/a 1</label>
+        <label for="nombre1">Investigador/a 1</label>
         <input type="text" id="nombre1" placeholder="Nombre y apellidos">
       </div>
       <div class="campo">
-        <label>Investigador/a 2</label>
+        <label for="nombre2">Investigador/a 2</label>
         <input type="text" id="nombre2" placeholder="Nombre y apellidos">
       </div>
     </div>
@@ -632,7 +637,7 @@ function pintarEvidencias() {
       <div class="asignar-panel">
         <div class="campo-sel">
           <label>① Posición en línea temporal</label>
-          <select onchange="asignar('${e.id}','pos',this.value)">
+          <select aria-label="Posición de la evidencia ${e.id} en la línea temporal" onchange="asignar('${e.id}','pos',this.value)">
             <option value="">— Paso —</option>
             <option value="1">Paso 1</option><option value="2">Paso 2</option>
             <option value="3">Paso 3</option><option value="4">Paso 4</option>
@@ -641,7 +646,7 @@ function pintarEvidencias() {
         </div>
         <div class="campo-sel">
           <label>② Técnica utilizada</label>
-          <select onchange="asignar('${e.id}','tecnica',this.value)">
+          <select aria-label="Técnica utilizada en la evidencia ${e.id}" onchange="asignar('${e.id}','tecnica',this.value)">
             <option value="">— Técnica —</option>
             <option value="phishing-email">Phishing email</option>
             <option value="smishing">Smishing (SMS)</option>
@@ -653,7 +658,7 @@ function pintarEvidencias() {
         </div>
         <div class="campo-sel">
           <label>③ ¿Pudo pararse aquí?</label>
-          <select onchange="asignar('${e.id}','prevencion',this.value)">
+          <select aria-label="¿Pudo pararse en la evidencia ${e.id}?" onchange="asignar('${e.id}','prevencion',this.value)">
             <option value="">— Sí / No —</option>
             <option value="si">SÍ — punto de parada</option>
             <option value="no">NO — ya era tarde / no procede</option>

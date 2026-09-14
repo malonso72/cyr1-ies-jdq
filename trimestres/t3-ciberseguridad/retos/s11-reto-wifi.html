@@ -233,10 +233,15 @@
   .cabecera-test .subtitulo {
     color: #B8C5D6; font-size: 13px; font-style: italic; margin-top: 4px;
   }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
-<div class="contenedor">
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<div class="contenedor" id="main-content" role="main">
   <header>
     <h1>📶 Wifi-trampa</h1>
     <p class="subtitulo">Sesión 11 · 1º ESO B · Computación y Robótica</p>
@@ -257,11 +262,11 @@
     <div class="caja">
       <h2>📝 Vuestros nombres</h2>
       <div class="campo">
-        <label>Investigador/a 1</label>
+        <label for="nombre1">Investigador/a 1</label>
         <input type="text" id="nombre1" placeholder="Nombre y apellido">
       </div>
       <div class="campo">
-        <label>Investigador/a 2</label>
+        <label for="nombre2">Investigador/a 2</label>
         <input type="text" id="nombre2" placeholder="Nombre y apellido">
       </div>
       <button class="btn-primario" onclick="empezar()">▶ Empezar misión</button>

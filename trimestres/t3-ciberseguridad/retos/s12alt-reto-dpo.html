@@ -372,11 +372,16 @@
     .campo input { width: 100%; }
     .sello-final { right: 10px; top: 10px; width: 80px; height: 80px; font-size: 9px; }
   }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<div class="lienzo">
+<div class="lienzo" id="main-content" role="main">
   <div class="encabezado">
     <div class="escudo">⚖️</div>
     <h1>Tribunal Digital</h1>
@@ -392,11 +397,11 @@
 
     <div class="campos-acreditacion">
       <div class="campo">
-        <label>Juez/a digital 1</label>
+        <label for="nombre1">Juez/a digital 1</label>
         <input type="text" id="nombre1" placeholder="Nombre y apellidos">
       </div>
       <div class="campo">
-        <label>Juez/a digital 2</label>
+        <label for="nombre2">Juez/a digital 2</label>
         <input type="text" id="nombre2" placeholder="Nombre y apellidos">
       </div>
     </div>
@@ -732,7 +737,7 @@ function mostrarExpediente(idx) {
         <div class="titulo-paso">Tu decisión como juez</div>
         <p style="font-size:13px;margin-bottom:10px;color:var(--tinta-suave);">Antes de pulsar el botón de decisión, elige la <b>regla del juez</b> que lo explica. Sin elegir una regla, los botones siguen bloqueados.</p>
 
-        <select id="selector-fundamento" onchange="habilitarBotones()">
+        <select id="selector-fundamento" aria-label="Regla que fundamenta la sentencia" onchange="habilitarBotones()">
           <option value="">— Elige la regla que se aplica —</option>
           <option value="1">${FUNDAMENTOS["1"]}</option>
           <option value="2">${FUNDAMENTOS["2"]}</option>

@@ -148,10 +148,15 @@
   }
 
   footer { text-align: center; margin-top: 20px; color: #6B7B8E; font-size: 12px; }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
-<div class="contenedor">
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<div class="contenedor" id="main-content" role="main">
   <header>
     <h1>🔍 Caso Lucía — Detective OSINT</h1>
     <p class="subtitulo">Sesión 13 · 1º ESO · Computación y Robótica</p>
@@ -190,34 +195,34 @@
 
       <form id="formulario">
         <div class="pregunta">
-          <label>1. ¿En qué CIUDAD vive Lucía?</label>
+          <label for="p1">1. ¿En qué CIUDAD vive Lucía?</label>
           <input type="text" id="p1" placeholder="Escribid la ciudad...">
-          <div class="pista-fuente">Pista de: <select id="f1"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+          <div class="pista-fuente">Pista de: <select id="f1" aria-label="Pista de la pregunta 1"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
         </div>
         <div class="pregunta">
-          <label>2. ¿A qué INSTITUTO va?</label>
+          <label for="p2">2. ¿A qué INSTITUTO va?</label>
           <input type="text" id="p2" placeholder="Nombre del instituto...">
-          <div class="pista-fuente">Pista de: <select id="f2"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+          <div class="pista-fuente">Pista de: <select id="f2" aria-label="Pista de la pregunta 2"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
         </div>
         <div class="pregunta">
-          <label>3. ¿En qué momento de la semana está SOLA en casa?</label>
+          <label for="p3">3. ¿En qué momento de la semana está SOLA en casa?</label>
           <input type="text" id="p3" placeholder="Día/s y horas...">
-          <div class="pista-fuente">Pista de: <select id="f3"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+          <div class="pista-fuente">Pista de: <select id="f3" aria-label="Pista de la pregunta 3"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
         </div>
         <div class="pregunta">
-          <label>4. ¿Cómo se llama su NOVIO?</label>
+          <label for="p4">4. ¿Cómo se llama su NOVIO?</label>
           <input type="text" id="p4" placeholder="Nombre...">
-          <div class="pista-fuente">Pista de: <select id="f4"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+          <div class="pista-fuente">Pista de: <select id="f4" aria-label="Pista de la pregunta 4"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
         </div>
         <div class="pregunta">
-          <label>5. ¿Cómo se llama su MASCOTA?</label>
+          <label for="p5">5. ¿Cómo se llama su MASCOTA?</label>
           <input type="text" id="p5" placeholder="Nombre...">
-          <div class="pista-fuente">Pista de: <select id="f5"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+          <div class="pista-fuente">Pista de: <select id="f5" aria-label="Pista de la pregunta 5"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
         </div>
         <div class="pregunta">
-          <label>6. ¿Dónde queda los MIÉRCOLES después de clase?</label>
+          <label for="p6">6. ¿Dónde queda los MIÉRCOLES después de clase?</label>
           <input type="text" id="p6" placeholder="Sitio concreto...">
-          <div class="pista-fuente">Pista de: <select id="f6"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
+          <div class="pista-fuente">Pista de: <select id="f6" aria-label="Pista de la pregunta 6"><option value="">—</option><option>P1</option><option>P2</option><option>P3</option><option>P4</option><option>P5</option><option>P6</option></select></div>
         </div>
 
         <button type="button" class="btn-veredicto" id="btnVeredicto">🔓 EMITIR VEREDICTO</button>

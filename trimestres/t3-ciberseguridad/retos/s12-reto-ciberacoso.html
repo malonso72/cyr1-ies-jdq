@@ -42,10 +42,15 @@
   .ok { color: #2ec47c; } .ko { color: #ef476f; }
   .diploma { background: linear-gradient(135deg,#1d2d50,#0f1830); border: 3px solid #ffd166; border-radius: 14px; padding: 22px; text-align: center; }
   .diploma .ins { font-size: 22px; color: #ffd166; font-weight: 700; margin: 8px 0; }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
-<div class="wrap">
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+<div class="wrap" id="main-content" role="main">
   <h1>🛡️ Escudo Digital</h1>
   <p class="subtitulo">Ciberacoso: qué hacer si te pasa (o si lo ves) · Sesión 12</p>
 
@@ -54,8 +59,8 @@
     <div class="tarjeta">
       <p style="font-size:15px;">Vas a acompañar a <b>Marcos</b>, un chico de tu clase, en una historia que (por desgracia) le pasa a mucha gente. En cada momento tendrás que <b>decidir la mejor manera de actuar</b>.</p>
       <p style="margin-top:10px;font-size:14px;color:#9fb3d8;">Marcos y el resto son <b>personajes ficticios</b>. La historia sirve para aprender a protegerte y a ayudar, nunca para señalar a nadie real.</p>
-      <div class="campo"><label>Investigador/a 1</label><input type="text" id="nombre1" placeholder="Tu nombre"></div>
-      <div class="campo"><label>Investigador/a 2 (opcional)</label><input type="text" id="nombre2" placeholder="Tu pareja"></div>
+      <div class="campo"><label for="nombre1">Investigador/a 1</label><input type="text" id="nombre1" placeholder="Tu nombre"></div>
+      <div class="campo"><label for="nombre2">Investigador/a 2 (opcional)</label><input type="text" id="nombre2" placeholder="Tu pareja"></div>
       <p style="font-size:13px;color:#ffd166;margin-top:6px;">⚠️ Tienes 2 oportunidades por decisión (la 2ª baja la nota). Dos fallos seguidos y vuelves al principio. Todo a la primera = insignia.</p>
       <button class="btn" onclick="empezar()">▶ Empezar la historia</button>
     </div>

@@ -139,9 +139,14 @@
     border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px;
   }
   .modal-caido button.secundario { background: #6FB5E8; }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
 <!-- BARRA DE NAVEGADOR FALSA -->
 <div class="browser-bar">
@@ -163,7 +168,7 @@
 </div>
 
 <!-- PACKS -->
-<div class="packs">
+<div class="packs" id="main-content" role="main">
   <div class="pack">
     <div class="cantidad">1.000 V-Bucks</div>
     <div class="precio-old">9,99 €</div>
@@ -253,16 +258,16 @@ function abrirCompra(pack, precio) {
     <p style="color:#666;margin-bottom:14px;">Rellena tus datos para recibir los V-Bucks en tu cuenta en menos de 2 minutos.</p>
     <div class="campo">
       <label>Usuario de Epic Games</label>
-      <input type="text" placeholder="Tu nombre de usuario...">
+      <input type="text" placeholder="Tu nombre de usuario..." aria-label="Usuario de Epic Games (tienda simulada)">
     </div>
     <div class="campo">
       <label>Contraseña de Epic Games</label>
-      <input type="password" placeholder="Tu contraseña...">
+      <input type="password" placeholder="Tu contraseña..." aria-label="Contraseña de Epic Games (tienda simulada)">
       <div class="nota-roja">Necesitamos tu contraseña para enviarte los V-Bucks directamente a tu cuenta.</div>
     </div>
     <div class="campo">
       <label>Plataforma</label>
-      <input type="text" placeholder="PC / PS5 / Xbox / Switch / Móvil">
+      <input type="text" placeholder="PC / PS5 / Xbox / Switch / Móvil" aria-label="Plataforma (tienda simulada)">
     </div>
     <button class="btn-enviar" onclick="mostrarHasCaido('compra')">✅ COMPLETAR COMPRA</button>
   `;
@@ -275,11 +280,11 @@ function abrirSoporte() {
     <p style="color:#666;margin-bottom:14px;">Verifica tu cuenta para que un agente pueda atenderte.</p>
     <div class="campo">
       <label>Email registrado en Epic Games</label>
-      <input type="email" placeholder="tu@email.com">
+      <input type="email" placeholder="tu@email.com" aria-label="Email registrado (tienda simulada)">
     </div>
     <div class="campo">
       <label>Contraseña de Epic Games</label>
-      <input type="password" placeholder="Tu contraseña...">
+      <input type="password" placeholder="Tu contraseña..." aria-label="Contraseña de Epic Games (tienda simulada)">
       <div class="nota-roja">Verificación obligatoria para confirmar tu identidad.</div>
     </div>
     <button class="btn-enviar" onclick="mostrarHasCaido('soporte')">📩 ENVIAR MENSAJE A SOPORTE</button>

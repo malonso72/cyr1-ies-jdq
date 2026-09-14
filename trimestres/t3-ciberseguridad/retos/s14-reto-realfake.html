@@ -328,11 +328,16 @@
     .caso .descripcion-caso { padding-right: 0; }
     .hud { flex-wrap: wrap; gap: 10px; }
   }
+
+  /* Enlace para saltar al contenido (sólo visible con el teclado) */
+  .skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:#111;color:#fff;padding:8px 14px;border-radius:6px;font:600 14px/1 system-ui,sans-serif;text-decoration:none}
+  .skip-link:focus{left:8px;outline:3px solid #FFD166}
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<div class="visor">
+<div class="visor" id="main-content" role="main">
   <div class="cabecera">
     <div class="icono">🎬</div>
     <h1>Torneo ¿Real o Fake?</h1>
@@ -366,11 +371,11 @@
 
     <div class="acreditar">
       <div class="campo">
-        <label>Analista 1</label>
+        <label for="nombre1">Analista 1</label>
         <input type="text" id="nombre1" placeholder="Nombre y apellidos">
       </div>
       <div class="campo">
-        <label>Analista 2</label>
+        <label for="nombre2">Analista 2</label>
         <input type="text" id="nombre2" placeholder="Nombre y apellidos">
       </div>
     </div>
@@ -599,8 +604,8 @@ function mostrarCaso(idx) {
           <button class="btn-voto btn-fake" id="voto-fake" onclick="elegirVoto('FAKE')">✗ FAKE</button>
         </div>
         <div class="selector-senal">
-          <label>Señal que justifica tu voto (para el bonus):</label>
-          <select id="senal-sel">
+          <label for="senal-sel">Señal que justifica tu voto (para el bonus):</label>
+          <select id="senal-sel" aria-label="Señal que justifica tu voto">
             <option value="">— Selecciona una señal —</option>
             <option value="1">Señal 1 — Ojos y parpadeo raro</option>
             <option value="2">Señal 2 — Bordes de la cara / detalles</option>
