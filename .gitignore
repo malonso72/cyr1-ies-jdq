@@ -16,3 +16,7 @@ Thumbs.db
 # Python del taller de generadores
 __pycache__/
 *.pyc
+
+# Dependencias de Node. Estaban comprometidas (24 MB, y la copia de jsdom rota).
+# El test del taller instala jsdom en /tmp; aquí no hace falta nada.
+node_modules/

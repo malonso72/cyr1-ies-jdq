@@ -15,6 +15,16 @@
 
 # Documentación interna del proyecto (no para el público)
 documentacion/
+CLAUDE.md
+README.md
+.gitignore
+
+# Herramientas de construcción y verificación: se usan en local, no se sirven
+scripts/
+node_modules/
+
+# Plantillas de página: son material de partida, no páginas del sitio
+assets/templates/
 
 # Capturas de trabajo que deja Claude (no para el público)
 Claude outputs/

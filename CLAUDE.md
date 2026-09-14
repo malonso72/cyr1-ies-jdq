@@ -112,12 +112,14 @@ clase sin que las presentaciones de la S20 salgan iguales.
 2. De las **cuatro decisiones de la auditoría** quedan dos: si T3 converge con el resto del
    sitio, y si se saca `node_modules` del repo. Las otras dos están contestadas — ver el final
    de `AUDITORIA_CyR_1ESO.md`. Ojo: los «🚧 En construcción» de **T2 micro:bit** siguen ahí.
-3. **`node_modules` está comprometido y además roto** (la carpeta `jsdom` no tiene
-   `package.json`). Pendiente `git rm -r --cached` + `.gitignore`.
+3. ~~`node_modules` comprometido~~ **Hecho (sept-2026):** fuera del repo y del despliegue,
+   en `.gitignore`. La carpeta sigue en el disco de Manuel por si quiere borrarla; no la usa nada.
 4. **`s02.js` se carga dos veces** en una página de T3 Ciberseguridad →
    `SyntaxError: Identifier 'SESION_ID' has already been declared`. Diagnosticado, sin arreglar.
    Era el único error real de JavaScript de las 112 páginas del sitio.
-5. T2 y T3 sin tocar. Manuel acotó el trabajo a T1.
+5. **Segunda auditoría (14-sept-2026), al final de `AUDITORIA_CyR_1ESO.md`:** diagnóstico
+   completo y el orden acordado con Manuel. T2 es el hueco y no se toca hasta que exista la
+   tabla `CLASIFICACION_RETOS_T2.md` y Manuel decida el troncal.
 6. Las **cuatro páginas de juegos que ya son sesiones** (carreras, laberinto,
    piedra-papel-tijera, pong) siguen siendo las plantillas viejas de 3,7 KB. Se conservan por su
    PDF y el índice ya avisa de que son sesiones, pero si alguna vez estorban, ahí están.

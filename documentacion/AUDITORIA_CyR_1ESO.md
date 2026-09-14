@@ -173,3 +173,93 @@ De propina, dos hallazgos más que han salido al trabajar T1 y que la auditoría
 - **Las once páginas de `juegos/` eran plantillas vacías**: la misma frase de «conceptos que
   trabaja» repetida en las once, incluido un «variables, puntuación o mensajes según el juego»
   sin rellenar. Tres se han rehecho; las otras ocho siguen como estaban, ya clasificadas.
+
+---
+
+## Segunda auditoría · 14 de septiembre de 2026
+
+Pasada completa sobre el repositorio y el sitio publicado, después de cerrar T1. Se recorrieron
+los 108 HTML con un análisis estático (estructura, etiquetas, sitemap, pie, fuentes), se leyeron
+los 30 retos de T2 uno por uno, se probó en el sitio publicado la generación de insignia y código
+de T3, y se comprobó qué archivos sirve realmente el despliegue.
+
+### Diagnóstico
+
+El sitio no necesita reconstrucción. T1 está resuelto. T3 es el bloque más trabajado y funciona
+(insignia PNG y código de finalización probados en producción). **T2 micro:bit es el hueco, y más
+profundo de lo que parecía**: no es sólo que falten dibujos.
+
+### T2 micro:bit
+
+- Los 30 retos y el PDF de `materiales/retos-microbit.pdf` (feb-2026, «1.º ESO A · 2025/26») son
+  el mismo texto; el PDF no tiene ni una imagen. **No hay un solo bloque de MakeCode dibujado en
+  todo el trimestre.**
+- **Secuencia didáctica al revés:** r03 y r05 consultan el botón con «Si botón A pulsado» dentro
+  de «Para siempre», y r06 presenta `al presionar botón A` como «tu primer control con botones».
+  El hub dice que se evalúa «distinguir cuándo usar eventos». En T1 ya usan las dos formas (la
+  pala del Arkanoid va con `¿tecla presionada?` en `por siempre`) y T2 no se apoya en ello.
+- **Errores de hecho:** r11 propone «cambiar el color de las filas… necesitarás una micro:bit V2»
+  (la matriz de la V2 es roja igual); r18 dice que la placa «vibrará» (no tiene vibrador); r28 se
+  presenta como «versión avanzada del Reto 15» (piedra-papel-tijera; el de esquivar es el r17).
+- **Fuera de nivel tal como están:** r18 (distancia euclídea con raíz cuadrada sobre el
+  acelerómetro), r27 (tres sprites a mano, siete variables), r28 (arrays). r17 y r27 encajan con
+  la categoría Juego de MakeCode; r18 se reformula como «frío/caliente» con una sola inclinación
+  y valor absoluto; r28 fuera o como reto de proyecto.
+- **El hub promete lo que no existe:** «el trimestre culmina con un proyecto en parejas que
+  combina sensores y radio» y «la evaluación combina los retos, el cuaderno del alumno y el
+  proyecto final». No hay página de proyecto ni definición de ese cuaderno. Teoría y actividades
+  siguen «en construcción» en la navegación de los 30 retos.
+- Hardware sin declarar (servo r20–r22, dos placas r24 y r29, micrófono V2 r25, altavoz r26,
+  LEDs externos en el extra de r22); sólo 2 de 30 dicen qué se entrega; «Entrega Moodle» va al
+  login genérico; restos de H4 (insignias vacías, «Consejo» partido, Title Case). Con unas 20
+  clases reales, 30 retos al mismo peso no caben.
+
+### T1 Scratch
+
+- **Bug del quiz (corregido en el commit f9a1950):** la explicación se insertaba con
+  `textContent` y 30 explicaciones de 14 páginas mostraban `<b>`/`<em>` como texto.
+- **Oportunidad:** los programas ya son datos en los generadores. Con esa fuente se pueden
+  generar `.sb3` reales: las tres bases funcionando para enseñar el primer día del proyecto o dar
+  a quien se queda atrás, y una comprobación mecánica de que cada programa dibujado carga.
+
+### T3 Ciberseguridad
+
+- Técnico: `s02.html` carga `s02.js` dos veces; los 10 retos sin `main`, salto ni pie, con 38
+  controles sin etiqueta y 3 `onclick` en `div` sin teclado; no están en el sitemap.
+- **Ordenadores compartidos:** identidad y progreso viven en `localStorage`; la pareja siguiente
+  abre la sesión con los nombres de la anterior ya escritos y sus insignias en `progreso.html`.
+  Hace falta una confirmación de pareja al empezar cada sesión.
+- El código de finalización es un hash de nombres|sesión|puntuación|fecha (verificable), pero no
+  hay herramienta que lo recalcule: hoy es disuasorio. Sólo merece página de verificación si
+  Manuel comprueba códigos al corregir.
+- La identidad de la Academia no se toca: es una virtud.
+
+### Transversal
+
+- Se servían públicamente `CLAUDE.md`, `README.md`, `.gitignore`, `node_modules/` (24 MB),
+  `scripts/` y `assets/templates/`. Corregido en el commit de higiene (este).
+- `.git` pesa 40 MB por el historial de `node_modules`; se queda así.
+- Los tests automáticos sólo cubren T1.
+- Documentación interna atrasada: `PROGRAMACION.md` dice que T2 está «sin sesiones», describe un
+  T3 que ya no existe (v3, cuadernillo v6, `moodle.html`) y lista «cuatro» juegos de ampliación
+  con cinco nombres; `PENDIENTES.md` es un historial con infraestructura ya hecha.
+
+### Lo que no se hace
+
+Buscador, fuentes locales, portada, unificar T3, gamificar T1, papel, páginas antiguas de juegos.
+
+### Orden acordado con Manuel (14-sept-2026)
+
+1. Bug del quiz de T1 — **hecho** (f9a1950).
+2. Higiene de despliegue — **hecho** (este commit).
+3. T3 técnico con alcance contenido + confirmación de pareja. Verificación de códigos, sólo si
+   se van a comprobar.
+4. Tabla de clasificación de los 30 retos de T2 (`CLASIFICACION_RETOS_T2.md`): bloques nuevos,
+   propuesta troncal/ampliación/proyecto/fuera, hardware, problema detectado, entrega. **Antes de
+   tocar nada de T2.**
+5. Manuel decide troncal (12–14 para ~20 clases) y si hay proyecto final corto en parejas.
+6. Cotejo de nombres de bloques en MakeCode en español + `makecodesvg.py` + matriz 5×5.
+7. Regenerar sólo el troncal con `documentacion/generadores-t2/` y el esqueleto de T1; errores
+   de hecho corregidos; eventos antes que consulta.
+8. Ampliaciones en formato ligero; presentación; fuera teoría/actividades; hub sin promesas vacías.
+9. Exportador `.sb3` de T1 y tests para T2 y T3. La documentación se corrige en los mismos commits.
