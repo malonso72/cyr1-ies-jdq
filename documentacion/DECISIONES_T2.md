@@ -40,3 +40,8 @@ con bloques dibujados, siguiendo `CLASIFICACION_RETOS_T2.md` (que Manuel cerró)
     simulador → Descargar → unidad MICROBIT. Sin capturas: todo sale del motor de bloques.
 12. **Hub en tres tarjetas**, como T1, sin las promesas de «proyecto en parejas» ni «cuaderno
     del alumno», que no existían.
+13. **Los 27 programas se han comprobado en el editor de MakeCode** (versión JavaScript en
+    `generadores-t2/ts/`): compilan todos; r15 y a10 se probaron además en el simulador con
+    trazas por serie. En a10 salió un fallo real, un enemigo que llegaba abajo sin tocar la
+    nave se quedaba fuera del alcance de la bala para siempre; corregido en el programa y
+    en la página (se elimina y nace otro, sin punto).

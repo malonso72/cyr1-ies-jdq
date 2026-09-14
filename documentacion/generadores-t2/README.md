@@ -58,3 +58,5 @@ cd documentacion/generadores-t2 && NODE_PATH=/tmp/node_modules node test_retos.j
 5. Cada umbral de sensor va precedido de «mide primero»: el alumno decide el número.
 6. Los retos que necesitan servo (m01–m03) no llevan bloques ni entrega: sólo el aviso y el
    programa en palabras.
+7. En `ts/` está la versión JavaScript de cada programa, comprobada en el editor real (ver
+   `ts/README.md`). Si se toca un programa en un generador, se toca también su `.ts`.

@@ -370,6 +370,7 @@ A10 = [
             SI(compara(SP_PROP('bala', 'y'), '=', 0), [SP_ELIMINAR('bala'), FIJAR('disparando', FALSO)])]),
         SP_CAMBIAR('enemigo', 'y', 1),
         SI(SP_TOCA('enemigo', 'nave'), [FIN_JUEGO]),
+        SI(compara(SP_PROP('enemigo', 'y'), '=', 4), [SP_ELIMINAR('enemigo'), FIJAR('enemigo', SPRITE(azar(0, 4), 0))]),
     ]),
 ]
 a10 = amp('a10', 10, 'Naves: dispara con A+B',
@@ -386,14 +387,16 @@ a10 = amp('a10', 10, 'Naves: dispara con A+B',
                      'mueven la nave. A+B: si no está disparando, crear la bala encima de la nave '
                      'y disparando a verdadero. Para siempre: pausa 300; si disparando, la bala '
                      'sube una fila, si toca al enemigo punto y ambos se eliminan, si llega a y=0 '
-                     'se elimina; el enemigo baja una fila; si toca la nave, fin del juego') +
+                     'se elimina; el enemigo baja una fila; si toca la nave, fin del juego; si llega a la '
+                     'fila 4 sin tocarla, se elimina y nace otro arriba') +
          secuencia(['Sólo puede haber <strong>una bala</strong> en el aire: por eso A+B pregunta '
                     'antes por <strong>disparando</strong>.',
                     'La bala nace en la fila 3, justo encima de la nave, en la misma columna: '
                     '<span class="bl">nave x</span>.',
                     'Cada vuelta la bala sube. Si toca al enemigo: punto, desaparecen los dos y '
                     'nace otro enemigo. Si llega arriba sin tocar nada, desaparece sin más.',
-                    'Después mueve el enemigo, y si te toca, se acabó.'])),
+                    'Después mueve el enemigo, y si te toca, se acabó. Si llega abajo sin tocarte, '
+                    'se escapa: desaparece y nace otro, pero ese no da punto.'])),
         ('Tu reto',
          pasos(['Crea las variables nave, enemigo, bala y disparando. Monta primero A, B y el '
                 'movimiento del enemigo; cuando funcione, añade el disparo.',
