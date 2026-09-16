@@ -639,7 +639,7 @@ function renderPwdSofia() {
     html += '<div class="mini-lab-teoria" style="margin-top:10px" data-num="' + i + '">' +
       '<div class="titulo-ml">Intento ' + i + ' / 5 — Inventa una contraseña que Sofía usaría</div>' +
       '<div class="input-pwd">' +
-        '<input type="text" id="pwd-sof-' + i + '" placeholder="Una contraseña que Sofía PROBABLEMENTE usaría...">' +
+        '<input type="text" id="pwd-sof-' + i + '" aria-label="Intento ' + i + ' de 5: contraseña que Sofía usaría" placeholder="Una contraseña que Sofía PROBABLEMENTE usaría...">' +
         '<button class="btn-comprobar-pwd" onclick="probarPwdSofia(' + i + ')">Probar</button>' +
       '</div>' +
       '<div class="resultado-pwd" id="pwd-sof-res-' + i + '"></div>' +

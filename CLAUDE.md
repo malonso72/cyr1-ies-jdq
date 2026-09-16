@@ -108,6 +108,9 @@ clase sin que las presentaciones de la S20 salgan iguales.
     reescritura; 12-20 de la ronda de arreglos posterior; 31, el exportador a `.sb3`.
   - `REVISION_T1_SESIONES.md` — la revisión pedagógica de las 20 sesiones: qué fallaba, qué se
     arregló y qué queda.
+  - `pruebas-t3/` — el test de T3 (`node test_academia.js`, 2120 comprobaciones sobre las 32
+    páginas y sobre `academia.js`). T3 se edita a mano: pásalo siempre antes de comprometer
+    cualquier cambio en `trimestres/t3-ciberseguridad/`.
 
 ### Lo que queda pendiente en CyR
 

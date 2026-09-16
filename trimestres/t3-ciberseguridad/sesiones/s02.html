@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#5B3D9B">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>S2 · Contraseñas · Academia Cyber-IES</title>
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t3-ciberseguridad/sesiones/s02.html">
 <meta name="description" content="Sesión 2 · Laboratorio de contraseñas · Academia Cyber-IES · CyR 1º ESO · IES Jiménez de Quesada.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -242,7 +243,7 @@
       <div class="titulo-ml">🛡️ La contraseña perfecta para Sofía</div>
       <p class="descr-ml">Inventa una contraseña que SOFÍA podría recordar (algo memorable para ella) pero que NO contenga ninguno de sus datos públicos (BTS, Jungkook, Coco, Diego, Granada, Lucía, 2012, marzo, 7, rosa, Roblox, Lorca).</p>
       <div class="input-pwd">
-        <input type="text" id="pwd-guardian-input" placeholder="Inventa una contraseña para Sofía...">
+        <input type="text" id="pwd-guardian-input" aria-label="Contraseña que propones para Sofía" placeholder="Inventa una contraseña para Sofía...">
         <button class="ver-pwd" onclick="alternarVisibilidadGuardian()" title="Mostrar/ocultar">👁</button>
         <button class="btn-comprobar-pwd" onclick="comprobarPwdGuardian()">Comprobar</button>
       </div>
@@ -263,11 +264,11 @@
       <div class="titulo-ml">📊 Tu mapa de cuentas</div>
       <p class="descr-ml">¿En cuántas apps importantes (Instagram, TikTok, Gmail, banco, Discord, Snapchat, móvil, ordenador del cole…) tienes cuenta?</p>
       <div class="input-pwd">
-        <input type="number" id="num-cuentas" min="0" max="50" placeholder="Total de cuentas">
+        <input type="number" id="num-cuentas" min="0" max="50" aria-label="Número de cuentas que tienes" placeholder="Total de cuentas">
       </div>
       <p class="descr-ml" style="margin-top:10px">¿En cuántas de esas usas la <strong>misma contraseña</strong> (o muy parecida)?</p>
       <div class="input-pwd">
-        <input type="number" id="num-reutilizadas" min="0" max="50" placeholder="Cuentas con la misma contraseña">
+        <input type="number" id="num-reutilizadas" min="0" max="50" aria-label="Número de esas cuentas con la misma contraseña" placeholder="Cuentas con la misma contraseña">
         <button class="btn-comprobar-pwd" onclick="auditarMisCuentas()">Auditar</button>
       </div>
       <div class="resultado-pwd" id="audit-resultado"></div>

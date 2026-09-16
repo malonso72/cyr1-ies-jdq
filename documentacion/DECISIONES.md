@@ -35,3 +35,35 @@ Formato: `YYYY-MM-DD · Decisión` con justificación.
   `s16` o `s17`).
 - Commits: español, verbo en imperativo, versión al final entre corchetes.
 - Sin frameworks. Sin CDNs salvo Google Fonts y MathJax (cuando aplique).
+
+## 2026-09-16 · T3 tiene por fin su propia red de seguridad
+
+T1 y T2 se generan y cada taller trae su test; T3 se edita a mano y no tenía ninguno. Ahora
+está `documentacion/pruebas-t3/test_academia.js` (2120 comprobaciones sobre las 32 páginas y
+sobre `academia.js`, con jsdom y un servidor de ficheros falso, porque el navegador simulado
+sólo da `localStorage` a un origen `http`). Su README dice qué comprueba.
+
+La primera pasada sacó **55 fallos reales**, todos arreglados:
+
+- **Faltaba el `canonical` en 30 páginas** de T3 —las 18 sesiones, los 10 retos, el hub y
+  `progreso.html`—, cuando T1 y T2 lo llevan en todas. Añadido.
+- **Los 10 retos no tenían `description`.** Escrita una para cada uno.
+- **Tres retos no tenían pie** y el del Tribunal Digital usaba una etiqueta inventada
+  (`<footer-legal>`), que no es una región del documento: ahora es `<footer class="legal">`,
+  con el mismo aspecto.
+- **Nueve campos sin etiqueta accesible** en S01 y S02 (los laboratorios de contraseñas y el
+  mapa de cuentas). Resueltos con `aria-label`, no con etiquetas visibles, porque el texto ya
+  está en el título del laboratorio y duplicarlo se leería dos veces.
+- **El hub del trimestre no tenía skip-link.**
+
+Y dos decisiones que tomé por mi cuenta:
+
+- **La tienda falsa de V-Bucks (`s16-reto-vbucks.html`) pasa a `noindex` y sale del
+  `sitemap.xml`** (100 URL). Es una imitación de una tienda real hecha para clase: sirve
+  abierta desde la sesión 16, pero no tiene por qué aparecer en un buscador, donde llegaría a
+  quien no sabe que es un ejercicio. Es la única página de T3 a la que **no** se le ha puesto
+  pie: el nombre del instituto al final destriparía la simulación. Las dos cosas están
+  anotadas como excepción dentro del propio test.
+- **S12-alt y S13 no se completan con un informe genérico** porque piden palabras clave del
+  tema. No es un fallo, es a propósito, así que el test sólo exige que la página diga qué
+  falta en vez de quedarse callada.
