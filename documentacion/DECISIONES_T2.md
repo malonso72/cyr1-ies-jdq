@@ -45,3 +45,16 @@ con bloques dibujados, siguiendo `CLASIFICACION_RETOS_T2.md` (que Manuel cerró)
     trazas por serie. En a10 salió un fallo real, un enemigo que llegaba abajo sin tocar la
     nave se quedaba fuera del alcance de la bala para siempre; corregido en el programa y
     en la página (se elimina y nace otro, sin punto).
+
+## 14. El cuadernillo de retos en PDF no se enlaza, pero tampoco se borra
+
+`trimestres/t2-microbit/materiales/retos-microbit.pdf` es el cuadernillo con el que nació T2:
+los 30 retos numerados R0–R29. Desde que T2 se rehízo, esa numeración no existe en ninguna
+parte —ahora son 15 troncales `r01…r15`, 12 ampliaciones `a01…a12` y 3 sin material—, así que
+enlazarlo pondría dos numeraciones distintas delante del mismo alumno, que es justo el lío que
+se quería evitar.
+
+Tampoco se borra: es el documento de origen y el que Manuel tiene impreso. Se queda donde
+está, **fuera del despliegue** (`.assetsignore`), para que no acabe indexado como PDF suelto
+contradiciendo a las páginas. Si algún día se quiere dar, es como el cuadernillo de Scratch:
+consulta con aviso, nunca material de trabajo.

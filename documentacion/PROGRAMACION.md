@@ -42,7 +42,7 @@ En la misma carpeta quedan otros ocho juegos, con sus guías en PDF en
 
 - **Cuatro ya son sesiones** —carreras es la S10, laberinto la S12 y la S13,
   piedra-papel-tijera la S14 y pong la S15 y la S16— y el índice lo dice.
-- **Cuatro son ampliación** para quien quiera seguir por su cuenta: tres en
+- **Cinco son ampliación** para quien quiera seguir por su cuenta: tres en
   raya, naves, bomb-jack, carrera de autos y cumpleaños feliz.
 
 > **Las once guías en PDF están hechas con Scratch 2**, igual que el cuadernillo,
@@ -55,17 +55,29 @@ En la misma carpeta quedan otros ocho juegos, con sus guías en PDF en
 |---|---|---|---|---|
 | T1 | `t1-scratch` | Scratch | 20 | **Completo**: hub, índice, presentación y las 20 sesiones. Se generan desde `generadores-t1/` |
 | T2 | `t2-microbit` | micro:bit | 15 (+12) | **Completo**: hub, índice y 30 páginas de reto con bloques dibujados. Se generan desde `generadores-t2/`, presentación incluida |
-| T3 | `t3-ciberseguridad` | Ciberseguridad | 18 | Hub «Academia Cyber-IES» + 18 sesiones + retos |
+| T3 | `t3-ciberseguridad` | Ciberseguridad | 18 | **Completo**: hub «Academia Cyber-IES», 18 sesiones de seis bloques y 10 retos. Escrito a mano; se comprueba con `pruebas-t3/` |
 
 ## Estructura interna de T3 Ciberseguridad
 
-Por la cantidad de material existente, T3 es el más estructurado:
+T3 no se parece a T1 ni a T2: no es una sesión que se lee, es una **«Academia Cyber-IES»** que
+el alumnado recorre por parejas, con su progreso guardado en el navegador.
 
-- `presentacion.html` — Presentación HTML pizarra v3 (estética dark independiente, no se migra)
-- `cuadernillo.html` — Cuadernillo v6 del alumno (DOCX o HTML según origen)
-- `sesiones/sNN.html` — 16-17 sesiones tipo "Opción D" (CC cuenta el número exacto antes de generar)
-- `moodle.html` — Templates de entrega + rúbrica de 4 criterios
-- `_soluciones/cuadernillo_solucionario_v6.html` — privado (NO se despliega)
+- `index.html` — el hub de la Academia.
+- `sesiones/sNN.html` (18, con `s12-alt` como alternativa a la S12) — cada sesión son **seis
+  bloques** que se recorren en orden: misión, teoría, entrenamiento, juego o reto, informe e
+  insignia. Cada una lleva su `sNN.js` con sus preguntas y su corrección.
+- `retos/*.html` (10) — los retos grandes, que se abren en pestaña nueva desde su sesión:
+  escape room, tribunal digital, caso OSINT, torneo de deepfakes, tienda falsa, examen final…
+- `assets/js/academia.js` y `assets/css/academia.css` — el motor común: identidad de la pareja,
+  progreso en `localStorage`, navegación entre bloques, diploma en PNG, y el archivo de parejas
+  para ordenadores compartidos.
+- `progreso.html` — el panel donde la pareja ve sus insignias.
+- `materiales/cuadernillo-ciberseguridad-1eso.pdf` — el cuadernillo imprimible.
+- `cuadernillo.html` y `sesiones/index.html` — páginas viejas que sólo redirigen al hub.
+- `_academia-v3/` — la fuente editable, privada; **Moodle es un enlace externo**, ya no hay
+  página local.
+- Se edita **a mano** (no hay generador) y por eso tiene su propio test:
+  `documentacion/pruebas-t3/` (`node test_academia.js`).
 
 ## Criterios de evaluación
 

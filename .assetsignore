@@ -32,6 +32,10 @@ Claude outputs/
 # Material privado de soluciones (no para el público)
 _soluciones/
 
+# Cuadernillo de retos de micro:bit con la numeración vieja (R0-R29): ya no lo enlaza
+# ninguna página y contradice la numeración nueva. Se conserva como documento de origen.
+trimestres/t2-microbit/materiales/retos-microbit.pdf
+
 # Fuente editable de la Academia (se publica ya en /trimestres/t3-ciberseguridad/)
 _academia-v3/
 

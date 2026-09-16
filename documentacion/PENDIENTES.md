@@ -1,143 +1,56 @@
-# Pendientes · CyR 1º ESO
+# Pendientes · CyR 1.º ESO
 
-Lista de lo que queda por completar. Se actualiza con cada sprint.
+Lo que queda por hacer, a **16 de septiembre de 2026**. Lo que ya está hecho no vive aquí: el
+estado del sitio está en `CLAUDE.md`, el porqué de cada decisión en `DECISIONES*.md` y el
+historial completo en el log de git.
 
-## ✅ v1.1.0 — Integración "scratch integrado" (mayo 2026)
+## De Manuel
 
-Esta integración (paquete `cyr1-ies-jdq-scratch-integrado.zip`) ha cerrado la
-mayor parte de la Fase E del brief y ha publicado material completo para
-los tres trimestres.
+- [ ] **Publicar los commits.** Se hacen en local; subirlos a GitHub (y con ello al worker de
+  Cloudflare) lo hace Manuel desde GitHub Desktop.
+- [ ] **Rehacer los enlaces de Moodle a T2.** Los retos han cambiado de número y de archivo
+  (`r01…r15` troncales, `a01…a12` ampliaciones, `m01…m03` sin material): los enlaces antiguos a
+  `r16…r29`, `r00`, `teoria.html` y `actividades.html` ya no existen.
+- [ ] **Revisar `DECISIONES_T2.md`** (13 puntos) y el punto 31 de `DECISIONES_T1.md`: es lo que
+  Claude decidió por su cuenta y lo que conviene mirar con ojo de profesor.
+- [ ] **Abrir en scratch.mit.edu y jugar** los tres `.sb3` de `_soluciones/sb3/` antes de darlos
+  a nadie. Que carguen está comprobado; que se jueguen bien, no (hace falta un navegador).
+- [ ] **Dos preguntas que sólo puede contestar él:** si el título de la S04 de T1 se puede
+  cambiar en Moodle («Condicionales I» avisa en la propia página de que ese día no hay ningún
+  `si… entonces`), y si el sonido `Pop` que usan S11, S12, S16 y S18 aparece con ese nombre en
+  el editor de Scratch en español — el cotejo sólo dejó cerrado `Miau`.
+- [ ] **Criterios de evaluación LOMLOE** por trimestre: rellenar el `<details class="criterios">`
+  de cada hub con los descriptores de Andalucía.
+- [ ] **«Saber / hacer / evaluar»** de los tres hubs: son una primera aproximación; ajustarlos a
+  la programación oficial del departamento.
 
-### T1 · Scratch — publicado
-- [x] **Presentación inicial** del bloque (`trimestres/t1-scratch/presentacion.html`).
-- [x] **20 sesiones** (s01–s20) en `trimestres/t1-scratch/sesiones/`.
-- [x] **12 juegos** (pong, naves, arkanoid, laberinto, space-invaders, etc.)
-  en `trimestres/t1-scratch/juegos/`.
-- [x] **Proyectos finales** (ideas, checklist, índice) en `trimestres/t1-scratch/proyectos/`.
-- [x] **Cuadernillo Scratch parte 1** (PDF, optimizado a 6 MB).
-- [x] **Guías de los 11 juegos** (PDFs) en `materiales/guias-juegos/`.
-- [x] Badge "Próximamente" eliminado de la tarjeta T1 del index raíz.
+## Del material
 
-### T2 · micro:bit — publicado
-- [x] **Presentación inicial** del bloque (`trimestres/t2-microbit/presentacion.html`).
-- [x] **30 retos** (r00–r29) en `trimestres/t2-microbit/retos/`.
-- [x] **Cuadernillo de retos** (PDF) en `materiales/retos-microbit.pdf`.
-- [x] Badge "Próximamente" eliminado de la tarjeta T2 del index raíz.
+- [ ] **Materiales auxiliares de T3** (S09, S10, S11, S12, S13, S14, S15, S16, S17, S18): las
+  sesiones avisan de que los hay, pero el contenido extra no está en la web. Diez de ellos ya
+  son páginas de reto; el resto sigue siendo aviso.
+- [ ] **Solucionario del cuadernillo de T3**, si Manuel lo elabora: va a
+  `_soluciones/` (privada, no se despliega).
+- [ ] **Retos transversales** entre trimestres: están previstos en la plantilla
+  (`assets/templates/PLANTILLA_reto.html`) y no se ha escrito ninguno.
 
-### T3 · Ciberseguridad — Fase E completada (versión inicial)
-- [x] **Presentación pizarra** integrada (`presentacion.html`).
-- [x] **Cuadernillo del alumno** (v7) integrado: HTML + PDF imprimible en
-  `materiales/cuadernillo-ciberseguridad-1eso-v7.pdf`.
-- [x] **19 sesiones** (s01–s19) integradas — el conteo final son 19, no 16-17
-  como decía la versión inicial del brief.
-- [x] **Moodle**: `trimestres/t3-ciberseguridad/moodle.html` con templates y rúbrica.
-- [x] Badges "Pendiente Fase E" eliminados de las 4 tarjetas del hub T3.
+## Anotado, sin prisa
 
-### Infraestructura del sitio tras la integración
-- [x] **`sitemap.xml`** regenerado con las 100 URLs publicadas.
-- [x] **Navegación transversal** ampliada en `teoria.html`/`actividades.html`
-  de T1 y T2 para incluir Sesiones, Juegos, Proyectos y Retos.
-- [x] **Auditoría de enlaces internos**: 0 enlaces rotos sobre 1.178.
-- [x] **Auditoría de imágenes huérfanas**: 0 huérfanas.
+- Las **cuatro páginas de juegos de T1 que ya son sesiones** (carreras, laberinto,
+  piedra-papel-tijera, pong) siguen siendo las plantillas viejas de 3,7 KB. Se conservan por su
+  PDF, y el índice ya avisa de que son sesiones.
+- Las **once guías de juegos en PDF** y el **cuadernillo de Scratch** están hechos con Scratch 2
+  y sus bloques son capturas: no se arreglan con una nota. Consulta con aviso, nunca material de
+  trabajo.
+- El **cuadernillo de retos de micro:bit** (`t2-microbit/materiales/retos-microbit.pdf`) usa la
+  numeración vieja R0–R29 y ya no lo enlaza ninguna página. Se conserva como documento de
+  origen, fuera del despliegue. Está en `DECISIONES_T2.md`.
+- `node_modules/` sigue en el disco de Manuel, fuera del repositorio y sin que lo use nada. Se
+  puede borrar cuando quiera.
 
-## ✅ v2.1.0 — T3 actualizado al cuadernillo v7 (mayo 2026)
+## Hecho, para que no se vuelva a preguntar
 
-Actualización del bloque de Ciberseguridad a la versión 7 del cuadernillo
-(`Cuadernillo_Ciberseguridad_1ESOB_v7.pdf`, **88 páginas**, 1,0 MB).
-Se conserva la estructura Bitácora de investigación pero con dinámicas
-nuevas en casi todas las sesiones.
-
-### Cambios v7 vs v6
-- [x] **PDF reemplazado**: 88 pp. (antes 62 pp.), 1,0 MB.
-- [x] **Misiones, herramientas, pasos y "Para pensar"** re-extraídos sesión a
-  sesión desde el PDF (parser `parse_ciber_v7.py`).
-- [x] **Títulos de sesión actualizados** en `sesiones/index.html` y
-  `cuadernillo.html`:
-  - S02 → "Contraseñas: torneo de la clase".
-  - S03 → "Caza al phisher: URL mortal + modo SOC".
-  - S04 → "Lo que internet sabe de ti + ranking OSINT".
-  - S07 → "Redes sociales: perfil de riesgo" (nuevo cálculo BAJO/MEDIO/ALTO).
-  - S09 → "Ingeniería social + Escape Room PIENSA" con diploma.
-  - S11 → "Wifis públicas: el café trampa" + aventura de Ana.
-  - S12 → "Identidad digital y Derecho al Olvido".
-  - S13 → Caso Lucía + **informe policial**.
-  - S14 → Deepfakes — **torneo Real/Fake** con puntuación y vidas.
-  - S15 → Ciber Cluedo CCN + **caso fragmentado** + pista falsa.
-  - S16 → Gaming: **4 estafas** + tienda falsa + streamer.
-  - S17 → Caso Marta Ruiz — **línea temporal del fraude**.
-  - S18 → Examen del analista + Informe final manuscrito (sin "Para pensar":
-    se sustituye por las 4 partes del informe).
-- [x] **Nuevos materiales auxiliares** añadidos (badge "📎 Material auxiliar"):
-  S07, S11, S12, S14, S15, S18.
-- [x] **Hub T3** actualizado: nuevas habilidades en "Hacer/Evaluar"
-  (analista SOC, niveles de riesgo, informe policial, diplomas), tarjeta de PDF
-  ahora dice "88 páginas A4".
-- [x] **`cuadernillo.html`**: sección de descarga reescrita con resumen de
-  novedades v7.
-- [x] **`sitemap.xml`** regenerado (97 URLs).
-- [x] **Auditoría de enlaces**: 0 rotos sobre 1.191.
-
-### Pendientes derivados de v7
-- [ ] **Escape Room PIENSA (S9)**: si se aloja en Moodle y da diploma
-  descargable, recordar enlazar desde S09 cuando esté publicado.
-- [ ] Posible expansión web de los materiales auxiliares ahora añadidos
-  (S11 café trampa, S12 Derecho al Olvido, S14 casos del torneo, S15 caso
-  fragmentado, S18 examen del analista).
-
-## ✅ v2.0.0 — Rework T3 "Bitácora de investigación" (mayo 2026)
-
-Reescritura completa del trimestre de Ciberseguridad a partir del
-nuevo cuadernillo (`Cuadernillo_Ciberseguridad_1ESOB_FINAL.pdf`, 62 pp.).
-
-### Cambios estructurales
-- [x] **Borrado** del T3 anterior: 19 sesiones (s01–s19), `presentacion.html`,
-  `cuadernillo.html` (v6/v7), `moodle.html` y PDF v7. Backup en
-  `outputs/t3-backup-pre-rework/`.
-- [x] **18 sesiones nuevas** (s01–s18) en formato "Bitácora de investigación":
-  cada una con Misión · Herramientas · Pasos · Para pensar.
-- [x] **Cuadernillo web nuevo** (`cuadernillo.html`): presentación, normas, índice y descarga.
-- [x] **PDF nuevo** en `materiales/cuadernillo-ciberseguridad-1eso.pdf` (62 pp., 2,7 MB).
-- [x] **Hub T3 reescrito**: trabajo en parejas, "saber/hacer/evaluar" actualizado a
-  vocabulario de investigación (OSINT, deepfakes, ingeniería social…).
-- [x] **`sesiones/index.html`** rehecho con las 18 sesiones, indicador de
-  materiales auxiliares y enlace al PDF.
-- [x] Acceso a Moodle ahora es **enlace externo** directo a la plataforma
-  de la Junta (ya no hay página `moodle.html` local).
-- [x] **`sitemap.xml`** regenerado con 97 URLs.
-- [x] **Auditoría de enlaces**: 0 rotos sobre 1.172.
-
-### Pendientes del nuevo T3
-- [ ] **Solucionario** del nuevo cuadernillo (si Manuel lo elabora aparte):
-  guardar en `_soluciones/cuadernillo_solucionario_bitacora.html` (privado).
-- [ ] Revisar los **materiales auxiliares** referenciados en las sesiones
-  S09, S10, S13, S16 y S17: por ahora solo aparece el aviso "incluye material
-  auxiliar" en cada sesión. Si se quiere mostrar el contenido extra en la
-  página web (capturas, casos), habría que crear secciones específicas o
-  páginas adicionales.
-
-## Pendientes de Manuel (no bloqueantes)
-
-- [ ] **Criterios de evaluación LOMLOE concretos** por trimestre. Rellenar el
-  `<details class="criterios">` de cada hub.
-- [ ] **Bullets de "saber/hacer/evaluar"**: los actuales son una primera
-  aproximación. Revisar y ajustar a la programación oficial del departamento.
-- [ ] **Duración estimada**: rangos orientativos. Validar con la dotación
-  real del curso (depende de cuántas sesiones/semana tenga la asignatura).
-- [ ] **Retos transversales**: definir los retos que cruzarán varios
-  trimestres y crearlos desde `assets/templates/PLANTILLA_reto.html`.
-- [ ] **Herramientas**: añadir editor Scratch online, simulador micro:bit,
-  glosario de seguridad, etc.
-
-## Infraestructura
-
-- [ ] **`git init`**: el sistema en el que se generó este repo no tenía
-  git instalado. Manuel debe ejecutar al recibirlo:
-  ```bash
-  cd cyr1-ies-jdq && git init -b main && git add . && \
-  git commit -m "Bootstrap del sitio CyR 1º ESO [v1.0.0]"
-  ```
-- [ ] **Configuración del worker Cloudflare**: crear el subdominio
-  `cyr1-ies-jdq.malonso72.workers.dev`. Probar primer deploy con
-  `npx wrangler deploy`.
-- [ ] **Google Search Console**: añadir verificación si se quiere indexar.
-- [ ] **Contador de visitas**: decidir si se añade GoatCounter como en TECI.
+El `git init`, el worker de Cloudflare, el contador de visitas, el `node_modules` comprometido,
+el `s02.js` cargado dos veces, la caché de un año del CSS y el JS, el aviso de pareja en
+ordenadores compartidos, la reescritura entera de T2, el exportador a `.sb3` de T1 y el test de
+T3 están todos cerrados. El detalle, en `DECISIONES.md` y en el log de git.
