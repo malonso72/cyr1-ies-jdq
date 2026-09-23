@@ -352,11 +352,11 @@ s20 = pagina(
     'que tu juego <strong>no se rompa</strong> y que se entienda sin que tengas que estar al lado '
     'explicándolo.',
     [
-        ('Depurar es buscar, no adivinar',
-         '<p>Cuando algo falla, la tentación es cambiar bloques a ver si suena la flauta. Casi '
-         'nunca sale bien, y de paso rompes lo que iba.</p>'
-         '<p>Depurar es otra cosa: <strong>ir quitando sospechosos</strong> hasta que quede uno. '
-         'Dos herramientas, las dos dentro de Scratch:</p>' +
+        ('Lo mismo de la S17, pero ahora es el tuyo',
+         '<p>En la <a href="s17.html">sesión 17</a> arreglaste cinco programas de otro. Hoy toca '
+         'el tuyo, que es más difícil por un motivo tonto: crees que ya sabes lo que hace.</p>'
+         '<p>El método no cambia — <strong>ir quitando sospechosos</strong> hasta que quede uno — '
+         'y las dos herramientas tampoco:</p>' +
          claves([
              ('Haz clic sobre un montón de bloques',
               'Se ejecuta ahí mismo, sin la bandera. Así pruebas una pieza sola.'),
