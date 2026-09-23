@@ -160,7 +160,11 @@ s02 = pagina(
          '<p><strong>Completa el cuadrado.</strong> Añade los dos lados que faltan para que el '
          'gato vuelva al punto de partida: hacia la izquierda y hacia arriba.</p>'
          '<p>Cuando te salga, prueba a cambiar los 120 pasos por otro número. El cuadrado tiene '
-         'que seguir cerrando.</p>' +
+         'que seguir cerrando.</p>'
+         '<p>Ojo con una cosa: el gato <strong>recorre</strong> el cuadrado, pero no lo pinta. '
+         'No deja ninguna línea detrás, así que en la pantalla no vas a ver ninguna figura. Lo '
+         'que tienes que mirar es que <strong>acabe justo donde empezó</strong>: ahí sabes que '
+         'ha cerrado.</p>' +
          pista('¿Te has atascado? Abre la pista',
                '<p>Estos son los bloques que faltan, y van <strong>debajo</strong> de los que ya '
                'hay, justo antes del sonido:</p>' +
@@ -172,7 +176,7 @@ s02 = pagina(
              'la dirección, gira el dibujo entero.</p>')),
 
         ('Lo has conseguido si…',
-         logros(['El gato dibuja un cuadrado y termina donde empezó.',
+         logros(['El gato recorre el cuadrado y termina exactamente donde empezó.',
                  'Al pulsar la bandera dos veces seguidas, hace exactamente lo mismo.',
                  'No aparece boca abajo en ningún momento.',
                  'Sabrías decir qué número corresponde a cada una de las cuatro direcciones.'])),
