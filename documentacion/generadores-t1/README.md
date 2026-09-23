@@ -39,10 +39,10 @@ generador.
 ```
 cd /tmp && npm i jsdom          # sólo la primera vez de cada sesión: /tmp se limpia
 cd <esta carpeta>
-node test_sesiones.js 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+node test_sesiones.js 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
 ```
 
-Son **713 comprobaciones**: estructura (un solo `h1`, `main`, skip-link, navcross, pie),
+Son **759 comprobaciones**: estructura (un solo `h1`, `main`, skip-link, navcross, pie),
 metadatos, accesibilidad de los SVG (`role`, `aria-label`, `<title>`, `viewBox`), `rel=noopener`
 en los enlaces externos, y que la pregunta de comprensión de cada página corrige bien, se
 bloquea tras responder y resalta la opción correcta.
@@ -87,10 +87,11 @@ scratch.mit.edu.
 | `plantilla.py` | La estructura común de toda página de sesión, el CSS y el JS de la pregunta. Aquí se cambia el diseño de las 20 a la vez. `pagina_juego()` reaprovecha ese mismo esqueleto para las páginas de `juegos/`: misma profundidad de rutas, mismo CSS, otro hero y otra navegación. |
 | `comun.py` | Rutas y la tabla sesión → página del cuadernillo. |
 | `gen_s*.py` | El **contenido** de las sesiones: textos, programas de bloques, preguntas y explicaciones. |
+| `gen_s17_depuracion.py` | La **S17**, que es distinta: cinco programas con un fallo plantado. Escribe la página y, con `sb3.py`, los dos `.sb3` —el del alumnado y el arreglado— desde los mismos programas. |
 | `gen_proyectos.py` | Las **tres bases del proyecto final** (`juegos/arkanoid.html`, `space-invaders.html`, `esquivar.html`) y el índice de `juegos/`. |
 | `gen_presentacion.py` | La **presentación inicial** (`presentacion.html`): 17 diapositivas de visita guiada al editor. Reutiliza el mapa del editor de la S01 y el motor de bloques, y dibuja el escenario con coordenadas. Ni una captura de otra versión de Scratch. |
 | `gen_indices.py` | El índice de sesiones y el **hub del trimestre**, que se escribe entero. Antes se parcheaba a base de reemplazos y cada cambio dejaba una entrada más que mantener viva; se abandonó. |
-| `test_sesiones.js` | Las 713 comprobaciones. |
+| `test_sesiones.js` | Las 759 comprobaciones. |
 | `sb3.py` | **El exportador a Scratch.** Convierte las mismas tuplas que dibuja `scratchsvg.py` en el `project.json` de un `.sb3` de verdad (opcodes de Scratch 3, sombras, variables, mensajes), con disfraces esquemáticos en SVG y los sonidos «Pop» y «Miau» sintetizados. |
 | `gen_sb3.py` | Escribe las **tres bases del proyecto como `.sb3`** en `_soluciones/sb3/` (privada) y, con `--todos`, un proyecto de prueba con los 62 programas de las sesiones. |
 | `test_sb3.js` | Abre esos `.sb3` en `scratch-vm` (el motor de Scratch sin pantalla) y comprueba que cargan, que todos los bloques existen y que la bandera verde arranca los hilos. |

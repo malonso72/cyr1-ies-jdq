@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Las tres bases del proyecto final como proyectos de Scratch de verdad (.sb3), y una
-comprobación de que todos los programas dibujados en las 20 sesiones cargan en Scratch.
+comprobación de que todos los programas dibujados en las 21 sesiones cargan en Scratch.
 
     python3 gen_sb3.py            # escribe _soluciones/sb3/{arkanoid,space-invaders,esquivar}.sb3
     python3 gen_sb3.py --todos    # además, /tmp/_todos_los_programas.sb3 para test_sb3.js
@@ -101,7 +101,7 @@ def esquivar():
 def todos_los_programas():
     """Un proyecto con un objeto por cada programa dibujado en las sesiones y las bases:
     sólo para comprobar que todos cargan en Scratch."""
-    for mod in ('gen_s01_s05', 'gen_s06_s11', 'gen_s12_s16', 'gen_s17_s20'):
+    for mod in ('gen_s01_s05', 'gen_s06_s11', 'gen_s12_s16', 'gen_s17_depuracion', 'gen_s18_s21'):
         importlib.import_module(mod)
     objetos = []
     for i, (titulo, bloques) in enumerate(_recogidos):

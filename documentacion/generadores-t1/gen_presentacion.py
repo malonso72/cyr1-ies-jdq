@@ -7,7 +7,7 @@ significa la forma de cada bloque. Al salir de aquí el alumnado tiene que saber
 dónde buscar las cosas.
 
 Se genera para poder reutilizar lo que ya está dibujado —el mapa del editor de la
-S01 y el motor de bloques de las 20 sesiones— en vez de meter capturas de otra
+S01 y el motor de bloques de las 21 sesiones— en vez de meter capturas de otra
 versión de Scratch, que es justo el problema del cuadernillo.
 """
 import sys, os
@@ -257,9 +257,10 @@ SLIDES = [
           '<strong>Todas las clases.</strong></p>'),
 
     slide('PROGRESIÓN',
-          '<div class="num">20</div>'
-          '<p>sesiones: <strong>dieciséis</strong> para aprender y las <strong>cuatro '
-          'últimas</strong> para el proyecto final.</p>'),
+          '<div class="num">21</div>'
+          '<p>sesiones: <strong>dieciséis</strong> para aprender, <strong>una</strong> para '
+          'aprender a cazar fallos y las <strong>cuatro últimas</strong> para el proyecto '
+          'final.</p>'),
 
     slide('EL PROYECTO FINAL',
           '<h2>Eliges uno y lo haces tuyo</h2>'

@@ -2,7 +2,7 @@
 """Plantilla de las páginas de sesión de T1 · Scratch (CyR 1º ESO).
 
 Una sesión se describe con un diccionario y se renderiza siempre con la misma
-estructura, para que la sesión 20 tenga el mismo criterio que la sesión 1.
+estructura, para que la sesión 21 tenga el mismo criterio que la sesión 1.
 """
 import html as _html
 from scratchsvg import script_svg
@@ -322,7 +322,7 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
     if num > 1:
         nav.append(_boton('s%02d.html' % (num - 1), '⬅️', 'Sesión anterior', 'S%02d' % (num - 1)))
     nav.append(_boton('index.html', '🗓️', 'Todas las sesiones', 'Índice del trimestre'))
-    if num < 20:
+    if num < 21:
         nav.append(_boton('s%02d.html' % (num + 1), '➡️', 'Sesión siguiente', 'S%02d' % (num + 1)))
     if cuadernillo:
         nav.append(_boton('%s#page=%d' % (CUAD, cuadernillo), '📒', 'Cuadernillo',
@@ -385,7 +385,7 @@ _ENTREGA_JUEGO = (
     '<code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>\n'
     '  <li>Cámbiale el nombre a <strong>ProyectoFinal_TuNombre.sb3</strong>.</li>\n'
     '  <li>Súbelo a la tarea de <strong>Moodle</strong> que toque: la primera versión jugable '
-    'en la sesión 18, la mejorada en la 19 y la definitiva en la 20.</li>\n</ol>')
+    'en la sesión 19, la mejorada en la 20 y la definitiva en la 21.</li>\n</ol>')
 
 
 def pagina_juego(slug, titulo, opcion, desc, consigue, secciones, guia=None, guia_nota=None):
@@ -400,9 +400,9 @@ def pagina_juego(slug, titulo, opcion, desc, consigue, secciones, guia=None, gui
             cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (n, tit, cont))
 
     nav = [_boton('index.html', '\U0001F3AE', 'Las tres opciones', 'Volver a elegir'),
-           _boton('../sesiones/s17.html', '\U0001F4DD', 'S17 · Tu versión',
+           _boton('../sesiones/s18.html', '\U0001F4DD', 'S18 · Tu versión',
                   'La ficha de diseño'),
-           _boton('../sesiones/s18.html', '\U0001F9F0', 'S18 · Kit de piezas',
+           _boton('../sesiones/s19.html', '\U0001F9F0', 'S19 · Kit de piezas',
                   'Las ocho piezas para montarlo')]
     if guia:
         nav.append(_boton('../materiales/guias-juegos/' + guia, '\U0001F4D5',

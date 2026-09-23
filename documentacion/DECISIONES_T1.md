@@ -382,3 +382,37 @@ páginas, así que no hay dos versiones que mantener. Lo que decidí:
   eso sólo lo hace el navegador. **Queda pendiente abrir los tres en scratch.mit.edu y
   jugarlos** antes de darlos a nadie.
 
+## 32. Entra una sesión de depuración (S17) y el proyecto final se corre a S18–S21
+
+Un alumno preguntó en clase si el ejercicio de la S02 traía un error puesto a propósito para
+que ellos lo encontraran. No lo traía, pero la pregunta era buena, y de ahí sale esta sesión.
+
+**Dónde.** Justo después del Pong y justo antes del proyecto. Acaban de terminar su primer
+juego completo y lo siguiente es pelearse tres sesiones con uno propio: depurar ahí deja de
+ser un ejercicio y pasa a ser la herramienta de la semana siguiente.
+
+**Renumerar en vez de llamarla S16b.** Lo decidiste tú al preguntártelo. Sale barato ahora
+—en Moodle sólo estaban puestas la S01 y la S02— y evita arrastrar para siempre una «b» que
+se lee como sesión opcional. El proyecto final pasa a S18–S21 y el trimestre a 21 sesiones.
+
+**Qué NO hace, para no repetirse.** La antigua S19 (ahora **S20**) ya era de depuración: el
+método y una tabla de seis síntomas, aplicados al juego de cada uno. Eso se queda donde
+estaba. La S17 es la otra mitad: se practica sobre **código ajeno**, con cinco programas que
+casi funcionan, y sin la presión de que sea el tuyo el que está roto.
+
+**Los cinco fallos no son inventados**: son los que cometen en las dieciséis sesiones
+anteriores y los que vuelven en el proyecto — falta el `ir a x: y:` y cada partida empieza
+donde acabó la anterior; falta el estilo de rotación y el gato sale del revés; un `repetir 3`
+donde iban 4 y el cuadrado no cierra; un `si` suelto fuera del `por siempre`, que se comprueba
+una sola vez; y una variable que no se pone a cero, así que la puntuación se hereda.
+
+**Un solo sitio para los programas.** El `.sb3` que se descarga el alumnado
+(`materiales/depuracion.sb3`) y el arreglado del profesor (`_soluciones/sb3/`) salen de las
+mismas tuplas que dibujan la página, con el exportador del punto 31. Si se toca un programa,
+cambian los tres a la vez. Los cinco fallos y los cinco arreglos están **probados
+ejecutándolos** en scratch.mit.edu, no sólo leídos.
+
+**Los cinco arrancan a la vez con la bandera.** No lo he evitado: la página manda trabajar de
+uno en uno haciendo clic sobre el montón de bloques de cada objeto, que es exactamente la
+técnica que se enseña. La limitación hace de ejercicio.
+

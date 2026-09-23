@@ -9,7 +9,7 @@ T1 = os.path.join(REPO, 'trimestres', 't1-scratch') + os.sep
 DESTINO = os.path.join(T1, 'sesiones') + os.sep
 
 # Página del cuadernillo que corresponde a cada sesión (verificado con pdftotext).
-# S12-S20 no tienen equivalente: usan las guías de juegos o son proyecto final.
+# S12-S21 no tienen equivalente: usan las guías de juegos, depuración o proyecto final.
 CUADERNILLO = {1: 4, 2: 7, 3: 9, 4: 10, 5: 11, 6: 12,
                7: 13, 8: 14, 9: 15, 10: 16, 11: 17}
 

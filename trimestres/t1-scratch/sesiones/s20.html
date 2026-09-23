@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FF8C1A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>S20 · Presentación de proyectos · Scratch · CyR 1º ESO</title>
-<meta name="description" content="Sesión 20 de Scratch: presentar el proyecto final en un minuto, rúbrica de evaluación y entrega definitiva. CyR 1º ESO.">
+<title>S20 · Proyecto final: mejoras · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Sesión 20 de Scratch: depurar el proyecto final y pulirlo. Los seis fallos típicos y cómo localizarlos. CyR 1º ESO.">
 <link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s20.html">
-<meta property="og:title" content="S20 · Presentación de proyectos · CyR 1º ESO">
-<meta property="og:description" content="Sesión 20 de Scratch: presentar el proyecto final en un minuto, rúbrica de evaluación y entrega definitiva. CyR 1º ESO.">
+<meta property="og:title" content="S20 · Proyecto final: mejoras · CyR 1º ESO">
+<meta property="og:description" content="Sesión 20 de Scratch: depurar el proyecto final y pulirlo. Los seis fallos típicos y cómo localizarlos. CyR 1º ESO.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,58 +121,73 @@
 <div id="main-content">
 <section class="unidad-titulo-hero">
   <div class="num">Sesión 20</div>
-  <h1>Presentación de proyectos</h1>
+  <h1>Proyecto final: mejoras</h1>
   <div class="duracion">T1 · Scratch · 1º ESO</div>
 </section>
 
 <main class="ej-main">
 
-<p><strong>Lo que vas a conseguir:</strong> presentar tu proyecto en <strong>un minuto</strong> y entregarlo. Último día del trimestre.</p>
+<p><strong>Lo que vas a conseguir:</strong> que tu juego <strong>no se rompa</strong> y que se entienda sin que tengas que estar al lado explicándolo.</p>
 
+<a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
+<p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
 
-
-<h2><span class="h2n">1</span>Con qué se te va a evaluar</h2>
-<p>Esto no es ninguna sorpresa: es la misma lista que se publicó en la <a href="s17.html#rubrica">sesión 17</a>, el día que diseñaste el proyecto. Léela antes de presentar y comprueba tú mismo por dónde andas.</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Criterio</th><th scope="col">Qué se mira</th><th scope="col">Puntos</th></tr></thead><tbody><tr><td><strong>Funciona</strong></td><td>Se juega de principio a fin sin romperse. Se puede ganar y perder. Al volver a empezar, empieza bien.</td><td>3</td></tr><tr><td><strong>Usa lo aprendido</strong></td><td>Bucles, condicionales y al menos una variable. Puntos extra si hay mensajes entre objetos o azar.</td><td>3</td></tr><tr><td><strong>Se entiende solo</strong></td><td>Otra persona sabe jugar sin que se lo expliques: hay instrucciones, marcador visible y se ve cuándo aciertas o fallas.</td><td>2</td></tr><tr><td><strong>Lo cuentas bien</strong></td><td>En un minuto explicas qué es, cómo se juega y qué te costó más.</td><td>2</td></tr></tbody></table></div><p>Fíjate en que <strong>«funciona» y «se entiende solo» suman 5 de los 10 puntos</strong>. Un juego sencillo, terminado y claro saca mejor nota que uno ambicioso a medias. Lleva siendo así todo el trimestre.</p>
-
-<h2><span class="h2n">2</span>El guion del minuto</h2>
-<p>Un minuto es poco y se pasa volando, así que llévalo pensado. Cuatro frases:</p><ol class="paso-lista">
-  <li><span class="p">Paso 1</span><span><strong>Qué es.</strong> «Es un juego de esquivar meteoritos». Una frase, sin rodeos.</span></li>
-  <li><span class="p">Paso 2</span><span><strong>Cómo se juega.</strong> Enséñalo mientras lo dices: mueve el personaje, marca un punto. No lo cuentes, hazlo.</span></li>
-  <li><span class="p">Paso 3</span><span><strong>Qué fue lo más difícil</strong> y cómo lo resolviste. Esta es la parte que de verdad interesa, porque es donde se ve lo que has aprendido.</span></li>
-  <li><span class="p">Paso 4</span><span><strong>Qué le añadirías</strong> si tuvieras otra sesión.</span></li>
-</ol><div class="aviso-ojo">
-  <h3>⚠️ Dos consejos que valen la nota</h3>
-<p><strong>Ten el juego ya abierto y probado</strong> antes de que te toque. Perder treinta segundos buscando el archivo es perder medio minuto de tu tiempo.</p><p style="margin-bottom:0">Y si al presentar falla algo, <strong>dilo y sigue</strong>. Explicar por qué crees que ha fallado suma; quedarse en blanco intentando arreglarlo delante de todos, no.</p>
+<h2><span class="h2n">1</span>Depurar es buscar, no adivinar</h2>
+<p>Cuando algo falla, la tentación es cambiar bloques a ver si suena la flauta. Casi nunca sale bien, y de paso rompes lo que iba.</p><p>Depurar es otra cosa: <strong>ir quitando sospechosos</strong> hasta que quede uno. Dos herramientas, las dos dentro de Scratch:</p><ul class="clave-lista">
+  <li><b>Haz clic sobre un montón de bloques.</b> Se ejecuta ahí mismo, sin la bandera. Así pruebas una pieza sola.</li>
+  <li><b>Mete un <em>decir</em> donde sospeches.</b> Te enseña lo que vale una variable en ese punto. Luego lo quitas.</li>
+</ul><div class="caja-bloques" style="max-width:340px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 295 58" width="295" height="58" class="bloques" role="img" aria-label="Bloque decir la variable Vidas durante 1 segundo"><title>Bloque decir la variable Vidas durante 1 segundo</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L278.6 10.0 Q284.6 10.0 284.6 16.0 L284.6 38.0 Q284.6 44.0 278.6 44.0 L44.0 44.0 L40.0 48.0 L28.0 48.0 L24.0 44.0 L16.0 44.0  Q10.0 44.0 10.0 38.0 Z" fill="#9966FF"/><text x="22.0" y="31.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">decir</text><rect x="60.1" y="15.0" width="52.5" height="24" rx="12" fill="#FF8C1A" stroke="#DB6E00" stroke-width="1"/><text x="69.1" y="31.6" class="sb-t" textLength="34.5" lengthAdjust="spacingAndGlyphs">Vidas</text><text x="119.5" y="31.6" class="sb-t" textLength="47.7" lengthAdjust="spacingAndGlyphs">durante</text><rect x="174.2" y="17.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="189.2" y="31.3" class="sb-n">1</text><text x="211.2" y="31.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text></svg>
+  <p class="pie">Un espía: cuenta lo que pasa por dentro.</p>
 </div>
 
+<h2><span class="h2n">2</span>Los seis fallos de siempre</h2>
+<p>Busca aquí tu síntoma antes de tocar nada.</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Lo que ves</th><th scope="col">Casi siempre es…</th><th scope="col">Cómo lo compruebas</th></tr></thead><tbody><tr><td>No pasa nada al pulsar la bandera</td><td>El programa no tiene sombrero, o lo tiene en otro objeto</td><td>Haz clic directamente sobre el montón de bloques. Si se ejecuta, el problema es el sombrero</td></tr><tr><td>El personaje se mueve una sola vez</td><td>Falta el <em>por siempre</em> alrededor de los condicionales</td><td>Mira si tus condicionales están sueltos debajo de la bandera</td></tr><tr><td>El marcador sube de golpe</td><td>La condición sigue siendo verdad durante varias vueltas del bucle</td><td>Añade una espera o aleja los objetos después de sumar (lo viste en el Pong)</td></tr><tr><td>El marcador no vuelve a 0 al empezar</td><td>Falta inicializar la variable debajo de la bandera</td><td>Pulsa la bandera dos veces seguidas y compara</td></tr><tr><td>Dos objetos hacen lo mismo o se pisan</td><td>Has montado los dos programas en el mismo objeto</td><td>Mira qué objeto tienes seleccionado abajo a la derecha, y luego el otro</td></tr><tr><td>El sonido no suena</td><td>El sonido no está en la lista de <em>ese</em> objeto</td><td>Pestaña Sonidos del objeto: si no está, añádelo desde la biblioteca</td></tr></tbody></table></div>
+
 <h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
-<div class="comprueba" data-ok="probar">
-  <p class="preg">Te quedan cinco minutos antes de presentar y tu juego funciona pero es sencillo. ¿Qué haces?</p>
+<div class="comprueba" data-ok="clic">
+  <p class="preg">Tu personaje no se mueve y no tienes ni idea de por qué. ¿Cuál es la primera comprobación que harías?</p>
   <div class="ops">
-    <button data-op="anadir" data-ex="Es la peor opción. Tocar el código cinco minutos antes de presentar es la forma más rápida de llegar con un juego que antes funcionaba y ahora no. Y «funciona» vale 3 puntos.">Añadir a toda prisa un segundo nivel para que parezca más completo</button>
-    <button data-op="probar" data-ex="Correcto. Con el juego terminado, lo que queda por ganar está en presentarlo bien —2 puntos— y en no romper lo que ya funciona —3 puntos—. Añadir cosas a última hora no puntúa y arriesga mucho.">Jugar una partida entera para comprobar que va, y repasar las cuatro frases del guion</button>
-    <button data-op="otro" data-ex="Para aprender está muy bien, pero no ahora: no te da tiempo a implementarla y te quedas sin repasar tu presentación.">Pedirle a un compañero que te enseñe el suyo para copiar alguna idea</button>
+    <button data-op="cero" data-ex="Es lo último, no lo primero. Tardas mucho y lo más probable es que vuelvas a cometer el mismo fallo, porque no habrás llegado a saber cuál era.">Borrar el programa y volver a montarlo desde el principio</button>
+    <button data-op="clic" data-ex="Correcto. En dos segundos partes el problema en dos: si al hacer clic el personaje se mueve, los bloques están bien y el fallo está en cómo arranca (el sombrero, el objeto seleccionado). Si no se mueve, el fallo está dentro. Has pasado de veinte sospechosos a diez.">Hacer clic directamente sobre el montón de bloques para ver si funciona por sí solo</button>
+    <button data-op="reiniciar" data-ex="Los fallos de Scratch casi nunca son del ordenador: son del programa. Recargar además te haría perder el proyecto si no lo has descargado.">Recargar la página o reiniciar el ordenador</button>
   </div>
   <div class="fb" id="fb1"></div>
 </div>
 
-<h2><span class="h2n">4</span>Antes de presentar: última comprobación</h2>
+<h2><span class="h2n">4</span>Tu actividad</h2>
+<p><strong>Primero arregla, después adorna.</strong> En este orden:</p><ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Juega tres partidas enteras. Apunta en un papel todo lo raro, por pequeño que sea.</span></li>
+  <li><span class="p">Paso 2</span><span>Arregla los fallos de arriba abajo. Después de cada arreglo, juega otra partida.</span></li>
+  <li><span class="p">Paso 3</span><span>Cuando ya no se rompa nada, y sólo entonces, coge la lista de pulido de abajo.</span></li>
+  <li><span class="p">Paso 4</span><span>Haz las <strong>dos marcadas con ✱</strong> y elige <strong>una más</strong>. Tres bien hechas, no siete a medias. Las dos obligatorias son las que hacen que el juego se entienda sin ti: 2 puntos de la rúbrica.</span></li>
+  <li><span class="p">Paso 5</span><span>Deja que un compañero juegue <strong>sin decirle nada</strong>. Si te pregunta cómo se juega, te faltan instrucciones.</span></li>
+</ol><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Mejora</th><th scope="col">En qué consiste</th><th scope="col">De dónde sale</th></tr></thead><tbody><tr><td><strong>Pantalla de inicio</strong> ✱</td><td>Un fondo de portada con el título y cómo se juega</td><td>Pieza 6 de la S19</td></tr><tr><td><strong>Pantalla de fin</strong> ✱</td><td>Un fondo distinto con la puntuación final</td><td>Pieza 7 de la S19 · S13</td></tr><tr><td>Instrucciones</td><td>Un <em>decir</em> al empezar que explique las teclas</td><td>S01</td></tr><tr><td>Sonido</td><td>Al puntuar, al chocar y al terminar</td><td>S01 · S11</td></tr><tr><td>Reacción visible</td><td>Cambio de disfraz al acertar o al fallar</td><td>S06</td></tr><tr><td>Marcador a la vista</td><td>Variables mostradas, y sólo las que interesan al jugador</td><td>S08 · S09</td></tr><tr><td>Aparecer y desaparecer</td><td>Que lo que recoges o esquivas se esconda y vuelva a salir</td><td>Pieza 8 de la S19</td></tr><tr><td>Dificultad creciente</td><td>Que se vaya poniendo más difícil según avanzas</td><td>S16</td></tr></tbody></table></div><div class="aviso-ojo">
+  <h3>⚠️ La prueba del compañero es la más dura y la más útil</h3>
+<p>Tú sabes jugar porque lo has hecho tú. Un compañero encuentra en dos minutos cosas que tú no has visto en tres sesiones. Déjale jugar y <strong>no le ayudes</strong>: apunta dónde se atasca.</p>
+</div>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
-  <li>El <code>.sb3</code> está descargado y sabes en qué carpeta.</li>
-  <li>Lo has subido a Moodle. <strong>Ahora, no luego.</strong></li>
-  <li>Has jugado una partida entera hoy mismo, en este ordenador.</li>
-  <li>El juego se puede ganar y se puede perder.</li>
-  <li>Tienes las cuatro frases del guion pensadas.</li>
-  <li>Sabes decir qué fue lo más difícil.</li>
+  <li>Has jugado tres partidas enteras sin que aparezca ningún fallo.</li>
+  <li>Un compañero ha sabido jugar sin que le expliques nada.</li>
+  <li>El juego tiene pantalla de inicio y pantalla de fin.</li>
+  <li>Has añadido una tercera mejora de la lista, terminada.</li>
+  <li>Has descargado la versión buena del <code>.sb3</code>.</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<ol><li><strong>Archivo → Guardar en tu ordenador.</strong> El <code>.sb3</code> aparece en <strong>Descargas</strong>.</li><li>Cámbiale el nombre a <strong>ProyectoFinal_TuNombre.sb3</strong>.</li><li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 20, junto con un texto corto: qué es, qué fue lo más difícil y qué le añadirías.</li><li>Esta entrega es la del trimestre. Compruébalo antes de irte.</li></ol>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
+<ol>
+  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
+  <li>Cámbiale el nombre a <strong>Sesion20_TuNombre.sb3</strong>.</li>
+  <li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 20.</li>
+</ol>
 </div>
 
 <h2>Navegación</h2>
-<div class="bg"><a href="s19.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S19</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a></div>
+<div class="bg"><a href="s19.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S19</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s21.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S21</span></a></div>
 
 </main>
 </div>

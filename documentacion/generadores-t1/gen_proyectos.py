@@ -2,8 +2,8 @@
 """Las tres bases del proyecto final de T1 · Scratch.
 
 No son juegos sueltos: son los tres puntos de partida entre los que elige el
-alumnado en la S17. Todo lo que hay aquí se monta con bloques que ya se han
-enseñado en S01-S16 y con las ocho piezas del kit de la S18. No entra ni un
+alumnado en la S18. Todo lo que hay aquí se monta con bloques que ya se han
+enseñado en S01-S16 y con las ocho piezas del kit de la S19. No entra ni un
 bloque nuevo, y ninguno de extensión.
 """
 import sys, os
@@ -112,9 +112,9 @@ arkanoid = pagina_juego(
              ['La pala que sigue al ratón', 'S15'],
              ['Sumar un punto al tocar, y despegarse', 'S16'],
              ['Perder cuando se te escapa por abajo', 'S16'],
-             ['El ladrillo que se esconde al tocarlo', 'Pieza 8 de la S18'],
+             ['El ladrillo que se esconde al tocarlo', 'Pieza 8 de la S19'],
              ['El aviso <em>ladrillo roto</em> entre objetos', 'S11'],
-             ['Poner el marcador a 0 al arrancar', 'Pieza 2 de la S18'],
+             ['Poner el marcador a 0 al arrancar', 'Pieza 2 de la S19'],
          ])),
 
         ('Los tres objetos',
@@ -171,7 +171,7 @@ arkanoid = pagina_juego(
         ('Tu versión',
          '<p>Hasta aquí es el juego de todos. <strong>A partir de aquí es el tuyo.</strong> '
          'Elige de esta lista o inventa, pero apúntalo en la ficha de la '
-         '<a href="../sesiones/s17.html">sesión 17</a> antes de empezar:</p>' +
+         '<a href="../sesiones/s18.html">sesión 18</a> antes de empezar:</p>' +
          tabla(['Idea', 'Qué tienes que tocar'], [
              ['Más ladrillos, o más filas',
               'Duplicar y cambiar coordenadas. <strong>Y el 10</strong> del <em>esperar hasta que</em>'],
@@ -286,12 +286,12 @@ space = pagina_juego(
          'pero un objeto no puede mirar dónde está otro. Así que la nave va apuntando su posición '
          'en una variable, <code>NaveX</code>, y la bala la lee cuando sale.</p>' + REUTILIZA +
          tabla(['Pieza', 'De dónde sale'], [
-             ['Moverse con las flechas', 'S05 · Pieza 1 de la S18'],
+             ['Moverse con las flechas', 'S05 · Pieza 1 de la S19'],
              ['Avisar con un mensaje de que has disparado', 'S11'],
              ['Guardar un dato en una variable para usarlo luego', 'S08'],
              ['Subir la bala hasta arriba', 'S12 · <em>cambiar y por</em>'],
-             ['El marciano que se esconde al tocarlo', 'Pieza 8 de la S18'],
-             ['La cuenta atrás', 'Pieza 5 de la S18'],
+             ['El marciano que se esconde al tocarlo', 'Pieza 8 de la S19'],
+             ['La cuenta atrás', 'Pieza 5 de la S19'],
              ['El vaivén de la fila', 'S03 · <em>repetir</em>'],
          ])),
 
@@ -351,7 +351,7 @@ space = pagina_juego(
         ('Tu versión',
          '<p>Hasta aquí es el juego de todos. <strong>A partir de aquí es el tuyo.</strong> '
          'Elige de esta lista o inventa, pero apúntalo en la ficha de la '
-         '<a href="../sesiones/s17.html">sesión 17</a> antes de empezar:</p>' +
+         '<a href="../sesiones/s18.html">sesión 18</a> antes de empezar:</p>' +
          tabla(['Idea', 'Qué tienes que tocar'], [
              ['Dos filas de marcianos',
               'Duplicar y cambiar la <code>y</code>. <strong>Y el 8</strong> del <em>esperar hasta que</em>'],
@@ -364,7 +364,7 @@ space = pagina_juego(
              ['Un escudo que aguante tres impactos',
               'Variable <code>Escudo</code> y <em>sumar a (Escudo) (−1)</em>'],
              ['Pantalla de inicio con el título',
-              'Pieza 6 de la S18'],
+              'Pieza 6 de la S19'],
          ])),
 
         ('Lo has conseguido si…',
@@ -442,12 +442,12 @@ esquivar = pagina_juego(
          '<p>Y tiene una ventaja para el proyecto: como es corto, te sobra sesión para hacerlo '
          '<em>tuyo</em>, que es lo que de verdad puntúa.</p>' + REUTILIZA +
          tabla(['Pieza', 'De dónde sale'], [
-             ['Moverse con las flechas', 'S05 · Pieza 1 de la S18'],
-             ['Aparecer arriba en un sitio al azar', 'Pieza 3 de la S18'],
+             ['Moverse con las flechas', 'S05 · Pieza 1 de la S19'],
+             ['Aparecer arriba en un sitio al azar', 'Pieza 3 de la S19'],
              ['Caer hasta abajo', 'S12 · <em>cambiar y por</em>'],
-             ['Chocar y perder una vida', 'Pieza 4 de la S18'],
-             ['Esconderse y volver a salir', 'Pieza 8 de la S18'],
-             ['Marcador y fin de partida', 'Piezas 2 y 7 de la S18'],
+             ['Chocar y perder una vida', 'Pieza 4 de la S19'],
+             ['Esconderse y volver a salir', 'Pieza 8 de la S19'],
+             ['Marcador y fin de partida', 'Piezas 2 y 7 de la S19'],
          ])),
 
         ('Los dos objetos',
@@ -496,7 +496,7 @@ esquivar = pagina_juego(
         ('Tu versión',
          '<p>Este es el que más margen te deja, porque el juego base se monta en una sesión. '
          'Elige de la lista o inventa, pero apúntalo en la ficha de la '
-         '<a href="../sesiones/s17.html">sesión 17</a> antes de empezar:</p>' +
+         '<a href="../sesiones/s18.html">sesión 18</a> antes de empezar:</p>' +
          tabla(['Idea', 'Qué tienes que tocar'], [
              ['Monedas que en vez de quitar, suman',
               'Duplicar la piedra, cambiarle el disfraz y poner <em>sumar a (Puntos) (5)</em>'],
@@ -621,7 +621,7 @@ estas tres bases y la montas. Cada página trae los programas dibujados bloque a
 pieza sale de qué sesión.</p>
 <p><strong>Pero el proyecto no es copiar el juego.</strong> Copiarlo es el primer día. El proyecto
 es <em>tu versión</em>: qué le cambias y qué le añades. Eso lo escribes en la ficha de la
-<a href="../sesiones/s17.html">sesión 17</a> antes de tocar un bloque.</p>
+<a href="../sesiones/s18.html">sesión 18</a> antes de tocar un bloque.</p>
 </div>
 
 <div class="hub-main">

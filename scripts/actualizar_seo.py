@@ -39,7 +39,22 @@ TODAY = date.today().isoformat()
 # ── Helpers ─────────────────────────────────────────────────────────
 
 def is_public(rel: Path) -> bool:
-    return not any(p in EXCLUDE_PARTS for p in rel.parts)
+    if any(p in EXCLUDE_PARTS for p in rel.parts):
+        return False
+    return not tiene_noindex(rel)
+
+
+def tiene_noindex(rel: Path) -> bool:
+    """Una pagina con <meta name="robots" content="noindex"> no entra en el sitemap.
+
+    Lo pide la tienda falsa de V-Bucks de T3: imita a una tienda real y se abre desde su
+    sesion, no desde un buscador. Si se anade otra pagina asi, basta con el meta.
+    """
+    try:
+        cabeza = rel.read_text(encoding='utf-8', errors='ignore')[:4000]
+    except OSError:
+        return False
+    return bool(re.search(r'<meta[^>]+name=["\']robots["\'][^>]+noindex', cabeza, re.I))
 
 def canonical_for(rel: Path) -> str:
     parts = list(rel.parts)

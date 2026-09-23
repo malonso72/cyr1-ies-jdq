@@ -53,7 +53,7 @@ Valen para este repo y para el hermano `teci2-ies-jdq`. No son negociables salvo
 
 ## T1 · SCRATCH — ESTADO (sept-2026)
 
-**Reescrito entero y revisado.** Las 20 sesiones dejaron de ser un índice que abría el cuadernillo
+**Reescrito entero y revisado.** Las 21 sesiones dejaron de ser un índice que abría el cuadernillo
 completo por la página 1 y son ahora páginas de trabajo autónomas, pensadas para tener Scratch
 abierto al lado en media pantalla.
 
@@ -62,12 +62,12 @@ cotejo (`REVISION_T1_SESIONES.md`). Salieron cuatro programas que no funcionaban
 —no al leerlos— y varias promesas que el material no cumplía. Está todo arreglado. Lo que
 decidí por mi cuenta al arreglarlo está en `DECISIONES_T1.md`, puntos 12 a 20.
 
-**Dotación real: 2 sesiones semanales.** Las 20 sesiones son unas 10 semanas y el trimestre da
-para unas 13. Esas clases de más se van en el **proyecto final**, que no es un juego inventado:
+**Dotación real: 2 sesiones semanales.** Las 21 sesiones son unas 10 semanas y media y el
+trimestre da para unas 13. Esas clases de más se van en el **proyecto final**, que no es un juego inventado:
 es **uno completo elegido entre tres bases** —Arkanoid, Space Invaders y Esquivar lo que cae—, en
 `t1-scratch/juegos/`. Lo que se evalúa no es el juego, es **la versión de cada uno**: la ficha de
-la S17 pide tres cambios concretos sobre la base. Así se puede mandar el mismo juego a toda la
-clase sin que las presentaciones de la S20 salgan iguales.
+la S18 pide tres cambios concretos sobre la base. Así se puede mandar el mismo juego a toda la
+clase sin que las presentaciones de la S21 salgan iguales.
 
 ### Contexto real de clase — importa para todo lo que escribas
 
@@ -84,7 +84,10 @@ clase sin que las presentaciones de la S20 salgan iguales.
 - La portada del trimestre está en **tres tarjetas** —presentación, abrir Scratch y sesiones—
   porque el alumnado no entra por ahí: entra desde Moodle directo a la sesión. Si se añade algo,
   que sea porque hace falta desde la portada, no porque exista.
-- Las páginas: `trimestres/t1-scratch/sesiones/s01..s20.html`
+- Las páginas: `trimestres/t1-scratch/sesiones/s01..s21.html`. La **S17 es de depuración**:
+  cinco programas con un fallo plantado cada uno, en `materiales/depuracion.sb3`, y la
+  versión arreglada en `_soluciones/sb3/`. Los escribe `gen_s17_depuracion.py`, que dibuja la
+  página y genera los dos `.sb3` desde los mismos programas. El proyecto final es S18–S21.
 - Las tres bases del proyecto: `trimestres/t1-scratch/juegos/` (`arkanoid`, `space-invaders`,
   `esquivar`, más su índice). El resto de páginas de esa carpeta son las viejas, con su PDF.
   Las mismas tres bases existen como **`.sb3` en `_soluciones/sb3/`** (privada): las escribe
@@ -103,10 +106,11 @@ clase sin que las presentaciones de la S20 salgan iguales.
   - `COTEJO_MakeCode.md` — lo mismo para **micro:bit**: tipo, forma, color, texto en español y
     desplegables de cada bloque, leídos del Blockly del editor real; más la geometría de los
     bloques. Consúltalo antes de escribir cualquier bloque de T2.
-  - `PLAN_T1_SCRATCH.md` — el guion de las 20 sesiones y las reglas de estilo del material.
+  - `PLAN_T1_SCRATCH.md` — el guion de las sesiones y las reglas de estilo del material.
+    Ojo: se escribió con 20 sesiones, antes de que entrara la S17 de depuración.
   - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta, con el porqué. Puntos 1-11 de la
     reescritura; 12-20 de la ronda de arreglos posterior; 31, el exportador a `.sb3`.
-  - `REVISION_T1_SESIONES.md` — la revisión pedagógica de las 20 sesiones: qué fallaba, qué se
+  - `REVISION_T1_SESIONES.md` — la revisión pedagógica de las 20 sesiones de entonces: qué fallaba, qué se
     arregló y qué queda.
   - `pruebas-t3/` — el test de T3 (`node test_academia.js`, 2120 comprobaciones sobre las 32
     páginas y sobre `academia.js`). T3 se edita a mano: pásalo siempre antes de comprometer

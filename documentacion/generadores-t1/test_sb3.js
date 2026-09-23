@@ -15,6 +15,8 @@ const ARCHIVOS = process.argv.length > 2 ? process.argv.slice(2) : [
   path.join(REPO, '_soluciones', 'sb3', 'arkanoid.sb3'),
   path.join(REPO, '_soluciones', 'sb3', 'space-invaders.sb3'),
   path.join(REPO, '_soluciones', 'sb3', 'esquivar.sb3'),
+  path.join(REPO, '_soluciones', 'sb3', 'depuracion-resuelto.sb3'),
+  path.join(REPO, 'trimestres', 't1-scratch', 'materiales', 'depuracion.sb3'),
   '/tmp/_todos_los_programas.sb3'];
 const SOMBRAS = /^(math_number|math_positive_number|math_whole_number|math_angle|text|colour_picker)$|_menu$|_costume$|_backdrops$|_keyoptions$|_touchingobjectmenu$/;
 let fallos = 0;

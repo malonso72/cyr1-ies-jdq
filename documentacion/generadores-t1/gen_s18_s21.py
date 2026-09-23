@@ -24,7 +24,7 @@ NAV_OPCIONES = (opcion('arkanoid', '\U0001F9F1', 'A · Arkanoid', 'Rompe los lad
                 opcion('esquivar', '\u2604\uFE0F', 'C · Esquivar lo que cae', 'Tres vidas'))
 
 
-# La rubrica del proyecto final: se publica en S17 y se repite en S20.
+# La rubrica del proyecto final: se publica en S18 y se repite en S21.
 RUBRICA = [
     ['<strong>Funciona</strong>', 'Se juega de principio a fin sin romperse. Se puede ganar y '
      'perder. Al volver a empezar, empieza bien.', '3'],
@@ -36,7 +36,7 @@ RUBRICA = [
      'costó más.', '2'],
 ]
 
-# ============================================================ S17
+# ============================================================ S18
 FICHA = [
     ('1. Título', 'Cómo se llama <em>tu</em> versión. No «Arkanoid»: el tuyo.'),
     ('2. Base', 'Cuál de las tres eliges: Arkanoid, Space Invaders o Esquivar lo que cae.'),
@@ -61,13 +61,13 @@ OPCIONES = [
      '⭐⭐⭐ La más larga'],
     ['<strong><a href="../juegos/esquivar.html">C · Esquivar lo que cae</a></strong>',
      'Aguanta debajo de una lluvia de cosas con tres vidas',
-     'Cuatro piezas del kit de la S18',
+     'Cuatro piezas del kit de la S19',
      '⭐ La más corta'],
 ]
 
-s17 = pagina(
-    17, 'Proyecto final: idea y diseño',
-    'Sesión 17 de Scratch: elegir el proyecto final, dimensionarlo bien y escribir la ficha de '
+s18 = pagina(
+    18, 'Proyecto final: idea y diseño',
+    'Sesión 18 de Scratch: elegir el proyecto final, dimensionarlo bien y escribir la ficha de '
     'diseño antes de programar. CyR 1º ESO.',
     'tu proyecto <strong>decidido y escrito</strong>, antes de tocar un solo bloque. Hoy no se '
     'programa: hoy se piensa.',
@@ -144,11 +144,11 @@ s17 = pagina(
     entrega='<p style="margin:0 0 10px;">Hoy <strong>no</strong> se entrega un <code>.sb3</code>: '
             'todavía no hay nada que programar.</p><ol>'
             '<li>Escribe los <strong>nueve puntos</strong> de la ficha en la tarea de Moodle de la '
-            'sesión 17.</li>'
+            'sesión 18.</li>'
             '<li>Si has hecho un boceto en papel, hazle una foto y súbela también.</li>'
             '<li>Guarda tu ficha: la vas a necesitar en las tres sesiones siguientes.</li></ol>')
 
-# ============================================================ S18
+# ============================================================ S19
 K1 = [
     BANDERA,
     ('c', 'control', ['por siempre'], [
@@ -205,9 +205,9 @@ K8 = [
         ('stack', 'looks', ['mostrar'])]),
 ]
 
-s18 = pagina(
-    18, 'Proyecto final: construcción',
-    'Sesión 18 de Scratch: kit de piezas reutilizables del trimestre para montar el proyecto '
+s19 = pagina(
+    19, 'Proyecto final: construcción',
+    'Sesión 19 de Scratch: kit de piezas reutilizables del trimestre para montar el proyecto '
     'final. Primera versión jugable. CyR 1º ESO.',
     'la <strong>primera versión jugable</strong> de tu proyecto. Fea, corta y sin pulir, pero que '
     'se pueda jugar de principio a fin.',
@@ -217,7 +217,7 @@ s18 = pagina(
          'empezar, jugar, ganar o perder, y terminar. Aunque sea con un personaje soso y sin '
          'sonidos.</p>'
          '<p>Es mucho mejor tener un juego feo terminado que uno precioso a medias. Lo bonito se '
-         'añade en la sesión 19; lo que no se puede añadir el último día es que funcione.</p>'),
+         'añade en la sesión 20; lo que no se puede añadir el último día es que funcione.</p>'),
 
         ('Kit de piezas',
          '<p>Casi nada de tu proyecto es nuevo. Estas ocho piezas salen de las sesiones anteriores '
@@ -283,7 +283,7 @@ s18 = pagina(
 
         ('Tu actividad',
          pasos([
-             'Saca tu ficha de la sesión 17 y abre <strong>la página de la base que elegiste</strong>.',
+             'Saca tu ficha de la sesión 18 y abre <strong>la página de la base que elegiste</strong>.',
              'Crea los objetos y los fondos que dice la ficha. Sin programar nada todavía.',
              'Monta la <strong>base tal cual viene en su página</strong> y pruébala. Hasta que el '
              'juego de todos no funcione, no empieces con lo tuyo.',
@@ -307,7 +307,7 @@ s18 = pagina(
     ],
     nav_extra=NAV_OPCIONES)
 
-# ============================================================ S19
+# ============================================================ S20
 FALLOS = [
     ['No pasa nada al pulsar la bandera',
      'El programa no tiene sombrero, o lo tiene en otro objeto',
@@ -330,24 +330,24 @@ FALLOS = [
 ]
 PULIDO = [
     ['<strong>Pantalla de inicio</strong> ✱', 'Un fondo de portada con el título y cómo se juega',
-     'Pieza 6 de la S18'],
+     'Pieza 6 de la S19'],
     ['<strong>Pantalla de fin</strong> ✱', 'Un fondo distinto con la puntuación final',
-     'Pieza 7 de la S18 · S13'],
+     'Pieza 7 de la S19 · S13'],
     ['Instrucciones', 'Un <em>decir</em> al empezar que explique las teclas', 'S01'],
     ['Sonido', 'Al puntuar, al chocar y al terminar', 'S01 · S11'],
     ['Reacción visible', 'Cambio de disfraz al acertar o al fallar', 'S06'],
     ['Marcador a la vista', 'Variables mostradas, y sólo las que interesan al jugador', 'S08 · S09'],
     ['Aparecer y desaparecer', 'Que lo que recoges o esquivas se esconda y vuelva a salir',
-     'Pieza 8 de la S18'],
+     'Pieza 8 de la S19'],
     ['Dificultad creciente', 'Que se vaya poniendo más difícil según avanzas', 'S16'],
 ]
 DEPURA19 = [
     ('stack', 'looks', ['decir', var('Vidas'), 'durante', ('num', '1'), 'segundos']),
 ]
 
-s19 = pagina(
-    19, 'Proyecto final: mejoras',
-    'Sesión 19 de Scratch: depurar el proyecto final y pulirlo. Los seis fallos típicos y cómo '
+s20 = pagina(
+    20, 'Proyecto final: mejoras',
+    'Sesión 20 de Scratch: depurar el proyecto final y pulirlo. Los seis fallos típicos y cómo '
     'localizarlos. CyR 1º ESO.',
     'que tu juego <strong>no se rompa</strong> y que se entienda sin que tengas que estar al lado '
     'explicándolo.',
@@ -412,16 +412,16 @@ s19 = pagina(
                  'Has descargado la versión buena del <code>.sb3</code>.'])),
     ])
 
-# ============================================================ S20
-s20 = pagina(
-    20, 'Presentación de proyectos',
-    'Sesión 20 de Scratch: presentar el proyecto final en un minuto, rúbrica de evaluación y '
+# ============================================================ S21
+s21 = pagina(
+    21, 'Presentación de proyectos',
+    'Sesión 21 de Scratch: presentar el proyecto final en un minuto, rúbrica de evaluación y '
     'entrega definitiva. CyR 1º ESO.',
     'presentar tu proyecto en <strong>un minuto</strong> y entregarlo. Último día del trimestre.',
     [
         ('Con qué se te va a evaluar',
          '<p>Esto no es ninguna sorpresa: es la misma lista que se publicó en la '
-         '<a href="s17.html#rubrica">sesión 17</a>, el día que diseñaste el proyecto. '
+         '<a href="s18.html#rubrica">sesión 18</a>, el día que diseñaste el proyecto. '
          'Léela antes de presentar y comprueba tú mismo por dónde andas.</p>' +
          tabla(['Criterio', 'Qué se mira', 'Puntos'], RUBRICA) +
          '<p>Fíjate en que <strong>«funciona» y «se entiende solo» suman 5 de los 10 puntos</strong>. '
@@ -474,9 +474,9 @@ s20 = pagina(
             '<li><strong>Archivo → Guardar en tu ordenador.</strong> El <code>.sb3</code> aparece '
             'en <strong>Descargas</strong>.</li>'
             '<li>Cámbiale el nombre a <strong>ProyectoFinal_TuNombre.sb3</strong>.</li>'
-            '<li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 20, junto con un texto '
+            '<li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 21, junto con un texto '
             'corto: qué es, qué fue lo más difícil y qué le añadirías.</li>'
             '<li>Esta entrega es la del trimestre. Compruébalo antes de irte.</li></ol>')
 
-for n, h in [(17, s17), (18, s18), (19, s19), (20, s20)]:
+for n, h in [(18, s18), (19, s19), (20, s20), (21, s21)]:
     escribir(n, h)

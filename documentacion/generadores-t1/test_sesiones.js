@@ -74,8 +74,8 @@ function ok(cond, msg) {
 
     // SVG accesibles
     const svgs = q('svg');
-    // S17 y S20 son de diseño y presentación: no llevan bloques
-    ok(svgs.length > 0 || n === 17 || n === 20, P + 'no hay ningún SVG de bloques');
+    // S18 y S21 son de diseño y presentación: no llevan bloques
+    ok(svgs.length > 0 || n === 18 || n === 21, P + 'no hay ningún SVG de bloques');
     svgs.forEach((s, i) => {
       ok(s.getAttribute('role') === 'img', P + 'svg ' + i + ' sin role=img');
       ok((s.getAttribute('aria-label') || '').length > 15, P + 'svg ' + i + ' sin aria-label útil');

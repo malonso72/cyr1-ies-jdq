@@ -12,8 +12,9 @@ TITULOS = {
     9: 'Variables II, azar y puntuación', 10: 'Juego de carreras',
     11: 'Mensajes entre objetos', 12: 'Laberinto I', 13: 'Laberinto II',
     14: 'Piedra, papel o tijera', 15: 'Pong I', 16: 'Pong II',
-    17: 'Proyecto final: idea y diseño', 18: 'Proyecto final: construcción',
-    19: 'Proyecto final: mejoras', 20: 'Presentación de proyectos',
+    17: 'Depuración: encuentra el fallo',
+    18: 'Proyecto final: idea y diseño', 19: 'Proyecto final: construcción',
+    20: 'Proyecto final: mejoras', 21: 'Presentación de proyectos',
 }
 
 QUE_HACES = {
@@ -33,10 +34,11 @@ QUE_HACES = {
     14: 'Juegas contra el ordenador, que elige sin hacer trampas.',
     15: 'La mecánica del Pong: pelota que rebota y pala que sigue al ratón.',
     16: 'Marcador, fin de partida y dificultad que sube sola.',
-    17: 'Eliges tu proyecto y escribes la ficha de diseño. Hoy no se programa.',
-    18: 'Kit de piezas reutilizables y primera versión jugable.',
-    19: 'Depuras los seis fallos típicos y pules el resultado.',
-    20: 'Rúbrica, guion de un minuto y entrega definitiva.',
+    17: 'Arreglas cinco programas rotos y sales sabiendo buscar un fallo.',
+    18: 'Eliges tu proyecto y escribes la ficha de diseño. Hoy no se programa.',
+    19: 'Kit de piezas reutilizables y primera versión jugable.',
+    20: 'Depuras tu propio juego y lo pules.',
+    21: 'Rúbrica, guion de un minuto y entrega definitiva.',
 }
 
 BLOQUES = [
@@ -49,8 +51,11 @@ BLOQUES = [
     ('🎮 Juegos completos', 'S12–S16',
      'Tres juegos de principio a fin: laberinto, piedra-papel-tijera y Pong. Aquí se junta '
      'todo lo anterior.', range(12, 17)),
-    ('🚀 Proyecto final', 'S17–S20',
-     'Tu propio proyecto: diseñarlo, construirlo, depurarlo y presentarlo.', range(17, 21)),
+    ('🔍 Depuración', 'S17',
+     'Antes de construir lo tuyo: aprender a encontrar un fallo en un programa que casi '
+     'funciona, con el método y sin tocar bloques al azar.', range(17, 18)),
+    ('🚀 Proyecto final', 'S18–S21',
+     'Tu propio proyecto: diseñarlo, construirlo, depurarlo y presentarlo.', range(18, 22)),
 ]
 
 
@@ -77,10 +82,10 @@ INDICE = '''<!DOCTYPE html>
 <meta name="theme-color" content="#FF8C1A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <title>Sesiones · T1 Scratch · CyR 1º ESO</title>
-<meta name="description" content="Las 20 sesiones del trimestre de Scratch de CyR 1º ESO: fundamentos, datos e interacción, juegos completos y proyecto final. IES Jiménez de Quesada.">
+<meta name="description" content="Las 21 sesiones del trimestre de Scratch de CyR 1º ESO: fundamentos, datos e interacción, juegos completos, depuración y proyecto final. IES Jiménez de Quesada.">
 <link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/index.html">
 <meta property="og:title" content="Sesiones · T1 Scratch · CyR 1º ESO">
-<meta property="og:description" content="Las 20 sesiones del trimestre de Scratch, con Scratch abierto al lado y entrega en Moodle.">
+<meta property="og:description" content="Las 21 sesiones del trimestre de Scratch, con Scratch abierto al lado y entrega en Moodle.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,7 +124,7 @@ INDICE = '''<!DOCTYPE html>
 <div id="main-content">
 <section class="unidad-titulo-hero">
   <div class="num">Trimestre 1</div>
-  <h1>🗓️ Las 20 sesiones de Scratch</h1>
+  <h1>🗓️ Las 21 sesiones de Scratch</h1>
   <div class="duracion">De los primeros bloques al proyecto final</div>
 </section>
 
@@ -172,7 +177,7 @@ print('escrito sesiones/index.html (%d bytes)' % os.path.getsize(ruta))
 # La portada se dejó en TRES tarjetas —presentación, abrir Scratch y sesiones—
 # porque el alumnado no entra por aquí: entra desde Moodle directo a la sesión.
 # Todo lo demás tiene ya su puerta: el cuadernillo se enlaza página a página
-# desde cada sesión, y a los juegos se llega desde la S17 y la S18.
+# desde cada sesión, y a los juegos se llega desde la S18 y la S19.
 HUB = '''<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -230,7 +235,7 @@ HUB = '''<!DOCTYPE html>
 <section class="unidad-titulo-hero">
   <div class="num">Trimestre 1</div>
   <h1>🎮 Scratch</h1>
-  <div class="duracion">⏱️ 20 sesiones · Programación, juegos y proyecto final</div>
+  <div class="duracion">⏱️ 21 sesiones · Programación, juegos y proyecto final</div>
 </section>
 
 <div class="hub-main">
@@ -249,7 +254,7 @@ HUB = '''<!DOCTYPE html>
   </a>
   <a href="sesiones/index.html" class="bc">
     <span class="bi">🗓️</span>
-    <span class="bk">Las 20 sesiones</span>
+    <span class="bk">Las 21 sesiones</span>
     <span class="bn">Cada una con su programa, su pregunta, su actividad y su entrega</span>
   </a>
 </div>
@@ -258,7 +263,7 @@ HUB = '''<!DOCTYPE html>
   <summary>📋 Enfoque de trabajo</summary>
   <div class="criterios-body">
     <p>Cada sesión tiene su propia página: un programa que hay que <strong>leer y entender antes de escribir el tuyo</strong>, una pregunta de comprensión, la actividad y la entrega. Se trabaja con Scratch abierto al lado, en el navegador, sin instalar nada y sin cuenta. El cuadernillo antiguo queda como consulta: cada sesión enlaza su página exacta.</p>
-    <p>Las <strong>cuatro últimas sesiones</strong> son el proyecto final, y no se parte de cero: se elige una de <a href="juegos/index.html">tres bases</a> —Arkanoid, Space Invaders o Esquivar lo que cae— y se hace una versión propia. La evaluación combina las entregas de cada sesión en Moodle y ese proyecto, con una rúbrica que se publica en la <a href="sesiones/s17.html#rubrica">sesión 17</a>, el día del diseño.</p>
+    <p>Las <strong>cuatro últimas sesiones</strong> son el proyecto final, y no se parte de cero: se elige una de <a href="juegos/index.html">tres bases</a> —Arkanoid, Space Invaders o Esquivar lo que cae— y se hace una versión propia. La evaluación combina las entregas de cada sesión en Moodle y ese proyecto, con una rúbrica que se publica en la <a href="sesiones/s18.html#rubrica">sesión 18</a>, el día del diseño.</p>
   </div>
 </details>
 
