@@ -184,25 +184,27 @@ s02 = pagina(
     cuadernillo=CUADERNILLO[2])
 
 # ============================================================ S03
+TECLA1 = ('hat', 'events', ['al presionar tecla', ('drop', '1')])
 P03 = [
-    BANDERA,
-    ('stack', 'motion', ['ir a x:', ('num', '0'), 'y:', ('num', '0')]),
+    TECLA1,
+    ('stack', 'motion', ['ir a x:', ('num', '-75'), 'y:', ('num', '75')]),
     ('stack', 'motion', ['apuntar en dirección', ('num', '90')]),
     ('c', 'control', ['repetir', ('num', '4')], [
-        ('stack', 'motion', ['mover', ('num', '100'), 'pasos']),
+        ('stack', 'motion', ['mover', ('num', '150'), 'pasos']),
         ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '90'), 'grados']),
+        ('stack', 'control', ['esperar', ('num', '1'), 'segundos']),
     ]),
     ('stack', 'sound', ['iniciar sonido', ('drop', 'Miau')]),
 ]
 LARGO03 = [
     BANDERA,
-    ('stack', 'motion', ['mover', ('num', '100'), 'pasos']),
+    ('stack', 'motion', ['mover', ('num', '150'), 'pasos']),
     ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '90'), 'grados']),
-    ('stack', 'motion', ['mover', ('num', '100'), 'pasos']),
+    ('stack', 'motion', ['mover', ('num', '150'), 'pasos']),
     ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '90'), 'grados']),
-    ('stack', 'motion', ['mover', ('num', '100'), 'pasos']),
+    ('stack', 'motion', ['mover', ('num', '150'), 'pasos']),
     ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '90'), 'grados']),
-    ('stack', 'motion', ['mover', ('num', '100'), 'pasos']),
+    ('stack', 'motion', ['mover', ('num', '150'), 'pasos']),
     ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '90'), 'grados']),
 ]
 SIEMPRE03 = [
@@ -223,19 +225,25 @@ s03 = pagina(
         ('El problema que resuelve un bucle',
          '<p>Para recorrer un cuadrado hay que avanzar y girar cuatro veces. Se puede escribir '
          'así, y funciona:</p>' +
-         caja(LARGO03, 'Programa largo: mover 100 pasos y girar 90 grados a la derecha, repetido '
+         caja(LARGO03, 'Programa largo: mover 150 pasos y girar 90 grados a la derecha, repetido '
                        'cuatro veces seguidas', ancho=330,
               pie='Ocho bloques. Y para un pentágono harían falta diez.') +
          '<p>Un <strong>bucle</strong> hace lo mismo con dos bloques. Le dices cuántas veces y '
          'metes dentro lo que se repite:</p>' +
-         caja(P03, 'Programa con bucle: ir a x 0 y 0, apuntar en dirección 90, repetir 4 veces '
-                   'mover 100 pasos y girar 90 grados a la derecha, e iniciar sonido Miau')),
+         caja(P03, 'Programa con bucle: al presionar la tecla 1, ir a x menos 75 y 75, apuntar '
+                   'en dirección 90, repetir 4 veces mover 150 pasos, girar 90 grados a la '
+                   'derecha y esperar 1 segundo, e iniciar sonido Miau')),
 
         ('Cómo funciona',
          secuencia([
-             'El gato se coloca en el centro mirando a la derecha.',
-             'Entra en el <strong>repetir (4)</strong>. Ejecuta lo de dentro: avanza y gira.',
+             'Pulsas la tecla <strong>1</strong> y el gato se coloca en la esquina de arriba a '
+             'la izquierda, mirando a la derecha. Empieza ahí y no en el centro para que la '
+             'figura quepa entera y quede centrada en el escenario.',
+             'Entra en el <strong>repetir (4)</strong>. Ejecuta lo de dentro: avanza, gira y '
+             'espera.',
              'Vuelve arriba y lo hace otra vez. Y otra. Y otra. Cuatro en total.',
+             'La <strong>espera de 1 segundo</strong> sólo está para que puedas ver cada lado. '
+             'Sin ella el gato haría la figura entera de golpe y no te daría tiempo a seguirlo.',
              'Cuando ha dado las cuatro vueltas, <strong>sale</strong> del bucle y sigue con el '
              'bloque de abajo: el maullido.',
              'Como ha girado 90 grados cuatro veces, ha dado una vuelta completa: '
@@ -254,11 +262,16 @@ s03 = pagina(
                   'abierto')),
 
         ('Tu actividad',
-         '<p>Con el mismo programa, cambiando sólo dos números, recorre estas tres figuras:</p>' +
-         tabla(['Figura', 'Repetir', 'Girar', 'Comprobación'],
-               [['Cuadrado', '4', '90', '4 × 90 = 360 ✔'],
-                ['Triángulo', '3', '120', '3 × 120 = 360 ✔'],
-                ['Pentágono', '5', '72', '5 × 72 = 360 ✔']]) +
+         '<p>Monta las tres figuras <strong>en el mismo proyecto</strong>, cada una con su '
+         'tecla: al pulsar <strong>1</strong> sale el cuadrado, al pulsar <strong>2</strong> el '
+         'triángulo y al pulsar <strong>3</strong> el pentágono. Así puedes verlas de una en '
+         'una, y ninguna le estropea la figura a la otra.</p>'
+         '<p>De un programa a otro sólo cambian tres cosas: la tecla, las veces que repite y '
+         'los grados que gira.</p>' +
+         tabla(['Figura', 'Tecla', 'Repetir', 'Girar', 'Comprobación'],
+               [['Cuadrado', '1', '4', '90', '4 × 90 = 360 ✔'],
+                ['Triángulo', '2', '3', '120', '3 × 120 = 360 ✔'],
+                ['Pentágono', '3', '5', '72', '5 × 72 = 360 ✔']]) +
          '<p>¿Ves la regla? <strong>Los grados son 360 dividido entre el número de lados.</strong> '
          'Pruébala con un hexágono (6 lados) sin mirar la tabla.</p>' +
          ojo('El cuadrado no se queda pintado',
@@ -278,10 +291,20 @@ s03 = pagina(
                'no se le puede encajar nada detrás, porque nunca llegaría el turno.</p>')),
 
         ('Lo has conseguido si…',
-         logros(['Has hecho las tres figuras cambiando sólo dos números.',
+         logros(['Al pulsar 1, 2 y 3 sale cada una de las tres figuras.',
                  'Las tres cierran: el gato acaba exactamente donde empezó.',
                  'Sabrías explicar por qué los giros tienen que sumar 360.',
                  'Sabes la diferencia entre <em>repetir (10)</em> y <em>por siempre</em>.'])),
+
+        (None,
+         pista('Un atajo, para el que haya leído hasta aquí',
+               '<p>No hacía falta montar los tres programas bloque a bloque. Haz clic con el '
+               '<strong>botón derecho</strong> sobre el primer montón y dale a '
+               '<strong>Duplicar</strong>: sale una copia entera, la sueltas al lado y sólo '
+               'tienes que cambiarle tres cosas — la tecla, las repeticiones y los grados.</p>'
+               '<p style="margin-bottom:0">Si los has montado los tres a mano, tampoco pasa '
+               'nada: ya sabes cómo se hace, y esto lo vas a usar mucho en el proyecto '
+               'final.</p>')),
     ],
     cuadernillo=CUADERNILLO[3])
 
