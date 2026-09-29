@@ -372,7 +372,10 @@ s04 = pagina(
          pasos([
              'Monta el programa tal cual está arriba y compruébalo.',
              'Cambia la condición por <strong>¿ratón presionado?</strong> — está en Sensores, '
-             'y tiene la misma forma de hexágono, así que encaja en el mismo hueco.',
+             'y tiene la misma forma de hexágono, así que encaja en el mismo hueco. Para pararlo, '
+             'haz clic <strong>dentro del escenario</strong>, el recuadro donde está el gato, y '
+             'mantén el botón un momento: Scratch no se entera de los clics que caen fuera, en los '
+             'bloques o en la bandera.',
              'Cambia la condición por <strong>¿tocando (borde)?</strong> El gato se moverá hasta '
              'chocar con el borde y ahí se parará. Para esta versión tendrás que quitar el bloque '
              'de rebotar, o no chocará nunca.']) +
