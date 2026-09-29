@@ -377,8 +377,9 @@ s04 = pagina(
              'mantén el botón un momento: Scratch no se entera de los clics que caen fuera, en los '
              'bloques o en la bandera.',
              'Cambia la condición por <strong>¿tocando (borde)?</strong> El gato se moverá hasta '
-             'chocar con el borde y ahí se parará. Para esta versión tendrás que quitar el bloque '
-             'de rebotar, o no chocará nunca.']) +
+             'chocar con el borde y ahí se parará. El bloque de rebotar ya no hace falta: si lo '
+             'quitas, se para mirando a la pared; si lo dejas, da media vuelta justo antes de '
+             'pararse.']) +
          caja(VAR04, 'Tercera versión: repetir hasta que tocando borde, mover 4 pasos', ancho=380)),
 
         ('Lo has conseguido si…',
