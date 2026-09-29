@@ -109,7 +109,8 @@ clase sin que las presentaciones de la S21 salgan iguales.
   - `PLAN_T1_SCRATCH.md` — el guion de las sesiones y las reglas de estilo del material.
     Ojo: se escribió con 20 sesiones, antes de que entrara la S17 de depuración.
   - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta, con el porqué. Puntos 1-11 de la
-    reescritura; 12-20 de la ronda de arreglos posterior; 31, el exportador a `.sb3`.
+    reescritura; 12-20 de la ronda de arreglos posterior; 31, el exportador a `.sb3`; 32, la S17 y
+    la renumeración; 33, la caja «⭐ Si te ha sobrado tiempo» (`ampliaciones.py`).
   - `REVISION_T1_SESIONES.md` — la revisión pedagógica de las 20 sesiones de entonces: qué fallaba, qué se
     arregló y qué queda.
   - `pruebas-t3/` — el test de T3 (`node test_academia.js`, 2120 comprobaciones sobre las 32

@@ -416,3 +416,37 @@ ejecutándolos** en scratch.mit.edu, no sólo leídos.
 uno en uno haciendo clic sobre el montón de bloques de cada objeto, que es exactamente la
 técnica que se enseña. La limitación hace de ejercicio.
 
+## 33. Una caja «⭐ Si te ha sobrado tiempo» al final de «Tu actividad» en S01–S17
+
+De la revisión de septiembre de 2026, con las entregas de las dos primeras sesiones ya
+corregidas: hay tres parejas que acaban antes y hacen más de lo que se pide (mensajes en la
+S01, un segundo personaje que contesta), y hasta ahora lo que hacían dependía de que se les
+ocurriera algo. Manuel dio el visto bueno sólo a esto de todo lo propuesto para T1; lo
+demás (separar mejor ejemplo y entrega, la norma de identificarse en el bocadillo, recortes
+en S07/S09/S14) queda apuntado y sin hacer, por decisión suya.
+
+**La regla para escribirlas.** Lo que ya saben más **un bloque nuevo como mucho**, y que
+quepa en los diez minutos que le sobran al que termina. Cuando la sesión ya traía un «Reto»
+en los pasos, la ampliación es otra cosa distinta, no la misma con otro nombre (S08 ya pedía
+la división: la caja pide la media y el resto; S16 ya pedía el récord: la caja pide el efecto
+de color). Y siempre con lo que la sesión tiene de verdad: en la S15 la pelota aún rebota en
+los cuatro bordes y la pala no cuenta puntos hasta la S16, así que el «Pong para dos» que
+salía en la revisión no funciona ahí y se cambió por la pala con teclas y las dos pelotas.
+
+**No se entrega ni cuenta.** La caja lo dice en su primera línea, y pide que lo que se haga
+vaya en el mismo `.sb3`: así el profesor lo ve al corregir sin abrir una segunda entrega, que
+es como se marca al alumnado aventajado.
+
+**Un solo archivo, y la plantilla la coloca.** Los diecisiete textos están en
+`ampliaciones.py` y `plantilla.pagina()` los cuelga al final de la sección «Tu actividad» de
+la sesión que corresponda. Quitar una ampliación es borrar su entrada y regenerar; no hay que
+tocar los `gen_*`. Si una sesión tuviera ampliación y no esa sección, la plantilla falla en
+vez de perder la caja en silencio. `test_sesiones.js` comprueba que hay una caja en cada una
+de las diecisiete, ninguna en el proyecto final, que va dentro de «Tu actividad» y que es lo
+último de la sección.
+
+**De paso, dos cosas del exportador.** Las entradas del `.sb3` llevan fecha fija: antes cada
+regeneración cambiaba los bytes del zip sin cambiar el proyecto y git veía modificados
+archivos que no lo estaban. Y el sombrero `al presionar tecla [1]` de la S03 no tenía
+traducción a Scratch, así que `gen_sb3.py --todos` fallaba desde el cambio de la S03; ahora
+sale como `event_whenkeypressed`.

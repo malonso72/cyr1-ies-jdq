@@ -75,6 +75,14 @@
   details.pista>summary::before{content:"\25B8 ";}
   details.pista[open]>summary::before{content:"\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  /* «Si te ha sobrado tiempo»: la ampliación para el que acaba antes. Ver ampliaciones.py. */
+  .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
+    padding:12px 16px 6px;margin:18px 0 6px;}
+  .sobra-tiempo h3{margin:0 0 4px;font-size:1.02rem;color:#4E2A84;}
+  .sobra-tiempo .st-intro{font-size:.88rem;color:#5B5470;margin:0 0 8px;}
+  .sobra-tiempo ul{margin:0;padding-left:20px;}
+  .sobra-tiempo li{margin-bottom:8px;}
+  .sobra-tiempo li b{color:#4E2A84;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -169,6 +177,14 @@
 </ol><div class="aviso-ojo">
   <h3>⚠️ De momento la pelota rebota también abajo</h3>
 <p>Con <em>si toca un borde, rebotar</em>, la pelota rebota en los <strong>cuatro</strong> bordes, incluido el de abajo. Eso significa que ahora mismo es imposible perder: la pala no sirve para nada.</p><p style="margin-bottom:0">Está bien así. En la sesión siguiente le quitarás ese rebote de abajo y ahí es donde el juego se convierte en un juego.</p>
+</div>
+<div class="sobra-tiempo">
+  <h3>⭐ Si te ha sobrado tiempo</h3>
+  <p class="st-intro">Sólo si has terminado la actividad y ya la has descargado. Esto no se pide, pero si lo haces, déjalo en el mismo proyecto: así lo veo al corregir.</p>
+  <ul>
+  <li><b>La pala con teclas.</b> Cambia el <em>ir a x: (posición x del ratón)</em> por lo de la sesión 5: si la tecla <strong>A</strong> está presionada, <em>cambiar x por −10</em>; si la <strong>D</strong>, <em>cambiar x por 10</em>. Cuando en la sesión 16 la pala cuente puntos, con esto tendrás la mitad de un Pong para dos.</li>
+  <li><b>Dos pelotas.</b> Clic derecho sobre la pelota, <strong>duplicar</strong>, y a la copia cámbiale la dirección de salida (por ejemplo 200) y el tamaño. Ningún bloque nuevo, y el escenario cambia por completo.</li>
+  </ul>
 </div>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>

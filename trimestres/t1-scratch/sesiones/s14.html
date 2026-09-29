@@ -75,6 +75,14 @@
   details.pista>summary::before{content:"\25B8 ";}
   details.pista[open]>summary::before{content:"\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  /* «Si te ha sobrado tiempo»: la ampliación para el que acaba antes. Ver ampliaciones.py. */
+  .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
+    padding:12px 16px 6px;margin:18px 0 6px;}
+  .sobra-tiempo h3{margin:0 0 4px;font-size:1.02rem;color:#4E2A84;}
+  .sobra-tiempo .st-intro{font-size:.88rem;color:#5B5470;margin:0 0 8px;}
+  .sobra-tiempo ul{margin:0;padding-left:20px;}
+  .sobra-tiempo li{margin-bottom:8px;}
+  .sobra-tiempo li b{color:#4E2A84;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -170,6 +178,13 @@
 </div><div class="aviso-ojo">
   <h3>⚠️ Cuidado con lo que escribe el jugador</h3>
 <p>El programa compara textos, así que «Piedra» con mayúscula, «piedra » con un espacio detrás o «tijeras» en plural <strong>no coinciden</strong> y el juego dirá que has perdido.</p><p style="margin-bottom:0">Por eso el bloque de preguntar dice exactamente qué hay que escribir. Si quieres afinar, hay quien pide un número (1, 2 o 3) en vez de una palabra: menos bonito, pero mucho más difícil de equivocar.</p>
+</div>
+<div class="sobra-tiempo">
+  <h3>⭐ Si te ha sobrado tiempo</h3>
+  <p class="st-intro">Sólo si has terminado la actividad y ya la has descargado. Esto no se pide, pero si lo haces, déjalo en el mismo proyecto: así lo veo al corregir.</p>
+  <ul>
+  <li><b>Que la máquina enseñe lo que ha sacado.</b> Dibújale al personaje tres disfraces y llámalos exactamente <strong>piedra</strong>, <strong>papel</strong> y <strong>tijera</strong>. Después del sorteo, pon <em>cambiar disfraz a</em> con la variable <code>maquina</code> en el hueco: Scratch busca el disfraz que tenga ese nombre. Sin bloques nuevos.</li>
+  </ul>
 </div>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>

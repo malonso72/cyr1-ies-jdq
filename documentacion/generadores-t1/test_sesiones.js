@@ -113,6 +113,33 @@ function ok(cond, msg) {
          P + 'no se resalta la respuesta correcta');
     }
 
+    // la ampliación «Si te ha sobrado tiempo»: una caja en S01–S17, ninguna en el proyecto
+    // final, siempre dentro de «Tu actividad» y con al menos un ítem con título y cuerpo
+    const ampl = q('.sobra-tiempo');
+    if (n <= 17) {
+      ok(ampl.length === 1, P + 'debe haber exactamente 1 caja de ampliación, hay ' + ampl.length);
+      if (ampl.length === 1) {
+        const caja = ampl[0];
+        ok(/^⭐ /.test(caja.querySelector('h3')?.textContent || ''), P + 'la ampliación no lleva el título con ⭐');
+        ok(!!caja.querySelector('.st-intro'), P + 'la ampliación no dice que es opcional');
+        const items = [...caja.querySelectorAll('li')];
+        ok(items.length >= 1 && items.length <= 2, P + 'la ampliación tiene ' + items.length + ' ítems (1 o 2)');
+        items.forEach((li, i) => {
+          ok((li.querySelector('b')?.textContent || '').length > 3, P + 'ítem ' + i + ' de ampliación sin título');
+          ok(li.textContent.length > 80, P + 'ítem ' + i + ' de ampliación demasiado corto');
+        });
+        // la h2 anterior más cercana tiene que ser «Tu actividad»
+        let prev = caja.previousElementSibling;
+        while (prev && prev.tagName !== 'H2') prev = prev.previousElementSibling;
+        ok(prev && /Tu actividad/.test(prev.textContent), P + 'la ampliación no está en «Tu actividad»');
+        // y nada de la actividad puede venir después de la caja
+        let next = caja.nextElementSibling;
+        ok(!next || next.tagName === 'H2', P + 'la ampliación no es lo último de «Tu actividad»');
+      }
+    } else {
+      ok(ampl.length === 0, P + 'el proyecto final no lleva caja de ampliación');
+    }
+
     // entrega y navegación
     ok(/Moodle/.test(d.body.textContent), P + 'no menciona Moodle');
     ok(!!d.querySelector('.entrega'), P + 'falta el bloque de entrega');

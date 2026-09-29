@@ -29,9 +29,15 @@ import zipfile
 # fijos, menús-sombra y el tipo de sombra de cada entrada.
 N, P, W, A, T = 'num', 'pos', 'whole', 'angle', 'text'   # tipos de sombra numérica/texto
 
+# Nombres de tecla del editor en español -> valor interno de Scratch. Las teclas de una
+# letra o un dígito (1, 2, a…) se llaman igual en los dos sitios.
+TECLAS = {'espacio': 'space', 'flecha derecha': 'right arrow', 'flecha izquierda': 'left arrow',
+          'flecha arriba': 'up arrow', 'flecha abajo': 'down arrow', 'cualquiera': 'any'}
+
 TABLA = {
     # eventos
     ('hat', 'al hacer clic en <bandera>'): ('event_whenflagclicked', [], {}),
+    ('hat', 'al presionar tecla []'): ('event_whenkeypressed', [], {'campo': ('KEY_OPTION', TECLAS)}),
     ('hat', 'al recibir []'): ('event_whenbroadcastreceived', [], {'campo_broadcast': 'BROADCAST_OPTION'}),
     ('stack', 'enviar []'): ('event_broadcast', [], {'input_broadcast': 'BROADCAST_INPUT'}),
     # control
@@ -76,9 +82,7 @@ TABLA = {
     ('rep', 'cronómetro'): ('sensing_timer', [], {}),
     ('rep', 'posición x del ratón'): ('sensing_mousex', [], {}),
     ('rep', 'posición y del ratón'): ('sensing_mousey', [], {}),
-    ('bool', '¿tecla [] presionada?'): ('sensing_keypressed', [], {'menu': ('KEY_OPTION', 'sensing_keyoptions', 'KEY_OPTION', {
-        'espacio': 'space', 'flecha derecha': 'right arrow', 'flecha izquierda': 'left arrow',
-        'flecha arriba': 'up arrow', 'flecha abajo': 'down arrow', 'cualquiera': 'any'})}),
+    ('bool', '¿tecla [] presionada?'): ('sensing_keypressed', [], {'menu': ('KEY_OPTION', 'sensing_keyoptions', 'KEY_OPTION', TECLAS)}),
     ('bool', '¿tocando [] ?'): ('sensing_touchingobject', [], {'menu': ('TOUCHINGOBJECTMENU', 'sensing_touchingobjectmenu', 'TOUCHINGOBJECTMENU', {
         'borde': '_edge_', 'puntero del ratón': '_mouse_'})}),
     ('bool', '¿tocando el color _ ?'): ('sensing_touchingcolor', [('COLOR', 'color')], {}),
@@ -372,11 +376,22 @@ def proyecto(objetos, fondos=None, sonidos_fondo=(), scripts_fondo=(), variables
     return pj, assets
 
 
+# Fecha fija para las entradas del zip: así el .sb3 sale byte a byte igual cada vez que se
+# regenera y git no ve cambios donde no los hay (Scratch ignora estas fechas).
+_FECHA_ZIP = (2026, 9, 1, 0, 0, 0)
+
+
+def _entrada(nombre):
+    zi = zipfile.ZipInfo(nombre, date_time=_FECHA_ZIP)
+    zi.compress_type = zipfile.ZIP_DEFLATED
+    return zi
+
+
 def escribir_sb3(ruta, pj, assets):
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as z:
-        z.writestr('project.json', json.dumps(pj, ensure_ascii=False))
+        z.writestr(_entrada('project.json'), json.dumps(pj, ensure_ascii=False))
         for nombre, data in assets.items():
-            z.writestr(nombre, data)
+            z.writestr(_entrada(nombre), data)
     open(ruta, 'wb').write(buf.getvalue())
     return len(buf.getvalue())

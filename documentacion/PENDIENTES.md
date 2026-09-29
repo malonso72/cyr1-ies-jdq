@@ -1,6 +1,6 @@
 # Pendientes · CyR 1.º ESO
 
-Lo que queda por hacer, a **16 de septiembre de 2026**. Lo que ya está hecho no vive aquí: el
+Lo que queda por hacer, a **30 de septiembre de 2026**. Lo que ya está hecho no vive aquí: el
 estado del sitio está en `CLAUDE.md`, el porqué de cada decisión en `DECISIONES*.md` y el
 historial completo en el log de git.
 
@@ -23,6 +23,22 @@ historial completo en el log de git.
   de cada hub con los descriptores de Andalucía.
 - [ ] **«Saber / hacer / evaluar»** de los tres hubs: son una primera aproximación; ajustarlos a
   la programación oficial del departamento.
+
+## De la revisión de septiembre (T1), pendientes de que Manuel diga
+
+Propuestas de la tercera revisión que Manuel prefirió **no** aplicar por ahora. Se anotan para
+no volver a proponerlas como nuevas:
+
+- Separar mejor el ejemplo de lo que se entrega (una línea fija en «Lo que vas a conseguir» y
+  otro pie en la caja del ejemplo). Su criterio: el problema es que no leen, y eso no se arregla
+  con más texto.
+- La norma «el personaje dice quiénes sois» desde la S01, en vez de insistir en el nombre del
+  archivo. Su criterio: si lo del nombre no funciona, es cuestión de insistir.
+- Recortes en S07 (dos preguntas en vez de tres), S09 y S14 (el paso 4 como ampliación) y los
+  quince minutos de Scratch abierto al final de la S18.
+- El `esperar 0.05` en la carrera de la S10: decisión suya viendo la clase.
+- **Miau o Meow** en S01, S02, S03, S05 y la presentación: mirar el desplegable en la pantalla
+  de un alumno. Y el **título de la S04** («Condicionales I») cuando la cree en Moodle.
 
 ## Del material
 

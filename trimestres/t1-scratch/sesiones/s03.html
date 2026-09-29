@@ -75,6 +75,14 @@
   details.pista>summary::before{content:"\25B8 ";}
   details.pista[open]>summary::before{content:"\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  /* «Si te ha sobrado tiempo»: la ampliación para el que acaba antes. Ver ampliaciones.py. */
+  .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
+    padding:12px 16px 6px;margin:18px 0 6px;}
+  .sobra-tiempo h3{margin:0 0 4px;font-size:1.02rem;color:#4E2A84;}
+  .sobra-tiempo .st-intro{font-size:.88rem;color:#5B5470;margin:0 0 8px;}
+  .sobra-tiempo ul{margin:0;padding-left:20px;}
+  .sobra-tiempo li{margin-bottom:8px;}
+  .sobra-tiempo li b{color:#4E2A84;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -171,6 +179,14 @@
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 196" width="210" height="196" class="bloques" role="img" aria-label="Programa: al hacer clic en la bandera, por siempre mover 4 pasos y si toca un borde rebotar"><title>Programa: al hacer clic en la bandera, por siempre mover 4 pasos y si toca un borde rebotar</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L194.4 62.0 Q200.4 62.0 200.4 68.0 L200.4 90.0 Q200.4 96.0 194.4 96.0 L58.0 96.0 L54.0 100.0 L42.0 100.0 L38.0 96.0 L30.0 96.0 Q24.0 96.0 24.0 102.0 L24.0 158.0 Q24.0 164.0 30.0 164.0 L194.4 164.0 Q200.4 164.0 200.4 170.0 L200.4 176.0 Q200.4 182.0 194.4 182.0 L44.0 182.0 L40.0 186.0 L28.0 186.0 L24.0 182.0 L16.0 182.0  Q10.0 182.0 10.0 176.0 Z" fill="#FFAB19"/><text x="22.0" y="83.6" class="sb-t" textLength="74.4" lengthAdjust="spacingAndGlyphs">por siempre</text><path d="M24.0 102.0 Q24.0 96.0 30.0 96.0 L38.0 96.0 L42.0 100.0 L54.0 100.0 L58.0 96.0  L162.6 96.0 Q168.6 96.0 168.6 102.0 L168.6 124.0 Q168.6 130.0 162.6 130.0 L58.0 130.0 L54.0 134.0 L42.0 134.0 L38.0 130.0 L30.0 130.0  Q24.0 130.0 24.0 124.0 Z" fill="#4C97FF"/><text x="36.0" y="117.6" class="sb-t" textLength="39.0" lengthAdjust="spacingAndGlyphs">mover</text><rect x="82.0" y="103.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="97.0" y="117.3" class="sb-n">4</text><text x="119.0" y="117.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">pasos</text><path d="M24.0 136.0 Q24.0 130.0 30.0 130.0 L38.0 130.0 L42.0 134.0 L54.0 134.0 L58.0 130.0  L194.4 130.0 Q200.4 130.0 200.4 136.0 L200.4 158.0 Q200.4 164.0 194.4 164.0 L30.0 164.0 Q24.0 164.0 24.0 158.0 Z" fill="#4C97FF"/><text x="36.0" y="151.6" class="sb-t" textLength="152.4" lengthAdjust="spacingAndGlyphs">si toca un borde, rebotar</text></svg>
 </div><p style="margin-bottom:0">Fíjate en que <strong>no tiene muesca abajo</strong>: no se le puede encajar nada detrás, porque nunca llegaría el turno.</p></div>
 </details>
+<div class="sobra-tiempo">
+  <h3>⭐ Si te ha sobrado tiempo</h3>
+  <p class="st-intro">Sólo si has terminado la actividad y ya la has descargado. Esto no se pide, pero si lo haces, déjalo en el mismo proyecto: así lo veo al corregir.</p>
+  <ul>
+  <li><b>Que se vea lo que dibuja: la extensión Lápiz.</b> Pulsa el botón azul de abajo a la izquierda, <strong>Añadir extensión</strong>, y elige <strong>Lápiz</strong>. Aparece una categoría verde nueva. Pon <strong>bajar lápiz</strong> justo después del <em>ir a x: y:</em> en los tres programas, y <strong>borrar todo</strong> al principio de cada uno. Pulsa 1, 2 y 3: ahora las figuras se quedan dibujadas.</li>
+  <li><b>La flor.</b> Con el lápiz bajado, un cuarto programa con la tecla 4: <strong>repetir 36</strong> con <em>mover 100 pasos</em> y <em>girar 100 grados</em> dentro, y sin la espera. Antes de pulsar, intenta adivinar qué va a salir.</li>
+  </ul>
+</div>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">

@@ -6,6 +6,7 @@ estructura, para que la sesión 21 tenga el mismo criterio que la sesión 1.
 """
 import html as _html
 from scratchsvg import script_svg
+from ampliaciones import caja_ampliacion
 
 RAIZ = '../../../'          # desde trimestres/t1-scratch/sesiones/
 CUAD = '../materiales/cuadernillo-scratch-parte-1.pdf'
@@ -149,6 +150,14 @@ CSS = '''
   details.pista>summary::before{content:"\\25B8 ";}
   details.pista[open]>summary::before{content:"\\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  /* «Si te ha sobrado tiempo»: la ampliación para el que acaba antes. Ver ampliaciones.py. */
+  .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
+    padding:12px 16px 6px;margin:18px 0 6px;}
+  .sobra-tiempo h3{margin:0 0 4px;font-size:1.02rem;color:#4E2A84;}
+  .sobra-tiempo .st-intro{font-size:.88rem;color:#5B5470;margin:0 0 8px;}
+  .sobra-tiempo ul{margin:0;padding-left:20px;}
+  .sobra-tiempo li{margin-bottom:8px;}
+  .sobra-tiempo li b{color:#4E2A84;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -308,6 +317,12 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
     `cuadernillo` es el número de página del PDF, o None.
     """
     nn = '%02d' % num
+    # La ampliación de la sesión (ampliaciones.py) se cuelga al final de «Tu actividad».
+    # Si la sesión tiene ampliación pero no esa sección, mejor enterarse ahora que verlo
+    # desaparecer sin ruido.
+    ampl = caja_ampliacion(num)
+    if ampl and not any(t == 'Tu actividad' for t, _ in secciones):
+        raise ValueError('la sesión %d tiene ampliación pero no sección «Tu actividad»' % num)
     cuerpo = []
     n = 0
     for tit, cont in secciones:
@@ -316,6 +331,8 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
             cuerpo.append(cont)
         else:
             n += 1
+            if tit == 'Tu actividad' and ampl:
+                cont = cont + '\n' + ampl
             cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (n, tit, cont))
 
     nav = []
