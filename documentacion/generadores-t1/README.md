@@ -16,7 +16,8 @@ Desde esta misma carpeta:
 python3 gen_s01_s05.py     # sesiones 01 a 05
 python3 gen_s06_s11.py     # sesiones 06 a 11
 python3 gen_s12_s16.py     # sesiones 12 a 16
-python3 gen_s17_s20.py     # sesiones 17 a 20 (proyecto final)
+python3 gen_s17_depuracion.py  # sesión 17 (depuración) + depuracion.sb3
+python3 gen_s18_s21.py     # sesiones 18 a 21 (proyecto final)
 python3 gen_proyectos.py   # las tres bases del proyecto final + el índice de juegos
 python3 gen_presentacion.py # la presentación inicial, para proyectar
 python3 gen_indices.py     # índice de sesiones + hub del trimestre

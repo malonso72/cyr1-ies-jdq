@@ -20,7 +20,7 @@ TITULOS = {
 QUE_HACES = {
     1: 'Montas tu primer programa y aprendes a descargarlo para entregarlo.',
     2: 'Recorres un cuadrado y vuelves justo al punto de partida.',
-    3: 'Cuadrado, triángulo y pentágono cambiando sólo dos números.',
+    3: 'Cuadrado, triángulo y pentágono con las teclas 1, 2 y 3, cambiando sólo tres números.',
     4: 'Un bucle que vigila y se para cuando tú se lo dices.',
     5: 'Mueves el personaje con las cuatro flechas del teclado.',
     6: 'Consigues que el personaje camine de verdad, no que patine.',

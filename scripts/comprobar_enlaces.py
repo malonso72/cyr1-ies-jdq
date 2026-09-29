@@ -26,7 +26,7 @@ except Exception:
 # para que glob('**/*.html') solo recorra ESTE sitio, no los hermanos.
 os.chdir(Path(__file__).resolve().parent.parent)
 
-EXCLUDE = ["documentacion/", "_soluciones/", ".git/", "node_modules/", ".wrangler/", "assets/templates/"]
+EXCLUDE = ["documentacion/", "_soluciones/", ".git/", "node_modules/", ".wrangler/", "assets/templates/", "Claude outputs/"]
 
 def main():
     # Normaliza separadores a '/' para que las exclusiones funcionen

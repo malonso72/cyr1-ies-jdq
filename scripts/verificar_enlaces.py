@@ -35,7 +35,8 @@ except Exception:
     pass
 
 ROOT = Path(__file__).resolve().parent.parent
-EXCLUDE_DIRS = {'templates', 'node_modules'}
+# 'Claude outputs' está en .gitignore y .assetsignore: ni se versiona ni se publica.
+EXCLUDE_DIRS = {'templates', 'node_modules', 'Claude outputs'}
 
 
 def listar_htmls() -> list[Path]:
