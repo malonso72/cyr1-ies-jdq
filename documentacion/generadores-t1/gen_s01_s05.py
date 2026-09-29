@@ -310,7 +310,8 @@ s03 = pagina(
 
 # ============================================================ S04
 P04 = [
-    BANDERA,
+    ('hat', 'events', ['al presionar tecla', ('drop', 'flecha arriba')]),
+    ('stack', 'motion', ['fijar estilo de rotación a', ('drop', 'no rotar')]),
     ('stack', 'motion', ['ir a x:', ('num', '0'), 'y:', ('num', '0')]),
     ('c', 'control', ['repetir hasta que', tecla('espacio')], [
         ('stack', 'motion', ['mover', ('num', '4'), 'pasos']),
@@ -339,12 +340,17 @@ s04 = pagina(
              'previo, y el nombre viene del cuadernillo antiguo.</p>')),
 
         ('Lee este programa',
-         caja(P04, 'Programa: ir a x 0 y 0, repetir hasta que la tecla espacio esté presionada '
+         caja(P04, 'Programa: al presionar la tecla flecha arriba, fijar estilo de rotación a no '
+                   'rotar, ir a x 0 y 0, repetir hasta que la tecla espacio esté presionada '
                    'moviendo 4 pasos y rebotando en los bordes, después decir ¡Me has parado! '
                    'durante 2 segundos y detener todos',
               pie='El bloque azul claro con forma de hexágono es una <strong>condición</strong>: '
                   'sólo puede valer sí o no. Encaja únicamente en huecos de esa misma forma.') +
          secuencia([
+             'Pulsas la <strong>flecha arriba</strong> y el programa arranca. Hoy no se usa la '
+             'bandera: cada programa tendrá su tecla, como las figuras de la sesión 3.',
+             'El <strong>estilo de rotación</strong> es el de la sesión 2: sin él, cada vez que '
+             'el gato rebote hacia la izquierda se pondrá boca abajo.',
              'El gato empieza en el centro.',
              '<strong>repetir hasta que</strong> mira la condición <em>antes de cada vuelta</em>: '
              '¿está pulsada la barra espaciadora?',
@@ -368,24 +374,39 @@ s04 = pagina(
                   'siempre')),
 
         ('Tu actividad',
-         '<p>Haz estas tres versiones, una detrás de otra. Descarga sólo la última.</p>' +
+         '<p>Monta las <strong>tres versiones en el mismo proyecto</strong>, cada una con su '
+         'tecla, como hiciste con las figuras de la sesión 3. Los tres programas son iguales '
+         'salvo la condición del <em>repetir hasta que</em>:</p>' +
+         tabla(['Tecla', 'El gato se para cuando…', 'Condición (en Sensores)'],
+               [['flecha arriba', 'pulsas la barra espaciadora', '¿tecla (espacio) presionada?'],
+                ['flecha abajo', 'haces clic dentro del escenario', '¿ratón presionado?'],
+                ['flecha derecha', 'llega al borde', '¿tocando (borde)?']]) +
          pasos([
-             'Monta el programa tal cual está arriba y compruébalo.',
-             'Cambia la condición por <strong>¿ratón presionado?</strong> — está en Sensores, '
-             'y tiene la misma forma de hexágono, así que encaja en el mismo hueco. Para pararlo, '
-             'haz clic <strong>dentro del escenario</strong>, el recuadro donde está el gato, y '
-             'mantén el botón un momento: Scratch no se entera de los clics que caen fuera, en los '
-             'bloques o en la bandera.',
-             'Cambia la condición por <strong>¿tocando (borde)?</strong> El gato se moverá hasta '
-             'chocar con el borde y ahí se parará. El bloque de rebotar ya no hace falta: si lo '
-             'quitas, se para mirando a la pared; si lo dejas, da media vuelta justo antes de '
-             'pararse.']) +
-         caja(VAR04, 'Tercera versión: repetir hasta que tocando borde, mover 4 pasos', ancho=380)),
+             'Monta el programa de arriba tal cual y compruébalo: flecha arriba para arrancar, '
+             'espacio para parar.',
+             'Monta el segundo, con la <strong>flecha abajo</strong> en el sombrero y '
+             '<strong>¿ratón presionado?</strong> en el hueco de la condición: tiene la misma forma '
+             'de hexágono, así que encaja igual. Para pararlo, haz clic <strong>dentro del '
+             'escenario</strong>, el recuadro donde está el gato, y mantén el botón un momento: '
+             'Scratch no se entera de los clics que caen fuera, en los bloques o en la bandera.',
+             'Monta el tercero, con la <strong>flecha derecha</strong> y <strong>¿tocando '
+             '(borde)?</strong>. El gato se mueve hasta chocar con el borde y ahí se para. El bloque '
+             'de rebotar ya no hace falta: si lo quitas, se para mirando a la pared; si lo dejas, da '
+             'media vuelta justo antes de pararse.']) +
+         caja(VAR04, 'Tercera versión: repetir hasta que tocando borde, mover 4 pasos', ancho=380) +
+         ojo('Una tecla a la vez',
+             '<p>Espera a que el gato diga «¡Me has parado!» antes de pulsar la siguiente flecha. '
+             'Si pulsas otra mientras un programa está corriendo, los dos mueven al gato a la vez '
+             '(8 pasos por vuelta en vez de 4) hasta que uno termina y su <em>detener todos</em> '
+             'apaga los dos. Si se lía, el círculo rojo lo para todo.</p>')),
 
         ('Lo has conseguido si…',
-         logros(['El gato se mueve y rebota hasta que pulsas espacio.',
+         logros(['Con la flecha arriba, el gato se mueve y rebota hasta que pulsas espacio.',
+                 'Con la flecha abajo se para al hacer clic en el escenario; con la derecha, al '
+                 'llegar al borde.',
+                 'El gato no se pone boca abajo al rebotar.',
                  'Al pararse, dice algo y el programa termina.',
-                 'Has probado las tres condiciones distintas en el mismo hueco.',
+                 'Los tres programas están en el mismo proyecto, y es ese el que entregas.',
                  'Sabrías explicar la diferencia entre <em>repetir (10)</em> y '
                  '<em>repetir hasta que</em>.'])),
     ],

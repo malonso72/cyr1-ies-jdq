@@ -450,3 +450,28 @@ regeneración cambiaba los bytes del zip sin cambiar el proyecto y git veía mod
 archivos que no lo estaban. Y el sombrero `al presionar tecla [1]` de la S03 no tenía
 traducción a Scratch, así que `gen_sb3.py --todos` fallaba desde el cambio de la S03; ahora
 sale como `event_whenkeypressed`.
+
+## 34. La S04 pasa a entregarse como la S03: tres programas, una tecla cada uno
+
+Manuel probó la sesión antes de darla y montó las tres versiones en el mismo proyecto, cada
+una con su flecha (arriba: espacio; abajo: ratón; derecha: borde). Es mejor que lo que pedía
+la página —«haz las tres versiones una detrás de otra y descarga sólo la última»—, porque
+así al corregir se ven las tres y no una, y porque es el mismo truco que acaban de aprender
+en la S03. Se deja con las flechas y no con 1, 2 y 3, por variar, a petición suya.
+
+**El estilo de rotación entra en el programa de ejemplo.** Un gato que rebota se pone boca
+abajo cada vez que va hacia la izquierda; el bloque lo aprendieron en la S02 y la idea es ir
+usando lo que ya saben, así que va justo debajo del sombrero, donde iba en la S02.
+
+**Dos cosas que la prueba real dejó claras y la página decía mal o no decía.** Que
+`¿ratón presionado?` sólo se entera de los clics que caen dentro del escenario (el paso lo
+dice ahora). Y que en la tercera versión **no hace falta quitar el rebote**: la página
+afirmaba que con él «no chocará nunca», y ejecutado en el editor el gato rebota, da media
+vuelta y en la siguiente vuelta del bucle `¿tocando borde?` ya es verdad, así que se para
+igual. Ese error estaba también en la ampliación de la sesión, y se ha quitado de los dos
+sitios. La lección para el taller: lo que se afirme sobre cómo se comporta Scratch se prueba
+en el editor antes de escribirlo.
+
+**Un aviso nuevo, «una tecla a la vez».** Con tres programas sobre el mismo gato, pulsar una
+flecha mientras otra versión corre hace que los dos lo muevan a la vez hasta que uno termina
+y su `detener todos` apaga los dos. No es un fallo, pero va a pasar en clase.

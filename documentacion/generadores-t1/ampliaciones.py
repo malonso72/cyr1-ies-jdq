@@ -41,12 +41,12 @@ AMPLIACIONES = {
          '<em>mover 100 pasos</em> y <em>girar 100 grados</em> dentro, y sin la espera. Antes de '
          'pulsar, intenta adivinar qué va a salir.')],
 
-    4: [('Que se pare por lo que pase primero',
-         'Tienes una versión que se para con el espacio y otra que se para en el borde. Júntalas: '
-         'que se pare por <strong>cualquiera de las dos cosas</strong>, la que pase antes. El '
-         'bloque nuevo es el operador verde <strong>&lt; &gt; o &lt; &gt;</strong>: tiene dos '
-         'huecos hexagonales, y en cada uno metes una condición. Quita el rebote, como en la '
-         'tercera versión, o no llegará nunca al borde.')],
+    4: [('Una cuarta flecha: que se pare por lo que pase primero',
+         'Tienes una versión que se para con el espacio y otra que se para en el borde. Júntalas '
+         'en un cuarto programa, con la <strong>flecha izquierda</strong>: que se pare por '
+         '<strong>cualquiera de las dos cosas</strong>, la que pase antes. El bloque nuevo es el '
+         'operador verde <strong>&lt; &gt; o &lt; &gt;</strong>, de Operadores: tiene dos huecos '
+         'hexagonales, y en cada uno metes una condición.')],
 
     5: [('Dos jugadores en el mismo escenario',
          'Añade un <strong>segundo personaje</strong> y móntale el mismo programa, pero con las '
