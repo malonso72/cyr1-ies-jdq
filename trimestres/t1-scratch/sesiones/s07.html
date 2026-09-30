@@ -75,6 +75,13 @@
   details.pista>summary::before{content:"\25B8 ";}
   details.pista[open]>summary::before{content:"\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  .ej-main h3.sub{font-family:'Barlow Condensed',sans-serif;font-size:1.18rem;color:#1B4F8A;margin:22px 0 8px;}
+  .ej-main h3.sub .subn{display:inline-block;min-width:2.4em;margin-right:6px;padding:1px 7px;border-radius:6px;
+    background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
+  .ej-main h2 + h3.sub{margin-top:8px;}
+  .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
+  .rp-ok b{color:#1A6B3A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -83,6 +90,23 @@
   .sobra-tiempo ul{margin:0;padding-left:20px;}
   .sobra-tiempo li{margin-bottom:8px;}
   .sobra-tiempo li b{color:#4E2A84;}
+  /* «Reto: del papel a los bloques»: seudocódigo sin dibujo. Ver pseudocodigo.py. */
+  .reto-pseudo{border:2px solid #1B4F8A;background:#fff;border-radius:10px;padding:12px 16px 10px;margin:16px 0 6px;}
+  .reto-pseudo h3{margin:0 0 4px;font-size:1.02rem;color:#1B4F8A;}
+  .reto-pseudo .rp-intro{font-size:.88rem;color:#555D6B;margin:0 0 10px;}
+  .reto-pseudo .rp-plan{margin:0 0 8px;}
+  .reto-pseudo .rp-plan b{color:#1B4F8A;}
+  ol.pseudo{list-style:none;margin:0 0 10px;padding:10px 14px;background:#F4F6F9;border:1px solid #D8DDE5;
+    border-radius:8px;font-family:'Barlow',system-ui,sans-serif;font-size:1rem;line-height:1.75;counter-reset:linea;}
+  ol.pseudo li{position:relative;padding-left:2em;}
+  ol.pseudo li::before{counter-increment:linea;content:counter(linea);position:absolute;left:0;top:0;
+    width:1.5em;text-align:right;color:#8A94A6;font-size:.8rem;font-variant-numeric:tabular-nums;}
+  ol.pseudo li.n1{margin-left:1.6em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n2{margin-left:3.2em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n3{margin-left:4.8em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n1::before,ol.pseudo li.n2::before,ol.pseudo li.n3::before{left:-1.9em;}
+  .reto-pseudo .rp-ok{margin:0;font-size:.95rem;}
+  .reto-pseudo .rp-ok b{color:#1A6B3A;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -168,6 +192,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<h3 class="sub"><span class="subn">4.1</span>Construye el diálogo</h3>
 <p>Construye un <strong>diálogo de tres preguntas</strong>. Después de cada una, el personaje tiene que contestar usando lo que has escrito.</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Pregunta</th><th scope="col">Y el personaje responde algo como…</th></tr></thead><tbody><tr><td>¿Cómo te llamas?</td><td>«Encantado, <em>Lucía</em>»</td></tr><tr><td>¿Cuál es tu color favorito?</td><td>«El <em>verde</em> también me gusta a mí»</td></tr><tr><td>¿Qué has desayunado?</td><td>«¿<em>Tostadas</em>? Yo prefiero el pescado»</td></tr></tbody></table></div><p>Fíjate en que en cada frase hay <strong>un trozo fijo</strong> y <strong>un trozo que cambia</strong>. Ese es justo el trabajo del bloque <strong>unir</strong>.</p><details class="pista">
   <summary>Reto: pegar tres trozos en vez de dos</summary>
   <div class="cuerpo"><p><strong>unir</strong> sólo admite dos huecos. Para juntar tres trozos hay que meter un <strong>unir</strong> dentro de otro: en el segundo hueco del primero, colocas otro <strong>unir</strong> completo. Se puede repetir tantas veces como quieras.</p></div>
@@ -175,13 +200,8 @@
   <h3>⚠️ El texto por defecto no es el del cuadernillo</h3>
 <p>Cuando coges el bloque de la paleta, ya viene escrito <strong>¿Cómo te llamas?</strong> Tu cuadernillo dice «¿Cuál es tu nombre?», que no es lo que verás. Da igual: puedes escribir dentro lo que quieras.</p>
 </div>
-<div class="sobra-tiempo">
-  <h3>⭐ Último paso</h3>
-  <p class="st-intro">Este paso es parte de la actividad, igual que los anteriores: hazlo en el mismo proyecto y entrégalo todo junto. Si te atascas, entrega lo que tengas y díselo al profesor.</p>
-  <ul>
-  <li><b>Un personaje que sabe calcular.</b> Añade una cuarta pregunta, <strong>¿Cuántos años tienes?</strong>, y que responda «El año que viene tendrás …» con tu edad <strong>más uno</strong>. El bloque nuevo es el <strong>( ) + ( )</strong> verde, de Operadores: en un hueco va <em>respuesta</em> y en el otro un 1, y el resultado se mete dentro del <em>unir</em>.</li>
-  </ul>
-</div>
+<h3 class="sub"><span class="subn">4.2</span>Haz que el personaje calcule tu edad</h3>
+<p>Añade una cuarta pregunta, <strong>¿Cuántos años tienes?</strong>, y que responda «El año que viene tendrás …» con tu edad <strong>más uno</strong>. El bloque nuevo es el <strong>( ) + ( )</strong> verde, de Operadores: en un hueco va <em>respuesta</em> y en el otro un 1, y el resultado se mete dentro del <em>unir</em>.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -189,11 +209,12 @@
   <li>Cada frase que dice incluye lo que tú acabas de escribir.</li>
   <li>Has usado <em>unir</em> al menos tres veces.</li>
   <li>Sabrías explicar por qué <em>respuesta</em> no se acuerda de la primera pregunta.</li>
-  <li>El último paso de la actividad también está hecho y va en el mismo archivo.</li>
+  <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
+<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

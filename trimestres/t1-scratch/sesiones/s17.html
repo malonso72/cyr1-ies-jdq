@@ -75,6 +75,13 @@
   details.pista>summary::before{content:"\25B8 ";}
   details.pista[open]>summary::before{content:"\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  .ej-main h3.sub{font-family:'Barlow Condensed',sans-serif;font-size:1.18rem;color:#1B4F8A;margin:22px 0 8px;}
+  .ej-main h3.sub .subn{display:inline-block;min-width:2.4em;margin-right:6px;padding:1px 7px;border-radius:6px;
+    background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
+  .ej-main h2 + h3.sub{margin-top:8px;}
+  .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
+  .rp-ok b{color:#1A6B3A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -83,6 +90,23 @@
   .sobra-tiempo ul{margin:0;padding-left:20px;}
   .sobra-tiempo li{margin-bottom:8px;}
   .sobra-tiempo li b{color:#4E2A84;}
+  /* «Reto: del papel a los bloques»: seudocódigo sin dibujo. Ver pseudocodigo.py. */
+  .reto-pseudo{border:2px solid #1B4F8A;background:#fff;border-radius:10px;padding:12px 16px 10px;margin:16px 0 6px;}
+  .reto-pseudo h3{margin:0 0 4px;font-size:1.02rem;color:#1B4F8A;}
+  .reto-pseudo .rp-intro{font-size:.88rem;color:#555D6B;margin:0 0 10px;}
+  .reto-pseudo .rp-plan{margin:0 0 8px;}
+  .reto-pseudo .rp-plan b{color:#1B4F8A;}
+  ol.pseudo{list-style:none;margin:0 0 10px;padding:10px 14px;background:#F4F6F9;border:1px solid #D8DDE5;
+    border-radius:8px;font-family:'Barlow',system-ui,sans-serif;font-size:1rem;line-height:1.75;counter-reset:linea;}
+  ol.pseudo li{position:relative;padding-left:2em;}
+  ol.pseudo li::before{counter-increment:linea;content:counter(linea);position:absolute;left:0;top:0;
+    width:1.5em;text-align:right;color:#8A94A6;font-size:.8rem;font-variant-numeric:tabular-nums;}
+  ol.pseudo li.n1{margin-left:1.6em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n2{margin-left:3.2em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n3{margin-left:4.8em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n1::before,ol.pseudo li.n2::before,ol.pseudo li.n3::before{left:-1.9em;}
+  .reto-pseudo .rp-ok{margin:0;font-size:.95rem;}
+  .reto-pseudo .rp-ok b{color:#1A6B3A;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -178,17 +202,13 @@
 </div>
 
 <h2><span class="h2n">5</span>Tu actividad</h2>
+<h3 class="sub"><span class="subn">5.1</span>Arregla los cinco programas</h3>
 <p><strong>Arregla los cinco.</strong> Uno por uno: lo pruebas, averiguas qué le pasa, lo corriges y lo vuelves a probar hasta que haga lo que promete la ficha.</p><p>Y apunta lo que has hecho. Por cada objeto, <strong>una línea</strong>: qué le pasaba y qué bloque tocaste. Eso es lo que se entrega junto al proyecto, y es lo que de verdad demuestra que lo has entendido.</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Objeto</th><th scope="col">Qué le pasaba</th><th scope="col">Qué hice</th></tr></thead><tbody><tr><td><code>SeVaSolo</code></td><td>…</td><td>…</td></tr><tr><td><code>CabezaAbajo</code></td><td>…</td><td>…</td></tr><tr><td><code>Cuadrado</code></td><td>…</td><td>…</td></tr><tr><td><code>NoAvisa</code></td><td>…</td><td>…</td></tr><tr><td><code>Marcador</code></td><td>…</td><td>…</td></tr></tbody></table></div><details class="pista">
   <summary>¿Te has atascado? Abre las pistas</summary>
   <div class="cuerpo"><p>No son las soluciones: son el sitio donde mirar.</p><ul><li><code>SeVaSolo</code> — ¿de dónde sale? ¿Quién le dice dónde empieza?</li><li><code>CabezaAbajo</code> — el problema no es el movimiento, es el dibujo. Hay un bloque de Movimiento que decide si el disfraz gira o no.</li><li><code>Cuadrado</code> — cuenta los lados que hace y los que tiene un cuadrado.</li><li><code>NoAvisa</code> — ¿cuántas veces se ejecuta ese <em>si</em>? Míralo con atención: ¿está dentro de algo o está suelto?</li><li><code>Marcador</code> — no falla al sumar, falla al empezar. ¿Qué vale <em>Puntos</em> justo antes de que sumes el primero?</li></ul></div>
 </details>
-<div class="sobra-tiempo">
-  <h3>⭐ Último paso</h3>
-  <p class="st-intro">Este paso es parte de la actividad, igual que los anteriores: hazlo en el mismo proyecto y entrégalo todo junto. Si te atascas, entrega lo que tengas y díselo al profesor.</p>
-  <ul>
-  <li><b>Rompe tú un programa.</b> Coge un programa tuyo de otra sesión (el Pong vale) y métele <strong>un solo fallo</strong> de los cinco tipos de hoy, uno que se note al ejecutar. Guárdalo como <code>Roto_TuNombre.sb3</code> y pásaselo a otra pareja que haya terminado (si no hay ninguna, al profesor): tienen que encontrarlo con el método de hoy y decirte cuál era. Para romper algo a propósito hay que entenderlo mejor que para arreglarlo.</li>
-  </ul>
-</div>
+<h3 class="sub"><span class="subn">5.2</span>Rompe un programa para otra pareja</h3>
+<p>Coge un programa tuyo de otra sesión (el Pong vale) y métele <strong>un solo fallo</strong> de los cinco tipos de hoy, uno que se note al ejecutar. Guárdalo como <code>Roto_TuNombre.sb3</code> y pásaselo a otra pareja que haya terminado (si no hay ninguna, al profesor): tienen que encontrarlo con el método de hoy y decirte cuál era. Para romper algo a propósito hay que entenderlo mejor que para arreglarlo.</p>
 
 <h2><span class="h2n">6</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -197,11 +217,12 @@
   <li><code>Marcador</code> vuelve a cero en cada partida.</li>
   <li>Tienes escrita una línea por objeto: qué le pasaba y qué tocaste.</li>
   <li>Sabrías explicarle a un compañero la diferencia entre un <em>si</em> suelto y un <em>si</em> dentro de un <em>por siempre</em>.</li>
-  <li>El último paso de la actividad también está hecho y va en el mismo archivo.</li>
+  <li>El apartado 5.2 también está hecho y va en el mismo archivo.</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
+<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 5.1 y 5.2. Si falta alguna, la actividad no está terminada.</p>
 <ol><li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un <code>.sb3</code> a tu carpeta <strong>Descargas</strong>.</li><li>Cámbiale el nombre a <strong>Sesion17_TuNombre.sb3</strong>.</li><li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 17, junto con las <strong>cinco líneas</strong> de la tabla: qué le pasaba a cada uno y qué tocaste.</li></ol>
 </div>
 

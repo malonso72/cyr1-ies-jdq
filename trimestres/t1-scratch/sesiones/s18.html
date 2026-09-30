@@ -75,7 +75,14 @@
   details.pista>summary::before{content:"\25B8 ";}
   details.pista[open]>summary::before{content:"\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
-  /* «Si te ha sobrado tiempo»: la ampliación para el que acaba antes. Ver ampliaciones.py. */
+  .ej-main h3.sub{font-family:'Barlow Condensed',sans-serif;font-size:1.18rem;color:#1B4F8A;margin:22px 0 8px;}
+  .ej-main h3.sub .subn{display:inline-block;min-width:2.4em;margin-right:6px;padding:1px 7px;border-radius:6px;
+    background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
+  .ej-main h2 + h3.sub{margin-top:8px;}
+  .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
+  .rp-ok b{color:#1A6B3A;}
+  /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
   .sobra-tiempo h3{margin:0 0 4px;font-size:1.02rem;color:#4E2A84;}
@@ -83,6 +90,23 @@
   .sobra-tiempo ul{margin:0;padding-left:20px;}
   .sobra-tiempo li{margin-bottom:8px;}
   .sobra-tiempo li b{color:#4E2A84;}
+  /* «Reto: del papel a los bloques»: seudocódigo sin dibujo. Ver pseudocodigo.py. */
+  .reto-pseudo{border:2px solid #1B4F8A;background:#fff;border-radius:10px;padding:12px 16px 10px;margin:16px 0 6px;}
+  .reto-pseudo h3{margin:0 0 4px;font-size:1.02rem;color:#1B4F8A;}
+  .reto-pseudo .rp-intro{font-size:.88rem;color:#555D6B;margin:0 0 10px;}
+  .reto-pseudo .rp-plan{margin:0 0 8px;}
+  .reto-pseudo .rp-plan b{color:#1B4F8A;}
+  ol.pseudo{list-style:none;margin:0 0 10px;padding:10px 14px;background:#F4F6F9;border:1px solid #D8DDE5;
+    border-radius:8px;font-family:'Barlow',system-ui,sans-serif;font-size:1rem;line-height:1.75;counter-reset:linea;}
+  ol.pseudo li{position:relative;padding-left:2em;}
+  ol.pseudo li::before{counter-increment:linea;content:counter(linea);position:absolute;left:0;top:0;
+    width:1.5em;text-align:right;color:#8A94A6;font-size:.8rem;font-variant-numeric:tabular-nums;}
+  ol.pseudo li.n1{margin-left:1.6em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n2{margin-left:3.2em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n3{margin-left:4.8em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n1::before,ol.pseudo li.n2::before,ol.pseudo li.n3::before{left:-1.9em;}
+  .reto-pseudo .rp-ok{margin:0;font-size:.95rem;}
+  .reto-pseudo .rp-ok b{color:#1A6B3A;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}

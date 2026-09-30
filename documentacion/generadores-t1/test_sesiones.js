@@ -113,40 +113,35 @@ function ok(cond, msg) {
          P + 'no se resalta la respuesta correcta');
     }
 
-    // el paso extra «⭐ Último paso»: una caja en S01–S17, ninguna en el proyecto final,
-    // siempre al cierre de «Tu actividad», numerada a continuación de la lista de pasos si
-    // la hay, con al menos un ítem con título y cuerpo, y con su línea en los logros
-    const ampl = q('.sobra-tiempo');
+    // «Tu actividad» en apartados: N.1 (la actividad), N.2 (el paso que sigue) y, donde ya
+    // está escrito, N.3 (seudocódigo). La entrega exige todas las partes. Nada de esto en S18–S21.
+    const subs = q('.ej-main h3.sub');
+    const partes = d.querySelector('.entrega .partes');
     if (n <= 17) {
-      ok(ampl.length === 1, P + 'debe haber exactamente 1 caja de paso extra, hay ' + ampl.length);
-      if (ampl.length === 1) {
-        const caja = ampl[0];
-        const h3 = caja.querySelector('h3')?.textContent || '';
-        ok(/^⭐ /.test(h3), P + 'el paso extra no lleva el título con ⭐');
-        // sólo los pasos de «Tu actividad»: desde su h2 hasta el h2 siguiente
-        let nPasos = 0, el = q('.ej-main h2').find(h => /Tu actividad/.test(h.textContent))?.nextElementSibling;
-        while (el && el.tagName !== 'H2') { nPasos += el.querySelectorAll('.paso-lista .p').length; el = el.nextElementSibling; }
-        if (nPasos) ok(h3.includes('Paso ' + (nPasos + 1) + ' '), P + 'el paso extra debería numerarse Paso ' + (nPasos + 1) + ': ' + h3);
-        else ok(/Último paso/.test(h3), P + 'sin lista de pasos, el paso extra debería llamarse «Último paso»: ' + h3);
-        ok(/parte de la actividad/.test(caja.querySelector('.st-intro')?.textContent || ''), P + 'el paso extra no dice que es parte de la actividad');
-        ok(q('.logro li').some(li => /último paso/i.test(li.textContent)), P + 'falta la línea del paso extra en «Lo has conseguido si…»');
-        const items = [...caja.querySelectorAll('li')];
-        ok(items.length >= 1 && items.length <= 2, P + 'la ampliación tiene ' + items.length + ' ítems (1 o 2)');
-        items.forEach((li, i) => {
-          ok((li.querySelector('b')?.textContent || '').length > 3, P + 'ítem ' + i + ' de ampliación sin título');
-          ok(li.textContent.length > 80, P + 'ítem ' + i + ' de ampliación demasiado corto');
-        });
-        // la h2 anterior más cercana tiene que ser «Tu actividad»
-        let prev = caja.previousElementSibling;
+      const hAct = q('.ej-main h2').find(h => /Tu actividad/.test(h.textContent));
+      const nAct = hAct ? hAct.querySelector('.h2n').textContent.trim() : '?';
+      const etiquetas = subs.map(h => h.querySelector('.subn')?.textContent.trim());
+      ok(subs.length === 2 || subs.length === 3, P + 'Tu actividad debe tener 2 o 3 apartados, tiene ' + subs.length);
+      etiquetas.forEach((e, i) => ok(e === nAct + '.' + (i + 1), P + 'apartado mal numerado: ' + e + ' (esperado ' + nAct + '.' + (i + 1) + ')'));
+      subs.forEach(h => {
+        // todos dentro de «Tu actividad»
+        let prev = h.previousElementSibling;
         while (prev && prev.tagName !== 'H2') prev = prev.previousElementSibling;
-        ok(prev && /Tu actividad/.test(prev.textContent), P + 'la ampliación no está en «Tu actividad»');
-        // y nada de la actividad puede venir después de la caja
-        let next = caja.nextElementSibling;
-        ok(!next || next.tagName === 'H2', P + 'la ampliación no es lo último de «Tu actividad»');
+        ok(prev === hAct, P + 'el apartado ' + h.textContent.slice(0, 20) + ' no está en «Tu actividad»');
+        const tit = h.textContent.replace(/^[\d.]+/, '').trim();
+        ok(!/último paso|reto|un paso más|si te ha sobrado/i.test(tit), P + 'título de apartado con rótulo en vez de orden: ' + tit);
+      });
+      ok(!!partes, P + 'la entrega no exige las partes de la actividad');
+      if (partes) etiquetas.forEach(e => ok(partes.textContent.includes(e), P + 'la entrega no pide el apartado ' + e));
+      ok(q('.logro li').some(li => /apartado \d+\.2/.test(li.textContent)), P + 'falta la línea del apartado .2 en los logros');
+      if (subs.length === 3) {
+        ok(!!d.querySelector('ol.pseudo'), P + 'el apartado .3 no lleva seudocódigo');
+        ok(!!d.querySelector('.rp-ok'), P + 'el apartado .3 no dice cómo saber que está bien');
+        ok(q('.logro li').some(li => /apartado \d+\.3/.test(li.textContent)), P + 'falta la línea del apartado .3 en los logros');
+        ok(!/\{h\d\}|\{d\d\}|_ |\[\]/.test(d.querySelector('ol.pseudo').textContent), P + 'el seudocódigo tiene huecos sin rellenar');
       }
     } else {
-      ok(ampl.length === 0, P + 'el proyecto final no lleva caja de paso extra');
-      ok(!q('.logro li').some(li => /último paso/i.test(li.textContent)), P + 'el proyecto final no lleva la línea del paso extra');
+      ok(subs.length === 0 && !partes, P + 'el proyecto final no lleva apartados ni línea de partes');
     }
 
     // entrega y navegación

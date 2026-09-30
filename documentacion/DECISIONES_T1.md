@@ -488,3 +488,39 @@ en el editor antes de escribirlo.
 **Un aviso nuevo, «una tecla a la vez».** Con tres programas sobre el mismo gato, pulsar una
 flecha mientras otra versión corre hace que los dos lo muevan a la vez hasta que uno termina
 y su `detener todos` apaga los dos. No es un fallo, pero va a pasar en clase.
+
+## 35. «Tu actividad» en tres apartados: 4.1, 4.2 y 4.3 (seudocódigo)
+
+Las sesiones se hacían en veinte minutos porque se daba el código hecho: bastaba copiar el
+dibujo. Manuel, 30-09: «lo que era un error es diseñar sesiones de 10 minutos y luego juntarlas
+porque quedan cortas». La actividad pasa a tener tres apartados numerados, con títulos que son
+órdenes y no rótulos («nada de último paso ni reto… algo más taxativo»):
+
+- **N.1** la actividad de siempre (`ORDEN_1` en `ampliaciones.py`).
+- **N.2** el paso siguiente, lo que fue la caja «Si te ha sobrado tiempo» (`ORDEN_2` y
+  `AMPLIACIONES`). En la S05 es copiar el programa del gato a un perro arrastrándolo hasta su
+  icono, con los pasos uno a uno y un aviso de por qué es lo que más van a usar.
+- **N.3** un programa distinto escrito en **seudocódigo**, sin dibujo, que tienen que pasar a
+  bloques (`pseudocodigo.py`). Sin lista de bloques, desordenada ni ordenada: «si no, se convierte
+  en ensayo y error». Lleva pasos de preparación y un «Sabes que está bien si…» con lo que tienen
+  que ver en pantalla, que sustituye al dibujo con el que compararse.
+
+**Instrucciones dirigidas.** Los objetos se fijan por su nombre en la biblioteca (que está en
+inglés aunque el editor esté en español): en la S05, el gato, **Dog2** y **Convertible 2**; la
+actividad lo dice al empezar y la entrega lo repite. «Para que todos tengan lo mismo»; Manuel
+deja cambiarlos a quien quiera. El programa del N.3 va siempre en su propio objeto y con un
+disparador que no choque con los de N.1 y N.2 (en la S05, la tecla C: la bandera y el espacio ya
+los usa el gato).
+
+**La entrega exige todas las partes**, y la sesión puede ocupar más de una clase: «no importa si
+no lo terminan… lo hacemos la siguiente clase».
+
+**El seudocódigo se genera** desde las mismas tuplas que dibujan los bloques y exportan los
+`.sb3`, con una tabla bloque → frase en castellano de la calle («avanzar», «mirar hacia la
+derecha»), el número entre paréntesis cuando el bloque lo necesita, sangría para lo que va
+dentro y subjuntivo tras «hasta que». El de la S05 («el coche teledirigido») está ejecutado en el
+editor real. Antes de escribir cada N.3 se comprueba que no se adelanta al juego de una sesión
+posterior.
+
+**Estado:** la S05 está completa; S01–S04 y S06–S17 tienen 4.1 y 4.2 con los textos de antes y
+falta hacerlos tan dirigidos como la S05 y escribir su 4.3.

@@ -75,6 +75,13 @@
   details.pista>summary::before{content:"\25B8 ";}
   details.pista[open]>summary::before{content:"\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  .ej-main h3.sub{font-family:'Barlow Condensed',sans-serif;font-size:1.18rem;color:#1B4F8A;margin:22px 0 8px;}
+  .ej-main h3.sub .subn{display:inline-block;min-width:2.4em;margin-right:6px;padding:1px 7px;border-radius:6px;
+    background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
+  .ej-main h2 + h3.sub{margin-top:8px;}
+  .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
+  .rp-ok b{color:#1A6B3A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -83,6 +90,23 @@
   .sobra-tiempo ul{margin:0;padding-left:20px;}
   .sobra-tiempo li{margin-bottom:8px;}
   .sobra-tiempo li b{color:#4E2A84;}
+  /* «Reto: del papel a los bloques»: seudocódigo sin dibujo. Ver pseudocodigo.py. */
+  .reto-pseudo{border:2px solid #1B4F8A;background:#fff;border-radius:10px;padding:12px 16px 10px;margin:16px 0 6px;}
+  .reto-pseudo h3{margin:0 0 4px;font-size:1.02rem;color:#1B4F8A;}
+  .reto-pseudo .rp-intro{font-size:.88rem;color:#555D6B;margin:0 0 10px;}
+  .reto-pseudo .rp-plan{margin:0 0 8px;}
+  .reto-pseudo .rp-plan b{color:#1B4F8A;}
+  ol.pseudo{list-style:none;margin:0 0 10px;padding:10px 14px;background:#F4F6F9;border:1px solid #D8DDE5;
+    border-radius:8px;font-family:'Barlow',system-ui,sans-serif;font-size:1rem;line-height:1.75;counter-reset:linea;}
+  ol.pseudo li{position:relative;padding-left:2em;}
+  ol.pseudo li::before{counter-increment:linea;content:counter(linea);position:absolute;left:0;top:0;
+    width:1.5em;text-align:right;color:#8A94A6;font-size:.8rem;font-variant-numeric:tabular-nums;}
+  ol.pseudo li.n1{margin-left:1.6em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n2{margin-left:3.2em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n3{margin-left:4.8em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n1::before,ol.pseudo li.n2::before,ol.pseudo li.n3::before{left:-1.9em;}
+  .reto-pseudo .rp-ok{margin:0;font-size:.95rem;}
+  .reto-pseudo .rp-ok b{color:#1A6B3A;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -163,6 +187,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<h3 class="sub"><span class="subn">4.1</span>Añade la meta y el segundo nivel</h3>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Crea el objeto <strong>Meta</strong> y colócalo al final del laberinto.</span></li>
   <li><span class="p">Paso 2</span><span>Añade el condicional de la meta y comprueba que el juego termina y dice el tiempo.</span></li>
@@ -177,13 +202,8 @@
   <summary>¿Y cómo hago que en el nivel 2 termine de verdad?</summary>
   <div class="cuerpo"><p>Con la variable <strong>Nivel</strong> que has creado en el paso 5. En vez de mirar sólo si tocas la Meta, mira <em>además</em> en qué nivel estás: si <code>Nivel</code> vale 2, el juego termina; si vale 1, pasa al siguiente fondo.</p><p style="margin-bottom:0">Para juntar dos condiciones en una se usa el operador verde <strong>&lt; &gt; y &lt; &gt;</strong>, que tiene dos huecos hexagonales.</p></div>
 </details>
-<div class="sobra-tiempo">
-  <h3>⭐ Paso 7 · Un paso más</h3>
-  <p class="st-intro">Este paso es parte de la actividad, igual que los anteriores: hazlo en el mismo proyecto y entrégalo todo junto. Si te atascas, entrega lo que tengas y díselo al profesor.</p>
-  <ul>
-  <li><b>El mejor tiempo, que no se borra.</b> Una variable <code>MejorTiempo</code> que guarde el tiempo más bajo de todas las partidas. Al llegar a la meta, antes del <em>detener todos</em>: si <em>cronómetro</em> es <strong>menor que</strong> <code>MejorTiempo</code>, dar a MejorTiempo el valor del cronómetro. Lo difícil: al arrancar <strong>no</strong> la pongas a 0, o la siguiente partida se olvida de la anterior. Para la primerísima vez, haz clic en un bloque suelto <em>dar a MejorTiempo el valor 999</em> (un clic ejecuta el bloque sin bandera) y luego tíralo a la paleta.</li>
-  </ul>
-</div>
+<h3 class="sub"><span class="subn">4.2</span>Guarda el mejor tiempo</h3>
+<p>Una variable <code>MejorTiempo</code> que guarde el tiempo más bajo de todas las partidas. Al llegar a la meta, antes del <em>detener todos</em>: si <em>cronómetro</em> es <strong>menor que</strong> <code>MejorTiempo</code>, dar a MejorTiempo el valor del cronómetro. Lo difícil: al arrancar <strong>no</strong> la pongas a 0, o la siguiente partida se olvida de la anterior. Para la primerísima vez, haz clic en un bloque suelto <em>dar a MejorTiempo el valor 999</em> (un clic ejecuta el bloque sin bandera) y luego tíralo a la paleta.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -193,11 +213,12 @@
   <li>Hay dos niveles con laberintos distintos.</li>
   <li>El juego termina de verdad al acabar el último nivel.</li>
   <li>Sabrías explicar por qué <em>detener (todos)</em> va siempre al final.</li>
-  <li>El último paso de la actividad también está hecho y va en el mismo archivo.</li>
+  <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
+<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

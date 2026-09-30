@@ -15,12 +15,36 @@ y añade a «Lo has conseguido si…» la línea que lo comprueba. Para quitar e
 sesión, se borra su entrada y se regenera.
 """
 
-TITULO = '⭐ %s · Un paso más'   # %s: «Paso N», lo pone la plantilla; sin lista de pasos, «⭐ Último paso»
+# Títulos de los apartados de «Tu actividad»: órdenes, no rótulos (Manuel, 30-09: «nada de
+# último paso ni reto… algo más taxativo»). 4.1 es la actividad de siempre; 4.2 el paso que
+# sigue (AMPLIACIONES, abajo); 4.3 el seudocódigo (pseudocodigo.py).
+ORDEN_1 = {
+    1: 'Monta tu primer programa', 2: 'Completa el cuadrado', 3: 'Recorre las tres figuras',
+    4: 'Monta las tres versiones', 5: 'Completa el programa', 6: 'Haz que tu personaje camine',
+    7: 'Construye el diálogo', 8: 'Construye la calculadora', 9: 'Construye el quiz',
+    10: 'Monta la carrera', 11: 'Haz que un objeto avise a otro', 12: 'Construye el laberinto',
+    13: 'Añade la meta y el segundo nivel', 14: 'Completa el juego', 15: 'Monta la pelota y la pala',
+    16: 'Añade el marcador y el final', 17: 'Arregla los cinco programas',
+}
+ORDEN_2 = {
+    1: 'Haz que el segundo personaje conteste', 2: 'Haz que el gato recorra un rectángulo',
+    3: 'Dibuja las figuras con el lápiz', 4: 'Añade una cuarta flecha con el operador «o»',
+    5: 'Añade un perro que se mueva con W, A, S y D', 6: 'Haz que sólo camine cuando lo mueves',
+    7: 'Haz que el personaje calcule tu edad', 8: 'Añade la media y el resto',
+    9: 'Añade las vidas', 10: 'Haz que el ganador diga su tiempo', 11: 'Encadena tres mensajes',
+    12: 'Añade una moneda que dé puntos', 13: 'Guarda el mejor tiempo',
+    14: 'Haz que la máquina enseñe lo que ha sacado', 15: 'Maneja la pala con teclas y añade otra pelota',
+    16: 'Haz que la pelota cambie con los puntos', 17: 'Rompe un programa para otra pareja',
+}
 
-INTRO = ('Este paso es parte de la actividad, igual que los anteriores: hazlo en el mismo '
-         'proyecto y entrégalo todo junto. Si te atascas, entrega lo que tengas y díselo al profesor.')
+# Los objetos que tiene que haber en el proyecto al terminar, por apartado: la actividad lo
+# dice al empezar y la entrega lo repite. Directos a propósito (Manuel, 30-09: «para que
+# todos tengan lo mismo… gato, perro, coche»); luego él deja cambiarlos a quien quiera.
+OBJETOS = {
+    5: ['el gato', 'el perro', 'el coche'],
+}
 
-LOGRO = 'El último paso de la actividad también está hecho y va en el mismo archivo.'
+LOGRO = 'El apartado {n}.2 también está hecho y va en el mismo archivo.'
 
 # num de sesión -> lista de (título corto, cuerpo en HTML)
 AMPLIACIONES = {
@@ -54,11 +78,11 @@ AMPLIACIONES = {
          'operador verde <strong>&lt; &gt; o &lt; &gt;</strong>, de Operadores: tiene dos huecos '
          'hexagonales, y en cada uno metes una condición.')],
 
-    5: [('Dos jugadores en el mismo escenario',
-         'Añade un <strong>segundo personaje</strong> y móntale el mismo programa, pero con las '
-         'teclas <strong>W, A, S y D</strong> en vez de las flechas. No hay ningún bloque nuevo: '
-         'es copiar y cambiar los desplegables. Truco: arrastra el programa entero hasta el '
-         'icono del otro objeto, abajo a la derecha, y se copia solo.')],
+    5: [('Dos jugadores en el mismo escenario', (
+        '<p>Un <strong>perro</strong> que se mueve igual que el gato, pero con las teclas <strong>W, A, S y D</strong>. Su programa no se monta otra vez: <strong>se copia el del gato y se cambia lo que es distinto</strong>.</p>'
+        '<ol class="paso-lista"><li><span class="p">Paso 1</span><span>Añade el perro: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Dog</strong> en el buscador y elige <strong>Dog2</strong>, el perro azul.</span></li><li><span class="p">Paso 2</span><span>Vuelve a seleccionar el <strong>gato</strong>, coge su programa por el bloque de arriba (la bandera verde) y <strong>arrástralo entero hasta el icono del perro</strong>, en la lista de objetos de abajo a la derecha. Suéltalo cuando el icono se mueva: eso quiere decir que lo ha recibido.</span></li><li><span class="p">Paso 3</span><span>Selecciona el perro. El programa ya está ahí, copiado. El gato sigue teniendo el suyo: no se ha movido, se ha duplicado.</span></li><li><span class="p">Paso 4</span><span>En el programa del perro, cambia sólo las teclas de los desplegables: <strong>flecha arriba → W</strong>, <strong>flecha abajo → S</strong>, <strong>flecha izquierda → A</strong>, <strong>flecha derecha → D</strong>.</span></li><li><span class="p">Paso 5</span><span>Pulsa la bandera: el gato se mueve con las flechas y el perro con W, A, S y D.</span></li></ol>'
+        '<div class="aviso-ojo"><h3>⚠️ Apréndete este truco</h3><p>Copiar un programa de un objeto a otro arrastrándolo hasta su icono es de lo que más vas a usar. En cuanto un juego tiene varios objetos que hacen casi lo mismo —los corredores de la carrera, las monedas del laberinto, los enemigos de tu proyecto final—, nadie los monta uno a uno: se hace el primero, se copia y se cambia lo que es distinto.</p></div>'
+        ''))],
 
     6: [('Que sólo camine cuando tú lo mueves',
          'Junta lo de hoy con lo de la sesión 5: mete el <em>siguiente disfraz</em> y la espera '
@@ -145,12 +169,15 @@ AMPLIACIONES = {
 }
 
 
-def caja_ampliacion(num, etiqueta='Último paso'):
-    """La caja de la sesión `num` con su etiqueta («Paso 6», «Último paso»), o '' si no tiene."""
+def caja_ampliacion(num, seccion=4):
+    """El apartado N.2 de la sesión `num`, o '' si no tiene."""
     items = AMPLIACIONES.get(num)
     if not items:
         return ''
-    li = ''.join('\n  <li><b>%s.</b> %s</li>' % (t, c) for t, c in items)
-    titulo = (TITULO % etiqueta) if etiqueta.startswith('Paso') else '⭐ ' + etiqueta
-    return ('<div class="sobra-tiempo">\n  <h3>%s</h3>\n  <p class="st-intro">%s</p>\n'
-            '  <ul>%s\n  </ul>\n</div>' % (titulo, INTRO, li))
+    if len(items) == 1:
+        c = items[0][1]
+        cuerpo = c if c.lstrip().startswith('<') else '<p>%s</p>' % c
+    else:
+        cuerpo = '<ul>%s\n</ul>' % ''.join('\n  <li><b>%s.</b> %s</li>' % (t, c) for t, c in items)
+    return ('<h3 class="sub"><span class="subn">%d.2</span>%s</h3>\n%s'
+            % (seccion, ORDEN_2[num], cuerpo))

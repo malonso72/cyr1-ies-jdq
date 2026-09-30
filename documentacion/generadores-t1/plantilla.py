@@ -6,7 +6,8 @@ estructura, para que la sesión 21 tenga el mismo criterio que la sesión 1.
 """
 import html as _html
 from scratchsvg import script_svg
-from ampliaciones import caja_ampliacion, LOGRO as LOGRO_AMPL
+from ampliaciones import caja_ampliacion, ORDEN_1, OBJETOS, LOGRO as LOGRO_AMPL
+from pseudocodigo import caja_reto, LOGRO as LOGRO_RETO
 
 RAIZ = '../../../'          # desde trimestres/t1-scratch/sesiones/
 CUAD = '../materiales/cuadernillo-scratch-parte-1.pdf'
@@ -150,6 +151,13 @@ CSS = '''
   details.pista>summary::before{content:"\\25B8 ";}
   details.pista[open]>summary::before{content:"\\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
+  .ej-main h3.sub{font-family:'Barlow Condensed',sans-serif;font-size:1.18rem;color:#1B4F8A;margin:22px 0 8px;}
+  .ej-main h3.sub .subn{display:inline-block;min-width:2.4em;margin-right:6px;padding:1px 7px;border-radius:6px;
+    background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
+  .ej-main h2 + h3.sub{margin-top:8px;}
+  .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
+  .rp-ok b{color:#1A6B3A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -158,6 +166,23 @@ CSS = '''
   .sobra-tiempo ul{margin:0;padding-left:20px;}
   .sobra-tiempo li{margin-bottom:8px;}
   .sobra-tiempo li b{color:#4E2A84;}
+  /* «Reto: del papel a los bloques»: seudocódigo sin dibujo. Ver pseudocodigo.py. */
+  .reto-pseudo{border:2px solid #1B4F8A;background:#fff;border-radius:10px;padding:12px 16px 10px;margin:16px 0 6px;}
+  .reto-pseudo h3{margin:0 0 4px;font-size:1.02rem;color:#1B4F8A;}
+  .reto-pseudo .rp-intro{font-size:.88rem;color:#555D6B;margin:0 0 10px;}
+  .reto-pseudo .rp-plan{margin:0 0 8px;}
+  .reto-pseudo .rp-plan b{color:#1B4F8A;}
+  ol.pseudo{list-style:none;margin:0 0 10px;padding:10px 14px;background:#F4F6F9;border:1px solid #D8DDE5;
+    border-radius:8px;font-family:'Barlow',system-ui,sans-serif;font-size:1rem;line-height:1.75;counter-reset:linea;}
+  ol.pseudo li{position:relative;padding-left:2em;}
+  ol.pseudo li::before{counter-increment:linea;content:counter(linea);position:absolute;left:0;top:0;
+    width:1.5em;text-align:right;color:#8A94A6;font-size:.8rem;font-variant-numeric:tabular-nums;}
+  ol.pseudo li.n1{margin-left:1.6em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n2{margin-left:3.2em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n3{margin-left:4.8em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n1::before,ol.pseudo li.n2::before,ol.pseudo li.n3::before{left:-1.9em;}
+  .reto-pseudo .rp-ok{margin:0;font-size:.95rem;}
+  .reto-pseudo .rp-ok b{color:#1A6B3A;}
   .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
   .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
   .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
@@ -309,6 +334,33 @@ def _boton(href, icono, clave, nota, clase=''):
             % (href, clase, icono, clave, nota))
 
 
+def _partes_entrega(num, n):
+    """La línea de la entrega que exige todos los apartados de «Tu actividad»."""
+    if n is None:
+        return ''
+    partes = ['%d.1' % n] + (['%d.2' % n] if caja_ampliacion(num) else []) + (['%d.3' % n] if caja_reto(num) else [])
+    lista = ', '.join(partes[:-1]) + ' y ' + partes[-1]
+    return ('<p class="partes">Tu archivo tiene que llevar <strong>%s partes</strong>: %s. '
+            'Si falta alguna, la actividad no está terminada.</p>\n'
+            % ({2: 'las dos', 3: 'las tres'}[len(partes)], lista)) + _objetos(num, n, 'entrega')
+
+
+_NUM = {2: 'dos', 3: 'tres', 4: 'cuatro'}
+
+
+def _objetos(num, n, donde):
+    """La línea que dice qué objetos tiene que haber en el proyecto, si la sesión lo fija."""
+    obs = OBJETOS.get(num)
+    if not obs:
+        return ''
+    trozos = ['<strong>%s</strong> (%d.%d)' % (o, n, i + 1) for i, o in enumerate(obs)]
+    lista = ', '.join(trozos[:-1]) + ' y ' + trozos[-1]
+    if donde == 'actividad':
+        return ('<p class="objetos">Al terminar, tu proyecto tiene <strong>%s objetos</strong>: %s. '
+                'Cada uno con su programa.</p>\n' % (_NUM[len(obs)], lista))
+    return ('<p class="partes">En el proyecto tienen que estar los %s objetos: %s.</p>\n' % (_NUM[len(obs)], lista))
+
+
 def pagina(num, titulo, desc, consigue, secciones, entrega=None,
            cuadernillo=None, abrir=True, nav_extra=''):
     """Renderiza la página completa de una sesión.
@@ -322,26 +374,32 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
     # «Lo has conseguido si…». Si la sesión lo tiene pero no esas secciones, mejor
     # enterarse ahora que verlo desaparecer sin ruido.
     tiene_ampl = bool(caja_ampliacion(num))
-    if tiene_ampl:
+    tiene_reto = bool(caja_reto(num))
+    if tiene_ampl or tiene_reto:
         for necesaria in ('Tu actividad', 'Lo has conseguido si…'):
             if not any(t == necesaria for t, _ in secciones):
-                raise ValueError('la sesión %d tiene paso extra pero no sección «%s»' % (num, necesaria))
+                raise ValueError('la sesión %d tiene paso extra o reto pero no sección «%s»' % (num, necesaria))
     cuerpo = []
     n = 0
+    n_act = None
     for tit, cont in secciones:
         if tit is None:
             # Una sección sin título no lleva número y no gasta ninguno.
             cuerpo.append(cont)
         else:
             n += 1
-            if tit == 'Tu actividad' and tiene_ampl:
-                n_pasos = cont.count('<span class="p">Paso ')
-                etiqueta = ('Paso %d' % (n_pasos + 1)) if n_pasos else 'Último paso'
-                cont = cont + '\n' + caja_ampliacion(num, etiqueta)
-            if tit == 'Lo has conseguido si…' and tiene_ampl:
+            if tit == 'Tu actividad' and (tiene_ampl or tiene_reto):
+                cont = (_objetos(num, n, 'actividad')
+                        + '<h3 class="sub"><span class="subn">%d.1</span>%s</h3>\n' % (n, ORDEN_1[num])
+                        + cont
+                        + ('\n' + caja_ampliacion(num, n) if tiene_ampl else '')
+                        + ('\n' + caja_reto(num, n) if tiene_reto else ''))
+                n_act = n
+            if tit == 'Lo has conseguido si…' and (tiene_ampl or tiene_reto):
                 cierre = '\n</ul>'
                 assert cont.count(cierre) == 1, 'la lista de logros de la sesión %d no es la esperada' % num
-                cont = cont.replace(cierre, '\n  <li>%s</li>%s' % (LOGRO_AMPL, cierre))
+                extra = ''.join('\n  <li>%s</li>' % l.format(n=n_act) for l, ok in ((LOGRO_AMPL, tiene_ampl), (LOGRO_RETO, tiene_reto)) if ok)
+                cont = cont.replace(cierre, extra + cierre)
             cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (n, tit, cont))
 
     nav = []
@@ -366,7 +424,8 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
             .replace('{CONSIGUE}', consigue)
             .replace('{ABRIR}', _ABRIR if abrir else '')
             .replace('{SECCIONES}', '\n\n'.join(cuerpo))
-            .replace('{ENTREGA}', (entrega or _ENTREGA_STD).replace('{NN}', nn))
+            .replace('{ENTREGA}', _partes_entrega(num, n_act if (tiene_ampl or tiene_reto) else None)
+                     + (entrega or _ENTREGA_STD).replace('{NN}', nn))
             .replace('{NAV}', ''.join(nav)))
 
 
