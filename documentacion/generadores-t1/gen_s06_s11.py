@@ -79,11 +79,12 @@ s06 = pagina(
              'Monta el programa con el gato y comprueba que camina.',
              'Prueba la espera con <strong>0.05</strong>, con <strong>0.2</strong> y con '
              '<strong>1</strong> segundo. Quédate con el valor que mejor se vea.',
-             'Ahora cámbiate de personaje: pulsa el botón del gato (abajo a la derecha) y '
-             '<strong>elige uno que tenga varios disfraces</strong>. Antes de decidirte, míralo en '
-             'la pestaña Disfraces: los que sólo traen uno no sirven para animar.',
-             'Vuelve a ajustar la espera: un personaje con cuatro disfraces necesita una espera '
-             'más corta que uno con dos.',
+             'Añade el oso: botón <strong>Elige un objeto</strong>, escribe <strong>Bear</strong> en '
+             'el buscador y elige <strong>Bear-walking</strong>, el oso que camina. Mira su pestaña '
+             'Disfraces: tiene <strong>ocho</strong>, uno por cada postura del paso.',
+             'Copia al oso el programa del gato arrastrándolo hasta su icono, como en la sesión 5. '
+             'Ajusta la espera del oso: con ocho disfraces necesita una espera más corta que el '
+             'gato, que tiene dos.',
              'Cambia también el fondo para que la escena tenga sentido.']) +
          pista('¿Y si quiero un disfraz concreto y no el siguiente?',
                '<p>Para eso está este otro bloque, que va directamente al disfraz que le digas. '
@@ -387,7 +388,7 @@ P10 = [
     ('stack', 'motion', ['ir a x:', ('num', '-200'), 'y:', ('num', '60')]),
     ('stack', 'motion', ['apuntar en dirección', ('num', '90')]),
     ('c', 'control', ['repetir hasta que',
-                      hexa('operators', rep('motion', 'posición x'), '>', ('num', '200'))], [
+                      hexa('operators', rep('motion', 'posición en x'), '>', ('num', '200'))], [
         ('stack', 'motion', ['mover', op('número aleatorio entre', ('num', '1'), 'y', ('num', '10')),
                              'pasos']),
     ]),
@@ -411,9 +412,9 @@ s10 = pagina(
 
         ('Lee este programa',
          caja(P10, 'Programa de un corredor: ir a x menos 200 y 60, apuntar en dirección 90, '
-                   'repetir hasta que la posición x sea mayor que 200 moviendo un número aleatorio '
+                   'repetir hasta que la posición en x sea mayor que 200 moviendo un número aleatorio '
                    'entre 1 y 10 pasos, después decir ¡He ganado! durante 2 segundos y detener todos',
-              pie='<strong>posición x</strong> es un informador azul de Movimiento: vale lo lejos '
+              pie='<strong>posición en x</strong> es un informador azul de Movimiento: vale lo lejos '
                   'que está el objeto del centro, de −240 a 240. Aquí lo usamos como línea de meta.') +
          secuencia([
              'El corredor se coloca en la línea de salida, a la izquierda del todo.',
@@ -440,14 +441,15 @@ s10 = pagina(
 
         ('Tu actividad',
          pasos([
-             'Elige dos personajes que puedan competir (dos coches, dos animales…).',
-             'Programa el primero con el programa de arriba.',
-             'Selecciona el <strong>segundo</strong> objeto y móntale el mismo programa, '
-             'cambiando sólo la <strong>y</strong> de la salida para que corran por carriles '
-             'distintos.',
+             'Los corredores son el gato y el perro. Añade el perro: botón <strong>Elige un '
+             'objeto</strong>, escribe <strong>Dog</strong> y elige <strong>Dog2</strong>.',
+             'Monta en el gato el programa de arriba.',
+             'Copia el programa al perro arrastrándolo hasta su icono (sesión 5) y, en la copia, '
+             'cambia sólo la <strong>y</strong> de la salida (por ejemplo -60) para que corran por '
+             'carriles distintos.',
              'Píntale al fondo una línea de salida y otra de meta, para que se entienda.',
-             '<strong>Reto:</strong> añade un tercer corredor que avance entre 1 y 12 pasos. '
-             '¿Gana siempre? Juega diez partidas y cuéntalas.']) +
+             'Cambia el azar del perro a <strong>entre 1 y 12</strong> pasos. ¿Gana siempre? Juega '
+             'diez partidas y cuenta cuántas gana cada uno.']) +
          ojo('El fallo que va a tener media clase',
              '<p>Los dos programas van en <strong>objetos distintos</strong>. Antes de arrastrar un '
              'bloque, comprueba abajo a la derecha <strong>qué objeto tienes seleccionado</strong>: '
@@ -550,14 +552,12 @@ s11 = pagina(
 
         ('Tu actividad',
          pasos([
-             'Elige dos objetos: uno que actúe y otro que reaccione.',
-             'Crea el mensaje con un nombre que se entienda.',
+             'El gato chuta y la pelota reacciona. Añade la pelota: botón <strong>Elige un '
+             'objeto</strong>, escribe <strong>Soccer</strong> y elige <strong>Soccer Ball</strong>.',
+             'Crea el mensaje <strong>patada</strong>, en el desplegable del bloque <em>enviar</em>.',
              'Monta los programas, cada uno en su objeto. No te olvides del que coloca.',
              'Añade un <strong>cambio de disfraz</strong> al gato justo antes de enviar el mensaje, '
-             'para que se vea el gesto de chutar.',
-             '<strong>Reto:</strong> añade un <strong>tercer objeto</strong> — un portero, un '
-             'marcador, una nube — que también tenga <em>al recibir (patada)</em> y haga algo. '
-             'Comprobarás que los dos reaccionan a la vez con un solo aviso.']) +
+             'para que se vea el gesto de chutar.']) +
          ojo('Dos diferencias con tu cuadernillo',
              '<p>El bloque ya <strong>no</strong> se llama «enviar a todos». Hoy es simplemente '
              '<strong>enviar (patada)</strong>, aunque siga avisando a todo el mundo.</p>'

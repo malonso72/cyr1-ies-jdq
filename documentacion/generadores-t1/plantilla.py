@@ -158,6 +158,7 @@ CSS = '''
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -345,20 +346,21 @@ def _partes_entrega(num, n):
             % ({2: 'las dos', 3: 'las tres'}[len(partes)], lista)) + _objetos(num, n, 'entrega')
 
 
-_NUM = {2: 'dos', 3: 'tres', 4: 'cuatro'}
-
-
 def _objetos(num, n, donde):
     """La línea que dice qué objetos tiene que haber en el proyecto, si la sesión lo fija."""
     obs = OBJETOS.get(num)
     if not obs:
         return ''
-    trozos = ['<strong>%s</strong> (%d.%d)' % (o, n, i + 1) for i, o in enumerate(obs)]
+
+    def aps(lista):
+        et = [('%d.%d' % (n, a)) if isinstance(a, int) else a for a in lista]
+        return et[0] if len(et) == 1 else ', '.join(et[:-1]) + ' y ' + et[-1]
+    trozos = ['<strong>%s</strong> (%s)' % (o, aps(a)) for o, a in obs]
     lista = ', '.join(trozos[:-1]) + ' y ' + trozos[-1]
     if donde == 'actividad':
-        return ('<p class="objetos">Al terminar, tu proyecto tiene <strong>%s objetos</strong>: %s. '
-                'Cada uno con su programa.</p>\n' % (_NUM[len(obs)], lista))
-    return ('<p class="partes">En el proyecto tienen que estar los %s objetos: %s.</p>\n' % (_NUM[len(obs)], lista))
+        return ('<p class="objetos">Al terminar, en tu proyecto tiene que estar: %s. '
+                'Cada objeto, con su programa.</p>\n' % lista)
+    return '<p class="partes">En el proyecto tienen que estar: %s.</p>\n' % lista
 
 
 def pagina(num, titulo, desc, consigue, secciones, entrega=None,

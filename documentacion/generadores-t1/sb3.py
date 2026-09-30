@@ -65,15 +65,19 @@ TABLA = {
     ('stack', 'girar <giro-i> _ grados'): ('motion_turnleft', [('DEGREES', N)], {}),
     ('stack', 'apuntar en dirección _'): ('motion_pointindirection', [('DIRECTION', A)], {}),
     ('stack', 'ir a x: _ y: _'): ('motion_gotoxy', [('X', N), ('Y', N)], {}),
-    ('stack', 'cambiar x por _'): ('motion_changexby', [('DX', N)], {}),
-    ('stack', 'cambiar y por _'): ('motion_changeyby', [('DY', N)], {}),
+    ('stack', 'sumar a x _'): ('motion_changexby', [('DX', N)], {}),
+    ('stack', 'sumar a y _'): ('motion_changeyby', [('DY', N)], {}),
     ('stack', 'fijar x a _'): ('motion_setx', [('X', N)], {}),
     ('stack', 'fijar y a _'): ('motion_sety', [('Y', N)], {}),
     ('stack', 'si toca un borde, rebotar'): ('motion_ifonedgebounce', [], {}),
+    # lápiz (extensión): el proyecto la declara sola si algún programa la usa
+    ('stack', 'borrar todo'): ('pen_clear', [], {}),
+    ('stack', 'bajar lápiz'): ('pen_penDown', [], {}),
+    ('stack', 'subir lápiz'): ('pen_penUp', [], {}),
     ('stack', 'fijar estilo de rotación a []'): ('motion_setrotationstyle', [], {'campo': ('STYLE', {
         'izquierda-derecha': 'left-right', 'no rotar': "don't rotate", 'en todas direcciones': 'all around'})}),
-    ('rep', 'posición x'): ('motion_xposition', [], {}),
-    ('rep', 'posición y'): ('motion_yposition', [], {}),
+    ('rep', 'posición en x'): ('motion_xposition', [], {}),
+    ('rep', 'posición en y'): ('motion_yposition', [], {}),
     ('rep', 'dirección'): ('motion_direction', [], {}),
     # sensores
     ('stack', 'preguntar _ y esperar'): ('sensing_askandwait', [('QUESTION', T)], {}),
@@ -371,7 +375,9 @@ def proyecto(objetos, fondos=None, sonidos_fondo=(), scripts_fondo=(), variables
     ini = variables_iniciales or {}
     stage['variables'] = {vid: [nombre, ini.get(nombre, 0)] for nombre, vid in variables.items()}
     stage['broadcasts'] = {bid: nombre for nombre, bid in broadcasts.items()}
-    pj = {'targets': targets, 'monitors': [], 'extensions': [],
+    usa_lapiz = any(isinstance(b, dict) and b.get('opcode', '').startswith('pen_')
+                    for t in targets for b in t['blocks'].values())
+    pj = {'targets': targets, 'monitors': [], 'extensions': ['pen'] if usa_lapiz else [],
           'meta': {'semver': '3.0.0', 'vm': '1.0.0', 'agent': 'generadores-t1/sb3.py'}}
     return pj, assets
 

@@ -152,8 +152,8 @@ s18 = pagina(
 K1 = [
     BANDERA,
     ('c', 'control', ['por siempre'], [
-        si(tecla('flecha derecha'), [('stack', 'motion', ['cambiar x por', ('num', '5')])]),
-        si(tecla('flecha izquierda'), [('stack', 'motion', ['cambiar x por', ('num', '-5')])]),
+        si(tecla('flecha derecha'), [('stack', 'motion', ['sumar a x', ('num', '5')])]),
+        si(tecla('flecha izquierda'), [('stack', 'motion', ['sumar a x', ('num', '-5')])]),
     ]),
 ]
 K2 = [
@@ -225,8 +225,8 @@ s19 = pagina(
          'números.</p>'
          '<h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">1 · Mover con el teclado</h3>'
          + caja(K1, 'Pieza de mover con el teclado: por siempre, si la flecha derecha está '
-                    'presionada cambiar x por 5, si la izquierda cambiar x por menos 5',
-                pie='Añade dos condicionales más, con <em>cambiar y por</em>, si también necesitas '
+                    'presionada sumar a x 5, si la izquierda sumar a x menos 5',
+                pie='Añade dos condicionales más, con <em>sumar a y</em>, si también necesitas '
                     'subir y bajar.') +
          '<h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">2 · Marcador</h3>'
          + caja(K2, 'Pieza de marcador: dar a Puntos el valor 0 y mostrar la variable Puntos',

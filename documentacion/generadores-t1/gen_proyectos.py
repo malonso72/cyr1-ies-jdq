@@ -14,8 +14,8 @@ from plantilla import (pagina_juego, caja, dos_cajas, pasos, pregunta, pista,
 from comun import escribir_juego
 
 BANDERA = ('hat', 'events', ['al hacer clic en', ('icon', 'bandera')])
-POSX = rep('motion', 'posición x')
-POSY = rep('motion', 'posición y')
+POSX = rep('motion', 'posición en x')
+POSY = rep('motion', 'posición en y')
 RATONX = rep('sensing', 'posición x del ratón')
 
 
@@ -207,8 +207,8 @@ B_NAVE = [
     ('stack', 'variables', ['dar a', ('drop', 'Puntos'), 'el valor', ('num', '0')]),
     ('stack', 'motion', ['ir a x:', ('num', '0'), 'y:', ('num', '-150')]),
     ('c', 'control', ['por siempre'], [
-        si(tecla('flecha derecha'), [('stack', 'motion', ['cambiar x por', ('num', '5')])]),
-        si(tecla('flecha izquierda'), [('stack', 'motion', ['cambiar x por', ('num', '-5')])]),
+        si(tecla('flecha derecha'), [('stack', 'motion', ['sumar a x', ('num', '5')])]),
+        si(tecla('flecha izquierda'), [('stack', 'motion', ['sumar a x', ('num', '-5')])]),
         ('stack', 'variables', ['dar a', ('drop', 'NaveX'), 'el valor', POSX]),
         si(tecla('espacio'), [
             ('stack', 'events', ['enviar', ('drop', 'disparo')]),
@@ -245,7 +245,7 @@ B_BALA = [
     ('stack', 'looks', ['mostrar']),
     ('c', 'control', ['repetir hasta que',
                       hexa('operators', POSY, '>', ('num', '160'))], [
-        ('stack', 'motion', ['cambiar y por', ('num', '12')]),
+        ('stack', 'motion', ['sumar a y', ('num', '12')]),
     ]),
     ('stack', 'looks', ['esconder']),
 ]
@@ -265,9 +265,9 @@ B_VAIVEN = [
     BANDERA,
     ('c', 'control', ['por siempre'], [
         ('c', 'control', ['repetir', ('num', '40')],
-         [('stack', 'motion', ['cambiar x por', ('num', '3')])]),
+         [('stack', 'motion', ['sumar a x', ('num', '3')])]),
         ('c', 'control', ['repetir', ('num', '40')],
-         [('stack', 'motion', ['cambiar x por', ('num', '-3')])]),
+         [('stack', 'motion', ['sumar a x', ('num', '-3')])]),
     ]),
 ]
 
@@ -289,7 +289,7 @@ space = pagina_juego(
              ['Moverse con las flechas', 'S05 · Pieza 1 de la S19'],
              ['Avisar con un mensaje de que has disparado', 'S11'],
              ['Guardar un dato en una variable para usarlo luego', 'S08'],
-             ['Subir la bala hasta arriba', 'S12 · <em>cambiar y por</em>'],
+             ['Subir la bala hasta arriba', 'S12 · <em>sumar a y</em>'],
              ['El marciano que se esconde al tocarlo', 'Pieza 8 de la S19'],
              ['La cuenta atrás', 'Pieza 5 de la S19'],
              ['El vaivén de la fila', 'S03 · <em>repetir</em>'],
@@ -298,7 +298,7 @@ space = pagina_juego(
         ('Los tres objetos',
          '<h3 style="margin:18px 0 2px;font-size:1.02rem;color:#1B4F8A">Nave · moverse y disparar</h3>'
          + caja(B_NAVE, 'Programa de la nave: colocarse abajo con el marcador a 0 y, por siempre, '
-                        'moverse con las flechas, guardar su posición x en la variable NaveX y, si '
+                        'moverse con las flechas, guardar su posición en x en la variable NaveX y, si '
                         'se pulsa espacio, enviar el mensaje disparo y esperar 0.4 segundos',
                 pie='La <strong>espera de 0.4 segundos</strong> es lo que impide disparar cien '
                     'veces por segundo. Súbela o bájala hasta que el juego te guste.') +
@@ -324,8 +324,8 @@ space = pagina_juego(
                       'Al hacer clic en la bandera, colocarse, mostrarse y, por siempre, si está '
                       'tocando la Bala iniciar sonido Pop, sumar 1 a Puntos y esconderse'),
                      ('El vaivén', B_VAIVEN,
-                      'Al hacer clic en la bandera, por siempre repetir 40 veces cambiar x por 3 '
-                      'y repetir 40 veces cambiar x por menos 3')) +
+                      'Al hacer clic en la bandera, por siempre repetir 40 veces sumar a x 3 '
+                      'y repetir 40 veces sumar a x menos 3')) +
          '<p>Un marciano escondido <strong>no toca nada</strong>: por eso, una vez le das, deja de '
          'sumar puntos solo, sin tener que pararle el programa.</p>'
          '<p>Cuando el primero funcione, <strong>duplícalo hasta tener ocho</strong> y cámbiale a '
@@ -356,7 +356,7 @@ space = pagina_juego(
              ['Dos filas de marcianos',
               'Duplicar y cambiar la <code>y</code>. <strong>Y el 8</strong> del <em>esperar hasta que</em>'],
              ['Que los marcianos bajen un poco en cada vaivén',
-              'Un <em>cambiar y por (−10)</em> entre los dos <em>repetir</em>'],
+              'Un <em>sumar a y (−10)</em> entre los dos <em>repetir</em>'],
              ['Marcianos de distinto color que valen distinto',
               'Un disfraz por color y otro número en el <em>sumar a (Puntos)</em>'],
              ['Que ellos también disparen',
@@ -388,8 +388,8 @@ C_JUGADOR = [
     ('stack', 'variables', ['dar a', ('drop', 'Puntos'), 'el valor', ('num', '0')]),
     ('stack', 'motion', ['ir a x:', ('num', '0'), 'y:', ('num', '-140')]),
     ('c', 'control', ['por siempre'], [
-        si(tecla('flecha derecha'), [('stack', 'motion', ['cambiar x por', ('num', '6')])]),
-        si(tecla('flecha izquierda'), [('stack', 'motion', ['cambiar x por', ('num', '-6')])]),
+        si(tecla('flecha derecha'), [('stack', 'motion', ['sumar a x', ('num', '6')])]),
+        si(tecla('flecha izquierda'), [('stack', 'motion', ['sumar a x', ('num', '-6')])]),
     ]),
 ]
 C_RELOJ = [
@@ -415,7 +415,7 @@ C_PIEDRA = [
         ('stack', 'motion', ['ir a x:', azar('-200', '200'), 'y:', ('num', '160')]),
         ('c', 'control', ['repetir hasta que',
                           hexa('operators', POSY, '<', ('num', '-150'))], [
-            ('stack', 'motion', ['cambiar y por', ('num', '-8')]),
+            ('stack', 'motion', ['sumar a y', ('num', '-8')]),
             si(tocando('Jugador'), [
                 ('stack', 'sound', ['iniciar sonido', ('drop', 'Pop')]),
                 ('stack', 'variables', ['sumar a', ('drop', 'Vidas'), ('num', '-1')]),
@@ -444,7 +444,7 @@ esquivar = pagina_juego(
          tabla(['Pieza', 'De dónde sale'], [
              ['Moverse con las flechas', 'S05 · Pieza 1 de la S19'],
              ['Aparecer arriba en un sitio al azar', 'Pieza 3 de la S19'],
-             ['Caer hasta abajo', 'S12 · <em>cambiar y por</em>'],
+             ['Caer hasta abajo', 'S12 · <em>sumar a y</em>'],
              ['Chocar y perder una vida', 'Pieza 4 de la S19'],
              ['Esconderse y volver a salir', 'Pieza 8 de la S19'],
              ['Marcador y fin de partida', 'Piezas 2 y 7 de la S19'],
@@ -501,11 +501,11 @@ esquivar = pagina_juego(
              ['Monedas que en vez de quitar, suman',
               'Duplicar la piedra, cambiarle el disfraz y poner <em>sumar a (Puntos) (5)</em>'],
              ['Que caigan más rápido cuanto más aguantas',
-              '<em>cambiar y por (−8 − Puntos / 10)</em>, como la dificultad del Pong en la S16'],
+              '<em>sumar a y (−8 − Puntos / 10)</em>, como la dificultad del Pong en la S16'],
              ['Un escudo que aguante un golpe',
               'Variable <code>Escudo</code>: si vale 1, en vez de quitar vida se gasta el escudo'],
              ['Que el jugador también salte',
-              'Dos condicionales más con <em>cambiar y por</em> y las flechas arriba y abajo'],
+              'Dos condicionales más con <em>sumar a y</em> y las flechas arriba y abajo'],
              ['Aviso visual al perder una vida',
               'Un <em>cambiar disfraz a</em> del jugador, o un <em>decir (¡Ay!)</em>'],
              ['Meteoritos, gotas de lluvia, exámenes, calcetines…',

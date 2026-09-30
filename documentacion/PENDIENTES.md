@@ -40,6 +40,11 @@ no volver a proponerlas como nuevas:
 - **Miau o Meow** en S01, S02, S03, S05 y la presentación: mirar el desplegable en la pantalla
   de un alumno. Y el **título de la S04** («Condicionales I») cuando la cree en Moodle.
 
+## Para revisar el fin de semana (Manuel)
+
+- Las diecisiete sesiones de T1 con «Tu actividad» en N.1/N.2/N.3 (DECISIONES_T1 §35). Lo que no
+  convenza se cambia en `ampliaciones.py` (N.2, objetos) o `pseudocodigo.py` (N.3) y se regenera.
+
 ## Del material
 
 - [ ] **Materiales auxiliares de T3** (S09, S10, S11, S12, S13, S14, S15, S16, S17, S18): las

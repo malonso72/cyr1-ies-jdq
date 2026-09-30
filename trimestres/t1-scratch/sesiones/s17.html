@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -202,13 +203,35 @@
 </div>
 
 <h2><span class="h2n">5</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>los cinco sospechosos</strong> (5.1) y <strong>la bailarina</strong> (5.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">5.1</span>Arregla los cinco programas</h3>
 <p><strong>Arregla los cinco.</strong> Uno por uno: lo pruebas, averiguas qué le pasa, lo corriges y lo vuelves a probar hasta que haga lo que promete la ficha.</p><p>Y apunta lo que has hecho. Por cada objeto, <strong>una línea</strong>: qué le pasaba y qué bloque tocaste. Eso es lo que se entrega junto al proyecto, y es lo que de verdad demuestra que lo has entendido.</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Objeto</th><th scope="col">Qué le pasaba</th><th scope="col">Qué hice</th></tr></thead><tbody><tr><td><code>SeVaSolo</code></td><td>…</td><td>…</td></tr><tr><td><code>CabezaAbajo</code></td><td>…</td><td>…</td></tr><tr><td><code>Cuadrado</code></td><td>…</td><td>…</td></tr><tr><td><code>NoAvisa</code></td><td>…</td><td>…</td></tr><tr><td><code>Marcador</code></td><td>…</td><td>…</td></tr></tbody></table></div><details class="pista">
   <summary>¿Te has atascado? Abre las pistas</summary>
   <div class="cuerpo"><p>No son las soluciones: son el sitio donde mirar.</p><ul><li><code>SeVaSolo</code> — ¿de dónde sale? ¿Quién le dice dónde empieza?</li><li><code>CabezaAbajo</code> — el problema no es el movimiento, es el dibujo. Hay un bloque de Movimiento que decide si el disfraz gira o no.</li><li><code>Cuadrado</code> — cuenta los lados que hace y los que tiene un cuadrado.</li><li><code>NoAvisa</code> — ¿cuántas veces se ejecuta ese <em>si</em>? Míralo con atención: ¿está dentro de algo o está suelto?</li><li><code>Marcador</code> — no falla al sumar, falla al empezar. ¿Qué vale <em>Puntos</em> justo antes de que sumes el primero?</li></ul></div>
 </details>
 <h3 class="sub"><span class="subn">5.2</span>Rompe un programa para otra pareja</h3>
-<p>Coge un programa tuyo de otra sesión (el Pong vale) y métele <strong>un solo fallo</strong> de los cinco tipos de hoy, uno que se note al ejecutar. Guárdalo como <code>Roto_TuNombre.sb3</code> y pásaselo a otra pareja que haya terminado (si no hay ninguna, al profesor): tienen que encontrarlo con el método de hoy y decirte cuál era. Para romper algo a propósito hay que entenderlo mejor que para arreglarlo.</p>
+<p>Para romper algo a propósito hay que entenderlo mejor que para arreglarlo.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Abre en otra pestaña un programa tuyo de otra sesión (el Pong vale).</span></li><li><span class="p">Paso 2</span><span>Métele <strong>un solo fallo</strong> de los cinco tipos de hoy, uno que se note al ejecutar: quita un <em>ir a</em>, un estilo de rotación, un <em>dar a … el valor 0</em>, cambia un número de un <em>repetir</em> o saca un <em>si</em> de su <em>por siempre</em>.</span></li><li><span class="p">Paso 3</span><span>Descárgalo como <strong>Roto_TuNombre.sb3</strong>.</span></li><li><span class="p">Paso 4</span><span>Pásaselo a otra pareja que haya terminado (si no hay ninguna, al profesor): tienen que encontrarlo con el método de hoy y decirte cuál era.</span></li><li><span class="p">Paso 5</span><span>Apunta en tu entrega qué fallo metiste y si te lo encontraron.</span></li></ol>
+<h3 class="sub"><span class="subn">5.3</span>Monta la bailarina que no para a partir del texto</h3>
+<p>Una bailarina que tiene que dar cuatro pasos de baile y decir «¡Fin!». <strong>El programa, tal y como está escrito, tiene un fallo</strong>: móntalo igual, comprueba qué hace, encuentra la línea culpable y arréglalo.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade la bailarina: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Ballerina</strong> en el buscador y elige <strong>Ballerina</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en la bailarina, <strong>no</strong> en los cinco sospechosos.</span></li>
+  <li><span class="p">Paso 3</span><span>Crea la variable <strong>Pasos</strong>.</span></li>
+  <li><span class="p">Paso 4</span><span>Monta el programa de abajo tal cual, con el fallo.</span></li>
+  <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>B</strong>. No uses la bandera: la bandera arranca los cinco sospechosos.</span></li>
+  <li><span class="p">Paso 6</span><span>Arréglalo y apunta en tu entrega qué línea estaba mal y por qué.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla B:</li>
+  <li class="n1">repetir hasta que el valor de Pasos sea igual a 4:</li>
+  <li class="n2">poner Pasos a 0</li>
+  <li class="n2">pasar al siguiente disfraz</li>
+  <li class="n2">esperar 0.5 segundos</li>
+  <li class="n2">sumar 1 a Pasos</li>
+  <li class="n1">decir «¡Fin!» durante 2 segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> arreglado, al pulsar B la bailarina cambia de postura cuatro veces, una cada medio segundo, y dice «¡Fin!». Sin arreglar, baila y baila y no dice nunca «¡Fin!»: ¿qué le pasa a la variable Pasos en cada vuelta?</p>
 
 <h2><span class="h2n">6</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -218,11 +241,13 @@
   <li>Tienes escrita una línea por objeto: qué le pasaba y qué tocaste.</li>
   <li>Sabrías explicarle a un compañero la diferencia entre un <em>si</em> suelto y un <em>si</em> dentro de un <em>por siempre</em>.</li>
   <li>El apartado 5.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 5.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 5.1 y 5.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 5.1, 5.2 y 5.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>los cinco sospechosos</strong> (5.1) y <strong>la bailarina</strong> (5.3).</p>
 <ol><li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un <code>.sb3</code> a tu carpeta <strong>Descargas</strong>.</li><li>Cámbiale el nombre a <strong>Sesion17_TuNombre.sb3</strong>.</li><li>Súbelo a la tarea de <strong>Moodle</strong> de la sesión 17, junto con las <strong>cinco líneas</strong> de la tabla: qué le pasaba a cada uno y qué tocaste.</li></ol>
 </div>
 

@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -196,6 +197,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el murciélago</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Monta las tres versiones</h3>
 <p>Monta las <strong>tres versiones en el mismo proyecto</strong>, cada una con su tecla, como hiciste con las figuras de la sesión 3. Los tres programas son iguales salvo la condición del <em>repetir hasta que</em>:</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Tecla</th><th scope="col">El gato se para cuando…</th><th scope="col">Condición (en Sensores)</th></tr></thead><tbody><tr><td>flecha arriba</td><td>pulsas la barra espaciadora</td><td>¿tecla (espacio) presionada?</td></tr><tr><td>flecha abajo</td><td>haces clic dentro del escenario</td><td>¿ratón presionado?</td></tr><tr><td>flecha derecha</td><td>llega al borde</td><td>¿tocando (borde)?</td></tr></tbody></table></div><ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Monta el programa de arriba tal cual y compruébalo: flecha arriba para arrancar, espacio para parar.</span></li>
@@ -208,7 +210,28 @@
 <p>Espera a que el gato diga «¡Me has parado!» antes de pulsar la siguiente flecha. Si pulsas otra mientras un programa está corriendo, los dos mueven al gato a la vez (8 pasos por vuelta en vez de 4) hasta que uno termina y su <em>detener todos</em> apaga los dos. Si se lía, el círculo rojo lo para todo.</p>
 </div>
 <h3 class="sub"><span class="subn">4.2</span>Añade una cuarta flecha con el operador «o»</h3>
-<p>Tienes una versión que se para con el espacio y otra que se para en el borde. Júntalas en un cuarto programa, con la <strong>flecha izquierda</strong>: que se pare por <strong>cualquiera de las dos cosas</strong>, la que pase antes. El bloque nuevo es el operador verde <strong>&lt; &gt; o &lt; &gt;</strong>, de Operadores: tiene dos huecos hexagonales, y en cada uno metes una condición.</p>
+<p>Tienes una versión que se para con el espacio y otra que se para en el borde. La cuarta, con la <strong>flecha izquierda</strong>, se para con <strong>lo que pase antes</strong> de las dos cosas.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Haz clic derecho sobre el sombrero del programa de la <strong>flecha derecha</strong> y elige <strong>Duplicar</strong>. Suelta la copia en un sitio libre.</span></li><li><span class="p">Paso 2</span><span>En la copia, cambia la tecla del sombrero por <strong>flecha izquierda</strong>.</span></li><li><span class="p">Paso 3</span><span>Saca el <em>¿tocando borde?</em> del hueco del <em>repetir hasta que</em> y déjalo a un lado. En su sitio pon el operador verde <strong>&lt; &gt; o &lt; &gt;</strong>, que está en Operadores.</span></li><li><span class="p">Paso 4</span><span>En el hueco izquierdo del <em>o</em> mete un <strong>¿tecla espacio presionada?</strong>; en el derecho, el <strong>¿tocando borde?</strong> que habías sacado.</span></li><li><span class="p">Paso 5</span><span>Pulsa la flecha izquierda: el gato se para al pulsar espacio <strong>o</strong> al llegar al borde, lo que pase primero.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el murciélago que hay que cazar a partir del texto</h3>
+<p>Un murciélago que vuela rebotando por el escenario hasta que lo tocas con el puntero del ratón.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el murciélago: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Bat</strong> en el buscador y elige <strong>Bat</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el murciélago, <strong>no</strong> en el gato.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el programa de abajo, línea a línea.</span></li>
+  <li><span class="p">Paso 4</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>M</strong>. No uses la bandera: la bandera arranca nada, pero las flechas son del gato.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla M:</li>
+  <li class="n1">poner el estilo de rotación en «no rotar»</li>
+  <li class="n1">ir al punto x: 0, y: 0</li>
+  <li class="n1">mirar en dirección 45</li>
+  <li class="n1">repetir hasta que toque el puntero del ratón:</li>
+  <li class="n2">avanzar 6 pasos</li>
+  <li class="n2">si toca un borde, dar la vuelta (rebotar)</li>
+  <li class="n1">decir «¡Me has cazado!» durante 2 segundos</li>
+  <li class="n1">detener todo</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar M el murciélago sale del centro en diagonal y rebota en los bordes sin parar. En cuanto pones el puntero del ratón encima, dice «¡Me has cazado!» y todo se detiene. No hace falta hacer clic: basta con tocarlo.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -219,11 +242,13 @@
   <li>Los tres programas están en el mismo proyecto, y es ese el que entregas.</li>
   <li>Sabrías explicar la diferencia entre <em>repetir (10)</em> y <em>repetir hasta que</em>.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el murciélago</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

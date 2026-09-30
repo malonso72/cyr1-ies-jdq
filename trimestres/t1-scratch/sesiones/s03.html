@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -194,6 +195,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el lápiz</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Recorre las tres figuras</h3>
 <p>Monta las tres figuras <strong>en el mismo proyecto</strong>, cada una con su tecla: al pulsar <strong>1</strong> sale el cuadrado, al pulsar <strong>2</strong> el triángulo y al pulsar <strong>3</strong> el pentágono. Así puedes verlas de una en una, y ninguna le estropea la figura a la otra.</p><p>De un programa a otro sólo cambian tres cosas: la tecla, las veces que repite y los grados que gira.</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Figura</th><th scope="col">Tecla</th><th scope="col">Repetir</th><th scope="col">Girar</th><th scope="col">Comprobación</th></tr></thead><tbody><tr><td>Cuadrado</td><td>1</td><td>4</td><td>90</td><td>4 × 90 = 360 ✔</td></tr><tr><td>Triángulo</td><td>2</td><td>3</td><td>120</td><td>3 × 120 = 360 ✔</td></tr><tr><td>Pentágono</td><td>3</td><td>5</td><td>72</td><td>5 × 72 = 360 ✔</td></tr></tbody></table></div><p>¿Ves la regla? <strong>Los grados son 360 dividido entre el número de lados.</strong> Pruébala con un hexágono (6 lados) sin mirar la tabla.</p><div class="aviso-ojo">
   <h3>⚠️ El cuadrado no se queda pintado</h3>
@@ -205,10 +207,30 @@
 </div><p style="margin-bottom:0">Fíjate en que <strong>no tiene muesca abajo</strong>: no se le puede encajar nada detrás, porque nunca llegaría el turno.</p></div>
 </details>
 <h3 class="sub"><span class="subn">4.2</span>Dibuja las figuras con el lápiz</h3>
-<ul>
-  <li><b>Que se vea lo que dibuja: la extensión Lápiz.</b> Pulsa el botón azul de abajo a la izquierda, <strong>Añadir extensión</strong>, y elige <strong>Lápiz</strong>. Aparece una categoría verde nueva. Pon <strong>bajar lápiz</strong> justo después del <em>ir a x: y:</em> en los tres programas, y <strong>borrar todo</strong> al principio de cada uno. Pulsa 1, 2 y 3: ahora las figuras se quedan dibujadas.</li>
-  <li><b>La flor.</b> Con el lápiz bajado, un cuarto programa con la tecla 4: <strong>repetir 36</strong> con <em>mover 100 pasos</em> y <em>girar 100 grados</em> dentro, y sin la espera. Antes de pulsar, intenta adivinar qué va a salir.</li>
-</ul>
+<p>El gato recorre las figuras, pero no deja rastro. Con la extensión <strong>Lápiz</strong> se quedan dibujadas.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Pulsa el botón azul de abajo a la izquierda, <strong>Añadir extensión</strong>, y elige <strong>Lápiz</strong>. Aparece una categoría verde nueva, abajo del todo.</span></li><li><span class="p">Paso 2</span><span>En los tres programas (teclas 1, 2 y 3), justo debajo del sombrero, pon <strong>borrar todo</strong> y <strong>subir lápiz</strong>.</span></li><li><span class="p">Paso 3</span><span>En los tres, justo después de <em>ir a x: -75 y: 75</em>, pon <strong>bajar lápiz</strong>.</span></li><li><span class="p">Paso 4</span><span>Pulsa 1, 2 y 3: cada figura se queda dibujada y borra la anterior. Si ves una raya que va de una figura a otra, te falta el <em>subir lápiz</em> antes del <em>ir a</em>.</span></li><li><span class="p">Paso 5</span><span>La flor: un cuarto programa en el gato con <strong>al presionar tecla 4</strong>: borrar todo, subir lápiz, ir a x: 0 y: 0, bajar lápiz y <strong>repetir 36</strong> con <em>mover 100 pasos</em> y <em>girar 100 grados</em> dentro, sin espera. Antes de pulsar el 4, intenta adivinar qué va a salir.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta la estrella de cinco puntas a partir del texto</h3>
+<p>El lápiz de Scratch dibuja una estrella de cinco puntas y vuelve al punto de partida.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el lápiz: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Pencil</strong> en el buscador y elige <strong>Pencil</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el lápiz, <strong>no</strong> en el gato.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el programa de abajo. Los bloques de lápiz son los de la extensión que has añadido en el apartado anterior.</span></li>
+  <li><span class="p">Paso 4</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>E</strong>. No uses la bandera: la bandera arranca nada, pero las teclas 1, 2, 3 y 4 son del gato.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla E:</li>
+  <li class="n1">borrar todo lo dibujado</li>
+  <li class="n1">subir el lápiz</li>
+  <li class="n1">ir al punto x: -75, y: 40</li>
+  <li class="n1">mirar hacia la derecha (dirección 90)</li>
+  <li class="n1">bajar el lápiz</li>
+  <li class="n1">repetir 5 veces:</li>
+  <li class="n2">avanzar 150 pasos</li>
+  <li class="n2">girar 144 grados hacia la derecha</li>
+  <li class="n2">esperar 0.5 segundos</li>
+  <li class="n1">subir el lápiz</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar E se borra lo que hubiera y aparece, trazo a trazo, una estrella de cinco puntas. El lápiz acaba justo donde empezó. Pregunta para pensar: ¿por qué 144 grados y no 72, como el pentágono?</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -217,6 +239,7 @@
   <li>Sabrías explicar por qué los giros tienen que sumar 360.</li>
   <li>Sabes la diferencia entre <em>repetir (10)</em> y <em>por siempre</em>.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <details class="pista">
@@ -226,7 +249,8 @@
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el lápiz</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

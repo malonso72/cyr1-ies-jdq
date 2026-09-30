@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -200,19 +201,46 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
-<h3 class="sub"><span class="subn">4.1</span>Haz que un objeto avise a otro</h3>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1), <strong>la pelota</strong> (4.1 y 4.2), <strong>el portero</strong> (4.2), <strong>el árbitro</strong> (4.3) y <strong>el tambor</strong> (4.3). Cada objeto, con su programa.</p>
+<h3 class="sub"><span class="subn">4.1</span>Haz que el gato avise a la pelota</h3>
 <ol class="paso-lista">
-  <li><span class="p">Paso 1</span><span>Elige dos objetos: uno que actúe y otro que reaccione.</span></li>
-  <li><span class="p">Paso 2</span><span>Crea el mensaje con un nombre que se entienda.</span></li>
+  <li><span class="p">Paso 1</span><span>El gato chuta y la pelota reacciona. Añade la pelota: botón <strong>Elige un objeto</strong>, escribe <strong>Soccer</strong> y elige <strong>Soccer Ball</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span>Crea el mensaje <strong>patada</strong>, en el desplegable del bloque <em>enviar</em>.</span></li>
   <li><span class="p">Paso 3</span><span>Monta los programas, cada uno en su objeto. No te olvides del que coloca.</span></li>
   <li><span class="p">Paso 4</span><span>Añade un <strong>cambio de disfraz</strong> al gato justo antes de enviar el mensaje, para que se vea el gesto de chutar.</span></li>
-  <li><span class="p">Paso 5</span><span><strong>Reto:</strong> añade un <strong>tercer objeto</strong> — un portero, un marcador, una nube — que también tenga <em>al recibir (patada)</em> y haga algo. Comprobarás que los dos reaccionan a la vez con un solo aviso.</span></li>
 </ol><div class="aviso-ojo">
   <h3>⚠️ Dos diferencias con tu cuadernillo</h3>
 <p>El bloque ya <strong>no</strong> se llama «enviar a todos». Hoy es simplemente <strong>enviar (patada)</strong>, aunque siga avisando a todo el mundo.</p><p style="margin-bottom:0">Y ojo: existe otro parecido, <strong>enviar (patada) y esperar</strong>. Ese <em>sí</em> deja al que envía parado hasta que los demás terminen. Aquí no lo queremos.</p>
 </div>
-<h3 class="sub"><span class="subn">4.2</span>Encadena tres mensajes</h3>
-<p>Que un mensaje provoque otro: el gato envía <em>patada</em>; la pelota, <em>al recibir patada</em>, hace lo suyo y al terminar envía un mensaje nuevo, <em>gol</em>; y un tercer objeto, <em>al recibir gol</em>, celebra. Tres objetos, dos mensajes, todo en cadena. La pantalla de inicio del proyecto final funciona exactamente así.</p>
+<h3 class="sub"><span class="subn">4.2</span>Encadena un segundo mensaje</h3>
+<p>Un mensaje que provoca otro: el gato avisa a la pelota y, cuando la pelota termina, avisa al <strong>portero</strong>.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Añade el portero: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Goalie</strong> en el buscador y elige <strong>Goalie</strong>, el portero. Arrástralo a la derecha del escenario.</span></li><li><span class="p">Paso 2</span><span>Selecciona la <strong>pelota</strong>. Al final de su programa de <em>al recibir patada</em>, añade <strong>enviar</strong> y, en su desplegable, <strong>Nuevo mensaje</strong>: llámalo <strong>gol</strong>.</span></li><li><span class="p">Paso 3</span><span>Selecciona el portero: <strong>al recibir gol</strong>, <strong>decir ¡Noooo! durante 2 segundos</strong>.</span></li><li><span class="p">Paso 4</span><span>Pulsa la bandera: el gato chuta, la pelota sale y, cuando termina, el portero se lamenta. Nadie ha pulsado nada para que el portero hable: se lo ha dicho la pelota.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el árbitro y el tambor a partir del texto</h3>
+<p>Dos objetos nuevos: un árbitro que pita y da la señal, y un tambor que redobla cuando le llega el aviso.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el árbitro: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Referee</strong> en el buscador y elige <strong>Referee</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span>Añade el tambor: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Drum</strong> en el buscador y elige <strong>Drum</strong>. Pon cada uno en un sitio distinto del escenario.</span></li>
+  <li><span class="p">Paso 3</span><span>Hay <strong>dos programas</strong>: el primero va en el árbitro y el segundo en el tambor. Selecciona cada objeto antes de montar el suyo.</span></li>
+  <li><span class="p">Paso 4</span><span>El mensaje <strong>redoble</strong> lo creas tú, en el desplegable del bloque <em>enviar</em>: <strong>Nuevo mensaje</strong>.</span></li>
+  <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>T</strong>. No uses la bandera: la bandera arranca el gato, la pelota y el portero.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<p class="rp-obj"><b>En el árbitro:</b></p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla T:</li>
+  <li class="n1">hacer sonar «Referee Whistle»</li>
+  <li class="n1">decir «¡Que suene el tambor!» durante 2 segundos</li>
+  <li class="n1">enviar el mensaje «redoble» a todos</li>
+  <li class="n1">esperar 3 segundos</li>
+  <li class="n1">decir «¡Bravo!» durante 2 segundos</li>
+</ol>
+<p class="rp-obj"><b>En el tambor:</b></p>
+<ol class="pseudo">
+  <li class="n0">Cuando llegue el mensaje «redoble»:</li>
+  <li class="n1">repetir 6 veces:</li>
+  <li class="n2">pasar al siguiente disfraz</li>
+  <li class="n2">hacer sonar «High Tom» y esperar a que termine</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar T el árbitro pita y dice «¡Que suene el tambor!»; justo cuando termina de hablar, el tambor empieza a sonar y a moverse seis veces, él solo. Después el árbitro dice «¡Bravo!». El tambor no tiene ninguna tecla: arranca porque le llega el mensaje.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -223,11 +251,13 @@
   <li>Hay un tercer objeto que reacciona al mismo aviso.</li>
   <li>Sabrías explicar la diferencia entre <em>enviar</em> y <em>enviar y esperar</em>.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1), <strong>la pelota</strong> (4.1 y 4.2), <strong>el portero</strong> (4.2), <strong>el árbitro</strong> (4.3) y <strong>el tambor</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

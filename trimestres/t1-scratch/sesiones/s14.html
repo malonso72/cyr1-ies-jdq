@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -190,6 +191,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el unicornio</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Completa el juego</h3>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Monta el programa tal cual y comprueba que detecta los empates.</span></li>
@@ -204,8 +206,29 @@
   <h3>⚠️ Cuidado con lo que escribe el jugador</h3>
 <p>El programa compara textos, así que «Piedra» con mayúscula, «piedra » con un espacio detrás o «tijeras» en plural <strong>no coinciden</strong> y el juego dirá que has perdido.</p><p style="margin-bottom:0">Por eso el bloque de preguntar dice exactamente qué hay que escribir. Si quieres afinar, hay quien pide un número (1, 2 o 3) en vez de una palabra: menos bonito, pero mucho más difícil de equivocar.</p>
 </div>
-<h3 class="sub"><span class="subn">4.2</span>Haz que la máquina enseñe lo que ha sacado</h3>
-<p>Dibújale al personaje tres disfraces y llámalos exactamente <strong>piedra</strong>, <strong>papel</strong> y <strong>tijera</strong>. Después del sorteo, pon <em>cambiar disfraz a</em> con la variable <code>maquina</code> en el hueco: Scratch busca el disfraz que tenga ese nombre. Sin bloques nuevos.</p>
+<h3 class="sub"><span class="subn">4.2</span>Haz que el gato enseñe lo que ha sacado</h3>
+<p>Que el gato <strong>enseñe</strong> lo que ha sacado, con un dibujo, además de decirlo.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Selecciona el gato y ve a la pestaña <strong>Disfraces</strong>.</span></li><li><span class="p">Paso 2</span><span>Pinta tres disfraces nuevos (el pincel de abajo a la izquierda, <strong>Pinta</strong>): una piedra, un papel y unas tijeras. No hace falta que sean bonitos.</span></li><li><span class="p">Paso 3</span><span>Cámbiales el nombre, arriba, exactamente a <strong>piedra</strong>, <strong>papel</strong> y <strong>tijera</strong>: en minúscula y sin tilde, igual que los textos de la variable <em>maquina</em>.</span></li><li><span class="p">Paso 4</span><span>Vuelve a Código. Justo después de los tres <em>si</em> del sorteo, pon <strong>cambiar disfraz a</strong> y mete la variable <strong>maquina</strong> en su hueco: Scratch busca el disfraz que se llame igual.</span></li><li><span class="p">Paso 5</span><span>Juega: el gato se convierte en lo que ha sacado.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el unicornio de la montaña rusa a partir del texto</h3>
+<p>Un unicornio que vigila la cola de la montaña rusa: puedes subir si mides más de 140 cm o si vienes con una persona adulta.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el unicornio: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Unicorn</strong> en el buscador y elige <strong>Unicorn</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el unicornio, <strong>no</strong> en el gato.</span></li>
+  <li><span class="p">Paso 3</span><span>Crea la variable <strong>altura</strong>.</span></li>
+  <li><span class="p">Paso 4</span><span>Monta el programa de abajo, línea a línea. La condición del <em>si</em> lleva el operador <strong>o</strong> con dos condiciones dentro.</span></li>
+  <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>U</strong>. No uses la bandera: la bandera arranca el piedra, papel o tijera.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla U:</li>
+  <li class="n1">preguntar «¿Cuánto mides, en centímetros?» y esperar la respuesta</li>
+  <li class="n1">poner altura a la respuesta</li>
+  <li class="n1">preguntar «¿Vienes con una persona adulta? Escribe si o no» y esperar la respuesta</li>
+  <li class="n1">si el valor de altura es mayor que 140 o bien la respuesta es igual a «si»:</li>
+  <li class="n2">decir «¡Puedes subir a la montaña rusa!» durante 3 segundos</li>
+  <li class="n1">si no:</li>
+  <li class="n2">decir «Lo siento, todavía no puedes subir» durante 3 segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar U el unicornio pregunta tu altura y si vienes con un adulto. Con 150 y «no», puedes subir. Con 120 y «si», también. Con 120 y «no», no puedes. Prueba las tres.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -214,11 +237,13 @@
   <li>Hay un marcador para los dos jugadores.</li>
   <li>Has usado el operador <em>y</em> al menos tres veces.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el unicornio</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

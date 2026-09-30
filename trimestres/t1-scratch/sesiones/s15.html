@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -192,22 +193,41 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>la pelota</strong> (4.1 y 4.2), <strong>la pala</strong> (4.1 y 4.2), <strong>la segunda pelota</strong> (4.2) y <strong>el globo</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Monta la pelota y la pala</h3>
 <ol class="paso-lista">
-  <li><span class="p">Paso 1</span><span>Crea los dos objetos y monta los dos programas, cada uno en el suyo.</span></li>
-  <li><span class="p">Paso 2</span><span>Comprueba que la pala se mueve con el ratón y no se sale por arriba ni por abajo.</span></li>
-  <li><span class="p">Paso 3</span><span>Ajusta la <strong>velocidad de la pelota</strong> (los 8 pasos). Busca un valor que se pueda seguir con la vista pero no aburra.</span></li>
-  <li><span class="p">Paso 4</span><span>Cambia la <strong>anchura de la pala</strong> desde la pestaña Disfraces. Una pala ancha hace el juego fácil; una estrecha, imposible.</span></li>
-  <li><span class="p">Paso 5</span><span>Ponle un fondo oscuro para que la pelota se vea bien.</span></li>
+  <li><span class="p">Paso 1</span><span>Borra el gato: clic derecho sobre su icono y <strong>borrar</strong>. Hoy no hace falta.</span></li>
+  <li><span class="p">Paso 2</span><span>Añade la pelota (busca <strong>Ball</strong>) y la pala (busca <strong>Paddle</strong>). A la pala cámbiale el nombre a <strong>Pala</strong>: la sesión 16 la busca con ese nombre. Monta los dos programas, cada uno en el suyo.</span></li>
+  <li><span class="p">Paso 3</span><span>Comprueba que la pala se mueve con el ratón y no se sale por arriba ni por abajo.</span></li>
+  <li><span class="p">Paso 4</span><span>Ajusta la <strong>velocidad de la pelota</strong> (los 8 pasos). Busca un valor que se pueda seguir con la vista pero no aburra.</span></li>
+  <li><span class="p">Paso 5</span><span>Cambia la <strong>anchura de la pala</strong> desde la pestaña Disfraces. Una pala ancha hace el juego fácil; una estrecha, imposible.</span></li>
+  <li><span class="p">Paso 6</span><span>Ponle un fondo oscuro para que la pelota se vea bien.</span></li>
 </ol><div class="aviso-ojo">
   <h3>⚠️ De momento la pelota rebota también abajo</h3>
 <p>Con <em>si toca un borde, rebotar</em>, la pelota rebota en los <strong>cuatro</strong> bordes, incluido el de abajo. Eso significa que ahora mismo es imposible perder: la pala no sirve para nada.</p><p style="margin-bottom:0">Está bien así. En la sesión siguiente le quitarás ese rebote de abajo y ahí es donde el juego se convierte en un juego.</p>
 </div>
 <h3 class="sub"><span class="subn">4.2</span>Maneja la pala con teclas y añade otra pelota</h3>
-<ul>
-  <li><b>La pala con teclas.</b> Cambia el <em>ir a x: (posición x del ratón)</em> por lo de la sesión 5: si la tecla <strong>A</strong> está presionada, <em>cambiar x por −10</em>; si la <strong>D</strong>, <em>cambiar x por 10</em>. Cuando en la sesión 16 la pala cuente puntos, con esto tendrás la mitad de un Pong para dos.</li>
-  <li><b>Dos pelotas.</b> Clic derecho sobre la pelota, <strong>duplicar</strong>, y a la copia cámbiale la dirección de salida (por ejemplo 200) y el tamaño. Ningún bloque nuevo, y el escenario cambia por completo.</li>
-</ul>
+<p>La pala pasa a moverse con las teclas <strong>A</strong> y <strong>D</strong>, y entra una segunda pelota.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Selecciona la <strong>pala</strong>. Quita el <em>ir a x: (posición x del ratón) y: -140</em> de dentro del <em>por siempre</em>.</span></li><li><span class="p">Paso 2</span><span>Antes del <em>por siempre</em>, pon <strong>ir a x: 0 y: -140</strong>.</span></li><li><span class="p">Paso 3</span><span>Dentro del <em>por siempre</em>: <strong>si ¿tecla a presionada? entonces sumar a x -10</strong> y <strong>si ¿tecla d presionada? entonces sumar a x 10</strong>. Es lo de la sesión 5.</span></li><li><span class="p">Paso 4</span><span>Haz clic derecho sobre el icono de la <strong>pelota</strong>, abajo a la derecha, y elige <strong>duplicar</strong>. En el programa de la copia cambia la dirección de salida <strong>160</strong> por <strong>200</strong>.</span></li><li><span class="p">Paso 5</span><span>Pulsa la bandera: dos pelotas rebotando y una pala que manejas con A y D.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el globo que se escapa a partir del texto</h3>
+<p>Un globo que sube solo, temblando a los lados, hasta que toca el techo y explota.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el globo: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Balloon</strong> en el buscador y elige <strong>Balloon1</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el globo, <strong>no</strong> en las pelotas ni en la pala.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el programa de abajo, línea a línea.</span></li>
+  <li><span class="p">Paso 4</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>G</strong>. No uses la bandera: la bandera arranca el Pong.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla G:</li>
+  <li class="n1">mostrarse</li>
+  <li class="n1">ir al punto x: 0, y: -100</li>
+  <li class="n1">repetir hasta que toque el borde:</li>
+  <li class="n2">desplazarse 3 en vertical (sumar a y)</li>
+  <li class="n2">desplazarse un número al azar entre -3 y 3 en horizontal (sumar a x)</li>
+  <li class="n1">decir «¡Pum!» durante 1 segundo</li>
+  <li class="n1">esconderse</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar G el globo aparece abajo, en el centro, y sube despacio moviéndose un poco a izquierda y derecha. Cuando toca el borde de arriba dice «¡Pum!» y desaparece. Si vuelves a pulsar G, reaparece abajo.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -216,11 +236,13 @@
   <li>La pala no gira ni se pone del revés.</li>
   <li>La pelota se ve bien contra el fondo.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>la pelota</strong> (4.1 y 4.2), <strong>la pala</strong> (4.1 y 4.2), <strong>la segunda pelota</strong> (4.2) y <strong>el globo</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

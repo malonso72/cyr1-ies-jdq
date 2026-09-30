@@ -522,5 +522,32 @@ dentro y subjuntivo tras «hasta que». El de la S05 («el coche teledirigido»)
 editor real. Antes de escribir cada N.3 se comprueba que no se adelanta al juego de una sesión
 posterior.
 
-**Estado:** la S05 está completa; S01–S04 y S06–S17 tienen 4.1 y 4.2 con los textos de antes y
-falta hacerlos tan dirigidos como la S05 y escribir su 4.3.
+**Estado (30-09, tarde):** las diecisiete sesiones completas con el mismo patrón que la S05,
+hechas «del tirón» a petición de Manuel, que las revisa el fin de semana. En cada una:
+
+- objetos fijados por su nombre en la biblioteca (comprobados en el editor: nombre, disfraces y
+  sonidos), dichos al empezar y repetidos en la entrega; cuando la sesión sigue el proyecto de
+  la anterior (S13 tras S12, S16 tras S15) se dice qué objetos vienen de ella;
+- los pasos de N.1 que dejaban elegir («elige dos personajes…») ahora nombran el objeto, y los
+  «Reto:» que metían un objeto más se han quitado o reconducido para no pisar N.2;
+- N.2 en pasos numerados;
+- N.3 en su propio objeto y con su propia tecla, con los pasos de preparación y el «Sabes que
+  está bien si…». La S11 tiene dos programas (árbitro y tambor, unidos por un mensaje); la S17
+  da el programa **con un fallo plantado** para que lo arreglen, coherente con la sesión.
+
+**Probados todos los N.3.** Los de S03 (lápiz), S04 (puntero del ratón), S05 y S15 (borde) y
+S12 (color de las paredes, con una pared negra y el gato de prueba) en el editor real; el resto
+con `test_retos.js` en scratch-vm, que los ejecuta con teclas y respuestas simuladas y comprueba
+lo que dice el «Sabes que está bien si…». Las soluciones, en `_soluciones/sb3/retos/`
+(`gen_sb3.py --retos`).
+
+**Ninguno se adelanta a una sesión posterior**, con una excepción consciente: la cuenta atrás de
+la S13 es la pieza 5 del kit del proyecto (S19), igual que las vidas de la S09 son la pieza 4. La
+página lo dice: «guárdalo bien».
+
+**Error encontrado de paso, en todo T1: tres nombres de bloque no eran los del editor en
+español.** Leídos de la paleta real: `cambiar x por` es **`sumar a x`**, `cambiar y por` es
+**`sumar a y`** y `posición x`/`posición y` son **`posición en x`/`posición en y`**. Afectaba a
+S10, S12, S16, S19 y a las tres bases del proyecto; corregido en los generadores y en
+`sb3.py`. También de la paleta: el operador de resto se llama **`módulo`** y el efecto de color
+**`sumar al efecto color`**, que es como los nombran ahora los textos.

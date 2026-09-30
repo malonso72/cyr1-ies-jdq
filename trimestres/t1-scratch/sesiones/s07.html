@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -192,6 +193,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el robot</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Construye el diálogo</h3>
 <p>Construye un <strong>diálogo de tres preguntas</strong>. Después de cada una, el personaje tiene que contestar usando lo que has escrito.</p><div class="tabla-env"><table class="tabla-cyr"><thead><tr><th scope="col">Pregunta</th><th scope="col">Y el personaje responde algo como…</th></tr></thead><tbody><tr><td>¿Cómo te llamas?</td><td>«Encantado, <em>Lucía</em>»</td></tr><tr><td>¿Cuál es tu color favorito?</td><td>«El <em>verde</em> también me gusta a mí»</td></tr><tr><td>¿Qué has desayunado?</td><td>«¿<em>Tostadas</em>? Yo prefiero el pescado»</td></tr></tbody></table></div><p>Fíjate en que en cada frase hay <strong>un trozo fijo</strong> y <strong>un trozo que cambia</strong>. Ese es justo el trabajo del bloque <strong>unir</strong>.</p><details class="pista">
   <summary>Reto: pegar tres trozos en vez de dos</summary>
@@ -200,8 +202,26 @@
   <h3>⚠️ El texto por defecto no es el del cuadernillo</h3>
 <p>Cuando coges el bloque de la paleta, ya viene escrito <strong>¿Cómo te llamas?</strong> Tu cuadernillo dice «¿Cuál es tu nombre?», que no es lo que verás. Da igual: puedes escribir dentro lo que quieras.</p>
 </div>
-<h3 class="sub"><span class="subn">4.2</span>Haz que el personaje calcule tu edad</h3>
-<p>Añade una cuarta pregunta, <strong>¿Cuántos años tienes?</strong>, y que responda «El año que viene tendrás …» con tu edad <strong>más uno</strong>. El bloque nuevo es el <strong>( ) + ( )</strong> verde, de Operadores: en un hueco va <em>respuesta</em> y en el otro un 1, y el resultado se mete dentro del <em>unir</em>.</p>
+<h3 class="sub"><span class="subn">4.2</span>Haz que el gato calcule tu edad dentro de diez años</h3>
+<p>Una cuarta pregunta, <strong>¿Cuántos años tienes?</strong>, y que el gato conteste <strong>calculando</strong>, no repitiendo.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Al final del programa del gato, añade <strong>preguntar ¿Cuántos años tienes? y esperar</strong>.</span></li><li><span class="p">Paso 2</span><span>Debajo, un <strong>decir</strong> con un <strong>unir</strong> dentro. En el primer hueco del unir escribe <strong>Dentro de diez años tendrás </strong> (con un espacio al final).</span></li><li><span class="p">Paso 3</span><span>En el segundo hueco del unir mete el operador verde <strong>( ) + ( )</strong>, que está en Operadores. En su hueco izquierdo, el bloque <strong>respuesta</strong>; en el derecho, un <strong>10</strong>.</span></li><li><span class="p">Paso 4</span><span>Prueba con 12: tiene que decir «Dentro de diez años tendrás 22».</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el robot eco a partir del texto</h3>
+<p>Un robot que te pide una palabra y te la repite tres veces, como un eco.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el robot: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Robot</strong> en el buscador y elige <strong>Retro Robot</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el robot, <strong>no</strong> en el gato.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el programa de abajo, línea a línea.</span></li>
+  <li><span class="p">Paso 4</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>R</strong>. No uses la bandera: la bandera arranca el diálogo del gato.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla R:</li>
+  <li class="n1">preguntar «Dime una palabra» y esperar la respuesta</li>
+  <li class="n1">repetir 3 veces:</li>
+  <li class="n2">decir la respuesta seguido de «...» durante 1 segundo</li>
+  <li class="n2">esperar 0.5 segundos</li>
+  <li class="n1">decir «¡Soy un robot eco!» durante 2 segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar R el robot te pide una palabra. Si escribes «hola», dice «hola...» tres veces, con una pausa entre una y otra, y después «¡Soy un robot eco!».</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -210,11 +230,13 @@
   <li>Has usado <em>unir</em> al menos tres veces.</li>
   <li>Sabrías explicar por qué <em>respuesta</em> no se acuerda de la primera pregunta.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el robot</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

@@ -27,10 +27,10 @@ MOV12 = [
     ('stack', 'looks', ['fijar tamaño al', ('num', '40'), '%']),
     ('stack', 'motion', ['ir a x:', ('num', '-200'), 'y:', ('num', '-140')]),
     ('c', 'control', ['por siempre'], [
-        si(tecla('flecha derecha'), [('stack', 'motion', ['cambiar x por', ('num', '4')])]),
-        si(tecla('flecha izquierda'), [('stack', 'motion', ['cambiar x por', ('num', '-4')])]),
-        si(tecla('flecha arriba'), [('stack', 'motion', ['cambiar y por', ('num', '4')])]),
-        si(tecla('flecha abajo'), [('stack', 'motion', ['cambiar y por', ('num', '-4')])]),
+        si(tecla('flecha derecha'), [('stack', 'motion', ['sumar a x', ('num', '4')])]),
+        si(tecla('flecha izquierda'), [('stack', 'motion', ['sumar a x', ('num', '-4')])]),
+        si(tecla('flecha arriba'), [('stack', 'motion', ['sumar a y', ('num', '4')])]),
+        si(tecla('flecha abajo'), [('stack', 'motion', ['sumar a y', ('num', '-4')])]),
     ]),
 ]
 PARED12 = [
@@ -48,7 +48,7 @@ s12 = pagina(
     [
         ('Dos bloques nuevos y una idea',
          claves([
-             ('cambiar x por (4) y cambiar y por (4)',
+             ('sumar a x (4) y sumar a y (4)',
               'Mueven el personaje en horizontal y en vertical sin girarlo. Para un laberinto van '
               'mucho mejor que <em>apuntar en dirección</em>, porque el personaje no tiene que dar '
               'la vuelta para bajar.'),
@@ -95,14 +95,14 @@ s12 = pagina(
              'dibujar tu propio laberinto. Usa el rectángulo relleno de <strong>negro</strong> para '
              'las paredes.',
              'Deja los pasillos <strong>anchos</strong>. Si son estrechos, el juego es imposible.',
-             'Vuelve al objeto, ponle un tamaño pequeño (30–40 %) y colócalo en la salida.',
+             'Vuelve al gato, ponle un tamaño pequeño (30–40 %) y colócalo en la salida.',
              'Monta el movimiento y pruébalo <em>sin</em> el condicional de las paredes.',
              'Añade el condicional de las paredes y vuelve a probar. Coge el color con el '
              '<strong>cuentagotas</strong>, no lo elijas a ojo.',
              'Ajusta los <strong>4</strong> pasos: si va muy rápido se cuela por las paredes, si va '
              'muy lento aburre.']) +
          ojo('El fallo de atravesar paredes yendo deprisa',
-             '<p>Si pones <em>cambiar x por (20)</em>, el personaje da saltos de 20 píxeles y puede '
+             '<p>Si pones <em>sumar a x (20)</em>, el personaje da saltos de 20 píxeles y puede '
              'aparecer <strong>al otro lado</strong> de una pared fina sin haberla tocado nunca. No '
              'es un fallo de Scratch: es que entre un fotograma y el siguiente nadie ha mirado.</p>'
              '<p style="margin-bottom:0">Solución: pasos pequeños y paredes gruesas.</p>')),
@@ -173,7 +173,9 @@ s13 = pagina(
 
         ('Tu actividad',
          pasos([
-             'Crea el objeto <strong>Meta</strong> y colócalo al final del laberinto.',
+             'Añade la meta: botón <strong>Elige un objeto</strong>, escribe <strong>Crystal</strong> '
+             'y elige <strong>Crystal</strong>. Cámbiale el nombre a <strong>Meta</strong> en la '
+             'casilla <em>Objeto</em>, debajo del escenario, y colócala al final del laberinto.',
              'Añade el condicional de la meta y comprueba que el juego termina y dice el tiempo.',
              'Añade <strong>reiniciar cronómetro</strong> al arranque. Juega dos veces seguidas y '
              'comprueba que el tiempo empieza de cero las dos.',
@@ -378,7 +380,11 @@ s15 = pagina(
 
         ('Tu actividad',
          pasos([
-             'Crea los dos objetos y monta los dos programas, cada uno en el suyo.',
+             'Borra el gato: clic derecho sobre su icono y <strong>borrar</strong>. Hoy no hace '
+             'falta.',
+             'Añade la pelota (busca <strong>Ball</strong>) y la pala (busca <strong>Paddle</strong>). '
+             'A la pala cámbiale el nombre a <strong>Pala</strong>: la sesión 16 la busca con ese '
+             'nombre. Monta los dos programas, cada uno en el suyo.',
              'Comprueba que la pala se mueve con el ratón y no se sale por arriba ni por abajo.',
              'Ajusta la <strong>velocidad de la pelota</strong> (los 8 pasos). Busca un valor que '
              'se pueda seguir con la vista pero no aburra.',
@@ -410,7 +416,7 @@ PUNTOS16 = [
         ('stack', 'motion', ['mover', ('num', '20'), 'pasos'])]),
 ]
 FIN16 = [
-    si(hexa('operators', rep('motion', 'posición y'), '<', ('num', '-155')),
+    si(hexa('operators', rep('motion', 'posición en y'), '<', ('num', '-155')),
        [('stack', 'looks', ['decir', op('unir', ('txt', 'Fin. Puntos: '), var('Puntos')),
                             'durante', ('num', '3'), 'segundos']),
         ('cap', 'control', ['detener', ('drop', 'todos')])]),
@@ -472,9 +478,9 @@ s16 = pagina(
              'la pelota vaya más rápido cuanto más puntos llevas.',
              '<strong>Reto:</strong> guarda el récord en una variable <code>Récord</code> y '
              'muéstralo. Pista: sólo hay que actualizarlo si <code>Puntos</code> es mayor.']) +
-         caja(FIN16, 'Condicional: si la posición y de la pelota es menor que menos 155, decir Fin '
+         caja(FIN16, 'Condicional: si la posición en y de la pelota es menor que menos 155, decir Fin '
                      'seguido de los puntos durante 3 segundos y detener todos',
-              pie='<strong>posición y</strong> vale cuánto está de arriba o de abajo la pelota, de '
+              pie='<strong>posición en y</strong> vale cuánto está de arriba o de abajo la pelota, de '
                   '−180 a 180. La pala está en −140, así que por debajo de −155 la pelota ya ha '
                   'pasado de largo. No hace falta quitar el <em>si toca un borde, rebotar</em>: '
                   'esta comprobación salta antes de que la pelota llegue al borde de abajo.') +

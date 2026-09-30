@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -198,33 +199,55 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1), <strong>el perro</strong> (4.1 y 4.2) y <strong>la pelota</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Monta tu primer programa</h3>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Abre Scratch con el botón de arriba. Ya tienes al gato, <strong>Sprite1</strong>.</span></li>
   <li><span class="p">Paso 2</span><span>Cambia el fondo: botón <strong>Elegir un fondo</strong>, abajo del todo a la derecha.</span></li>
   <li><span class="p">Paso 3</span><span>Monta el programa de arriba arrastrando los cuatro bloques.</span></li>
   <li><span class="p">Paso 4</span><span>Cambia el texto del bocadillo por un saludo tuyo.</span></li>
-  <li><span class="p">Paso 5</span><span>Añade un <strong>segundo objeto</strong> con el botón del gato (abajo a la derecha) y hazle decir algo también. Acuérdate: tienes que seleccionarlo primero, porque cada objeto tiene su propio código.</span></li>
+  <li><span class="p">Paso 5</span><span>Añade el perro: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Dog</strong> en el buscador y elige <strong>Dog2</strong>, el perro azul. Selecciónalo y móntale un programa que también empiece con la bandera y diga algo. Acuérdate: cada objeto tiene su propio código.</span></li>
 </ol><div class="aviso-ojo">
   <h3>⚠️ Esto se te va a olvidar la primera semana</h3>
 <p>Scratch <strong>no guarda solo</strong>. Antes de irte de clase:</p><p style="margin:0"><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> a tu carpeta <strong>Descargas</strong>. Ese archivo es tu proyecto, y es lo que subes a Moodle.</p>
 </div>
-<h3 class="sub"><span class="subn">4.2</span>Haz que el segundo personaje conteste</h3>
-<p>Ahora tus dos personajes hablan a la vez. Haz que el segundo <strong>espere 2 segundos</strong> antes de contestar, y que el primero le responda después. El bloque nuevo es <strong>esperar (1) segundos</strong>, naranja, de Control: se pone delante del <em>decir</em> y cambias el 1 por un 2.</p>
+<h3 class="sub"><span class="subn">4.2</span>Haz que el perro conteste al gato</h3>
+<p>Ahora el gato y el perro hablan <strong>a la vez</strong> y no se entiende nada. Haz que el perro espere a que el gato termine y entonces le conteste.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Selecciona el <strong>perro</strong>, abajo a la derecha.</span></li><li><span class="p">Paso 2</span><span>En su programa, justo debajo de <strong>al hacer clic en la bandera</strong>, mete el bloque <strong>esperar (1) segundos</strong>. Está en Control, el naranja. Cambia el 1 por un <strong>2</strong>, que es lo que dura el bocadillo del gato.</span></li><li><span class="p">Paso 3</span><span>Cambia el texto del perro por una respuesta: si el gato dice «¡Hola! Soy Sprite1», el perro puede decir «¡Hola, gato! Yo soy el perro».</span></li><li><span class="p">Paso 4</span><span>Pulsa la bandera: primero habla el gato y, cuando termina, contesta el perro.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta la pelota que se presenta a partir del texto</h3>
+<p>Una pelota que se presenta, da dos saltos hacia la derecha y avisa de que ha llegado.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade la pelota: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Ball</strong> en el buscador y elige <strong>Ball</strong>. Arrástrala con el ratón a la izquierda del escenario, para que tenga sitio para avanzar.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en la pelota, <strong>no</strong> en el gato ni en el perro.</span></li>
+  <li><span class="p">Paso 3</span><span>La primera línea es un bloque que todavía no has usado: está en <strong>Eventos</strong>, el amarillo, y se llama <strong>al presionar tecla</strong>. En su desplegable eliges la <strong>b</strong>.</span></li>
+  <li><span class="p">Paso 4</span><span>Monta el programa de abajo, línea a línea.</span></li>
+  <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>B</strong>. No uses la bandera: la bandera arranca los programas del gato y del perro.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla B:</li>
+  <li class="n1">decir «¡Soy la pelota!» durante 2 segundos</li>
+  <li class="n1">avanzar 100 pasos</li>
+  <li class="n1">esperar 1 segundo</li>
+  <li class="n1">avanzar 100 pasos</li>
+  <li class="n1">decir «¡He llegado!» durante 2 segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar B la pelota dice «¡Soy la pelota!», avanza hacia la derecha, se para un segundo, vuelve a avanzar y dice «¡He llegado!». El gato y el perro no hablan.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
   <li>El fondo ya no es blanco.</li>
   <li>Al pulsar la bandera verde, el gato dice algo tuyo.</li>
   <li>Se mueve y suena el maullido.</li>
-  <li>Tienes un segundo objeto que también hace algo.</li>
+  <li>El perro también dice algo al pulsar la bandera.</li>
   <li>Has descargado el <code>.sb3</code> y sabes en qué carpeta está.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1), <strong>el perro</strong> (4.1 y 4.2) y <strong>la pelota</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

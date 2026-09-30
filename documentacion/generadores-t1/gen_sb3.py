@@ -110,6 +110,39 @@ def todos_los_programas():
     return proyecto(objetos), len(_recogidos)
 
 
+def reto(num):
+    """El programa del apartado N.3 de la sesión `num` (la versión arreglada, si la hay), en el
+    objeto de la biblioteca que dice pseudocodigo.SPRITES. Disfraces y sonidos esquemáticos con
+    los nombres que usa el programa. En la S12 van además el gato y una pared negra, porque el
+    fantasma los necesita para hacer lo que dice el enunciado."""
+    import pseudocodigo as P
+    from sb3 import svg_costume, _svg
+    r = P.RETOS[num]
+    progs = r.get('solucion', r['programas'])
+    objetos = []
+    for (et, prog), nombre in zip(progs, P.SPRITES[num]):
+        sonidos = []
+        def visita(bloques):
+            for b in bloques:
+                for parte in b[2]:
+                    if isinstance(parte, tuple) and parte[0] == 'drop' and b[1] == 'sound':
+                        if parte[1] not in [x['name'] for x in sonidos]:
+                            sonidos.append(wav_pop(parte[1]))
+                if b[0] in ('c', 'ce'):
+                    visita(b[3])
+                if b[0] == 'ce':
+                    visita(b[5])
+        visita(prog)
+        x = {1: -150, 11: -120 if nombre == 'Referee' else 120, 12: 0}.get(num, 0)
+        objetos.append(Objeto(nombre, [DISFRACES['pelota'], DISFRACES['piedra']], [copy.deepcopy(prog)],
+                              x=x, y=0, sonidos=sonidos))
+    if num == 12:
+        pared = svg_costume(_svg(20, 200, '<rect width="20" height="200" fill="#1A1A1A"/>'), 'pared', 10, 100)
+        objetos.append(Objeto('Pared', [pared], [], x=150, y=0))
+        objetos.append(Objeto('Sprite1', [DISFRACES['gato']], [], x=-150, y=0))
+    return proyecto(objetos)
+
+
 if __name__ == '__main__':
     destino = os.path.join(comun.REPO, '_soluciones', 'sb3')
     os.makedirs(destino, exist_ok=True)
@@ -122,3 +155,11 @@ if __name__ == '__main__':
         ruta = os.path.join(sys.argv[-1] if os.path.isdir(sys.argv[-1]) else '/tmp', '_todos_los_programas.sb3')
         escribir_sb3(ruta, pj, assets)
         print('  %s · %d programas' % (ruta, n))
+    if '--retos' in sys.argv:
+        import pseudocodigo as P
+        dr = os.path.join(destino, 'retos')
+        os.makedirs(dr, exist_ok=True)
+        for num in sorted(P.RETOS):
+            pj, assets = reto(num)
+            escribir_sb3(os.path.join(dr, 's%02d-apartado3.sb3' % num), pj, assets)
+        print('  %s · %d programas del apartado N.3' % (dr, len(P.RETOS)))

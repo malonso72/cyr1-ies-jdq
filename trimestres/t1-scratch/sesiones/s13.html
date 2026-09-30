@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -187,9 +188,10 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1 y 4.2), <strong>la estrella y el fantasma</strong> (de la sesión 12), <strong>la meta</strong> (4.1) y <strong>la campana</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Añade la meta y el segundo nivel</h3>
 <ol class="paso-lista">
-  <li><span class="p">Paso 1</span><span>Crea el objeto <strong>Meta</strong> y colócalo al final del laberinto.</span></li>
+  <li><span class="p">Paso 1</span><span>Añade la meta: botón <strong>Elige un objeto</strong>, escribe <strong>Crystal</strong> y elige <strong>Crystal</strong>. Cámbiale el nombre a <strong>Meta</strong> en la casilla <em>Objeto</em>, debajo del escenario, y colócala al final del laberinto.</span></li>
   <li><span class="p">Paso 2</span><span>Añade el condicional de la meta y comprueba que el juego termina y dice el tiempo.</span></li>
   <li><span class="p">Paso 3</span><span>Añade <strong>reiniciar cronómetro</strong> al arranque. Juega dos veces seguidas y comprueba que el tiempo empieza de cero las dos.</span></li>
   <li><span class="p">Paso 4</span><span>Dibuja un <strong>segundo fondo</strong> con un laberinto más difícil. Los fondos se crean igual que el primero, con el botón de abajo a la derecha.</span></li>
@@ -203,7 +205,29 @@
   <div class="cuerpo"><p>Con la variable <strong>Nivel</strong> que has creado en el paso 5. En vez de mirar sólo si tocas la Meta, mira <em>además</em> en qué nivel estás: si <code>Nivel</code> vale 2, el juego termina; si vale 1, pasa al siguiente fondo.</p><p style="margin-bottom:0">Para juntar dos condiciones en una se usa el operador verde <strong>&lt; &gt; y &lt; &gt;</strong>, que tiene dos huecos hexagonales.</p></div>
 </details>
 <h3 class="sub"><span class="subn">4.2</span>Guarda el mejor tiempo</h3>
-<p>Una variable <code>MejorTiempo</code> que guarde el tiempo más bajo de todas las partidas. Al llegar a la meta, antes del <em>detener todos</em>: si <em>cronómetro</em> es <strong>menor que</strong> <code>MejorTiempo</code>, dar a MejorTiempo el valor del cronómetro. Lo difícil: al arrancar <strong>no</strong> la pongas a 0, o la siguiente partida se olvida de la anterior. Para la primerísima vez, haz clic en un bloque suelto <em>dar a MejorTiempo el valor 999</em> (un clic ejecuta el bloque sin bandera) y luego tíralo a la paleta.</p>
+<p>Una variable <strong>MejorTiempo</strong> que guarda el tiempo más bajo de todas las partidas. Es la primera variable que no se borra al volver a jugar.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Crea la variable <strong>MejorTiempo</strong>.</span></li><li><span class="p">Paso 2</span><span>Arrastra al área de código, suelto, un bloque <strong>dar a MejorTiempo el valor 999</strong>. Haz <strong>un clic</strong> encima (un clic ejecuta un bloque sin bandera) y comprueba que la variable marca 999. Después tíralo a la paleta.</span></li><li><span class="p">Paso 3</span><span>En el condicional de la meta, justo antes del <em>detener todos</em> que termina el juego, pon un <strong>si</strong> con el operador <strong>( ) &lt; ( )</strong>: <em>cronómetro</em> a la izquierda y <em>MejorTiempo</em> a la derecha.</span></li><li><span class="p">Paso 4</span><span>Dentro de ese <em>si</em>: <strong>dar a MejorTiempo el valor (cronómetro)</strong>.</span></li><li><span class="p">Paso 5</span><span>Juega dos partidas: si la segunda es más rápida, MejorTiempo baja; si es más lenta, se queda como estaba. Al arrancar <strong>no</strong> la pongas a 0, o la siguiente partida se olvida de las anteriores.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta la campana de la cuenta atrás a partir del texto</h3>
+<p>Una campana que cuenta 30 segundos hacia atrás y suena cuando se acaba el tiempo.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade la campana: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Bell</strong> en el buscador y elige <strong>Bell</strong>. Colócala en una esquina, fuera del laberinto.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en la campana, <strong>no</strong> en el gato, la estrella ni el fantasma.</span></li>
+  <li><span class="p">Paso 3</span><span>Crea la variable <strong>Tiempo</strong>.</span></li>
+  <li><span class="p">Paso 4</span><span>Monta el programa de abajo, línea a línea.</span></li>
+  <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>T</strong>. No uses la bandera: la bandera arranca el laberinto.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla T:</li>
+  <li class="n1">poner Tiempo a 30</li>
+  <li class="n1">mostrar la variable Tiempo</li>
+  <li class="n1">repetir hasta que el valor de Tiempo sea igual a 0:</li>
+  <li class="n2">esperar 1 segundo</li>
+  <li class="n2">sumar -1 a Tiempo</li>
+  <li class="n1">hacer sonar «Bell Toll»</li>
+  <li class="n1">decir «¡Se acabó el tiempo!» durante 2 segundos</li>
+  <li class="n1">detener todo</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar T aparece el marcador de Tiempo en 30 y va bajando de uno en uno cada segundo. Al llegar a 0 suena la campana, dice «¡Se acabó el tiempo!» y todo se detiene. Si lo pulsas mientras juegas al laberinto, tienes treinta segundos para llegar a la meta. Guárdalo bien: esta cuenta atrás es una de las piezas del kit del proyecto final.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -214,11 +238,13 @@
   <li>El juego termina de verdad al acabar el último nivel.</li>
   <li>Sabrías explicar por qué <em>detener (todos)</em> va siempre al final.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1 y 4.2), <strong>la estrella y el fantasma</strong> (de la sesión 12), <strong>la meta</strong> (4.1) y <strong>la campana</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

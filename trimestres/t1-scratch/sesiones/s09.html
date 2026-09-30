@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -197,6 +198,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el búho</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Construye el quiz</h3>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Crea las tres variables: <code>Aciertos</code>, <code>a</code> y <code>b</code>.</span></li>
@@ -209,7 +211,33 @@
 <p>Tu cuadernillo lo llama <strong>cambiar (Aciertos) por (1)</strong>. Ese nombre <strong>ya no existe</strong>. Hoy se llama <strong>sumar a (Aciertos) (1)</strong> y está en la categoría Variables, justo debajo de <em>dar a … el valor</em>.</p>
 </div>
 <h3 class="sub"><span class="subn">4.2</span>Añade las vidas</h3>
-<p>Crea una variable <code>Vidas</code> que empiece en <strong>3</strong>. Cada fallo, <em>sumar a Vidas −1</em> (para restar se suma un número negativo). Y cambia el <em>repetir</em> por un <strong>repetir hasta que Vidas = 0</strong>: la partida se acaba cuando te quedas sin vidas, no a las diez preguntas. Esta pieza la vas a volver a usar en el proyecto final.</p>
+<p>La partida deja de acabar a las diez preguntas: acaba cuando te quedas <strong>sin vidas</strong>. Esta pieza la vas a volver a usar en el proyecto final.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Crea la variable <strong>Vidas</strong>.</span></li><li><span class="p">Paso 2</span><span>Al principio del programa, junto a <em>dar a Aciertos el valor 0</em>, pon <strong>dar a Vidas el valor 3</strong>.</span></li><li><span class="p">Paso 3</span><span>En la parte del <em>si no</em> (cuando fallas), añade <strong>sumar a Vidas -1</strong>. Para restar se suma un número negativo.</span></li><li><span class="p">Paso 4</span><span>Cambia el <em>repetir 10</em> por un <strong>repetir hasta que</strong> con el operador <strong>( ) = ( )</strong>: <em>Vidas</em> en un hueco y <strong>0</strong> en el otro. Pasa los bloques de dentro del uno al otro.</span></li><li><span class="p">Paso 5</span><span>Juega: la partida sigue mientras aciertes y se acaba al tercer fallo.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el búho que piensa un número a partir del texto</h3>
+<p>Un búho que piensa un número del 1 al 10 y te va diciendo si te pasas o te quedas corto hasta que lo aciertas.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el búho: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Owl</strong> en el buscador y elige <strong>Owl</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el búho, <strong>no</strong> en el gato.</span></li>
+  <li><span class="p">Paso 3</span><span>Crea tres variables: <strong>secreto</strong>, <strong>prueba</strong> e <strong>intentos</strong>.</span></li>
+  <li><span class="p">Paso 4</span><span>Monta el programa de abajo, línea a línea.</span></li>
+  <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>N</strong>. No uses la bandera: la bandera arranca el quiz del gato.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla N:</li>
+  <li class="n1">poner secreto a un número al azar entre 1 y 10</li>
+  <li class="n1">poner prueba a 0</li>
+  <li class="n1">poner intentos a 0</li>
+  <li class="n1">repetir hasta que el valor de prueba sea igual al valor de secreto:</li>
+  <li class="n2">preguntar «Estoy pensando un número del 1 al 10. ¿Cuál es?» y esperar la respuesta</li>
+  <li class="n2">poner prueba a la respuesta</li>
+  <li class="n2">sumar 1 a intentos</li>
+  <li class="n2">si el valor de prueba es mayor que el valor de secreto:</li>
+  <li class="n3">decir «Es más pequeño» durante 1 segundo</li>
+  <li class="n2">si el valor de prueba es menor que el valor de secreto:</li>
+  <li class="n3">decir «Es más grande» durante 1 segundo</li>
+  <li class="n1">decir «¡Acertaste en » seguido del valor de intentos seguido de « intentos!» durante 3 segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar N el búho pregunta un número. Si te pasas dice «Es más pequeño», si te quedas corto «Es más grande», y vuelve a preguntar. Cuando aciertas dice en cuántos intentos lo has conseguido. Con buena estrategia, nunca hacen falta más de cuatro.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -219,11 +247,13 @@
   <li>Al terminar dice si has aprobado.</li>
   <li>Sabrías explicar la diferencia entre <em>dar a … el valor</em> y <em>sumar a …</em></li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1 y 4.2) y <strong>el búho</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

@@ -43,7 +43,7 @@ cd <esta carpeta>
 node test_sesiones.js 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
 ```
 
-Son **958 comprobaciones**: estructura (un solo `h1`, `main`, skip-link, navcross, pie),
+Son **1086 comprobaciones**: estructura (un solo `h1`, `main`, skip-link, navcross, pie),
 metadatos, accesibilidad de los SVG (`role`, `aria-label`, `<title>`, `viewBox`), `rel=noopener`
 en los enlaces externos, y que la pregunta de comprensión de cada página corrige bien, se
 bloquea tras responder y resalta la opción correcta.
@@ -93,8 +93,9 @@ scratch.mit.edu.
 | `gen_presentacion.py` | La **presentación inicial** (`presentacion.html`): 17 diapositivas de visita guiada al editor. Reutiliza el mapa del editor de la S01 y el motor de bloques, y dibuja el escenario con coordenadas. Ni una captura de otra versión de Scratch. |
 | `gen_indices.py` | El índice de sesiones y el **hub del trimestre**, que se escribe entero. Antes se parcheaba a base de reemplazos y cada cambio dejaba una entrada más que mantener viva; se abandonó. |
 | `ampliaciones.py` | Los títulos de los apartados de «Tu actividad» (`ORDEN_1`, `ORDEN_2`), los textos del apartado N.2 (`AMPLIACIONES`) y los objetos fijados por sesión (`OBJETOS`). `plantilla.pagina()` monta N.1/N.2/N.3, la línea de objetos y la de partes en la entrega. |
+| `test_retos.js` | Ejecuta en scratch-vm los programas del apartado N.3 que no necesitan pantalla y comprueba lo que promete su «Sabes que está bien si…» (`python3 gen_sb3.py --retos && node test_retos.js`). S03, S04, S05, S12 y S15 se prueban en el editor. |
 | `pseudocodigo.py` | El apartado N.3: programas en tuplas que se traducen a **seudocódigo** con la tabla `FRASES`, con sus pasos de preparación y su «Sabes que está bien si…». Un bloque sin frase sale con el texto de Scratch y el test lo detecta. |
-| `test_sesiones.js` | Las 958 comprobaciones. |
+| `test_sesiones.js` | Las 1086 comprobaciones. |
 | `sb3.py` | **El exportador a Scratch.** Convierte las mismas tuplas que dibuja `scratchsvg.py` en el `project.json` de un `.sb3` de verdad (opcodes de Scratch 3, sombras, variables, mensajes), con disfraces esquemáticos en SVG y los sonidos «Pop» y «Miau» sintetizados. |
 | `gen_sb3.py` | Escribe las **tres bases del proyecto como `.sb3`** en `_soluciones/sb3/` (privada) y, con `--todos`, un proyecto de prueba con los 67 programas de las sesiones. |
 | `test_sb3.js` | Abre esos `.sb3` en `scratch-vm` (el motor de Scratch sin pantalla) y comprueba que cargan, que todos los bloques existen y que la bandera verde arranca los hilos. |

@@ -82,6 +82,7 @@
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
   /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
@@ -192,12 +193,13 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
-<h3 class="sub"><span class="subn">4.1</span>Haz que tu personaje camine</h3>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1), <strong>el oso</strong> (4.1 y 4.2) y <strong>el loro</strong> (4.3). Cada objeto, con su programa.</p>
+<h3 class="sub"><span class="subn">4.1</span>Haz que tus personajes caminen</h3>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Monta el programa con el gato y comprueba que camina.</span></li>
   <li><span class="p">Paso 2</span><span>Prueba la espera con <strong>0.05</strong>, con <strong>0.2</strong> y con <strong>1</strong> segundo. Quédate con el valor que mejor se vea.</span></li>
-  <li><span class="p">Paso 3</span><span>Ahora cámbiate de personaje: pulsa el botón del gato (abajo a la derecha) y <strong>elige uno que tenga varios disfraces</strong>. Antes de decidirte, míralo en la pestaña Disfraces: los que sólo traen uno no sirven para animar.</span></li>
-  <li><span class="p">Paso 4</span><span>Vuelve a ajustar la espera: un personaje con cuatro disfraces necesita una espera más corta que uno con dos.</span></li>
+  <li><span class="p">Paso 3</span><span>Añade el oso: botón <strong>Elige un objeto</strong>, escribe <strong>Bear</strong> en el buscador y elige <strong>Bear-walking</strong>, el oso que camina. Mira su pestaña Disfraces: tiene <strong>ocho</strong>, uno por cada postura del paso.</span></li>
+  <li><span class="p">Paso 4</span><span>Copia al oso el programa del gato arrastrándolo hasta su icono, como en la sesión 5. Ajusta la espera del oso: con ocho disfraces necesita una espera más corta que el gato, que tiene dos.</span></li>
   <li><span class="p">Paso 5</span><span>Cambia también el fondo para que la escena tenga sentido.</span></li>
 </ol><details class="pista">
   <summary>¿Y si quiero un disfraz concreto y no el siguiente?</summary>
@@ -208,8 +210,29 @@
   <h3>⚠️ Los disfraces se llaman en inglés</h3>
 <p>Aunque el editor esté en español, los disfraces del gato se llaman <strong>costume1</strong> y <strong>costume2</strong>. Tu cuadernillo dice «disfraz1» y «disfraz2», y esos nombres <strong>no existen</strong> en pantalla. Si quieres, puedes cambiarles el nombre tú desde la pestaña Disfraces.</p>
 </div>
-<h3 class="sub"><span class="subn">4.2</span>Haz que sólo camine cuando lo mueves</h3>
-<p>Junta lo de hoy con lo de la sesión 5: mete el <em>siguiente disfraz</em> y la espera <strong>dentro</strong> del <em>si la tecla flecha derecha está presionada</em>, junto al <em>mover</em>. Así el personaje camina mientras pulsas y se queda quieto cuando sueltas. Luego, con las cuatro flechas.</p>
+<h3 class="sub"><span class="subn">4.2</span>Haz que el oso sólo camine cuando lo mueves</h3>
+<p>El gato y el oso pasean solos. Ahora el oso va a caminar <strong>sólo mientras mantienes pulsada una flecha</strong>, y a quedarse quieto cuando la sueltas: lo de hoy junto con lo de la sesión 5.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Selecciona el <strong>oso</strong>.</span></li><li><span class="p">Paso 2</span><span>Saca del <em>por siempre</em> los cuatro bloques de dentro (siguiente disfraz, esperar, mover y rebotar) y déjalos a un lado: los vas a reutilizar.</span></li><li><span class="p">Paso 3</span><span>Dentro del <em>por siempre</em> pon un <strong>si ¿tecla flecha derecha presionada? entonces</strong>. Dentro de él: <em>apuntar en dirección 90</em>, <em>siguiente disfraz</em>, <em>mover 10 pasos</em> y <em>esperar 0.1 segundos</em>.</span></li><li><span class="p">Paso 4</span><span>Debajo, otro <strong>si</strong> igual para la <strong>flecha izquierda</strong>, con <em>apuntar en dirección -90</em>. Truco: duplica el primero y cambia la tecla y la dirección.</span></li><li><span class="p">Paso 5</span><span>Tira a la paleta los bloques que te hayan sobrado y pulsa la bandera: el gato sigue paseando solo y el oso sólo camina mientras mantienes una flecha.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el loro que cruza volando a partir del texto</h3>
+<p>Un loro que cruza el cielo de izquierda a derecha batiendo las alas.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el loro: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Parrot</strong> en el buscador y elige <strong>Parrot</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el loro, <strong>no</strong> en el gato ni en el oso.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el programa de abajo, línea a línea.</span></li>
+  <li><span class="p">Paso 4</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>P</strong>. No uses la bandera: la bandera arranca los programas del gato y del oso.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">Cuando se pulse la tecla P:</li>
+  <li class="n1">poner el estilo de rotación en «izquierda-derecha»</li>
+  <li class="n1">ir al punto x: -200, y: 120</li>
+  <li class="n1">mirar hacia la derecha (dirección 90)</li>
+  <li class="n1">repetir 40 veces:</li>
+  <li class="n2">pasar al siguiente disfraz</li>
+  <li class="n2">avanzar 10 pasos</li>
+  <li class="n2">esperar 0.1 segundos</li>
+  <li class="n1">decir «¡He cruzado!» durante 2 segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar P el loro aparece arriba a la izquierda y cruza hasta la derecha en unos cuatro segundos, abriendo y cerrando las alas. Al llegar dice «¡He cruzado!». Si las alas se mueven tan deprisa que no se ven, revisa la espera.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -218,11 +241,13 @@
   <li>Has probado al menos tres valores distintos de espera y sabes cuál va mejor.</li>
   <li>Has cambiado de personaje y de fondo.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las dos partes</strong>: 4.1 y 4.2. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1), <strong>el oso</strong> (4.1 y 4.2) y <strong>el loro</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>

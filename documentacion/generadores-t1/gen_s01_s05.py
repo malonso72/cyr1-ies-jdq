@@ -79,9 +79,10 @@ s01 = pagina(
              'Cambia el fondo: botón <strong>Elegir un fondo</strong>, abajo del todo a la derecha.',
              'Monta el programa de arriba arrastrando los cuatro bloques.',
              'Cambia el texto del bocadillo por un saludo tuyo.',
-             'Añade un <strong>segundo objeto</strong> con el botón del gato (abajo a la derecha) '
-             'y hazle decir algo también. Acuérdate: tienes que seleccionarlo primero, porque cada '
-             'objeto tiene su propio código.']) +
+             'Añade el perro: botón <strong>Elige un objeto</strong> (el del gato, abajo a la '
+             'derecha), escribe <strong>Dog</strong> en el buscador y elige <strong>Dog2</strong>, el '
+             'perro azul. Selecciónalo y móntale un programa que también empiece con la bandera y '
+             'diga algo. Acuérdate: cada objeto tiene su propio código.']) +
          ojo('Esto se te va a olvidar la primera semana',
              '<p>Scratch <strong>no guarda solo</strong>. Antes de irte de clase:</p>'
              '<p style="margin:0"><strong>Archivo → Guardar en tu ordenador.</strong> '
@@ -92,7 +93,7 @@ s01 = pagina(
          logros(['El fondo ya no es blanco.',
                  'Al pulsar la bandera verde, el gato dice algo tuyo.',
                  'Se mueve y suena el maullido.',
-                 'Tienes un segundo objeto que también hace algo.',
+                 'El perro también dice algo al pulsar la bandera.',
                  'Has descargado el <code>.sb3</code> y sabes en qué carpeta está.'])),
     ],
     cuadernillo=CUADERNILLO[1])
