@@ -80,6 +80,11 @@
     background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
   .ej-main h2 + h3.sub{margin-top:8px;}
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .escala table{border-collapse:collapse;margin:6px 0 8px;font-size:.95rem;}
+  .entrega .escala th,.entrega .escala td{border:1px solid #BFD8C6;padding:5px 10px;text-align:left;}
+  .entrega .escala th{background:#E3F2E8;color:#1A6B3A;}
+  .entrega .escala td.nota{text-align:center;font-weight:700;color:#1A6B3A;font-size:1.05rem;}
+  .entrega .escala p{margin:0 0 6px;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
   .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
@@ -243,7 +248,9 @@
 
 <div class="entrega">
 <h3>📤 Qué tienes que entregar</h3>
-<p class="partes">Tu archivo tiene que llevar <strong>las tres partes</strong>: 4.1, 4.2 y 4.3. Si falta alguna, la actividad no está terminada.</p>
+<div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo archivo. Un apartado cuenta si funciona; a medias no suma.</p>
+<table><thead><tr><th>Lo que entregas hecho</th><th>Nota</th></tr></thead><tbody><tr><td>4.1</td><td class="nota">5</td></tr><tr><td>4.1 y otro apartado (4.2 o 4.3)</td><td class="nota">8</td></tr><tr><td>4.1, 4.2 y 4.3</td><td class="nota">10</td></tr></tbody></table>
+<p>Sin el 4.1 hecho no hay nota, aunque estén los demás: lo repites.</p></div>
 <p class="partes">En el proyecto tienen que estar: <strong>las dos pelotas, la pala y el globo</strong> (de la sesión 15) y <strong>el saltamontes</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>

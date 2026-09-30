@@ -156,6 +156,11 @@ CSS = '''
     background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
   .ej-main h2 + h3.sub{margin-top:8px;}
   .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .escala table{border-collapse:collapse;margin:6px 0 8px;font-size:.95rem;}
+  .entrega .escala th,.entrega .escala td{border:1px solid #BFD8C6;padding:5px 10px;text-align:left;}
+  .entrega .escala th{background:#E3F2E8;color:#1A6B3A;}
+  .entrega .escala td.nota{text-align:center;font-weight:700;color:#1A6B3A;font-size:1.05rem;}
+  .entrega .escala p{margin:0 0 6px;}
   .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
   .rp-ok b{color:#1A6B3A;}
   .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
@@ -336,14 +341,27 @@ def _boton(href, icono, clave, nota, clase=''):
 
 
 def _partes_entrega(num, n):
-    """La línea de la entrega que exige todos los apartados de «Tu actividad»."""
+    """El bloque de la entrega que dice cómo se valora «Tu actividad» por apartados.
+
+    Escala de Manuel (30-09): N.1 → 5; N.1 y otro apartado → 8; los tres → 10. El 8 está
+    pensado para el alumno medio: el salto de 5 a 8 por hacer el N.2 es el que le compensa.
+    Sin N.1 no hay nota, aunque estén los otros: «inténtalo». Un apartado a medias no suma.
+    """
     if n is None:
         return ''
-    partes = ['%d.1' % n] + (['%d.2' % n] if caja_ampliacion(num) else []) + (['%d.3' % n] if caja_reto(num) else [])
-    lista = ', '.join(partes[:-1]) + ' y ' + partes[-1]
-    return ('<p class="partes">Tu archivo tiene que llevar <strong>%s partes</strong>: %s. '
-            'Si falta alguna, la actividad no está terminada.</p>\n'
-            % ({2: 'las dos', 3: 'las tres'}[len(partes)], lista)) + _objetos(num, n, 'entrega')
+    a1, a2, a3 = '%d.1' % n, '%d.2' % n, '%d.3' % n
+    if caja_reto(num):
+        filas = [(a1, '5'), ('%s y otro apartado (%s o %s)' % (a1, a2, a3), '8'),
+                 ('%s, %s y %s' % (a1, a2, a3), '10')]
+    else:
+        filas = [(a1, '5'), ('%s y %s' % (a1, a2), '10')]
+    tr = ''.join('<tr><td>%s</td><td class="nota">%s</td></tr>' % f for f in filas)
+    return ('<div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo '
+            'archivo. Un apartado cuenta si funciona; a medias no suma.</p>\n'
+            '<table><thead><tr><th>Lo que entregas hecho</th><th>Nota</th></tr></thead>'
+            '<tbody>%s</tbody></table>\n'
+            '<p>Sin el %s hecho no hay nota, aunque estén los demás: lo repites.</p></div>\n'
+            % (tr, a1)) + _objetos(num, n, 'entrega')
 
 
 def _objetos(num, n, donde):

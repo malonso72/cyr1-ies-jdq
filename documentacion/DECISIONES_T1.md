@@ -551,3 +551,25 @@ español.** Leídos de la paleta real: `cambiar x por` es **`sumar a x`**, `camb
 S10, S12, S16, S19 y a las tres bases del proyecto; corregido en los generadores y en
 `sb3.py`. También de la paleta: el operador de resto se llama **`módulo`** y el efecto de color
 **`sumar al efecto color`**, que es como los nombran ahora los textos.
+
+## 36. Escala de valoración por apartados: 5, 8 y 10
+
+Sustituye a la regla anterior (10 si está bien, «inténtalo» si no, marca de aventajado aparte),
+que daba lo mismo al que se quedaba en el 4.1 que al que llegaba al seudocódigo. Ahora, en la
+entrega de S01–S17:
+
+| Lo que entregas hecho | Nota |
+|---|---|
+| N.1 | 5 |
+| N.1 y otro apartado (N.2 o N.3) | 8 |
+| N.1, N.2 y N.3 | 10 |
+
+Sin N.1 no hay nota aunque estén los demás («inténtalo»); un apartado a medias no suma.
+
+**Por qué 8 y no 7.** Se barajó 7, para que el N.3 pesara más que el N.2. Manuel prefirió 8:
+quien decide si se esfuerza es el alumno medio, y su pregunta es si hace el N.2 o se queda en el
+5; de 5 a 8 le compensa. El que va a por el 10 lo busca igual. El 8 vale también para N.1 + N.3,
+porque el N.3 no depende del N.2 y dos apartados son dos apartados.
+
+La escala sale de `plantilla._partes_entrega()` y el test la comprueba (5/8/10, o 5/10 en una
+sesión sin N.3).

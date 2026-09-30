@@ -110,7 +110,7 @@ clase sin que las presentaciones de la S21 salgan iguales.
     Ojo: se escribió con 20 sesiones, antes de que entrara la S17 de depuración.
   - `DECISIONES_T1.md` — lo que Claude decidió por su cuenta, con el porqué. Puntos 1-11 de la
     reescritura; 12-20 de la ronda de arreglos posterior; 31, el exportador a `.sb3`; 32, la S17 y
-    la renumeración; 33, el paso extra de la actividad «⭐ Paso N · Un paso más» (`ampliaciones.py`); 34, la S04 con una tecla por versión; 35, «Tu actividad» en N.1/N.2/N.3 con seudocódigo (probado con `test_retos.js`).
+    la renumeración; 33, el paso extra de la actividad «⭐ Paso N · Un paso más» (`ampliaciones.py`); 34, la S04 con una tecla por versión; 35, «Tu actividad» en N.1/N.2/N.3 con seudocódigo (probado con `test_retos.js`); 36, la escala 5/8/10 por apartados.
   - `REVISION_T1_SESIONES.md` — la revisión pedagógica de las 20 sesiones de entonces: qué fallaba, qué se
     arregló y qué queda.
   - `pruebas-t3/` — el test de T3 (`node test_academia.js`, 2120 comprobaciones sobre las 32

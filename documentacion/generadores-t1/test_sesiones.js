@@ -133,6 +133,13 @@ function ok(cond, msg) {
       });
       ok(!!partes, P + 'la entrega no exige las partes de la actividad');
       if (partes) etiquetas.forEach(e => ok(partes.textContent.includes(e), P + 'la entrega no pide el apartado ' + e));
+      const esc = d.querySelector('.entrega .escala');
+      ok(!!esc, P + 'la entrega no lleva la escala de valoración');
+      if (esc) {
+        const notas = [...esc.querySelectorAll('td.nota')].map(t => t.textContent.trim());
+        ok(notas.join('/') === (subs.length === 3 ? '5/8/10' : '5/10'), P + 'escala inesperada: ' + notas.join('/'));
+        ok(!/no está terminada/.test(esc.textContent), P + 'la entrega sigue diciendo que sin todas las partes no está terminada');
+      }
       ok(q('.logro li').some(li => /apartado \d+\.2/.test(li.textContent)), P + 'falta la línea del apartado .2 en los logros');
       if (subs.length === 3) {
         ok(!!d.querySelector('ol.pseudo'), P + 'el apartado .3 no lleva seudocódigo');
