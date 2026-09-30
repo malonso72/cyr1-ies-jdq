@@ -240,7 +240,7 @@ const Academia = {
     ctx.fillStyle = '#0E2A3C';
     ctx.textAlign = 'center';
     ctx.font = '11px Georgia';
-    ctx.fillText('Manuel Alonso Herrera · Computación y Robótica 1º ESO B', W / 2, H - 70);
+    ctx.fillText('Manuel Alonso Herrera · Computación y Robótica 1º ESO A', W / 2, H - 70);
 
     return canvas.toDataURL('image/png');
   },
