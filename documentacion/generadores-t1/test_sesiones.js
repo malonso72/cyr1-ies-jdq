@@ -113,15 +113,23 @@ function ok(cond, msg) {
          P + 'no se resalta la respuesta correcta');
     }
 
-    // la ampliación «Si te ha sobrado tiempo»: una caja en S01–S17, ninguna en el proyecto
-    // final, siempre dentro de «Tu actividad» y con al menos un ítem con título y cuerpo
+    // el paso extra «⭐ Último paso»: una caja en S01–S17, ninguna en el proyecto final,
+    // siempre al cierre de «Tu actividad», numerada a continuación de la lista de pasos si
+    // la hay, con al menos un ítem con título y cuerpo, y con su línea en los logros
     const ampl = q('.sobra-tiempo');
     if (n <= 17) {
-      ok(ampl.length === 1, P + 'debe haber exactamente 1 caja de ampliación, hay ' + ampl.length);
+      ok(ampl.length === 1, P + 'debe haber exactamente 1 caja de paso extra, hay ' + ampl.length);
       if (ampl.length === 1) {
         const caja = ampl[0];
-        ok(/^⭐ /.test(caja.querySelector('h3')?.textContent || ''), P + 'la ampliación no lleva el título con ⭐');
-        ok(!!caja.querySelector('.st-intro'), P + 'la ampliación no dice que es opcional');
+        const h3 = caja.querySelector('h3')?.textContent || '';
+        ok(/^⭐ /.test(h3), P + 'el paso extra no lleva el título con ⭐');
+        // sólo los pasos de «Tu actividad»: desde su h2 hasta el h2 siguiente
+        let nPasos = 0, el = q('.ej-main h2').find(h => /Tu actividad/.test(h.textContent))?.nextElementSibling;
+        while (el && el.tagName !== 'H2') { nPasos += el.querySelectorAll('.paso-lista .p').length; el = el.nextElementSibling; }
+        if (nPasos) ok(h3.includes('Paso ' + (nPasos + 1) + ' '), P + 'el paso extra debería numerarse Paso ' + (nPasos + 1) + ': ' + h3);
+        else ok(/Último paso/.test(h3), P + 'sin lista de pasos, el paso extra debería llamarse «Último paso»: ' + h3);
+        ok(/parte de la actividad/.test(caja.querySelector('.st-intro')?.textContent || ''), P + 'el paso extra no dice que es parte de la actividad');
+        ok(q('.logro li').some(li => /último paso/i.test(li.textContent)), P + 'falta la línea del paso extra en «Lo has conseguido si…»');
         const items = [...caja.querySelectorAll('li')];
         ok(items.length >= 1 && items.length <= 2, P + 'la ampliación tiene ' + items.length + ' ítems (1 o 2)');
         items.forEach((li, i) => {
@@ -137,7 +145,8 @@ function ok(cond, msg) {
         ok(!next || next.tagName === 'H2', P + 'la ampliación no es lo último de «Tu actividad»');
       }
     } else {
-      ok(ampl.length === 0, P + 'el proyecto final no lleva caja de ampliación');
+      ok(ampl.length === 0, P + 'el proyecto final no lleva caja de paso extra');
+      ok(!q('.logro li').some(li => /último paso/i.test(li.textContent)), P + 'el proyecto final no lleva la línea del paso extra');
     }
 
     // entrega y navegación

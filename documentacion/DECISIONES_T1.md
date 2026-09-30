@@ -451,6 +451,19 @@ archivos que no lo estaban. Y el sombrero `al presionar tecla [1]` de la S03 no 
 traducción a Scratch, así que `gen_sb3.py --todos` fallaba desde el cambio de la S03; ahora
 sale como `event_whenkeypressed`.
 
+**Nota del 30 de septiembre: la caja deja de ser optativa.** A los dos días de meterla, Manuel
+vio que las sesiones se hacían en veinte minutos y prefirió que el paso extra fuera parte de la
+actividad —«no me importa si las tareas les llevan más de una sesión; es preferible a tenerlos
+danzando media hora por clase»—, con la misma nota que el resto de pasos. La caja pasa a
+llamarse «⭐ Paso N · Un paso más» (N, el siguiente a la lista de pasos de la sesión; «Último
+paso» donde no hay lista), su texto de entrada dice que se entrega con lo demás y «Lo has
+conseguido si…» lleva la línea que lo comprueba. Los textos no cambian: se escribieron para que
+los rápidos los hicieran en diez minutos, así que para el alumno medio son veinte, y ese es el
+tiempo que faltaba. Los más exigentes son el resto de la división (S08), el mejor tiempo que
+sobrevive a la partida (S13) y romper un programa para otra pareja (S17); Manuel los conoce y
+los deja. Con esto, la propuesta de la revisión de hacer dos sesiones por clase hasta la S06
+queda a su criterio.
+
 ## 34. La S04 pasa a entregarse como la S03: tres programas, una tecla cada uno
 
 Manuel probó la sesión antes de darla y montó las tres versiones en el mismo proyecto, cada

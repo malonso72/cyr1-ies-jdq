@@ -6,7 +6,7 @@ estructura, para que la sesión 21 tenga el mismo criterio que la sesión 1.
 """
 import html as _html
 from scratchsvg import script_svg
-from ampliaciones import caja_ampliacion
+from ampliaciones import caja_ampliacion, LOGRO as LOGRO_AMPL
 
 RAIZ = '../../../'          # desde trimestres/t1-scratch/sesiones/
 CUAD = '../materiales/cuadernillo-scratch-parte-1.pdf'
@@ -150,7 +150,7 @@ CSS = '''
   details.pista>summary::before{content:"\\25B8 ";}
   details.pista[open]>summary::before{content:"\\25BE ";}
   details.pista .cuerpo{padding:0 14px 14px;}
-  /* «Si te ha sobrado tiempo»: la ampliación para el que acaba antes. Ver ampliaciones.py. */
+  /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
   .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
     padding:12px 16px 6px;margin:18px 0 6px;}
   .sobra-tiempo h3{margin:0 0 4px;font-size:1.02rem;color:#4E2A84;}
@@ -317,12 +317,15 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
     `cuadernillo` es el número de página del PDF, o None.
     """
     nn = '%02d' % num
-    # La ampliación de la sesión (ampliaciones.py) se cuelga al final de «Tu actividad».
-    # Si la sesión tiene ampliación pero no esa sección, mejor enterarse ahora que verlo
-    # desaparecer sin ruido.
-    ampl = caja_ampliacion(num)
-    if ampl and not any(t == 'Tu actividad' for t, _ in secciones):
-        raise ValueError('la sesión %d tiene ampliación pero no sección «Tu actividad»' % num)
+    # El paso extra de la sesión (ampliaciones.py) se cuelga al final de «Tu actividad»,
+    # numerado como el siguiente a la lista de pasos de esa sección, y deja su línea en
+    # «Lo has conseguido si…». Si la sesión lo tiene pero no esas secciones, mejor
+    # enterarse ahora que verlo desaparecer sin ruido.
+    tiene_ampl = bool(caja_ampliacion(num))
+    if tiene_ampl:
+        for necesaria in ('Tu actividad', 'Lo has conseguido si…'):
+            if not any(t == necesaria for t, _ in secciones):
+                raise ValueError('la sesión %d tiene paso extra pero no sección «%s»' % (num, necesaria))
     cuerpo = []
     n = 0
     for tit, cont in secciones:
@@ -331,8 +334,14 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
             cuerpo.append(cont)
         else:
             n += 1
-            if tit == 'Tu actividad' and ampl:
-                cont = cont + '\n' + ampl
+            if tit == 'Tu actividad' and tiene_ampl:
+                n_pasos = cont.count('<span class="p">Paso ')
+                etiqueta = ('Paso %d' % (n_pasos + 1)) if n_pasos else 'Último paso'
+                cont = cont + '\n' + caja_ampliacion(num, etiqueta)
+            if tit == 'Lo has conseguido si…' and tiene_ampl:
+                cierre = '\n</ul>'
+                assert cont.count(cierre) == 1, 'la lista de logros de la sesión %d no es la esperada' % num
+                cont = cont.replace(cierre, '\n  <li>%s</li>%s' % (LOGRO_AMPL, cierre))
             cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (n, tit, cont))
 
     nav = []

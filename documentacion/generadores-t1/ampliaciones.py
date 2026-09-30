@@ -1,20 +1,26 @@
 # -*- coding: utf-8 -*-
-"""Ampliaciones de T1: la caja «⭐ Si te ha sobrado tiempo» de cada sesión.
+"""El último paso de la actividad de cada sesión de T1 (S01–S17): la caja «⭐ Último paso».
 
-Una caja por sesión de contenido (S01–S17), al final de «Tu actividad». La regla para
-escribirlas: lo que ya saben más UN bloque nuevo como mucho, y que quepa en los diez
-minutos que le sobran al que acaba antes. No se piden en la entrega ni cuentan para la
-nota; si el alumno la hace, va en el mismo .sb3 y el profesor la ve al corregir.
+Nació como ampliación optativa para los que acababan antes («Si te ha sobrado tiempo»), y
+a los dos días pasó a ser parte de la actividad: las sesiones se hacían en veinte minutos
+y Manuel prefiere que una tarea ocupe más de una clase a tener al grupo media hora sin
+nada que hacer. Se entrega en el mismo .sb3 que el resto y cuenta para la nota igual que
+los demás pasos.
 
-plantilla.pagina() mete la caja sola: basta con que la sesión tenga una entrada aquí.
-Para quitar la ampliación de una sesión, se borra su entrada y se regenera. Para
-quitarlas todas, se vacía el diccionario.
+La regla para escribirlos no cambia: lo que ya saben más UN bloque nuevo como mucho.
+
+plantilla.pagina() coloca la caja al final de «Tu actividad», numerada como el paso
+siguiente al último de la lista de pasos (o «Último paso» si la sesión no lleva lista),
+y añade a «Lo has conseguido si…» la línea que lo comprueba. Para quitar el paso de una
+sesión, se borra su entrada y se regenera.
 """
 
-TITULO = '⭐ Si te ha sobrado tiempo'
+TITULO = '⭐ %s · Un paso más'   # %s: «Paso N», lo pone la plantilla; sin lista de pasos, «⭐ Último paso»
 
-INTRO = ('Sólo si has terminado la actividad y ya la has descargado. Esto no se pide, pero si '
-         'lo haces, déjalo en el mismo proyecto: así lo veo al corregir.')
+INTRO = ('Este paso es parte de la actividad, igual que los anteriores: hazlo en el mismo '
+         'proyecto y entrégalo todo junto. Si te atascas, entrega lo que tengas y díselo al profesor.')
+
+LOGRO = 'El último paso de la actividad también está hecho y va en el mismo archivo.'
 
 # num de sesión -> lista de (título corto, cuerpo en HTML)
 AMPLIACIONES = {
@@ -133,17 +139,18 @@ AMPLIACIONES = {
     17: [('Rompe tú un programa',
           'Coge un programa tuyo de otra sesión (el Pong vale) y métele <strong>un solo '
           'fallo</strong> de los cinco tipos de hoy, uno que se note al ejecutar. Guárdalo como '
-          '<code>Roto_TuNombre.sb3</code> y pásaselo a otra pareja que haya terminado: tienen que '
-          'encontrarlo con el método de hoy y decirte cuál era. Para romper algo a propósito hay '
-          'que entenderlo mejor que para arreglarlo.')],
+          '<code>Roto_TuNombre.sb3</code> y pásaselo a otra pareja que haya terminado (si no hay '
+          'ninguna, al profesor): tienen que encontrarlo con el método de hoy y decirte cuál era. '
+          'Para romper algo a propósito hay que entenderlo mejor que para arreglarlo.')],
 }
 
 
-def caja_ampliacion(num):
-    """La caja de la sesión `num`, o '' si no tiene ampliación."""
+def caja_ampliacion(num, etiqueta='Último paso'):
+    """La caja de la sesión `num` con su etiqueta («Paso 6», «Último paso»), o '' si no tiene."""
     items = AMPLIACIONES.get(num)
     if not items:
         return ''
     li = ''.join('\n  <li><b>%s.</b> %s</li>' % (t, c) for t, c in items)
+    titulo = (TITULO % etiqueta) if etiqueta.startswith('Paso') else '⭐ ' + etiqueta
     return ('<div class="sobra-tiempo">\n  <h3>%s</h3>\n  <p class="st-intro">%s</p>\n'
-            '  <ul>%s\n  </ul>\n</div>' % (TITULO, INTRO, li))
+            '  <ul>%s\n  </ul>\n</div>' % (titulo, INTRO, li))
