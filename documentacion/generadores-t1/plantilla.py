@@ -343,7 +343,7 @@ def _boton(href, icono, clave, nota, clase=''):
 def _partes_entrega(num, n):
     """El bloque de la entrega que dice cómo se valora «Tu actividad» por apartados.
 
-    Escala de Manuel (30-09): N.1 → 5; N.1 y otro apartado → 8; los tres → 10. El 8 está
+    Escala de Manuel (30-09): N.1 → 5; N.1 y N.2 → 8; los tres → 10. El 8 está
     pensado para el alumno medio: el salto de 5 a 8 por hacer el N.2 es el que le compensa.
     Sin N.1 no hay nota, aunque estén los otros: «inténtalo». Un apartado a medias no suma.
     """
@@ -351,8 +351,9 @@ def _partes_entrega(num, n):
         return ''
     a1, a2, a3 = '%d.1' % n, '%d.2' % n, '%d.3' % n
     if caja_reto(num):
-        filas = [(a1, '5'), ('%s y otro apartado (%s o %s)' % (a1, a2, a3), '8'),
-                 ('%s, %s y %s' % (a1, a2, a3), '10')]
+        # En escalera, que se lee de un vistazo (Manuel, 05-10). Quien haga N.1 y N.3 sin
+        # N.2 también saca un 8, pero se resuelve al corregir: no hace falta escribirlo.
+        filas = [(a1, '5'), ('%s y %s' % (a1, a2), '8'), ('%s, %s y %s' % (a1, a2, a3), '10')]
     else:
         filas = [(a1, '5'), ('%s y %s' % (a1, a2), '10')]
     tr = ''.join('<tr><td>%s</td><td class="nota">%s</td></tr>' % f for f in filas)

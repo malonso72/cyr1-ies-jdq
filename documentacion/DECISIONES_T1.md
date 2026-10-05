@@ -561,7 +561,7 @@ entrega de S01–S17:
 | Lo que entregas hecho | Nota |
 |---|---|
 | N.1 | 5 |
-| N.1 y otro apartado (N.2 o N.3) | 8 |
+| N.1 y N.2 | 8 |
 | N.1, N.2 y N.3 | 10 |
 
 Sin N.1 no hay nota aunque estén los demás («inténtalo»); un apartado a medias no suma.
@@ -573,3 +573,7 @@ porque el N.3 no depende del N.2 y dos apartados son dos apartados.
 
 La escala sale de `plantilla._partes_entrega()` y el test la comprueba (5/8/10, o 5/10 en una
 sesión sin N.3).
+
+**Ajuste del 05-10.** La tabla de la página pasa a ser una escalera (4.1 → 5; 4.1 y 4.2 → 8;
+los tres → 10), que se lee más fácil. El caso N.1 + N.3 sin N.2 sigue valiendo 8, pero lo
+resuelve Manuel al corregir: no está escrito.
