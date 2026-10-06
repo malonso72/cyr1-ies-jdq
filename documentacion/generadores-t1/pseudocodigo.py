@@ -8,8 +8,12 @@ tiene que pasar, línea a línea y en castellano, y él decide qué bloque es ca
 categoría está y cómo se encaja. Sin lista de bloques (Manuel, 30-09: «si no, se convierte en un
 ensayo y error»).
 
-El seudocódigo se GENERA desde las mismas tuplas con las que scratchsvg.py dibuja los bloques y
-sb3.py exporta los .sb3, con la tabla FRASES (patrón del bloque -> frase). Así cada programa se
+El texto se GENERA desde las mismas tuplas con las que scratchsvg.py dibuja los bloques y sb3.py
+exporta los .sb3: cada línea es el texto del bloque tal cual, con lo que se escribe entre ( ) y lo
+que se elige en un desplegable entre [ ]. Al principio se usaban frases «de la calle» («mirar
+hacia la derecha» por «apuntar en dirección 90»); Manuel, 06-10, lo vio demasiado y pidió las
+mismas palabras que el bloque, sin dibujo ni colores. La tabla FRASES se conserva, sin uso, por si
+se quisiera volver a ese nivel. Así cada programa se
 puede exportar y ejecutar para comprobar que hace lo que dice (`gen_sb3.py --retos` deja uno por
 sesión en `_soluciones/sb3/retos/`), y el texto no puede irse de lo que hacen los bloques. Un
 bloque sin frase sale con su texto de Scratch tal cual y SIN_FRASE lo apunta.
@@ -25,15 +29,17 @@ Reglas para escribir un N.3:
 from sb3 import _patron
 from scratchsvg import rep, op, hexa, tecla, var
 
-INTRO = ('Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría '
-         'está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.')
+INTRO = ('Aquí no hay dibujo: cada línea es un bloque, escrito con las mismas palabras que '
+         'en Scratch. Lo que escribes tú va entre paréntesis <strong>( )</strong>; lo que eliges en '
+         'un desplegable, entre corchetes <strong>[ ]</strong>. Lo que va con sangría va '
+         '<em>dentro</em> de la línea de arriba.')
 
 LOGRO = 'El programa del apartado {n}.3 está montado y hace lo que dice «Sabes que está bien si…».'
 
 DIRECCIONES = {'90': 'hacia la derecha', '-90': 'hacia la izquierda', '0': 'hacia arriba',
                '180': 'hacia abajo'}
 NOMBRES = {'Sprite1': 'el gato (Sprite1)'}
-COLORES = {'#1A1A1A': 'negro de las paredes'}
+COLORES = {'#1A1A1A': 'el negro de las paredes'}
 
 
 def _tecla(k):
@@ -182,27 +188,33 @@ def _pulir(t):
     return t.replace(' a el ', ' al ').replace(' de el ', ' del ')
 
 
+def _parte(p):
+    """Una parte de un bloque en texto: lo escrito entre ( ), lo elegido entre [ ]."""
+    if isinstance(p, str):
+        return p
+    tipo = p[0]
+    if tipo in ('num', 'txt'):
+        return '(%s)' % p[1]
+    if tipo == 'drop':
+        return '[%s]' % p[1]
+    if tipo == 'color':
+        return '[%s]' % COLORES.get(p[1], p[1])
+    if tipo == 'icon':
+        return {'bandera': 'bandera verde', 'giro-d': '↻', 'giro-i': '↺'}[p[1]]
+    if tipo == 'rep':
+        return '(%s)' % frase(p)
+    if tipo == 'bool':
+        return frase(p)
+    raise ValueError(p)
+
+
 def frase(b):
-    """La frase de un bloque (sin sus hijos)."""
+    """El texto de un bloque, con las mismas palabras que en Scratch (Manuel, 06-10: «con que
+    des las instrucciones igual pero sin los bloques ni los colores»)."""
     tipo, cat, partes = b[0], b[1], b[2]
     if tipo == 'rep' and cat == 'variables':
-        return 'el valor de %s' % partes[0]
-    patron, huecos, drops = _patron(partes)
-    h = [_hueco(x) for x in huecos]
-    plantilla = FRASES.get((tipo, patron))
-    if plantilla is None:
-        SIN_FRASE.append((tipo, patron))
-        txt = patron
-        for x in h:
-            txt = txt.replace('_', x, 1)
-        for d in drops:
-            txt = txt.replace('[]', d, 1)
-        return txt.replace('<bandera>', 'bandera verde')
-    if callable(plantilla):
-        return _pulir(plantilla(h, drops))
-    kw = {'h%d' % i: x for i, x in enumerate(h)}
-    kw.update({'d%d' % i: x for i, x in enumerate(drops)})
-    return _pulir(plantilla.format(**kw))
+        return partes[0]
+    return ' '.join(_parte(p) for p in partes).replace(' ?', '?')
 
 
 def lineas(programa, nivel=0):
@@ -218,7 +230,7 @@ def lineas(programa, nivel=0):
             out.extend(lineas(b[3], nivel + 1))
         elif b[0] == 'ce':
             out.extend(lineas(b[3], nivel + 1))
-            out.append((nivel, 'si no:'))
+            out.append((nivel, 'si no'))
             out.extend(lineas(b[5], nivel + 1))
     return out
 
@@ -401,8 +413,9 @@ RETOS = {
 
     5: dict(
         objeto='el coche teledirigido',
-        planteamiento='Un coche que avanza solo y que tú conduces con las flechas. Si toca el borde '
-                      'del escenario, has perdido.',
+        planteamiento='Un coche que avanza solo y que tú conduces con las teclas <strong>J</strong> '
+                      '(izquierda) y <strong>L</strong> (derecha). Si toca el borde del escenario, has '
+                      'perdido. No usa las flechas para no mover a la vez al gato.',
         preparar=['Añade el coche: botón <strong>Elige un objeto</strong>, escribe <strong>Conv</strong> '
                   'en el buscador y elige <strong>Convertible 2</strong>, el coche verde.',
                   selecciona('el coche', 'el gato ni en el perro'),
@@ -411,15 +424,15 @@ RETOS = {
         programas=[(None, [K('c'), ir('0', '0'), apuntar('90'),
                            hasta(BORDE, [
                                mover('4'),
-                               si(tecla('flecha izquierda'),
+                               si(tecla('j'),
                                   [('stack', 'motion', ['girar', ('icon', 'giro-i'), ('num', '10'), 'grados'])]),
-                               si(tecla('flecha derecha'),
+                               si(tecla('l'),
                                   [('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '10'), 'grados'])]),
                            ]),
                            decir('¡Choque!'),
                            ('cap', 'control', ['detener', ('drop', 'todos')])])],
-        comprueba='al pulsar C el coche sale del centro hacia la derecha y no se para; con las '
-                  'flechas izquierda y derecha va girando mientras avanza; y en cuanto toca el borde '
+        comprueba='al pulsar C el coche sale del centro hacia la derecha y no se para; con la J '
+                  'gira a la izquierda y con la L a la derecha mientras avanza; y en cuanto toca el borde '
                   'dice «¡Choque!» y todo se detiene. Si aguantas más de veinte segundos sin chocar, '
                   'conduces bien. Y mientras tanto el gato y el perro no se han movido.'),
 

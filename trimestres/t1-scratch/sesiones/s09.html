@@ -226,21 +226,21 @@
   <li><span class="p">Paso 4</span><span>Monta el programa de abajo, línea a línea.</span></li>
   <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>N</strong>. No uses la bandera: la bandera arranca el quiz del gato.</span></li>
 </ol>
-<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<p>Aquí no hay dibujo: cada línea es un bloque, escrito con las mismas palabras que en Scratch. Lo que escribes tú va entre paréntesis <strong>( )</strong>; lo que eliges en un desplegable, entre corchetes <strong>[ ]</strong>. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
 <ol class="pseudo">
-  <li class="n0">Cuando se pulse la tecla N:</li>
-  <li class="n1">poner secreto a un número al azar entre 1 y 10</li>
-  <li class="n1">poner prueba a 0</li>
-  <li class="n1">poner intentos a 0</li>
-  <li class="n1">repetir hasta que el valor de prueba sea igual al valor de secreto:</li>
-  <li class="n2">preguntar «Estoy pensando un número del 1 al 10. ¿Cuál es?» y esperar la respuesta</li>
-  <li class="n2">poner prueba a la respuesta</li>
-  <li class="n2">sumar 1 a intentos</li>
-  <li class="n2">si el valor de prueba es mayor que el valor de secreto:</li>
-  <li class="n3">decir «Es más pequeño» durante 1 segundo</li>
-  <li class="n2">si el valor de prueba es menor que el valor de secreto:</li>
-  <li class="n3">decir «Es más grande» durante 1 segundo</li>
-  <li class="n1">decir «¡Acertaste en » seguido del valor de intentos seguido de « intentos!» durante 3 segundos</li>
+  <li class="n0">al presionar tecla [n]</li>
+  <li class="n1">dar a [secreto] el valor (número aleatorio entre (1) y (10))</li>
+  <li class="n1">dar a [prueba] el valor (0)</li>
+  <li class="n1">dar a [intentos] el valor (0)</li>
+  <li class="n1">repetir hasta que (prueba) = (secreto)</li>
+  <li class="n2">preguntar (Estoy pensando un número del 1 al 10. ¿Cuál es?) y esperar</li>
+  <li class="n2">dar a [prueba] el valor (respuesta)</li>
+  <li class="n2">sumar a [intentos] (1)</li>
+  <li class="n2">si (prueba) > (secreto) entonces</li>
+  <li class="n3">decir (Es más pequeño) durante (1) segundos</li>
+  <li class="n2">si (prueba) < (secreto) entonces</li>
+  <li class="n3">decir (Es más grande) durante (1) segundos</li>
+  <li class="n1">decir (unir (¡Acertaste en ) (unir (intentos) ( intentos!))) durante (3) segundos</li>
 </ol>
 <p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar N el búho pregunta un número. Si te pasas dice «Es más pequeño», si te quedas corto «Es más grande», y vuelve a preguntar. Cuando aciertas dice en cuántos intentos lo has conseguido. Con buena estrategia, nunca hacen falta más de cuatro.</p>
 

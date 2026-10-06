@@ -213,28 +213,28 @@
 <h3 class="sub"><span class="subn">4.2</span>Añade un perro que se mueva con W, A, S y D</h3>
 <p>Un <strong>perro</strong> que se mueve igual que el gato, pero con las teclas <strong>W, A, S y D</strong>. Su programa no se monta otra vez: <strong>se copia el del gato y se cambia lo que es distinto</strong>.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Añade el perro: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Dog</strong> en el buscador y elige <strong>Dog2</strong>, el perro azul.</span></li><li><span class="p">Paso 2</span><span>Vuelve a seleccionar el <strong>gato</strong>, coge su programa por el bloque de arriba (la bandera verde) y <strong>arrástralo entero hasta el icono del perro</strong>, en la lista de objetos de abajo a la derecha. Suéltalo cuando el icono se mueva: eso quiere decir que lo ha recibido.</span></li><li><span class="p">Paso 3</span><span>Selecciona el perro. El programa ya está ahí, copiado. El gato sigue teniendo el suyo: no se ha movido, se ha duplicado.</span></li><li><span class="p">Paso 4</span><span>En el programa del perro, cambia sólo las teclas de los desplegables: <strong>flecha arriba → W</strong>, <strong>flecha abajo → S</strong>, <strong>flecha izquierda → A</strong>, <strong>flecha derecha → D</strong>.</span></li><li><span class="p">Paso 5</span><span>Pulsa la bandera: el gato se mueve con las flechas y el perro con W, A, S y D.</span></li></ol><div class="aviso-ojo"><h3>⚠️ Apréndete este truco</h3><p>Copiar un programa de un objeto a otro arrastrándolo hasta su icono es de lo que más vas a usar. En cuanto un juego tiene varios objetos que hacen casi lo mismo —los corredores de la carrera, las monedas del laberinto, los enemigos de tu proyecto final—, nadie los monta uno a uno: se hace el primero, se copia y se cambia lo que es distinto.</p></div>
 <h3 class="sub"><span class="subn">4.3</span>Monta el coche teledirigido a partir del texto</h3>
-<p>Un coche que avanza solo y que tú conduces con las flechas. Si toca el borde del escenario, has perdido.</p>
+<p>Un coche que avanza solo y que tú conduces con las teclas <strong>J</strong> (izquierda) y <strong>L</strong> (derecha). Si toca el borde del escenario, has perdido. No usa las flechas para no mover a la vez al gato.</p>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Añade el coche: botón <strong>Elige un objeto</strong>, escribe <strong>Conv</strong> en el buscador y elige <strong>Convertible 2</strong>, el coche verde.</span></li>
   <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el coche, <strong>no</strong> en el gato ni en el perro.</span></li>
   <li><span class="p">Paso 3</span><span>Monta el programa de abajo, línea a línea.</span></li>
   <li><span class="p">Paso 4</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>C</strong>. No uses la bandera: la bandera arranca los programas del gato y del perro.</span></li>
 </ol>
-<p>Aquí no hay dibujo: cada línea es un bloque. Tú decides cuál es, en qué categoría está y dónde se encaja. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<p>Aquí no hay dibujo: cada línea es un bloque, escrito con las mismas palabras que en Scratch. Lo que escribes tú va entre paréntesis <strong>( )</strong>; lo que eliges en un desplegable, entre corchetes <strong>[ ]</strong>. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
 <ol class="pseudo">
-  <li class="n0">Cuando se pulse la tecla C:</li>
-  <li class="n1">ir al punto x: 0, y: 0</li>
-  <li class="n1">mirar hacia la derecha (dirección 90)</li>
-  <li class="n1">repetir hasta que toque el borde:</li>
-  <li class="n2">avanzar 4 pasos</li>
-  <li class="n2">si la flecha izquierda está pulsada:</li>
-  <li class="n3">girar 10 grados hacia la izquierda</li>
-  <li class="n2">si la flecha derecha está pulsada:</li>
-  <li class="n3">girar 10 grados hacia la derecha</li>
-  <li class="n1">decir «¡Choque!» durante 2 segundos</li>
-  <li class="n1">detener todo</li>
+  <li class="n0">al presionar tecla [c]</li>
+  <li class="n1">ir a x: (0) y: (0)</li>
+  <li class="n1">apuntar en dirección (90)</li>
+  <li class="n1">repetir hasta que ¿tocando [borde]?</li>
+  <li class="n2">mover (4) pasos</li>
+  <li class="n2">si ¿tecla [j] presionada? entonces</li>
+  <li class="n3">girar ↺ (10) grados</li>
+  <li class="n2">si ¿tecla [l] presionada? entonces</li>
+  <li class="n3">girar ↻ (10) grados</li>
+  <li class="n1">decir (¡Choque!) durante (2) segundos</li>
+  <li class="n1">detener [todos]</li>
 </ol>
-<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar C el coche sale del centro hacia la derecha y no se para; con las flechas izquierda y derecha va girando mientras avanza; y en cuanto toca el borde dice «¡Choque!» y todo se detiene. Si aguantas más de veinte segundos sin chocar, conduces bien. Y mientras tanto el gato y el perro no se han movido.</p>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar C el coche sale del centro hacia la derecha y no se para; con la J gira a la izquierda y con la L a la derecha mientras avanza; y en cuanto toca el borde dice «¡Choque!» y todo se detiene. Si aguantas más de veinte segundos sin chocar, conduces bien. Y mientras tanto el gato y el perro no se han movido.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">

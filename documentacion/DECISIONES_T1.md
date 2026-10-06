@@ -577,3 +577,20 @@ sesión sin N.3).
 **Ajuste del 05-10.** La tabla de la página pasa a ser una escalera (4.1 → 5; 4.1 y 4.2 → 8;
 los tres → 10), que se lee más fácil. El caso N.1 + N.3 sin N.2 sigue valiendo 8, pero lo
 resuelve Manuel al corregir: no está escrito.
+
+## 37. El seudocódigo del N.3 usa las palabras del bloque
+
+Las frases «de la calle» («mirar hacia la derecha (dirección 90)» por *apuntar en dirección
+90*) eran demasiado para 1.º: Manuel, 06-10, «con que des las instrucciones igual pero sin los
+bloques ni los colores». Ahora cada línea es el texto del bloque tal cual, sin dibujo: lo que se
+escribe va entre ( ) y lo que se elige en un desplegable entre [ ] (*apuntar en dirección (90)*,
+*¿tecla [flecha izquierda] presionada?*). El trabajo que queda es encontrar el bloque en su
+categoría y encajarlo donde dice la sangría. La tabla FRASES de `pseudocodigo.py` se conserva sin
+uso por si un día se quiere subir el nivel.
+
+**S05, 06-10: el coche se conduce con J y L, no con las flechas.** Probándolo, Manuel vio que si
+el programa del gato seguía en marcha (bandera sin parar), las flechas movían a la vez al gato y
+al coche, y al chocar el gato seguía moviéndose hasta el «detener todos». El paso «para todo con
+el círculo rojo» lo evitaba, pero en clase se lo saltarían; con teclas propias da igual lo que esté
+en marcha. Regla para los N.3: ni el disparador ni los controles comparten teclas con N.1 y N.2.
+
