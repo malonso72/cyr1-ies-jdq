@@ -164,9 +164,11 @@ AMPLIACIONES = {
              'hoy junto con lo de la sesión 5. Su programa es nuevo: no se copia el del gato.</p>' + P(
         'Añade el oso: ' + elige('Bear-walking', 'Bear', 'el oso que camina. Mira su pestaña '
         'Disfraces: tiene <strong>ocho</strong>, uno por cada postura del paso.'),
-        'Con el oso seleccionado, monta: <strong>al hacer clic en la bandera</strong>, <strong>ir a '
-        'x: 0 y: 0</strong> (el oso va en el medio; el gato, abajo), <strong>fijar estilo de '
-        'rotación a (izquierda-derecha)</strong> y un <strong>por siempre</strong>.',
+        'Con el oso seleccionado, monta: <strong>al hacer clic en la bandera</strong>, <strong>fijar '
+        'tamaño al (50) %</strong> (está en Apariencia: el oso es muy grande y así queda como el '
+        'gato), <strong>ir a x: 0 y: 0</strong> (el oso va en el medio; el gato, abajo), '
+        '<strong>fijar estilo de rotación a (izquierda-derecha)</strong> y un <strong>por '
+        'siempre</strong>.',
         'Dentro del <em>por siempre</em> pon un <strong>si ¿tecla flecha derecha presionada? '
         'entonces</strong>. Dentro de él: <em>apuntar en dirección 90</em>, <em>siguiente '
         'disfraz</em>, <em>mover 10 pasos</em> y <em>esperar 0.1 segundos</em>. La espera es más '
