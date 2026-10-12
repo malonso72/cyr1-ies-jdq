@@ -160,17 +160,19 @@ AMPLIACIONES = {
     6: [('', '<p>El gato y el oso pasean solos. Ahora el oso va a caminar <strong>sólo mientras '
              'mantienes pulsada una flecha</strong>, y a quedarse quieto cuando la sueltas: lo de '
              'hoy junto con lo de la sesión 5.</p>' + P(
-        'Selecciona el <strong>oso</strong>.',
-        'Saca del <em>por siempre</em> los cuatro bloques de dentro (siguiente disfraz, esperar, '
-        'mover y rebotar) y déjalos a un lado: los vas a reutilizar.',
+        'Selecciona el <strong>oso</strong>. Coge su programa por la bandera y '
+        '<strong>arrástralo entero a la paleta</strong>, la columna de bloques de la izquierda: '
+        'se borra. Le vas a montar uno nuevo; el del gato no se toca.',
+        'Monta en el oso: <strong>al hacer clic en la bandera</strong>, <strong>fijar estilo de '
+        'rotación a (izquierda-derecha)</strong> y un <strong>por siempre</strong>.',
         'Dentro del <em>por siempre</em> pon un <strong>si ¿tecla flecha derecha presionada? '
         'entonces</strong>. Dentro de él: <em>apuntar en dirección 90</em>, <em>siguiente '
         'disfraz</em>, <em>mover 10 pasos</em> y <em>esperar 0.1 segundos</em>.',
         'Debajo, otro <strong>si</strong> igual para la <strong>flecha izquierda</strong>, con '
         '<em>apuntar en dirección -90</em>. Truco: duplica el primero y cambia la tecla y la '
         'dirección.',
-        'Tira a la paleta los bloques que te hayan sobrado y pulsa la bandera: el gato sigue '
-        'paseando solo y el oso sólo camina mientras mantienes una flecha.'))],
+        'Pulsa la bandera: el gato sigue paseando solo y el oso sólo camina mientras mantienes '
+        'una flecha.'))],
 
     7: [('', '<p>Una cuarta pregunta, <strong>¿Cuántos años tienes?</strong>, y que el gato '
              'conteste <strong>calculando</strong>, no repitiendo.</p>' + P(

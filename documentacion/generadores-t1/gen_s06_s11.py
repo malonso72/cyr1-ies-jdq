@@ -21,7 +21,6 @@ P06 = [
         ('stack', 'motion', ['si toca un borde, rebotar']),
     ]),
 ]
-DISFRAZ06 = [('stack', 'looks', ['cambiar disfraz a', ('drop', 'costume1')])]
 
 s06 = pagina(
     6, 'Animaciones con disfraces',
@@ -84,24 +83,13 @@ s06 = pagina(
              'Disfraces: tiene <strong>ocho</strong>, uno por cada postura del paso.',
              'Copia al oso el programa del gato arrastrándolo hasta su icono, como en la sesión 5. '
              'Ajusta la espera del oso: con ocho disfraces necesita una espera más corta que el '
-             'gato, que tiene dos.',
-             'Cambia también el fondo para que la escena tenga sentido.']) +
-         pista('¿Y si quiero un disfraz concreto y no el siguiente?',
-               '<p>Para eso está este otro bloque, que va directamente al disfraz que le digas. '
-               'Se usa, por ejemplo, para dejar al personaje quieto en una postura concreta cuando '
-               'el programa termina:</p>' +
-               caja(DISFRAZ06, 'Bloque cambiar disfraz a costume1', ancho=360)) +
-         ojo('Los disfraces se llaman en inglés',
-             '<p>Aunque el editor esté en español, los disfraces del gato se llaman '
-             '<strong>costume1</strong> y <strong>costume2</strong>. Tu cuadernillo dice '
-             '«disfraz1» y «disfraz2», y esos nombres <strong>no existen</strong> en pantalla. '
-             'Si quieres, puedes cambiarles el nombre tú desde la pestaña Disfraces.</p>')),
+             'gato, que tiene dos.'])),
 
         ('Lo has conseguido si…',
          logros(['El personaje camina: se le ve mover las patas, no deslizarse.',
                  'Rebota en los bordes sin quedarse boca abajo.',
                  'Has probado al menos tres valores distintos de espera y sabes cuál va mejor.',
-                 'Has cambiado de personaje y de fondo.'])),
+                 'El oso también camina, con una espera más corta que la del gato.'])),
     ],
     cuadernillo=CUADERNILLO[6])
 
