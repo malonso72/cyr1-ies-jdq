@@ -39,7 +39,7 @@ def elige(nombre, busca, que):
 
 ORDEN_1 = {
     1: 'Monta tu primer programa', 2: 'Completa el cuadrado', 3: 'Recorre las tres figuras',
-    4: 'Monta las tres versiones', 5: 'Completa el programa', 6: 'Haz que tus personajes caminen',
+    4: 'Monta las tres versiones', 5: 'Completa el programa', 6: 'Haz que el gato camine',
     7: 'Construye el diálogo', 8: 'Construye la calculadora', 9: 'Construye el quiz',
     10: 'Monta la carrera', 11: 'Haz que el gato avise a la pelota', 12: 'Construye el laberinto',
     13: 'Añade la meta y el segundo nivel', 14: 'Completa el juego', 15: 'Monta la pelota y la pala',
@@ -48,7 +48,7 @@ ORDEN_1 = {
 ORDEN_2 = {
     1: 'Haz que el perro conteste al gato', 2: 'Haz que el gato recorra un rectángulo con la tecla R',
     3: 'Dibuja las figuras con el lápiz', 4: 'Añade una cuarta flecha con el operador «o»',
-    5: 'Añade un perro que se mueva con W, A, S y D', 6: 'Haz que el oso sólo camine cuando lo mueves',
+    5: 'Añade un perro que se mueva con W, A, S y D', 6: 'Añade un oso que camine con las flechas',
     7: 'Haz que el gato calcule tu edad dentro de diez años', 8: 'Añade la media y el resto',
     9: 'Añade las vidas', 10: 'Haz que el ganador diga su tiempo', 11: 'Encadena un segundo mensaje',
     12: 'Añade una estrella que dé puntos', 13: 'Guarda el mejor tiempo',
@@ -63,7 +63,7 @@ OBJETOS = {
     3: [('el gato', [1, 2]), ('el lápiz', [3])],
     4: [('el gato', [1, 2]), ('el murciélago', [3])],
     5: [('el gato', [1]), ('el perro', [2]), ('el coche', [3])],
-    6: [('el gato', [1]), ('el oso', [1, 2]), ('el loro', [3])],
+    6: [('el gato', [1]), ('el oso', [2]), ('el loro', [3])],
     7: [('el gato', [1, 2]), ('el robot', [3])],
     8: [('el gato', [1, 2]), ('el perro', [3])],
     9: [('el gato', [1, 2]), ('el búho', [3])],
@@ -147,31 +147,34 @@ AMPLIACIONES = {
         'decir que lo ha recibido.',
         'Selecciona el perro. El programa ya está ahí, copiado. El gato sigue teniendo el suyo: '
         'no se ha movido, se ha duplicado.',
-        'En el programa del perro, cambia sólo las teclas de los desplegables: <strong>flecha '
+        'En el programa del perro, cambia las teclas de los desplegables: <strong>flecha '
         'arriba → W</strong>, <strong>flecha abajo → S</strong>, <strong>flecha izquierda → '
-        'A</strong>, <strong>flecha derecha → D</strong>.',
-        'Pulsa la bandera: el gato se mueve con las flechas y el perro con W, A, S y D.') + OJO(
+        'A</strong>, <strong>flecha derecha → D</strong>. Y en el <em>ir a</em> pon <strong>x: '
+        '120</strong>, para que el perro empiece a la derecha y no encima del gato.',
+        'Pulsa la bandera: el gato sale a la izquierda y se mueve con las flechas; el perro sale '
+        'a la derecha y se mueve con W, A, S y D.') + OJO(
         'Apréndete este truco',
         'Copiar un programa de un objeto a otro arrastrándolo hasta su icono es de lo que más '
         'vas a usar. En cuanto un juego tiene varios objetos que hacen casi lo mismo —los '
         'corredores de la carrera, las monedas del laberinto, los enemigos de tu proyecto final—, '
         'nadie los monta uno a uno: se hace el primero, se copia y se cambia lo que es distinto.'))],
 
-    6: [('', '<p>El gato y el oso pasean solos. Ahora el oso va a caminar <strong>sólo mientras '
-             'mantienes pulsada una flecha</strong>, y a quedarse quieto cuando la sueltas: lo de '
-             'hoy junto con lo de la sesión 5.</p>' + P(
-        'Selecciona el <strong>oso</strong>. Coge su programa por la bandera y '
-        '<strong>arrástralo entero a la paleta</strong>, la columna de bloques de la izquierda: '
-        'se borra. Le vas a montar uno nuevo; el del gato no se toca.',
-        'Monta en el oso: <strong>al hacer clic en la bandera</strong>, <strong>fijar estilo de '
+    6: [('', '<p>Un <strong>oso</strong> que camina moviendo las patas, pero <strong>sólo mientras '
+             'mantienes pulsada una flecha</strong>, y que se queda quieto cuando la sueltas: lo de '
+             'hoy junto con lo de la sesión 5. Su programa es nuevo: no se copia el del gato.</p>' + P(
+        'Añade el oso: ' + elige('Bear-walking', 'Bear', 'el oso que camina. Mira su pestaña '
+        'Disfraces: tiene <strong>ocho</strong>, uno por cada postura del paso.'),
+        'Con el oso seleccionado, monta: <strong>al hacer clic en la bandera</strong>, <strong>ir a '
+        'x: 0 y: 0</strong> (el oso va en el medio; el gato, abajo), <strong>fijar estilo de '
         'rotación a (izquierda-derecha)</strong> y un <strong>por siempre</strong>.',
         'Dentro del <em>por siempre</em> pon un <strong>si ¿tecla flecha derecha presionada? '
         'entonces</strong>. Dentro de él: <em>apuntar en dirección 90</em>, <em>siguiente '
-        'disfraz</em>, <em>mover 10 pasos</em> y <em>esperar 0.1 segundos</em>.',
+        'disfraz</em>, <em>mover 10 pasos</em> y <em>esperar 0.1 segundos</em>. La espera es más '
+        'corta que la del gato porque el oso tiene ocho disfraces y el gato dos.',
         'Debajo, otro <strong>si</strong> igual para la <strong>flecha izquierda</strong>, con '
         '<em>apuntar en dirección -90</em>. Truco: duplica el primero y cambia la tecla y la '
         'dirección.',
-        'Pulsa la bandera: el gato sigue paseando solo y el oso sólo camina mientras mantienes '
+        'Pulsa la bandera: el gato pasea solo por abajo y el oso sólo camina mientras mantienes '
         'una flecha.'))],
 
     7: [('', '<p>Una cuarta pregunta, <strong>¿Cuántos años tienes?</strong>, y que el gato '

@@ -416,6 +416,7 @@ s04 = pagina(
 # ============================================================ S05
 P05 = [
     BANDERA,
+    ('stack', 'motion', ['ir a x:', ('num', '-120'), 'y:', ('num', '0')]),
     ('c', 'control', ['repetir hasta que', tecla('espacio')], [
         ('c', 'control', ['si', tecla('flecha derecha'), 'entonces'], [
             ('stack', 'motion', ['apuntar en dirección', ('num', '90')]),
@@ -441,7 +442,8 @@ s05 = pagina(
     [
         ('Lee este programa',
          '<p>Este es el programa de partida. Todavía <em>no</em> es el tuyo: tú vas a completarlo.</p>' +
-         caja(P05, 'Programa: al hacer clic en la bandera verde, repetir hasta que se pulse '
+         caja(P05, 'Programa: al hacer clic en la bandera verde, ir a x menos 120 y 0, repetir '
+                   'hasta que se pulse '
                    'espacio, con dos condicionales dentro que mueven el personaje a la derecha y a '
                    'la izquierda; al salir del bucle, iniciar el sonido Miau',
               pie='Si en tu cuadernillo ves <strong>270</strong> donde aquí pone <strong>−90</strong>, '
@@ -449,7 +451,9 @@ s05 = pagina(
 
         ('Cómo funciona',
          secuencia([
-             'Al pulsar la bandera verde, el programa arranca.',
+             'Al pulsar la bandera verde, el programa arranca. <strong>ir a x: (-120) y: '
+             '(0)</strong> pone al gato a la izquierda, siempre en el mismo sitio: cada objeto '
+             'empieza en su sitio para no taparse con los otros.',
              '<strong>repetir hasta que</strong> vigila una y otra vez si has pulsado la barra '
              'espaciadora. Mientras no la pulses, todo lo de dentro se repite sin parar.',
              'Dentro hay <strong>dos condicionales</strong>, uno debajo del otro. Cada uno pregunta '

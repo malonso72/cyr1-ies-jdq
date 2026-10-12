@@ -594,3 +594,20 @@ al coche, y al chocar el gato seguía moviéndose hasta el «detener todos». El
 el círculo rojo» lo evitaba, pero en clase se lo saltarían; con teclas propias da igual lo que esté
 en marcha. Regla para los N.3: ni el disparador ni los controles comparten teclas con N.1 y N.2.
 
+## 38. Montar, nunca desmontar ni borrar; y cada objeto empieza en su sitio
+
+*12-10-2026, a raíz de revisar la S06 con Manuel.*
+
+- **Ningún apartado obliga a deshacer lo que hizo otro.** La S06 tenía el 4.2 sacando bloques del
+  «por siempre» del oso para volver a meterlos dentro de dos «si»; una primera corrección lo
+  cambió por «borra el programa del oso y móntale uno nuevo», y Manuel lo rechazó: no se hace algo
+  para luego borrarlo. Queda así: 4.1 es sólo el gato; el oso entra en el 4.2 directamente con su
+  programa de flechas. Cada objeto tiene su programa, se monta una vez y no se toca más.
+- **Fuera de la S06**: el recuadro de «cambiar disfraz a» (ningún apartado lo usaba), el aviso de
+  los nombres del cuadernillo (ya no se usa) y el paso de cambiar el fondo.
+- **Cada objeto empieza en su sitio** con un «ir a x: y:» justo debajo del sombrero, para que no
+  se tapen. S05: gato x -120, perro x 120 (se cambia al copiar), coche en el centro. S06: gato
+  abajo (y -120), oso en el medio (0, 0), loro arriba (ya salía de -200, 120). S07, S08, S09 y
+  S14: el objeto del N.3 va a x 150, y 0, a la derecha del gato. No se toca donde la posición ya
+  estaba (S10, S11, S12, S15, S16) ni donde el objeto se coloca a mano y no se mueve (árbitro y
+  tambor de la S11, campana de la S13, fantasma de la S12, que depende del laberinto de cada uno).

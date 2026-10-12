@@ -458,7 +458,7 @@ RETOS = {
                   selecciona('el robot', 'el gato'),
                   'Monta el programa de abajo, línea a línea.',
                   prueba('R', 'el diálogo del gato')],
-        programas=[(None, [K('r'), preguntar('Dime una palabra'),
+        programas=[(None, [K('r'), ir('150', '0'), preguntar('Dime una palabra'),
                            repetir('3', [decir(unir(RESP, txt('...')), '1'), esperar('0.5')]),
                            decir('¡Soy un robot eco!')])],
         comprueba='al pulsar R el robot te pide una palabra. Si escribes «hola», dice «hola...» '
@@ -472,7 +472,7 @@ RETOS = {
                   'Crea una variable nueva, <strong>edad</strong>, para todos los objetos.',
                   'Monta el programa de abajo, línea a línea.',
                   prueba('D', 'la calculadora del gato')],
-        programas=[(None, [K('d'), preguntar('¿Cuántos años tiene tu perro?'), dar('edad', RESP),
+        programas=[(None, [K('d'), ir('150', '0'), preguntar('¿Cuántos años tiene tu perro?'), dar('edad', RESP),
                            decir(unir(txt('En años de persona serían '), op(var('edad'), '*', num('7'))), '3'),
                            decir(unir(txt('Y dentro de 5 años tendrá '), op(var('edad'), '+', num('5'))), '3')])],
         comprueba='al pulsar D el perro pregunta. Si contestas 3, dice «En años de persona serían '
@@ -488,7 +488,7 @@ RETOS = {
                   '<strong>intentos</strong>.',
                   'Monta el programa de abajo, línea a línea.',
                   prueba('N', 'el quiz del gato')],
-        programas=[(None, [K('n'),
+        programas=[(None, [K('n'), ir('150', '0'),
                            dar('secreto', op('número aleatorio entre', num('1'), 'y', num('10'))),
                            dar('prueba', num('0')), dar('intentos', num('0')),
                            hasta(hexa('operators', var('prueba'), '=', var('secreto')), [
@@ -598,7 +598,7 @@ RETOS = {
                   'Monta el programa de abajo, línea a línea. La condición del <em>si</em> lleva el '
                   'operador <strong>o</strong> con dos condiciones dentro.',
                   prueba('U', 'el piedra, papel o tijera')],
-        programas=[(None, [K('u'), preguntar('¿Cuánto mides, en centímetros?'), dar('altura', RESP),
+        programas=[(None, [K('u'), ir('150', '0'), preguntar('¿Cuánto mides, en centímetros?'), dar('altura', RESP),
                            preguntar('¿Vienes con una persona adulta? Escribe si o no'),
                            sino(hexa('operators', hexa('operators', var('altura'), '>', num('140')), 'o',
                                      hexa('operators', RESP, '=', txt('si'))),

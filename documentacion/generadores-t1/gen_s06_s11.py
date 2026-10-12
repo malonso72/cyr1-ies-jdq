@@ -13,6 +13,7 @@ BORDE = hexa('sensing', '¿tocando', ('drop', 'borde'), '?')
 # ============================================================ S06
 P06 = [
     BANDERA,
+    ('stack', 'motion', ['ir a x:', ('num', '0'), 'y:', ('num', '-120')]),
     ('stack', 'motion', ['fijar estilo de rotación a', ('drop', 'izquierda-derecha')]),
     ('c', 'control', ['por siempre'], [
         ('stack', 'looks', ['siguiente disfraz']),
@@ -38,12 +39,15 @@ s06 = pagina(
          'animados.</p>'),
 
         ('Lee este programa',
-         caja(P06, 'Programa: fijar estilo de rotación a izquierda-derecha y después, por siempre, '
+         caja(P06, 'Programa: ir a x 0 y menos 120, fijar estilo de rotación a izquierda-derecha '
+                   'y después, por siempre, '
                    'siguiente disfraz, esperar 0.2 segundos, mover 10 pasos y si toca un borde '
                    'rebotar',
               pie='Los cuatro bloques de dentro se repiten sin parar: cambiar de disfraz, esperar '
                   'un poco, avanzar y rebotar si llega al borde.') +
          secuencia([
+             '<strong>ir a x: (0) y: (-120)</strong> pone al gato abajo, siempre en el mismo '
+             'sitio. Cada objeto empieza en su sitio para no taparse con los otros.',
              '<strong>fijar estilo de rotación a (izquierda-derecha)</strong> se ejecuta '
              '<em>una sola vez</em>, al principio: hace que al rebotar el personaje se dé la '
              'vuelta como un espejo, en vez de quedarse cabeza abajo.',
@@ -55,7 +59,7 @@ s06 = pagina(
              'ella, el cambio va tan rápido que no se ve un paso, se ve un borrón.',
              '<strong>mover 10 pasos</strong> lo desplaza mientras «camina».',
              '<strong>si toca un borde, rebotar</strong> le da la vuelta al llegar al final. Y se '
-             'vuelve al 3.'])),
+             'vuelve al 4.'])),
 
         ('Comprueba que lo has entendido',
          pregunta('1', 'Quitas el bloque <em>esperar (0.2) segundos</em> y dejas todo lo demás igual. '
@@ -77,19 +81,13 @@ s06 = pagina(
          pasos([
              'Monta el programa con el gato y comprueba que camina.',
              'Prueba la espera con <strong>0.05</strong>, con <strong>0.2</strong> y con '
-             '<strong>1</strong> segundo. Quédate con el valor que mejor se vea.',
-             'Añade el oso: botón <strong>Elige un objeto</strong>, escribe <strong>Bear</strong> en '
-             'el buscador y elige <strong>Bear-walking</strong>, el oso que camina. Mira su pestaña '
-             'Disfraces: tiene <strong>ocho</strong>, uno por cada postura del paso.',
-             'Copia al oso el programa del gato arrastrándolo hasta su icono, como en la sesión 5. '
-             'Ajusta la espera del oso: con ocho disfraces necesita una espera más corta que el '
-             'gato, que tiene dos.'])),
+             '<strong>1</strong> segundo. Quédate con el valor que mejor se vea.'])),
 
         ('Lo has conseguido si…',
          logros(['El personaje camina: se le ve mover las patas, no deslizarse.',
                  'Rebota en los bordes sin quedarse boca abajo.',
                  'Has probado al menos tres valores distintos de espera y sabes cuál va mejor.',
-                 'El oso también camina, con una espera más corta que la del gato.'])),
+                 'El gato sale siempre del mismo sitio, abajo.'])),
     ],
     cuadernillo=CUADERNILLO[6])
 
