@@ -53,8 +53,8 @@ const PRUEBAS = {
   },
   8: async ({ obj, dice, tecla, contestar }) => {
     const p = obj('Dog2'); tecla('d'); await dormir(300); contestar('3'); await dormir(300);
-    ok(dice(p) === 'En años de persona serían 21', 's08: ' + dice(p));
-    await dormir(3000); ok(dice(p) === 'Y dentro de 5 años tendrá 8', 's08: ' + dice(p));
+    ok(dice(p) === 'Tu perro tiene 3 años', 's08: ' + dice(p));
+    await dormir(2000); ok(dice(p) === 'En años de persona serían 21', 's08: ' + dice(p));
   },
   9: async ({ obj, dice, tecla, contestar, variable }) => {
     const p = obj('Owl'); tecla('n'); await dormir(300);

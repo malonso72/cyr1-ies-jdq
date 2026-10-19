@@ -474,10 +474,10 @@ RETOS = {
                   'Monta el programa de abajo, línea a línea.',
                   prueba('D', 'la calculadora del gato')],
         programas=[(None, [K('d'), ir('150', '0'), preguntar('¿Cuántos años tiene tu perro?'), dar('edad', RESP),
-                           decir(unir(txt('En años de persona serían '), op(var('edad'), '*', num('7'))), '3'),
-                           decir(unir(txt('Y dentro de 5 años tendrá '), op(var('edad'), '+', num('5'))), '3')])],
-        comprueba='al pulsar D el perro pregunta. Si contestas 3, dice «En años de persona serían '
-                  '21» y luego «Y dentro de 5 años tendrá 8».'),
+                           decir(unir(txt('Tu perro tiene '), unir(var('edad'), txt(' años'))), '2'),
+                           decir(unir(txt('En años de persona serían '), op(var('edad'), '*', num('7'))), '3')])],
+        comprueba='al pulsar D el perro pregunta. Si contestas 3, dice «Tu perro tiene 3 años» y '
+                  'luego «En años de persona serían 21».'),
 
     9: dict(
         objeto='el búho que piensa un número',
