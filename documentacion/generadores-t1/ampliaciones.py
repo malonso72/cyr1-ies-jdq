@@ -49,7 +49,7 @@ ORDEN_2 = {
     1: 'Haz que el perro conteste al gato', 2: 'Haz que el gato recorra un rectángulo con la tecla R',
     3: 'Dibuja las figuras con el lápiz', 4: 'Añade una cuarta flecha con el operador «o»',
     5: 'Añade un perro que se mueva con W, A, S y D', 6: 'Añade un oso que camine con las flechas',
-    7: 'Haz que el gato calcule tu edad dentro de diez años', 8: 'Añade la media y el resto',
+    7: 'Haz que el gato calcule tu edad dentro de diez años', 8: 'Añade la resta, la multiplicación y la división',
     9: 'Añade las vidas', 10: 'Haz que el ganador diga su tiempo', 11: 'Encadena un segundo mensaje',
     12: 'Añade una estrella que dé puntos', 13: 'Guarda el mejor tiempo',
     14: 'Haz que el gato enseñe lo que ha sacado', 15: 'Maneja la pala con teclas y añade otra pelota',
@@ -191,18 +191,20 @@ AMPLIACIONES = {
         'derecho, un <strong>10</strong>.',
         'Prueba con 12: tiene que decir «Dentro de diez años tendrás 22».'))],
 
-    8: [('', '<p>Dos cuentas más en la calculadora: la <strong>media</strong> de los dos números y '
-             'el <strong>resto</strong> de dividir el primero entre el segundo.</p>' + P(
-        'Añade al final un <strong>decir</strong> con un <strong>unir</strong>: «La media es » en '
-        'el primer hueco.',
-        'En el segundo hueco, el operador <strong>( ) / ( )</strong>. En su hueco izquierdo mete '
-        'un <strong>( ) + ( )</strong> con <em>num1</em> y <em>num2</em>; en el derecho, un '
-        '<strong>2</strong>. Es la cuenta (num1 + num2) / 2: un operador dentro de otro, como los '
-        '<em>unir</em> dentro de <em>unir</em> de la sesión 7.',
-        'Otro <strong>decir</strong> con <strong>unir</strong>: «El resto es » y el operador '
-        '<strong>( ) módulo ( )</strong> con <em>num1</em> y <em>num2</em>. «Módulo» es como Scratch '
-        'llama al resto de una división.',
-        'Prueba con 7 y 2: la media es 4.5 y el resto es 1.'))],
+    8: [('', '<p>Tres cuentas más con los mismos dos números: la <strong>resta</strong>, la '
+             '<strong>multiplicación</strong> y la <strong>división</strong>. Cada una, en su propio '
+             'bocadillo, uno detrás de otro. Los números ya están guardados en <em>num1</em> y '
+             '<em>num2</em>: no hay que volver a preguntarlos.</p>' + P(
+        'Haz clic derecho sobre el <strong>decir</strong> de la suma y elige '
+        '<strong>Duplicar</strong>. Encaja la copia debajo del original.',
+        'En la copia, cambia el texto por «La resta es » y el operador verde por <strong>( ) - '
+        '( )</strong>, con <em>num1</em> en el hueco izquierdo y <em>num2</em> en el derecho.',
+        'Igual para la multiplicación, con «El producto es » y el operador <strong>( ) * ( '
+        ')</strong>.',
+        'Igual para la división, con «La división es » y el operador <strong>( ) / ( )</strong>.',
+        'Prueba con 7 y 2: la suma es 9, la resta 5, el producto 14 y la división 3.5. Después '
+        'prueba a dividir entre <strong>0</strong> y mira qué contesta Scratch: no es un fallo '
+        'tuyo.'))],
 
     9: [('', '<p>La partida deja de acabar a las diez preguntas: acaba cuando te quedas '
              '<strong>sin vidas</strong>. Esta pieza la vas a volver a usar en el proyecto '

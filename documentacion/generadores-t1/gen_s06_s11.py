@@ -189,11 +189,6 @@ P08 = [
                                     op(var('num1'), '+', var('num2'))),
                         'durante', ('num', '3'), 'segundos']),
 ]
-RESTA08 = [
-    ('stack', 'looks', ['decir', op('unir', ('txt', 'La resta es '),
-                                    op(var('num1'), '-', var('num2'))),
-                        'durante', ('num', '3'), 'segundos']),
-]
 
 s08 = pagina(
     8, 'Variables I',
@@ -242,15 +237,12 @@ s08 = pagina(
 
         ('Tu actividad',
          pasos([
-             'Crea las dos variables <code>num1</code> y <code>num2</code> y monta el programa.',
-             'Añade la <strong>resta</strong> y la <strong>multiplicación</strong>, cada una en su '
-             'propio bocadillo, uno detrás de otro.',
+             'Crea las dos variables <code>num1</code> y <code>num2</code> y monta el programa '
+             'de arriba.',
              'Quita las marcas de las casillas de las variables para que no se vean en el '
              'escenario y quede más limpio.',
-             '<strong>Reto:</strong> añade la división. Prueba a dividir entre 0 y mira qué '
-             'contesta Scratch — no es un fallo tuyo.']) +
-         caja(RESTA08, 'Bloque decir unir La resta es con num1 menos num2 durante 3 segundos',
-              pie='El bloque de la resta es idéntico al de la suma cambiando el operador verde.') +
+             'Pruébalo con <strong>7</strong> y <strong>2</strong>: tiene que decir «La suma es '
+             '9». Prueba también con otros dos números.']) +
          ojo('Este bloque ha cambiado de nombre',
              '<p>Tu cuadernillo lo llama <strong>fijar (num1) a (…)</strong>. En Scratch 3 se '
              'llama <strong>dar a (num1) el valor (…)</strong>. Es exactamente el mismo bloque.</p>'
@@ -260,7 +252,7 @@ s08 = pagina(
 
         ('Lo has conseguido si…',
          logros(['Has creado dos variables con nombres que se entienden.',
-                 'El programa pide dos números y da suma, resta y producto correctos.',
+                 'El programa pide dos números y dice bien la suma.',
                  'Funciona bien aunque escribas los números en otro orden.',
                  'Sabrías explicar la diferencia entre <em>respuesta</em> y una variable tuya.'])),
     ],
