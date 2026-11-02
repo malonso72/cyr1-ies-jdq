@@ -197,6 +197,35 @@ _ENTREGA_STD = '''<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> Ma
   <li>Sube el <code>.hex</code> a la tarea de <strong>Moodle</strong> de este reto.</li>
 </ol>'''
 
+# Escala de los retos troncales (Manuel, 02-11-2026), la misma escalera que en Scratch:
+# el programa de la página → 5; además los cambios de «Tu reto» → 8; además enseñarlo
+# funcionando en la placa → 10. Por cada reto: (pasos del programa base, pasos de los cambios).
+ESCALA = {
+    'r01': ('1 a 3', '4'),      'r02': ('1 y 2', '3 y 4'),  'r03': ('1 a 3', '4'),
+    'r04': ('1 y 2', '3 y 4'),  'r05': ('1 a 3', '4'),      'r06': ('1 y 2', '3 y 4'),
+    'r07': ('1 y 2', '3 y 4'),  'r08': ('1 y 2', '3'),      'r09': ('1', '2 a 4'),
+    'r10': ('1 y 2', '3 y 4'),  'r11': ('1', '2 a 4'),      'r12': ('1 y 2', '3 y 4'),
+    'r13': ('1 y 2', '3'),      'r14': ('1 a 3', '4 y 5'),  'r15': ('1 y 2', '3 y 4'),
+}
+
+
+def _escala(arch):
+    """El cuadro «Cómo se valora» del reto, con los pasos que corresponden a cada nota."""
+    if arch not in ESCALA:
+        return ''
+    base, cambios = ESCALA[arch]
+    pb = 'paso' if base.isdigit() else 'pasos'
+    pc = 'paso' if cambios.isdigit() else 'pasos'
+    filas = [('El programa de la página funcionando (%s %s)' % (pb, base), '5'),
+             ('Además, los cambios de «Tu reto» (%s %s)' % (pc, cambios), '8'),
+             ('Además, se lo enseñas al profesor funcionando en la placa', '10')]
+    tr = ''.join('<tr><td>%s</td><td class="nota">%s</td></tr>' % f for f in filas)
+    return ('<div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo '
+            'archivo. Un cambio cuenta si funciona; a medias no suma.</p>\n'
+            '<table><thead><tr><th>Lo que entregas hecho</th><th>Nota</th></tr></thead>'
+            '<tbody>%s</tbody></table></div>\n' % tr)
+
+
 _NIVEL = {'t': ' <span class="nivel nivel-t">troncal</span>',
           'a': ' <span class="nivel nivel-a">ampliación</span>',
           'm': ' <span class="nivel nivel-m">requiere servo</span>'}
@@ -243,5 +272,5 @@ def pagina(arch, pre, titulo, desc, consigue, secciones, nivel='t', entrega=None
             .replace('{CONSIGUE}', consigue)
             .replace('{ABRIR}', _ABRIR if abrir else '')
             .replace('{SECCIONES}', '\n\n'.join(cuerpo))
-            .replace('{ENTREGA}', (entrega or _ENTREGA_STD).replace('{NOMBRE}', nombre))
+            .replace('{ENTREGA}', _escala(arch) + (entrega or _ENTREGA_STD).replace('{NOMBRE}', nombre))
             .replace('{NAV}', ''.join(nav)))
