@@ -463,7 +463,7 @@ B11 = [
     ('hat', 'events', ['al recibir', ('drop', 'patada')]),
     ('stack', 'sound', ['iniciar sonido', ('drop', 'Pop')]),
     ('c', 'control', ['repetir hasta que', BORDE], [
-        ('stack', 'motion', ['mover', ('num', '10'), 'pasos']),
+        ('stack', 'motion', ['sumar a x', ('num', '10')]),
         ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '15'), 'grados']),
     ]),
 ]
@@ -490,7 +490,7 @@ s11 = pagina(
                     'esperar 1 segundo, mover 60 pasos y enviar el mensaje patada'),
                    ('Objeto <strong>Balón</strong>', B11,
                     'Programa del balón: al recibir el mensaje patada, iniciar el sonido Pop y '
-                    'repetir hasta que toque un borde moviendo 10 pasos y girando 15 grados')) +
+                    'repetir hasta que toque un borde sumando 10 a x y girando 15 grados')) +
          '<p>Y el balón necesita además un <strong>segundo programa</strong>, con su propia '
          'bandera verde, que lo devuelva al sitio antes de cada partida:</p>' +
          caja(C11, 'Segundo programa del balón: al hacer clic en la bandera verde, ir a x 0 y '
@@ -503,7 +503,10 @@ s11 = pagina(
              'aviso, y el gato sigue a lo suyo inmediatamente.',
              'El balón tiene un sombrero <strong>al recibir (patada)</strong>. Estaba esperando '
              'ese aviso, y en cuanto llega arranca su programa.',
-             'El balón suena, sale rodando y gira mientras avanza, hasta chocar con un borde.'])
+             'El balón suena y sale rodando hacia la derecha hasta chocar con el borde: '
+             '<strong>sumar a x</strong> lo desplaza y <strong>girar</strong> sólo le da vueltas. '
+             'Con <em>mover</em> en vez de <em>sumar a x</em>, el giro le cambiaría también el '
+             'camino y el balón daría vueltas en círculo sin llegar nunca al borde.'])
          + '<p>Dos cosas que no van en ese orden, pero que hacen falta:</p>'
          + claves([
              ('Por qué el balón tiene dos programas',
