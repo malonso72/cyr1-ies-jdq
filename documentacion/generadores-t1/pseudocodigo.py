@@ -90,6 +90,7 @@ FRASES = {
     ('hat', 'al presionar tecla []'): lambda h, d: 'Cuando se pulse %s:' % _tecla(d[0]),
     ('hat', 'al recibir []'): 'Cuando llegue el mensaje «{d0}»:',
     ('stack', 'enviar []'): 'enviar el mensaje «{d0}» a todos',
+    ('stack', 'enviar [] y esperar'): 'enviar el mensaje «{d0}» a todos y esperar a que terminen',
     # control
     ('c', 'por siempre'): 'para siempre:',
     ('c', 'repetir _'): 'repetir {h0} veces:',
@@ -530,17 +531,17 @@ RETOS = {
                   'tambor. Selecciona cada objeto antes de montar el suyo.',
                   'El mensaje <strong>redoble</strong> lo creas tú, en el desplegable del bloque '
                   '<em>enviar</em>: <strong>Nuevo mensaje</strong>.',
-                  prueba('T', 'el gato, la pelota y el portero')],
+                  prueba('T', 'el gato, el balón y el portero')],
         programas=[('En el árbitro:', [K('t'), ('stack', 'sound', ['iniciar sonido', ('drop', 'Referee Whistle')]),
                                        decir('¡Que suene el tambor!'),
-                                       ('stack', 'events', ['enviar', ('drop', 'redoble')]),
-                                       esperar('3'), decir('¡Bravo!')]),
+                                       ('stack', 'events', ['enviar', ('drop', 'redoble'), 'y esperar']),
+                                       decir('¡Bravo!')]),
                    ('En el tambor:', [('hat', 'events', ['al recibir', ('drop', 'redoble')]),
                                       repetir('6', [('stack', 'looks', ['siguiente disfraz']),
                                                     ('stack', 'sound', ['tocar sonido', ('drop', 'High Tom'), 'hasta que termine'])])])],
         comprueba='al pulsar T el árbitro pita y dice «¡Que suene el tambor!»; justo cuando termina '
-                  'de hablar, el tambor empieza a sonar y a moverse seis veces, él solo. Después el '
-                  'árbitro dice «¡Bravo!». El tambor no tiene ninguna tecla: arranca porque le llega '
+                  'de hablar, el tambor empieza a sonar y a moverse seis veces, él solo. Cuando el '
+                  'tambor acaba, el árbitro dice «¡Bravo!». El tambor no tiene ninguna tecla: arranca porque le llega '
                   'el mensaje.'),
 
     12: dict(

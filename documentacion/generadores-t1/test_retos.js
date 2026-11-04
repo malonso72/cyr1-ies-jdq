@@ -74,7 +74,9 @@ const PRUEBAS = {
     ok(dice(a) === '¡Que suene el tambor!', 's11: árbitro: ' + dice(a));
     const c0 = t.currentCostume; await dormir(2200); ok(t.currentCostume !== c0 || true, '');
     let visto = new Set(); for (let i = 0; i < 10; i++) { visto.add(t.currentCostume); await dormir(60); }
-    await dormir(3000); ok(dice(a) === '¡Bravo!', 's11: final: ' + dice(a));
+    // «enviar y esperar»: el ¡Bravo! llega cuando el tambor acaba. En la VM los sonidos de
+    // biblioteca no existen y el tambor acaba al instante, así que el ¡Bravo! sale hacia los 2,2 s.
+    ok(dice(a) === '¡Bravo!', 's11: final: ' + dice(a));
   },
   13: async ({ obj, dice, tecla, variable }) => {
     const p = obj('Bell'); tecla('t'); await dormir(2400);

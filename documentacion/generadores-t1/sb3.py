@@ -40,6 +40,7 @@ TABLA = {
     ('hat', 'al presionar tecla []'): ('event_whenkeypressed', [], {'campo': ('KEY_OPTION', TECLAS)}),
     ('hat', 'al recibir []'): ('event_whenbroadcastreceived', [], {'campo_broadcast': 'BROADCAST_OPTION'}),
     ('stack', 'enviar []'): ('event_broadcast', [], {'input_broadcast': 'BROADCAST_INPUT'}),
+    ('stack', 'enviar [] y esperar'): ('event_broadcastandwait', [], {'input_broadcast': 'BROADCAST_INPUT'}),
     # control
     ('c', 'por siempre'): ('control_forever', [], {}),
     ('c', 'repetir _'): ('control_repeat', [('TIMES', W)], {}),

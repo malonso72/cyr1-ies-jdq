@@ -461,7 +461,7 @@ C11 = [
 ]
 B11 = [
     ('hat', 'events', ['al recibir', ('drop', 'patada')]),
-    ('stack', 'sound', ['iniciar sonido', ('drop', 'Pop')]),
+    ('stack', 'sound', ['iniciar sonido', ('drop', 'basketball bounce')]),
     ('c', 'control', ['repetir hasta que', BORDE], [
         ('stack', 'motion', ['sumar a x', ('num', '5')]),
         ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '20'), 'grados']),
@@ -489,7 +489,7 @@ s11 = pagina(
                     'Programa del gato: ir a x menos 120 y menos 60, apuntar en dirección 90, '
                     'esperar 1 segundo, mover 60 pasos y enviar el mensaje patada'),
                    ('Objeto <strong>Balón</strong>', B11,
-                    'Programa del balón: al recibir el mensaje patada, iniciar el sonido Pop y '
+                    'Programa del balón: al recibir el mensaje patada, iniciar el sonido basketball bounce y '
                     'repetir hasta que toque un borde sumando 5 a x y girando 20 grados')) +
          '<p>Y el balón necesita además un <strong>segundo programa</strong>, con su propia '
          'bandera verde, que lo devuelva al sitio antes de cada partida:</p>' +
@@ -533,7 +533,7 @@ s11 = pagina(
 
         ('Tu actividad',
          pasos([
-             'El gato chuta y la pelota reacciona. Añade la pelota: botón <strong>Elige un '
+             'El gato chuta y el balón reacciona. Añade el balón: botón <strong>Elige un '
              'objeto</strong>, escribe <strong>Soccer</strong> y elige <strong>Soccer Ball</strong>.',
              'Crea el mensaje <strong>patada</strong>, en el desplegable del bloque <em>enviar</em>.',
              'Monta los programas, cada uno en su objeto. No te olvides del que coloca.',
@@ -546,7 +546,7 @@ s11 = pagina(
              '<strong>enviar (patada)</strong>, aunque siga avisando a todo el mundo.</p>'
              '<p style="margin-bottom:0">Y ojo: existe otro parecido, '
              '<strong>enviar (patada) y esperar</strong>. Ese <em>sí</em> deja al que envía '
-             'parado hasta que los demás terminen. Aquí no lo queremos.</p>')),
+             'parado hasta que los demás terminen. Aquí no lo queremos; en el 4.3 verás dónde sí.</p>')),
 
         ('Lo has conseguido si…',
          logros(['El balón no se mueve hasta que el gato llega.',
@@ -554,7 +554,7 @@ s11 = pagina(
                  'mismo las dos.',
                  'El mensaje tiene un nombre que explica lo que pasa.',
                  'Los dos programas están cada uno en su objeto.',
-                 'Hay un tercer objeto que reacciona al mismo aviso.',
+                 'El portero reacciona al mensaje <em>gol</em>, que le envía el balón.',
                  'Sabrías explicar la diferencia entre <em>enviar</em> y <em>enviar y esperar</em>.'])),
     ],
     cuadernillo=CUADERNILLO[11])

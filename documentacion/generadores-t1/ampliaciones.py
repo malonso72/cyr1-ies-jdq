@@ -41,7 +41,7 @@ ORDEN_1 = {
     1: 'Monta tu primer programa', 2: 'Completa el cuadrado', 3: 'Recorre las tres figuras',
     4: 'Monta las tres versiones', 5: 'Completa el programa', 6: 'Haz que el gato camine',
     7: 'Construye el diálogo', 8: 'Construye la calculadora', 9: 'Construye el quiz',
-    10: 'Monta la carrera', 11: 'Haz que el gato avise a la pelota', 12: 'Construye el laberinto',
+    10: 'Monta la carrera', 11: 'Haz que el gato avise al balón', 12: 'Construye el laberinto',
     13: 'Añade la meta y el segundo nivel', 14: 'Completa el juego', 15: 'Monta la pelota y la pala',
     16: 'Añade el marcador y el final', 17: 'Arregla los cinco programas',
 }
@@ -68,7 +68,7 @@ OBJETOS = {
     8: [('el gato', [1, 2]), ('el perro', [3])],
     9: [('el gato', [1, 2]), ('el búho', [3])],
     10: [('el gato', [1, 2]), ('el perro', [1, 2]), ('la rana', [3])],
-    11: [('el gato', [1]), ('la pelota', [1, 2]), ('el portero', [2]), ('el árbitro', [3]),
+    11: [('el gato', [1]), ('el balón', [1, 2]), ('el portero', [2]), ('el árbitro', [3]),
          ('el tambor', [3])],
     12: [('el gato', [1, 2]), ('la estrella', [2]), ('el fantasma', [3])],
     13: [('el gato', [1, 2]), ('la estrella y el fantasma', ['de la sesión 12']), ('la meta', [1]),
@@ -230,17 +230,17 @@ AMPLIACIONES = {
         'Juega unas cuantas: el que gana dice su tiempo, y cada vez es distinto. Lo vas a '
         'necesitar en la sesión 13.'))],
 
-    11: [('', '<p>Un mensaje que provoca otro: el gato avisa a la pelota y, cuando la pelota '
+    11: [('', '<p>Un mensaje que provoca otro: el gato avisa al balón y, cuando el balón '
               'termina, avisa al <strong>portero</strong>.</p>' + P(
         'Añade el portero: ' + elige('Goalie', 'Goalie', 'el portero. Arrástralo a la derecha del '
                                      'escenario.'),
-        'Selecciona la <strong>pelota</strong>. Al final de su programa de <em>al recibir '
+        'Selecciona el <strong>balón</strong>. Al final de su programa de <em>al recibir '
         'patada</em>, añade <strong>enviar</strong> y, en su desplegable, <strong>Nuevo '
         'mensaje</strong>: llámalo <strong>gol</strong>.',
         'Selecciona el portero: <strong>al recibir gol</strong>, <strong>decir ¡Noooo! durante 2 '
         'segundos</strong>.',
-        'Pulsa la bandera: el gato chuta, la pelota sale y, cuando termina, el portero se lamenta. '
-        'Nadie ha pulsado nada para que el portero hable: se lo ha dicho la pelota.'))],
+        'Pulsa la bandera: el gato chuta, el balón sale y, cuando termina, el portero se lamenta. '
+        'Nadie ha pulsado nada para que el portero hable: se lo ha dicho el balón.'))],
 
     12: [('', '<p>Una <strong>estrella</strong> dentro del laberinto que da un punto al cogerla y '
               'desaparece.</p>' + P(
