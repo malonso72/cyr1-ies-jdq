@@ -463,8 +463,8 @@ B11 = [
     ('hat', 'events', ['al recibir', ('drop', 'patada')]),
     ('stack', 'sound', ['iniciar sonido', ('drop', 'Pop')]),
     ('c', 'control', ['repetir hasta que', BORDE], [
-        ('stack', 'motion', ['sumar a x', ('num', '10')]),
-        ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '15'), 'grados']),
+        ('stack', 'motion', ['sumar a x', ('num', '5')]),
+        ('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '20'), 'grados']),
     ]),
 ]
 
@@ -490,7 +490,7 @@ s11 = pagina(
                     'esperar 1 segundo, mover 60 pasos y enviar el mensaje patada'),
                    ('Objeto <strong>Balón</strong>', B11,
                     'Programa del balón: al recibir el mensaje patada, iniciar el sonido Pop y '
-                    'repetir hasta que toque un borde sumando 10 a x y girando 15 grados')) +
+                    'repetir hasta que toque un borde sumando 5 a x y girando 20 grados')) +
          '<p>Y el balón necesita además un <strong>segundo programa</strong>, con su propia '
          'bandera verde, que lo devuelva al sitio antes de cada partida:</p>' +
          caja(C11, 'Segundo programa del balón: al hacer clic en la bandera verde, ir a x 0 y '
