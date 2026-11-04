@@ -537,8 +537,10 @@ s11 = pagina(
              'objeto</strong>, escribe <strong>Soccer</strong> y elige <strong>Soccer Ball</strong>.',
              'Crea el mensaje <strong>patada</strong>, en el desplegable del bloque <em>enviar</em>.',
              'Monta los programas, cada uno en su objeto. No te olvides del que coloca.',
-             'Añade un <strong>cambio de disfraz</strong> al gato justo antes de enviar el mensaje, '
-             'para que se vea el gesto de chutar.']) +
+             'Al gato, añádele <strong>cambiar disfraz a [cat-b]</strong> justo antes de enviar el '
+             'mensaje, para que se vea el gesto de chutar, y <strong>cambiar disfraz a [cat-a]</strong> '
+             'al principio, justo después del <em>ir a</em>. Sin este último, el gato se queda con '
+             'la pierna levantada y la siguiente partida empieza ya dando la patada.']) +
          ojo('Dos diferencias con tu cuadernillo',
              '<p>El bloque ya <strong>no</strong> se llama «enviar a todos». Hoy es simplemente '
              '<strong>enviar (patada)</strong>, aunque siga avisando a todo el mundo.</p>'
