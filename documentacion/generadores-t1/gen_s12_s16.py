@@ -127,7 +127,7 @@ PARTE1 = (
           'tramo.</p>' + captura('p8-ojo.jpg', 'El tramo de arriba se ha vuelto blanco al cambiar de color sin hacer clic fuera'))
     + captura('p9-final.jpg', 'Así queda: césped, carretera, salida y raya del centro')
     + sub1(3, 'Dibuja un segundo fondo más difícil')
-    + '<p>Una segunda carretera, para el nivel 2 del juego de la sesión 13. Esta la diseñas tú.</p>'
+    + '<p>Un segundo fondo, con una carretera más difícil. Esta la diseñas tú.</p>'
     + pasos([
         'En la pestaña <strong>Fondos</strong>, abajo a la izquierda, pasa el ratón por el botón '
         'del fondo y elige el <strong>pincel</strong> (<strong>Pinta</strong>): aparece un fondo '

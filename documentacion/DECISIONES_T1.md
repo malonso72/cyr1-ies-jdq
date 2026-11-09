@@ -620,8 +620,8 @@ en marcha. Regla para los N.3: ni el disparador ni los controles comparten tecla
   césped**, que no tiene ningún objeto de la sesión.
 - **Dos partes, una sola página (S12), dos tareas en Moodle.** Parte 1 · Dibuja la carretera
   (apartados 1.1–1.3, con capturas del editor en `trimestres/t1-scratch/img/s12/`): 1.1 césped y
-  carretera → 5; además salida y raya → 8; además un segundo fondo de cinco tramos (nivel 2 de la
-  S13) → 10. Parte 2 · Programa el coche (5.1–5.3): coche → 5; estrella y puntos → 8; camión en
+  carretera → 5; además salida y raya → 8; además un segundo fondo de cinco tramos (práctica de
+  dibujo; no se usa después) → 10. Parte 2 · Programa el coche (5.1–5.3): coche → 5; estrella y puntos → 8; camión en
   seudocódigo → 10. Se entrega `Sesion12-1_…` y `Sesion12-2_…`.
 - **Fondo común en la Parte 2** (`materiales/carretera.svg`): se descarga sólo en la Parte 2,
   cuando el dibujo ya está entregado y corregido, para que todos programen sobre la misma
@@ -631,4 +631,5 @@ en marcha. Regla para los N.3: ni el disparador ni los controles comparten tecla
   se cambia el color antes de hacer clic fuera.
 - **Camión**: tras «girar 180» va «mover 20», no 3. Con estilo izquierda-derecha el dibujo se
   voltea, sigue tocando el césped y se quedaba temblando en el extremo.
-- Pendiente: la S13 sigue hablando de laberinto, gato y fantasma; hay que revisarla.
+- La S13 deja la carretera: será otro juego («Caza la mariquita»: clic del ratón, posición
+  aleatoria, cuenta atrás y pantalla de fin). Aparcada hasta cerrar la S12.
