@@ -51,6 +51,7 @@ CESPED12 = [
 ]
 
 IMG12 = '../img/s12/'
+COLOCA12 = [BANDERA, ('stack', 'looks', ['fijar tamaño al', ('num', '35'), '%'])] + SALIDA12
 
 
 def captura(arch, alt):
@@ -68,8 +69,9 @@ def sub(n, k, tit):
 A12 = 3     # número de la sección «Tu actividad» en la Parte 1
 
 ACT12_1 = (
-    '<p class="objetos">Al terminar, en tu proyecto tiene que haber <strong>dos fondos</strong>: '
-    'la carretera (%d.1 y %d.2) y la carretera difícil (%d.3).</p>\n' % (A12, A12, A12)
+    '<p class="objetos">Al terminar, en tu proyecto tiene que haber <strong>dos fondos</strong>, '
+    'la carretera (%d.1 y %d.2) y la carretera difícil (%d.3), y <strong>el coche</strong> '
+    'colocado en la salida con su programa (%d.2).</p>\n' % (A12, A12, A12, A12)
     + sub(A12, 1, 'Pinta el césped y la carretera')
     + pasos([
         'Abajo a la derecha, haz clic en <strong>Escenario</strong>. A partir de ahora lo que '
@@ -103,23 +105,40 @@ ACT12_1 = (
           '<p style="margin-bottom:0">Pulsa la flecha de <strong>deshacer</strong> (arriba, junto '
           'al nombre «backdrop1») tantas veces como haga falta. Deshace los pasos de uno en '
           'uno.</p>')
-    + sub(A12, 2, 'Marca la salida y la raya del centro')
+    + sub(A12, 2, 'Marca la salida y coloca el coche')
     + pasos([
         'Antes de cambiar de color, <strong>haz clic fuera del recuadro de dibujo</strong>, en la '
-        'zona de alrededor.',
-        'Cambia el color de <strong>Rellenar</strong> a blanco: <strong>Saturación 0, Brillo 100</strong>.',
+        'zona de alrededor. Después cambia el color de <strong>Rellenar</strong> a blanco: '
+        '<strong>Saturación 0, Brillo 100</strong>.',
         'Con el <strong>Rectángulo</strong>, dibuja la línea de salida: un rectángulo muy estrecho '
         'que cruce el tramo de abajo, cerca del borde izquierdo.',
         'Dibuja la raya del centro con rectángulos pequeños y alargados, separados entre sí, '
-        'siguiendo los tres tramos. Haz clic fuera del dibujo después de cada uno.',
+        'siguiendo los tres tramos. Haz clic fuera del dibujo después de cada uno.'
+        + ojo('El rectángulo recién dibujado sigue seleccionado',
+              '<p>Hasta que haces clic fuera, el último rectángulo sigue seleccionado, con puntitos '
+              'azules alrededor. Si cambias el color en ese momento, <strong>cambia el color de ese '
+              'rectángulo</strong>, no el del siguiente. Aquí el tramo de arriba se ha vuelto blanco '
+              'por eso. Se arregla con <em>deshacer</em>, o con el bote de pintura en gris sobre el '
+              'tramo.</p>' + captura('p8-ojo.jpg', 'El tramo de arriba se ha vuelto blanco al cambiar de color sin hacer clic fuera'))
+        + captura('p9-final.jpg', 'Así queda el fondo: césped, carretera, salida y raya del centro'),
+        'Añade el coche: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), '
+        'escribe <strong>Convertible</strong> y elige el descapotable morado. Borra el gato.',
+        'Con el coche seleccionado, escribe <strong>35</strong> en la casilla <strong>Tamaño</strong>, '
+        'debajo del escenario. Es el tamaño que tendrá en el juego.',
+        '<strong>Comprueba que cabe:</strong> arrastra el coche con el ratón por toda la '
+        'carretera, también por el tramo vertical. El coche no gira: en el tramo vertical va '
+        'atravesado y ocupa todo su largo. Si en algún sitio se sale al verde, ensancha ese tramo.',
+        'Deja el coche en la salida. Debajo del escenario aparecen su <strong>x</strong> y su '
+        '<strong>y</strong>: son las coordenadas de la salida.'
+        + captura('p10-coordenadas.jpg', 'El coche en la salida, con su x, su y y su tamaño debajo del escenario'),
+        'Monta en el coche este programa. El bloque <em>ir a x: y:</em> de la paleta de '
+        'Movimiento ya trae los números de donde está el coche; si no, escríbelos tú.'
+        + captura('p11-ir-a.jpg', 'El bloque ir a x: y: de la paleta, con las coordenadas del coche ya puestas')
+        + caja(COLOCA12, 'Programa del coche: al hacer clic en la bandera, fijar tamaño al 35 por '
+                         'ciento e ir a la salida', ancho=320)
+        + '<p>Pruébalo: arrastra el coche a cualquier sitio y pulsa la bandera. Vuelve a la salida. '
+          'Por ahora es todo su programa: el resto lo montarás en la Parte 2.</p>',
     ])
-    + ojo('El rectángulo recién dibujado sigue seleccionado',
-          '<p>Hasta que haces clic fuera, el último rectángulo sigue seleccionado, con puntitos '
-          'azules alrededor. Si cambias el color en ese momento, <strong>cambia el color de ese '
-          'rectángulo</strong>, no el del siguiente. Aquí el tramo de arriba se ha vuelto blanco '
-          'por eso. Se arregla con <em>deshacer</em>, o con el bote de pintura en gris sobre el '
-          'tramo.</p>' + captura('p8-ojo.jpg', 'El tramo de arriba se ha vuelto blanco al cambiar de color sin hacer clic fuera'))
-    + captura('p9-final.jpg', 'Así queda: césped, carretera, salida y raya del centro')
     + sub(A12, 3, 'Dibuja un segundo fondo más difícil')
     + '<p>Un segundo fondo, con una carretera más difícil. Esta la diseñas tú.</p>'
     + pasos([
@@ -130,6 +149,7 @@ ACT12_1 = (
         'Dibuja una carretera con <strong>al menos cinco tramos</strong>, más difícil que la '
         'primera: más giros o tramos más estrechos, pero que el coche quepa.',
         'Marca la salida y la raya del centro igual que en el %d.2.' % A12,
+        'Arrastra el coche por la carretera nueva para comprobar que cabe en todos los tramos.',
     ])
 )
 
@@ -189,7 +209,8 @@ s12 = pagina(
          logros(['No queda nada blanco en el fondo: todo es césped o carretera.',
                  'La carretera es continua: no hay rendijas verdes entre los tramos.',
                  'Los tramos son anchos, más o menos una cuarta parte del fondo.',
-                 'La salida y la raya del centro están dibujadas (apartado %d.2).' % A12,
+                 'La salida y la raya del centro están dibujadas, y el coche cabe en todos los tramos.',
+                 'Al pulsar la bandera, el coche va a la salida con tamaño 35 (apartado %d.2).' % A12,
                  'Hay un segundo fondo con una carretera de al menos cinco tramos (apartado %d.3).' % A12])),
     ],
     nn='12', extras=False,
