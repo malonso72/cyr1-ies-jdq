@@ -382,20 +382,29 @@ def _objetos(num, n, donde):
     return '<p class="partes">En el proyecto tienen que estar: %s.</p>\n' % lista
 
 
+# La S12 va en dos páginas, s12 (Parte 1, dibujar) y s12b (Parte 2, programar): la
+# navegación anterior/siguiente las encadena (DECISIONES_T1 §39).
+_NAV_ANT = {'12b': ('s12.html', 'S12'), '13': ('s12b.html', 'S12b')}
+_NAV_SIG = {'12': ('s12b.html', 'S12b'), '12b': ('s13.html', 'S13')}
+
+
 def pagina(num, titulo, desc, consigue, secciones, entrega=None,
-           cuadernillo=None, abrir=True, nav_extra=''):
+           cuadernillo=None, abrir=True, nav_extra='', nn=None, extras=True, partes=None):
     """Renderiza la página completa de una sesión.
 
     `secciones` es una lista de (título de sección, HTML). Se numeran solas.
     `cuadernillo` es el número de página del PDF, o None.
     """
-    nn = '%02d' % num
+    # nn: etiqueta y nombre de archivo ('12b'). extras=False: la página no lleva los
+    # apartados N.2/N.3 de ampliaciones.py y pseudocodigo.py (los pone ella misma), y
+    # partes es entonces su bloque «Cómo se valora».
+    nn = nn or '%02d' % num
     # El paso extra de la sesión (ampliaciones.py) se cuelga al final de «Tu actividad»,
     # numerado como el siguiente a la lista de pasos de esa sección, y deja su línea en
     # «Lo has conseguido si…». Si la sesión lo tiene pero no esas secciones, mejor
     # enterarse ahora que verlo desaparecer sin ruido.
-    tiene_ampl = bool(caja_ampliacion(num))
-    tiene_reto = bool(caja_reto(num))
+    tiene_ampl = extras and bool(caja_ampliacion(num))
+    tiene_reto = extras and bool(caja_reto(num))
     if tiene_ampl or tiene_reto:
         for necesaria in ('Tu actividad', 'Lo has conseguido si…'):
             if not any(t == necesaria for t, _ in secciones):
@@ -424,11 +433,13 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
             cuerpo.append('<h2><span class="h2n">%d</span>%s</h2>\n%s' % (n, tit, cont))
 
     nav = []
-    if num > 1:
-        nav.append(_boton('s%02d.html' % (num - 1), '⬅️', 'Sesión anterior', 'S%02d' % (num - 1)))
+    ant = _NAV_ANT.get(nn, ('s%02d.html' % (num - 1), 'S%02d' % (num - 1)) if num > 1 else None)
+    sig = _NAV_SIG.get(nn, ('s%02d.html' % (num + 1), 'S%02d' % (num + 1)) if num < 21 else None)
+    if ant:
+        nav.append(_boton(ant[0], '⬅️', 'Sesión anterior', ant[1]))
     nav.append(_boton('index.html', '🗓️', 'Todas las sesiones', 'Índice del trimestre'))
-    if num < 21:
-        nav.append(_boton('s%02d.html' % (num + 1), '➡️', 'Sesión siguiente', 'S%02d' % (num + 1)))
+    if sig:
+        nav.append(_boton(sig[0], '➡️', 'Sesión siguiente', sig[1]))
     if cuadernillo:
         nav.append(_boton('%s#page=%d' % (CUAD, cuadernillo), '📒', 'Cuadernillo',
                           'Página %d, para consultar' % cuadernillo))
@@ -445,7 +456,7 @@ def pagina(num, titulo, desc, consigue, secciones, entrega=None,
             .replace('{CONSIGUE}', consigue)
             .replace('{ABRIR}', _ABRIR if abrir else '')
             .replace('{SECCIONES}', '\n\n'.join(cuerpo))
-            .replace('{ENTREGA}', _partes_entrega(num, n_act if (tiene_ampl or tiene_reto) else None)
+            .replace('{ENTREGA}', (partes if partes is not None else _partes_entrega(num, n_act if (tiene_ampl or tiene_reto) else None))
                      + (entrega or _ENTREGA_STD).replace('{NN}', nn))
             .replace('{NAV}', ''.join(nav)))
 

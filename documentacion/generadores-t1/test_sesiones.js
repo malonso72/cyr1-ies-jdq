@@ -33,9 +33,13 @@ function ok(cond, msg) {
 }
 
 (async () => {
-  const nums = process.argv.slice(2).map(Number);
-  for (const n of nums) {
-    const nn = String(n).padStart(2, '0');
+  // Un argumento puede ser «12b»: la S12 va en dos páginas (s12 dibuja, s12b programa).
+  // La s12 es la del dibujo: sin bloques ni seudocódigo (su 3.3 es un segundo dibujo).
+  const args = process.argv.slice(2);
+  for (const arg of args) {
+    const n = parseInt(arg, 10);
+    const nn = /b$/.test(arg) ? String(n).padStart(2, '0') + 'b' : String(n).padStart(2, '0');
+    const dibujo = arg === '12';
     const abs = RAIZ + 's' + nn + '.html';
     const errs = [];
     const vc = new VirtualConsole();
@@ -75,7 +79,7 @@ function ok(cond, msg) {
     // SVG accesibles
     const svgs = q('svg');
     // S18 y S21 son de diseño y presentación: no llevan bloques
-    ok(svgs.length > 0 || n === 18 || n === 21, P + 'no hay ningún SVG de bloques');
+    ok(svgs.length > 0 || n === 18 || n === 21 || dibujo, P + 'no hay ningún SVG de bloques');
     svgs.forEach((s, i) => {
       ok(s.getAttribute('role') === 'img', P + 'svg ' + i + ' sin role=img');
       ok((s.getAttribute('aria-label') || '').length > 15, P + 'svg ' + i + ' sin aria-label útil');
@@ -143,7 +147,7 @@ function ok(cond, msg) {
         ok(!/no está terminada/.test(esc.textContent), P + 'la entrega sigue diciendo que sin todas las partes no está terminada');
       }
       ok(q('.logro li').some(li => /apartado \d+\.2/.test(li.textContent)), P + 'falta la línea del apartado .2 en los logros');
-      if (subs.length === 3) {
+      if (subs.length === 3 && !dibujo) {
         ok(!!d.querySelector('ol.pseudo'), P + 'el apartado .3 no lleva seudocódigo');
         ok(!!d.querySelector('.rp-ok'), P + 'el apartado .3 no dice cómo saber que está bien');
         ok(q('.logro li').some(li => /apartado \d+\.3/.test(li.textContent)), P + 'falta la línea del apartado .3 en los logros');

@@ -17,10 +17,12 @@ GUIA = '../materiales/guias-juegos/'
 
 
 def escribir(num, html):
-    ruta = os.path.join(DESTINO, 's%02d.html' % num)
+    # num puede ser un texto como '12b' (la S12 va en dos páginas, ver DECISIONES_T1 §39)
+    stem = ('s' + num) if isinstance(num, str) else ('s%02d' % num)
+    ruta = os.path.join(DESTINO, stem + '.html')
     os.makedirs(DESTINO, exist_ok=True)
     open(ruta, 'w', encoding='utf-8').write(html)
-    print('  s%02d.html  %6d bytes' % (num, len(html)))
+    print('  %s.html  %6d bytes' % (stem, len(html)))
 
 
 # Las tres bases del proyecto final viven en trimestres/t1-scratch/juegos/

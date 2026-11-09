@@ -618,12 +618,13 @@ en marcha. Regla para los N.3: ni el disparador ni los controles comparten tecla
   estrella de la biblioteca (Star) tiene el contorno en negro exacto (#000000): al cogerla, el
   «¿tocando el color negro?» devolvía al gato a la salida. Ahora salirse es tocar el **verde del
   césped**, que no tiene ningún objeto de la sesión.
-- **Dos partes, una sola página (S12), dos tareas en Moodle.** Parte 1 · Dibuja la carretera
-  (apartados 1.1–1.3, con capturas del editor en `trimestres/t1-scratch/img/s12/`): 1.1 césped y
+- **Dos partes, dos páginas (s12 y s12b), dos tareas en Moodle.** Primero fueron una sola página;
+  se separaron para que el fondo común no se pueda descargar el día del dibujo. Parte 1 · Dibuja
+  la carretera (s12, apartados 3.1–3.3, con capturas del editor en `trimestres/t1-scratch/img/s12/`): 1.1 césped y
   carretera → 5; además salida y raya → 8; además un segundo fondo de cinco tramos (práctica de
-  dibujo; no se usa después) → 10. Parte 2 · Programa el coche (5.1–5.3): coche → 5; estrella y puntos → 8; camión en
+  dibujo; no se usa después) → 10. Parte 2 · Programa el coche (s12b, 4.1–4.3): coche → 5; estrella y puntos → 8; camión en
   seudocódigo → 10. Se entrega `Sesion12-1_…` y `Sesion12-2_…`.
-- **Fondo común en la Parte 2** (`materiales/carretera.svg`): se descarga sólo en la Parte 2,
+- **Fondo común en la Parte 2** (`materiales/carretera.svg`): se descarga sólo desde s12b,
   cuando el dibujo ya está entregado y corregido, para que todos programen sobre la misma
   carretera. Esquinas en ángulo recto: con sumar a x / y, en las curvas el coche se salía siempre.
 - **Dibujo en mapa de bits**: el bote rellena el fondo vacío de un clic (en vectorial no rellena

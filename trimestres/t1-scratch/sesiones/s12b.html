@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FF8C1A">
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<title>S12b · Carretera · Parte 2 · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Sesión 12 de Scratch, parte 2: un coche que recorre una carretera sin salirse, con sumar a x e y y ¿tocando el color? Fondo común para descargar. CyR 1º ESO.">
+<link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s12b.html">
+<meta property="og:title" content="S12b · Carretera · Parte 2 · CyR 1º ESO">
+<meta property="og:description" content="Sesión 12 de Scratch, parte 2: un coche que recorre una carretera sin salirse, con sumar a x e y y ¿tocando el color? Fondo común para descargar. CyR 1º ESO.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/css/common.css">
+<link rel="stylesheet" href="../../../assets/css/hub.css">
+<link rel="stylesheet" href="../../../assets/css/unidad.css">
+<style>
+  .ej-main{max-width:900px;margin:0 auto;padding:16px 16px 50px;font-size:1.02rem;line-height:1.6;}
+  .ej-main p{margin:0 0 12px;}
+  .ej-main h2{font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;color:#1B4F8A;
+    margin:26px 0 10px;padding-bottom:5px;border-bottom:2px solid #E3E8EF;}
+  .ej-main h2 .h2n{display:inline-flex;align-items:center;justify-content:center;
+    width:25px;height:25px;border-radius:50%;background:#1B4F8A;color:#fff;font-size:.85rem;
+    margin-right:9px;vertical-align:2px;}
+  /* Tres listas, tres significados. Ver la regla de numeración en el README del taller. */
+  .paso-lista,.orden-lista,.clave-lista{list-style:none;margin:0 0 12px;padding:0;}
+  .paso-lista li,.orden-lista li{display:grid;gap:10px;align-items:start;
+    padding:9px 0;border-bottom:1px dashed #D8DDE5;}
+  .paso-lista li:last-child,.orden-lista li:last-child{border-bottom:none;}
+  /* lo que hace el alumno */
+  .paso-lista li{grid-template-columns:64px 1fr;}
+  .paso-lista .p{display:inline-flex;align-items:center;justify-content:center;
+    height:24px;border-radius:12px;background:#1B4F8A;color:#fff;font-weight:700;
+    font-size:.74rem;letter-spacing:.02em;font-family:'Barlow Condensed',sans-serif;
+    text-transform:uppercase;padding:0 8px;margin-top:1px;}
+  /* cómo funciona el programa: marca de referencia, no de acción */
+  .orden-lista li{grid-template-columns:30px 1fr;}
+  .orden-lista .o{width:25px;height:25px;border-radius:50%;background:#EEF3F9;
+    border:1.5px solid #B9C7D8;color:#1B4F8A;font-weight:700;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;}
+  /* conceptos sin orden: manda el nombre */
+  .clave-lista li{padding:9px 0 9px 14px;border-left:4px solid #C7D5E5;margin-bottom:8px;
+    background:#FAFBFD;border-radius:0 6px 6px 0;}
+  .clave-lista li:last-child{margin-bottom:0;}
+  .clave-lista b{color:#1B4F8A;}
+  @media(max-width:520px){.paso-lista li{grid-template-columns:1fr;gap:3px;}
+    .paso-lista .p{justify-self:start;}}
+  .bloques{max-width:100%;height:auto;display:block;}
+  .caja-bloques{background:#F4F6F9;border:1px solid #D8DDE5;border-radius:10px;
+    padding:12px;margin:10px 0 16px;overflow-x:auto;}
+  .caja-bloques .pie{font-size:.82rem;color:#555D6B;margin:8px 2px 0;}
+  .dos-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0 16px;}
+  .dos-col .col-tit{font-weight:700;color:#1B4F8A;font-size:.92rem;margin:0 0 4px;}
+  @media(max-width:700px){.dos-col{grid-template-columns:1fr;}}
+  .aviso-ojo{border-left:5px solid #D4700A;background:#FFF6EC;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0;}
+  .aviso-ojo h3{margin:0 0 6px;font-size:1rem;color:#A8560A;}
+  .aviso-ojo .caja-bloques{background:#fff;}
+  .entrega{border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:22px 0;}
+  .entrega h3{margin:0 0 8px;font-size:1.05rem;color:#1A6B3A;}
+  .entrega ol{margin:0;padding-left:20px;}
+  .entrega li{margin-bottom:5px;}
+  .logro{list-style:none;margin:0;padding:0;}
+  .logro li{padding:7px 0 7px 30px;position:relative;border-bottom:1px dashed #D8DDE5;}
+  .logro li:last-child{border-bottom:none;}
+  .logro li::before{content:"\2610";position:absolute;left:4px;top:6px;font-size:1.15rem;color:#1B4F8A;}
+  details.pista{border:1px solid #D8DDE5;border-radius:8px;padding:0;margin:14px 0;background:#fff;}
+  details.pista>summary{cursor:pointer;padding:11px 14px;font-weight:600;color:#1B4F8A;
+    list-style:none;user-select:none;}
+  details.pista>summary::-webkit-details-marker{display:none;}
+  details.pista>summary::before{content:"\25B8 ";}
+  details.pista[open]>summary::before{content:"\25BE ";}
+  details.pista .cuerpo{padding:0 14px 14px;}
+  .ej-main h3.sub{font-family:'Barlow Condensed',sans-serif;font-size:1.18rem;color:#1B4F8A;margin:22px 0 8px;}
+  .ej-main h3.sub .subn{display:inline-block;min-width:2.4em;margin-right:6px;padding:1px 7px;border-radius:6px;
+    background:#1B4F8A;color:#fff;font-size:.95rem;text-align:center;}
+  .ej-main h2 + h3.sub{margin-top:8px;}
+  .ej-main .objetos{margin:4px 0 6px;padding:9px 13px;background:#EEF3F9;border-left:4px solid #1B4F8A;border-radius:0 8px 8px 0;}
+  .entrega .escala table{border-collapse:collapse;margin:6px 0 8px;font-size:.95rem;}
+  .entrega .escala th,.entrega .escala td{border:1px solid #BFD8C6;padding:5px 10px;text-align:left;}
+  .entrega .escala th{background:#E3F2E8;color:#1A6B3A;}
+  .entrega .escala td.nota{text-align:center;font-weight:700;color:#1A6B3A;font-size:1.05rem;}
+  .entrega .escala p{margin:0 0 6px;}
+  .entrega .partes{margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px;}
+  .rp-ok b{color:#1A6B3A;}
+  .ej-main .rp-obj{margin:12px 0 4px;color:#1B4F8A;}
+  /* «Último paso»: el paso extra de la actividad, que llegó como ampliación. Ver ampliaciones.py. */
+  .sobra-tiempo{border:2px dashed #7B4FB3;background:#F7F3FC;border-radius:10px;
+    padding:12px 16px 6px;margin:18px 0 6px;}
+  .sobra-tiempo h3{margin:0 0 4px;font-size:1.02rem;color:#4E2A84;}
+  .sobra-tiempo .st-intro{font-size:.88rem;color:#5B5470;margin:0 0 8px;}
+  .sobra-tiempo ul{margin:0;padding-left:20px;}
+  .sobra-tiempo li{margin-bottom:8px;}
+  .sobra-tiempo li b{color:#4E2A84;}
+  /* «Reto: del papel a los bloques»: seudocódigo sin dibujo. Ver pseudocodigo.py. */
+  .reto-pseudo{border:2px solid #1B4F8A;background:#fff;border-radius:10px;padding:12px 16px 10px;margin:16px 0 6px;}
+  .reto-pseudo h3{margin:0 0 4px;font-size:1.02rem;color:#1B4F8A;}
+  .reto-pseudo .rp-intro{font-size:.88rem;color:#555D6B;margin:0 0 10px;}
+  .reto-pseudo .rp-plan{margin:0 0 8px;}
+  .reto-pseudo .rp-plan b{color:#1B4F8A;}
+  ol.pseudo{list-style:none;margin:0 0 10px;padding:10px 14px;background:#F4F6F9;border:1px solid #D8DDE5;
+    border-radius:8px;font-family:'Barlow',system-ui,sans-serif;font-size:1rem;line-height:1.75;counter-reset:linea;}
+  ol.pseudo li{position:relative;padding-left:2em;}
+  ol.pseudo li::before{counter-increment:linea;content:counter(linea);position:absolute;left:0;top:0;
+    width:1.5em;text-align:right;color:#8A94A6;font-size:.8rem;font-variant-numeric:tabular-nums;}
+  ol.pseudo li.n1{margin-left:1.6em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n2{margin-left:3.2em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n3{margin-left:4.8em;border-left:2px solid #B9C7D8;padding-left:.9em;}
+  ol.pseudo li.n1::before,ol.pseudo li.n2::before,ol.pseudo li.n3::before{left:-1.9em;}
+  .reto-pseudo .rp-ok{margin:0;font-size:.95rem;}
+  .reto-pseudo .rp-ok b{color:#1A6B3A;}
+  .comprueba{background:#FFFBE8;border:1px solid #E8D27A;border-radius:10px;padding:14px 16px;margin:18px 0;}
+  .comprueba .preg{font-weight:600;color:#6B5A12;margin:0 0 10px;}
+  .comprueba .ops{display:flex;flex-direction:column;gap:7px;}
+  .comprueba .ops button{text-align:left;padding:10px 12px;border:1px solid #D8C470;
+    background:#FFFDF4;border-radius:6px;cursor:pointer;font:inherit;font-size:.95rem;color:#3A3527;}
+  .comprueba .ops button:hover{background:#FDF3CF;}
+  .comprueba .ops button.ok{background:#EAFAF0;border-color:#1A6B3A;color:#155C30;}
+  .comprueba .ops button.mal{background:#FDECEB;border-color:#C0321E;color:#8E2418;}
+  .comprueba .ops button:disabled{cursor:default;}
+  .comprueba .fb{display:none;margin-top:11px;padding:11px 13px;border-radius:6px;
+    font-size:.94rem;line-height:1.55;background:#EEF6FF;border:1px solid #B7D4EF;color:#123A66;}
+  .comprueba .fb.ver{display:block;}
+  .abrir-scratch{display:inline-flex;align-items:center;gap:8px;background:#1B4F8A;color:#fff;
+    text-decoration:none;padding:10px 18px;border-radius:8px;font-weight:600;margin:4px 0 8px;}
+  .abrir-scratch:hover{background:#123A66;}
+  .consejo{font-size:.9rem;color:#555D6B;margin-top:2px;}
+  .tabla-env{overflow-x:auto;margin:10px 0 16px;}
+  .tabla-cyr{border-collapse:collapse;width:100%;font-size:.94rem;}
+  .tabla-cyr th,.tabla-cyr td{border:1px solid #D8DDE5;padding:7px 10px;text-align:left;vertical-align:top;}
+  .tabla-cyr th{background:#EEF3F9;color:#1B4F8A;}
+  .tabla-cyr tbody tr:nth-child(even){background:#FAFBFD;}
+  @media(max-width:640px){.ej-main{font-size:1rem;}}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="curso-hd">
+<a class="curso-lg" href="../../../index.html">CyR 1º ESO</a>
+<span class="curso-sb">T1 · Scratch</span>
+</header>
+<nav class="curso-navcross" role="navigation" aria-label="Navegación del trimestre">
+<a href="../../../index.html"><span>🏠</span><span class="nc-lbl">Índice</span></a>
+<span class="nc-sep">·</span>
+<a href="../index.html"><span>📋</span><span class="nc-lbl">Hub T1</span></a>
+<span class="nc-sep">·</span>
+<a href="index.html"><span>🗓️</span><span class="nc-lbl">Sesiones</span></a>
+<span class="nc-sep">·</span>
+<span class="nc-current"><span>✏️</span><span class="nc-lbl">S12b</span></span>
+<span class="nc-sep">·</span>
+<a href="../juegos/index.html"><span>🎮</span><span class="nc-lbl">Juegos</span></a>
+</nav>
+
+<div id="main-content">
+<section class="unidad-titulo-hero">
+  <div class="num">Sesión 12b</div>
+  <h1>Carretera · Parte 2</h1>
+  <div class="duracion">T1 · Scratch · 1º ESO</div>
+</section>
+
+<main class="ej-main">
+
+<p><strong>Lo que vas a conseguir:</strong> un <strong>coche</strong> que recorre la carretera con las flechas y vuelve a la salida si se sale al césped, y una estrella que da puntos.</p>
+
+<a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
+<p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
+
+<p><strong>Hoy todos usáis el mismo fondo</strong>, este. Descárgalo y cárgalo en Scratch como se explica en el 4.1.</p>
+<figure style="margin:10px 0"><img class="captura" src="../materiales/carretera.svg" alt="El fondo común de la carretera" style="display:block;width:100%;max-width:480px;height:auto;border:1px solid #CFD8DC;border-radius:8px"></figure>
+<a class="abrir-scratch" href="../materiales/carretera.svg" download="carretera.svg">📥 Descargar el fondo de la carretera</a>
+
+<h2><span class="h2n">1</span>Dos bloques nuevos y una idea</h2>
+<ul class="clave-lista">
+  <li><b>sumar a x (3) y sumar a y (3).</b> Mueven el objeto en horizontal y en vertical sin girarlo. Para recorrer una carretera de tramos rectos van mejor que <em>mover</em>, porque el coche no tiene que girar para subir o bajar.</li>
+  <li><b>¿tocando el color ( )?.</b> Una condición de Sensores que mira si el objeto está pisando un color concreto de la pantalla. Así se entera el programa de que el coche se ha salido.</li>
+  <li><b>Y la idea.</b> En Scratch los bordes de la carretera no existen. Lo que hay es un dibujo verde y un programa que dice «si estás tocando el verde, vuelve a la salida». Para el jugador el efecto es el mismo.</li>
+</ul><p>El <strong>estilo de rotación izquierda-derecha</strong> ya lo conoces de sesiones anteriores: con él, al apuntar a -90 el coche mira a la izquierda en vez de ponerse boca abajo.</p>
+
+<h2><span class="h2n">2</span>Lee estos dos trozos</h2>
+<p>Primero, el movimiento. Cuatro condicionales, uno por flecha, dentro de un <em>por siempre</em> que los vigila todo el rato:</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 433 676" width="433" height="676" class="bloques" role="img" aria-label="Programa del coche: fijar tamaño al 35 por ciento, estilo de rotación izquierda-derecha, apuntar a 90, ir a la salida y, por siempre, cuatro condicionales que mueven el coche según la flecha pulsada"><title>Programa del coche: fijar tamaño al 35 por ciento, estilo de rotación izquierda-derecha, apuntar a 90, ir a la salida y, por siempre, cuatro condicionales que mueven el coche según la flecha pulsada</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L174.2 62.0 Q180.2 62.0 180.2 68.0 L180.2 90.0 Q180.2 96.0 174.2 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#9966FF"/><text x="22.0" y="83.6" class="sb-t" textLength="88.1" lengthAdjust="spacingAndGlyphs">fijar tamaño al</text><rect x="117.1" y="69.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="133.4" y="83.3" class="sb-n">35</text><text x="156.6" y="83.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">%</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L324.2 96.0 Q330.2 96.0 330.2 102.0 L330.2 124.0 Q330.2 130.0 324.2 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#4C97FF"/><text x="22.0" y="117.6" class="sb-t" textLength="145.9" lengthAdjust="spacingAndGlyphs">fijar estilo de rotación a</text><rect x="174.9" y="102.0" width="143.3" height="22" rx="4" fill="#3373CC"/><text x="183.9" y="117.4" class="sb-t" textLength="111.3" lengthAdjust="spacingAndGlyphs">izquierda-derecha</text><path d="M303.2 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M10.0 136.0 Q10.0 130.0 16.0 130.0 L24.0 130.0 L28.0 134.0 L40.0 134.0 L44.0 130.0  L195.3 130.0 Q201.3 130.0 201.3 136.0 L201.3 158.0 Q201.3 164.0 195.3 164.0 L44.0 164.0 L40.0 168.0 L28.0 168.0 L24.0 164.0 L16.0 164.0  Q10.0 164.0 10.0 158.0 Z" fill="#4C97FF"/><text x="22.0" y="151.6" class="sb-t" textLength="127.9" lengthAdjust="spacingAndGlyphs">apuntar en dirección</text><rect x="156.9" y="137.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="173.1" y="151.3" class="sb-n">90</text><path d="M10.0 170.0 Q10.0 164.0 16.0 164.0 L24.0 164.0 L28.0 168.0 L40.0 168.0 L44.0 164.0  L183.3 164.0 Q189.3 164.0 189.3 170.0 L189.3 192.0 Q189.3 198.0 183.3 198.0 L44.0 198.0 L40.0 202.0 L28.0 202.0 L24.0 198.0 L16.0 198.0  Q10.0 198.0 10.0 192.0 Z" fill="#4C97FF"/><text x="22.0" y="185.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="63.7" y="171.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="85.7" y="185.3" class="sb-n">-200</text><text x="114.7" y="185.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="133.3" y="171.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="155.3" y="185.3" class="sb-n">-120</text><path d="M10.0 204.0 Q10.0 198.0 16.0 198.0 L24.0 198.0 L28.0 202.0 L40.0 202.0 L44.0 198.0  L417.0 198.0 Q423.0 198.0 423.0 204.0 L423.0 226.0 Q423.0 232.0 417.0 232.0 L58.0 232.0 L54.0 236.0 L42.0 236.0 L38.0 232.0 L30.0 232.0 Q24.0 232.0 24.0 238.0 L24.0 638.0 Q24.0 644.0 30.0 644.0 L417.0 644.0 Q423.0 644.0 423.0 650.0 L423.0 656.0 Q423.0 662.0 417.0 662.0 L44.0 662.0 L40.0 666.0 L28.0 666.0 L24.0 662.0 L16.0 662.0  Q10.0 662.0 10.0 656.0 Z" fill="#FFAB19"/><text x="22.0" y="219.6" class="sb-t" textLength="74.4" lengthAdjust="spacingAndGlyphs">por siempre</text><path d="M24.0 238.0 Q24.0 232.0 30.0 232.0 L38.0 232.0 L42.0 236.0 L54.0 236.0 L58.0 232.0  L409.9 232.0 Q415.9 232.0 415.9 238.0 L415.9 260.0 Q415.9 266.0 409.9 266.0 L72.0 266.0 L68.0 270.0 L56.0 270.0 L52.0 266.0 L44.0 266.0 Q38.0 266.0 38.0 272.0 L38.0 328.0 Q38.0 334.0 44.0 334.0 L409.9 334.0 Q415.9 334.0 415.9 340.0 L415.9 346.0 Q415.9 352.0 409.9 352.0 L58.0 352.0 L54.0 356.0 L42.0 356.0 L38.0 352.0 L30.0 352.0  Q24.0 352.0 24.0 346.0 Z" fill="#FFAB19"/><text x="36.0" y="253.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 237.0 l-9 12.0 l9 12.0 h267.9 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="253.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="238.0" width="123.1" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="253.4" class="sb-t" textLength="91.1" lengthAdjust="spacingAndGlyphs">flecha derecha</text><path d="M223.5 246.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="245.5" y="253.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="346.8" y="253.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 272.0 Q38.0 266.0 44.0 266.0 L52.0 266.0 L56.0 270.0 L68.0 270.0 L72.0 266.0  L223.3 266.0 Q229.3 266.0 229.3 272.0 L229.3 294.0 Q229.3 300.0 223.3 300.0 L72.0 300.0 L68.0 304.0 L56.0 304.0 L52.0 300.0 L44.0 300.0  Q38.0 300.0 38.0 294.0 Z" fill="#4C97FF"/><text x="50.0" y="287.6" class="sb-t" textLength="127.9" lengthAdjust="spacingAndGlyphs">apuntar en dirección</text><rect x="184.9" y="273.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="201.1" y="287.3" class="sb-n">90</text><path d="M38.0 306.0 Q38.0 300.0 44.0 300.0 L52.0 300.0 L56.0 304.0 L68.0 304.0 L72.0 300.0  L153.7 300.0 Q159.7 300.0 159.7 306.0 L159.7 328.0 Q159.7 334.0 153.7 334.0 L44.0 334.0 Q38.0 334.0 38.0 328.0 Z" fill="#4C97FF"/><text x="50.0" y="321.6" class="sb-t" textLength="60.7" lengthAdjust="spacingAndGlyphs">sumar a x</text><rect x="117.7" y="307.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="132.7" y="321.3" class="sb-n">3</text><path d="M24.0 358.0 Q24.0 352.0 30.0 352.0 L38.0 352.0 L42.0 356.0 L54.0 356.0 L58.0 352.0  L417.0 352.0 Q423.0 352.0 423.0 358.0 L423.0 380.0 Q423.0 386.0 417.0 386.0 L72.0 386.0 L68.0 390.0 L56.0 390.0 L52.0 386.0 L44.0 386.0 Q38.0 386.0 38.0 392.0 L38.0 448.0 Q38.0 454.0 44.0 454.0 L417.0 454.0 Q423.0 454.0 423.0 460.0 L423.0 466.0 Q423.0 472.0 417.0 472.0 L58.0 472.0 L54.0 476.0 L42.0 476.0 L38.0 472.0 L30.0 472.0  Q24.0 472.0 24.0 466.0 Z" fill="#FFAB19"/><text x="36.0" y="373.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 357.0 l-9 12.0 l9 12.0 h275.1 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="373.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="358.0" width="130.2" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="373.4" class="sb-t" textLength="98.2" lengthAdjust="spacingAndGlyphs">flecha izquierda</text><path d="M230.7 366.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="252.7" y="373.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="354.0" y="373.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 392.0 Q38.0 386.0 44.0 386.0 L52.0 386.0 L56.0 390.0 L68.0 390.0 L72.0 386.0  L227.7 386.0 Q233.7 386.0 233.7 392.0 L233.7 414.0 Q233.7 420.0 227.7 420.0 L72.0 420.0 L68.0 424.0 L56.0 424.0 L52.0 420.0 L44.0 420.0  Q38.0 420.0 38.0 414.0 Z" fill="#4C97FF"/><text x="50.0" y="407.6" class="sb-t" textLength="127.9" lengthAdjust="spacingAndGlyphs">apuntar en dirección</text><rect x="184.9" y="393.0" width="36.8" height="20" rx="10" fill="#FFFFFF"/><text x="203.3" y="407.3" class="sb-n">-90</text><path d="M38.0 426.0 Q38.0 420.0 44.0 420.0 L52.0 420.0 L56.0 424.0 L68.0 424.0 L72.0 420.0  L153.7 420.0 Q159.7 420.0 159.7 426.0 L159.7 448.0 Q159.7 454.0 153.7 454.0 L44.0 454.0 Q38.0 454.0 38.0 448.0 Z" fill="#4C97FF"/><text x="50.0" y="441.6" class="sb-t" textLength="60.7" lengthAdjust="spacingAndGlyphs">sumar a x</text><rect x="117.7" y="427.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="132.7" y="441.3" class="sb-n">-3</text><path d="M24.0 478.0 Q24.0 472.0 30.0 472.0 L38.0 472.0 L42.0 476.0 L54.0 476.0 L58.0 472.0  L396.1 472.0 Q402.1 472.0 402.1 478.0 L402.1 500.0 Q402.1 506.0 396.1 506.0 L72.0 506.0 L68.0 510.0 L56.0 510.0 L52.0 506.0 L44.0 506.0 Q38.0 506.0 38.0 512.0 L38.0 534.0 Q38.0 540.0 44.0 540.0 L396.1 540.0 Q402.1 540.0 402.1 546.0 L402.1 552.0 Q402.1 558.0 396.1 558.0 L58.0 558.0 L54.0 562.0 L42.0 562.0 L38.0 558.0 L30.0 558.0  Q24.0 558.0 24.0 552.0 Z" fill="#FFAB19"/><text x="36.0" y="493.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 477.0 l-9 12.0 l9 12.0 h254.2 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="493.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="478.0" width="109.3" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="493.4" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">flecha arriba</text><path d="M209.8 486.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="231.8" y="493.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="333.0" y="493.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 512.0 Q38.0 506.0 44.0 506.0 L52.0 506.0 L56.0 510.0 L68.0 510.0 L72.0 506.0  L153.7 506.0 Q159.7 506.0 159.7 512.0 L159.7 534.0 Q159.7 540.0 153.7 540.0 L44.0 540.0 Q38.0 540.0 38.0 534.0 Z" fill="#4C97FF"/><text x="50.0" y="527.6" class="sb-t" textLength="60.7" lengthAdjust="spacingAndGlyphs">sumar a y</text><rect x="117.7" y="513.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="132.7" y="527.3" class="sb-n">3</text><path d="M24.0 564.0 Q24.0 558.0 30.0 558.0 L38.0 558.0 L42.0 562.0 L54.0 562.0 L58.0 558.0  L393.9 558.0 Q399.9 558.0 399.9 564.0 L399.9 586.0 Q399.9 592.0 393.9 592.0 L72.0 592.0 L68.0 596.0 L56.0 596.0 L52.0 592.0 L44.0 592.0 Q38.0 592.0 38.0 598.0 L38.0 620.0 Q38.0 626.0 44.0 626.0 L393.9 626.0 Q399.9 626.0 399.9 632.0 L399.9 638.0 Q399.9 644.0 393.9 644.0 L30.0 644.0 Q24.0 644.0 24.0 638.0 Z" fill="#FFAB19"/><text x="36.0" y="579.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M62.8 563.0 l-9 12.0 l9 12.0 h252.0 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="70.8" y="579.6" class="sb-t" textLength="37.6" lengthAdjust="spacingAndGlyphs">¿tecla</text><rect x="115.4" y="564.0" width="107.1" height="22" rx="4" fill="#2E8EB8"/><text x="124.4" y="579.4" class="sb-t" textLength="75.1" lengthAdjust="spacingAndGlyphs">flecha abajo</text><path d="M207.6 572.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="229.6" y="579.6" class="sb-t" textLength="77.3" lengthAdjust="spacingAndGlyphs">presionada?</text><text x="330.9" y="579.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M38.0 598.0 Q38.0 592.0 44.0 592.0 L52.0 592.0 L56.0 596.0 L68.0 596.0 L72.0 592.0  L153.7 592.0 Q159.7 592.0 159.7 598.0 L159.7 620.0 Q159.7 626.0 153.7 626.0 L44.0 626.0 Q38.0 626.0 38.0 620.0 Z" fill="#4C97FF"/><text x="50.0" y="613.6" class="sb-t" textLength="60.7" lengthAdjust="spacingAndGlyphs">sumar a y</text><rect x="117.7" y="599.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="132.7" y="613.3" class="sb-n">-3</text></svg>
+</div><p>Y ahora el césped. Este trozo va dentro del mismo <em>por siempre</em>, debajo de los cuatro anteriores:</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 316 178" width="316" height="178" class="bloques" role="img" aria-label="Condicional: si está tocando el verde del césped, iniciar el sonido pop, volver a la salida y apuntar a 90"><title>Condicional: si está tocando el verde del césped, iniciar el sonido pop, volver a la salida y apuntar a 90</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L300.2 10.0 Q306.2 10.0 306.2 16.0 L306.2 38.0 Q306.2 44.0 300.2 44.0 L58.0 44.0 L54.0 48.0 L42.0 48.0 L38.0 44.0 L30.0 44.0 Q24.0 44.0 24.0 50.0 L24.0 140.0 Q24.0 146.0 30.0 146.0 L300.2 146.0 Q306.2 146.0 306.2 152.0 L306.2 158.0 Q306.2 164.0 300.2 164.0 L44.0 164.0 L40.0 168.0 L28.0 168.0 L24.0 164.0 L16.0 164.0  Q10.0 164.0 10.0 158.0 Z" fill="#FFAB19"/><text x="22.0" y="31.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M48.8 15.0 l-9 12.0 l9 12.0 h172.3 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="56.8" y="31.6" class="sb-t" textLength="108.3" lengthAdjust="spacingAndGlyphs">¿tocando el color</text><rect x="175.2" y="17.0" width="20" height="20" rx="4" fill="#4CAF50" stroke="#FFFFFF" stroke-width="2"/><text x="205.2" y="31.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><text x="237.1" y="31.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M24.0 50.0 Q24.0 44.0 30.0 44.0 L38.0 44.0 L42.0 48.0 L54.0 48.0 L58.0 44.0  L189.3 44.0 Q195.3 44.0 195.3 50.0 L195.3 72.0 Q195.3 78.0 189.3 78.0 L58.0 78.0 L54.0 82.0 L42.0 82.0 L38.0 78.0 L30.0 78.0  Q24.0 78.0 24.0 72.0 Z" fill="#CF63CF"/><text x="36.0" y="65.6" class="sb-t" textLength="84.5" lengthAdjust="spacingAndGlyphs">iniciar sonido</text><rect x="127.5" y="50.0" width="55.8" height="22" rx="4" fill="#BD42BD"/><text x="136.5" y="65.4" class="sb-t" textLength="23.8" lengthAdjust="spacingAndGlyphs">pop</text><path d="M168.3 58.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M24.0 84.0 Q24.0 78.0 30.0 78.0 L38.0 78.0 L42.0 82.0 L54.0 82.0 L58.0 78.0  L197.3 78.0 Q203.3 78.0 203.3 84.0 L203.3 106.0 Q203.3 112.0 197.3 112.0 L58.0 112.0 L54.0 116.0 L42.0 116.0 L38.0 112.0 L30.0 112.0  Q24.0 112.0 24.0 106.0 Z" fill="#4C97FF"/><text x="36.0" y="99.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="77.7" y="85.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="99.7" y="99.3" class="sb-n">-200</text><text x="128.7" y="99.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="147.3" y="85.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="169.3" y="99.3" class="sb-n">-120</text><path d="M24.0 118.0 Q24.0 112.0 30.0 112.0 L38.0 112.0 L42.0 116.0 L54.0 116.0 L58.0 112.0  L209.3 112.0 Q215.3 112.0 215.3 118.0 L215.3 140.0 Q215.3 146.0 209.3 146.0 L30.0 146.0 Q24.0 146.0 24.0 140.0 Z" fill="#4C97FF"/><text x="36.0" y="133.6" class="sb-t" textLength="127.9" lengthAdjust="spacingAndGlyphs">apuntar en dirección</text><rect x="170.9" y="119.0" width="32.5" height="20" rx="10" fill="#FFFFFF"/><text x="187.1" y="133.3" class="sb-n">90</text></svg>
+  <p class="pie">Si tocas el césped, vuelves a la salida. Es el castigo clásico de los juegos de carreras, y se resuelve con un solo condicional.</p>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>Al pulsar la bandera, el coche se pone a su tamaño, mirando a la derecha y en la salida.</span></li>
+  <li><span class="o">2</span><span>El <em>por siempre</em> mira las cuatro flechas una y otra vez. La que esté pulsada mueve el coche 3 pasos en su sentido; las de izquierda y derecha, además, lo giran hacia donde va.</span></li>
+  <li><span class="o">3</span><span>En cada vuelta mira también si el coche pisa el verde. Si lo pisa, suena y lo devuelve a la salida mirando a la derecha.</span></li>
+</ol>
+
+<h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
+<div class="comprueba" data-ok="color">
+  <p class="preg">Pones el condicional del césped y, al probarlo, el coche atraviesa el césped como si nada. ¿Cuál es la causa más probable?</p>
+  <div class="ops">
+    <button data-op="color" data-ex="Casi seguro que es esto. El bloque compara colores &lt;b&gt;exactos&lt;/b&gt;. Hay que abrir el cuadradito de color del bloque, elegir el &lt;b&gt;cuentagotas&lt;/b&gt; y pinchar directamente sobre el césped del escenario.">El verde del bloque no es exactamente el mismo que el del césped</button>
+    <button data-op="fondo" data-ex="No. &lt;em&gt;¿tocando el color?&lt;/em&gt; mira los píxeles de la pantalla, vengan del fondo o de otro objeto. Justamente por eso sirve para una carretera pintada.">El bloque sólo detecta objetos, no dibujos del fondo</button>
+    <button data-op="siempre" data-ex="No hace falta. El condicional del césped va dentro del mismo &lt;em&gt;por siempre&lt;/em&gt; que las flechas, y así se comprueba en cada vuelta.">Falta un segundo por siempre para el césped</button>
+  </div>
+  <div class="fb" id="fb1"></div>
+</div>
+
+<h2><span class="h2n">4</span>Tu actividad</h2>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el coche</strong> (4.1 y 4.2), <strong>la estrella</strong> (4.2) y <strong>el camión</strong> (4.3). Cada objeto, con su programa.</p>
+<h3 class="sub"><span class="subn">4.1</span>Monta el coche</h3>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Carga el fondo común: abajo a la derecha, pasa el ratón por el botón de <strong>Fondos</strong> y elige <strong>Cargar fondo</strong>. Abre el archivo <strong>carretera.svg</strong> que has descargado (está en tu carpeta <strong>Descargas</strong>).</span></li>
+  <li><span class="p">Paso 2</span><span>Borra el gato y añade el coche: botón <strong>Elige un objeto</strong>, escribe <strong>Convertible</strong> y elige el descapotable morado.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta en el coche los dos trozos de arriba: el movimiento y, dentro del mismo <em>por siempre</em>, debajo de los cuatro <em>si</em>, el condicional del césped.</span></li>
+  <li><span class="p">Paso 4</span><span>El verde del bloque <em>¿tocando el color?</em> se coge con el <strong>cuentagotas</strong>: haz clic en el color del bloque, después en el cuentagotas, y pincha en el césped del escenario. No lo elijas a ojo.</span></li>
+  <li><span class="p">Paso 5</span><span>Prueba: el coche recorre la carretera de la salida al final. Si toca el césped, suena y vuelve a la salida. En las esquinas, llega hasta el centro del tramo y entonces gira.</span></li>
+</ol>
+<h3 class="sub"><span class="subn">4.2</span>Añade una estrella que dé puntos</h3>
+<p>Una <strong>estrella</strong> en la carretera que da un punto al cogerla y desaparece.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Añade la estrella: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Star</strong> en el buscador y elige <strong>Star</strong>, la estrella amarilla. Ponle tamaño <strong>50</strong> y colócala en el tramo de la derecha.</span></li><li><span class="p">Paso 2</span><span>Crea la variable <strong>Puntos</strong>. En el programa del <strong>coche</strong>, justo debajo de la bandera, pon <strong>dar a Puntos el valor 0</strong>.</span></li><li><span class="p">Paso 3</span><span>Selecciona la estrella: <strong>al hacer clic en la bandera</strong>, <strong>mostrar</strong> y un <strong>por siempre</strong> con un <strong>si ¿tocando Convertible? entonces</strong> dentro. Convertible es el coche.</span></li><li><span class="p">Paso 4</span><span>Dentro del <em>si</em>: <strong>sumar a Puntos 1</strong>, <strong>esconder</strong> y <strong>detener este programa</strong>. Mostrar y esconder están en Apariencia; el detener es el de la sesión 4, con «este programa» en el desplegable.</span></li><li><span class="p">Paso 5</span><span>Juega: al pasar por la estrella desaparece y Puntos sube a 1. Sólo a 1: sin el <em>detener</em>, seguiría sumando mientras la tocas.</span></li></ol>
+<h3 class="sub"><span class="subn">4.3</span>Monta el camión que patrulla a partir del texto</h3>
+<p>Un camión que va y viene por el tramo de arriba de la carretera y pita si toca al coche.</p>
+<ol class="paso-lista">
+  <li><span class="p">Paso 1</span><span>Añade el camión: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Truck</strong> en el buscador y elige <strong>Truck</strong>. Arrástralo con el ratón al tramo de arriba de la carretera.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el camión, <strong>no</strong> en el coche ni en la estrella.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el programa de abajo. El verde lo coges con el cuentagotas, igual que en el programa del coche.</span></li>
+  <li><span class="p">Paso 4</span><span>Para probarlo, pulsa la <strong>bandera</strong> para el coche y luego la tecla <strong>C</strong> para poner en marcha el camión.</span></li>
+</ol>
+<p>Aquí no hay dibujo: cada línea es un bloque, escrito con las mismas palabras que en Scratch. Lo que escribes tú va entre paréntesis <strong>( )</strong>; lo que eliges en un desplegable, entre corchetes <strong>[ ]</strong>. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<ol class="pseudo">
+  <li class="n0">al presionar tecla [c]</li>
+  <li class="n1">fijar tamaño al (20) %</li>
+  <li class="n1">fijar estilo de rotación a [izquierda-derecha]</li>
+  <li class="n1">apuntar en dirección (90)</li>
+  <li class="n1">por siempre</li>
+  <li class="n2">mover (3) pasos</li>
+  <li class="n2">si ¿tocando el color [el verde del césped]? entonces</li>
+  <li class="n3">girar ↻ (180) grados</li>
+  <li class="n3">mover (20) pasos</li>
+  <li class="n2">si ¿tocando [Convertible]? entonces</li>
+  <li class="n3">decir (¡Piii!) durante (1) segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar C el camión avanza por el tramo de arriba, al llegar al césped se da la vuelta y sigue en sentido contrario, una y otra vez, sin quedarse atascado. Si llevas el coche hasta él, dice «¡Piii!». Se para con el círculo rojo.</p>
+
+<h2><span class="h2n">5</span>Lo has conseguido si…</h2>
+<ul class="logro">
+  <li>El coche se mueve con las cuatro flechas y mira hacia donde va.</li>
+  <li>Al tocar el césped suena y vuelve a la salida.</li>
+  <li>Se puede recorrer toda la carretera, de la salida al final, sin salirse.</li>
+  <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
+  <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
+</ul>
+
+<div class="entrega">
+<h3>📤 Qué tienes que entregar</h3>
+<div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo archivo. Un apartado cuenta si funciona; a medias no suma.</p>
+<table><thead><tr><th>Lo que entregas hecho</th><th>Nota</th></tr></thead><tbody><tr><td>4.1</td><td class="nota">5</td></tr><tr><td>4.1 y 4.2</td><td class="nota">8</td></tr><tr><td>4.1, 4.2 y 4.3</td><td class="nota">10</td></tr></tbody></table>
+<p>Sin el 4.1 hecho no hay nota, aunque estén los demás: lo repites.</p></div>
+<p class="partes">En el proyecto tienen que estar: <strong>el coche</strong> (4.1 y 4.2), <strong>la estrella</strong> (4.2) y <strong>el camión</strong> (4.3).</p>
+<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
+<ol>
+  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
+  <li>Cámbiale el nombre a <strong>Sesion12-2_TuNombre.sb3</strong>.</li>
+  <li>Súbelo a la tarea de <strong>Moodle</strong> «S12 · Parte 2».</li>
+</ol>
+</div>
+
+<h2>Navegación</h2>
+<div class="bg"><a href="s12.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S12</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s13.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S13</span></a></div>
+
+</main>
+</div>
+
+<p class="foot">
+IES Jiménez de Quesada · Santa Fe (Granada)<br>
+CyR 1º ESO · Curso 2026-27 · Manuel Alonso Herrera
+<br><a href="https://tecnologia-ies-jdq.malonso72.workers.dev/">🏛️ Otras asignaturas del departamento</a>
+</p>
+
+<script src="../../../assets/js/common.js"></script>
+<script src="../../../assets/js/header.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll('.comprueba').forEach(function(caja){
+    var correcta = caja.getAttribute('data-ok');
+    var fb = caja.querySelector('.fb');
+    var bots = caja.querySelectorAll('.ops button');
+    bots.forEach(function(b){
+      b.addEventListener('click', function(){
+        var bien = (b.getAttribute('data-op') === correcta);
+        fb.className = 'fb ver';
+        fb.textContent = (bien ? '\u2714 ' : '\u2718 ');
+        // La explicación lleva <b>/<em> escritos por nosotros: se inserta como HTML,
+        // no como texto, o el alumno ve las etiquetas.
+        fb.insertAdjacentHTML('beforeend', b.getAttribute('data-ex'));
+        bots.forEach(function(x){
+          x.disabled = true;
+          if (x.getAttribute('data-op') === correcta) x.classList.add('ok');
+          else if (x === b) x.classList.add('mal');
+        });
+      });
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://malonso72.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

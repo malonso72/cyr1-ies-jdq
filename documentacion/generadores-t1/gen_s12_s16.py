@@ -22,11 +22,11 @@ def si(cond, hijos):
 
 
 # ============================================================ S12
-# S12 en dos clases (Manuel, 09-11-2026): la Parte 1 es dibujar la carretera (su primer
-# dibujo en Scratch, con capturas paso a paso) y la Parte 2 programar el coche sobre un
-# fondo común que se descarga de la página. Antes era un laberinto negro: la estrella de la
-# biblioteca tiene el contorno negro y devolvía al gato a la salida. Ahora salirse es tocar
-# el verde del césped, que no tiene ningún objeto.
+# S12 en dos clases y dos páginas (Manuel, 09-11-2026; DECISIONES_T1 §39): s12 es la Parte 1,
+# dibujar la carretera (su primer dibujo en Scratch, con capturas paso a paso), y s12b la
+# Parte 2, programar el coche sobre un fondo común que sólo se descarga desde s12b. Antes era
+# un laberinto negro: la estrella de la biblioteca tiene el contorno negro y devolvía al gato
+# a la salida. Ahora salirse es tocar el verde del césped, que no tiene ningún objeto.
 VERDE12 = '#4CAF50'
 SALIDA12 = [('stack', 'motion', ['ir a x:', ('num', '-200'), 'y:', ('num', '-120')])]
 MOV12 = [
@@ -61,22 +61,16 @@ def captura(arch, alt):
             'margin-top:4px">%s</figcaption></figure>' % (IMG12, arch, alt, alt))
 
 
-def sub1(n, tit):
-    """Apartado de la Parte 1. No lleva la clase «sub»: esos son los de «Tu actividad»."""
-    return ('<h3 style="font-family:\'Barlow Condensed\',sans-serif;font-size:1.18rem;'
-            'color:#1B4F8A;margin:22px 0 8px"><span style="display:inline-block;min-width:2.4em;'
-            'margin-right:6px;padding:1px 7px;border-radius:6px;background:#1B4F8A;color:#fff;'
-            'font-size:.95rem;text-align:center">1.%d</span>%s</h3>\n' % (n, tit))
+def sub(n, k, tit):
+    return '<h3 class="sub"><span class="subn">%d.%d</span>%s</h3>\n' % (n, k, tit)
 
 
-VERDE_TXT = '<strong>Color 35, Saturación 80, Brillo 70</strong>'
+A12 = 3     # número de la sección «Tu actividad» en la Parte 1
 
-PARTE1 = (
-    '<p><strong>Hoy dibujas el fondo del juego:</strong> un césped verde y una carretera gris '
-    'por la que circulará un coche en la Parte 2. Es la primera vez que dibujas en Scratch: '
-    'sigue los pasos en orden y mira cada imagen. Lo marcado en <strong>rojo</strong> es lo '
-    'que tienes que pulsar.</p>\n'
-    + sub1(1, 'Pinta el césped y la carretera')
+ACT12_1 = (
+    '<p class="objetos">Al terminar, en tu proyecto tiene que haber <strong>dos fondos</strong>: '
+    'la carretera (%d.1 y %d.2) y la carretera difícil (%d.3).</p>\n' % (A12, A12, A12)
+    + sub(A12, 1, 'Pinta el césped y la carretera')
     + pasos([
         'Abajo a la derecha, haz clic en <strong>Escenario</strong>. A partir de ahora lo que '
         'dibujes será el fondo, no un objeto.' + captura('p1-escenario.jpg', 'El Escenario, abajo a la derecha'),
@@ -86,7 +80,7 @@ PARTE1 = (
         + captura('p2-fondos-mapa-bits.jpg', 'La pestaña Fondos (arriba) y el botón Convertir a mapa de bits (abajo)'),
         'Elige la herramienta <strong>Rellenar</strong> (el bote de pintura). Haz clic en el '
         'cuadrado de color de <strong>Rellenar</strong>, arriba, y mueve las tres barras hasta '
-        + VERDE_TXT + '. Es el verde del césped.'
+        '<strong>Color 35, Saturación 80, Brillo 70</strong>. Es el verde del césped.'
         + captura('p3-verde.jpg', 'El verde del césped: Color 35, Saturación 80, Brillo 70'),
         'Haz clic una vez dentro del recuadro de dibujo. Todo el fondo se vuelve verde.'
         + captura('p4-cesped.jpg', 'Con el bote, un clic y el fondo entero queda verde'),
@@ -109,7 +103,7 @@ PARTE1 = (
           '<p style="margin-bottom:0">Pulsa la flecha de <strong>deshacer</strong> (arriba, junto '
           'al nombre «backdrop1») tantas veces como haga falta. Deshace los pasos de uno en '
           'uno.</p>')
-    + sub1(2, 'Marca la salida y la raya del centro')
+    + sub(A12, 2, 'Marca la salida y la raya del centro')
     + pasos([
         'Antes de cambiar de color, <strong>haz clic fuera del recuadro de dibujo</strong>, en la '
         'zona de alrededor.',
@@ -126,46 +120,92 @@ PARTE1 = (
           'por eso. Se arregla con <em>deshacer</em>, o con el bote de pintura en gris sobre el '
           'tramo.</p>' + captura('p8-ojo.jpg', 'El tramo de arriba se ha vuelto blanco al cambiar de color sin hacer clic fuera'))
     + captura('p9-final.jpg', 'Así queda: césped, carretera, salida y raya del centro')
-    + sub1(3, 'Dibuja un segundo fondo más difícil')
+    + sub(A12, 3, 'Dibuja un segundo fondo más difícil')
     + '<p>Un segundo fondo, con una carretera más difícil. Esta la diseñas tú.</p>'
     + pasos([
         'En la pestaña <strong>Fondos</strong>, abajo a la izquierda, pasa el ratón por el botón '
         'del fondo y elige el <strong>pincel</strong> (<strong>Pinta</strong>): aparece un fondo '
         'nuevo en blanco, «backdrop2».',
-        'Conviértelo a mapa de bits y pinta el césped igual que en el 1.1.',
+        'Conviértelo a mapa de bits y pinta el césped igual que en el %d.1.' % A12,
         'Dibuja una carretera con <strong>al menos cinco tramos</strong>, más difícil que la '
         'primera: más giros o tramos más estrechos, pero que el coche quepa.',
-        'Marca la salida y la raya del centro igual que en el 1.2.',
+        'Marca la salida y la raya del centro igual que en el %d.2.' % A12,
     ])
-    + '<h3 style="margin-top:20px">Lo has conseguido si…</h3>'
-    + logros(['No queda nada blanco en el fondo: todo es césped o carretera.',
-              'La carretera es continua: no hay rendijas verdes entre los tramos.',
-              'Los tramos son anchos, más o menos una cuarta parte del fondo.',
-              'La salida y la raya del centro están dibujadas (apartado 1.2).',
-              'Hay un segundo fondo con una carretera de al menos cinco tramos (apartado 1.3).'])
-    + '<div style="border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:18px 0">'
-      '<h3 style="margin:0 0 8px">📤 Qué tienes que entregar hoy</h3>'
-      '<div style="margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px">'
-      '<p style="margin:0 0 6px"><strong>Cómo se valora.</strong> Todo va en el mismo archivo. Un '
-      'apartado cuenta si está hecho; a medias no suma.</p>'
-      '<table style="border-collapse:collapse;margin:6px 0 8px;font-size:.95rem"><thead><tr>'
-      '<th style="border:1px solid #BFD8C6;padding:5px 10px;background:#E3F2E8;color:#1A6B3A;text-align:left">Lo que entregas hecho</th>'
-      '<th style="border:1px solid #BFD8C6;padding:5px 10px;background:#E3F2E8;color:#1A6B3A">Nota</th></tr></thead><tbody>'
-      + ''.join('<tr><td style="border:1px solid #BFD8C6;padding:5px 10px">%s</td><td style="border:1px '
-                'solid #BFD8C6;padding:5px 10px;text-align:center;font-weight:700;color:#1A6B3A">%s</td></tr>' % f
-                for f in (('1.1', '5'), ('1.1 y 1.2', '8'), ('1.1, 1.2 y 1.3', '10')))
-    + '</tbody></table><p style="margin:0">Sin el 1.1 hecho no hay nota, aunque estén los demás: lo repites.</p></div>'
-      '<ol style="margin:0;padding-left:20px"><li><strong>Archivo → Guardar en tu ordenador.</strong> '
-      'Se descarga un archivo <code>.sb3</code> en tu carpeta <strong>Descargas</strong>.</li>'
-      '<li>Cámbiale el nombre a <strong>Sesion12-1_TuNombre.sb3</strong>.</li>'
-      '<li>Súbelo a la tarea de <strong>Moodle</strong> «S12 · Parte 1».</li></ol></div>'
 )
 
-PARTE2 = (
-    '<h2 style="margin-top:34px;padding:10px 14px;background:#1B4F8A;color:#fff;border-radius:10px">'
-    'Parte 2 · Programa el coche</h2>\n'
-    '<p><strong>En la segunda clase</strong> todos usáis <strong>el mismo fondo</strong>, este. '
-    'Descárgalo y cárgalo en Scratch como se explica en el 5.1.</p>\n'
+
+def _escala12(a, filas):
+    tr = ''.join('<tr><td>%s</td><td class="nota">%s</td></tr>' % f for f in filas)
+    return ('<div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo '
+            'archivo. Un apartado cuenta si está hecho; a medias no suma.</p>\n'
+            '<table><thead><tr><th>Lo que entregas hecho</th><th>Nota</th></tr></thead>'
+            '<tbody>%s</tbody></table>\n<p>Sin el %d.1 hecho no hay nota, aunque estén los demás: '
+            'lo repites.</p></div>\n' % (tr, a))
+
+
+s12 = pagina(
+    12, 'Carretera · Parte 1',
+    'Sesión 12 de Scratch, parte 1: dibujar en el editor de pintura el fondo de un juego de '
+    'carreras, con el bote de pintura y el rectángulo. Primer dibujo en Scratch. CyR 1º ESO.',
+    'el fondo de un <strong>juego de carreras</strong>: un césped verde y una carretera gris. '
+    'Es tu primer dibujo en Scratch. En la próxima clase (Parte 2) programarás un coche que la '
+    'recorre.',
+    [
+        ('El editor de pintura',
+         claves([
+             ('Escenario y Fondos',
+              'Lo que se dibuja con el Escenario seleccionado es el <strong>fondo</strong>: no se '
+              'mueve ni tiene programas de movimiento. Se dibuja en la pestaña <em>Fondos</em>.'),
+             ('Mapa de bits',
+              'Un modo de dibujo en el que la pantalla es una cuadrícula de puntos de color. En '
+              'él el <strong>bote de pintura</strong> rellena todo el fondo vacío de un clic.'),
+             ('Rellenar y Rectángulo',
+              'El bote pinta una zona entera del mismo color; el rectángulo, con la opción '
+              '<em>Relleno</em>, dibuja un bloque macizo. Con esas dos herramientas basta para '
+              'la carretera.'),
+             ('Color, Saturación y Brillo',
+              'Las tres barras del color. Con la saturación a 0 sale un gris, más claro cuanto más '
+              'brillo: con brillo 100, blanco.'),
+         ])
+         + '<p>Lo marcado en <strong>rojo</strong> en cada imagen es lo que tienes que pulsar.</p>'),
+
+        ('Comprueba que lo has entendido',
+         pregunta('1', 'Eliges el bote de pintura, pinchas en el fondo vacío y no se pinta nada. '
+                       '¿Qué ha pasado?',
+                  [('bits', 'No has pulsado Convertir a mapa de bits',
+                    'Eso es. En el modo normal (vectorial) el bote sólo rellena figuras ya '
+                    'dibujadas, y el fondo vacío no lo es. En <b>mapa de bits</b> rellena todo.'),
+                   ('color', 'El color elegido es el mismo que el del fondo',
+                    'El fondo vacío no tiene color: es transparente. Con cualquier color se '
+                    'pintaría, si estuvieras en mapa de bits.'),
+                   ('objeto', 'Tienes seleccionado el gato en vez del Escenario',
+                    'Entonces estarías pintando un disfraz del gato, y el bote sí funcionaría en '
+                    'mapa de bits. El fallo es el modo de dibujo.')],
+                  'bits')),
+
+        ('Tu actividad', ACT12_1),
+
+        ('Lo has conseguido si…',
+         logros(['No queda nada blanco en el fondo: todo es césped o carretera.',
+                 'La carretera es continua: no hay rendijas verdes entre los tramos.',
+                 'Los tramos son anchos, más o menos una cuarta parte del fondo.',
+                 'La salida y la raya del centro están dibujadas (apartado %d.2).' % A12,
+                 'Hay un segundo fondo con una carretera de al menos cinco tramos (apartado %d.3).' % A12])),
+    ],
+    nn='12', extras=False,
+    partes=_escala12(A12, (('%d.1' % A12, '5'), ('%d.1 y %d.2' % (A12, A12), '8'),
+                           ('%d.1, %d.2 y %d.3' % (A12, A12, A12), '10'))),
+    entrega=('<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta '
+             'de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, '
+             '<strong>se pierde</strong>.</p>\n<ol>\n'
+             '  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo '
+             '<code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>\n'
+             '  <li>Cámbiale el nombre a <strong>Sesion12-1_TuNombre.sb3</strong>.</li>\n'
+             '  <li>Súbelo a la tarea de <strong>Moodle</strong> «S12 · Parte 1».</li>\n</ol>'))
+
+FONDO12 = (
+    '<p><strong>Hoy todos usáis el mismo fondo</strong>, este. Descárgalo y cárgalo en Scratch '
+    'como se explica en el 4.1.</p>\n'
     '<figure style="margin:10px 0"><img class="captura" src="../materiales/carretera.svg" '
     'alt="El fondo común de la carretera" style="display:block;width:100%;max-width:480px;'
     'height:auto;border:1px solid #CFD8DC;border-radius:8px"></figure>\n'
@@ -173,16 +213,14 @@ PARTE2 = (
     '📥 Descargar el fondo de la carretera</a>'
 )
 
-s12 = pagina(
-    12, 'Carretera',
-    'Sesión 12 de Scratch, en dos clases: dibujar una carretera en el editor de pintura y '
-    'programar un coche que la recorre sin salirse, con sumar a x e y y ¿tocando el color? CyR 1º ESO.',
-    'un <strong>juego de carreras</strong> en dos clases: en la primera <strong>dibujas la '
-    'carretera</strong>; en la segunda <strong>programas un coche</strong> que la recorre sin '
-    'salirse al césped.',
+s12b = pagina(
+    12, 'Carretera · Parte 2',
+    'Sesión 12 de Scratch, parte 2: un coche que recorre una carretera sin salirse, con sumar a '
+    'x e y y ¿tocando el color? Fondo común para descargar. CyR 1º ESO.',
+    'un <strong>coche</strong> que recorre la carretera con las flechas y vuelve a la salida si '
+    'se sale al césped, y una estrella que da puntos.',
     [
-        ('Parte 1 · Dibuja la carretera', PARTE1),
-        (None, PARTE2),
+        (None, FONDO12),
         ('Dos bloques nuevos y una idea',
          claves([
              ('sumar a x (3) y sumar a y (3)',
@@ -259,6 +297,7 @@ s12 = pagina(
                  'Al tocar el césped suena y vuelve a la salida.',
                  'Se puede recorrer toda la carretera, de la salida al final, sin salirse.'])),
     ],
+    nn='12b',
     entrega=('<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta '
              'de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, '
              '<strong>se pierde</strong>.</p>\n<ol>\n'
@@ -653,5 +692,5 @@ s16 = pagina(
     ],
     nav_extra=guia('ejercicio-de-pong.pdf', 'Pong, material de apoyo'))
 
-for n, h in [(12, s12), (13, s13), (14, s14), (15, s15), (16, s16)]:
+for n, h in [(12, s12), ('12b', s12b), (13, s13), (14, s14), (15, s15), (16, s16)]:
     escribir(n, h)
