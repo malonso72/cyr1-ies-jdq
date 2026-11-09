@@ -41,7 +41,7 @@ ORDEN_1 = {
     1: 'Monta tu primer programa', 2: 'Completa el cuadrado', 3: 'Recorre las tres figuras',
     4: 'Monta las tres versiones', 5: 'Completa el programa', 6: 'Haz que el gato camine',
     7: 'Construye el diálogo', 8: 'Construye la calculadora', 9: 'Construye el quiz',
-    10: 'Monta la carrera', 11: 'Haz que el gato avise al balón', 12: 'Construye el laberinto',
+    10: 'Monta la carrera', 11: 'Haz que el gato avise al balón', 12: 'Monta el coche',
     13: 'Añade la meta y el segundo nivel', 14: 'Completa el juego', 15: 'Monta la pelota y la pala',
     16: 'Añade el marcador y el final', 17: 'Arregla los cinco programas',
 }
@@ -70,7 +70,7 @@ OBJETOS = {
     10: [('el gato', [1, 2]), ('el perro', [1, 2]), ('la rana', [3])],
     11: [('el gato', [1]), ('el balón', [1, 2]), ('el portero', [2]), ('el árbitro', [3]),
          ('el tambor', [3])],
-    12: [('el gato', [1, 2]), ('la estrella', [2]), ('el fantasma', [3])],
+    12: [('el coche', [1, 2]), ('la estrella', [2]), ('el camión', [3])],
     13: [('el gato', [1, 2]), ('la estrella y el fantasma', ['de la sesión 12']), ('la meta', [1]),
          ('la campana', [3])],
     14: [('el gato', [1, 2]), ('el unicornio', [3])],
@@ -242,15 +242,15 @@ AMPLIACIONES = {
         'Pulsa la bandera: el gato chuta, el balón sale y, cuando termina, el portero se lamenta. '
         'Nadie ha pulsado nada para que el portero hable: se lo ha dicho el balón.'))],
 
-    12: [('', '<p>Una <strong>estrella</strong> dentro del laberinto que da un punto al cogerla y '
+    12: [('', '<p>Una <strong>estrella</strong> en la carretera que da un punto al cogerla y '
               'desaparece.</p>' + P(
         'Añade la estrella: ' + elige('Star', 'Star', 'la estrella amarilla. Ponle tamaño '
-                                      '<strong>50</strong> y colócala en un pasillo.'),
-        'Crea la variable <strong>Puntos</strong>. En el programa del <strong>gato</strong>, justo '
+                                      '<strong>50</strong> y colócala en el tramo de la derecha.'),
+        'Crea la variable <strong>Puntos</strong>. En el programa del <strong>coche</strong>, justo '
         'debajo de la bandera, pon <strong>dar a Puntos el valor 0</strong>.',
         'Selecciona la estrella: <strong>al hacer clic en la bandera</strong>, '
         '<strong>mostrar</strong> y un <strong>por siempre</strong> con un <strong>si ¿tocando '
-        'Sprite1? entonces</strong> dentro. Sprite1 es el gato.',
+        'Convertible? entonces</strong> dentro. Convertible es el coche.',
         'Dentro del <em>si</em>: <strong>sumar a Puntos 1</strong>, <strong>esconder</strong> y '
         '<strong>detener este programa</strong>. Mostrar y esconder están en Apariencia; el '
         'detener es el de la sesión 4, con «este programa» en el desplegable.',

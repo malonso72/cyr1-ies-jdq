@@ -22,98 +22,251 @@ def si(cond, hijos):
 
 
 # ============================================================ S12
+# S12 en dos clases (Manuel, 09-11-2026): la Parte 1 es dibujar la carretera (su primer
+# dibujo en Scratch, con capturas paso a paso) y la Parte 2 programar el coche sobre un
+# fondo común que se descarga de la página. Antes era un laberinto negro: la estrella de la
+# biblioteca tiene el contorno negro y devolvía al gato a la salida. Ahora salirse es tocar
+# el verde del césped, que no tiene ningún objeto.
+VERDE12 = '#4CAF50'
+SALIDA12 = [('stack', 'motion', ['ir a x:', ('num', '-200'), 'y:', ('num', '-120')])]
 MOV12 = [
     BANDERA,
-    ('stack', 'looks', ['fijar tamaño al', ('num', '40'), '%']),
-    ('stack', 'motion', ['ir a x:', ('num', '-200'), 'y:', ('num', '-140')]),
+    ('stack', 'looks', ['fijar tamaño al', ('num', '35'), '%']),
+    ('stack', 'motion', ['fijar estilo de rotación a', ('drop', 'izquierda-derecha')]),
+    ('stack', 'motion', ['apuntar en dirección', ('num', '90')]),
+] + SALIDA12 + [
     ('c', 'control', ['por siempre'], [
-        si(tecla('flecha derecha'), [('stack', 'motion', ['sumar a x', ('num', '4')])]),
-        si(tecla('flecha izquierda'), [('stack', 'motion', ['sumar a x', ('num', '-4')])]),
-        si(tecla('flecha arriba'), [('stack', 'motion', ['sumar a y', ('num', '4')])]),
-        si(tecla('flecha abajo'), [('stack', 'motion', ['sumar a y', ('num', '-4')])]),
+        si(tecla('flecha derecha'), [('stack', 'motion', ['apuntar en dirección', ('num', '90')]),
+                                     ('stack', 'motion', ['sumar a x', ('num', '3')])]),
+        si(tecla('flecha izquierda'), [('stack', 'motion', ['apuntar en dirección', ('num', '-90')]),
+                                       ('stack', 'motion', ['sumar a x', ('num', '-3')])]),
+        si(tecla('flecha arriba'), [('stack', 'motion', ['sumar a y', ('num', '3')])]),
+        si(tecla('flecha abajo'), [('stack', 'motion', ['sumar a y', ('num', '-3')])]),
     ]),
 ]
-PARED12 = [
-    si(hexa('sensing', '¿tocando el color', ('color', NEGRO), '?'),
-       [('stack', 'sound', ['iniciar sonido', ('drop', 'Pop')]),
-        ('stack', 'motion', ['ir a x:', ('num', '-200'), 'y:', ('num', '-140')])]),
+CESPED12 = [
+    si(hexa('sensing', '¿tocando el color', ('color', VERDE12), '?'),
+       [('stack', 'sound', ['iniciar sonido', ('drop', 'pop')])] + SALIDA12 +
+       [('stack', 'motion', ['apuntar en dirección', ('num', '90')])]),
 ]
 
+IMG12 = '../img/s12/'
+
+
+def captura(arch, alt):
+    """Captura del editor de Scratch, para la Parte 1 (su primer dibujo)."""
+    return ('<figure style="margin:10px 0 4px"><img class="captura" src="%s%s" alt="%s" '
+            'loading="lazy" style="display:block;max-width:100%%;height:auto;border:1px solid '
+            '#CFD8DC;border-radius:8px"><figcaption style="font-size:.85rem;color:#555D6B;'
+            'margin-top:4px">%s</figcaption></figure>' % (IMG12, arch, alt, alt))
+
+
+def sub1(n, tit):
+    """Apartado de la Parte 1. No lleva la clase «sub»: esos son los de «Tu actividad»."""
+    return ('<h3 style="font-family:\'Barlow Condensed\',sans-serif;font-size:1.18rem;'
+            'color:#1B4F8A;margin:22px 0 8px"><span style="display:inline-block;min-width:2.4em;'
+            'margin-right:6px;padding:1px 7px;border-radius:6px;background:#1B4F8A;color:#fff;'
+            'font-size:.95rem;text-align:center">1.%d</span>%s</h3>\n' % (n, tit))
+
+
+VERDE_TXT = '<strong>Color 35, Saturación 80, Brillo 70</strong>'
+
+PARTE1 = (
+    '<p><strong>Hoy dibujas el fondo del juego:</strong> un césped verde y una carretera gris '
+    'por la que circulará un coche en la Parte 2. Es la primera vez que dibujas en Scratch: '
+    'sigue los pasos en orden y mira cada imagen. Lo marcado en <strong>rojo</strong> es lo '
+    'que tienes que pulsar.</p>\n'
+    + sub1(1, 'Pinta el césped y la carretera')
+    + pasos([
+        'Abajo a la derecha, haz clic en <strong>Escenario</strong>. A partir de ahora lo que '
+        'dibujes será el fondo, no un objeto.' + captura('p1-escenario.jpg', 'El Escenario, abajo a la derecha'),
+        'Arriba, abre la pestaña <strong>Fondos</strong>. Verás el fondo en blanco, «backdrop1».',
+        'Abajo, pulsa <strong>Convertir a mapa de bits</strong>. Así el bote de pintura rellena '
+        'todo el fondo de un solo clic.'
+        + captura('p2-fondos-mapa-bits.jpg', 'La pestaña Fondos (arriba) y el botón Convertir a mapa de bits (abajo)'),
+        'Elige la herramienta <strong>Rellenar</strong> (el bote de pintura). Haz clic en el '
+        'cuadrado de color de <strong>Rellenar</strong>, arriba, y mueve las tres barras hasta '
+        + VERDE_TXT + '. Es el verde del césped.'
+        + captura('p3-verde.jpg', 'El verde del césped: Color 35, Saturación 80, Brillo 70'),
+        'Haz clic una vez dentro del recuadro de dibujo. Todo el fondo se vuelve verde.'
+        + captura('p4-cesped.jpg', 'Con el bote, un clic y el fondo entero queda verde'),
+        'Elige la herramienta <strong>Rectángulo</strong> y comprueba que arriba está marcado '
+        '<strong>Relleno</strong>, no Contorneado.',
+        'Cambia el color de <strong>Rellenar</strong> a gris: <strong>Saturación 0, Brillo 50</strong>. '
+        'Cuando la saturación es 0, el Color da igual.'
+        + captura('p5-gris.jpg', 'El gris de la carretera: Saturación 0, Brillo 50'),
+        'Dibuja el primer tramo: pincha abajo a la izquierda y, sin soltar, arrastra hasta la '
+        'derecha. Debe ocupar todo el ancho del fondo y, de alto, más o menos <strong>una cuarta '
+        'parte</strong> del fondo. Si es más estrecho, el coche no cabrá.'
+        + captura('p6-rect1.jpg', 'El primer tramo, de izquierda a derecha y abajo'),
+        'Dibuja otros dos tramos del mismo ancho: uno <strong>vertical</strong> a la derecha, de '
+        'abajo arriba, y otro <strong>horizontal arriba</strong>, de derecha a izquierda. Cada '
+        'tramo tiene que <strong>montarse</strong> un poco sobre el anterior: si entre dos tramos '
+        'queda una rendija verde, el coche chocará ahí.'
+        + captura('p7-tres.jpg', 'Los tres tramos: abajo, a la derecha y arriba'),
+    ])
+    + ojo('Si te equivocas',
+          '<p style="margin-bottom:0">Pulsa la flecha de <strong>deshacer</strong> (arriba, junto '
+          'al nombre «backdrop1») tantas veces como haga falta. Deshace los pasos de uno en '
+          'uno.</p>')
+    + sub1(2, 'Marca la salida y la raya del centro')
+    + pasos([
+        'Antes de cambiar de color, <strong>haz clic fuera del recuadro de dibujo</strong>, en la '
+        'zona de alrededor.',
+        'Cambia el color de <strong>Rellenar</strong> a blanco: <strong>Saturación 0, Brillo 100</strong>.',
+        'Con el <strong>Rectángulo</strong>, dibuja la línea de salida: un rectángulo muy estrecho '
+        'que cruce el tramo de abajo, cerca del borde izquierdo.',
+        'Dibuja la raya del centro con rectángulos pequeños y alargados, separados entre sí, '
+        'siguiendo los tres tramos. Haz clic fuera del dibujo después de cada uno.',
+    ])
+    + ojo('El rectángulo recién dibujado sigue seleccionado',
+          '<p>Hasta que haces clic fuera, el último rectángulo sigue seleccionado, con puntitos '
+          'azules alrededor. Si cambias el color en ese momento, <strong>cambia el color de ese '
+          'rectángulo</strong>, no el del siguiente. Aquí el tramo de arriba se ha vuelto blanco '
+          'por eso. Se arregla con <em>deshacer</em>, o con el bote de pintura en gris sobre el '
+          'tramo.</p>' + captura('p8-ojo.jpg', 'El tramo de arriba se ha vuelto blanco al cambiar de color sin hacer clic fuera'))
+    + captura('p9-final.jpg', 'Así queda: césped, carretera, salida y raya del centro')
+    + sub1(3, 'Dibuja un segundo fondo más difícil')
+    + '<p>Una segunda carretera, para el nivel 2 del juego de la sesión 13. Esta la diseñas tú.</p>'
+    + pasos([
+        'En la pestaña <strong>Fondos</strong>, abajo a la izquierda, pasa el ratón por el botón '
+        'del fondo y elige el <strong>pincel</strong> (<strong>Pinta</strong>): aparece un fondo '
+        'nuevo en blanco, «backdrop2».',
+        'Conviértelo a mapa de bits y pinta el césped igual que en el 1.1.',
+        'Dibuja una carretera con <strong>al menos cinco tramos</strong>, más difícil que la '
+        'primera: más giros o tramos más estrechos, pero que el coche quepa.',
+        'Marca la salida y la raya del centro igual que en el 1.2.',
+    ])
+    + '<h3 style="margin-top:20px">Lo has conseguido si…</h3>'
+    + logros(['No queda nada blanco en el fondo: todo es césped o carretera.',
+              'La carretera es continua: no hay rendijas verdes entre los tramos.',
+              'Los tramos son anchos, más o menos una cuarta parte del fondo.',
+              'La salida y la raya del centro están dibujadas (apartado 1.2).',
+              'Hay un segundo fondo con una carretera de al menos cinco tramos (apartado 1.3).'])
+    + '<div style="border:2px solid #1A6B3A;background:#F0F9F3;border-radius:10px;padding:14px 18px;margin:18px 0">'
+      '<h3 style="margin:0 0 8px">📤 Qué tienes que entregar hoy</h3>'
+      '<div style="margin:0 0 10px;padding:8px 12px;background:#fff;border:1.5px solid #1A6B3A;border-radius:8px">'
+      '<p style="margin:0 0 6px"><strong>Cómo se valora.</strong> Todo va en el mismo archivo. Un '
+      'apartado cuenta si está hecho; a medias no suma.</p>'
+      '<table style="border-collapse:collapse;margin:6px 0 8px;font-size:.95rem"><thead><tr>'
+      '<th style="border:1px solid #BFD8C6;padding:5px 10px;background:#E3F2E8;color:#1A6B3A;text-align:left">Lo que entregas hecho</th>'
+      '<th style="border:1px solid #BFD8C6;padding:5px 10px;background:#E3F2E8;color:#1A6B3A">Nota</th></tr></thead><tbody>'
+      + ''.join('<tr><td style="border:1px solid #BFD8C6;padding:5px 10px">%s</td><td style="border:1px '
+                'solid #BFD8C6;padding:5px 10px;text-align:center;font-weight:700;color:#1A6B3A">%s</td></tr>' % f
+                for f in (('1.1', '5'), ('1.1 y 1.2', '8'), ('1.1, 1.2 y 1.3', '10')))
+    + '</tbody></table><p style="margin:0">Sin el 1.1 hecho no hay nota, aunque estén los demás: lo repites.</p></div>'
+      '<ol style="margin:0;padding-left:20px"><li><strong>Archivo → Guardar en tu ordenador.</strong> '
+      'Se descarga un archivo <code>.sb3</code> en tu carpeta <strong>Descargas</strong>.</li>'
+      '<li>Cámbiale el nombre a <strong>Sesion12-1_TuNombre.sb3</strong>.</li>'
+      '<li>Súbelo a la tarea de <strong>Moodle</strong> «S12 · Parte 1».</li></ol></div>'
+)
+
+PARTE2 = (
+    '<h2 style="margin-top:34px;padding:10px 14px;background:#1B4F8A;color:#fff;border-radius:10px">'
+    'Parte 2 · Programa el coche</h2>\n'
+    '<p><strong>En la segunda clase</strong> todos usáis <strong>el mismo fondo</strong>, este. '
+    'Descárgalo y cárgalo en Scratch como se explica en el 5.1.</p>\n'
+    '<figure style="margin:10px 0"><img class="captura" src="../materiales/carretera.svg" '
+    'alt="El fondo común de la carretera" style="display:block;width:100%;max-width:480px;'
+    'height:auto;border:1px solid #CFD8DC;border-radius:8px"></figure>\n'
+    '<a class="abrir-scratch" href="../materiales/carretera.svg" download="carretera.svg">'
+    '📥 Descargar el fondo de la carretera</a>'
+)
+
 s12 = pagina(
-    12, 'Laberinto I',
-    'Sesión 12 de Scratch: mover un personaje con cambiar x e y, y detectar las paredes con '
-    '¿tocando el color? Primera parte del laberinto. CyR 1º ESO.',
-    'un <strong>laberinto</strong> por el que se mueve tu personaje, con paredes que no se pueden '
-    'atravesar.',
+    12, 'Carretera',
+    'Sesión 12 de Scratch, en dos clases: dibujar una carretera en el editor de pintura y '
+    'programar un coche que la recorre sin salirse, con sumar a x e y y ¿tocando el color? CyR 1º ESO.',
+    'un <strong>juego de carreras</strong> en dos clases: en la primera <strong>dibujas la '
+    'carretera</strong>; en la segunda <strong>programas un coche</strong> que la recorre sin '
+    'salirse al césped.',
     [
+        ('Parte 1 · Dibuja la carretera', PARTE1),
+        (None, PARTE2),
         ('Dos bloques nuevos y una idea',
          claves([
-             ('sumar a x (4) y sumar a y (4)',
-              'Mueven el personaje en horizontal y en vertical sin girarlo. Para un laberinto van '
-              'mucho mejor que <em>apuntar en dirección</em>, porque el personaje no tiene que dar '
-              'la vuelta para bajar.'),
+             ('sumar a x (3) y sumar a y (3)',
+              'Mueven el objeto en horizontal y en vertical sin girarlo. Para recorrer una '
+              'carretera de tramos rectos van mejor que <em>mover</em>, porque el coche no tiene '
+              'que girar para subir o bajar.'),
              ('¿tocando el color ( )?',
-              'Una condición que mira si el personaje está pisando un color concreto de la '
-              'pantalla. Es así como el programa se entera de que ha chocado con una pared.'),
+              'Una condición de Sensores que mira si el objeto está pisando un color concreto de '
+              'la pantalla. Así se entera el programa de que el coche se ha salido.'),
              ('Y la idea',
-              'En Scratch las paredes no existen. Lo que hay es un dibujo de color negro y un '
-              'programa que dice «si estás tocando negro, vuelve al principio». El efecto para el '
-              'jugador es el mismo.')])),
+              'En Scratch los bordes de la carretera no existen. Lo que hay es un dibujo verde y '
+              'un programa que dice «si estás tocando el verde, vuelve a la salida». Para el '
+              'jugador el efecto es el mismo.'),
+         ])
+         + '<p>El <strong>estilo de rotación izquierda-derecha</strong> ya lo conoces de sesiones '
+           'anteriores: con él, al apuntar a -90 el coche mira a la izquierda en vez de ponerse '
+           'boca abajo.</p>'),
 
         ('Lee estos dos trozos',
-         '<p>Primero, el movimiento. Cuatro condicionales, uno por flecha, dentro de un '
-         '<strong>por siempre</strong> que los vigila todo el rato:</p>' +
-         caja(MOV12, 'Programa de movimiento: fijar tamaño al 40 por ciento, ir a la posición de '
-                     'salida y después, por siempre, cuatro condicionales que cambian x o y según '
-                     'la flecha que esté pulsada') +
-         '<p>Y ahora las paredes. Este trozo va <strong>dentro del mismo por siempre</strong>, '
-         'debajo de los cuatro anteriores:</p>' +
-         caja(PARED12, 'Condicional: si está tocando el color negro, iniciar el sonido Pop y '
-                       'volver a la posición de salida',
-              pie='Si tocas la pared, vuelves a la casilla de salida. Es el castigo clásico del '
-                  'laberinto, y se resuelve con un solo bloque.')),
+         '<p>Primero, el movimiento. Cuatro condicionales, uno por flecha, dentro de un <em>por '
+         'siempre</em> que los vigila todo el rato:</p>'
+         + caja(MOV12, 'Programa del coche: fijar tamaño al 35 por ciento, estilo de rotación '
+                       'izquierda-derecha, apuntar a 90, ir a la salida y, por siempre, cuatro '
+                       'condicionales que mueven el coche según la flecha pulsada')
+         + '<p>Y ahora el césped. Este trozo va dentro del mismo <em>por siempre</em>, debajo de '
+           'los cuatro anteriores:</p>'
+         + caja(CESPED12, 'Condicional: si está tocando el verde del césped, iniciar el sonido '
+                          'pop, volver a la salida y apuntar a 90',
+                pie='Si tocas el césped, vuelves a la salida. Es el castigo clásico de los juegos '
+                    'de carreras, y se resuelve con un solo condicional.')
+         + secuencia([
+             'Al pulsar la bandera, el coche se pone a su tamaño, mirando a la derecha y en la '
+             'salida.',
+             'El <em>por siempre</em> mira las cuatro flechas una y otra vez. La que esté pulsada '
+             'mueve el coche 3 pasos en su sentido; las de izquierda y derecha, además, lo giran '
+             'hacia donde va.',
+             'En cada vuelta mira también si el coche pisa el verde. Si lo pisa, suena y lo '
+             'devuelve a la salida mirando a la derecha.'])),
 
         ('Comprueba que lo has entendido',
-         pregunta('1', 'Pintas el laberinto de negro y usas <em>¿tocando el color?</em>. Al probarlo, '
-                       'el personaje atraviesa las paredes como un fantasma. ¿Cuál es la causa más '
-                       'probable?',
-                  [('color', 'El color del bloque no es exactamente el mismo que el de la pared',
+         pregunta('1', 'Pones el condicional del césped y, al probarlo, el coche atraviesa el '
+                       'césped como si nada. ¿Cuál es la causa más probable?',
+                  [('color', 'El verde del bloque no es exactamente el mismo que el del césped',
                     'Casi seguro que es esto. El bloque compara colores <b>exactos</b>. Hay que '
                     'abrir el cuadradito de color del bloque, elegir el <b>cuentagotas</b> y pinchar '
-                    'directamente sobre la pared del escenario.'),
+                    'directamente sobre el césped del escenario.'),
                    ('fondo', 'El bloque sólo detecta objetos, no dibujos del fondo',
                     'No. <em>¿tocando el color?</em> mira los píxeles de la pantalla, vengan del '
-                    'fondo o de otro objeto. Justamente por eso sirve para laberintos pintados.'),
-                   ('siempre', 'Falta meterlo dentro de un por siempre',
-                    'Eso sí lo haría fallar, pero de otra forma: comprobaría una sola vez al '
-                    'arrancar y ya nunca más. Aquí el condicional ya está dentro del bucle.')],
+                    'fondo o de otro objeto. Justamente por eso sirve para una carretera pintada.'),
+                   ('siempre', 'Falta un segundo por siempre para el césped',
+                    'No hace falta. El condicional del césped va dentro del mismo <em>por '
+                    'siempre</em> que las flechas, y así se comprueba en cada vuelta.')],
                   'color')),
 
         ('Tu actividad',
          pasos([
-             'Haz clic en el escenario (abajo a la derecha) y elige <strong>Pintar</strong> para '
-             'dibujar tu propio laberinto. Usa el rectángulo relleno de <strong>negro</strong> para '
-             'las paredes.',
-             'Deja los pasillos <strong>anchos</strong>. Si son estrechos, el juego es imposible.',
-             'Vuelve al gato, ponle un tamaño pequeño (30–40 %) y colócalo en la salida.',
-             'Monta el movimiento y pruébalo <em>sin</em> el condicional de las paredes.',
-             'Añade el condicional de las paredes y vuelve a probar. Coge el color con el '
-             '<strong>cuentagotas</strong>, no lo elijas a ojo.',
-             'Ajusta los <strong>4</strong> pasos: si va muy rápido se cuela por las paredes, si va '
-             'muy lento aburre.']) +
-         ojo('El fallo de atravesar paredes yendo deprisa',
-             '<p>Si pones <em>sumar a x (20)</em>, el personaje da saltos de 20 píxeles y puede '
-             'aparecer <strong>al otro lado</strong> de una pared fina sin haberla tocado nunca. No '
-             'es un fallo de Scratch: es que entre un fotograma y el siguiente nadie ha mirado.</p>'
-             '<p style="margin-bottom:0">Solución: pasos pequeños y paredes gruesas.</p>')),
+             'Carga el fondo común: abajo a la derecha, pasa el ratón por el botón de '
+             '<strong>Fondos</strong> y elige <strong>Cargar fondo</strong>. Abre el archivo '
+             '<strong>carretera.svg</strong> que has descargado (está en tu carpeta '
+             '<strong>Descargas</strong>).',
+             'Borra el gato y añade el coche: botón <strong>Elige un objeto</strong>, escribe '
+             '<strong>Convertible</strong> y elige el descapotable morado.',
+             'Monta en el coche los dos trozos de arriba: el movimiento y, dentro del mismo '
+             '<em>por siempre</em>, debajo de los cuatro <em>si</em>, el condicional del césped.',
+             'El verde del bloque <em>¿tocando el color?</em> se coge con el '
+             '<strong>cuentagotas</strong>: haz clic en el color del bloque, después en el '
+             'cuentagotas, y pincha en el césped del escenario. No lo elijas a ojo.',
+             'Prueba: el coche recorre la carretera de la salida al final. Si toca el césped, '
+             'suena y vuelve a la salida. En las esquinas, llega hasta el centro del tramo y '
+             'entonces gira.'])),
 
         ('Lo has conseguido si…',
-         logros(['Hay un laberinto pintado en el fondo con pasillos por los que se puede pasar.',
-                 'El personaje se mueve con las cuatro flechas, sin girar.',
-                 'Al tocar una pared vuelve a la salida y suena algo.',
-                 'No se cuela por las paredes yendo deprisa.'])),
+         logros(['El coche se mueve con las cuatro flechas y mira hacia donde va.',
+                 'Al tocar el césped suena y vuelve a la salida.',
+                 'Se puede recorrer toda la carretera, de la salida al final, sin salirse.'])),
     ],
-    nav_extra=guia('ejercicio-de-juego-laberinto.pdf', 'Laberinto, material de apoyo'))
+    entrega=('<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta '
+             'de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, '
+             '<strong>se pierde</strong>.</p>\n<ol>\n'
+             '  <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo '
+             '<code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>\n'
+             '  <li>Cámbiale el nombre a <strong>Sesion12-2_TuNombre.sb3</strong>.</li>\n'
+             '  <li>Súbelo a la tarea de <strong>Moodle</strong> «S12 · Parte 2».</li>\n</ol>'))
+
 
 # ============================================================ S13
 META13 = [

@@ -113,8 +113,8 @@ def todos_los_programas():
 def reto(num):
     """El programa del apartado N.3 de la sesión `num` (la versión arreglada, si la hay), en el
     objeto de la biblioteca que dice pseudocodigo.SPRITES. Disfraces y sonidos esquemáticos con
-    los nombres que usa el programa. En la S12 van además el gato y una pared negra, porque el
-    fantasma los necesita para hacer lo que dice el enunciado."""
+    los nombres que usa el programa. En la S12 van además el coche y un trozo de césped, porque el
+    camión los necesita para hacer lo que dice el enunciado."""
     import pseudocodigo as P
     from sb3 import svg_costume, _svg
     r = P.RETOS[num]
@@ -137,9 +137,9 @@ def reto(num):
         objetos.append(Objeto(nombre, [DISFRACES['pelota'], DISFRACES['piedra']], [copy.deepcopy(prog)],
                               x=x, y=0, sonidos=sonidos))
     if num == 12:
-        pared = svg_costume(_svg(20, 200, '<rect width="20" height="200" fill="#1A1A1A"/>'), 'pared', 10, 100)
-        objetos.append(Objeto('Pared', [pared], [], x=150, y=0))
-        objetos.append(Objeto('Sprite1', [DISFRACES['gato']], [], x=-150, y=0))
+        pared = svg_costume(_svg(20, 200, '<rect width="20" height="200" fill="#4CAF50"/>'), 'cesped', 10, 100)
+        objetos.append(Objeto('Cesped', [pared], [], x=150, y=0))
+        objetos.append(Objeto('Convertible', [DISFRACES['gato']], [], x=-150, y=0))
     return proyecto(objetos)
 
 

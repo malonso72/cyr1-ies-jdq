@@ -82,7 +82,9 @@ function ok(cond, msg) {
       ok(!!s.querySelector('title'), P + 'svg ' + i + ' sin <title>');
       ok(!!s.getAttribute('viewBox'), P + 'svg ' + i + ' sin viewBox');
     });
-    ok(q('img').length === 0, P + 'hay <img>: debería ser todo SVG en línea');
+    // Las capturas del editor (S12, primer dibujo) son las únicas imágenes permitidas, y con alt.
+    ok(q('img:not(.captura)').length === 0, P + 'hay <img>: debería ser todo SVG en línea');
+    q('img.captura').forEach(im => ok((im.getAttribute('alt') || '').length > 10, P + 'captura sin alt: ' + im.getAttribute('src')));
 
     // enlaces externos con rel=noopener
     q('a[target="_blank"]').forEach(a =>

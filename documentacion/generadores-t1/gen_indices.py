@@ -10,7 +10,7 @@ TITULOS = {
     4: 'Condicionales I', 5: 'Condicionales II y teclado',
     6: 'Animaciones con disfraces', 7: 'Preguntas y respuestas', 8: 'Variables I',
     9: 'Variables II, azar y puntuación', 10: 'Juego de carreras',
-    11: 'Mensajes entre objetos', 12: 'Laberinto I', 13: 'Laberinto II',
+    11: 'Mensajes entre objetos', 12: 'Carretera', 13: 'Laberinto II',
     14: 'Piedra, papel o tijera', 15: 'Pong I', 16: 'Pong II',
     17: 'Depuración: encuentra el fallo',
     18: 'Proyecto final: idea y diseño', 19: 'Proyecto final: construcción',
@@ -29,7 +29,7 @@ QUE_HACES = {
     9: 'Un quiz de sumas con marcador de aciertos.',
     10: 'Dos corredores y un ganador distinto en cada partida.',
     11: 'Que un objeto reaccione justo cuando otro hace algo.',
-    12: 'Un laberinto con paredes que no se pueden atravesar.',
+    12: 'En dos clases: dibujas una carretera y programas un coche que la recorre sin salirse.',
     13: 'Le añades meta, cronómetro y un segundo nivel.',
     14: 'Juegas contra el ordenador, que elige sin hacer trampas.',
     15: 'La mecánica del Pong: pelota que rebota y pala que sigue al ratón.',
@@ -49,7 +49,7 @@ BLOQUES = [
      'Animar, preguntar, guardar datos en variables, usar el azar y coordinar dos objetos '
      'con mensajes.', range(6, 12)),
     ('🎮 Juegos completos', 'S12–S16',
-     'Tres juegos de principio a fin: laberinto, piedra-papel-tijera y Pong. Aquí se junta '
+     'Tres juegos de principio a fin: carretera, piedra-papel-tijera y Pong. Aquí se junta '
      'todo lo anterior.', range(12, 17)),
     ('🔍 Depuración', 'S17',
      'Antes de construir lo tuyo: aprender a encontrar un fallo en un programa que casi '

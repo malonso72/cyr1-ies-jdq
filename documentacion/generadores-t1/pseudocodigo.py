@@ -39,7 +39,7 @@ LOGRO = 'El programa del apartado {n}.3 está montado y hace lo que dice «Sabes
 DIRECCIONES = {'90': 'hacia la derecha', '-90': 'hacia la izquierda', '0': 'hacia arriba',
                '180': 'hacia abajo'}
 NOMBRES = {'Sprite1': 'el gato (Sprite1)'}
-COLORES = {'#1A1A1A': 'el negro de las paredes'}
+COLORES = {'#1A1A1A': 'el negro de las paredes', '#4CAF50': 'el verde del césped'}
 
 
 def _tecla(k):
@@ -545,28 +545,28 @@ RETOS = {
                   'el mensaje.'),
 
     12: dict(
-        objeto='el fantasma que patrulla',
-        planteamiento='Un fantasma que va y viene por un pasillo del laberinto y asusta al gato si '
-                      'lo toca.',
-        preparar=[elige('Ghost', 'Ghost', 'el fantasma') + ' Arrástralo con el ratón a un pasillo '
-                  'largo y recto de tu laberinto.',
-                  selecciona('el fantasma', 'el gato ni en la estrella'),
-                  'Monta el programa de abajo. El color negro lo coges con el cuentagotas, igual que '
-                  'en el programa del gato.',
-                  'Para probarlo, pulsa la <strong>bandera</strong> para mover al gato y luego la '
-                  'tecla <strong>G</strong> para despertar al fantasma.'],
-        programas=[(None, [K('g'), ('stack', 'looks', ['fijar tamaño al', ('num', '40'), '%']),
+        objeto='el camión que patrulla',
+        planteamiento='Un camión que va y viene por el tramo de arriba de la carretera y pita si '
+                      'toca al coche.',
+        preparar=[elige('Truck', 'Truck', 'el camión') + ' Arrástralo con el ratón al tramo de '
+                  'arriba de la carretera.',
+                  selecciona('el camión', 'el coche ni en la estrella'),
+                  'Monta el programa de abajo. El verde lo coges con el cuentagotas, igual que '
+                  'en el programa del coche.',
+                  'Para probarlo, pulsa la <strong>bandera</strong> para el coche y luego la '
+                  'tecla <strong>C</strong> para poner en marcha el camión.'],
+        programas=[(None, [K('c'), ('stack', 'looks', ['fijar tamaño al', ('num', '20'), '%']),
                            rotacion('izquierda-derecha'), apuntar('90'),
                            ('c', 'control', ['por siempre'], [
                                mover('3'),
-                               si(('bool', 'sensing', ['¿tocando el color', ('color', '#1A1A1A'), '?']),
-                                  [('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '180'), 'grados']), mover('3')]),
-                               si(('bool', 'sensing', ['¿tocando', ('drop', 'Sprite1'), '?']),
-                                  [decir('¡Buuu!', '1')]),
+                               si(('bool', 'sensing', ['¿tocando el color', ('color', '#4CAF50'), '?']),
+                                  [('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '180'), 'grados']), mover('20')]),
+                               si(('bool', 'sensing', ['¿tocando', ('drop', 'Convertible'), '?']),
+                                  [decir('¡Piii!', '1')]),
                            ])])],
-        comprueba='al pulsar G el fantasma avanza por el pasillo, choca con la pared, se da la '
-                  'vuelta y sigue en sentido contrario, una y otra vez, sin atravesar las paredes. Si '
-                  'llevas al gato hasta él, dice «¡Buuu!». Se para con el círculo rojo.'),
+        comprueba='al pulsar C el camión avanza por el tramo de arriba, al llegar al césped se da '
+                  'la vuelta y sigue en sentido contrario, una y otra vez, sin quedarse atascado. '
+                  'Si llevas el coche hasta él, dice «¡Piii!». Se para con el círculo rojo.'),
 
     13: dict(
         objeto='la campana de la cuenta atrás',
@@ -675,7 +675,7 @@ RETOS = {
 # Qué objeto de la biblioteca es cada programa, para el .sb3 de soluciones y las pruebas.
 SPRITES = {1: ['Ball'], 2: ['Butterfly 1'], 3: ['Pencil'], 4: ['Bat'], 5: ['Convertible 2'],
            6: ['Parrot'], 7: ['Retro Robot'], 8: ['Dog2'], 9: ['Owl'], 10: ['Frog'],
-           11: ['Referee', 'Drum'], 12: ['Ghost'], 13: ['Bell'], 14: ['Unicorn'],
+           11: ['Referee', 'Drum'], 12: ['Truck'], 13: ['Bell'], 14: ['Unicorn'],
            15: ['Balloon1'], 16: ['Grasshopper'], 17: ['Ballerina']}
 
 
