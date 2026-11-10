@@ -112,14 +112,16 @@ ACT12_1 = (
         '<strong>Saturación 0, Brillo 100</strong>.',
         'Con el <strong>Rectángulo</strong>, dibuja la línea de salida: un rectángulo muy estrecho '
         'que cruce el tramo de abajo, cerca del borde izquierdo.',
-        'Dibuja la raya del centro con rectángulos pequeños y alargados, separados entre sí, '
-        'siguiendo los tres tramos. Haz clic fuera del dibujo después de cada uno.'
+        'Dibuja la raya del centro, también con el <strong>Rectángulo</strong>: un rectángulo '
+        '<strong>muy fino y largo</strong> por el centro de cada tramo, de punta a punta. El '
+        'rectángulo siempre sale recto, aunque se te tuerza un poco la mano: como mucho saldrá '
+        'algo más gordo. Haz clic fuera del dibujo después de cada uno.'
         + ojo('El rectángulo recién dibujado sigue seleccionado',
               '<p>Hasta que haces clic fuera, el último rectángulo sigue seleccionado, con puntitos '
               'azules alrededor. Si cambias el color en ese momento, <strong>cambia el color de ese '
-              'rectángulo</strong>, no el del siguiente. Aquí el tramo de arriba se ha vuelto blanco '
-              'por eso. Se arregla con <em>deshacer</em>, o con el bote de pintura en gris sobre el '
-              'tramo.</p>' + captura('p8-ojo.jpg', 'El tramo de arriba se ha vuelto blanco al cambiar de color sin hacer clic fuera'))
+              'rectángulo</strong>, no el del siguiente. Aquí el tramo de arriba, recién dibujado, se '
+              'ha vuelto blanco por eso. Se arregla con <em>deshacer</em>.</p>'
+              + captura('p8-ojo.jpg', 'El tramo de arriba, todavía seleccionado, se ha vuelto blanco al cambiar de color'))
         + captura('p9-final.jpg', 'Así queda el fondo: césped, carretera, salida y raya del centro'),
         'Añade el coche: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), '
         'escribe <strong>Convertible</strong> y elige el descapotable morado. Borra el gato.',
@@ -154,6 +156,29 @@ ACT12_1 = (
 )
 
 
+OBJETIVO12 = (
+    '<div style="border:2px solid #1B4F8A;background:#F3F7FC;border-radius:12px;padding:14px 18px;'
+    'margin:6px 0 22px">'
+    '<h2 style="margin:0 0 6px;font-size:1.3rem;color:#1B4F8A">🎯 Hoy dibujas estos dos fondos</h2>'
+    '<p style="margin:0 0 10px">Mira las dos imágenes antes de empezar y vuelve a ellas cuando no '
+    'sepas por dónde vas. Al terminar, tu proyecto tiene que parecerse a esto.</p>'
+    '<div style="display:flex;flex-wrap:wrap;gap:16px">'
+    '<figure style="flex:1 1 280px;margin:0"><img class="captura" src="%sobjetivo-1.jpg" '
+    'alt="Fondo 1: la carretera de tres tramos con la salida, la raya del centro y el coche en la salida" '
+    'style="display:block;width:100%%;height:auto;border:1px solid #CFD8DC;border-radius:8px">'
+    '<figcaption style="font-size:.9rem;margin-top:6px"><strong>Fondo 1 · La carretera</strong> '
+    '(apartados %d.1 y %d.2): tres tramos, la salida, la raya del centro y el coche esperando en '
+    'la salida.</figcaption></figure>'
+    '<figure style="flex:1 1 280px;margin:0"><img class="captura" src="%sobjetivo-2.jpg" '
+    'alt="Fondo 2: un ejemplo de carretera difícil de cinco tramos" '
+    'style="display:block;width:100%%;height:auto;border:1px solid #CFD8DC;border-radius:8px">'
+    '<figcaption style="font-size:.9rem;margin-top:6px"><strong>Fondo 2 · La carretera difícil</strong> '
+    '(apartado %d.3), un ejemplo: <strong>la tuya puede ser distinta</strong>, con al menos cinco '
+    'tramos y que el coche quepa.</figcaption></figure>'
+    '</div></div>' % (IMG12, A12, A12, IMG12, A12)
+)
+
+
 def _escala12(a, filas):
     tr = ''.join('<tr><td>%s</td><td class="nota">%s</td></tr>' % f for f in filas)
     return ('<div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo '
@@ -171,6 +196,7 @@ s12 = pagina(
     'Es tu primer dibujo en Scratch. En la próxima clase (Parte 2) programarás un coche que la '
     'recorre.',
     [
+        (None, OBJETIVO12),
         ('El editor de pintura',
          claves([
              ('Escenario y Fondos',
