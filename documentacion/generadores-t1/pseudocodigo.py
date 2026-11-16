@@ -546,27 +546,59 @@ RETOS = {
 
     12: dict(
         objeto='el camión que patrulla',
-        planteamiento='Un camión que va y viene por el tramo de arriba de la carretera y pita si '
-                      'toca al coche.',
-        preparar=[elige('Truck', 'Truck', 'el camión') + ' Arrástralo con el ratón al tramo de '
-                  'arriba de la carretera.',
+        planteamiento='Un camión que va y viene por el tramo de arriba de la carretera, por el '
+                      'carril de abajo (debajo de la raya del centro). Para llegar a la meta hay '
+                      'que adelantarlo por el carril de arriba: si te pilla, pita y vuelves a la '
+                      'salida. Y, para terminar, un coche que mira hacia donde va también al subir '
+                      'y al bajar.',
+        preparar=[elige('Truck', 'Truck', 'el camión') + ' No hace falta colocarlo: su '
+                  'programa lo lleva a su carril.',
                   selecciona('el camión', 'el coche ni en la estrella'),
-                  'Monta el programa de abajo. El verde lo coges con el cuentagotas, igual que '
-                  'en el programa del coche.',
-                  'Para probarlo, pulsa la <strong>bandera</strong> para el coche y luego la '
-                  'tecla <strong>C</strong> para poner en marcha el camión.'],
-        programas=[(None, [K('c'), ('stack', 'looks', ['fijar tamaño al', ('num', '20'), '%']),
-                           rotacion('izquierda-derecha'), apuntar('90'),
+                  'Monta el <strong>primer programa</strong> de abajo, el del camión. El verde lo '
+                  'coges con el cuentagotas, igual que en el programa del coche.',
+                  'Ahora el choque. Selecciona <strong>el coche</strong> y añade el <strong>segundo '
+                  'trozo</strong> dentro de su <em>por siempre</em>, debajo del condicional de la '
+                  'meta. Es como el del césped, pero con <em>¿tocando [Truck]?</em> de Sensores: '
+                  'Truck es el camión.',
+                  'Y la mejora. En el coche, cambia los cuatro <em>si</em> de las flechas por los '
+                  'del <strong>tercer trozo</strong>: cada flecha fija el estilo de rotación antes '
+                  'de apuntar. Arriba y abajo usan <em>en todas direcciones</em>, para que el coche '
+                  'se incline; izquierda y derecha vuelven a <em>izquierda-derecha</em>, para que '
+                  'no vaya boca abajo.',
+                  'Para probarlo, pulsa la <strong>bandera</strong> y luego la tecla '
+                  '<strong>C</strong> para poner en marcha el camión.'],
+        programas=[('En el camión:', [K('c'), ('stack', 'looks', ['fijar tamaño al', ('num', '20'), '%']),
+                           rotacion('izquierda-derecha'), apuntar('90'), ir('0', '75'),
                            ('c', 'control', ['por siempre'], [
                                mover('3'),
                                si(('bool', 'sensing', ['¿tocando el color', ('color', '#4CAF50'), '?']),
                                   [('stack', 'motion', ['girar', ('icon', 'giro-d'), ('num', '180'), 'grados']), mover('20')]),
                                si(('bool', 'sensing', ['¿tocando', ('drop', 'Convertible'), '?']),
                                   [decir('¡Piii!', '1')]),
-                           ])])],
-        comprueba='al pulsar C el camión avanza por el tramo de arriba, al llegar al césped se da '
-                  'la vuelta y sigue en sentido contrario, una y otra vez, sin quedarse atascado. '
-                  'Si llevas el coche hasta él, dice «¡Piii!». Se para con el círculo rojo.'),
+                           ])]),
+                   ('En el coche, dentro de su <em>por siempre</em>, debajo de la meta:', [
+                       si(('bool', 'sensing', ['¿tocando', ('drop', 'Truck'), '?']),
+                          [('stack', 'sound', ['iniciar sonido', ('drop', 'pop')]),
+                           ir('-200', '-120'), apuntar('90')])]),
+                   ('En el coche, en lugar de los cuatro <em>si</em> de las flechas:', [
+                       si(('bool', 'sensing', ['¿tecla', ('drop', 'flecha derecha'), 'presionada?']),
+                          [rotacion('izquierda-derecha'), apuntar('90'),
+                           ('stack', 'motion', ['sumar a x', ('num', '3')])]),
+                       si(('bool', 'sensing', ['¿tecla', ('drop', 'flecha izquierda'), 'presionada?']),
+                          [rotacion('izquierda-derecha'), apuntar('-90'),
+                           ('stack', 'motion', ['sumar a x', ('num', '-3')])]),
+                       si(('bool', 'sensing', ['¿tecla', ('drop', 'flecha arriba'), 'presionada?']),
+                          [rotacion('en todas direcciones'), apuntar('0'),
+                           ('stack', 'motion', ['sumar a y', ('num', '3')])]),
+                       si(('bool', 'sensing', ['¿tecla', ('drop', 'flecha abajo'), 'presionada?']),
+                          [rotacion('en todas direcciones'), apuntar('180'),
+                           ('stack', 'motion', ['sumar a y', ('num', '-3')])])])],
+        comprueba='al pulsar C el camión avanza por el carril de abajo del tramo de arriba, al '
+                  'llegar al césped se da la vuelta y sigue en sentido contrario, una y otra vez, '
+                  'sin quedarse atascado. Si el coche va por encima de la raya del centro, lo '
+                  'adelanta sin tocarlo; si lo toca, el camión dice «¡Piii!» y el coche vuelve a la salida. Al '
+                  'subir, el coche mira hacia arriba; al bajar, hacia abajo; a izquierda y '
+                  'derecha va recto, nunca boca abajo. Todo se para con el círculo rojo.'),
 
     13: dict(
         objeto='la campana de la cuenta atrás',

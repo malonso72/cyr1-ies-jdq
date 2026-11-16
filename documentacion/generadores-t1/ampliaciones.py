@@ -70,7 +70,7 @@ OBJETOS = {
     10: [('el gato', [1, 2]), ('el perro', [1, 2]), ('la rana', [3])],
     11: [('el gato', [1]), ('el balón', [1, 2]), ('el portero', [2]), ('el árbitro', [3]),
          ('el tambor', [3])],
-    12: [('el coche', [1, 2]), ('la estrella', [2]), ('el camión', [3])],
+    12: [('el coche', [1, 2, 3]), ('la estrella', [2]), ('el camión', [3])],
     13: [('el gato', [1, 2]), ('la estrella y el fantasma', ['de la sesión 12']), ('la meta', [1]),
          ('la campana', [3])],
     14: [('el gato', [1, 2]), ('el unicornio', [3])],

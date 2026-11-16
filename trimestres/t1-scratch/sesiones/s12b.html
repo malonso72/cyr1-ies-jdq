@@ -209,7 +209,7 @@
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
-<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el coche</strong> (4.1 y 4.2), <strong>la estrella</strong> (4.2) y <strong>el camión</strong> (4.3). Cada objeto, con su programa.</p>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el coche</strong> (4.1, 4.2 y 4.3), <strong>la estrella</strong> (4.2) y <strong>el camión</strong> (4.3). Cada objeto, con su programa.</p>
 <h3 class="sub"><span class="subn">4.1</span>Monta el coche</h3>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Carga el fondo común: abajo a la derecha, pasa el ratón por el botón de <strong>Fondos</strong> y elige <strong>Cargar fondo</strong>. Abre el archivo <strong>carretera.svg</strong> que has descargado (está en tu carpeta <strong>Descargas</strong>).</span></li>
@@ -221,19 +221,23 @@
 <h3 class="sub"><span class="subn">4.2</span>Añade una estrella que dé puntos</h3>
 <p>Una <strong>estrella</strong> en la carretera que da un punto al cogerla y desaparece.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Añade la estrella: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Star</strong> en el buscador y elige <strong>Star</strong>, la estrella amarilla. Ponle tamaño <strong>50</strong> y colócala en el tramo de la derecha.</span></li><li><span class="p">Paso 2</span><span>Crea la variable <strong>Puntos</strong>. En el programa del <strong>coche</strong>, justo debajo de la bandera, pon <strong>dar a Puntos el valor 0</strong>.</span></li><li><span class="p">Paso 3</span><span>Selecciona la estrella: <strong>al hacer clic en la bandera</strong>, <strong>mostrar</strong> y un <strong>por siempre</strong> con un <strong>si ¿tocando Convertible? entonces</strong> dentro. Convertible es el coche.</span></li><li><span class="p">Paso 4</span><span>Dentro del <em>si</em>: <strong>sumar a Puntos 1</strong>, <strong>esconder</strong> y <strong>detener este programa</strong>. Mostrar y esconder están en Apariencia; el detener es el de la sesión 4, con «este programa» en el desplegable.</span></li><li><span class="p">Paso 5</span><span>Juega: al pasar por la estrella desaparece y Puntos sube a 1. Sólo a 1: sin el <em>detener</em>, seguiría sumando mientras la tocas.</span></li></ol>
 <h3 class="sub"><span class="subn">4.3</span>Monta el camión que patrulla a partir del texto</h3>
-<p>Un camión que va y viene por el tramo de arriba de la carretera y pita si toca al coche.</p>
+<p>Un camión que va y viene por el tramo de arriba de la carretera, por el carril de abajo (debajo de la raya del centro). Para llegar a la meta hay que adelantarlo por el carril de arriba: si te pilla, pita y vuelves a la salida. Y, para terminar, un coche que mira hacia donde va también al subir y al bajar.</p>
 <ol class="paso-lista">
-  <li><span class="p">Paso 1</span><span>Añade el camión: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Truck</strong> en el buscador y elige <strong>Truck</strong>. Arrástralo con el ratón al tramo de arriba de la carretera.</span></li>
+  <li><span class="p">Paso 1</span><span>Añade el camión: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Truck</strong> en el buscador y elige <strong>Truck</strong>. No hace falta colocarlo: su programa lo lleva a su carril.</span></li>
   <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el camión, <strong>no</strong> en el coche ni en la estrella.</span></li>
-  <li><span class="p">Paso 3</span><span>Monta el programa de abajo. El verde lo coges con el cuentagotas, igual que en el programa del coche.</span></li>
-  <li><span class="p">Paso 4</span><span>Para probarlo, pulsa la <strong>bandera</strong> para el coche y luego la tecla <strong>C</strong> para poner en marcha el camión.</span></li>
+  <li><span class="p">Paso 3</span><span>Monta el <strong>primer programa</strong> de abajo, el del camión. El verde lo coges con el cuentagotas, igual que en el programa del coche.</span></li>
+  <li><span class="p">Paso 4</span><span>Ahora el choque. Selecciona <strong>el coche</strong> y añade el <strong>segundo trozo</strong> dentro de su <em>por siempre</em>, debajo del condicional de la meta. Es como el del césped, pero con <em>¿tocando [Truck]?</em> de Sensores: Truck es el camión.</span></li>
+  <li><span class="p">Paso 5</span><span>Y la mejora. En el coche, cambia los cuatro <em>si</em> de las flechas por los del <strong>tercer trozo</strong>: cada flecha fija el estilo de rotación antes de apuntar. Arriba y abajo usan <em>en todas direcciones</em>, para que el coche se incline; izquierda y derecha vuelven a <em>izquierda-derecha</em>, para que no vaya boca abajo.</span></li>
+  <li><span class="p">Paso 6</span><span>Para probarlo, pulsa la <strong>bandera</strong> y luego la tecla <strong>C</strong> para poner en marcha el camión.</span></li>
 </ol>
 <p>Aquí no hay dibujo: cada línea es un bloque, escrito con las mismas palabras que en Scratch. Lo que escribes tú va entre paréntesis <strong>( )</strong>; lo que eliges en un desplegable, entre corchetes <strong>[ ]</strong>. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<p class="rp-obj"><b>En el camión:</b></p>
 <ol class="pseudo">
   <li class="n0">al presionar tecla [c]</li>
   <li class="n1">fijar tamaño al (20) %</li>
   <li class="n1">fijar estilo de rotación a [izquierda-derecha]</li>
   <li class="n1">apuntar en dirección (90)</li>
+  <li class="n1">ir a x: (0) y: (75)</li>
   <li class="n1">por siempre</li>
   <li class="n2">mover (3) pasos</li>
   <li class="n2">si ¿tocando el color [el verde del césped]? entonces</li>
@@ -242,7 +246,33 @@
   <li class="n2">si ¿tocando [Convertible]? entonces</li>
   <li class="n3">decir (¡Piii!) durante (1) segundos</li>
 </ol>
-<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar C el camión avanza por el tramo de arriba, al llegar al césped se da la vuelta y sigue en sentido contrario, una y otra vez, sin quedarse atascado. Si llevas el coche hasta él, dice «¡Piii!». Se para con el círculo rojo.</p>
+<p class="rp-obj"><b>En el coche, dentro de su <em>por siempre</em>, debajo de la meta:</b></p>
+<ol class="pseudo">
+  <li class="n0">si ¿tocando [Truck]? entonces</li>
+  <li class="n1">iniciar sonido [pop]</li>
+  <li class="n1">ir a x: (-200) y: (-120)</li>
+  <li class="n1">apuntar en dirección (90)</li>
+</ol>
+<p class="rp-obj"><b>En el coche, en lugar de los cuatro <em>si</em> de las flechas:</b></p>
+<ol class="pseudo">
+  <li class="n0">si ¿tecla [flecha derecha] presionada? entonces</li>
+  <li class="n1">fijar estilo de rotación a [izquierda-derecha]</li>
+  <li class="n1">apuntar en dirección (90)</li>
+  <li class="n1">sumar a x (3)</li>
+  <li class="n0">si ¿tecla [flecha izquierda] presionada? entonces</li>
+  <li class="n1">fijar estilo de rotación a [izquierda-derecha]</li>
+  <li class="n1">apuntar en dirección (-90)</li>
+  <li class="n1">sumar a x (-3)</li>
+  <li class="n0">si ¿tecla [flecha arriba] presionada? entonces</li>
+  <li class="n1">fijar estilo de rotación a [en todas direcciones]</li>
+  <li class="n1">apuntar en dirección (0)</li>
+  <li class="n1">sumar a y (3)</li>
+  <li class="n0">si ¿tecla [flecha abajo] presionada? entonces</li>
+  <li class="n1">fijar estilo de rotación a [en todas direcciones]</li>
+  <li class="n1">apuntar en dirección (180)</li>
+  <li class="n1">sumar a y (-3)</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar C el camión avanza por el carril de abajo del tramo de arriba, al llegar al césped se da la vuelta y sigue en sentido contrario, una y otra vez, sin quedarse atascado. Si el coche va por encima de la raya del centro, lo adelanta sin tocarlo; si lo toca, el camión dice «¡Piii!» y el coche vuelve a la salida. Al subir, el coche mira hacia arriba; al bajar, hacia abajo; a izquierda y derecha va recto, nunca boca abajo. Todo se para con el círculo rojo.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
@@ -259,7 +289,7 @@
 <div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo archivo. Un apartado cuenta si funciona; a medias no suma.</p>
 <table><thead><tr><th>Lo que entregas hecho</th><th>Nota</th></tr></thead><tbody><tr><td>4.1</td><td class="nota">5</td></tr><tr><td>4.1 y 4.2</td><td class="nota">8</td></tr><tr><td>4.1, 4.2 y 4.3</td><td class="nota">10</td></tr></tbody></table>
 <p>Sin el 4.1 hecho no hay nota, aunque estén los demás: lo repites.</p></div>
-<p class="partes">En el proyecto tienen que estar: <strong>el coche</strong> (4.1 y 4.2), <strong>la estrella</strong> (4.2) y <strong>el camión</strong> (4.3).</p>
+<p class="partes">En el proyecto tienen que estar: <strong>el coche</strong> (4.1, 4.2 y 4.3), <strong>la estrella</strong> (4.2) y <strong>el camión</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
