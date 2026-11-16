@@ -49,6 +49,12 @@ CESPED12 = [
        [('stack', 'sound', ['iniciar sonido', ('drop', 'pop')])] + SALIDA12 +
        [('stack', 'motion', ['apuntar en dirección', ('num', '90')])]),
 ]
+ROJO12 = '#E53935'
+META12 = [
+    si(hexa('sensing', '¿tocando el color', ('color', ROJO12), '?'),
+       [('stack', 'looks', ['decir', ('txt', '¡Has llegado!'), 'durante', ('num', '2'), 'segundos']),
+        ('cap', 'control', ['detener', ('drop', 'todos')])]),
+]
 
 IMG12 = '../img/s12/'
 COLOCA12 = [BANDERA, ('stack', 'looks', ['fijar tamaño al', ('num', '35'), '%'])] + SALIDA12
@@ -264,8 +270,8 @@ s12b = pagina(
     12, 'Carretera · Parte 2',
     'Sesión 12 de Scratch, parte 2: un coche que recorre una carretera sin salirse, con sumar a '
     'x e y y ¿tocando el color? Fondo común para descargar. CyR 1º ESO.',
-    'un <strong>coche</strong> que recorre la carretera con las flechas y vuelve a la salida si '
-    'se sale al césped, y una estrella que da puntos.',
+    'un <strong>coche</strong> que recorre la carretera con las flechas, vuelve a la salida si '
+    'se sale al césped y termina al llegar a la meta, y una estrella que da puntos.',
     [
         (None, FONDO12),
         ('Dos bloques nuevos y una idea',
@@ -286,7 +292,7 @@ s12b = pagina(
            'anteriores: con él, al apuntar a -90 el coche mira a la izquierda en vez de ponerse '
            'boca abajo.</p>'),
 
-        ('Lee estos dos trozos',
+        ('Lee estos tres trozos',
          '<p>Primero, el movimiento. Cuatro condicionales, uno por flecha, dentro de un <em>por '
          'siempre</em> que los vigila todo el rato:</p>'
          + caja(MOV12, 'Programa del coche: fijar tamaño al 35 por ciento, estilo de rotación '
@@ -298,6 +304,12 @@ s12b = pagina(
                           'pop, volver a la salida y apuntar a 90',
                 pie='Si tocas el césped, vuelves a la salida. Es el castigo clásico de los juegos '
                     'de carreras, y se resuelve con un solo condicional.')
+         + '<p>Por último, la meta: la franja roja del final de la carretera. Este trozo va '
+           'también dentro del mismo <em>por siempre</em>, debajo del césped:</p>'
+         + caja(META12, 'Condicional: si está tocando el rojo de la meta, decir ¡Has llegado! '
+                        'durante 2 segundos y detener todos',
+                pie='Detener todos para todos los programas del proyecto, también los de otros '
+                    'objetos: la partida se acaba.')
          + secuencia([
              'Al pulsar la bandera, el coche se pone a su tamaño, mirando a la derecha y en la '
              'salida.',
@@ -305,7 +317,8 @@ s12b = pagina(
              'mueve el coche 3 pasos en su sentido; las de izquierda y derecha, además, lo giran '
              'hacia donde va.',
              'En cada vuelta mira también si el coche pisa el verde. Si lo pisa, suena y lo '
-             'devuelve a la salida mirando a la derecha.'])),
+             'devuelve a la salida mirando a la derecha.',
+             'Y mira si pisa el rojo de la meta. Si lo pisa, dice ¡Has llegado! y se para todo.'])),
 
         ('Comprueba que lo has entendido',
          pregunta('1', 'Pones el condicional del césped y, al probarlo, el coche atraviesa el '
@@ -330,19 +343,22 @@ s12b = pagina(
              '<strong>Descargas</strong>).',
              'Borra el gato y añade el coche: botón <strong>Elige un objeto</strong>, escribe '
              '<strong>Convertible</strong> y elige el descapotable morado.',
-             'Monta en el coche los dos trozos de arriba: el movimiento y, dentro del mismo '
-             '<em>por siempre</em>, debajo de los cuatro <em>si</em>, el condicional del césped.',
-             'El verde del bloque <em>¿tocando el color?</em> se coge con el '
+             'Monta en el coche los tres trozos de arriba: el movimiento y, dentro del mismo '
+             '<em>por siempre</em>, debajo de los cuatro <em>si</em>, el condicional del césped '
+             'y el de la meta.',
+             'Los colores de los bloques <em>¿tocando el color?</em> se cogen con el '
              '<strong>cuentagotas</strong>: haz clic en el color del bloque, después en el '
-             'cuentagotas, y pincha en el césped del escenario. No lo elijas a ojo.',
-             'Prueba: el coche recorre la carretera de la salida al final. Si toca el césped, '
+             'cuentagotas, y pincha en el escenario: en el césped para el verde y en la franja '
+             'de la meta para el rojo. No los elijas a ojo.',
+             'Prueba: el coche recorre la carretera de la salida a la meta. Si toca el césped, '
              'suena y vuelve a la salida. En las esquinas, llega hasta el centro del tramo y '
-             'entonces gira.'])),
+             'entonces gira. Al llegar a la meta dice ¡Has llegado! y se para todo.'])),
 
         ('Lo has conseguido si…',
          logros(['El coche se mueve con las cuatro flechas y mira hacia donde va.',
                  'Al tocar el césped suena y vuelve a la salida.',
-                 'Se puede recorrer toda la carretera, de la salida al final, sin salirse.'])),
+                 'Se puede recorrer toda la carretera, de la salida a la meta, sin salirse.',
+                 'Al llegar a la meta dice ¡Has llegado! y se para todo.'])),
     ],
     nn='12b',
     entrega=('<p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta '

@@ -39,7 +39,7 @@ LOGRO = 'El programa del apartado {n}.3 está montado y hace lo que dice «Sabes
 DIRECCIONES = {'90': 'hacia la derecha', '-90': 'hacia la izquierda', '0': 'hacia arriba',
                '180': 'hacia abajo'}
 NOMBRES = {'Sprite1': 'el gato (Sprite1)'}
-COLORES = {'#1A1A1A': 'el negro de las paredes', '#4CAF50': 'el verde del césped'}
+COLORES = {'#1A1A1A': 'el negro de las paredes', '#4CAF50': 'el verde del césped', '#E53935': 'el rojo de la meta'}
 
 
 def _tecla(k):

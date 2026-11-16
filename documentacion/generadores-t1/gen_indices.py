@@ -30,7 +30,7 @@ QUE_HACES = {
     10: 'Dos corredores y un ganador distinto en cada partida.',
     11: 'Que un objeto reaccione justo cuando otro hace algo.',
     12: 'Dibujas en Scratch el fondo de un juego de carreras: césped y carretera.',
-    '12b': 'Programas un coche que recorre la carretera sin salirse al césped.',
+    '12b': 'Programas un coche que recorre la carretera hasta la meta sin salirse al césped.',
     13: 'Le añades meta, cronómetro y un segundo nivel.',
     14: 'Juegas contra el ordenador, que elige sin hacer trampas.',
     15: 'La mecánica del Pong: pelota que rebota y pala que sigue al ratón.',
