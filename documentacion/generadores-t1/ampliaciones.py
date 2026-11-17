@@ -42,7 +42,7 @@ ORDEN_1 = {
     4: 'Monta las tres versiones', 5: 'Completa el programa', 6: 'Haz que el gato camine',
     7: 'Construye el diálogo', 8: 'Construye la calculadora', 9: 'Construye el quiz',
     10: 'Monta la carrera', 11: 'Haz que el gato avise al balón', 12: 'Monta el coche',
-    13: 'Añade la meta y el segundo nivel', 14: 'Completa el juego', 15: 'Monta la pelota y la pala',
+    13: 'Caza la mariquita', 14: 'Completa el juego', 15: 'Monta la pelota y la pala',
     16: 'Añade el marcador y el final', 17: 'Arregla los cinco programas',
 }
 ORDEN_2 = {
@@ -51,7 +51,7 @@ ORDEN_2 = {
     5: 'Añade un perro que se mueva con W, A, S y D', 6: 'Añade un oso que camine con las flechas',
     7: 'Haz que el gato calcule tu edad dentro de diez años', 8: 'Añade la resta, la multiplicación y la división',
     9: 'Añade las vidas', 10: 'Haz que el ganador diga su tiempo', 11: 'Encadena un segundo mensaje',
-    12: 'Añade una estrella que dé puntos', 13: 'Guarda el mejor tiempo',
+    12: 'Añade una estrella que dé puntos', 13: 'Ponle tiempo y pantalla de fin',
     14: 'Haz que el gato enseñe lo que ha sacado', 15: 'Maneja la pala con teclas y añade otra pelota',
     16: 'Haz que la pelota cambie de color con los puntos', 17: 'Rompe un programa para otra pareja',
 }
@@ -71,8 +71,7 @@ OBJETOS = {
     11: [('el gato', [1]), ('el balón', [1, 2]), ('el portero', [2]), ('el árbitro', [3]),
          ('el tambor', [3])],
     12: [('el coche', [1, 2, 3]), ('la estrella', [2]), ('el camión', [3])],
-    13: [('el gato', [1, 2]), ('la estrella y el fantasma', ['de la sesión 12']), ('la meta', [1]),
-         ('la campana', [3])],
+    13: [('la mariquita', [1, 2]), ('el escarabajo', [3])],
     14: [('el gato', [1, 2]), ('el unicornio', [3])],
     15: [('la pelota', [1, 2]), ('la pala', [1, 2]), ('la segunda pelota', [2]), ('el globo', [3])],
     16: [('las dos pelotas, la pala y el globo', ['de la sesión 15']), ('el saltamontes', [3])],
@@ -257,19 +256,26 @@ AMPLIACIONES = {
         'Juega: al pasar por la estrella desaparece y Puntos sube a 1. Sólo a 1: sin el '
         '<em>detener</em>, seguiría sumando mientras la tocas.'))],
 
-    13: [('', '<p>Una variable <strong>MejorTiempo</strong> que guarda el tiempo más bajo de todas '
-              'las partidas. Es la primera variable que no se borra al volver a jugar.</p>' + P(
-        'Crea la variable <strong>MejorTiempo</strong>.',
-        'Arrastra al área de código, suelto, un bloque <strong>dar a MejorTiempo el valor '
-        '999</strong>. Haz <strong>un clic</strong> encima (un clic ejecuta un bloque sin '
-        'bandera) y comprueba que la variable marca 999. Después tíralo a la paleta.',
-        'En el condicional de la meta, justo antes del <em>detener todos</em> que termina el juego, pon un '
-        '<strong>si</strong> con el operador <strong>( ) &lt; ( )</strong>: <em>cronómetro</em> a la '
-        'izquierda y <em>MejorTiempo</em> a la derecha.',
-        'Dentro de ese <em>si</em>: <strong>dar a MejorTiempo el valor (cronómetro)</strong>.',
-        'Juega dos partidas: si la segunda es más rápida, MejorTiempo baja; si es más lenta, se '
-        'queda como estaba. Al arrancar <strong>no</strong> la pongas a 0, o la siguiente partida '
-        'se olvida de las anteriores.'))],
+    13: [('', '<p>Que la partida dure <strong>30 segundos</strong> y termine con una pantalla '
+              'de fin.</p>' + P(
+        'Pinta el fondo del final: abajo a la derecha, pasa el ratón por el botón <strong>Elige un '
+        'fondo</strong> y elige <strong>Pinta</strong> (el pincel). Con la herramienta '
+        '<strong>Texto</strong> (la T) haz clic en el centro y escribe <strong>¡Se acabó!</strong>. '
+        'Ponle de nombre <strong>fin</strong> en la casilla de arriba del dibujo.',
+        'Crea la variable <strong>Tiempo</strong>.',
+        'En el programa de la bandera de la mariquita, justo debajo de <em>dar a Puntos el valor '
+        '0</em>, añade <strong>dar a Tiempo el valor 30</strong>, <strong>cambiar fondo a '
+        'Flowers</strong> y <strong>mostrar</strong>.',
+        'Al final de ese mismo programa, debajo de <em>ir a posición aleatoria</em>, pon la cuenta '
+        'atrás: un <strong>repetir hasta que (Tiempo = 0)</strong> y, dentro, <strong>esperar 1 '
+        'segundos</strong> y <strong>sumar a Tiempo -1</strong>.',
+        'Debajo del <em>repetir</em>, el final: <strong>cambiar fondo a fin</strong>, '
+        '<strong>esconder</strong> y <strong>detener todos</strong>.',
+        'Juega: el Tiempo baja de 30 a 0, uno por segundo, y al llegar a 0 sale «¡Se acabó!» con '
+        'tus Puntos en pantalla. Pulsa otra vez la bandera: vuelven el jardín y la mariquita. Sin '
+        'el <em>cambiar fondo a Flowers</em> y el <em>mostrar</em> del paso 3, la segunda partida '
+        'empezaría en la pantalla de fin y sin mariquita.') +
+        '<p>Guárdalo bien: esta cuenta atrás es una de las piezas del kit del proyecto final.</p>')],
 
     14: [('', '<p>Que el gato <strong>enseñe</strong> lo que ha sacado, con un dibujo, además de '
               'decirlo.</p>' + P(

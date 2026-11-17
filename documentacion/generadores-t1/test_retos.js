@@ -78,9 +78,14 @@ const PRUEBAS = {
     // biblioteca no existen y el tambor acaba al instante, así que el ¡Bravo! sale hacia los 2,2 s.
     ok(dice(a) === '¡Bravo!', 's11: final: ' + dice(a));
   },
-  13: async ({ obj, dice, tecla, variable }) => {
-    const p = obj('Bell'); tecla('t'); await dormir(2400);
-    const v = Number(variable('Tiempo')); ok(v === 28 || v === 29, 's13: la cuenta atrás no baja 1 por segundo: ' + v);
+  13: async ({ vm, obj, dice, variable }) => {
+    // El escarabajo salta solo cada segundo y, al hacerle clic, quita un punto y dice ¡Ay!.
+    const p = obj('Beetle'); vm.greenFlag(); await dormir(300);
+    const pos = new Set(); for (let i = 0; i < 4; i++) { pos.add(Math.round(p.x) + ',' + Math.round(p.y)); await dormir(1000); }
+    ok(pos.size >= 3, 's13: el escarabajo no salta solo cada segundo: ' + [...pos].join(' '));
+    vm.runtime.startHats('event_whenthisspriteclicked', null, p); await dormir(300);
+    ok(Number(variable('Puntos')) === -1, 's13: el clic no resta un punto: ' + variable('Puntos'));
+    ok(dice(p) === '¡Ay!', 's13: no dice ¡Ay!: ' + dice(p));
   },
   14: async ({ obj, dice, tecla, contestar }) => {
     const p = obj('Unicorn');

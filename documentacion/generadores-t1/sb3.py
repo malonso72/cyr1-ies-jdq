@@ -39,6 +39,7 @@ TABLA = {
     ('hat', 'al hacer clic en <bandera>'): ('event_whenflagclicked', [], {}),
     ('hat', 'al presionar tecla []'): ('event_whenkeypressed', [], {'campo': ('KEY_OPTION', TECLAS)}),
     ('hat', 'al recibir []'): ('event_whenbroadcastreceived', [], {'campo_broadcast': 'BROADCAST_OPTION'}),
+    ('hat', 'al hacer clic en este objeto'): ('event_whenthisspriteclicked', [], {}),
     ('stack', 'enviar []'): ('event_broadcast', [], {'input_broadcast': 'BROADCAST_INPUT'}),
     ('stack', 'enviar [] y esperar'): ('event_broadcastandwait', [], {'input_broadcast': 'BROADCAST_INPUT'}),
     # control
@@ -66,6 +67,8 @@ TABLA = {
     ('stack', 'girar <giro-i> _ grados'): ('motion_turnleft', [('DEGREES', N)], {}),
     ('stack', 'apuntar en dirección _'): ('motion_pointindirection', [('DIRECTION', A)], {}),
     ('stack', 'ir a x: _ y: _'): ('motion_gotoxy', [('X', N), ('Y', N)], {}),
+    ('stack', 'ir a []'): ('motion_goto', [], {'menu': ('TO', 'motion_goto_menu', 'TO', {
+        'posición aleatoria': '_random_', 'puntero del ratón': '_mouse_'})}),
     ('stack', 'sumar a x _'): ('motion_changexby', [('DX', N)], {}),
     ('stack', 'sumar a y _'): ('motion_changeyby', [('DY', N)], {}),
     ('stack', 'fijar x a _'): ('motion_setx', [('X', N)], {}),

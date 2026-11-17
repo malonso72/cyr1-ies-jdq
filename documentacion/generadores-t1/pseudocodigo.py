@@ -89,6 +89,7 @@ FRASES = {
     ('hat', 'al hacer clic en <bandera>'): 'Cuando se pulse la bandera verde:',
     ('hat', 'al presionar tecla []'): lambda h, d: 'Cuando se pulse %s:' % _tecla(d[0]),
     ('hat', 'al recibir []'): 'Cuando llegue el mensaje «{d0}»:',
+    ('hat', 'al hacer clic en este objeto'): 'Cuando se haga clic en este objeto:',
     ('stack', 'enviar []'): 'enviar el mensaje «{d0}» a todos',
     ('stack', 'enviar [] y esperar'): 'enviar el mensaje «{d0}» a todos y esperar a que terminen',
     # control
@@ -115,6 +116,7 @@ FRASES = {
     ('stack', 'girar <giro-i> _ grados'): 'girar {h0} grados hacia la izquierda',
     ('stack', 'apuntar en dirección _'): lambda h, d: _direccion(h[0]),
     ('stack', 'ir a x: _ y: _'): 'ir al punto x: {h0}, y: {h1}',
+    ('stack', 'ir a []'): 'ir a «{d0}»',
     ('stack', 'sumar a x _'): 'desplazarse {h0} en horizontal (sumar a x)',
     ('stack', 'sumar a y _'): 'desplazarse {h0} en vertical (sumar a y)',
     ('stack', 'si toca un borde, rebotar'): 'si toca un borde, dar la vuelta (rebotar)',
@@ -601,26 +603,25 @@ RETOS = {
                   'derecha va recto, nunca boca abajo. Todo se para con el círculo rojo.'),
 
     13: dict(
-        objeto='la campana de la cuenta atrás',
-        planteamiento='Una campana que cuenta 30 segundos hacia atrás y suena cuando se acaba el '
-                      'tiempo.',
-        preparar=[elige('Bell', 'Bell', 'la campana') + ' Colócala en una esquina, fuera del '
-                  'laberinto.',
-                  selecciona('la campana', 'el gato, la estrella ni el fantasma'),
-                  'Crea la variable <strong>Tiempo</strong>.',
-                  'Monta el programa de abajo, línea a línea.',
-                  prueba('T', 'el laberinto')],
-        programas=[(None, [K('t'), dar('Tiempo', num('30')),
-                           ('stack', 'variables', ['mostrar variable', ('drop', 'Tiempo')]),
-                           hasta(hexa('operators', var('Tiempo'), '=', num('0')), [esperar('1'), sumar('Tiempo', '-1')]),
-                           ('stack', 'sound', ['iniciar sonido', ('drop', 'Bell Toll')]),
-                           decir('¡Se acabó el tiempo!'),
-                           ('cap', 'control', ['detener', ('drop', 'todos')])])],
-        comprueba='al pulsar T aparece el marcador de Tiempo en 30 y va bajando de uno en uno cada '
-                  'segundo. Al llegar a 0 suena la campana, dice «¡Se acabó el tiempo!» y todo se '
-                  'detiene. Si lo pulsas mientras juegas al laberinto, tienes treinta segundos para '
-                  'llegar a la meta. Guárdalo bien: esta cuenta atrás es una de las piezas del kit del '
-                  'proyecto final.'),
+        objeto='el escarabajo que quita puntos',
+        planteamiento='Un escarabajo que salta solo de un sitio a otro cada segundo. Si le haces '
+                      'clic por error, te quita un punto: hay que fijarse antes de hacer clic.',
+        preparar=[elige('Beetle', 'Beetle', 'el escarabajo'),
+                  selecciona('el escarabajo', 'la mariquita'),
+                  'Hay <strong>dos programas</strong> y los dos van en el escarabajo. Monta los dos.',
+                  'Para probarlo, pulsa la <strong>bandera</strong>: el escarabajo arranca con ella, '
+                  'igual que la mariquita.'],
+        programas=[('En el escarabajo:', [('hat', 'events', ['al hacer clic en', ('icon', 'bandera')]),
+                                          ('stack', 'looks', ['fijar tamaño al', ('num', '60'), '%']),
+                                          ('c', 'control', ['por siempre'], [
+                                              ('stack', 'motion', ['ir a', ('drop', 'posición aleatoria')]),
+                                              esperar('1')])]),
+                   ('También en el escarabajo:', [('hat', 'events', ['al hacer clic en este objeto']),
+                                                  sumar('Puntos', '-1'),
+                                                  decir('¡Ay!', '1')])],
+        comprueba='al pulsar la bandera el escarabajo salta a un sitio distinto cada segundo, él '
+                  'solo. Si le haces clic, dice «¡Ay!» y Puntos baja 1. La mariquita sólo se mueve '
+                  'cuando la cazas; el escarabajo, todo el rato.'),
 
     14: dict(
         objeto='el unicornio de la montaña rusa',
@@ -707,7 +708,7 @@ RETOS = {
 # Qué objeto de la biblioteca es cada programa, para el .sb3 de soluciones y las pruebas.
 SPRITES = {1: ['Ball'], 2: ['Butterfly 1'], 3: ['Pencil'], 4: ['Bat'], 5: ['Convertible 2'],
            6: ['Parrot'], 7: ['Retro Robot'], 8: ['Dog2'], 9: ['Owl'], 10: ['Frog'],
-           11: ['Referee', 'Drum'], 12: ['Truck'], 13: ['Bell'], 14: ['Unicorn'],
+           11: ['Referee', 'Drum'], 12: ['Truck'], 13: ['Beetle', 'Beetle'], 14: ['Unicorn'],
            15: ['Balloon1'], 16: ['Grasshopper'], 17: ['Ballerina']}
 
 

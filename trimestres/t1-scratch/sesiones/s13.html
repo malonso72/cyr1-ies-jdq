@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#FF8C1A">
 <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
-<title>S13 · Laberinto II · Scratch · CyR 1º ESO</title>
-<meta name="description" content="Sesión 13 de Scratch: añadir meta, cronómetro y un segundo nivel al laberinto. CyR 1º ESO.">
+<title>S13 · Caza la mariquita · Scratch · CyR 1º ESO</title>
+<meta name="description" content="Sesión 13 de Scratch: un juego de puntería con el ratón. Al hacer clic en este objeto e ir a posición aleatoria. CyR 1º ESO.">
 <link rel="canonical" href="https://cyr1-ies-jdq.malonso72.workers.dev/trimestres/t1-scratch/sesiones/s13.html">
-<meta property="og:title" content="S13 · Laberinto II · CyR 1º ESO">
-<meta property="og:description" content="Sesión 13 de Scratch: añadir meta, cronómetro y un segundo nivel al laberinto. CyR 1º ESO.">
+<meta property="og:title" content="S13 · Caza la mariquita · CyR 1º ESO">
+<meta property="og:description" content="Sesión 13 de Scratch: un juego de puntería con el ratón. Al hacer clic en este objeto e ir a posición aleatoria. CyR 1º ESO.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -159,89 +159,91 @@
 <div id="main-content">
 <section class="unidad-titulo-hero">
   <div class="num">Sesión 13</div>
-  <h1>Laberinto II</h1>
+  <h1>Caza la mariquita</h1>
   <div class="duracion">T1 · Scratch · 1º ESO</div>
 </section>
 
 <main class="ej-main">
 
-<p><strong>Lo que vas a conseguir:</strong> que tu laberinto se pueda <strong>ganar</strong>: con meta, con tiempo y con un segundo nivel.</p>
+<p><strong>Lo que vas a conseguir:</strong> un juego de <strong>puntería</strong>: una mariquita que salta a otro sitio cada vez que la cazas con el ratón, y un marcador con tus puntos.</p>
 
 <a class="abrir-scratch" href="https://scratch.mit.edu/projects/editor/" target="_blank" rel="noopener">🐱 Abrir Scratch en otra pestaña</a>
 <p class="consejo">Consejo: deja Scratch a un lado de la pantalla y esta página al otro. Así no tienes que ir y venir.</p>
 
-<h2><span class="h2n">1</span>La meta</h2>
-<p>Un laberinto sin meta es un pasillo. Crea un objeto nuevo —una bandera, una estrella, un trozo de queso— llámalo <strong>Meta</strong> y ponlo al final del recorrido.</p><p>Este condicional va dentro del <strong>por siempre</strong> del personaje, junto a los que ya tenías:</p><div class="caja-bloques">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 144" width="500" height="144" class="bloques" role="img" aria-label="Condicional: si está tocando el objeto Meta, decir Has tardado seguido del cronómetro durante 3 segundos y detener todos"><title>Condicional: si está tocando el objeto Meta, decir Has tardado seguido del cronómetro durante 3 segundos y detener todos</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L483.7 10.0 Q489.7 10.0 489.7 16.0 L489.7 38.0 Q489.7 44.0 483.7 44.0 L58.0 44.0 L54.0 48.0 L42.0 48.0 L38.0 44.0 L30.0 44.0 Q24.0 44.0 24.0 50.0 L24.0 106.0 Q24.0 112.0 30.0 112.0 L483.7 112.0 Q489.7 112.0 489.7 118.0 L489.7 124.0 Q489.7 130.0 483.7 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#FFAB19"/><text x="22.0" y="31.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M48.8 15.0 l-9 12.0 l9 12.0 h158.0 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="56.8" y="31.6" class="sb-t" textLength="58.5" lengthAdjust="spacingAndGlyphs">¿tocando</text><rect x="122.3" y="16.0" width="61.6" height="22" rx="4" fill="#2E8EB8"/><text x="131.3" y="31.4" class="sb-t" textLength="29.6" lengthAdjust="spacingAndGlyphs">Meta</text><path d="M169.0 24.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="191.0" y="31.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><text x="222.9" y="31.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M24.0 50.0 Q24.0 44.0 30.0 44.0 L38.0 44.0 L42.0 48.0 L54.0 48.0 L58.0 44.0  L483.7 44.0 Q489.7 44.0 489.7 50.0 L489.7 72.0 Q489.7 78.0 483.7 78.0 L58.0 78.0 L54.0 82.0 L42.0 82.0 L38.0 78.0 L30.0 78.0  Q24.0 78.0 24.0 72.0 Z" fill="#9966FF"/><text x="36.0" y="65.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">decir</text><rect x="74.1" y="49.0" width="243.5" height="24" rx="12" fill="#59C059" stroke="#389438" stroke-width="1"/><text x="83.1" y="65.6" class="sb-t" textLength="24.5" lengthAdjust="spacingAndGlyphs">unir</text><rect x="114.6" y="51.0" width="96.8" height="20" rx="10" fill="#FFFFFF"/><text x="163.0" y="65.3" class="sb-n">Has tardado </text><rect x="218.4" y="49.0" width="90.2" height="24" rx="12" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="227.4" y="65.6" class="sb-t" textLength="72.2" lengthAdjust="spacingAndGlyphs">cronómetro</text><text x="324.6" y="65.6" class="sb-t" textLength="47.7" lengthAdjust="spacingAndGlyphs">durante</text><rect x="379.3" y="51.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="394.3" y="65.3" class="sb-n">3</text><text x="416.3" y="65.6" class="sb-t" textLength="61.4" lengthAdjust="spacingAndGlyphs">segundos</text><path d="M24.0 84.0 Q24.0 78.0 30.0 78.0 L38.0 78.0 L42.0 82.0 L54.0 82.0 L58.0 78.0  L163.3 78.0 Q169.3 78.0 169.3 84.0 L169.3 106.0 Q169.3 112.0 163.3 112.0 L30.0 112.0 Q24.0 112.0 24.0 106.0 Z" fill="#FFAB19"/><text x="36.0" y="99.6" class="sb-t" textLength="47.0" lengthAdjust="spacingAndGlyphs">detener</text><rect x="90.0" y="84.0" width="67.4" height="22" rx="4" fill="#CF8B17"/><text x="99.0" y="99.4" class="sb-t" textLength="35.4" lengthAdjust="spacingAndGlyphs">todos</text><path d="M142.3 92.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
-  <p class="pie"><strong>cronómetro</strong> es un informador de Sensores: cuenta segundos desde que se reinició. No hay que crearlo, ya existe.</p>
-</div>
+<h2><span class="h2n">1</span>Dos bloques nuevos</h2>
+<ul class="clave-lista">
+  <li><b>al hacer clic en este objeto.</b> Un sombrero de Eventos. Arranca su programa cuando haces clic con el ratón <strong>encima de ese objeto</strong>; si haces clic en otro sitio, no pasa nada. Cada objeto tiene el suyo.</li>
+  <li><b>ir a (posición aleatoria).</b> Está en Movimiento y no es el <em>ir a x: y:</em> de siempre: es el que tiene un desplegable. Con <strong>posición aleatoria</strong> elegida, lleva el objeto a un sitio cualquiera del escenario, distinto cada vez.</li>
+</ul><p>Juntos dan un juego de puntería: la mariquita espera quieta, tú le haces clic y ella se escapa a otro sitio.</p>
 
-<h2><span class="h2n">2</span>El cronómetro</h2>
-<p>El cronómetro corre solo desde que se abre Scratch, así que hay que ponerlo a cero al empezar la partida. Este es el arranque completo:</p><div class="caja-bloques" style="max-width:420px">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 144" width="220" height="144" class="bloques" role="img" aria-label="Programa de arranque: al hacer clic en la bandera, reiniciar cronómetro y cambiar el fondo a nivel1"><title>Programa de arranque: al hacer clic en la bandera, reiniciar cronómetro y cambiar el fondo a nivel1</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L154.4 62.0 Q160.4 62.0 160.4 68.0 L160.4 90.0 Q160.4 96.0 154.4 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#5CB1D6"/><text x="22.0" y="83.6" class="sb-t" textLength="126.4" lengthAdjust="spacingAndGlyphs">reiniciar cronómetro</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L204.3 96.0 Q210.3 96.0 210.3 102.0 L210.3 124.0 Q210.3 130.0 204.3 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#9966FF"/><text x="22.0" y="117.6" class="sb-t" textLength="100.4" lengthAdjust="spacingAndGlyphs">cambiar fondo a</text><rect x="129.4" y="102.0" width="68.9" height="22" rx="4" fill="#774DCB"/><text x="138.4" y="117.4" class="sb-t" textLength="36.9" lengthAdjust="spacingAndGlyphs">nivel1</text><path d="M183.3 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
-</div>
+<h2><span class="h2n">2</span>Lee estos dos programas</h2>
+<p>Los dos van en la <strong>mariquita</strong>. Uno prepara la partida; el otro dice qué pasa cada vez que la cazas.</p><div class="dos-col">
+<div><p class="col-tit">Al empezar la partida</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 144" width="248" height="144" class="bloques" role="img" aria-label="Programa de la mariquita: al hacer clic en la bandera, dar a Puntos el valor 0 e ir a posición aleatoria"><title>Programa de la mariquita: al hacer clic en la bandera, dar a Puntos el valor 0 e ir a posición aleatoria</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L146.2 28.0 Q152.2 28.0 152.2 34.0 L152.2 56.0 Q152.2 62.0 146.2 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="93.2" lengthAdjust="spacingAndGlyphs">al hacer clic en</text><path d="M124.2 38.0 v14 M124.2 38.0 h11 l-2.5 3.5 l2.5 3.5 h-11 z" fill="#4CBF56" stroke="#3EA149" stroke-width="1.2" stroke-linejoin="round"/><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L231.7 62.0 Q237.7 62.0 237.7 68.0 L237.7 90.0 Q237.7 96.0 231.7 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#FF8C1A"/><text x="22.0" y="83.6" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">dar a</text><rect x="60.1" y="68.0" width="76.0" height="22" rx="4" fill="#DB6E00"/><text x="69.1" y="83.4" class="sb-t" textLength="44.0" lengthAdjust="spacingAndGlyphs">Puntos</text><path d="M121.1 76.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="143.1" y="83.6" class="sb-t" textLength="45.5" lengthAdjust="spacingAndGlyphs">el valor</text><rect x="195.7" y="69.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="210.7" y="83.3" class="sb-n">0</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L197.0 96.0 Q203.0 96.0 203.0 102.0 L203.0 124.0 Q203.0 130.0 197.0 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#4C97FF"/><text x="22.0" y="117.6" class="sb-t" textLength="19.5" lengthAdjust="spacingAndGlyphs">ir a</text><rect x="48.5" y="102.0" width="142.5" height="22" rx="4" fill="#3373CC"/><text x="57.5" y="117.4" class="sb-t" textLength="110.5" lengthAdjust="spacingAndGlyphs">posición aleatoria</text><path d="M176.0 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
+</div></div>
+<div><p class="col-tit">Cada vez que la cazas</p><div class="caja-bloques">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 214 178" width="214" height="178" class="bloques" role="img" aria-label="Programa de la mariquita: al hacer clic en este objeto, sumar 1 a Puntos, iniciar el sonido pop e ir a posición aleatoria"><title>Programa de la mariquita: al hacer clic en este objeto, sumar 1 a Puntos, iniciar el sonido pop e ir a posición aleatoria</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 56.0 L10.0 28.0 C10.0 12.0 36.0 6.0 52.0 16.0 C62.0 22.0 70.0 28.0 82.0 28.0 L193.5 28.0 Q199.5 28.0 199.5 34.0 L199.5 56.0 Q199.5 62.0 193.5 62.0 L44.0 62.0 L40.0 66.0 L28.0 66.0 L24.0 62.0 L16.0 62.0  Q10.0 62.0 10.0 56.0 Z" fill="#FFBF00"/><text x="22.0" y="49.6" class="sb-t" textLength="165.5" lengthAdjust="spacingAndGlyphs">al hacer clic en este objeto</text><path d="M10.0 68.0 Q10.0 62.0 16.0 62.0 L24.0 62.0 L28.0 66.0 L40.0 66.0 L44.0 62.0  L197.9 62.0 Q203.9 62.0 203.9 68.0 L203.9 90.0 Q203.9 96.0 197.9 96.0 L44.0 96.0 L40.0 100.0 L28.0 100.0 L24.0 96.0 L16.0 96.0  Q10.0 96.0 10.0 90.0 Z" fill="#FF8C1A"/><text x="22.0" y="83.6" class="sb-t" textLength="49.9" lengthAdjust="spacingAndGlyphs">sumar a</text><rect x="78.9" y="68.0" width="76.0" height="22" rx="4" fill="#DB6E00"/><text x="87.9" y="83.4" class="sb-t" textLength="44.0" lengthAdjust="spacingAndGlyphs">Puntos</text><path d="M139.9 76.0 l5 6 l5 -6 z" fill="#FFFFFF"/><rect x="161.9" y="69.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="176.9" y="83.3" class="sb-n">1</text><path d="M10.0 102.0 Q10.0 96.0 16.0 96.0 L24.0 96.0 L28.0 100.0 L40.0 100.0 L44.0 96.0  L175.3 96.0 Q181.3 96.0 181.3 102.0 L181.3 124.0 Q181.3 130.0 175.3 130.0 L44.0 130.0 L40.0 134.0 L28.0 134.0 L24.0 130.0 L16.0 130.0  Q10.0 130.0 10.0 124.0 Z" fill="#CF63CF"/><text x="22.0" y="117.6" class="sb-t" textLength="84.5" lengthAdjust="spacingAndGlyphs">iniciar sonido</text><rect x="113.5" y="102.0" width="55.8" height="22" rx="4" fill="#BD42BD"/><text x="122.5" y="117.4" class="sb-t" textLength="23.8" lengthAdjust="spacingAndGlyphs">pop</text><path d="M154.3 110.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M10.0 136.0 Q10.0 130.0 16.0 130.0 L24.0 130.0 L28.0 134.0 L40.0 134.0 L44.0 130.0  L197.0 130.0 Q203.0 130.0 203.0 136.0 L203.0 158.0 Q203.0 164.0 197.0 164.0 L44.0 164.0 L40.0 168.0 L28.0 168.0 L24.0 164.0 L16.0 164.0  Q10.0 164.0 10.0 158.0 Z" fill="#4C97FF"/><text x="22.0" y="151.6" class="sb-t" textLength="19.5" lengthAdjust="spacingAndGlyphs">ir a</text><rect x="48.5" y="136.0" width="142.5" height="22" rx="4" fill="#3373CC"/><text x="57.5" y="151.4" class="sb-t" textLength="110.5" lengthAdjust="spacingAndGlyphs">posición aleatoria</text><path d="M176.0 144.0 l5 6 l5 -6 z" fill="#FFFFFF"/></svg>
+</div></div>
+</div><ol class="orden-lista">
+  <li><span class="o">1</span><span>Al pulsar la bandera, Puntos se pone a 0 y la mariquita aparece en un sitio al azar.</span></li>
+  <li><span class="o">2</span><span>Ese programa se acaba ahí. La mariquita se queda quieta, esperando.</span></li>
+  <li><span class="o">3</span><span>Cuando haces clic encima de ella arranca el segundo programa: suma un punto, suena y salta a otro sitio al azar.</span></li>
+  <li><span class="o">4</span><span>Cada clic vuelve a arrancar el segundo programa. El primero no se repite hasta que pulses otra vez la bandera.</span></li>
+</ol>
 
 <h2><span class="h2n">3</span>Comprueba que lo has entendido</h2>
-<div class="comprueba" data-ok="nada">
-  <p class="preg">Por error colocas el <em>detener (todos)</em> <strong>antes</strong> del bloque que dice «Has tardado…». ¿Qué ve el jugador al llegar a la meta?</p>
+<div class="comprueba" data-ok="quieta">
+  <p class="preg">Montas el programa del clic pero se te olvida el último bloque, <em>ir a (posición aleatoria)</em>. ¿Qué pasa al jugar?</p>
   <div class="ops">
-    <button data-op="mensaje" data-ex="No. Los bloques se ejecutan de arriba abajo, y &lt;em&gt;detener todos&lt;/em&gt; apaga el programa en el momento en que le llega el turno.">El mensaje, y después el juego se para</button>
-    <button data-op="nada" data-ex="Correcto. El programa muere en el &lt;em&gt;detener&lt;/em&gt; y nunca llega al bloque de debajo. Por eso &lt;b&gt;detener (todos) va siempre el último&lt;/b&gt;.">Nada: el juego se para sin decir nada</button>
-    <button data-op="siempre" data-ex="Eso pasaría con &lt;em&gt;decir (…)&lt;/em&gt; sin duración, que es otro bloque distinto. Aquí el problema es el orden.">El mensaje se queda en pantalla para siempre</button>
+    <button data-op="quieta" data-ex="Correcto. El clic sigue sumando, pero la mariquita ya no huye: el juego deja de tener gracia. El &lt;em&gt;ir a&lt;/em&gt; es lo que lo convierte en un juego de puntería.">La mariquita no se mueve, y haciendo clic sin parar en el mismo sitio sumas todos los puntos que quieras</button>
+    <button data-op="nosuma" data-ex="No. El &lt;em&gt;sumar a Puntos 1&lt;/em&gt; sigue ahí y se ejecuta en cada clic. Lo que falta es que la mariquita se vaya.">Al hacer clic ya no suma puntos</button>
+    <button data-op="salta" data-ex="No. El programa de la bandera sólo se ejecuta una vez, al empezar. Lo que pasa en cada clic lo decide sólo el programa del clic.">Salta igual, porque el programa de la bandera ya la manda a un sitio al azar</button>
   </div>
   <div class="fb" id="fb1"></div>
 </div>
 
 <h2><span class="h2n">4</span>Tu actividad</h2>
-<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>el gato</strong> (4.1 y 4.2), <strong>la estrella y el fantasma</strong> (de la sesión 12), <strong>la meta</strong> (4.1) y <strong>la campana</strong> (4.3). Cada objeto, con su programa.</p>
-<h3 class="sub"><span class="subn">4.1</span>Añade la meta y el segundo nivel</h3>
+<p class="objetos">Al terminar, en tu proyecto tiene que estar: <strong>la mariquita</strong> (4.1 y 4.2) y <strong>el escarabajo</strong> (4.3). Cada objeto, con su programa.</p>
+<h3 class="sub"><span class="subn">4.1</span>Caza la mariquita</h3>
 <ol class="paso-lista">
-  <li><span class="p">Paso 1</span><span>Añade la meta: botón <strong>Elige un objeto</strong>, escribe <strong>Crystal</strong> y elige <strong>Crystal</strong>. Cámbiale el nombre a <strong>Meta</strong> en la casilla <em>Objeto</em>, debajo del escenario, y colócala al final del laberinto.</span></li>
-  <li><span class="p">Paso 2</span><span>Añade el condicional de la meta y comprueba que el juego termina y dice el tiempo.</span></li>
-  <li><span class="p">Paso 3</span><span>Añade <strong>reiniciar cronómetro</strong> al arranque. Juega dos veces seguidas y comprueba que el tiempo empieza de cero las dos.</span></li>
-  <li><span class="p">Paso 4</span><span>Dibuja un <strong>segundo fondo</strong> con un laberinto más difícil. Los fondos se crean igual que el primero, con el botón de abajo a la derecha.</span></li>
-  <li><span class="p">Paso 5</span><span>Crea la variable <strong>Nivel</strong> y añade al arranque, justo debajo de <em>reiniciar cronómetro</em>, el bloque <strong>dar a (Nivel) el valor (1)</strong>. Si no lo pones, la segunda partida empieza en el nivel donde acabó la primera: es el mismo fallo del marcador de la sesión 9.</span></li>
-  <li><span class="p">Paso 6</span><span>Cambia el condicional de la meta para que, en vez de terminar, pase al nivel 2:</span></li>
-</ol><div class="caja-bloques">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 302 178" width="302" height="178" class="bloques" role="img" aria-label="Condicional: si está tocando la Meta, cambiar el fondo a nivel2, volver a la salida y sumar 1 a la variable Nivel"><title>Condicional: si está tocando la Meta, cambiar el fondo a nivel2, volver a la salida y sumar 1 a la variable Nivel</title><style>.sb-t{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#FFFFFF}.sb-n{font:700 13px 'Helvetica Neue',Helvetica,Arial,'Liberation Sans',sans-serif;fill:#575E75;text-anchor:middle}</style><path d="M10.0 16.0 Q10.0 10.0 16.0 10.0 L24.0 10.0 L28.0 14.0 L40.0 14.0 L44.0 10.0  L286.0 10.0 Q292.0 10.0 292.0 16.0 L292.0 38.0 Q292.0 44.0 286.0 44.0 L58.0 44.0 L54.0 48.0 L42.0 48.0 L38.0 44.0 L30.0 44.0 Q24.0 44.0 24.0 50.0 L24.0 140.0 Q24.0 146.0 30.0 146.0 L286.0 146.0 Q292.0 146.0 292.0 152.0 L292.0 158.0 Q292.0 164.0 286.0 164.0 L44.0 164.0 L40.0 168.0 L28.0 168.0 L24.0 164.0 L16.0 164.0  Q10.0 164.0 10.0 158.0 Z" fill="#FFAB19"/><text x="22.0" y="31.6" class="sb-t" textLength="10.8" lengthAdjust="spacingAndGlyphs">si</text><path d="M48.8 15.0 l-9 12.0 l9 12.0 h158.0 l9 -12.0 l-9 -12.0 z" fill="#5CB1D6" stroke="#2E8EB8" stroke-width="1"/><text x="56.8" y="31.6" class="sb-t" textLength="58.5" lengthAdjust="spacingAndGlyphs">¿tocando</text><rect x="122.3" y="16.0" width="61.6" height="22" rx="4" fill="#2E8EB8"/><text x="131.3" y="31.4" class="sb-t" textLength="29.6" lengthAdjust="spacingAndGlyphs">Meta</text><path d="M169.0 24.0 l5 6 l5 -6 z" fill="#FFFFFF"/><text x="191.0" y="31.6" class="sb-t" textLength="7.9" lengthAdjust="spacingAndGlyphs">?</text><text x="222.9" y="31.6" class="sb-t" textLength="57.1" lengthAdjust="spacingAndGlyphs">entonces</text><path d="M24.0 50.0 Q24.0 44.0 30.0 44.0 L38.0 44.0 L42.0 48.0 L54.0 48.0 L58.0 44.0  L218.3 44.0 Q224.3 44.0 224.3 50.0 L224.3 72.0 Q224.3 78.0 218.3 78.0 L58.0 78.0 L54.0 82.0 L42.0 82.0 L38.0 78.0 L30.0 78.0  Q24.0 78.0 24.0 72.0 Z" fill="#9966FF"/><text x="36.0" y="65.6" class="sb-t" textLength="100.4" lengthAdjust="spacingAndGlyphs">cambiar fondo a</text><rect x="143.4" y="50.0" width="68.9" height="22" rx="4" fill="#774DCB"/><text x="152.4" y="65.4" class="sb-t" textLength="36.9" lengthAdjust="spacingAndGlyphs">nivel2</text><path d="M197.3 58.0 l5 6 l5 -6 z" fill="#FFFFFF"/><path d="M24.0 84.0 Q24.0 78.0 30.0 78.0 L38.0 78.0 L42.0 82.0 L54.0 82.0 L58.0 78.0  L197.3 78.0 Q203.3 78.0 203.3 84.0 L203.3 106.0 Q203.3 112.0 197.3 112.0 L58.0 112.0 L54.0 116.0 L42.0 116.0 L38.0 112.0 L30.0 112.0  Q24.0 112.0 24.0 106.0 Z" fill="#4C97FF"/><text x="36.0" y="99.6" class="sb-t" textLength="34.7" lengthAdjust="spacingAndGlyphs">ir a x:</text><rect x="77.7" y="85.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="99.7" y="99.3" class="sb-n">-200</text><text x="128.7" y="99.6" class="sb-t" textLength="11.6" lengthAdjust="spacingAndGlyphs">y:</text><rect x="147.3" y="85.0" width="44.0" height="20" rx="10" fill="#FFFFFF"/><text x="169.3" y="99.3" class="sb-n">-140</text><path d="M24.0 118.0 Q24.0 112.0 30.0 112.0 L38.0 112.0 L42.0 116.0 L54.0 116.0 L58.0 112.0  L199.0 112.0 Q205.0 112.0 205.0 118.0 L205.0 140.0 Q205.0 146.0 199.0 146.0 L30.0 146.0 Q24.0 146.0 24.0 140.0 Z" fill="#FF8C1A"/><text x="36.0" y="133.6" class="sb-t" textLength="49.9" lengthAdjust="spacingAndGlyphs">sumar a</text><rect x="92.9" y="118.0" width="63.1" height="22" rx="4" fill="#DB6E00"/><text x="101.9" y="133.4" class="sb-t" textLength="31.1" lengthAdjust="spacingAndGlyphs">Nivel</text><path d="M141.0 126.0 l5 6 l5 -6 z" fill="#FFFFFF"/><rect x="163.0" y="119.0" width="30.0" height="20" rx="10" fill="#FFFFFF"/><text x="178.0" y="133.3" class="sb-n">1</text></svg>
-  <p class="pie">Acuérdate de <strong>mover el objeto Meta</strong> al final del segundo laberinto: cambiar el fondo no lo cambia a él de sitio.</p>
-</div><details class="pista">
-  <summary>¿Y cómo hago que en el nivel 2 termine de verdad?</summary>
-  <div class="cuerpo"><p>Con la variable <strong>Nivel</strong> que has creado en el paso 5. En vez de mirar sólo si tocas la Meta, mira <em>además</em> en qué nivel estás: si <code>Nivel</code> vale 2, el juego termina; si vale 1, pasa al siguiente fondo.</p><p style="margin-bottom:0">Para juntar dos condiciones en una se usa el operador verde <strong>&lt; &gt; y &lt; &gt;</strong>, que tiene dos huecos hexagonales.</p></div>
-</details>
-<h3 class="sub"><span class="subn">4.2</span>Guarda el mejor tiempo</h3>
-<p>Una variable <strong>MejorTiempo</strong> que guarda el tiempo más bajo de todas las partidas. Es la primera variable que no se borra al volver a jugar.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Crea la variable <strong>MejorTiempo</strong>.</span></li><li><span class="p">Paso 2</span><span>Arrastra al área de código, suelto, un bloque <strong>dar a MejorTiempo el valor 999</strong>. Haz <strong>un clic</strong> encima (un clic ejecuta un bloque sin bandera) y comprueba que la variable marca 999. Después tíralo a la paleta.</span></li><li><span class="p">Paso 3</span><span>En el condicional de la meta, justo antes del <em>detener todos</em> que termina el juego, pon un <strong>si</strong> con el operador <strong>( ) &lt; ( )</strong>: <em>cronómetro</em> a la izquierda y <em>MejorTiempo</em> a la derecha.</span></li><li><span class="p">Paso 4</span><span>Dentro de ese <em>si</em>: <strong>dar a MejorTiempo el valor (cronómetro)</strong>.</span></li><li><span class="p">Paso 5</span><span>Juega dos partidas: si la segunda es más rápida, MejorTiempo baja; si es más lenta, se queda como estaba. Al arrancar <strong>no</strong> la pongas a 0, o la siguiente partida se olvida de las anteriores.</span></li></ol>
-<h3 class="sub"><span class="subn">4.3</span>Monta la campana de la cuenta atrás a partir del texto</h3>
-<p>Una campana que cuenta 30 segundos hacia atrás y suena cuando se acaba el tiempo.</p>
+  <li><span class="p">Paso 1</span><span>Pon el fondo: abajo a la derecha, botón <strong>Elige un fondo</strong>, escribe <strong>Flowers</strong> en el buscador y elígelo.</span></li>
+  <li><span class="p">Paso 2</span><span>Borra el gato y añade la mariquita: botón <strong>Elige un objeto</strong>, escribe <strong>Ladybug</strong> y elige <strong>Ladybug1</strong>.</span></li>
+  <li><span class="p">Paso 3</span><span>Crea la variable <strong>Puntos</strong>.</span></li>
+  <li><span class="p">Paso 4</span><span>Monta en la mariquita los dos programas de arriba. El sonido <em>pop</em> ya viene con ella.</span></li>
+  <li><span class="p">Paso 5</span><span>Prueba: pulsa la bandera y caza la mariquita. Cada clic suma un punto y ella salta a otro sitio. Pulsa otra vez la bandera: Puntos vuelve a 0.</span></li>
+</ol>
+<h3 class="sub"><span class="subn">4.2</span>Ponle tiempo y pantalla de fin</h3>
+<p>Que la partida dure <strong>30 segundos</strong> y termine con una pantalla de fin.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Pinta el fondo del final: abajo a la derecha, pasa el ratón por el botón <strong>Elige un fondo</strong> y elige <strong>Pinta</strong> (el pincel). Con la herramienta <strong>Texto</strong> (la T) haz clic en el centro y escribe <strong>¡Se acabó!</strong>. Ponle de nombre <strong>fin</strong> en la casilla de arriba del dibujo.</span></li><li><span class="p">Paso 2</span><span>Crea la variable <strong>Tiempo</strong>.</span></li><li><span class="p">Paso 3</span><span>En el programa de la bandera de la mariquita, justo debajo de <em>dar a Puntos el valor 0</em>, añade <strong>dar a Tiempo el valor 30</strong>, <strong>cambiar fondo a Flowers</strong> y <strong>mostrar</strong>.</span></li><li><span class="p">Paso 4</span><span>Al final de ese mismo programa, debajo de <em>ir a posición aleatoria</em>, pon la cuenta atrás: un <strong>repetir hasta que (Tiempo = 0)</strong> y, dentro, <strong>esperar 1 segundos</strong> y <strong>sumar a Tiempo -1</strong>.</span></li><li><span class="p">Paso 5</span><span>Debajo del <em>repetir</em>, el final: <strong>cambiar fondo a fin</strong>, <strong>esconder</strong> y <strong>detener todos</strong>.</span></li><li><span class="p">Paso 6</span><span>Juega: el Tiempo baja de 30 a 0, uno por segundo, y al llegar a 0 sale «¡Se acabó!» con tus Puntos en pantalla. Pulsa otra vez la bandera: vuelven el jardín y la mariquita. Sin el <em>cambiar fondo a Flowers</em> y el <em>mostrar</em> del paso 3, la segunda partida empezaría en la pantalla de fin y sin mariquita.</span></li></ol><p>Guárdalo bien: esta cuenta atrás es una de las piezas del kit del proyecto final.</p>
+<h3 class="sub"><span class="subn">4.3</span>Monta el escarabajo que quita puntos a partir del texto</h3>
+<p>Un escarabajo que salta solo de un sitio a otro cada segundo. Si le haces clic por error, te quita un punto: hay que fijarse antes de hacer clic.</p>
 <ol class="paso-lista">
-  <li><span class="p">Paso 1</span><span>Añade la campana: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Bell</strong> en el buscador y elige <strong>Bell</strong>. Colócala en una esquina, fuera del laberinto.</span></li>
-  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en la campana, <strong>no</strong> en el gato, la estrella ni el fantasma.</span></li>
-  <li><span class="p">Paso 3</span><span>Crea la variable <strong>Tiempo</strong>.</span></li>
-  <li><span class="p">Paso 4</span><span>Monta el programa de abajo, línea a línea.</span></li>
-  <li><span class="p">Paso 5</span><span>Para probarlo, para todo con el <strong>círculo rojo</strong> y pulsa la tecla <strong>T</strong>. No uses la bandera: la bandera arranca el laberinto.</span></li>
+  <li><span class="p">Paso 1</span><span>Añade el escarabajo: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Beetle</strong> en el buscador y elige <strong>Beetle</strong>.</span></li>
+  <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el escarabajo, <strong>no</strong> en la mariquita.</span></li>
+  <li><span class="p">Paso 3</span><span>Hay <strong>dos programas</strong> y los dos van en el escarabajo. Monta los dos.</span></li>
+  <li><span class="p">Paso 4</span><span>Para probarlo, pulsa la <strong>bandera</strong>: el escarabajo arranca con ella, igual que la mariquita.</span></li>
 </ol>
 <p>Aquí no hay dibujo: cada línea es un bloque, escrito con las mismas palabras que en Scratch. Lo que escribes tú va entre paréntesis <strong>( )</strong>; lo que eliges en un desplegable, entre corchetes <strong>[ ]</strong>. Lo que va con sangría va <em>dentro</em> de la línea de arriba.</p>
+<p class="rp-obj"><b>En el escarabajo:</b></p>
 <ol class="pseudo">
-  <li class="n0">al presionar tecla [t]</li>
-  <li class="n1">dar a [Tiempo] el valor (30)</li>
-  <li class="n1">mostrar variable [Tiempo]</li>
-  <li class="n1">repetir hasta que (Tiempo) = (0)</li>
+  <li class="n0">al hacer clic en bandera verde</li>
+  <li class="n1">fijar tamaño al (60) %</li>
+  <li class="n1">por siempre</li>
+  <li class="n2">ir a [posición aleatoria]</li>
   <li class="n2">esperar (1) segundos</li>
-  <li class="n2">sumar a [Tiempo] (-1)</li>
-  <li class="n1">iniciar sonido [Bell Toll]</li>
-  <li class="n1">decir (¡Se acabó el tiempo!) durante (2) segundos</li>
-  <li class="n1">detener [todos]</li>
 </ol>
-<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar T aparece el marcador de Tiempo en 30 y va bajando de uno en uno cada segundo. Al llegar a 0 suena la campana, dice «¡Se acabó el tiempo!» y todo se detiene. Si lo pulsas mientras juegas al laberinto, tienes treinta segundos para llegar a la meta. Guárdalo bien: esta cuenta atrás es una de las piezas del kit del proyecto final.</p>
+<p class="rp-obj"><b>También en el escarabajo:</b></p>
+<ol class="pseudo">
+  <li class="n0">al hacer clic en este objeto</li>
+  <li class="n1">sumar a [Puntos] (-1)</li>
+  <li class="n1">decir (¡Ay!) durante (1) segundos</li>
+</ol>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar la bandera el escarabajo salta a un sitio distinto cada segundo, él solo. Si le haces clic, dice «¡Ay!» y Puntos baja 1. La mariquita sólo se mueve cuando la cazas; el escarabajo, todo el rato.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">
-  <li>Al llegar a la meta pasa algo: mensaje, sonido o cambio de nivel.</li>
-  <li>El cronómetro empieza en cero en cada partida.</li>
-  <li>Al volver a jugar se empieza otra vez en el nivel 1.</li>
-  <li>Hay dos niveles con laberintos distintos.</li>
-  <li>El juego termina de verdad al acabar el último nivel.</li>
-  <li>Sabrías explicar por qué <em>detener (todos)</em> va siempre al final.</li>
+  <li>Al hacer clic en la mariquita, Puntos sube 1, suena y ella salta a otro sitio.</li>
+  <li>Si haces clic fuera de la mariquita, no pasa nada.</li>
+  <li>Al pulsar la bandera, Puntos vuelve a 0.</li>
   <li>El apartado 4.2 también está hecho y va en el mismo archivo.</li>
   <li>El programa del apartado 4.3 está montado y hace lo que dice «Sabes que está bien si…».</li>
 </ul>
@@ -251,7 +253,7 @@
 <div class="partes escala"><p><strong>Cómo se valora.</strong> Todo va en el mismo archivo. Un apartado cuenta si funciona; a medias no suma.</p>
 <table><thead><tr><th>Lo que entregas hecho</th><th>Nota</th></tr></thead><tbody><tr><td>4.1</td><td class="nota">5</td></tr><tr><td>4.1 y 4.2</td><td class="nota">8</td></tr><tr><td>4.1, 4.2 y 4.3</td><td class="nota">10</td></tr></tbody></table>
 <p>Sin el 4.1 hecho no hay nota, aunque estén los demás: lo repites.</p></div>
-<p class="partes">En el proyecto tienen que estar: <strong>el gato</strong> (4.1 y 4.2), <strong>la estrella y el fantasma</strong> (de la sesión 12), <strong>la meta</strong> (4.1) y <strong>la campana</strong> (4.3).</p>
+<p class="partes">En el proyecto tienen que estar: <strong>la mariquita</strong> (4.1 y 4.2) y <strong>el escarabajo</strong> (4.3).</p>
 <p style="margin:0 0 10px;"><strong>Antes de nada:</strong> como no usamos cuenta de Scratch, tu proyecto sólo existe en esta pestaña. Si la cierras sin descargarlo, <strong>se pierde</strong>.</p>
 <ol>
   <li><strong>Archivo → Guardar en tu ordenador.</strong> Se descarga un archivo <code>.sb3</code> que aparece en tu carpeta <strong>Descargas</strong>.</li>
@@ -261,7 +263,7 @@
 </div>
 
 <h2>Navegación</h2>
-<div class="bg"><a href="s12b.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S12b</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s14.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S14</span></a><a href="../materiales/guias-juegos/ejercicio-de-juego-laberinto.pdf" class="bc"><span class="bi">📕</span><span class="bk">Guía en PDF</span><span class="bn">Laberinto, material de apoyo</span></a></div>
+<div class="bg"><a href="s12b.html" class="bc"><span class="bi">⬅️</span><span class="bk">Sesión anterior</span><span class="bn">S12b</span></a><a href="index.html" class="bc"><span class="bi">🗓️</span><span class="bk">Todas las sesiones</span><span class="bn">Índice del trimestre</span></a><a href="s14.html" class="bc"><span class="bi">➡️</span><span class="bk">Sesión siguiente</span><span class="bn">S14</span></a></div>
 
 </main>
 </div>

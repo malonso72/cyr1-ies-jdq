@@ -371,96 +371,94 @@ s12b = pagina(
 
 
 # ============================================================ S13
-META13 = [
-    si(hexa('sensing', '¿tocando', ('drop', 'Meta'), '?'),
-       [('stack', 'looks', ['decir', op('unir', ('txt', 'Has tardado '),
-                                        rep('sensing', 'cronómetro')),
-                            'durante', ('num', '3'), 'segundos']),
-        ('cap', 'control', ['detener', ('drop', 'todos')])]),
-]
-CRONO13 = [
+# Caza la mariquita (DECISIONES_T1 §40): un juego de puntería con el ratón. Lo nuevo:
+# «al hacer clic en este objeto» e «ir a posición aleatoria». La cuenta atrás (pieza 5 del kit)
+# y la pantalla de fin van en el 4.2; el escarabajo que quita puntos, en el 4.3.
+ALEA13 = ('stack', 'motion', ['ir a', ('drop', 'posición aleatoria')])
+CLIC13 = ('hat', 'events', ['al hacer clic en este objeto'])
+BAND13 = [
     BANDERA,
-    ('stack', 'sensing', ['reiniciar cronómetro']),
-    ('stack', 'looks', ['cambiar fondo a', ('drop', 'nivel1')]),
+    ('stack', 'variables', ['dar a', ('drop', 'Puntos'), 'el valor', ('num', '0')]),
+    ALEA13,
 ]
-NIVEL13 = [
-    si(hexa('sensing', '¿tocando', ('drop', 'Meta'), '?'),
-       [('stack', 'looks', ['cambiar fondo a', ('drop', 'nivel2')]),
-        ('stack', 'motion', ['ir a x:', ('num', '-200'), 'y:', ('num', '-140')]),
-        ('stack', 'variables', ['sumar a', ('drop', 'Nivel'), ('num', '1')])]),
+CAZA13 = [
+    CLIC13,
+    ('stack', 'variables', ['sumar a', ('drop', 'Puntos'), ('num', '1')]),
+    ('stack', 'sound', ['iniciar sonido', ('drop', 'pop')]),
+    ALEA13,
 ]
 
 s13 = pagina(
-    13, 'Laberinto II',
-    'Sesión 13 de Scratch: añadir meta, cronómetro y un segundo nivel al laberinto. '
-    'CyR 1º ESO.',
-    'que tu laberinto se pueda <strong>ganar</strong>: con meta, con tiempo y con un segundo nivel.',
+    13, 'Caza la mariquita',
+    'Sesión 13 de Scratch: un juego de puntería con el ratón. Al hacer clic en este objeto e ir '
+    'a posición aleatoria. CyR 1º ESO.',
+    'un juego de <strong>puntería</strong>: una mariquita que salta a otro sitio cada vez que la '
+    'cazas con el ratón, y un marcador con tus puntos.',
     [
-        ('La meta',
-         '<p>Un laberinto sin meta es un pasillo. Crea un objeto nuevo —una bandera, una estrella, '
-         'un trozo de queso— llámalo <strong>Meta</strong> y ponlo al final del recorrido.</p>'
-         '<p>Este condicional va dentro del <strong>por siempre</strong> del personaje, junto a los '
-         'que ya tenías:</p>' +
-         caja(META13, 'Condicional: si está tocando el objeto Meta, decir Has tardado seguido del '
-                      'cronómetro durante 3 segundos y detener todos',
-              pie='<strong>cronómetro</strong> es un informador de Sensores: cuenta segundos desde '
-                  'que se reinició. No hay que crearlo, ya existe.')),
+        ('Dos bloques nuevos',
+         claves([
+             ('al hacer clic en este objeto',
+              'Un sombrero de Eventos. Arranca su programa cuando haces clic con el ratón '
+              '<strong>encima de ese objeto</strong>; si haces clic en otro sitio, no pasa nada. '
+              'Cada objeto tiene el suyo.'),
+             ('ir a (posición aleatoria)',
+              'Está en Movimiento y no es el <em>ir a x: y:</em> de siempre: es el que tiene un '
+              'desplegable. Con <strong>posición aleatoria</strong> elegida, lleva el objeto a un '
+              'sitio cualquiera del escenario, distinto cada vez.'),
+         ])
+         + '<p>Juntos dan un juego de puntería: la mariquita espera quieta, tú le haces clic y '
+           'ella se escapa a otro sitio.</p>'),
 
-        ('El cronómetro',
-         '<p>El cronómetro corre solo desde que se abre Scratch, así que hay que ponerlo a cero al '
-         'empezar la partida. Este es el arranque completo:</p>' +
-         caja(CRONO13, 'Programa de arranque: al hacer clic en la bandera, reiniciar cronómetro y '
-                       'cambiar el fondo a nivel1', ancho=420)),
+        ('Lee estos dos programas',
+         '<p>Los dos van en la <strong>mariquita</strong>. Uno prepara la partida; el otro dice '
+         'qué pasa cada vez que la cazas.</p>'
+         + dos_cajas(('Al empezar la partida', BAND13,
+                      'Programa de la mariquita: al hacer clic en la bandera, dar a Puntos el valor 0 '
+                      'e ir a posición aleatoria'),
+                     ('Cada vez que la cazas', CAZA13,
+                      'Programa de la mariquita: al hacer clic en este objeto, sumar 1 a Puntos, '
+                      'iniciar el sonido pop e ir a posición aleatoria'))
+         + secuencia([
+             'Al pulsar la bandera, Puntos se pone a 0 y la mariquita aparece en un sitio al azar.',
+             'Ese programa se acaba ahí. La mariquita se queda quieta, esperando.',
+             'Cuando haces clic encima de ella arranca el segundo programa: suma un punto, suena y '
+             'salta a otro sitio al azar.',
+             'Cada clic vuelve a arrancar el segundo programa. El primero no se repite hasta que '
+             'pulses otra vez la bandera.'])),
 
         ('Comprueba que lo has entendido',
-         pregunta('1', 'Por error colocas el <em>detener (todos)</em> <strong>antes</strong> del '
-                       'bloque que dice «Has tardado…». ¿Qué ve el jugador al llegar a la meta?',
-                  [('mensaje', 'El mensaje, y después el juego se para',
-                    'No. Los bloques se ejecutan de arriba abajo, y <em>detener todos</em> apaga el '
-                    'programa en el momento en que le llega el turno.'),
-                   ('nada', 'Nada: el juego se para sin decir nada',
-                    'Correcto. El programa muere en el <em>detener</em> y nunca llega al bloque de '
-                    'debajo. Por eso <b>detener (todos) va siempre el último</b>.'),
-                   ('siempre', 'El mensaje se queda en pantalla para siempre',
-                    'Eso pasaría con <em>decir (…)</em> sin duración, que es otro bloque distinto. '
-                    'Aquí el problema es el orden.')],
-                  'nada')),
+         pregunta('1', 'Montas el programa del clic pero se te olvida el último bloque, <em>ir a '
+                       '(posición aleatoria)</em>. ¿Qué pasa al jugar?',
+                  [('quieta', 'La mariquita no se mueve, y haciendo clic sin parar en el mismo sitio '
+                              'sumas todos los puntos que quieras',
+                    'Correcto. El clic sigue sumando, pero la mariquita ya no huye: el juego deja de '
+                    'tener gracia. El <em>ir a</em> es lo que lo convierte en un juego de puntería.'),
+                   ('nosuma', 'Al hacer clic ya no suma puntos',
+                    'No. El <em>sumar a Puntos 1</em> sigue ahí y se ejecuta en cada clic. Lo que '
+                    'falta es que la mariquita se vaya.'),
+                   ('salta', 'Salta igual, porque el programa de la bandera ya la manda a un sitio '
+                             'al azar',
+                    'No. El programa de la bandera sólo se ejecuta una vez, al empezar. Lo que pasa '
+                    'en cada clic lo decide sólo el programa del clic.')],
+                  'quieta')),
 
         ('Tu actividad',
          pasos([
-             'Añade la meta: botón <strong>Elige un objeto</strong>, escribe <strong>Crystal</strong> '
-             'y elige <strong>Crystal</strong>. Cámbiale el nombre a <strong>Meta</strong> en la '
-             'casilla <em>Objeto</em>, debajo del escenario, y colócala al final del laberinto.',
-             'Añade el condicional de la meta y comprueba que el juego termina y dice el tiempo.',
-             'Añade <strong>reiniciar cronómetro</strong> al arranque. Juega dos veces seguidas y '
-             'comprueba que el tiempo empieza de cero las dos.',
-             'Dibuja un <strong>segundo fondo</strong> con un laberinto más difícil. Los fondos se '
-             'crean igual que el primero, con el botón de abajo a la derecha.',
-             'Crea la variable <strong>Nivel</strong> y añade al arranque, justo debajo de '
-             '<em>reiniciar cronómetro</em>, el bloque <strong>dar a (Nivel) el valor (1)</strong>. '
-             'Si no lo pones, la segunda partida empieza en el nivel donde acabó la primera: es el '
-             'mismo fallo del marcador de la sesión 9.',
-             'Cambia el condicional de la meta para que, en vez de terminar, pase al nivel 2:']) +
-         caja(NIVEL13, 'Condicional: si está tocando la Meta, cambiar el fondo a nivel2, volver a '
-                       'la salida y sumar 1 a la variable Nivel',
-              pie='Acuérdate de <strong>mover el objeto Meta</strong> al final del segundo '
-                  'laberinto: cambiar el fondo no lo cambia a él de sitio.') +
-         pista('¿Y cómo hago que en el nivel 2 termine de verdad?',
-               '<p>Con la variable <strong>Nivel</strong> que has creado en el paso 5. En vez de mirar sólo '
-               'si tocas la Meta, mira <em>además</em> en qué nivel estás: si <code>Nivel</code> '
-               'vale 2, el juego termina; si vale 1, pasa al siguiente fondo.</p>'
-               '<p style="margin-bottom:0">Para juntar dos condiciones en una se usa el operador '
-               'verde <strong>&lt; &gt; y &lt; &gt;</strong>, que tiene dos huecos hexagonales.</p>')),
+             'Pon el fondo: abajo a la derecha, botón <strong>Elige un fondo</strong>, escribe '
+             '<strong>Flowers</strong> en el buscador y elígelo.',
+             'Borra el gato y añade la mariquita: botón <strong>Elige un objeto</strong>, escribe '
+             '<strong>Ladybug</strong> y elige <strong>Ladybug1</strong>.',
+             'Crea la variable <strong>Puntos</strong>.',
+             'Monta en la mariquita los dos programas de arriba. El sonido <em>pop</em> ya viene '
+             'con ella.',
+             'Prueba: pulsa la bandera y caza la mariquita. Cada clic suma un punto y ella salta a '
+             'otro sitio. Pulsa otra vez la bandera: Puntos vuelve a 0.'])),
 
         ('Lo has conseguido si…',
-         logros(['Al llegar a la meta pasa algo: mensaje, sonido o cambio de nivel.',
-                 'El cronómetro empieza en cero en cada partida.',
-                 'Al volver a jugar se empieza otra vez en el nivel 1.',
-                 'Hay dos niveles con laberintos distintos.',
-                 'El juego termina de verdad al acabar el último nivel.',
-                 'Sabrías explicar por qué <em>detener (todos)</em> va siempre al final.'])),
-    ],
-    nav_extra=guia('ejercicio-de-juego-laberinto.pdf', 'Laberinto, material de apoyo'))
+         logros(['Al hacer clic en la mariquita, Puntos sube 1, suena y ella salta a otro sitio.',
+                 'Si haces clic fuera de la mariquita, no pasa nada.',
+                 'Al pulsar la bandera, Puntos vuelve a 0.'])),
+    ])
 
 # ============================================================ S14
 P14 = [

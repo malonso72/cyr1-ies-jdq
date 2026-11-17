@@ -634,3 +634,21 @@ en marcha. Regla para los N.3: ni el disparador ni los controles comparten tecla
   voltea, sigue tocando el césped y se quedaba temblando en el extremo.
 - La S13 deja la carretera: será otro juego («Caza la mariquita»: clic del ratón, posición
   aleatoria, cuenta atrás y pantalla de fin). Aparcada hasta cerrar la S12.
+
+## 40. La S13 es «Caza la mariquita» (17-11-2026)
+
+- **Por qué.** El laberinto de la S13 vieja (meta, cronómetro y segundo nivel) dependía del
+  laberinto de la S12, que ya no existe, y Manuel no quería más carretera. Es un archivo nuevo
+  que no necesita nada de la S12.
+- **Lo nuevo**: *al hacer clic en este objeto* e *ir a (posición aleatoria)*. 4.1: la
+  mariquita (Ladybug1, fondo Flowers) con dos programas, el de la bandera (Puntos a 0 y a un
+  sitio al azar) y el del clic (sumar 1, pop, a otro sitio) → 5.
+- **4.2 · tiempo y pantalla de fin** → 8: la cuenta atrás de 30 s (la pieza 5 del kit del
+  proyecto se queda aquí) y un fondo «fin» pintado con la herramienta Texto. El arranque añade
+  *cambiar fondo a Flowers* y *mostrar*, para que la segunda partida no empiece en la pantalla
+  de fin y sin mariquita.
+- **4.3 · el escarabajo** (Beetle; la biblioteca no tiene abeja) → 10: salta solo cada segundo y
+  al hacerle clic quita un punto. Sus dos programas van en el mismo objeto: `gen_sb3.reto()`
+  junta en un objeto los programas con el mismo nombre en `SPRITES`.
+- Desaparecen de la S13 el cronómetro, la meta y los niveles. La meta ya está en la S12 bis; el
+  cronómetro no lo usa ninguna sesión posterior ni el kit.

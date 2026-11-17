@@ -134,6 +134,12 @@ def reto(num):
                     visita(b[5])
         visita(prog)
         x = {1: -150, 11: -120 if nombre == 'Referee' else 120, 12: 0}.get(num, 0)
+        previo = [o for o in objetos if o.nombre == nombre]
+        if previo:
+            # Dos programas del mismo objeto (S13: el escarabajo): van juntos en él.
+            previo[0].scripts.append(copy.deepcopy(prog))
+            previo[0].sonidos += [s for s in sonidos if s['name'] not in [x['name'] for x in previo[0].sonidos]]
+            continue
         objetos.append(Objeto(nombre, [DISFRACES['pelota'], DISFRACES['piedra']], [copy.deepcopy(prog)],
                               x=x, y=0, sonidos=sonidos))
     if num == 12:
