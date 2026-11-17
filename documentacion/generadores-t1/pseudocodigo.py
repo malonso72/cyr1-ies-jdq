@@ -604,24 +604,32 @@ RETOS = {
 
     13: dict(
         objeto='el escarabajo que quita puntos',
-        planteamiento='Un escarabajo que salta solo de un sitio a otro cada segundo. Si le haces '
-                      'clic por error, te quita un punto: hay que fijarse antes de hacer clic.',
+        planteamiento='Un escarabajo que salta solo de un sitio a otro cada segundo mientras queda '
+                      'tiempo, y desaparece cuando se acaba. Si le haces clic por error, te quita un '
+                      'punto: hay que fijarse antes de hacer clic. Móntalo después del 4.2, porque '
+                      'usa la variable Tiempo. El primer <em>esperar</em> le da tiempo a la '
+                      'mariquita para poner el Tiempo a 30: sin él, en la segunda partida el '
+                      'escarabajo aún ve el 0 de la anterior y desaparece nada más empezar.',
         preparar=[elige('Beetle', 'Beetle', 'el escarabajo'),
                   selecciona('el escarabajo', 'la mariquita'),
                   'Hay <strong>dos programas</strong> y los dos van en el escarabajo. Monta los dos.',
                   'Para probarlo, pulsa la <strong>bandera</strong>: el escarabajo arranca con ella, '
                   'igual que la mariquita.'],
         programas=[('En el escarabajo:', [('hat', 'events', ['al hacer clic en', ('icon', 'bandera')]),
+                                          ('stack', 'looks', ['mostrar']),
                                           ('stack', 'looks', ['fijar tamaño al', ('num', '60'), '%']),
-                                          ('c', 'control', ['por siempre'], [
+                                          esperar('1'),
+                                          hasta(hexa('operators', var('Tiempo'), '=', num('0')), [
                                               ('stack', 'motion', ['ir a', ('drop', 'posición aleatoria')]),
-                                              esperar('1')])]),
+                                              esperar('1')]),
+                                          ('stack', 'looks', ['esconder'])]),
                    ('También en el escarabajo:', [('hat', 'events', ['al hacer clic en este objeto']),
                                                   sumar('Puntos', '-1'),
                                                   decir('¡Ay!', '1')])],
         comprueba='al pulsar la bandera el escarabajo salta a un sitio distinto cada segundo, él '
                   'solo. Si le haces clic, dice «¡Ay!» y Puntos baja 1. La mariquita sólo se mueve '
-                  'cuando la cazas; el escarabajo, todo el rato.'),
+                  'cuando la cazas; el escarabajo, todo el rato. Cuando el Tiempo llega a 0 '
+                  'desaparece, y en la pantalla de fin ya no se le puede hacer clic.'),
 
     14: dict(
         objeto='el unicornio de la montaña rusa',

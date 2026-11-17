@@ -86,6 +86,8 @@ const PRUEBAS = {
     vm.runtime.startHats('event_whenthisspriteclicked', null, p); await dormir(300);
     ok(Number(variable('Puntos')) === -1, 's13: el clic no resta un punto: ' + variable('Puntos'));
     ok(dice(p) === '¡Ay!', 's13: no dice ¡Ay!: ' + dice(p));
+    const st = vm.runtime.getTargetForStage(); Object.values(st.variables).find(v => v.name === 'Tiempo').value = 0;
+    await dormir(1300); ok(!p.visible, 's13: el escarabajo no se esconde al acabar el tiempo');
   },
   14: async ({ obj, dice, tecla, contestar }) => {
     const p = obj('Unicorn');

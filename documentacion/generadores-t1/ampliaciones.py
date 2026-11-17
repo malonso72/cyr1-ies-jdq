@@ -269,8 +269,9 @@ AMPLIACIONES = {
         'Al final de ese mismo programa, debajo de <em>ir a posición aleatoria</em>, pon la cuenta '
         'atrás: un <strong>repetir hasta que (Tiempo = 0)</strong> y, dentro, <strong>esperar 1 '
         'segundos</strong> y <strong>sumar a Tiempo -1</strong>.',
-        'Debajo del <em>repetir</em>, el final: <strong>cambiar fondo a fin</strong>, '
-        '<strong>esconder</strong> y <strong>detener todos</strong>.',
+        'Debajo del <em>repetir</em>, el final: <strong>cambiar fondo a fin</strong> y '
+        '<strong>esconder</strong>. La mariquita escondida ya no se puede cazar: la partida ha '
+        'terminado.',
         'Juega: el Tiempo baja de 30 a 0, uno por segundo, y al llegar a 0 sale «¡Se acabó!» con '
         'tus Puntos en pantalla. Pulsa otra vez la bandera: vuelven el jardín y la mariquita. Sin '
         'el <em>cambiar fondo a Flowers</em> y el <em>mostrar</em> del paso 3, la segunda partida '

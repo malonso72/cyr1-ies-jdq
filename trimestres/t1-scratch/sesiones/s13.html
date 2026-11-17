@@ -213,9 +213,9 @@
   <li><span class="p">Paso 5</span><span>Prueba: pulsa la bandera y caza la mariquita. Cada clic suma un punto y ella salta a otro sitio. Pulsa otra vez la bandera: Puntos vuelve a 0.</span></li>
 </ol>
 <h3 class="sub"><span class="subn">4.2</span>Ponle tiempo y pantalla de fin</h3>
-<p>Que la partida dure <strong>30 segundos</strong> y termine con una pantalla de fin.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Pinta el fondo del final: abajo a la derecha, pasa el ratón por el botón <strong>Elige un fondo</strong> y elige <strong>Pinta</strong> (el pincel). Con la herramienta <strong>Texto</strong> (la T) haz clic en el centro y escribe <strong>¡Se acabó!</strong>. Ponle de nombre <strong>fin</strong> en la casilla de arriba del dibujo.</span></li><li><span class="p">Paso 2</span><span>Crea la variable <strong>Tiempo</strong>.</span></li><li><span class="p">Paso 3</span><span>En el programa de la bandera de la mariquita, justo debajo de <em>dar a Puntos el valor 0</em>, añade <strong>dar a Tiempo el valor 30</strong>, <strong>cambiar fondo a Flowers</strong> y <strong>mostrar</strong>.</span></li><li><span class="p">Paso 4</span><span>Al final de ese mismo programa, debajo de <em>ir a posición aleatoria</em>, pon la cuenta atrás: un <strong>repetir hasta que (Tiempo = 0)</strong> y, dentro, <strong>esperar 1 segundos</strong> y <strong>sumar a Tiempo -1</strong>.</span></li><li><span class="p">Paso 5</span><span>Debajo del <em>repetir</em>, el final: <strong>cambiar fondo a fin</strong>, <strong>esconder</strong> y <strong>detener todos</strong>.</span></li><li><span class="p">Paso 6</span><span>Juega: el Tiempo baja de 30 a 0, uno por segundo, y al llegar a 0 sale «¡Se acabó!» con tus Puntos en pantalla. Pulsa otra vez la bandera: vuelven el jardín y la mariquita. Sin el <em>cambiar fondo a Flowers</em> y el <em>mostrar</em> del paso 3, la segunda partida empezaría en la pantalla de fin y sin mariquita.</span></li></ol><p>Guárdalo bien: esta cuenta atrás es una de las piezas del kit del proyecto final.</p>
+<p>Que la partida dure <strong>30 segundos</strong> y termine con una pantalla de fin.</p><ol class="paso-lista"><li><span class="p">Paso 1</span><span>Pinta el fondo del final: abajo a la derecha, pasa el ratón por el botón <strong>Elige un fondo</strong> y elige <strong>Pinta</strong> (el pincel). Con la herramienta <strong>Texto</strong> (la T) haz clic en el centro y escribe <strong>¡Se acabó!</strong>. Ponle de nombre <strong>fin</strong> en la casilla de arriba del dibujo.</span></li><li><span class="p">Paso 2</span><span>Crea la variable <strong>Tiempo</strong>.</span></li><li><span class="p">Paso 3</span><span>En el programa de la bandera de la mariquita, justo debajo de <em>dar a Puntos el valor 0</em>, añade <strong>dar a Tiempo el valor 30</strong>, <strong>cambiar fondo a Flowers</strong> y <strong>mostrar</strong>.</span></li><li><span class="p">Paso 4</span><span>Al final de ese mismo programa, debajo de <em>ir a posición aleatoria</em>, pon la cuenta atrás: un <strong>repetir hasta que (Tiempo = 0)</strong> y, dentro, <strong>esperar 1 segundos</strong> y <strong>sumar a Tiempo -1</strong>.</span></li><li><span class="p">Paso 5</span><span>Debajo del <em>repetir</em>, el final: <strong>cambiar fondo a fin</strong> y <strong>esconder</strong>. La mariquita escondida ya no se puede cazar: la partida ha terminado.</span></li><li><span class="p">Paso 6</span><span>Juega: el Tiempo baja de 30 a 0, uno por segundo, y al llegar a 0 sale «¡Se acabó!» con tus Puntos en pantalla. Pulsa otra vez la bandera: vuelven el jardín y la mariquita. Sin el <em>cambiar fondo a Flowers</em> y el <em>mostrar</em> del paso 3, la segunda partida empezaría en la pantalla de fin y sin mariquita.</span></li></ol><p>Guárdalo bien: esta cuenta atrás es una de las piezas del kit del proyecto final.</p>
 <h3 class="sub"><span class="subn">4.3</span>Monta el escarabajo que quita puntos a partir del texto</h3>
-<p>Un escarabajo que salta solo de un sitio a otro cada segundo. Si le haces clic por error, te quita un punto: hay que fijarse antes de hacer clic.</p>
+<p>Un escarabajo que salta solo de un sitio a otro cada segundo mientras queda tiempo, y desaparece cuando se acaba. Si le haces clic por error, te quita un punto: hay que fijarse antes de hacer clic. Móntalo después del 4.2, porque usa la variable Tiempo. El primer <em>esperar</em> le da tiempo a la mariquita para poner el Tiempo a 30: sin él, en la segunda partida el escarabajo aún ve el 0 de la anterior y desaparece nada más empezar.</p>
 <ol class="paso-lista">
   <li><span class="p">Paso 1</span><span>Añade el escarabajo: botón <strong>Elige un objeto</strong> (el del gato, abajo a la derecha), escribe <strong>Beetle</strong> en el buscador y elige <strong>Beetle</strong>.</span></li>
   <li><span class="p">Paso 2</span><span><strong>Selecciónalo</strong> abajo a la derecha antes de arrastrar ningún bloque. Este programa va en el escarabajo, <strong>no</strong> en la mariquita.</span></li>
@@ -226,10 +226,13 @@
 <p class="rp-obj"><b>En el escarabajo:</b></p>
 <ol class="pseudo">
   <li class="n0">al hacer clic en bandera verde</li>
+  <li class="n1">mostrar</li>
   <li class="n1">fijar tamaño al (60) %</li>
-  <li class="n1">por siempre</li>
+  <li class="n1">esperar (1) segundos</li>
+  <li class="n1">repetir hasta que (Tiempo) = (0)</li>
   <li class="n2">ir a [posición aleatoria]</li>
   <li class="n2">esperar (1) segundos</li>
+  <li class="n1">esconder</li>
 </ol>
 <p class="rp-obj"><b>También en el escarabajo:</b></p>
 <ol class="pseudo">
@@ -237,7 +240,7 @@
   <li class="n1">sumar a [Puntos] (-1)</li>
   <li class="n1">decir (¡Ay!) durante (1) segundos</li>
 </ol>
-<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar la bandera el escarabajo salta a un sitio distinto cada segundo, él solo. Si le haces clic, dice «¡Ay!» y Puntos baja 1. La mariquita sólo se mueve cuando la cazas; el escarabajo, todo el rato.</p>
+<p class="rp-ok"><b>Sabes que está bien si…</b> al pulsar la bandera el escarabajo salta a un sitio distinto cada segundo, él solo. Si le haces clic, dice «¡Ay!» y Puntos baja 1. La mariquita sólo se mueve cuando la cazas; el escarabajo, todo el rato. Cuando el Tiempo llega a 0 desaparece, y en la pantalla de fin ya no se le puede hacer clic.</p>
 
 <h2><span class="h2n">5</span>Lo has conseguido si…</h2>
 <ul class="logro">

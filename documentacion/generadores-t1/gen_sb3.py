@@ -146,7 +146,8 @@ def reto(num):
         pared = svg_costume(_svg(20, 200, '<rect width="20" height="200" fill="#4CAF50"/>'), 'cesped', 10, 100)
         objetos.append(Objeto('Cesped', [pared], [], x=150, y=0))
         objetos.append(Objeto('Convertible', [DISFRACES['gato']], [], x=-150, y=0))
-    return proyecto(objetos)
+    # El escarabajo de la S13 salta mientras Tiempo no sea 0: en la prueba arranca en 30.
+    return proyecto(objetos, variables_iniciales={'Tiempo': 30} if num == 13 else None)
 
 
 if __name__ == '__main__':

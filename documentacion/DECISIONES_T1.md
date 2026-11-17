@@ -650,5 +650,11 @@ en marcha. Regla para los N.3: ni el disparador ni los controles comparten tecla
 - **4.3 · el escarabajo** (Beetle; la biblioteca no tiene abeja) → 10: salta solo cada segundo y
   al hacerle clic quita un punto. Sus dos programas van en el mismo objeto: `gen_sb3.reto()`
   junta en un objeto los programas con el mismo nombre en `SPRITES`.
+- **Sin *detener todos* al final** (Manuel lo vio al probarla): con él, el escarabajo se quedaba
+  quieto y visible en la pantalla de fin y cada clic seguía restando. Ahora el 4.2 termina con
+  *cambiar fondo a fin* y *esconder*, y el escarabajo salta con *repetir hasta que (Tiempo = 0)* y
+  se esconde al salir; un objeto escondido no recibe clics. El 4.3 se monta después del 4.2.
+  Antes del *repetir* lleva un *esperar 1*: al pulsar la bandera, el escarabajo puede ejecutarse
+  antes que la mariquita y ver todavía el Tiempo = 0 de la partida anterior.
 - Desaparecen de la S13 el cronómetro, la meta y los niveles. La meta ya está en la S12 bis; el
   cronómetro no lo usa ninguna sesión posterior ni el kit.
